@@ -1,0 +1,103 @@
+﻿;リソース ファイル ジェネレータ (Resgen.exe) 用ファイル
+;.resourcesに変換して使用
+
+;リソース要素
+;リソース要素については、大半はまだソースが未対応
+
+;メイン画面のリソース要素
+TextMain_ButtonConfig = 設定
+TextMain_ButtonSaveDirectory = 参照
+TextMain_ButtonRun = 実行
+TextMain_ButtonStop = 中止
+
+TextMain_GroupBoxTransfer = 翻訳元→先の言語を設定
+TextMain_GroupBoxSaveDirectory = 処理結果を出力するフォルダの選択
+TextMain_GroupBoxRun = 翻訳する記事を指定して、実行
+
+DescriptionMain_FolderBrowserDialogSaveDirectory = 処理結果を出力するフォルダを選択してください。
+
+;メイン画面のツールチップ
+ToolTipMain_GroupBoxTransfer = 翻訳元・先の言語を選択してください\nコンボボックスに目的の言語コードが存在しない場合は、設定画面で登録を行ってください
+ToolTipMain_ComboBoxSource = 翻訳元の言語を選択、または入力します\n入力の場合、Wikipediaで使用されている言語コードを入力してください
+ToolTipMain_ComboBoxTarget = 翻訳先の言語を選択、または入力します\n入力の場合、Wikipediaで使用されている言語コードを入力してください
+ToolTipMain_LabelSource = 翻訳元の言語です
+ToolTipMain_LabelTarget = 翻訳先の言語です
+ToolTipMain_LinkLabelSourceURL = 翻訳元WikipediaのURLです
+ToolTipMain_ButtonConfig = 言語に関する設定を行います
+ToolTipMain_GroupBoxSaveDirectory = 処理結果を出力するフォルダを選択してください\n指定されたフォルダに記事テキストとログを出力します
+ToolTipMain_ButtonSaveDirectory = 処理結果を出力するフォルダを選択します
+ToolTipMain_TextBoxSaveDirectory = 処理結果の出力先フォルダは、「参照」ボタンから選択する以外に、こちらに直接指定することもできます
+ToolTipMain_GroupBoxRun = 目的の記事の、翻訳元言語のWikipediaでの記事名を入力し、実行ボタンを押してください
+ToolTipMain_TextBoxArticle = 翻訳元Wikipediaでの記事名を入力します
+ToolTipMain_ButtonRun = 記事にアクセスし、翻訳支援処理を行います\n作成した翻訳支援ファイルとログは、出力先フォルダに出力されます
+ToolTipMain_ButtonStop = 処理を中断します
+
+;設定画面のリソース要素
+ConfigWikipediaDialogTitle = 設定
+
+TextConfigWikipedia_ButtonOK = OK
+TextConfigWikipedia_ButtonCancel = キャンセル
+
+;設定画面のツールチップ
+ToolTipConfigWikipedia_GroupBoxLanguage = 各言語に対する設定です\n設定を行う言語の、言語コードを選択してください
+ToolTipConfigWikipedia_ComboBoxCode = 設定を行う言語の、言語コードを選択します\n言語の追加を行う場合は、言語コード入力後にEnterキーで登録できます\n削除する場合は、右クリックで選択した値を削除できます\nこのコンボボックスに設定する言語コードは、Wikipediaの言語コードと一致させてください
+ToolTipConfigWikipedia_GroupBoxStyle = 各言語での記事XMLデータのパスや、リダイレクトの書式を入力します\nこの値が正しく設定されていない場合、正常な処理は行えません
+ToolTipConfigWikipedia_TextBoxXml = 記事のXMLデータが格納されているパスです\n設定されたパスに記事名を付加して、XMLデータの取得を行います\n\n例、wiki/Special:Export/
+ToolTipConfigWikipedia_TextBoxRedirect = リダイレクトの書式です\n各言語の書式と、英語版の書式でチェックを行います\n\n例、#転送
+ToolTipConfigWikipedia_GroupBoxName = 選択した言語の、各言語での呼称です
+ToolTipConfigWikipedia_GroupBoxTitleKey = 見出しの変換を行うための設定です\n各言語で、同じ意味を持つ項目が何であるかのパターンを設定します\n\n例、英語版の See Also という見出しを日本語版の 関連項目 と対応させたい場合、\n    en の列に See Also を、ja 列の同じ行に 関連項目 をそれぞれ記述します
+
+ToolTipConfigWikipedia_ToolStripMenuItemModify = 選択された言語の言語コードを変更します\n変更を選ぶと、新しい言語コードを入力するダイアログが開きます
+ToolTipConfigWikipedia_ToolStripMenuItemDelete = 選択された言語を削除します\n削除を選ぶと、その言語に属する設定は全て削除されます
+
+;表のツールチップ
+ToolTipConfigWikipediaColumn_Code = 言語コードです\nまず言語コードを入力し、呼称列と略称列に、その言語コードの言語での名称を入力してください
+ToolTipConfigWikipediaColumn_ArticleName = その言語のWikipediaでの記事名です\n言語コード列の言語での記事名を設定してください\n\n例、日本語 で言語コード列が en の場合、Japanese
+ToolTipConfigWikipediaColumn_ShortName = 言語の略称です\n言語コード列の言語での略称を設定してください\n特に存在しない場合は、未入力で問題ありません\n\n例、ドイツ語 で言語コード列が ja の場合、独
+
+;各種メッセージ
+LogMessage_Start = {0}、実行日時 {1}\r\n\r\n
+LogMessage_End = \r\n処理結果を {0} に出力しました。このログは {1} に保存されます。\r\n
+LogMessage_Stop = \r\n処理を中止しました。このログは {0} に保存されます。\r\n
+LogMessage_ErrorFileSave = \r\nファイル {0} の保存に失敗しました。（{1}）\r\n
+LogMessage_ErrorURL = 要求したURLは {0} です。
+LogMessage_GetArticle = {0} より [[{1}]] を取得。
+LogMessage_ArticleExistInterWiki = 注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。
+LogMessage_ArticleNothing = 翻訳元として指定された記事は存在しません。記事名を確認してください。
+LogMessage_TemplateUnknown = {{{{0}}}} の識別に失敗しました。{{{{0}}}} は {{1}}名前空間の記事して処理します。（{{2}}）
+LogMessage_CheckAndReplaceStart = 言語間リンクの探索、定型句の変換を行います
+LogMessage_LinkArticleNothing = 記事無し
+LogMessage_InterWikiNothing = 言語間リンク無し
+LogMessage_Redirect = リダイレクト
+
+ArticleFooter = <!-- {0}、[[:{1}:{2}]]（{3}(UTC)）より -->
+
+;ダイアログ関係のメッセージ
+InformationTitle = お知らせ
+InformationMessage_DevelopingMethod = 現在、{0}には未対応ですm(__)m
+
+QuestionTitle = 確認
+QuestionMessage_CommonWorkQuestion = {0}を行います。よろしいですか？
+QuestionMessage_ArticleExist = 対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？
+
+WarningTitle = 警告
+WarningMessage_NotSelectedSource = 翻訳元の言語が指定されていません。
+WarningMessage_NotSelectedTarget = 翻訳先の言語が指定されていません。
+WarningMessage_SourceEqualTarget = 翻訳元／先に同じ言語コードが指定されています。
+WarningMessage_UnuseSaveDirectory = 出力先フォルダに無効なパスが指定されています。出力先を確認してください。
+WarningMessage_FormatUncompleateBracket = 括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。
+;※↑の{0}はそのまま表示する。
+WarningMessage_UnsetCodeColumn = 言語コードは必須です。（{0}行）
+WarningMessage_UnsetArticleNameColumn = 呼称を設定せずに略称を設定することはできません。（{0}行）
+WarningMessage_RedundantCodeColumn = 言語コードが重複しています。（{0}行）
+
+ErrorTitle = エラー
+ErrorMessage_DevelopmentMiss = 想定外のエラーが発生しました。以降の動作は保障できません。プログラムを再起動してください。\n問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。\nまた、手順や現在の設定を確認し、開発者にご連絡ください。（{0}）
+ErrorMessage_TemporayError = 一時ファイルの作成に失敗しました。設定ファイルに異常が無いか、また以下のフォルダにファイルが作成可能かを確認してください。
+ErrorMessage_MissNetworkAccess = サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。（{0}）
+ErrorMessage_MissConfigSave = 設定の保存に失敗しました。設定ファイルが読み取り専用でないか等、確認してください。
+
+;以下cmnクラス用、このアプリでは未使用
+ErrorMessage_NotDataOpen = 指定されたデータを開けませんでした。（{0}）
+ErrorMessage_NotDataExist = 指定されたデータは存在しません。
+ErrorMessage_MissFileSaveView = 表の保存に失敗しました。{0}
