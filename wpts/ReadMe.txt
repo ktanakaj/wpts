@@ -1,12 +1,12 @@
 ﻿=====================================================================
 【タイトル】 Wikipedia 翻訳支援ツール
-【ファイル】 wpts072.zip
+【ファイル】 wpts072a.zip
 【作成月日】 2006/9/17
 【制 作 者】 Honeplus
 【動作環境】 WindowsXP Professional SP2での動作を確認。要.NET Framework 2.0
 【配布形態】 修正BSDライセンス
 【 E-Mail 】 honeplus@hotmail.co.jp
-【HomePage】 http://www.asahi-net.or.jp/~uf5k-tnk/
+【HomePage】 http://honeplus.blog50.fc2.com/
 =====================================================================
 
 ・概要
@@ -61,7 +61,8 @@ src.zipにソースファイルをまとめています。開発環境はVisualS
 このプログラムの変更・再配布・流用はご自由にどうぞ。
 
 修正BSDライセンスの文面はこちら（日本語版）
-http://www.opensource.jp/licenses/bsd-license.html
+http://sourceforge.jp/projects/opensource/wiki/licenses%2Fnew_BSD_license
+※ 既存のライセンスを使っていますが、要は「好きに使ってね。責任取らないけど。」ということです。
 
 
 ・更新履歴
@@ -96,6 +97,7 @@ Ver0.70 2006/09/16  記事を一時フォルダにキャッシュするように
 Ver0.71 2006/09/17  キャッシュの確認時に、大文字・小文字が異なるものを違うデータと判断するように修正。
                     設定ファイルの初期設定を追加。その他微妙に修正。
 Ver0.72 2006/09/17  赤リンクの場合、言語間リンクにしないように修正。
+Ver0.72a 2008/07/06 ReadMe.txt 内のリンク先修正、著作権の記述に注釈追加。
 
 
 ・今後の目標
