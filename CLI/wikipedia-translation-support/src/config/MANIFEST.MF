@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: jp.honeplus.wpts.form.swt.MainForm
-Class-Path: ./ commons-beanutils-1.8.0.jar commons-collections-3.2.1.jar commons-io-1.4.jar commons-lang-2.4.jar
