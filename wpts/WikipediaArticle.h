@@ -173,7 +173,7 @@ namespace wpts {
 		}
 
 		// WikipediaのXMLの固定値の書式
-		const static String ^XMLNS = "http://www.mediawiki.org/xml/export-0.3/";
+		const static String ^XMLNS = "http://www.mediawiki.org/xml/export-0.4/";
 
 	protected:
 		// 記事のXMLをサーバーより取得

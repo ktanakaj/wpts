@@ -16,7 +16,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("-")];
 [assembly:AssemblyProductAttribute("Wikipedia 翻訳支援ツール")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) Honeplus 2006")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Honeplus 2009")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
@@ -31,7 +31,7 @@ using namespace System::Security::Permissions;
 // すべての値を指定するか、下のように '*' を使ってリビジョンおよびビルド番号を
 // 既定値にすることができます:
 
-[assembly:AssemblyVersionAttribute("0.72.*")];
+[assembly:AssemblyVersionAttribute("0.73.*")];
 
 [assembly:ComVisible(false)];
 
