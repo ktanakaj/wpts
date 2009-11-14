@@ -86,4 +86,20 @@ public class Article {
 		//TODO: 未実装
 		return false;
 	}
+	/**
+	 * 記事がカテゴリーかを判定する。
+	 * @return <code>true</code> カテゴリー
+	 */
+	public boolean isCategory() {
+		//TODO: 未実装
+		return false;
+	}
+	/**
+	 * 記事が画像などのファイルかを判定する。
+	 * @return <code>true</code> 画像などのファイル
+	 */
+	public boolean isImage() {
+		//TODO: 未実装
+		return false;
+	}
 }
