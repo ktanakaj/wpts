@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Build Java App" default="make" basedir="../../">
+	<!-- ビルド設定定義ファイル読み込み -->
+	<property file="./src/config/build.properties" />
+
+	<!-- アプリケーションディレクトリ名 -->
+	<basename property="ap.dir" file="${basedir}"/>
+	<!-- ビルド出力先 -->
+	<condition property="build.dir" value="${dist.dir}/debug">
+		<istrue value="${debug}" />
+	</condition>
+	<condition property="build.dir" value="${dist.dir}/release">
+		<not>
+			<istrue value="${debug}" />
+		</not>
+	</condition>
+	<!-- jar出力先 -->
+	<property name="ap.jar" value="${dist.dir}/${ap.name}.jar" />
+	<!-- javadoc zip出力先 -->
+	<property name="javadoc.zip" value="${dist.dir}/${ap.name}-javadoc.zip" />
+	<!-- src zip出力先 -->
+	<property name="src.zip" value="${dist.dir}/${ap.name}-src.zip" />
+	<!-- 配布用zip出力先 -->
+	<property name="dist.zip" value="${dist.dir}/${ap.name}.zip" />
+
+	<!-- 依存jarファイル -->
+	<path id="jars">
+		<fileset dir="${lib.dir}" />
+		<!-- 外部のjarを参照する場合は、必要に応じて追加する -->
+		<fileset file="${lib.jar.junit}" />
+	</path>
+
+	<!-- アプリケーションビルド -->
+	<target name="make" depends="clean, compile, dist" description="make" />
+
+	<!-- アプリケーションクリーン -->
+	<target name="clean" description="Clean up distribution">
+		<delete quiet="true" dir="${build.dir}" />
+		<delete quiet="true" file="${ap.jar}" />
+	</target>
+
+	<!-- アプリケーションコンパイル -->
+	<target name="compile" depends="clean" description="Compile">
+		<mkdir dir="${build.dir}" />
+
+		<javac srcdir="${src.dir}"
+			   destdir="${build.dir}"
+			   encoding="${src.encoding}"
+			   debug="${debug}"
+			   source="${src.jdk}"
+			   target="${src.jdk}">
+			<classpath refid="jars" />
+		</javac>
+
+		<!-- javaソース以外のファイルをコピー -->
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}">
+				<exclude name="**/*.java" />
+				<!-- javadoc関連のファイルは除外 -->
+				<exclude name="**/package.html" />
+				<exclude name="overview.html" />
+				<exclude name="**/doc-files/**" />
+			</fileset>
+			<fileset dir="${resource.dir}">
+				<exclude name="**/*.java" />
+				<!-- javadoc関連のファイルは除外 -->
+				<exclude name="**/package.html" />
+				<exclude name="overview.html" />
+				<exclude name="**/doc-files/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- アプリケーション配布物生成 -->
+	<target name="dist" depends="clean, compile" description="Create distribution">
+		<mkdir dir="${dist.dir}" />
+		<jar destfile="${ap.jar}"
+			 basedir="${build.dir}"
+			 manifest="${manifest}" />
+	</target>
+
+	<!-- javadoc全ビルド -->
+	<target name="javadoc" depends="clean javadoc, compile javadoc, dist javadoc" description="javadoc" />
+
+	<!-- javadoc関連ファイルのクリーン -->
+	<target name="clean javadoc" description="Clean up javadoc">
+		<delete quiet="true" dir="${javadoc.dir}" />
+		<delete quiet="true" file="${javadoc.zip}" />
+	</target>
+
+	<!-- javadoc生成 -->
+	<target name="compile javadoc" depends="clean javadoc" description="Generate javadoc">
+		<mkdir dir="${javadoc.dir}" />
+		<javadoc destdir="${javadoc.dir}"
+				 source="${src.jdk}"
+				 encoding="${src.encoding}"
+				 docencoding="${javadoc.encoding}"
+				 charset="${javadoc.encoding}"
+				 author="${javadoc.author}"
+				 version="${javadoc.version}"
+				 access="${javadoc.access}"
+				 doctitle="${javadoc.doc.title}"
+				 windowtitle="${javadoc.window.title}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<classpath refid="jars" />
+			<!-- ↓参照する外部のjavadoc。必要に応じて追加する -->
+			<link href="${javadoc.api.jdk}" />
+			<link href="${javadoc.api.javaee}" />
+			<link href="${javadoc.api.junit}" />
+		</javadoc>
+	</target>
+
+	<!-- javadoc配布物の作成 -->
+	<target name="dist javadoc" depends="clean javadoc, compile javadoc" description="Create javadoc distribution">
+		<mkdir dir="${dist.dir}" />
+		<zip destfile="${javadoc.zip}">
+			<zipfileset dir="${javadoc.dir}" prefix="${ap.name}" />
+		</zip>
+	</target>
+
+	<!-- ソース配布物のビルド -->
+	<target name="src" depends="clean src" description="src archive">
+		<mkdir dir="${dist.dir}" />
+		<zip destfile="${src.zip}">
+			<zipfileset dir="${basedir}" prefix="${ap.dir}">
+				<!-- eclipseで生成するファイルは除外 -->
+				<exclude name="target/classes/**" />
+				<!-- antで生成するファイルも除外 -->
+				<exclude name="${dist.dir}/**" />
+				<exclude name="${javadoc.dir}/**" />
+			</zipfileset>
+		</zip>
+	</target>
+
+	<!-- ソース配布物のクリーン -->
+	<target name="clean src" description="Clean up src">
+		<delete quiet="true" file="${src.zip}" />
+	</target>
+
+	<!-- 配布物の全ビルド -->
+	<target name="all" depends="clean all, make, javadoc, src" description="all distribution">
+		<mkdir dir="${dist.dir}" />
+		<zip destfile="${dist.zip}">
+			<fileset file="${ap.jar}" />
+			<fileset file="${javadoc.zip}" />
+			<fileset file="${src.zip}" />
+			<!-- プロジェクト内のjarファイルを含める -->
+			<fileset dir="${lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<!-- ルートフォルダにあるtxt, htmlファイルを含める -->
+			<fileset dir="${basedir}">
+				<include name="*.txt" />
+				<include name="*.html" />
+			</fileset>
+		</zip>
+	</target>
+
+	<!-- 生成物全クリーン -->
+	<target name="clean all" depends="clean, clean javadoc, clean src" description="Clean up make artifacts">
+		<delete quiet="true" dir="${dist.dir}" />
+	</target>
+</project>
