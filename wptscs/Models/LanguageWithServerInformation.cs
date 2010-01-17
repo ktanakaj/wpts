@@ -1,6 +1,6 @@
 using System;
 
-namespace wptscs.model
+namespace Honememo.Wptscs.Models
 {
     // 言語情報と、関連するサーバー情報を格納するクラス
     public class LanguageWithServerInformation : LanguageInformation

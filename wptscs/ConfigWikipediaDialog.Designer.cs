@@ -1,6 +1,19 @@
-﻿namespace wptscs
+﻿// ================================================================================================
+// <summary>
+//      Wikipedia翻訳支援ツール設定画面デザインソース</summary>
+//
+// <copyright file="ConfigWikipediaDialog.Designer.cs" company="honeplusのメモ帳">
+//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+// <author>
+//      Honeplus</author>
+// ================================================================================================
+
+namespace Honememo.Wptscs
 {
-    partial class ConfigWikipediaDialog
+    /// <summary>
+    /// Wikipedia翻訳支援ツール設定画面のクラスです。
+    /// </summary>
+    public partial class ConfigWikipediaDialog
     {
         /// <summary>
         /// 必要なデザイナ変数です。

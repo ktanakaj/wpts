@@ -4,7 +4,7 @@ using System.Net;
 using System.Xml;
 using System.Windows.Forms;
 
-namespace wptscs.model
+namespace Honememo.Wptscs.Models
 {
     // Wikipediaの記事を管理するためのクラス
     public class WikipediaArticle : WikipediaFormat
@@ -20,7 +20,7 @@ namespace wptscs.model
         public void Initialize(String i_Title)
         {
 	        // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-	        if(MYAPP.Cmn.NullCheckAndTrim(i_Title).TrimStart(':') == ""){
+	        if(Honememo.Cmn.NullCheckAndTrim(i_Title).TrimStart(':') == ""){
 		        throw new ArgumentNullException("i_Title");
 	        }
 	        // メンバ変数の初期化
@@ -138,7 +138,7 @@ namespace wptscs.model
 				        Directory.CreateDirectory(tmpDir);
 			        }
 			        // ファイルの保存
-			        Xml.Save(Path.Combine(tmpDir, MYAPP.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml"));
+			        Xml.Save(Path.Combine(tmpDir, Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml"));
 		        }
 		        catch(Exception e){
 			        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getServerArticle > 一時ファイルの保存に失敗しました : " + e.Message);
@@ -173,7 +173,7 @@ namespace wptscs.model
 		        // 記事のXMLデータをキャッシュファイルから取得
 		        try{
 			        // 一時ファイルにアクセス
-			        String tmpFile = Path.Combine(Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath)), MYAPP.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
+			        String tmpFile = Path.Combine(Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath)), Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
 			        if(File.Exists(tmpFile) == true){
 				        // ファイルが有効期限内のものかを確認
 				        if((DateTime.UtcNow - File.GetLastWriteTimeUtc(tmpFile)) < i_CacheEnabledSpan){
@@ -202,7 +202,7 @@ namespace wptscs.model
 						        if(rootElement.GetAttribute("xml:lang") == Server.Code &&
 						           pageElement.InnerText == title){
 							        // XMLをメンバ変数に設定し、正常終了
-							        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getCacheArticle > キャッシュ読込み : " + MYAPP.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
+							        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getCacheArticle > キャッシュ読込み : " + Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
 							        _Xml = tmpXml;
 							        return true;
 						        }
@@ -238,7 +238,7 @@ namespace wptscs.model
 			        i = index;
 		        }
 		        // 指定言語への言語間リンクの場合、内容を取得し、処理終了
-		        else if(MYAPP.Cmn.ChkTextInnerWith(Text, i, "[[" + i_Code + ":") == true){
+		        else if(Honememo.Cmn.ChkTextInnerWith(Text, i, "[[" + i_Code + ":") == true){
 			        Link link = ParseInnerLink(Text.Substring(i));
 			        if(!String.IsNullOrEmpty(link.Text)){
 				        interWiki = link.Article;
@@ -268,7 +268,7 @@ namespace wptscs.model
 				        WikipediaInformation.Namespace ns = new WikipediaInformation.Namespace();
                         ns.Key = Decimal.ToInt16(Decimal.Parse(e.GetAttribute("key")));
                         ns.Name = e.InnerText;
-				        MYAPP.Cmn.AddArray(ref namespaces, ns);
+				        Honememo.Cmn.AddArray(ref namespaces, ns);
 			        }
                     catch (Exception ex) {
                         System.Diagnostics.Debug.WriteLine("WikipediaArticle.GetNamespaces > 例外発生 : " + ex);

@@ -1,6 +1,19 @@
-﻿namespace wptscs
+﻿// ================================================================================================
+// <summary>
+//      Wikipedia翻訳支援ツールコード入力ダイアログデザインソース</summary>
+//
+// <copyright file="InputLanguageCodeDialog.Designer.cs" company="honeplusのメモ帳">
+//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+// <author>
+//      Honeplus</author>
+// ================================================================================================
+
+namespace Honememo.Wptscs
 {
-    partial class InputLanguageCodeDialog
+    /// <summary>
+    /// Wikipedia翻訳支援ツールコード入力ダイアログのクラスです。
+    /// </summary>
+    public partial class InputLanguageCodeDialog
     {
         /// <summary>
         /// 必要なデザイナ変数です。

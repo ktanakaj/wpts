@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace wptscs.model
+namespace Honememo.Wptscs.Models
 {
     // 言語情報・サーバー情報に加え、Wikipediaのサーバーごとの設定を格納するクラス
     public class WikipediaInformation : LanguageWithServerInformation

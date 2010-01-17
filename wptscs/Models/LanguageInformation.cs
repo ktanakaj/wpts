@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace wptscs.model
+namespace Honememo.Wptscs.Models
 {
     // Œ¾Œê‚ÉŠÖ‚·‚éî•ñ‚ğŠi”[‚·‚éƒNƒ‰ƒX
     public class LanguageInformation : IComparable

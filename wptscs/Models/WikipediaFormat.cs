@@ -1,7 +1,7 @@
 using System;
-using MYAPP;
+using Honememo;
 
-namespace wptscs.model
+namespace Honememo.Wptscs.Models
 {
     // Wikipediaの記事の書式を扱うためのクラス
     public class WikipediaFormat
@@ -170,14 +170,14 @@ namespace wptscs.model
 	        for(int i = 2 ; i < i_Text.Length ; i++){
 		        char c = i_Text[i];
 		        // ]]が見つかったら、処理正常終了
-		        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i, "]]") == true){
+		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "]]") == true){
 			        lastIndex = ++i;
 			        break;
 		        }
 		        // | が含まれている場合、以降の文字列は表示名などとして扱う
 		        if(c == '|'){
 			        ++pipeCounter;
-			        MYAPP.Cmn.AddArray(ref pipeTexts, "");
+			        Honememo.Cmn.AddArray(ref pipeTexts, "");
 			        continue;
 		        }
 		        // 変数（[[{{{1}}}]]とか）の再帰チェック
@@ -223,7 +223,7 @@ namespace wptscs.model
 		        // | の後のとき
 		        else{
 			        // コメント（<!--）が含まれている場合、リンクは無効
-			        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
+			        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
 				        break;
 			        }
 			        // nowikiのチェック
@@ -296,14 +296,14 @@ namespace wptscs.model
 	        for(int i = 2 ; i < i_Text.Length ; i++){
 		        char c = i_Text[i];
 		        // }}が見つかったら、処理正常終了
-		        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i, "}}") == true){
+		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}") == true){
 			        lastIndex = ++i;
 			        break;
 		        }
 		        // | が含まれている場合、以降の文字列は引数などとして扱う
 		        if(c == '|'){
 			        ++pipeCounter;
-			        MYAPP.Cmn.AddArray(ref pipeTexts, "");
+			        Honememo.Cmn.AddArray(ref pipeTexts, "");
 			        continue;
 		        }
 		        // 変数（[[{{{1}}}]]とか）の再帰チェック
@@ -332,7 +332,7 @@ namespace wptscs.model
 		        // | の後のとき
 		        else{
 			        // コメント（<!--）が含まれている場合、リンクは無効
-			        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
+			        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
 				        break;
 			        }
 			        // nowikiのチェック
@@ -393,11 +393,11 @@ namespace wptscs.model
 	        int lastIndex = -1;
 	        o_Link.Initialize();
 	        // 入力値に応じて、処理を振り分け
-	        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i_Index, "[[") == true){
+	        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "[[") == true){
 		        // 内部リンク
 		        o_Link = ParseInnerLink(i_Text.Substring(i_Index));
 	        }
-	        else if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i_Index, "{{") == true){
+	        else if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "{{") == true){
 		        // テンプレート
 		        o_Link = ParseTemplate(i_Text.Substring(i_Index));
 	        }
@@ -416,14 +416,14 @@ namespace wptscs.model
 	        o_Variable = "";
 	        o_Value = "";
 	        // 入力値確認
-	        if(MYAPP.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, "{{{") == false){
+	        if(Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, "{{{") == false){
 		        return lastIndex;
 	        }
 	        // ブロック終了まで取得
 	        bool pipeFlag = false;
 	        for(int i = i_Index + 3; i < i_Text.Length ; i++){
 		        // 終了条件のチェック
-		        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i, "}}}") == true){
+		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}}") == true){
 			        lastIndex = i + 2;
 			        break;
 		        }
@@ -495,13 +495,13 @@ namespace wptscs.model
 	        int lastIndex = -1;
 	        o_Text = "";
 	        // 入力値確認
-	        if(MYAPP.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, NOWIKISTART.ToLower()) == false){
+	        if(Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, NOWIKISTART.ToLower()) == false){
 		        return lastIndex;
 	        }
 	        // ブロック終了まで取得
 	        for(int i = i_Index + NOWIKISTART.Length; i < i_Text.Length ; i++){
 		        // 終了条件のチェック
-		        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i, NOWIKIEND)){
+		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, NOWIKIEND)){
 			        lastIndex = i + NOWIKIEND.Length - 1;
 			        break;
 		        }
@@ -528,12 +528,12 @@ namespace wptscs.model
 	        int lastIndex = -1;
 	        o_Text = "";
 	        // 入力値確認
-	        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i_Index, COMMENTSTART) == false){
+	        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, COMMENTSTART) == false){
 		        return lastIndex;
 	        }
 	        // コメント終了まで取得
 	        for(int i = i_Index + COMMENTSTART.Length; i < i_Text.Length ; i++){
-		        if(MYAPP.Cmn.ChkTextInnerWith(i_Text, i, COMMENTEND)){
+		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTEND)){
 			        lastIndex = i + COMMENTEND.Length - 1;
 			        break;
 		        }

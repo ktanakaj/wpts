@@ -1,4 +1,14 @@
-﻿using System.Reflection;
+﻿// ================================================================================================
+// <summary>
+//      Wikipedia翻訳支援ツールのアセンブリソース</summary>
+//
+// <copyright file="AssemblyInfo.cs" company="honeplusのメモ帳">
+//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+// <author>
+//      Honeplus</author>
+// ================================================================================================
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -23,11 +33,8 @@ using System.Runtime.InteropServices;
 [assembly: Guid("404a79d4-250a-427c-8e84-375abeba27a4")]
 
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
-//
 //      Major Version
 //      Minor Version 
 //      Build Number
 //      Revision
-//
 [assembly: AssemblyVersion("0.80.*")]
-//[assembly: AssemblyFileVersion("0.8.*")]

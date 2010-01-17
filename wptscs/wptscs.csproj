@@ -7,7 +7,7 @@
     <ProjectGuid>{4E20E523-0230-474C-B8F1-1E991360F5F5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>wptscs</RootNamespace>
+    <RootNamespace>Honememo.Wptscs</RootNamespace>
     <AssemblyName>wptscs</AssemblyName>
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
@@ -19,6 +19,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\wptscs_doc.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,21 +51,21 @@
     <Compile Include="InputLanguageCodeDialog.Designer.cs">
       <DependentUpon>InputLanguageCodeDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="logic\Translate.cs" />
-    <Compile Include="logic\TranslateNetworkObject.cs" />
-    <Compile Include="logic\TranslateWikipedia.cs" />
+    <Compile Include="Logics\Translate.cs" />
+    <Compile Include="Logics\TranslateNetworkObject.cs" />
+    <Compile Include="Logics\TranslateWikipedia.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\Config.cs" />
-    <Compile Include="model\LanguageInformation.cs" />
-    <Compile Include="model\LanguageWithServerInformation.cs" />
-    <Compile Include="model\WikipediaArticle.cs" />
-    <Compile Include="model\WikipediaFormat.cs" />
-    <Compile Include="model\WikipediaInformation.cs" />
+    <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\LanguageInformation.cs" />
+    <Compile Include="Models\LanguageWithServerInformation.cs" />
+    <Compile Include="Models\WikipediaArticle.cs" />
+    <Compile Include="Models\WikipediaFormat.cs" />
+    <Compile Include="Models\WikipediaInformation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ConfigWikipediaDialog.resx">

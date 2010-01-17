@@ -1,6 +1,19 @@
-﻿namespace wptscs
+﻿// ================================================================================================
+// <summary>
+//      Wikipedia翻訳支援ツール主画面デザインソース</summary>
+//
+// <copyright file="MainForm.Designer.cs" company="honeplusのメモ帳">
+//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+// <author>
+//      Honeplus</author>
+// ================================================================================================
+
+namespace Honememo.Wptscs
 {
-    partial class MainForm
+    /// <summary>
+    /// Wikipedia翻訳支援ツール主画面のクラスです。
+    /// </summary>
+    public partial class MainForm
     {
         /// <summary>
         /// 必要なデザイナ変数です。
