@@ -26,6 +26,8 @@ namespace Honememo.Wptscs
     /// </summary>
     public partial class ConfigWikipediaDialog : Form
     {
+        #region private変数
+
         /// <summary>
         /// 共通関数クラスのオブジェクト。
         /// </summary>
@@ -41,19 +43,28 @@ namespace Honememo.Wptscs
         /// </summary>
         private string comboBoxCodeSelectedText;
 
+        #endregion
+
+        #region コンストラクタ
+
         /// <summary>
         /// コンストラクタ。初期化メソッド呼び出しのみ。
         /// </summary>
         public ConfigWikipediaDialog()
         {
+            // Windows フォーム デザイナで生成されたコード
             InitializeComponent();
         }
+
+        #endregion
+
+        #region 各イベントのメソッド
 
         /// <summary>
         /// フォームロード時の処理。初期化。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void ConfigWikipediaDialog_Load(object sender, EventArgs e)
         {
             // 初期化処理
@@ -68,21 +79,27 @@ namespace Honememo.Wptscs
             // 使用言語取得
             String showCode = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
             int x = 0;
-            foreach(LanguageInformation lang in config.Languages){
+            foreach (LanguageInformation lang in config.Languages)
+            {
                 WikipediaInformation svr = lang as WikipediaInformation;
-                if(svr != null){
+                if (svr != null)
+                {
                     // 表タイトル設定
                     String name = svr.GetName(showCode);
-                    if(name != ""){
+                    if (name != "")
+                    {
                         name += (" (" + svr.Code + ")");
                     }
-                    else{
+                    else
+                    {
                         name = svr.Code;
                     }
                     dataGridViewTitleKey.Columns.Add(svr.Code, name);
                     // 表データ設定
-                    for(int y = 0 ; y < svr.TitleKeys.Length ; y++){
-                        if(dataGridViewTitleKey.RowCount - 1 <= y){
+                    for (int y = 0; y < svr.TitleKeys.Length; y++)
+                    {
+                        if (dataGridViewTitleKey.RowCount - 1 <= y)
+                        {
                             dataGridViewTitleKey.Rows.Add();
                         }
                         dataGridViewTitleKey[x, y].Value = svr.TitleKeys[y];
@@ -99,8 +116,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 言語コードコンボボックス変更時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void comboBoxCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("ConfigLanguageDialog._SelectedIndexChanged > "
@@ -109,18 +126,22 @@ namespace Honememo.Wptscs
 
             // 変更前の設定を保存
             // ※変更前にしろ変更後にしろ、事前に追加しているのでGetLanguageで見つからないことは無い・・・はず
-            if(comboBoxCodeSelectedText != ""){
+            if (comboBoxCodeSelectedText != "")
+            {
                 WikipediaInformation svr = config.GetLanguage(comboBoxCodeSelectedText) as WikipediaInformation;
-                if(svr != null){
+                if (svr != null)
+                {
                     svr.ArticleXmlPath = textBoxXml.Text.Trim();
                     svr.Redirect = textBoxRedirect.Text.Trim();
                     // 表から呼称の情報も保存
                     dataGridViewName.Sort(dataGridViewName.Columns["Code"], ListSortDirection.Ascending);
                     svr.Names = new LanguageInformation.LanguageName[0];
-                    for(int y = 0 ; y < dataGridViewName.RowCount - 1 ; y++){
+                    for (int y = 0; y < dataGridViewName.RowCount - 1; y++)
+                    {
                         // 値が入ってないとかはガードしているはずだが、一応チェック
                         String code = Honememo.Cmn.NullCheckAndTrim(dataGridViewName["Code", y]);
-                        if(code != ""){
+                        if (code != "")
+                        {
                             LanguageInformation.LanguageName name = new LanguageInformation.LanguageName();
                             name.Code = code;
                             name.Name = Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ArticleName", y]);
@@ -131,15 +152,18 @@ namespace Honememo.Wptscs
                 }
             }
             // 変更後の値に応じて、画面表示を更新
-            if(comboBoxCode.SelectedItem != null){
+            if (comboBoxCode.SelectedItem != null)
+            {
                 // 値を設定
                 WikipediaInformation svr = config.GetLanguage(comboBoxCode.SelectedItem.ToString()) as WikipediaInformation;
-                if(svr != null){
+                if (svr != null)
+                {
                     textBoxXml.Text = svr.ArticleXmlPath;
                     textBoxRedirect.Text = svr.Redirect;
                     // 呼称の情報を表に設定
                     dataGridViewName.Rows.Clear();
-                    foreach(LanguageInformation.LanguageName name in svr.Names){
+                    foreach (LanguageInformation.LanguageName name in svr.Names)
+                    {
                         int index = dataGridViewName.Rows.Add();
                         dataGridViewName["Code", index].Value = name.Code;
                         dataGridViewName["ArticleName", index].Value = name.Name;
@@ -152,7 +176,8 @@ namespace Honememo.Wptscs
                 // 現在の選択値を更新
                 comboBoxCodeSelectedText = comboBoxCode.SelectedItem.ToString();
             }
-            else{
+            else
+            {
                 // 言語のプロパティを無効に
                 groupBoxStyle.Enabled = false;
                 groupBoxName.Enabled = false;
@@ -165,7 +190,8 @@ namespace Honememo.Wptscs
         private void comboBoxCode_KeyDown(object sender, KeyEventArgs e)
         {
             // エンターキーが押された場合、現在の値が一覧に無ければ登録する（フォーカスを失ったときの処理）
-            if(e.KeyCode == Keys.Enter){
+            if (e.KeyCode == Keys.Enter)
+            {
                 System.Diagnostics.Debug.WriteLine("ConfigLanguageDialog._KeyDown > " + comboBoxCode.Text);
                 comboBoxCode_Leave(sender, e);
             }
@@ -177,14 +203,17 @@ namespace Honememo.Wptscs
             System.Diagnostics.Debug.WriteLine("ConfigLanguageDialog._Leave > " + comboBoxCode.Text);
             // 現在の値が一覧に無ければ登録する
             comboBoxCode.Text = comboBoxCode.Text.Trim().ToLower();
-            if(comboBoxCode.Text != ""){
-                if(Honememo.Cmn.AddComboBoxNewItem(ref comboBoxCode) == true){
+            if (comboBoxCode.Text != "")
+            {
+                if (Honememo.Cmn.AddComboBoxNewItem(ref comboBoxCode) == true)
+                {
                     // 登録した場合メンバ変数にも登録
                     WikipediaInformation svr = config.GetLanguage(comboBoxCode.Text) as WikipediaInformation;
                     // 存在しないはずだが一応は確認して追加
-                    if(svr == null){
+                    if (svr == null)
+                    {
                         svr = new WikipediaInformation(comboBoxCode.Text);
-                        Honememo.Cmn.AddArray(ref config.Languages, (LanguageInformation) svr);
+                        Honememo.Cmn.AddArray(ref config.Languages, (LanguageInformation)svr);
                         // 定型句の設定表に列を追加
                         dataGridViewTitleKey.Columns.Add(comboBoxCode.Text, comboBoxCode.Text);
                     }
@@ -192,7 +221,8 @@ namespace Honememo.Wptscs
                     comboBoxCode.SelectedItem = comboBoxCode.Text;
                 }
             }
-            else{
+            else
+            {
                 // 空にしたとき、変更でイベントが起こらないようなので、強制的に呼ぶ
                 comboBoxCode_SelectedIndexChanged(sender, e);
             }
@@ -202,20 +232,25 @@ namespace Honememo.Wptscs
         private void toolStripMenuItemModify_Click(object sender, EventArgs e)
         {
             // 選択されている言語コードに関連する情報を更新
-            if(comboBoxCode.SelectedIndex != -1){
+            if (comboBoxCode.SelectedIndex != -1)
+            {
                 String oldCode = comboBoxCode.SelectedItem.ToString();
                 // 入力画面にて変更後の言語コードを取得
                 InputLanguageCodeDialog dialog = new InputLanguageCodeDialog();
                 dialog.LanguageCode = oldCode;
-                if(dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK){
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
                     String newCode = dialog.LanguageCode;
                     // メンバ変数を更新
                     LanguageInformation lang = config.GetLanguage(oldCode);
-                    if(lang != null){
+                    if (lang != null)
+                    {
                         lang.Code = newCode;
                     }
-                    foreach(LanguageInformation langIndex in config.Languages){
-                        if(langIndex.GetType() != typeof(WikipediaInformation)){
+                    foreach (LanguageInformation langIndex in config.Languages)
+                    {
+                        if (langIndex.GetType() != typeof(WikipediaInformation))
+                        {
                             continue;
                         }
                         for (int i = 0; i < langIndex.Names.Length; i++)
@@ -231,10 +266,12 @@ namespace Honememo.Wptscs
                     comboBoxCode.Items[index] = newCode;
                     // 定型句の設定表を更新
                     String header = lang.GetName(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-                    if(header != ""){
+                    if (header != "")
+                    {
                         header += (" (" + newCode + ")");
                     }
-                    else{
+                    else
+                    {
                         header = newCode;
                     }
                     dataGridViewTitleKey.Columns[oldCode].HeaderText = header;
@@ -249,13 +286,16 @@ namespace Honememo.Wptscs
         private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
         {
             // 選択されている言語コードに関連する情報を削除
-            if(comboBoxCode.SelectedIndex != -1){
+            if (comboBoxCode.SelectedIndex != -1)
+            {
                 dataGridViewTitleKey.Columns.Remove(comboBoxCode.SelectedItem.ToString());
                 // メンバ変数からも削除
                 LanguageInformation[] newLanguages = new LanguageInformation[0];
-                foreach(LanguageInformation lang in config.Languages){
-                    if(lang.Code == comboBoxCode.SelectedItem.ToString() &&
-                       lang.GetType() == typeof(WikipediaInformation)) {
+                foreach (LanguageInformation lang in config.Languages)
+                {
+                    if (lang.Code == comboBoxCode.SelectedItem.ToString() &&
+                       lang.GetType() == typeof(WikipediaInformation))
+                    {
                         continue;
                     }
                     Honememo.Cmn.AddArray(ref newLanguages, lang);
@@ -274,21 +314,28 @@ namespace Honememo.Wptscs
             String codeUnsetRows = "";
             String nameUnsetRows = "";
             String redundantCodeRows = "";
-            for(int y = 0 ; y < dataGridViewName.RowCount - 1 ; y++){
+            for (int y = 0; y < dataGridViewName.RowCount - 1; y++)
+            {
                 // 言語コード列は、小文字のデータに変換
                 dataGridViewName["Code", y].Value = Honememo.Cmn.NullCheckAndTrim(dataGridViewName["Code", y]).ToLower();
                 // 言語コードが設定されていない行があるか？
-                if(dataGridViewName["Code", y].Value.ToString() == ""){
-                    if(codeUnsetRows != ""){
+                if (dataGridViewName["Code", y].Value.ToString() == "")
+                {
+                    if (codeUnsetRows != "")
+                    {
                         codeUnsetRows += ",";
                     }
                     codeUnsetRows += (y + 1);
                 }
-                else{
+                else
+                {
                     // 言語コードが重複していないか？
-                    for(int i = 0 ; i < y ; i++){
-                        if(dataGridViewName["Code", i].Value.ToString() == dataGridViewName["Code", y].Value.ToString()){
-                            if(redundantCodeRows != ""){
+                    for (int i = 0; i < y; i++)
+                    {
+                        if (dataGridViewName["Code", i].Value.ToString() == dataGridViewName["Code", y].Value.ToString())
+                        {
+                            if (redundantCodeRows != "")
+                            {
                                 redundantCodeRows += ",";
                             }
                             redundantCodeRows += (y + 1);
@@ -296,9 +343,11 @@ namespace Honememo.Wptscs
                         }
                     }
                     // 呼称が設定されていないのに略称が設定されていないか？
-                    if(Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ShortName", y]) != "" &&
-                       Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ArticleName", y]) == ""){
-                        if(nameUnsetRows != ""){
+                    if (Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ShortName", y]) != "" &&
+                       Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ArticleName", y]) == "")
+                    {
+                        if (nameUnsetRows != "")
+                        {
                             nameUnsetRows += ",";
                         }
                         nameUnsetRows += (y + 1);
@@ -307,22 +356,28 @@ namespace Honememo.Wptscs
             }
             // 結果の表示
             String errorMessage = "";
-            if(codeUnsetRows != ""){
+            if (codeUnsetRows != "")
+            {
                 errorMessage += (String.Format(Resources.WarningMessage_UnsetCodeColumn, codeUnsetRows));
             }
-            if(redundantCodeRows != ""){
-                if(errorMessage != ""){
+            if (redundantCodeRows != "")
+            {
+                if (errorMessage != "")
+                {
                     errorMessage += "\n";
                 }
                 errorMessage += (String.Format(Resources.WarningMessage_RedundantCodeColumn, redundantCodeRows));
             }
-            if(nameUnsetRows != ""){
-                if(errorMessage != ""){
+            if (nameUnsetRows != "")
+            {
+                if (errorMessage != "")
+                {
                     errorMessage += "\n";
                 }
                 errorMessage += (String.Format(Resources.WarningMessage_UnsetArticleNameColumn, nameUnsetRows));
             }
-            if(errorMessage != ""){
+            if (errorMessage != "")
+            {
                 MessageBox.Show(errorMessage, Resources.WarningTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 dataGridViewName.Focus();
             }
@@ -336,21 +391,28 @@ namespace Honememo.Wptscs
             comboBoxCode_SelectedIndexChanged(sender, e);
             // 表の状態をメンバ変数に保存
             // 領域の初期化
-            foreach(LanguageInformation lang in config.Languages){
+            foreach (LanguageInformation lang in config.Languages)
+            {
                 WikipediaInformation svr = lang as WikipediaInformation;
-                if(svr != null){
+                if (svr != null)
+                {
                     Array.Resize(ref svr.TitleKeys, dataGridViewTitleKey.RowCount - 1);
                 }
             }
             // データの保存
-            for(int x = 0 ; x < dataGridViewTitleKey.ColumnCount ; x++){
+            for (int x = 0; x < dataGridViewTitleKey.ColumnCount; x++)
+            {
                 WikipediaInformation svr = config.GetLanguage(dataGridViewTitleKey.Columns[x].Name) as WikipediaInformation;
-                if(svr != null){
-                    for(int y = 0; y < dataGridViewTitleKey.RowCount - 1; y++){
-                        if(dataGridViewTitleKey[x, y].Value != null){
+                if (svr != null)
+                {
+                    for (int y = 0; y < dataGridViewTitleKey.RowCount - 1; y++)
+                    {
+                        if (dataGridViewTitleKey[x, y].Value != null)
+                        {
                             svr.TitleKeys[y] = dataGridViewTitleKey[x, y].Value.ToString().Trim();
                         }
-                        else{
+                        else
+                        {
                             svr.TitleKeys[y] = "";
                         }
                     }
@@ -360,14 +422,18 @@ namespace Honememo.Wptscs
             Array.Sort(config.Languages);
 
             // 設定をファイルに保存
-            if(config.Save() == true){
+            if (config.Save() == true)
+            {
                 // 画面を閉じて、設定終了
                 this.Close();
             }
-            else{
+            else
+            {
                 // エラーメッセージを表示、画面は開いたまま
                 cmnAP.ErrorDialogResource("ErrorMessage_MissConfigSave");
             }
         }
+
+        #endregion
     }
 }

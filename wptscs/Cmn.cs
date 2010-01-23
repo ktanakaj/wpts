@@ -55,8 +55,8 @@ namespace Honememo
         /// <summary>
         /// コンストラクタ（指定されたリソースマネージャーを指定されたフォルダから設定）。
         /// </summary>
-        /// <param name="i_Resource">リソースマネージャー</param>
-        /// <param name="i_Dir">リソースのあるフォルダ</param>
+        /// <param name="i_Resource">リソースマネージャー。</param>
+        /// <param name="i_Dir">リソースのあるフォルダ。</param>
         public Cmn(string i_Resource, string i_Dir)
         {
             System.Diagnostics.Debug.WriteLine("Cmn.Cmn > " + i_Resource + ", " + i_Dir);
@@ -77,7 +77,7 @@ namespace Honememo
         /// <summary>
         /// コンストラクタ（渡されたリソースマネージャーを使用）。
         /// </summary>
-        /// <param name="resource">リソースマネージャー</param>
+        /// <param name="resource">リソースマネージャー。</param>
         public Cmn(ResourceManager resource)
         {
             // 渡されたリソースマネージャーをそのまま使用
@@ -89,7 +89,7 @@ namespace Honememo
         /// <summary>
         /// StringのNULL値チェック＆Trim。
         /// </summary>
-        /// <param name="s">対象文字列</param>
+        /// <param name="s">対象文字列。</param>
         /// <returns>チェック後の文字列</returns>
         public static string NullCheckAndTrim(string s)
         {
@@ -105,7 +105,7 @@ namespace Honememo
         /// <summary>
         /// DataGridViewCellのNULL値チェック＆Trim。
         /// </summary>
-        /// <param name="c">対象セル</param>
+        /// <param name="c">対象セル。</param>
         /// <returns>チェック後の文字列</returns>
         public static string NullCheckAndTrim(DataGridViewCell c)
         {
@@ -126,7 +126,7 @@ namespace Honememo
         /// 配列への要素（NULL）追加。
         /// </summary>
         /// <typeparam name="T">要素の型</typeparam>
-        /// <param name="io_Array">配列</param>
+        /// <param name="io_Array">配列。</param>
         /// <returns>追加したインデックス</returns>
         public static int AddArray<T>(ref T[] io_Array)
         {
@@ -145,8 +145,8 @@ namespace Honememo
         /// 配列への要素（入力値）追加。
         /// </summary>
         /// <typeparam name="T">要素の型</typeparam>
-        /// <param name="io_Array">配列</param>
-        /// <param name="i_Obj">追加するオブジェクト</param>
+        /// <param name="io_Array">配列。</param>
+        /// <param name="i_Obj">追加するオブジェクト。</param>
         /// <returns>追加したインデックス</returns>
         public static int AddArray<T>(ref T[] io_Array, T i_Obj)
         {
@@ -179,7 +179,7 @@ namespace Honememo
         /// <summary>
         /// 文字列中のファイル名に使用できない文字を置換。
         /// </summary>
-        /// <param name="s">ファイル名</param>
+        /// <param name="s">ファイル名。</param>
         /// <returns>置換後の文字列</returns>
         public static string ReplaceInvalidFileNameChars(string s)
         {
@@ -197,8 +197,8 @@ namespace Honememo
         /// <summary>
         /// オブジェクトのXMLへのシリアライズ。
         /// </summary>
-        /// <param name="i_Obj">オブジェクト</param>
-        /// <param name="i_FileName">XMLファイルパス</param>
+        /// <param name="i_Obj">オブジェクト。</param>
+        /// <param name="i_FileName">XMLファイルパス。</param>
         /// <returns><c>true</c> シリアライズ成功</returns>
         public static bool XmlSerialize(object i_Obj, string i_FileName)
         {
@@ -232,9 +232,9 @@ namespace Honememo
         /// <summary>
         /// オブジェクトのXMLからのデシリアライズ。
         /// </summary>
-        /// <param name="o_Obj">オブジェクト</param>
-        /// <param name="i_Type">オブジェクトの型</param>
-        /// <param name="i_FileName">XMLファイルパス</param>
+        /// <param name="o_Obj">オブジェクト。</param>
+        /// <param name="i_Type">オブジェクトの型。</param>
+        /// <param name="i_FileName">XMLファイルパス。</param>
         /// <returns><c>true</c> デシリアライズ成功</returns>
         public static bool XmlDeserialize(ref object o_Obj, Type i_Type, string i_FileName)
         {
@@ -274,9 +274,9 @@ namespace Honememo
         /// <summary>
         /// 対象の文字列が、渡された文字列のインデックス番目に存在するかをチェック。
         /// </summary>
-        /// <param name="i_Text">文字列全体</param>
-        /// <param name="i_Index">チェック位置</param>
-        /// <param name="i_ChkStr">探索する文字列</param>
+        /// <param name="i_Text">文字列全体。</param>
+        /// <param name="i_Index">チェック位置。</param>
+        /// <param name="i_ChkStr">探索する文字列。</param>
         /// <returns><c>true</c> 存在する</returns>
         public static bool ChkTextInnerWith(string i_Text, int i_Index, string i_ChkStr)
         {
@@ -318,8 +318,8 @@ namespace Honememo
         /// <summary>
         /// コンボボックスを確認し、現在の値が一覧に無ければ登録。
         /// </summary>
-        /// <param name="io_Box">コンボボックス</param>
-        /// <param name="i_FirstStr">プレフィックス</param>
+        /// <param name="io_Box">コンボボックス。</param>
+        /// <param name="i_FirstStr">プレフィックス。</param>
         /// <returns><c>true</c> 登録成功</returns>
         public static bool AddComboBoxNewItem(ref ComboBox io_Box, string i_FirstStr)
         {
@@ -353,7 +353,7 @@ namespace Honememo
         /// <summary>
         /// コンボボックスを確認し、現在の値が一覧に無ければ登録。
         /// </summary>
-        /// <param name="io_Box">コンボボックス</param>
+        /// <param name="io_Box">コンボボックス。</param>
         /// <returns><c>true</c> 登録成功</returns>
         public static bool AddComboBoxNewItem(ref ComboBox io_Box)
         {
@@ -364,7 +364,7 @@ namespace Honememo
         /// <summary>
         /// コンボボックスを確認し、選択されている値を削除。
         /// </summary>
-        /// <param name="io_Box">コンボボックス</param>
+        /// <param name="io_Box">コンボボックス。</param>
         /// <returns><c>true</c> 削除成功</returns>
         public static bool RemoveComboBoxItem(ref ComboBox io_Box)
         {
@@ -396,7 +396,7 @@ namespace Honememo
         /// <summary>
         /// 共通通知ダイアログ（入力された文字列を表示）。
         /// </summary>
-        /// <param name="msg">メッセージ</param>
+        /// <param name="msg">メッセージ。</param>
         public virtual void InformationDialog(string msg)
         {
             // 渡された文字列で通知ダイアログを表示
@@ -411,8 +411,8 @@ namespace Honememo
         /// <summary>
         /// 共通通知ダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
         /// </summary>
-        /// <param name="i_Key">リソースのキー</param>
-        /// <param name="i_args">フォーマットの引数</param>
+        /// <param name="i_Key">リソースのキー。</param>
+        /// <param name="i_args">フォーマットの引数。</param>
         public virtual void InformationDialogResource(string i_Key, params object[] i_args)
         {
             // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
@@ -439,7 +439,7 @@ namespace Honememo
         /// <summary>
         /// 共通警告ダイアログ（入力された文字列を表示）。
         /// </summary>
-        /// <param name="msg">メッセージ</param>
+        /// <param name="msg">メッセージ。</param>
         public virtual void WarningDialog(string msg)
         {
             // 渡された文字列で警告ダイアログを表示
@@ -454,8 +454,8 @@ namespace Honememo
         /// <summary>
         /// 共通警告ダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
         /// </summary>
-        /// <param name="i_Key">リソースのキー</param>
-        /// <param name="i_args">フォーマットの引数</param>
+        /// <param name="i_Key">リソースのキー。</param>
+        /// <param name="i_args">フォーマットの引数。</param>
         public virtual void WarningDialogResource(string i_Key, params object[] i_args)
         {
             // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
@@ -482,7 +482,7 @@ namespace Honememo
         /// <summary>
         /// 共通エラーダイアログ（入力された文字列を表示）。
         /// </summary>
-        /// <param name="msg">メッセージ</param>
+        /// <param name="msg">メッセージ。</param>
         public virtual void ErrorDialog(string msg)
         {
             // 渡された文字列でエラーダイアログを表示
@@ -497,8 +497,8 @@ namespace Honememo
         /// <summary>
         /// 共通エラーダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
         /// </summary>
-        /// <param name="i_Key">リソースのキー</param>
-        /// <param name="i_args">フォーマットの引数</param>
+        /// <param name="i_Key">リソースのキー。</param>
+        /// <param name="i_args">フォーマットの引数。</param>
         public virtual void ErrorDialogResource(string i_Key, params object[] i_args)
         {
             // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
@@ -527,8 +527,8 @@ namespace Honememo
         /// <summary>
         /// フォルダオープン。
         /// </summary>
-        /// <param name="i_Path">フォルダのパス</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示</param>
+        /// <param name="i_Path">フォルダのパス。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
         /// <returns><c>true</c> オープン成功</returns>
         public virtual bool OpenFolder(string i_Path, bool i_ShowEnabled)
         {
@@ -574,7 +574,7 @@ namespace Honememo
         /// <summary>
         /// フォルダオープン（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="path">フォルダのパス</param>
+        /// <param name="path">フォルダのパス。</param>
         /// <returns><c>true</c> オープン成功</returns>
         public bool OpenFolder(string path)
         {
@@ -584,8 +584,8 @@ namespace Honememo
         /// <summary>
         /// ファイルオープン。
         /// </summary>
-        /// <param name="i_Path">ファイルのパス</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示</param>
+        /// <param name="i_Path">ファイルのパス。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
         /// <returns><c>true</c> オープン成功</returns>
         public virtual bool OpenFile(string i_Path, bool i_ShowEnabled)
         {
@@ -631,7 +631,7 @@ namespace Honememo
         /// <summary>
         /// ファイルオープン（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="path">ファイルのパス</param>
+        /// <param name="path">ファイルのパス。</param>
         /// <returns><c>true</c> オープン成功</returns>
         public bool OpenFile(string path)
         {
@@ -641,8 +641,8 @@ namespace Honememo
         /// <summary>
         /// サーバー接続チェック。
         /// </summary>
-        /// <param name="i_Server">サーバー名</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示</param>
+        /// <param name="i_Server">サーバー名。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
         /// <returns><c>true</c> 接続成功</returns>
         public virtual bool Ping(string i_Server, bool i_ShowEnabled)
         {
@@ -679,7 +679,7 @@ namespace Honememo
         /// <summary>
         /// サーバー接続チェック（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="server">サーバー名</param>
+        /// <param name="server">サーバー名。</param>
         /// <returns><c>true</c> 接続成功</returns>
         public bool Ping(string server)
         {
@@ -689,9 +689,9 @@ namespace Honememo
         /// <summary>
         /// DataGridViewのCSVファイルへの出力。
         /// </summary>
-        /// <param name="i_View">CSVファイルを出力するDataGridView</param>
-        /// <param name="i_Path">CSVファイルパス</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示</param>
+        /// <param name="i_View">CSVファイルを出力するDataGridView。</param>
+        /// <param name="i_Path">CSVファイルパス。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
         /// <returns><c>true</c> 出力成功</returns>
         public virtual bool SaveDataGridViewCsv(DataGridView i_View, string i_Path, bool i_ShowEnabled)
         {
@@ -761,8 +761,8 @@ namespace Honememo
         /// <summary>
         /// DataGridViewのCSVファイルへの出力（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="i_View">CSVファイルを出力するDataGridView</param>
-        /// <param name="i_Path">CSVファイルパス</param>
+        /// <param name="i_View">CSVファイルを出力するDataGridView。</param>
+        /// <param name="i_Path">CSVファイルパス。</param>
         /// <returns><c>true</c> 出力成功</returns>
         public bool SaveDataGridViewCsv(DataGridView i_View, string i_Path)
         {

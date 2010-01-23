@@ -49,7 +49,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// コンストラクタ（ファイル読み込みあり）。
         /// </summary>
-        /// <param name="path">設定ファイルパス</param>
+        /// <param name="path">設定ファイルパス。</param>
         public Config(string path)
         {
             // ファイルから設定を読み込み
@@ -120,8 +120,8 @@ namespace Honememo.Wptscs.Models
         /// 指定されたコードの言語情報（サーバー情報）を取得。
         /// ※ 存在しない場合、<c>null</c>
         /// </summary>
-        /// <param name="code">言語コード</param>
-        /// <param name="mode">処理モード</param>
+        /// <param name="code">言語コード。</param>
+        /// <param name="mode">処理モード。</param>
         /// <returns>言語情報（サーバー情報）</returns>
         public LanguageInformation GetLanguage(string code, RunType mode)
         {
@@ -152,7 +152,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 指定されたコードの言語情報（サーバー情報）を取得（RunTypeの型）。
         /// </summary>
-        /// <param name="code">言語コード</param>
+        /// <param name="code">言語コード。</param>
         /// <returns>言語情報（サーバー情報）</returns>
         public LanguageInformation GetLanguage(string code)
         {

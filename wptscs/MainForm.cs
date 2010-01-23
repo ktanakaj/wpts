@@ -27,6 +27,8 @@ namespace Honememo.Wptscs
     /// </summary>
     public partial class MainForm : Form
     {
+        #region private変数
+
         /// <summary>
         /// 共通関数クラスのオブジェクト。
         /// </summary>
@@ -47,19 +49,28 @@ namespace Honememo.Wptscs
         /// </summary>
         private int logLastLength;
 
+        #endregion
+
+        #region コンストラクタ
+
         /// <summary>
         /// コンストラクタ。初期化メソッド呼び出しのみ。
         /// </summary>
         public MainForm()
         {
+            // Windows フォーム デザイナで生成されたコード
             InitializeComponent();
         }
+
+        #endregion
+
+        #region 各イベントのメソッド
 
         /// <summary>
         /// フォームロード時の処理。初期化。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
             // 初期化処理
@@ -92,8 +103,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// フォームクローズ時の処理。処理状態を保存。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // 複数立ち上げの場合、言語設定が更新されている可能性があるので、設定を再読み込み
@@ -146,8 +157,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 翻訳元コンボボックス変更時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void comboBoxSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ラベルに言語名を表示する
@@ -196,8 +207,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 翻訳元コンボボックスフォーカス喪失時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void comboBoxSource_Leave(object sender, EventArgs e)
         {
             // 直接入力された場合の対策、変更字の処理をコール
@@ -207,8 +218,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// リンクラベルのリンククリック時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void linkLabelSourceURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // リンクを開く
@@ -218,8 +229,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 翻訳先コンボボックス変更時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void comboBoxTarget_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ラベルに言語名を表示する
@@ -245,8 +256,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 翻訳先コンボボックスフォーカス喪失時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void comboBoxTarget_Leave(object sender, EventArgs e)
         {
             // 直接入力された場合の対策、変更字の処理をコール
@@ -256,8 +267,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 設定ボタン押下時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void buttonConfig_Click(object sender, EventArgs e)
         {
             if (this.config.Client.RunMode == Config.RunType.Wikipedia)
@@ -290,8 +301,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 参照ボタン押下時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void buttonSaveDirectory_Click(object sender, EventArgs e)
         {
             // フォルダ名が入力されている場合、それを初期位置に設定
@@ -311,8 +322,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 出力先テキストボックスフォーカス喪失時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void textBoxSaveDirectory_Leave(object sender, EventArgs e)
         {
             // 空白を削除
@@ -322,8 +333,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 実行ボタン押下時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void buttonRun_Click(object sender, EventArgs e)
         {
             // 入力値チェック
@@ -369,8 +380,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 中止ボタン押下時の処理。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void buttonStop_Click(object sender, EventArgs e)
         {
             // 処理を中断
@@ -389,8 +400,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 実行ボタン バックグラウンド処理（スレッド）。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void backgroundWorkerRun_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -506,13 +517,17 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 実行ボタン バックグラウンド処理（終了時）。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void backgroundWorkerRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // 画面をロック中から解放
             this.Release();
         }
+
+        #endregion
+
+        #region それ以外のメソッド
 
         /// <summary>
         /// 画面初期化処理。
@@ -562,10 +577,10 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 渡された文字列から.txtと.logの重複していないファイル名を作成。
         /// </summary>
-        /// <param name="o_FileName">出力結果ファイル名</param>
-        /// <param name="o_LogName">出力ログファイル名</param>
-        /// <param name="i_Text">出力する結果テキスト</param>
-        /// <param name="i_Dir">出力先ディレクトリ</param>
+        /// <param name="o_FileName">出力結果ファイル名。</param>
+        /// <param name="o_LogName">出力ログファイル名。</param>
+        /// <param name="i_Text">出力する結果テキスト。</param>
+        /// <param name="i_Dir">出力先ディレクトリ。</param>
         /// <returns><c>true</c> 出力成功</returns>
         private bool MakeFileName(ref string o_FileName, ref string o_LogName, string i_Text, string i_Dir)
         {
@@ -603,8 +618,8 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 翻訳支援処理クラスのイベント用。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void GetLogUpdate(object sender, System.EventArgs e)
         {
             // 前回以降に追加されたログをテキストボックスに出力
@@ -616,5 +631,7 @@ namespace Honememo.Wptscs
 
             this.logLastLength = length;
         }
+
+        #endregion
     }
 }

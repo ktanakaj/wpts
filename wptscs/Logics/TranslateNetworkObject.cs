@@ -21,6 +21,8 @@ namespace Honememo.Wptscs.Logics
     /// </summary>
     public abstract class TranslateNetworkObject : Translate
     {
+        #region private変数
+
         /// <summary>
         /// 通信時に使用するUserAgent。
         /// </summary>
@@ -30,23 +32,31 @@ namespace Honememo.Wptscs.Logics
         /// 通信時に使用するReferer。
         /// </summary>
         public string Referer;
+        
+        #endregion
+
+        #region コンストラクタ
 
         /// <summary>
         /// コンストラクタ。
         /// </summary>
-        /// <param name="source">翻訳元言語</param>
-        /// <param name="target">翻訳先言語</param>
+        /// <param name="source">翻訳元言語。</param>
+        /// <param name="target">翻訳先言語。</param>
         public TranslateNetworkObject(
             LanguageWithServerInformation source, LanguageWithServerInformation target)
             : base(source, target)
         {
         }
+        
+        #endregion
+        
+        #region メソッド
 
         /// <summary>
         /// 翻訳支援処理実行。
         /// </summary>
-        /// <param name="name">記事名</param>
-        /// <returns><c>true</c> 処理成功</returns>
+        /// <param name="name">記事名。</param>
+        /// <returns><c>true</c> 処理成功。</returns>
         public override bool Run(string name)
         {
             // 変数を初期化
@@ -66,8 +76,8 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// サーバー接続チェック。
         /// </summary>
-        /// <param name="server">サーバー名</param>
-        /// <returns><c>true</c> 接続成功</returns>
+        /// <param name="server">サーバー名。</param>
+        /// <returns><c>true</c> 接続成功。</returns>
         private bool Ping(string server)
         {
             // サーバー接続チェック
@@ -89,5 +99,7 @@ namespace Honememo.Wptscs.Logics
 
             return true;
         }
+        
+        #endregion
     }
 }

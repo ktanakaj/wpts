@@ -20,6 +20,8 @@ namespace Honememo.Wptscs.Logics
     /// </summary>
     public abstract class Translate
     {
+        #region private変数
+
         /// <summary>
         /// 改行コード。
         /// </summary>
@@ -54,12 +56,16 @@ namespace Honememo.Wptscs.Logics
         /// 変換後テキスト（property）。
         /// </summary>
         private string text;
+        
+        #endregion
+
+        #region コンストラクタ
 
         /// <summary>
         /// コンストラクタ。
         /// </summary>
-        /// <param name="source">翻訳元言語</param>
-        /// <param name="target">翻訳先言語</param>
+        /// <param name="source">翻訳元言語。</param>
+        /// <param name="target">翻訳先言語。</param>
         public Translate(LanguageInformation source, LanguageInformation target)
         {
             // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
@@ -79,10 +85,18 @@ namespace Honememo.Wptscs.Logics
             this.RunInitialize();
         }
 
+        #endregion
+
+        #region イベント
+
         /// <summary>
         /// ログ更新伝達イベント。
         /// </summary>
         public event EventHandler LogUpdate;
+
+        #endregion
+
+        #region プロパティ
 
         /// <summary>
         /// ログメッセージ。
@@ -117,10 +131,14 @@ namespace Honememo.Wptscs.Logics
             }
         }
 
+        #endregion
+
+        #region メソッド
+
         /// <summary>
         /// 翻訳支援処理実行。
         /// </summary>
-        /// <param name="name">記事名</param>
+        /// <param name="name">記事名。</param>
         /// <returns><c>true</c> 処理成功</returns>
         public virtual bool Run(string name)
         {
@@ -136,7 +154,7 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行部の本体。
         /// ※継承クラスでは、この関数に処理を実装すること
         /// </summary>
-        /// <param name="name">記事名</param>
+        /// <param name="name">記事名。</param>
         /// <returns><c>true</c> 処理成功</returns>
         protected abstract bool RunBody(string name);
 
@@ -154,7 +172,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// ログメッセージを1行追加出力。
         /// </summary>
-        /// <param name="log">ログメッセージ</param>
+        /// <param name="log">ログメッセージ。</param>
         protected void LogLine(string log)
         {
             // 直前のログが改行されていない場合、改行して出力
@@ -167,5 +185,7 @@ namespace Honememo.Wptscs.Logics
                 this.Log += log + ENTER;
             }
         }
+
+        #endregion
     }
 }

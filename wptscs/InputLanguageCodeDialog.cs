@@ -23,24 +23,35 @@ namespace Honememo.Wptscs
     /// </summary>
     public partial class InputLanguageCodeDialog : Form
     {
+        #region private変数
+
         /// <summary>
         /// 言語コード（データやり取り用）。
         /// </summary>
         public string LanguageCode;
+
+        #endregion
+        
+        #region コンストラクタ
 
         /// <summary>
         /// コンストラクタ。初期化メソッド呼び出しのみ。
         /// </summary>
         public InputLanguageCodeDialog()
         {
+            // Windows フォーム デザイナで生成されたコード
             InitializeComponent();
         }
+        
+        #endregion
+
+        #region 各イベントのメソッド
 
         /// <summary>
         /// フォームロード時の処理。初期化。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void InputLanguageCodeDialog_Load(object sender, EventArgs e)
         {
             // テキストボックスに言語コードを設定
@@ -53,12 +64,14 @@ namespace Honememo.Wptscs
         /// <summary>
         /// フォームクローズ時の処理。データ保存。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト</param>
-        /// <param name="e">発生したイベント</param>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
         private void InputLanguageCodeDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
             // テキストボックスの言語コードを保存
             this.LanguageCode = textBoxCode.Text.Trim();
         }
+        
+        #endregion
     }
 }

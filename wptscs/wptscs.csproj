@@ -61,8 +61,13 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\MediaWiki.cs" />
     <Compile Include="Models\LanguageInformation.cs" />
     <Compile Include="Models\LanguageWithServerInformation.cs" />
+    <Compile Include="Models\MediaWikiPage.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Website.cs" />
     <Compile Include="Models\WikipediaArticle.cs" />
     <Compile Include="Models\WikipediaFormat.cs" />
     <Compile Include="Models\WikipediaInformation.cs" />
