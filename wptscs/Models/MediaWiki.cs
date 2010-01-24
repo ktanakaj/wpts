@@ -128,6 +128,88 @@ namespace Honememo.Wptscs.Models
         #region プロパティ
 
         /// <summary>
+        /// ページを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        public override Page this[string title]
+        {
+            get
+            {
+                // 初期化と値チェック
+                _Xml = null;
+                _GetArticleStatus = HttpStatusCode.PaymentRequired;
+                _GetArticleException = null;
+                // 記事のXMLデータをWikipediaサーバーから取得
+                try
+                {
+                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(Url);
+                    // UserAgent設定
+                    // ※WikipediaはUserAgentが空の場合エラーとなるので、必ず設定する
+                    if (!String.IsNullOrEmpty(i_UserAgent))
+                    {
+                        req.UserAgent = i_UserAgent;
+                    }
+                    else
+                    {
+                        Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                        req.UserAgent = "WikipediaTranslationSupportTool/" + ver.Major + "." + String.Format("{0:D2}", ver.Minor);
+                    }
+                    // Referer設定
+                    if (!String.IsNullOrEmpty(i_Referer))
+                    {
+                        req.Referer = i_Referer;
+                    }
+                    HttpWebResponse res = (HttpWebResponse)req.GetResponse();
+                    _GetArticleStatus = res.StatusCode;
+
+                    // 応答データを受信するためのStreamを取得し、データを取得
+                    // ※取得したXMLが正常かは、ここでは確認しない
+                    _Xml = new XmlDocument();
+                    _Xml.Load(res.GetResponseStream());
+                    res.Close();
+
+                    // 取得したXMLを一時フォルダに保存
+                    try
+                    {
+                        // 一時フォルダを確認
+                        String tmpDir = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath));
+                        if (Directory.Exists(tmpDir) == false)
+                        {
+                            // 一時フォルダを作成
+                            Directory.CreateDirectory(tmpDir);
+                        }
+                        // ファイルの保存
+                        Xml.Save(Path.Combine(tmpDir, Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml"));
+                    }
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getServerArticle > 一時ファイルの保存に失敗しました : " + e.Message);
+                    }
+                }
+                catch (WebException e)
+                {
+                    // ProtocolErrorエラーの場合、ステータスコードを保持
+                    _Xml = null;
+                    if (e.Status == WebExceptionStatus.ProtocolError)
+                    {
+                        _GetArticleStatus = ((HttpWebResponse)e.Response).StatusCode;
+                    }
+                    _GetArticleException = e;
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    _Xml = null;
+                    _GetArticleException = e;
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
         /// 記事のXMLデータが存在するパス。
         /// </summary>
         public string ExportPath
@@ -139,7 +221,7 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                this.exportPath = value != null ? value.Trim() : String.Empty;
+                this.exportPath = value;
             }
         }
 

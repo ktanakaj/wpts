@@ -73,12 +73,12 @@ namespace Honememo.Wptscs.Models
             set
             {
                 // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (String.IsNullOrEmpty(value != null ? value.Trim() : value))
+                if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("code");
                 }
 
-                this.code = value.Trim().ToLower();
+                this.code = value.ToLower();
             }
         }
 
@@ -97,7 +97,7 @@ namespace Honememo.Wptscs.Models
                 // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("names");
                 }
 
                 this.names = value;

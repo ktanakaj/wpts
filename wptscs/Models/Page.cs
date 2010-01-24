@@ -20,12 +20,17 @@ namespace Honememo.Wptscs.Models
         #region private変数
 
         /// <summary>
+        /// ページが所属するウェブサイト。
+        /// </summary>
+        private Website website;
+
+        /// <summary>
         /// ページタイトル。
         /// </summary>
         private string title;
 
         /// <summary>
-        /// ページタイトル。
+        /// ページの本文。
         /// </summary>
         private string text;
 
@@ -34,14 +39,63 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         private DateTime timestamp;
 
+        #endregion
+
+        #region コンストラクタ
+
         /// <summary>
-        /// ページのURL。
+        /// コンストラクタ。
         /// </summary>
-        private Uri url;
+        /// <param name="website">ページが所属するウェブサイト。</param>
+        /// <param name="title">ページタイトル。</param>
+        /// <param name="text">ページの本文。</param>
+        /// <param name="timestamp">ページのタイムスタンプ。</param>
+        public Page(Website website, string title, string text, DateTime timestamp)
+        {
+            // 初期値設定、基本的に以後外から変更されることを想定しない
+            this.Website = website;
+            this.Title = title;
+            this.Text = text;
+            this.Timestamp = timestamp;
+        }
+
+        /// <summary>
+        /// コンストラクタ。
+        /// ページのタイムスタンプには現在日時 (UTC) を設定。
+        /// </summary>
+        /// <param name="website">ページが所属するウェブサイト。</param>
+        /// <param name="title">ページタイトル。</param>
+        /// <param name="text">ページの本文。</param>
+        public Page(Website website, string title, string text)
+            : this(website, title, text, System.DateTime.UtcNow)
+        {
+        }
 
         #endregion
 
         #region プロパティ
+
+        /// <summary>
+        /// ページが所属するウェブサイト。
+        /// </summary>
+        public Website Website
+        {
+            get
+            {
+                return this.website;
+            }
+
+            protected set
+            {
+                // ウェブサイトは必須
+                if (value == null)
+                {
+                    throw new ArgumentNullException("website");
+                }
+
+                this.website = value;
+            }
+        }
 
         /// <summary>
         /// ページタイトル。
@@ -55,6 +109,12 @@ namespace Honememo.Wptscs.Models
 
             protected set
             {
+                // ページタイトルは必須
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("title");
+                }
+
                 this.title = value;
             }
         }
@@ -88,22 +148,6 @@ namespace Honememo.Wptscs.Models
             protected set
             {
                 this.timestamp = value;
-            }
-        }
-
-        /// <summary>
-        /// ページのURL。
-        /// </summary>
-        public Uri Url
-        {
-            get
-            {
-                return this.url;
-            }
-
-            protected set
-            {
-                this.url = value;
             }
         }
         

@@ -18,7 +18,7 @@ namespace Honememo.Wptscs.Models
     /// ウェブサイトをあらわすモデルクラスです。
     /// </summary>
     /// <remarks>言語が異なる場合は、別のウェブサイトとして扱います。</remarks>
-    public class Website
+    public abstract class Website
     {
         #region private変数
 
@@ -73,12 +73,12 @@ namespace Honememo.Wptscs.Models
             protected set
             {
                 // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (String.IsNullOrEmpty(value != null ? value.Trim() : value))
+                if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("server");
                 }
 
-                this.server = value.Trim();
+                this.server = value;
             }
         }
 
@@ -97,11 +97,22 @@ namespace Honememo.Wptscs.Models
                 // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
                 if (value == null)
                 {
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException("lang");
                 }
 
                 this.lang = value;
             }
+        }
+
+        /// <summary>
+        /// ページを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        public abstract Page this[string title]
+        {
+            get;
         }
 
         #endregion
