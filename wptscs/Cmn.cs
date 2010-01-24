@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      ��ʁE�@�\�ɂ��Ȃ��A���ʓI�Ȋ֐��N���X�\�[�X</summary>
+//      画面・機能によらない、共通的な関数クラスソース</summary>
 //
-// <copyright file="Cmn.cs" company="honeplus�̃�����">
+// <copyright file="Cmn.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -21,25 +21,25 @@ namespace Honememo
     using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// ��ʁE�@�\�ɂ��Ȃ��A���ʓI�Ȋ֐��̃N���X�ł��B
-    /// �� �����\��
+    /// 画面・機能によらない、共通的な関数のクラスです。
+    /// ※ 整理予定
     /// </summary>
     public class Cmn
     {
         /// <summary>
-        /// ���\�[�X�}�l�[�W���[
+        /// リソースマネージャー
         /// </summary>
         public ResourceManager Resource;
 
         /// <summary>
-        /// �R���X�g���N�^�iexe�Ɠ����̃��\�[�X�}�l�[�W���[���N���t�H���_����ǂݍ��݁j�B
+        /// コンストラクタ（exeと同名のリソースマネージャーを起動フォルダから読み込み）。
         /// </summary>
         public Cmn()
         {
-            // �R���X�g���N�^�ł��邽�߁A��O�͓����Ȃ��B�ُ펞��NULL�ŏ�����
+            // コンストラクタであるため、例外は投げない。異常時はNULLで初期化
             try
             {
-                // �t�@�C������ݒ��ǂݍ���
+                // ファイルから設定を読み込み
                 this.Resource = ResourceManager.CreateFileBasedResourceManager(
                     Path.GetFileNameWithoutExtension(Application.ExecutablePath),
                     Application.StartupPath,
@@ -47,53 +47,53 @@ namespace Honememo
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Cmn.Cmn > ��O�����F" + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Cmn.Cmn > 例外発生：" + e.ToString());
                 this.Resource = null;
             }
         }
 
         /// <summary>
-        /// �R���X�g���N�^�i�w�肳�ꂽ���\�[�X�}�l�[�W���[���w�肳�ꂽ�t�H���_����ݒ�j�B
+        /// コンストラクタ（指定されたリソースマネージャーを指定されたフォルダから設定）。
         /// </summary>
-        /// <param name="i_Resource">���\�[�X�}�l�[�W���[�B</param>
-        /// <param name="i_Dir">���\�[�X�̂���t�H���_�B</param>
+        /// <param name="i_Resource">リソースマネージャー。</param>
+        /// <param name="i_Dir">リソースのあるフォルダ。</param>
         public Cmn(string i_Resource, string i_Dir)
         {
             System.Diagnostics.Debug.WriteLine("Cmn.Cmn > " + i_Resource + ", " + i_Dir);
 
-            // �R���X�g���N�^�ł��邽�߁A��O�͓����Ȃ��B�ُ펞��NULL�ŏ�����
+            // コンストラクタであるため、例外は投げない。異常時はNULLで初期化
             try
             {
-                // �t�@�C������ݒ��ǂݍ���
+                // ファイルから設定を読み込み
                 Resource = ResourceManager.CreateFileBasedResourceManager(i_Resource, i_Dir, null);
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Cmn.Cmn > ��O�����F" + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Cmn.Cmn > 例外発生：" + e.ToString());
                 this.Resource = null;
             }
         }
 
         /// <summary>
-        /// �R���X�g���N�^�i�n���ꂽ���\�[�X�}�l�[�W���[���g�p�j�B
+        /// コンストラクタ（渡されたリソースマネージャーを使用）。
         /// </summary>
-        /// <param name="resource">���\�[�X�}�l�[�W���[�B</param>
+        /// <param name="resource">リソースマネージャー。</param>
         public Cmn(ResourceManager resource)
         {
-            // �n���ꂽ���\�[�X�}�l�[�W���[�����̂܂܎g�p
+            // 渡されたリソースマネージャーをそのまま使用
             this.Resource = resource;
         }
 
-        // ���ȉ��͐ÓI�����o
+        // ↓以下は静的メンバ
 
         /// <summary>
-        /// String��NULL�l�`�F�b�N��Trim�B
+        /// StringのNULL値チェック＆Trim。
         /// </summary>
-        /// <param name="s">�Ώە�����B</param>
-        /// <returns>�`�F�b�N��̕�����</returns>
+        /// <param name="s">対象文字列。</param>
+        /// <returns>チェック後の文字列</returns>
         public static string NullCheckAndTrim(string s)
         {
-            // ����O�Ȃ�
+            // ※例外なし
             if (s == null)
             {
                 return String.Empty;
@@ -103,13 +103,13 @@ namespace Honememo
         }
 
         /// <summary>
-        /// DataGridViewCell��NULL�l�`�F�b�N��Trim�B
+        /// DataGridViewCellのNULL値チェック＆Trim。
         /// </summary>
-        /// <param name="c">�ΏۃZ���B</param>
-        /// <returns>�`�F�b�N��̕�����</returns>
+        /// <param name="c">対象セル。</param>
+        /// <returns>チェック後の文字列</returns>
         public static string NullCheckAndTrim(DataGridViewCell c)
         {
-            // ����O�Ȃ�
+            // ※例外なし
             if (c == null)
             {
                 return String.Empty;
@@ -123,14 +123,14 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �z��ւ̗v�f�iNULL�j�ǉ��B
+        /// 配列への要素（NULL）追加。
         /// </summary>
-        /// <typeparam name="T">�v�f�̌^</typeparam>
-        /// <param name="io_Array">�z��B</param>
-        /// <returns>�ǉ������C���f�b�N�X</returns>
+        /// <typeparam name="T">要素の型</typeparam>
+        /// <param name="io_Array">配列。</param>
+        /// <returns>追加したインデックス</returns>
         public static int AddArray<T>(ref T[] io_Array)
         {
-            // ��Resize���ŗ�O�����������ꍇ�́A���̂܂ܓ�����
+            // ※Resize等で例外が発生した場合は、そのまま投げる
             if (io_Array == null)
             {
                 io_Array = new T[1];
@@ -142,29 +142,29 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �z��ւ̗v�f�i���͒l�j�ǉ��B
+        /// 配列への要素（入力値）追加。
         /// </summary>
-        /// <typeparam name="T">�v�f�̌^</typeparam>
-        /// <param name="io_Array">�z��B</param>
-        /// <param name="i_Obj">�ǉ�����I�u�W�F�N�g�B</param>
-        /// <returns>�ǉ������C���f�b�N�X</returns>
+        /// <typeparam name="T">要素の型</typeparam>
+        /// <param name="io_Array">配列。</param>
+        /// <param name="i_Obj">追加するオブジェクト。</param>
+        /// <returns>追加したインデックス</returns>
         public static int AddArray<T>(ref T[] io_Array, T i_Obj)
         {
-            // ��Resize�����ɗ�O�����������ꍇ�́A���̂܂ܓ�����
+            // ※Resize時等に例外が発生した場合は、そのまま投げる
             int index = AddArray(ref io_Array);
             io_Array[index] = i_Obj;
             return index;
         }
 
         /// <summary>
-        /// �\�t�g��+�o�[�W�������̕�����擾�i�A�Z���u������擾�j�B
+        /// ソフト名+バージョン情報の文字列取得（アセンブリから取得）。
         /// </summary>
-        /// <returns>�\�t�g���</returns>
+        /// <returns>ソフト情報</returns>
         public static string GetProductName()
         {
-            // ����O�Ȃ��B������������ꍇ�͂��̂܂ܕԂ�
+            // ※例外なし。もし発生する場合はそのまま返す
 
-            // �A�Z���u�����琻�i�����擾���A�o�[�W�������(x.xx�`��)��t���ĕԂ�
+            // アセンブリから製品名を取得し、バージョン情報(x.xx形式)を付けて返す
             Assembly assembly = Assembly.GetExecutingAssembly();
             AssemblyProductAttribute product =
                 (AssemblyProductAttribute)Attribute.GetCustomAttribute(
@@ -172,18 +172,18 @@ namespace Honememo
                     typeof(AssemblyProductAttribute));
             Version ver = assembly.GetName().Version;
 
-            // �߂�l��Ԃ��A�r���h�ԍ��E���r�W�����͖���
+            // 戻り値を返す、ビルド番号・リビジョンは無視
             return product.Product + " Ver" + ver.Major + "." + String.Format("{0:D2}", ver.Minor);
         }
 
         /// <summary>
-        /// �����񒆂̃t�@�C�����Ɏg�p�ł��Ȃ�������u���B
+        /// 文字列中のファイル名に使用できない文字を置換。
         /// </summary>
-        /// <param name="s">�t�@�C�����B</param>
-        /// <returns>�u����̕�����</returns>
+        /// <param name="s">ファイル名。</param>
+        /// <returns>置換後の文字列</returns>
         public static string ReplaceInvalidFileNameChars(string s)
         {
-            // �n���ꂽ������Ƀt�@�C�����Ɏg���Ȃ��������܂܂�Ă���ꍇ�A_ �ɒu��������
+            // 渡された文字列にファイル名に使えない文字が含まれている場合、_ に置き換える
             string result = s;
             char[] unuseChars = Path.GetInvalidFileNameChars();
             foreach (char c in unuseChars)
@@ -195,17 +195,17 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g��XML�ւ̃V���A���C�Y�B
+        /// オブジェクトのXMLへのシリアライズ。
         /// </summary>
-        /// <param name="i_Obj">�I�u�W�F�N�g�B</param>
-        /// <param name="i_FileName">XML�t�@�C���p�X�B</param>
-        /// <returns><c>true</c> �V���A���C�Y����</returns>
+        /// <param name="i_Obj">オブジェクト。</param>
+        /// <param name="i_FileName">XMLファイルパス。</param>
+        /// <returns><c>true</c> シリアライズ成功</returns>
         public static bool XmlSerialize(object i_Obj, string i_FileName)
         {
-            // ����O�͓����Ȃ��B���s�����ꍇ�͑S��false
+            // ※例外は投げない。失敗した場合は全てfalse
 
-            // �ݒ���V���A���C�Y��
-            System.Diagnostics.Debug.WriteLine("Cmn.Serialize > " + i_FileName + "�ɃV���A���C�Y");
+            // 設定をシリアライズ化
+            System.Diagnostics.Debug.WriteLine("Cmn.Serialize > " + i_FileName + "にシリアライズ");
 
             XmlSerializer serializer = new XmlSerializer(i_Obj.GetType());
             try
@@ -222,7 +222,7 @@ namespace Honememo
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Cmn.Serialize > ��O�����F" + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Cmn.Serialize > 例外発生：" + e.ToString());
                 return false;
             }
 
@@ -230,31 +230,31 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �I�u�W�F�N�g��XML����̃f�V���A���C�Y�B
+        /// オブジェクトのXMLからのデシリアライズ。
         /// </summary>
-        /// <param name="o_Obj">�I�u�W�F�N�g�B</param>
-        /// <param name="i_Type">�I�u�W�F�N�g�̌^�B</param>
-        /// <param name="i_FileName">XML�t�@�C���p�X�B</param>
-        /// <returns><c>true</c> �f�V���A���C�Y����</returns>
+        /// <param name="o_Obj">オブジェクト。</param>
+        /// <param name="i_Type">オブジェクトの型。</param>
+        /// <param name="i_FileName">XMLファイルパス。</param>
+        /// <returns><c>true</c> デシリアライズ成功</returns>
         public static bool XmlDeserialize(ref object o_Obj, Type i_Type, string i_FileName)
         {
-            // ����O�͓����Ȃ��B���s�����ꍇ�͑S��false
+            // ※例外は投げない。失敗した場合は全てfalse
 
-            // �ݒ���f�V���A���C�Y��
-            System.Diagnostics.Debug.WriteLine("Cmn.Deserialize > " + i_FileName + "����f�V���A���C�Y");
+            // 設定をデシリアライズ化
+            System.Diagnostics.Debug.WriteLine("Cmn.Deserialize > " + i_FileName + "からデシリアライズ");
 
-            // �o�͒l������
+            // 出力値初期化
             o_Obj = null;
 
-            // ������gcnew�Ń��O��ɗ�O���o�邪�AMSDN�ɂ��Ζ������Ă����炵���E�E�E
+            // ↓このgcnewでログ上に例外が出るが、MSDNによれば無視していいらしい・・・
             XmlSerializer serializer = new XmlSerializer(i_Type);
             try
             {
                 Stream reader = new FileStream(i_FileName, FileMode.Open, FileAccess.Read);
                 try
                 {
-                    // �� �ق�Ƃ�Object�̌^�ɃL���X�g���đ���������̂����A
-                    //    ���@�s���Ȃ��߁A����͌Ăяo�����ōs��
+                    // ※ ほんとはObjectの型にキャストして代入したいのだが、
+                    //    方法不明なため、現状は呼び出し元で行う
                     o_Obj = serializer.Deserialize(reader);
                 }
                 finally
@@ -264,7 +264,7 @@ namespace Honememo
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Cmn.Deserialize > ��O�����F" + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Cmn.Deserialize > 例外発生：" + e.ToString());
                 return false;
             }
 
@@ -272,18 +272,18 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �Ώۂ̕����񂪁A�n���ꂽ������̃C���f�b�N�X�Ԗڂɑ��݂��邩���`�F�b�N�B
+        /// 対象の文字列が、渡された文字列のインデックス番目に存在するかをチェック。
         /// </summary>
-        /// <param name="i_Text">������S�́B</param>
-        /// <param name="i_Index">�`�F�b�N�ʒu�B</param>
-        /// <param name="i_ChkStr">�T�����镶����B</param>
-        /// <returns><c>true</c> ���݂���</returns>
+        /// <param name="i_Text">文字列全体。</param>
+        /// <param name="i_Index">チェック位置。</param>
+        /// <param name="i_ChkStr">探索する文字列。</param>
+        /// <returns><c>true</c> 存在する</returns>
         public static bool ChkTextInnerWith(string i_Text, int i_Index, string i_ChkStr)
         {
-            // ��i_Text, i_ChkStr��NULL�̏ꍇ�͂��̂܂�NullReferenceException���B
-            //   i_Index��i_Text�͈̔͊O�̂Ƃ���ArgumentException��Ԃ�
+            // ※i_Text, i_ChkStrがNULLの場合はそのままNullReferenceExceptionを。
+            //   i_Indexがi_Textの範囲外のときはArgumentExceptionを返す
 
-            // ���͒l�`�F�b�N
+            // 入力値チェック
             if ((i_Index < 0) || (i_Index >= i_Text.Length))
             {
                 throw new ArgumentException("IndexOutOfRange! : " + i_Index, "i_Index");
@@ -299,8 +299,8 @@ namespace Honememo
                 return false;
             }
 
-            // ������̈�v���`�F�b�N
-            // ��1�ڂ�if�͑��x�I�ɂ������̕����������ȂƎv���Ă���Ă���B�v��Ȃ������E�E�E
+            // 文字列の一致をチェック
+            // ※1つ目のifは速度的にこっちの方が速いかなと思ってやっている。要らないかも・・・
             if (i_Text[i_Index] == i_ChkStr[0])
             {
                 if ((i_Index + i_ChkStr.Length) <= i_Text.Length)
@@ -316,19 +316,19 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �R���{�{�b�N�X���m�F���A���݂̒l���ꗗ�ɖ�����Γo�^�B
+        /// コンボボックスを確認し、現在の値が一覧に無ければ登録。
         /// </summary>
-        /// <param name="io_Box">�R���{�{�b�N�X�B</param>
-        /// <param name="i_FirstStr">�v���t�B�b�N�X�B</param>
-        /// <returns><c>true</c> �o�^����</returns>
+        /// <param name="io_Box">コンボボックス。</param>
+        /// <param name="i_FirstStr">プレフィックス。</param>
+        /// <returns><c>true</c> 登録成功</returns>
         public static bool AddComboBoxNewItem(ref ComboBox io_Box, string i_FirstStr)
         {
-            // ��io_Box��NULL�̏ꍇ�Ȃǂ́ANullReferenceException�������̂܂ܕԂ�
+            // ※io_BoxがNULLの場合などは、NullReferenceException等をそのまま返す
 
             // System.Diagnostics.Debug.WriteLine("Cmn.AddComboBoxNewItem > " + io_Box.Text + ", " + i_FirstStr);
             if (io_Box.Text != String.Empty)
             {
-                // ���݂̒l��i_FirstStr����n�܂��Ă��Ȃ��ꍇ�́Ai_FirstStr��t���ď���
+                // 現在の値がi_FirstStrから始まっていない場合は、i_FirstStrを付けて処理
                 string text = io_Box.Text;
                 if (i_FirstStr != null && i_FirstStr != String.Empty)
                 {
@@ -338,10 +338,10 @@ namespace Honememo
                     }
                 }
 
-                // ���݂̒l�Ɉ�v������̂����邩���m�F
+                // 現在の値に一致するものがあるかを確認
                 if (io_Box.Items.Contains(text) == false)
                 {
-                    // ���݂��Ȃ��ꍇ�A���݂̒l���ꗗ�ɒǉ�
+                    // 存在しない場合、現在の値を一覧に追加
                     io_Box.Items.Add(text);
                     return true;
                 }
@@ -351,27 +351,27 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �R���{�{�b�N�X���m�F���A���݂̒l���ꗗ�ɖ�����Γo�^�B
+        /// コンボボックスを確認し、現在の値が一覧に無ければ登録。
         /// </summary>
-        /// <param name="io_Box">�R���{�{�b�N�X�B</param>
-        /// <returns><c>true</c> �o�^����</returns>
+        /// <param name="io_Box">コンボボックス。</param>
+        /// <returns><c>true</c> 登録成功</returns>
         public static bool AddComboBoxNewItem(ref ComboBox io_Box)
         {
-            // �ǉ������񖳂��ŁA������̊֐����R�[��
+            // 追加文字列無しで、もう一つの関数をコール
             return AddComboBoxNewItem(ref io_Box, String.Empty);
         }
 
         /// <summary>
-        /// �R���{�{�b�N�X���m�F���A�I������Ă���l���폜�B
+        /// コンボボックスを確認し、選択されている値を削除。
         /// </summary>
-        /// <param name="io_Box">�R���{�{�b�N�X�B</param>
-        /// <returns><c>true</c> �폜����</returns>
+        /// <param name="io_Box">コンボボックス。</param>
+        /// <returns><c>true</c> 削除成功</returns>
         public static bool RemoveComboBoxItem(ref ComboBox io_Box)
         {
-            // ��io_Box��NULL�̏ꍇ�Ȃǂ́ANullReferenceException�������̂܂ܕԂ�
+            // ※io_BoxがNULLの場合などは、NullReferenceException等をそのまま返す
 
             // System.Diagnostics.Debug.WriteLine("Cmn.RemoveComboBoxItem > " + io_Box.SelectedIndex.ToString());
-            // �I������Ă���A�C�e�����폜
+            // 選択されているアイテムを削除
             if (io_Box.SelectedIndex != -1)
             {
                 io_Box.Items.Remove(io_Box.SelectedItem);
@@ -379,7 +379,7 @@ namespace Honememo
             }
             else
             {
-                // �����I������Ă��Ȃ��ꍇ���A���͂��ꂽ�����񂾂��͏����Ă���
+                // 何も選択されていない場合も、入力された文字列だけは消しておく
                 io_Box.Text = String.Empty;
                 return false;
             }
@@ -387,20 +387,20 @@ namespace Honememo
             return true;
         }
 
-        // ���v���\�[�X�}�l�[�W���[�̃����o
+        // ↓要リソースマネージャーのメンバ
 
-        // ���ʃ_�C�A���O�i�ʒm�^�x���^�G���[�j
-        // �����ʃ_�C�A���O�́A���͂��ꂽ����������̂܂ܕ\��������̂ƁA���͂��ꂽ������
-        //   �Ń��\�[�X���擾�A�t�H�[�}�b�g���ĕ\��������̂̊e2���
+        // 共通ダイアログ（通知／警告／エラー）
+        // ※共通ダイアログは、入力された文字列をそのまま表示するものと、入力された文字列
+        //   でリソースを取得、フォーマットして表示するものの各2種類
 
         /// <summary>
-        /// ���ʒʒm�_�C�A���O�i���͂��ꂽ�������\���j�B
+        /// 共通通知ダイアログ（入力された文字列を表示）。
         /// </summary>
-        /// <param name="msg">���b�Z�[�W�B</param>
+        /// <param name="msg">メッセージ。</param>
         public virtual void InformationDialog(string msg)
         {
-            // �n���ꂽ������Œʒm�_�C�A���O��\��
-            // ��Resource����NULL�̏ꍇ�ANullReferenceException�������̂܂ܕԂ�
+            // 渡された文字列で通知ダイアログを表示
+            // ※Resource等がNULLの場合、NullReferenceException等をそのまま返す
             MessageBox.Show(
                 msg,
                 Resources.InformationTitle,
@@ -409,41 +409,41 @@ namespace Honememo
         }
 
         /// <summary>
-        /// ���ʒʒm�_�C�A���O�i���͂��ꂽ������Ń��\�[�X���擾�A�t�H�[�}�b�g���ĕ\���j�B
+        /// 共通通知ダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
         /// </summary>
-        /// <param name="i_Key">���\�[�X�̃L�[�B</param>
-        /// <param name="i_args">�t�H�[�}�b�g�̈����B</param>
+        /// <param name="i_Key">リソースのキー。</param>
+        /// <param name="i_args">フォーマットの引数。</param>
         public virtual void InformationDialogResource(string i_Key, params object[] i_args)
         {
-            // ���t�@�C�����烊�\�[�X���ǂݎ��Ȃ��ꍇ��ArgumentException���B
-            //   ����ȊO��NullReferenceException�������̂܂ܕԂ�
+            // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
+            //   それ以外はNullReferenceException等をそのまま返す
 
-            // �L�[�l���ȗ�������Ă���ꍇ�A�擪�ɒǉ����ď���
+            // キー値が簡略化されている場合、先頭に追加して処理
             string key = (string) i_Key.Clone();
             if (key.StartsWith("InformationMessage_") == false)
             {
                 key = "InformationMessage_" + i_Key;
             }
 
-            // .resources����w�肳�ꂽ���b�Z�[�W��ǂݍ���
+            // .resourcesから指定されたメッセージを読み込み
             string text = this.Resource.GetString(key);
             if (text == null)
             {
                 throw new ArgumentException("Resource \"" + key + "\" Not Exist!", "i_Key");
             }
 
-            // �\���p�֐����R�[��
+            // 表示用関数をコール
             this.InformationDialog(String.Format(text, i_args));
         }
 
         /// <summary>
-        /// ���ʌx���_�C�A���O�i���͂��ꂽ�������\���j�B
+        /// 共通警告ダイアログ（入力された文字列を表示）。
         /// </summary>
-        /// <param name="msg">���b�Z�[�W�B</param>
+        /// <param name="msg">メッセージ。</param>
         public virtual void WarningDialog(string msg)
         {
-            // �n���ꂽ������Ōx���_�C�A���O��\��
-            // ��Resource����NULL�̏ꍇ�ANullReferenceException�������̂܂ܕԂ�
+            // 渡された文字列で警告ダイアログを表示
+            // ※Resource等がNULLの場合、NullReferenceException等をそのまま返す
             MessageBox.Show(
                 msg,
                 Resources.WarningTitle,
@@ -452,41 +452,41 @@ namespace Honememo
         }
 
         /// <summary>
-        /// ���ʌx���_�C�A���O�i���͂��ꂽ������Ń��\�[�X���擾�A�t�H�[�}�b�g���ĕ\���j�B
+        /// 共通警告ダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
         /// </summary>
-        /// <param name="i_Key">���\�[�X�̃L�[�B</param>
-        /// <param name="i_args">�t�H�[�}�b�g�̈����B</param>
+        /// <param name="i_Key">リソースのキー。</param>
+        /// <param name="i_args">フォーマットの引数。</param>
         public virtual void WarningDialogResource(string i_Key, params object[] i_args)
         {
-            // ���t�@�C�����烊�\�[�X���ǂݎ��Ȃ��ꍇ��ArgumentException���B
-            //   ����ȊO��NullReferenceException�������̂܂ܕԂ�
+            // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
+            //   それ以外はNullReferenceException等をそのまま返す
 
-            // �L�[�l���ȗ�������Ă���ꍇ�A�擪�ɒǉ����ď���
+            // キー値が簡略化されている場合、先頭に追加して処理
             string key = (string) i_Key.Clone();
             if (key.StartsWith("WarningMessage_") == false)
             {
                 key = "WarningMessage_" + i_Key;
             }
 
-            // .resources����w�肳�ꂽ���b�Z�[�W��ǂݍ���
+            // .resourcesから指定されたメッセージを読み込み
             string text = this.Resource.GetString(key);
             if (text == null)
             {
                 throw new ArgumentException("Resource \"" + key + "\" Not Exist!", "i_Key");
             }
 
-            // �\���p�֐����R�[��
+            // 表示用関数をコール
             this.WarningDialog(String.Format(text, i_args));
         }
 
         /// <summary>
-        /// ���ʃG���[�_�C�A���O�i���͂��ꂽ�������\���j�B
+        /// 共通エラーダイアログ（入力された文字列を表示）。
         /// </summary>
-        /// <param name="msg">���b�Z�[�W�B</param>
+        /// <param name="msg">メッセージ。</param>
         public virtual void ErrorDialog(string msg)
         {
-            // �n���ꂽ������ŃG���[�_�C�A���O��\��
-            // ��Resource����NULL�̏ꍇ�ANullReferenceException�������̂܂ܕԂ�
+            // 渡された文字列でエラーダイアログを表示
+            // ※Resource等がNULLの場合、NullReferenceException等をそのまま返す
             MessageBox.Show(
                 msg,
                 Resources.ErrorTitle,
@@ -495,53 +495,53 @@ namespace Honememo
         }
 
         /// <summary>
-        /// ���ʃG���[�_�C�A���O�i���͂��ꂽ������Ń��\�[�X���擾�A�t�H�[�}�b�g���ĕ\���j�B
+        /// 共通エラーダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
         /// </summary>
-        /// <param name="i_Key">���\�[�X�̃L�[�B</param>
-        /// <param name="i_args">�t�H�[�}�b�g�̈����B</param>
+        /// <param name="i_Key">リソースのキー。</param>
+        /// <param name="i_args">フォーマットの引数。</param>
         public virtual void ErrorDialogResource(string i_Key, params object[] i_args)
         {
-            // ���t�@�C�����烊�\�[�X���ǂݎ��Ȃ��ꍇ��ArgumentException���B
-            //   ����ȊO��NullReferenceException�������̂܂ܕԂ�
+            // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
+            //   それ以外はNullReferenceException等をそのまま返す
 
-            // �L�[�l���ȗ�������Ă���ꍇ�A�擪�ɒǉ����ď���
+            // キー値が簡略化されている場合、先頭に追加して処理
             string key = (string) i_Key.Clone();
             if (key.StartsWith("ErrorMessage_") == false)
             {
                 key = "ErrorMessage_" + i_Key;
             }
 
-            // .resources����w�肳�ꂽ���b�Z�[�W��ǂݍ���
+            // .resourcesから指定されたメッセージを読み込み
             string text = this.Resource.GetString(key);
             if (text == null)
             {
                 throw new ArgumentException("Resource \"" + key + "\" Not Exist!", "i_Key");
             }
 
-            // �\���p�֐����R�[��
+            // 表示用関数をコール
             this.ErrorDialog(String.Format(text, i_args));
         }
 
-        // �����\�[�X�}�l�[�W���[��null�ł�����A���̏ꍇ�̓_�C�A���O���o�Ȃ�
+        // ↓リソースマネージャーがnullでも動作、その場合はダイアログが出ない
 
         /// <summary>
-        /// �t�H���_�I�[�v���B
+        /// フォルダオープン。
         /// </summary>
-        /// <param name="i_Path">�t�H���_�̃p�X�B</param>
-        /// <param name="i_ShowEnabled"><c>true</c> �G���[���Ƀ_�C�A���O��\���B</param>
-        /// <returns><c>true</c> �I�[�v������</returns>
+        /// <param name="i_Path">フォルダのパス。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
+        /// <returns><c>true</c> オープン成功</returns>
         public virtual bool OpenFolder(string i_Path, bool i_ShowEnabled)
         {
-            // ����O�͓����Ȃ��B���s�����ꍇ�͑S��false
+            // ※例外は投げない。失敗した場合は全てfalse
             System.Diagnostics.Debug.WriteLine("Cmn.OpenFolder > " + i_Path);
 
-            // ��̏ꍇ�͏��O
+            // 空の場合は除外
             if (String.IsNullOrEmpty(i_Path))
             {
                 return false;
             }
 
-            // �Ώۃf�[�^�̃t�H���_���J��
+            // 対象データのフォルダを開く
             if (Directory.Exists(i_Path))
             {
                 try
@@ -572,33 +572,33 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �t�H���_�I�[�v���i�G���[���Ƀ_�C�A���O��\���j�B
+        /// フォルダオープン（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="path">�t�H���_�̃p�X�B</param>
-        /// <returns><c>true</c> �I�[�v������</returns>
+        /// <param name="path">フォルダのパス。</param>
+        /// <returns><c>true</c> オープン成功</returns>
         public bool OpenFolder(string path)
         {
             return this.OpenFolder(path, true);
         }
 
         /// <summary>
-        /// �t�@�C���I�[�v���B
+        /// ファイルオープン。
         /// </summary>
-        /// <param name="i_Path">�t�@�C���̃p�X�B</param>
-        /// <param name="i_ShowEnabled"><c>true</c> �G���[���Ƀ_�C�A���O��\���B</param>
-        /// <returns><c>true</c> �I�[�v������</returns>
+        /// <param name="i_Path">ファイルのパス。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
+        /// <returns><c>true</c> オープン成功</returns>
         public virtual bool OpenFile(string i_Path, bool i_ShowEnabled)
         {
-            // ����O�͓����Ȃ��B���s�����ꍇ�͑S��false
+            // ※例外は投げない。失敗した場合は全てfalse
             System.Diagnostics.Debug.WriteLine("Cmn.OpenFile > " + i_Path);
 
-            // ��̃Z���͏��O
+            // 空のセルは除外
             if (String.IsNullOrEmpty(i_Path))
             {
                 return false;
             }
 
-            // �Ώۃf�[�^���J��
+            // 対象データを開く
             if (File.Exists(i_Path))
             {
                 try
@@ -629,26 +629,26 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �t�@�C���I�[�v���i�G���[���Ƀ_�C�A���O��\���j�B
+        /// ファイルオープン（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="path">�t�@�C���̃p�X�B</param>
-        /// <returns><c>true</c> �I�[�v������</returns>
+        /// <param name="path">ファイルのパス。</param>
+        /// <returns><c>true</c> オープン成功</returns>
         public bool OpenFile(string path)
         {
             return this.OpenFile(path, true);
         }
 
         /// <summary>
-        /// �T�[�o�[�ڑ��`�F�b�N�B
+        /// サーバー接続チェック。
         /// </summary>
-        /// <param name="i_Server">�T�[�o�[���B</param>
-        /// <param name="i_ShowEnabled"><c>true</c> �G���[���Ƀ_�C�A���O��\���B</param>
-        /// <returns><c>true</c> �ڑ�����</returns>
+        /// <param name="i_Server">サーバー名。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
+        /// <returns><c>true</c> 接続成功</returns>
         public virtual bool Ping(string i_Server, bool i_ShowEnabled)
         {
-            // ����O�͓����Ȃ��B���s�����ꍇ�͑S��false
+            // ※例外は投げない。失敗した場合は全てfalse
 
-            // �T�[�o�[�ڑ��`�F�b�N
+            // サーバー接続チェック
             Ping ping = new Ping();
             try
             {
@@ -677,32 +677,32 @@ namespace Honememo
         }
 
         /// <summary>
-        /// �T�[�o�[�ڑ��`�F�b�N�i�G���[���Ƀ_�C�A���O��\���j�B
+        /// サーバー接続チェック（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="server">�T�[�o�[���B</param>
-        /// <returns><c>true</c> �ڑ�����</returns>
+        /// <param name="server">サーバー名。</param>
+        /// <returns><c>true</c> 接続成功</returns>
         public bool Ping(string server)
         {
             return this.Ping(server, true);
         }
 
         /// <summary>
-        /// DataGridView��CSV�t�@�C���ւ̏o�́B
+        /// DataGridViewのCSVファイルへの出力。
         /// </summary>
-        /// <param name="i_View">CSV�t�@�C�����o�͂���DataGridView�B</param>
-        /// <param name="i_Path">CSV�t�@�C���p�X�B</param>
-        /// <param name="i_ShowEnabled"><c>true</c> �G���[���Ƀ_�C�A���O��\���B</param>
-        /// <returns><c>true</c> �o�͐���</returns>
+        /// <param name="i_View">CSVファイルを出力するDataGridView。</param>
+        /// <param name="i_Path">CSVファイルパス。</param>
+        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
+        /// <returns><c>true</c> 出力成功</returns>
         public virtual bool SaveDataGridViewCsv(DataGridView i_View, string i_Path, bool i_ShowEnabled)
         {
-            // ����O�͓����Ȃ��B���s�����ꍇ�͑S��false
+            // ※例外は投げない。失敗した場合は全てfalse
             try
             {
-                // DataGridView�̕\�����e��CSV�t�@�C���ɏo��
+                // DataGridViewの表示内容をCSVファイルに出力
                 StreamWriter sw = new StreamWriter(i_Path, false, System.Text.Encoding.GetEncoding("Shift-JIS"));
                 try
                 {
-                    // �w�b�_�[�o��
+                    // ヘッダー出力
                     string header = String.Empty;
                     foreach (DataGridViewColumn column in i_View.Columns)
                     {
@@ -716,16 +716,16 @@ namespace Honememo
 
                     sw.WriteLine(header);
 
-                    // �{�̏o��
+                    // 本体出力
                     for (int y = 0; y < i_View.RowCount; y++)
                     {
-                        // �\������Ă��Ȃ��s�͏��O
+                        // 表示されていない行は除外
                         if (i_View.Rows[y].Visible == false)
                         {
                             continue;
                         }
 
-                        // 1�s���Ƃɏo��
+                        // 1行ごとに出力
                         string line = String.Empty;
                         for (int x = 0; x < i_View.ColumnCount; x++)
                         {
@@ -759,11 +759,11 @@ namespace Honememo
         }
 
         /// <summary>
-        /// DataGridView��CSV�t�@�C���ւ̏o�́i�G���[���Ƀ_�C�A���O��\���j�B
+        /// DataGridViewのCSVファイルへの出力（エラー時にダイアログを表示）。
         /// </summary>
-        /// <param name="i_View">CSV�t�@�C�����o�͂���DataGridView�B</param>
-        /// <param name="i_Path">CSV�t�@�C���p�X�B</param>
-        /// <returns><c>true</c> �o�͐���</returns>
+        /// <param name="i_View">CSVファイルを出力するDataGridView。</param>
+        /// <param name="i_Path">CSVファイルパス。</param>
+        /// <returns><c>true</c> 出力成功</returns>
         public bool SaveDataGridViewCsv(DataGridView i_View, string i_Path)
         {
             return this.SaveDataGridViewCsv(i_View, i_Path, true);

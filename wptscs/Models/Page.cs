@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      ƒy[ƒWiWikipedia‚Ì‹L–‚È‚Çj‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒXƒ\[ƒX</summary>
+//      ãƒšãƒ¼ã‚¸ï¼ˆWikipediaã®è¨˜äº‹ãªã©ï¼‰ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="Page.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="Page.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -13,46 +13,46 @@ namespace Honememo.Wptscs.Models
     using System;
 
     /// <summary>
-    /// ƒy[ƒWiWikipedia‚Ì‹L–‚È‚Çj‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒX‚Å‚·B
+    /// ãƒšãƒ¼ã‚¸ï¼ˆWikipediaã®è¨˜äº‹ãªã©ï¼‰ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public class Page
     {
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// ƒy[ƒW‚ªŠ‘®‚·‚éƒEƒFƒuƒTƒCƒgB
+        /// ãƒšãƒ¼ã‚¸ãŒæ‰€å±ã™ã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã€‚
         /// </summary>
         private Website website;
 
         /// <summary>
-        /// ƒy[ƒWƒ^ƒCƒgƒ‹B
+        /// ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚
         /// </summary>
         private string title;
 
         /// <summary>
-        /// ƒy[ƒW‚Ì–{•¶B
+        /// ãƒšãƒ¼ã‚¸ã®æœ¬æ–‡ã€‚
         /// </summary>
         private string text;
 
         /// <summary>
-        /// ƒy[ƒW‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒvB
+        /// ãƒšãƒ¼ã‚¸ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã€‚
         /// </summary>
         private DateTime timestamp;
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
         /// </summary>
-        /// <param name="website">ƒy[ƒW‚ªŠ‘®‚·‚éƒEƒFƒuƒTƒCƒgB</param>
-        /// <param name="title">ƒy[ƒWƒ^ƒCƒgƒ‹B</param>
-        /// <param name="text">ƒy[ƒW‚Ì–{•¶B</param>
-        /// <param name="timestamp">ƒy[ƒW‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒvB</param>
+        /// <param name="website">ãƒšãƒ¼ã‚¸ãŒæ‰€å±ã™ã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã€‚</param>
+        /// <param name="title">ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚</param>
+        /// <param name="text">ãƒšãƒ¼ã‚¸ã®æœ¬æ–‡ã€‚</param>
+        /// <param name="timestamp">ãƒšãƒ¼ã‚¸ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã€‚</param>
         public Page(Website website, string title, string text, DateTime timestamp)
         {
-            // ‰Šú’lİ’èAŠî–{“I‚ÉˆÈŒãŠO‚©‚ç•ÏX‚³‚ê‚é‚±‚Æ‚ğ‘z’è‚µ‚È‚¢
+            // åˆæœŸå€¤è¨­å®šã€åŸºæœ¬çš„ã«ä»¥å¾Œå¤–ã‹ã‚‰å¤‰æ›´ã•ã‚Œã‚‹ã“ã¨ã‚’æƒ³å®šã—ãªã„
             this.Website = website;
             this.Title = title;
             this.Text = text;
@@ -60,12 +60,12 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
-        /// ƒy[ƒW‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚É‚ÍŒ»İ“ú (UTC) ‚ğİ’èB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
+        /// ãƒšãƒ¼ã‚¸ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã«ã¯ç¾åœ¨æ—¥æ™‚ (UTC) ã‚’è¨­å®šã€‚
         /// </summary>
-        /// <param name="website">ƒy[ƒW‚ªŠ‘®‚·‚éƒEƒFƒuƒTƒCƒgB</param>
-        /// <param name="title">ƒy[ƒWƒ^ƒCƒgƒ‹B</param>
-        /// <param name="text">ƒy[ƒW‚Ì–{•¶B</param>
+        /// <param name="website">ãƒšãƒ¼ã‚¸ãŒæ‰€å±ã™ã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã€‚</param>
+        /// <param name="title">ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚</param>
+        /// <param name="text">ãƒšãƒ¼ã‚¸ã®æœ¬æ–‡ã€‚</param>
         public Page(Website website, string title, string text)
             : this(website, title, text, System.DateTime.UtcNow)
         {
@@ -73,10 +73,10 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
         /// <summary>
-        /// ƒy[ƒW‚ªŠ‘®‚·‚éƒEƒFƒuƒTƒCƒgB
+        /// ãƒšãƒ¼ã‚¸ãŒæ‰€å±ã™ã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã€‚
         /// </summary>
         public Website Website
         {
@@ -87,7 +87,7 @@ namespace Honememo.Wptscs.Models
 
             protected set
             {
-                // ƒEƒFƒuƒTƒCƒg‚Í•K{
+                // ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã¯å¿…é ˆ
                 if (value == null)
                 {
                     throw new ArgumentNullException("website");
@@ -98,7 +98,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒy[ƒWƒ^ƒCƒgƒ‹B
+        /// ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚
         /// </summary>
         public string Title
         {
@@ -109,7 +109,7 @@ namespace Honememo.Wptscs.Models
 
             protected set
             {
-                // ƒy[ƒWƒ^ƒCƒgƒ‹‚Í•K{
+                // ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã¯å¿…é ˆ
                 if (String.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("title");
@@ -120,7 +120,7 @@ namespace Honememo.Wptscs.Models
         }
         
         /// <summary>
-        /// ƒy[ƒW‚Ì–{•¶B
+        /// ãƒšãƒ¼ã‚¸ã®æœ¬æ–‡ã€‚
         /// </summary>
         public string Text
         {
@@ -136,7 +136,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒy[ƒW‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒvB
+        /// ãƒšãƒ¼ã‚¸ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã€‚
         /// </summary>
         public DateTime Timestamp
         {

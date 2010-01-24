@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      MediaWiki‚ÌƒEƒFƒuƒTƒCƒgiƒVƒXƒeƒ€j‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒXƒ\[ƒX</summary>
+//      MediaWikiã®ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆï¼ˆã‚·ã‚¹ãƒ†ãƒ ï¼‰ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="MediaWiki.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="MediaWiki.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -16,40 +16,40 @@ namespace Honememo.Wptscs.Models
     using System.Xml.Serialization;
 
     /// <summary>
-    /// MediaWiki‚ÌƒEƒFƒuƒTƒCƒgiƒVƒXƒeƒ€j‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒX‚Å‚·B
+    /// MediaWikiã®ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆï¼ˆã‚·ã‚¹ãƒ†ãƒ ï¼‰ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public class MediaWiki : Website
     {
-        #region ’è”’è‹`
+        #region å®šæ•°å®šç¾©
 
         /// <summary>
-        /// Wikipedia‚ÌXML‚ÌŒÅ’è’l‚Ì‘®B
+        /// Wikipediaã®XMLã®å›ºå®šå€¤ã®æ›¸å¼ã€‚
         /// </summary>
         public static readonly string Xmlns = "http://www.mediawiki.org/xml/export-0.4/";
 
         /// <summary>
-        /// ƒeƒ“ƒvƒŒ[ƒg‚Ì–¼‘O‹óŠÔ‚ğ¦‚·”Ô†B
+        /// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®åå‰ç©ºé–“ã‚’ç¤ºã™ç•ªå·ã€‚
         /// </summary>
         public static readonly int TemplateNamespaceNumber = 10;
 
         /// <summary>
-        /// ƒJƒeƒSƒŠ‚Ì–¼‘O‹óŠÔ‚ğ¦‚·”Ô†B
+        /// ã‚«ãƒ†ã‚´ãƒªã®åå‰ç©ºé–“ã‚’ç¤ºã™ç•ªå·ã€‚
         /// </summary>
         public static readonly int CategoryNamespaceNumber = 14;
 
         /// <summary>
-        /// ‰æ‘œ‚Ì–¼‘O‹óŠÔ‚ğ¦‚·”Ô†B
+        /// ç”»åƒã®åå‰ç©ºé–“ã‚’ç¤ºã™ç•ªå·ã€‚
         /// </summary>
         public static readonly int ImageNamespaceNumber = 6;
 
         #endregion
 
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
-        // ¦Še•Ï”‚Ì‰Šú’l‚Í2006”N9Œ“_‚ÌWikipedia‰pŒê”Å‚æ‚è
+        // â€»å„å¤‰æ•°ã®åˆæœŸå€¤ã¯2006å¹´9æœˆæ™‚ç‚¹ã®Wikipediaè‹±èªç‰ˆã‚ˆã‚Š
 
         /// <summary>
-        /// Wikipedia‘®‚ÌƒVƒXƒeƒ€’è‹`•Ï”B
+        /// Wikipediaæ›¸å¼ã®ã‚·ã‚¹ãƒ†ãƒ å®šç¾©å¤‰æ•°ã€‚
         /// </summary>
         [XmlArrayItem("Variable")]
         public string[] SystemVariables = new string[]
@@ -72,81 +72,81 @@ namespace Honememo.Wptscs.Models
         };
 
         /// <summary>
-        /// Š‡ŒÊ‚ÌƒtƒH[ƒ}ƒbƒgB
+        /// æ‹¬å¼§ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã€‚
         /// </summary>
         public string Bracket = " ({0}) ";
 
         /// <summary>
-        /// ƒŠƒ_ƒCƒŒƒNƒg‚Ì•¶š—ñB
+        /// ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã®æ–‡å­—åˆ—ã€‚
         /// </summary>
         public string Redirect = "#REDIRECT";
 
         /// <summary>
-        /// –¼‘O‹óŠÔ‚Ìİ’èB
+        /// åå‰ç©ºé–“ã®è¨­å®šã€‚
         /// </summary>
         [XmlIgnoreAttribute()]
         public IDictionary<int, string> Namespaces = new Dictionary<int, string>();
 
         /// <summary>
-        /// Œ©o‚µ‚Ì’èŒ^‹åB
+        /// è¦‹å‡ºã—ã®å®šå‹å¥ã€‚
         /// </summary>
         [XmlArrayItem("Title")]
         public string[] TitleKeys = new string[0];
 
         /// <summary>
-        /// ‹L–‚ÌXMLƒf[ƒ^‚ª‘¶İ‚·‚éƒpƒXB
+        /// è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãƒ‘ã‚¹ã€‚
         /// </summary>
         private string exportPath = "wiki/Special:Export/";
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒVƒŠƒAƒ‰ƒCƒY—pjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ï¼‰ã€‚
         /// </summary>
         public MediaWiki()
             : this(new Language("unknown"))
         {
-            // “K“–‚È’l‚Å’Êí‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğÀs
-            System.Diagnostics.Debug.WriteLine("MediaWiki.MediaWiki > „§‚³‚ê‚È‚¢ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğg—p‚µ‚Ä‚¢‚Ü‚·");
+            // é©å½“ãªå€¤ã§é€šå¸¸ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’å®Ÿè¡Œ
+            System.Diagnostics.Debug.WriteLine("MediaWiki.MediaWiki > æ¨å¥¨ã•ã‚Œãªã„ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™");
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’ÊíjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆé€šå¸¸ï¼‰ã€‚
         /// </summary>
-        /// <param name="lang">ƒEƒFƒuƒTƒCƒg‚ÌŒ¾ŒêB</param>
+        /// <param name="lang">ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã®è¨€èªã€‚</param>
         public MediaWiki(Language lang)
             : base(lang)
         {
-            // ƒƒ“ƒo•Ï”‚Ì‰Šúİ’è
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸè¨­å®š
             this.Server = String.Format("{0}.wikipedia.org", lang.Code);
         }
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
         /// <summary>
-        /// ƒy[ƒW‚ğæ“¾B
+        /// ãƒšãƒ¼ã‚¸ã‚’å–å¾—ã€‚
         /// </summary>
-        /// <param name="title">ƒy[ƒWƒ^ƒCƒgƒ‹B</param>
-        /// <returns>æ“¾‚µ‚½ƒy[ƒWBƒy[ƒW‚ª‘¶İ‚µ‚È‚¢ê‡‚Í <c>null</c> ‚ğ•Ô‚·B</returns>
-        /// <remarks>æ“¾‚Å‚«‚È‚¢ê‡i’ÊMƒGƒ‰[‚È‚Çj‚Í—áŠO‚ğ“Š‚°‚éB</remarks>
+        /// <param name="title">ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚</param>
+        /// <returns>å–å¾—ã—ãŸãƒšãƒ¼ã‚¸ã€‚ãƒšãƒ¼ã‚¸ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ <c>null</c> ã‚’è¿”ã™ã€‚</returns>
+        /// <remarks>å–å¾—ã§ããªã„å ´åˆï¼ˆé€šä¿¡ã‚¨ãƒ©ãƒ¼ãªã©ï¼‰ã¯ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã€‚</remarks>
         public override Page this[string title]
         {
             get
             {
-                // ‰Šú‰»‚Æ’lƒ`ƒFƒbƒN
+                // åˆæœŸåŒ–ã¨å€¤ãƒã‚§ãƒƒã‚¯
                 _Xml = null;
                 _GetArticleStatus = HttpStatusCode.PaymentRequired;
                 _GetArticleException = null;
-                // ‹L–‚ÌXMLƒf[ƒ^‚ğWikipediaƒT[ƒo[‚©‚çæ“¾
+                // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ã‚’Wikipediaã‚µãƒ¼ãƒãƒ¼ã‹ã‚‰å–å¾—
                 try
                 {
                     HttpWebRequest req = (HttpWebRequest)WebRequest.Create(Url);
-                    // UserAgentİ’è
-                    // ¦Wikipedia‚ÍUserAgent‚ª‹ó‚Ìê‡ƒGƒ‰[‚Æ‚È‚é‚Ì‚ÅA•K‚¸İ’è‚·‚é
+                    // UserAgentè¨­å®š
+                    // â€»Wikipediaã¯UserAgentãŒç©ºã®å ´åˆã‚¨ãƒ©ãƒ¼ã¨ãªã‚‹ã®ã§ã€å¿…ãšè¨­å®šã™ã‚‹
                     if (!String.IsNullOrEmpty(i_UserAgent))
                     {
                         req.UserAgent = i_UserAgent;
@@ -156,7 +156,7 @@ namespace Honememo.Wptscs.Models
                         Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
                         req.UserAgent = "WikipediaTranslationSupportTool/" + ver.Major + "." + String.Format("{0:D2}", ver.Minor);
                     }
-                    // Refererİ’è
+                    // Refererè¨­å®š
                     if (!String.IsNullOrEmpty(i_Referer))
                     {
                         req.Referer = i_Referer;
@@ -164,33 +164,33 @@ namespace Honememo.Wptscs.Models
                     HttpWebResponse res = (HttpWebResponse)req.GetResponse();
                     _GetArticleStatus = res.StatusCode;
 
-                    // ‰“šƒf[ƒ^‚ğóM‚·‚é‚½‚ß‚ÌStream‚ğæ“¾‚µAƒf[ƒ^‚ğæ“¾
-                    // ¦æ“¾‚µ‚½XML‚ª³í‚©‚ÍA‚±‚±‚Å‚ÍŠm”F‚µ‚È‚¢
+                    // å¿œç­”ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã™ã‚‹ãŸã‚ã®Streamã‚’å–å¾—ã—ã€ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
+                    // â€»å–å¾—ã—ãŸXMLãŒæ­£å¸¸ã‹ã¯ã€ã“ã“ã§ã¯ç¢ºèªã—ãªã„
                     _Xml = new XmlDocument();
                     _Xml.Load(res.GetResponseStream());
                     res.Close();
 
-                    // æ“¾‚µ‚½XML‚ğˆêƒtƒHƒ‹ƒ_‚É•Û‘¶
+                    // å–å¾—ã—ãŸXMLã‚’ä¸€æ™‚ãƒ•ã‚©ãƒ«ãƒ€ã«ä¿å­˜
                     try
                     {
-                        // ˆêƒtƒHƒ‹ƒ_‚ğŠm”F
+                        // ä¸€æ™‚ãƒ•ã‚©ãƒ«ãƒ€ã‚’ç¢ºèª
                         String tmpDir = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath));
                         if (Directory.Exists(tmpDir) == false)
                         {
-                            // ˆêƒtƒHƒ‹ƒ_‚ğì¬
+                            // ä¸€æ™‚ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆ
                             Directory.CreateDirectory(tmpDir);
                         }
-                        // ƒtƒ@ƒCƒ‹‚Ì•Û‘¶
+                        // ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜
                         Xml.Save(Path.Combine(tmpDir, Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml"));
                     }
                     catch (Exception e)
                     {
-                        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getServerArticle > ˆêƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½ : " + e.Message);
+                        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getServerArticle > ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ : " + e.Message);
                     }
                 }
                 catch (WebException e)
                 {
-                    // ProtocolErrorƒGƒ‰[‚Ìê‡AƒXƒe[ƒ^ƒXƒR[ƒh‚ğ•Û
+                    // ProtocolErrorã‚¨ãƒ©ãƒ¼ã®å ´åˆã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’ä¿æŒ
                     _Xml = null;
                     if (e.Status == WebExceptionStatus.ProtocolError)
                     {
@@ -210,7 +210,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ‹L–‚ÌXMLƒf[ƒ^‚ª‘¶İ‚·‚éƒpƒXB
+        /// è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãƒ‘ã‚¹ã€‚
         /// </summary>
         public string ExportPath
         {
@@ -227,13 +227,13 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region ƒƒ\ƒbƒh
+        #region ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// w’è‚µ‚½Œ¾Œê‚Å‚ÌŒ¾Œê–¼Ì‚ğ ƒy[ƒW–¼|—ªÌ ‚ÌŒ`®‚Åæ“¾B
+        /// æŒ‡å®šã—ãŸè¨€èªã§ã®è¨€èªåç§°ã‚’ ãƒšãƒ¼ã‚¸å|ç•¥ç§° ã®å½¢å¼ã§å–å¾—ã€‚
         /// </summary>
-        /// <param name="code">Œ¾Œê‚ÌƒR[ƒhB</param>
-        /// <returns>ƒy[ƒW–¼|—ªÌŒ`®‚ÌŒ¾Œê–¼ÌB</returns>
+        /// <param name="code">è¨€èªã®ã‚³ãƒ¼ãƒ‰ã€‚</param>
+        /// <returns>ãƒšãƒ¼ã‚¸å|ç•¥ç§°å½¢å¼ã®è¨€èªåç§°ã€‚</returns>
         public string GetFullName(string code)
         {
             if (Lang.Names.ContainsKey(code))
@@ -253,16 +253,16 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½•¶š—ñ‚ªWikipedia‚ÌƒVƒXƒeƒ€•Ï”‚É‘Š“–‚©‚ğ”»’èB
+        /// æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ãŒWikipediaã®ã‚·ã‚¹ãƒ†ãƒ å¤‰æ•°ã«ç›¸å½“ã‹ã‚’åˆ¤å®šã€‚
         /// </summary>
-        /// <param name="text">ƒ`ƒFƒbƒN‚·‚é•¶š—ñB</param>
-        /// <returns><c>true</c> ƒVƒXƒeƒ€•Ï”‚É‘Š“–B</returns>
+        /// <param name="text">ãƒã‚§ãƒƒã‚¯ã™ã‚‹æ–‡å­—åˆ—ã€‚</param>
+        /// <returns><c>true</c> ã‚·ã‚¹ãƒ†ãƒ å¤‰æ•°ã«ç›¸å½“ã€‚</returns>
         public bool ChkSystemVariable(string text)
         {
             string s = text != null ? text : String.Empty;
 
-            // Šî–{‚Í‘S•¶ˆê’v‚¾‚ªA’è”‚ª : ‚ÅI‚í‚Á‚Ä‚¢‚éê‡Atext‚Ì:‚æ‚è‘O‚Ì‚İ‚ğ”äŠr
-            // ¦ {{ns:1}}‚İ‚½‚¢‚Èê‡‚É”õ‚¦‚Ä
+            // åŸºæœ¬ã¯å…¨æ–‡ä¸€è‡´ã ãŒã€å®šæ•°ãŒ : ã§çµ‚ã‚ã£ã¦ã„ã‚‹å ´åˆã€textã®:ã‚ˆã‚Šå‰ã®ã¿ã‚’æ¯”è¼ƒ
+            // â€» {{ns:1}}ã¿ãŸã„ãªå ´åˆã«å‚™ãˆã¦
             foreach (string variable in this.SystemVariables)
             {
                 if (variable.EndsWith(":") == true)

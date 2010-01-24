@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      ƒEƒFƒuƒTƒCƒg‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒXƒ\[ƒX</summary>
+//      ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="Website.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="Website.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -15,53 +15,53 @@ namespace Honememo.Wptscs.Models
     using System.Text;
 
     /// <summary>
-    /// ƒEƒFƒuƒTƒCƒg‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒX‚Å‚·B
+    /// ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
-    /// <remarks>Œ¾Œê‚ªˆÙ‚È‚éê‡‚ÍA•Ê‚ÌƒEƒFƒuƒTƒCƒg‚Æ‚µ‚Äˆµ‚¢‚Ü‚·B</remarks>
+    /// <remarks>è¨€èªãŒç•°ãªã‚‹å ´åˆã¯ã€åˆ¥ã®ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã¨ã—ã¦æ‰±ã„ã¾ã™ã€‚</remarks>
     public abstract class Website
     {
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// ƒT[ƒo[–¼iƒhƒƒCƒ“ or IPƒAƒhƒŒƒXjB
+        /// ã‚µãƒ¼ãƒãƒ¼åï¼ˆãƒ‰ãƒ¡ã‚¤ãƒ³ or IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼‰ã€‚
         /// </summary>
         private string server;
 
         /// <summary>
-        /// ƒEƒFƒuƒTƒCƒg‚ÌŒ¾ŒêB
+        /// ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã®è¨€èªã€‚
         /// </summary>
         private Language lang;
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒVƒŠƒAƒ‰ƒCƒY—pjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ï¼‰ã€‚
         /// </summary>
         public Website()
             : this(new Language("unknown"))
         {
-            // ª“K“–‚È’l‚Å’Êí‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğÀs
-            System.Diagnostics.Debug.WriteLine("Website.Website : „§‚³‚ê‚È‚¢ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğg—p‚µ‚Ä‚¢‚Ü‚·");
+            // â†‘é©å½“ãªå€¤ã§é€šå¸¸ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’å®Ÿè¡Œ
+            System.Diagnostics.Debug.WriteLine("Website.Website : æ¨å¥¨ã•ã‚Œãªã„ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™");
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’ÊíjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆé€šå¸¸ï¼‰ã€‚
         /// </summary>
-        /// <param name="lang">ƒEƒFƒuƒTƒCƒg‚ÌŒ¾ŒêB</param>
+        /// <param name="lang">ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã®è¨€èªã€‚</param>
         public Website(Language lang)
         {
-            // ƒƒ“ƒo•Ï”‚Ì‰Šúİ’è
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸè¨­å®š
             this.lang = lang;
         }
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
         /// <summary>
-        /// ƒT[ƒo[–¼iƒhƒƒCƒ“ or IPƒAƒhƒŒƒXjB
+        /// ã‚µãƒ¼ãƒãƒ¼åï¼ˆãƒ‰ãƒ¡ã‚¤ãƒ³ or IPã‚¢ãƒ‰ãƒ¬ã‚¹ï¼‰ã€‚
         /// </summary>
         public string Server
         {
@@ -72,7 +72,7 @@ namespace Honememo.Wptscs.Models
 
             protected set
             {
-                // ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
+                // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
                 if (String.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("server");
@@ -83,7 +83,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒEƒFƒuƒTƒCƒg‚ÌŒ¾ŒêB
+        /// ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã®è¨€èªã€‚
         /// </summary>
         public Language Lang
         {
@@ -94,7 +94,7 @@ namespace Honememo.Wptscs.Models
 
             protected set
             {
-                // ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
+                // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
                 if (value == null)
                 {
                     throw new ArgumentNullException("lang");
@@ -105,11 +105,11 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒy[ƒW‚ğæ“¾B
+        /// ãƒšãƒ¼ã‚¸ã‚’å–å¾—ã€‚
         /// </summary>
-        /// <param name="title">ƒy[ƒWƒ^ƒCƒgƒ‹B</param>
-        /// <returns>æ“¾‚µ‚½ƒy[ƒWBƒy[ƒW‚ª‘¶İ‚µ‚È‚¢ê‡‚Í <c>null</c> ‚ğ•Ô‚·B</returns>
-        /// <remarks>æ“¾‚Å‚«‚È‚¢ê‡i’ÊMƒGƒ‰[‚È‚Çj‚Í—áŠO‚ğ“Š‚°‚éB</remarks>
+        /// <param name="title">ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚</param>
+        /// <returns>å–å¾—ã—ãŸãƒšãƒ¼ã‚¸ã€‚ãƒšãƒ¼ã‚¸ãŒå­˜åœ¨ã—ãªã„å ´åˆã¯ <c>null</c> ã‚’è¿”ã™ã€‚</returns>
+        /// <remarks>å–å¾—ã§ããªã„å ´åˆï¼ˆé€šä¿¡ã‚¨ãƒ©ãƒ¼ãªã©ï¼‰ã¯ä¾‹å¤–ã‚’æŠ•ã’ã‚‹ã€‚</remarks>
         public abstract Page this[string title]
         {
             get;

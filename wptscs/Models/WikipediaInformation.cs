@@ -3,142 +3,142 @@ using System.Xml.Serialization;
 
 namespace Honememo.Wptscs.Models
 {
-    // Œ¾Œêî•ñEƒT[ƒo[î•ñ‚É‰Á‚¦AWikipedia‚ÌƒT[ƒo[‚²‚Æ‚Ìİ’è‚ğŠi”[‚·‚éƒNƒ‰ƒX
+    // è¨€èªæƒ…å ±ãƒ»ã‚µãƒ¼ãƒãƒ¼æƒ…å ±ã«åŠ ãˆã€Wikipediaã®ã‚µãƒ¼ãƒãƒ¼ã”ã¨ã®è¨­å®šã‚’æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹
     public class WikipediaInformation : LanguageWithServerInformation
     {
-        // ŠeƒT[ƒo[‚Å‚Ì–¼‘O‹óŠÔ‚Ìİ’è‚ğŠi”[‚·‚é‚½‚ß‚Ì\‘¢‘Ì
-		public struct Namespace : IComparable {
-			public int Key;				// –¼‘O‹óŠÔ‚Ì”Ô†
-			public String Name;			// –¼‘O‹óŠÔ–¼
+        // å„ã‚µãƒ¼ãƒãƒ¼ã§ã®åå‰ç©ºé–“ã®è¨­å®šã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®æ§‹é€ ä½“
+        public struct Namespace : IComparable {
+            public int Key;             // åå‰ç©ºé–“ã®ç•ªå·
+            public String Name;         // åå‰ç©ºé–“å
 
-			// ”z—ñ‚Ìƒ\[ƒg—pƒƒ\ƒbƒh
+            // é…åˆ—ã®ã‚½ãƒ¼ãƒˆç”¨ãƒ¡ã‚½ãƒƒãƒ‰
             public int CompareTo(Object obj)
             {
-	            // –¼‘O‹óŠÔ‚Ì”Ô†‚Åƒ\[ƒg
+                // åå‰ç©ºé–“ã®ç•ªå·ã§ã‚½ãƒ¼ãƒˆ
                 Namespace ns = (Namespace) obj;
-	            return this.Key.CompareTo(ns.Key);
+                return this.Key.CompareTo(ns.Key);
             }
-		};
+        };
 
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒVƒŠƒAƒ‰ƒCƒY—pj
+        // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ï¼‰
         public WikipediaInformation() : this("unknown")
         {
-//			System.Diagnostics.Debug.WriteLine("WikipediaInformation.WikipediaInformation > „§‚³‚ê‚È‚¢ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğg—p‚µ‚Ä‚¢‚Ü‚·");
-			// “K“–‚È’l‚Å’Êí‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğÀs
-		}
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’Êíj
-		public WikipediaInformation(String i_Code) : base(i_Code){
-			// ‰Šú’lİ’è
-			setDefault();
-		}
+            //System.Diagnostics.Debug.WriteLine("WikipediaInformation.WikipediaInformation > æ¨å¥¨ã•ã‚Œãªã„ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™");
+            // é©å½“ãªå€¤ã§é€šå¸¸ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’å®Ÿè¡Œ
+        }
+        // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆé€šå¸¸ï¼‰
+        public WikipediaInformation(String i_Code) : base(i_Code){
+            // åˆæœŸå€¤è¨­å®š
+            setDefault();
+        }
     
-        /* ƒƒ“ƒo•Ï”‚Ì‰Šú’lİ’è */
+        /* ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸå€¤è¨­å®š */
         public void setDefault()
         {
-	        // ƒƒ“ƒo•Ï”‚Ì—ÌˆæŠm•ÛE‰Šúİ’è
-	        // ¦Še‰Šú’l‚Í2006”N9Œ“_‚ÌWikipedia‰pŒê”Å‚æ‚è
-	        Server = String.Format("{0}.wikipedia.org", Code);
-	        ArticleXmlPath = "wiki/Special:Export/";
-	        SystemVariables = new String[]{
-		        "CURRENTMONTH",
-		        "CURRENTMONTHNAME",
-		        "CURRENTDAY",
-		        "CURRENTDAYNAME",
-		        "CURRENTYEAR",
-		        "CURRENTTIME",
-		        "NUMBEROFARTICLES",
-		        "SITENAME",
-		        "SERVER",
-		        "NAMESPACE",
-		        "PAGENAME",
-		        "ns:",
-		        "localurl:",
-		        "fullurl:",
-		        "#if:"};
-	        Bracket = " ({0}) ";
-	        Redirect = "#REDIRECT";
-	        Namespaces = new Namespace[0];
-	        TitleKeys = new String[0];
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®é ˜åŸŸç¢ºä¿ãƒ»åˆæœŸè¨­å®š
+            // â€»å„åˆæœŸå€¤ã¯2006å¹´9æœˆæ™‚ç‚¹ã®Wikipediaè‹±èªç‰ˆã‚ˆã‚Š
+            Server = String.Format("{0}.wikipedia.org", Code);
+            ArticleXmlPath = "wiki/Special:Export/";
+            SystemVariables = new String[]{
+                "CURRENTMONTH",
+                "CURRENTMONTHNAME",
+                "CURRENTDAY",
+                "CURRENTDAYNAME",
+                "CURRENTYEAR",
+                "CURRENTTIME",
+                "NUMBEROFARTICLES",
+                "SITENAME",
+                "SERVER",
+                "NAMESPACE",
+                "PAGENAME",
+                "ns:",
+                "localurl:",
+                "fullurl:",
+                "#if:"};
+            Bracket = " ({0}) ";
+            Redirect = "#REDIRECT";
+            Namespaces = new Namespace[0];
+            TitleKeys = new String[0];
         }
 
-        /* w’è‚µ‚½Œ¾Œê‚Å‚Ì–¼Ì‚ğ ‹L––¼|—ªÌ ‚ÌŒ`®‚Åæ“¾ */
+        /* æŒ‡å®šã—ãŸè¨€èªã§ã®åç§°ã‚’ è¨˜äº‹å|ç•¥ç§° ã®å½¢å¼ã§å–å¾— */
         public String GetFullName(String i_Code)
         {
-	        foreach(LanguageName name in Names){
-		        if(name.Code == i_Code){
-			        if(name.ShortName != ""){
-				        return (name.Name + "|" + name.ShortName);
-			        }
-			        else{
-				        return name.Name;
-			        }
-		        }
-	        }
-	        return "";
+            foreach(LanguageName name in Names){
+                if(name.Code == i_Code){
+                    if(name.ShortName != ""){
+                        return (name.Name + "|" + name.ShortName);
+                    }
+                    else{
+                        return name.Name;
+                    }
+                }
+            }
+            return "";
         }
 
-        /* w’è‚³‚ê‚½”Ô†‚Ì–¼‘O‹óŠÔ‚ğæ“¾ */
+        /* æŒ‡å®šã•ã‚ŒãŸç•ªå·ã®åå‰ç©ºé–“ã‚’å–å¾— */
         public String GetNamespace(int i_Key)
         {
-	        foreach(Namespace ns in Namespaces){
-		        if(ns.Key == i_Key){
-			        return ns.Name;
-		        }
-	        }
-	        return "";
+            foreach(Namespace ns in Namespaces){
+                if(ns.Key == i_Key){
+                    return ns.Name;
+                }
+            }
+            return "";
         }
 
-        /* w’è‚³‚ê‚½•¶š—ñ‚ªWikipedia‚ÌƒVƒXƒeƒ€•Ï”‚É‘Š“–‚©‚ğ”»’è */
+        /* æŒ‡å®šã•ã‚ŒãŸæ–‡å­—åˆ—ãŒWikipediaã®ã‚·ã‚¹ãƒ†ãƒ å¤‰æ•°ã«ç›¸å½“ã‹ã‚’åˆ¤å®š */
         public bool ChkSystemVariable(String i_Text)
         {
-	        String text = ((i_Text != null) ? i_Text : "");
-	        // Šî–{‚Í‘S•¶ˆê’v‚¾‚ªA’è”‚ª : ‚ÅI‚í‚Á‚Ä‚¢‚éê‡Atext‚Ì:‚æ‚è‘O‚Ì‚İ‚ğ”äŠr
-	        // ¦ {{ns:1}}‚İ‚½‚¢‚Èê‡‚É”õ‚¦‚Ä
-	        foreach(String variable in SystemVariables){
-		        if(variable.EndsWith(":") == true){
-			        if(text.StartsWith(variable) == true){
-				        return true;
-			        }
-		        }
-		        else if(text == variable){
-			        return true;
-		        }
-	        }
-	        return false;
+            String text = ((i_Text != null) ? i_Text : "");
+            // åŸºæœ¬ã¯å…¨æ–‡ä¸€è‡´ã ãŒã€å®šæ•°ãŒ : ã§çµ‚ã‚ã£ã¦ã„ã‚‹å ´åˆã€textã®:ã‚ˆã‚Šå‰ã®ã¿ã‚’æ¯”è¼ƒ
+            // â€» {{ns:1}}ã¿ãŸã„ãªå ´åˆã«å‚™ãˆã¦
+            foreach(String variable in SystemVariables){
+                if(variable.EndsWith(":") == true){
+                    if(text.StartsWith(variable) == true){
+                        return true;
+                    }
+                }
+                else if(text == variable){
+                    return true;
+                }
+            }
+            return false;
         }
 
-		// ‹L–‚ÌXMLƒf[ƒ^‚ª‘¶İ‚·‚éƒpƒX
-		public String ArticleXmlPath {
-			get {
-				return _ArticleXmlPath;
-			}
-			set {
-				_ArticleXmlPath = ((value != null) ? value.Trim() : "");
-			}
-		}
+        // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãƒ‘ã‚¹
+        public String ArticleXmlPath {
+            get {
+                return _ArticleXmlPath;
+            }
+            set {
+                _ArticleXmlPath = ((value != null) ? value.Trim() : "");
+            }
+        }
 
-		// Wikipedia‘®‚ÌƒVƒXƒeƒ€’è‹`•Ï”
-		[XmlArrayItem("Variable")]
-		public String[] SystemVariables;
+        // Wikipediaæ›¸å¼ã®ã‚·ã‚¹ãƒ†ãƒ å®šç¾©å¤‰æ•°
+        [XmlArrayItem("Variable")]
+        public String[] SystemVariables;
 
-		// Š‡ŒÊ‚ÌƒtƒH[ƒ}ƒbƒg
-		public String Bracket;
-		// ƒŠƒ_ƒCƒŒƒNƒg‚Ì•¶š—ñ
-		public String Redirect;
+        // æ‹¬å¼§ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+        public String Bracket;
+        // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã®æ–‡å­—åˆ—
+        public String Redirect;
 
-		// –¼‘O‹óŠÔ‚Ìİ’è
-		[XmlIgnoreAttribute()]
-		public Namespace[] Namespaces;
-		// ƒeƒ“ƒvƒŒ[ƒgEƒJƒeƒSƒŠE‰æ‘œ‚Ì–¼‘O‹óŠÔ‚ğ¦‚·”Ô†
-		public static readonly int TEMPLATENAMESPACENUMBER = 10;
+        // åå‰ç©ºé–“ã®è¨­å®š
+        [XmlIgnoreAttribute()]
+        public Namespace[] Namespaces;
+        // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãƒ»ã‚«ãƒ†ã‚´ãƒªãƒ»ç”»åƒã®åå‰ç©ºé–“ã‚’ç¤ºã™ç•ªå·
+        public static readonly int TEMPLATENAMESPACENUMBER = 10;
         public static readonly int CATEGORYNAMESPACENUMBER = 14;
         public static readonly int IMAGENAMESPACENUMBER = 6;
 
-		// Œ©o‚µ‚Ì’èŒ^‹å
-		[XmlArrayItem("Title")]
-		public String[] TitleKeys;
+        // è¦‹å‡ºã—ã®å®šå‹å¥
+        [XmlArrayItem("Title")]
+        public String[] TitleKeys;
 
-		// ‹L–‚ÌXMLƒf[ƒ^‚ª‘¶İ‚·‚éƒpƒXipropertyj
-		private String _ArticleXmlPath;
+        // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãƒ‘ã‚¹ï¼ˆpropertyï¼‰
+        private String _ArticleXmlPath;
     }
 }

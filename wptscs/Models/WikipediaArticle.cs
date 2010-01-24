@@ -6,409 +6,409 @@ using System.Windows.Forms;
 
 namespace Honememo.Wptscs.Models
 {
-    // Wikipedia‚Ì‹L–‚ğŠÇ—‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX
+    // Wikipediaã®è¨˜äº‹ã‚’ç®¡ç†ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹
     public class WikipediaArticle : WikipediaFormat
     {
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒT[ƒo[‚Æ‹L––¼‚ğw’èj
-		public WikipediaArticle(WikipediaInformation i_Server, String i_Name)
-			: base(i_Server){
-			// ‰Šúİ’è
-			Initialize(i_Name);
-		}
+        // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚µãƒ¼ãƒãƒ¼ã¨è¨˜äº‹åã‚’æŒ‡å®šï¼‰
+        public WikipediaArticle(WikipediaInformation i_Server, String i_Name)
+            : base(i_Server){
+            // åˆæœŸè¨­å®š
+            Initialize(i_Name);
+        }
 
-		/* ‰Šúİ’è */
+        /* åˆæœŸè¨­å®š */
         public void Initialize(String i_Title)
         {
-	        // ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
-	        if(Honememo.Cmn.NullCheckAndTrim(i_Title).TrimStart(':') == ""){
-		        throw new ArgumentNullException("i_Title");
-	        }
-	        // ƒƒ“ƒo•Ï”‚Ì‰Šú‰»
-	        _Title = i_Title.Trim().TrimStart(':');
-	        UriBuilder uri = new UriBuilder("http", Server.Server);
-	        uri.Path = (Server.ArticleXmlPath + Title);
-	        _Url = uri.Uri;
-	        _Xml = null;
-	        _Timestamp = DateTime.MinValue;
-	        _Text = "";
-	        _Redirect = "";
-	        _GetArticleStatus = HttpStatusCode.PaymentRequired;
-	        _GetArticleException = null;
+            // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
+            if(Honememo.Cmn.NullCheckAndTrim(i_Title).TrimStart(':') == ""){
+                throw new ArgumentNullException("i_Title");
+            }
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸåŒ–
+            _Title = i_Title.Trim().TrimStart(':');
+            UriBuilder uri = new UriBuilder("http", Server.Server);
+            uri.Path = (Server.ArticleXmlPath + Title);
+            _Url = uri.Uri;
+            _Xml = null;
+            _Timestamp = DateTime.MinValue;
+            _Text = "";
+            _Redirect = "";
+            _GetArticleStatus = HttpStatusCode.PaymentRequired;
+            _GetArticleException = null;
         }
 
-        /* ‹L–‚ÌÚ×î•ñ‚ğæ“¾ */
+        /* è¨˜äº‹ã®è©³ç´°æƒ…å ±ã‚’å–å¾— */
         public virtual bool GetArticle(String i_UserAgent, String i_Referer, TimeSpan i_CacheEnabledSpan)
         {
-	        // ‰Šú‰»‚Æ’lƒ`ƒFƒbƒN
-	        _Xml = null;
-	        _Timestamp = DateTime.MinValue;
-	        _Text = "";
-	        _Redirect = "";
-	        _GetArticleStatus = HttpStatusCode.PaymentRequired;
-	        _GetArticleException = null;
-	        // ‹L–‚Ìƒf[ƒ^‚ğƒLƒƒƒbƒVƒ…‚âWikipediaƒT[ƒo[‚©‚çæ“¾‚µAXML‚ÉŠi”[
-	        if(getCacheArticle(i_CacheEnabledSpan) == false){
-		        if(getServerArticle(i_UserAgent, i_Referer) == false){
-			        return false;
-		        }
-	        }
-	        // æ“¾‚³‚ê‚½XML‚ğ‰ğÍ‚µAƒƒ“ƒo•Ï”‚Éİ’è
-	        // –¼‘O‹óŠÔî•ñ‚Ìã‘‚«
-	        _Server.Namespaces = GetNamespaces();
-	        // ‹L–î•ñ‚Ìİ’è
-	        XmlNamespaceManager nsMgr = new XmlNamespaceManager(Xml.NameTable);
-	        nsMgr.AddNamespace("ns", XMLNS);
-	        XmlElement pageElement = (XmlElement) Xml.SelectSingleNode("/ns:mediawiki/ns:page", nsMgr);
-	        if(pageElement != null){
-		        // ‹L––¼‚Ìã‘‚«
-		        XmlElement titleElement = (XmlElement) pageElement.SelectSingleNode("ns:title", nsMgr);
-		        _Title = (!String.IsNullOrEmpty(titleElement.InnerText) ? titleElement.InnerText : Title);
-		        // ÅIXV“ú
-		        XmlElement timeElement = (XmlElement) pageElement.SelectSingleNode("ns:revision/ns:timestamp", nsMgr);
-		        _Timestamp = DateTime.Parse(timeElement.InnerText);
-		        // ‹L––{•¶
-		        XmlElement textElement = (XmlElement) pageElement.SelectSingleNode("ns:revision/ns:text", nsMgr);
-		        _Text = textElement.InnerText;
-		        // ƒŠƒ_ƒCƒŒƒNƒg‚Ìƒ`ƒFƒbƒN‚ğs‚Á‚Ä‚¨‚­
-		        IsRedirect();
-	        }
-	        // ‹L–‚ª‘¶İ‚µ‚È‚¢ê‡AXML‚Íæ“¾‚Å‚«‚é‚ªpageƒm[ƒh‚ª–³‚¢‚Ì‚ÅA404ƒGƒ‰[‚Æ“¯—l‚Éˆµ‚¤
-	        else{
-		        _GetArticleStatus = HttpStatusCode.NotFound;
-		        return false;
-	        }
-	        return true;
+            // åˆæœŸåŒ–ã¨å€¤ãƒã‚§ãƒƒã‚¯
+            _Xml = null;
+            _Timestamp = DateTime.MinValue;
+            _Text = "";
+            _Redirect = "";
+            _GetArticleStatus = HttpStatusCode.PaymentRequired;
+            _GetArticleException = null;
+            // è¨˜äº‹ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚„Wikipediaã‚µãƒ¼ãƒãƒ¼ã‹ã‚‰å–å¾—ã—ã€XMLã«æ ¼ç´
+            if(getCacheArticle(i_CacheEnabledSpan) == false){
+                if(getServerArticle(i_UserAgent, i_Referer) == false){
+                    return false;
+                }
+            }
+            // å–å¾—ã•ã‚ŒãŸXMLã‚’è§£æã—ã€ãƒ¡ãƒ³ãƒå¤‰æ•°ã«è¨­å®š
+            // åå‰ç©ºé–“æƒ…å ±ã®ä¸Šæ›¸ã
+            _Server.Namespaces = GetNamespaces();
+            // è¨˜äº‹æƒ…å ±ã®è¨­å®š
+            XmlNamespaceManager nsMgr = new XmlNamespaceManager(Xml.NameTable);
+            nsMgr.AddNamespace("ns", XMLNS);
+            XmlElement pageElement = (XmlElement) Xml.SelectSingleNode("/ns:mediawiki/ns:page", nsMgr);
+            if(pageElement != null){
+                // è¨˜äº‹åã®ä¸Šæ›¸ã
+                XmlElement titleElement = (XmlElement) pageElement.SelectSingleNode("ns:title", nsMgr);
+                _Title = (!String.IsNullOrEmpty(titleElement.InnerText) ? titleElement.InnerText : Title);
+                // æœ€çµ‚æ›´æ–°æ—¥æ™‚
+                XmlElement timeElement = (XmlElement) pageElement.SelectSingleNode("ns:revision/ns:timestamp", nsMgr);
+                _Timestamp = DateTime.Parse(timeElement.InnerText);
+                // è¨˜äº‹æœ¬æ–‡
+                XmlElement textElement = (XmlElement) pageElement.SelectSingleNode("ns:revision/ns:text", nsMgr);
+                _Text = textElement.InnerText;
+                // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã®ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã£ã¦ãŠã
+                IsRedirect();
+            }
+            // è¨˜äº‹ãŒå­˜åœ¨ã—ãªã„å ´åˆã€XMLã¯å–å¾—ã§ãã‚‹ãŒpageãƒãƒ¼ãƒ‰ãŒç„¡ã„ã®ã§ã€404ã‚¨ãƒ©ãƒ¼ã¨åŒæ§˜ã«æ‰±ã†
+            else{
+                _GetArticleStatus = HttpStatusCode.NotFound;
+                return false;
+            }
+            return true;
         }
 
-        /* ‹L–‚ÌÚ×î•ñ‚ğæ“¾iƒLƒƒƒbƒVƒ…—LŒøŠúŠÔ‚ÍƒfƒtƒHƒ‹ƒgj */
+        /* è¨˜äº‹ã®è©³ç´°æƒ…å ±ã‚’å–å¾—ï¼ˆã‚­ãƒ£ãƒƒã‚·ãƒ¥æœ‰åŠ¹æœŸé–“ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼‰ */
         public bool GetArticle(String i_UserAgent, String i_Referer)
         {
-	        // ƒLƒƒƒbƒVƒ…—LŒøŠúŠÔ1TŠÔ‚ÅGetArticle‚ğÀs
-	        // ¦‹L–‚Ì—L–³‚â–¼ÌAƒŠƒ_ƒCƒŒƒNƒgAŒ¾ŒêŠÔƒŠƒ“ƒN“™‚Í‚»‚ñ‚È‚ÉXV‚³‚ê‚È‚¢‚¾‚ë‚¤
-	        //   EEE‚Æ‚¢‚¤‚±‚Æ‚ÅA‚±‚ÌŠúŠÔ‚ÉB
-	        //   •K—v‚Å‚ ‚ê‚ÎAƒLƒƒƒbƒVƒ…‚ğg‚í‚È‚¢İ’è‚Å–{ƒƒ\ƒbƒh‚ğ’¼ÚŒÄ‚Ô‚±‚Æ
+            // ã‚­ãƒ£ãƒƒã‚·ãƒ¥æœ‰åŠ¹æœŸé–“1é€±é–“ã§GetArticleã‚’å®Ÿè¡Œ
+            // â€»è¨˜äº‹ã®æœ‰ç„¡ã‚„åç§°ã€ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã€è¨€èªé–“ãƒªãƒ³ã‚¯ç­‰ã¯ãã‚“ãªã«æ›´æ–°ã•ã‚Œãªã„ã ã‚ã†
+            //   ãƒ»ãƒ»ãƒ»ã¨ã„ã†ã“ã¨ã§ã€ã“ã®æœŸé–“ã«ã€‚
+            //   å¿…è¦ã§ã‚ã‚Œã°ã€ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’ä½¿ã‚ãªã„è¨­å®šã§æœ¬ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ç›´æ¥å‘¼ã¶ã“ã¨
             return GetArticle(i_UserAgent, i_Referer, new TimeSpan(7, 0, 0, 0));
         }
 
-        /* ‹L–‚ÌÚ×î•ñ‚ğæ“¾iUserAgent, Referer, ƒLƒƒƒbƒVƒ…—LŒøŠúŠÔ‚ÍƒfƒtƒHƒ‹ƒgj */
+        /* è¨˜äº‹ã®è©³ç´°æƒ…å ±ã‚’å–å¾—ï¼ˆUserAgent, Referer, ã‚­ãƒ£ãƒƒã‚·ãƒ¥æœ‰åŠ¹æœŸé–“ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆï¼‰ */
         public bool GetArticle()
         {
-	        // Šù’è’l‚ÅGetArticle‚ğÀs
-	        return GetArticle("", "");
+            // æ—¢å®šå€¤ã§GetArticleã‚’å®Ÿè¡Œ
+            return GetArticle("", "");
         }
 
-        /* ‹L–‚ÌXML‚ğƒT[ƒo[‚æ‚èæ“¾ */
+        /* è¨˜äº‹ã®XMLã‚’ã‚µãƒ¼ãƒãƒ¼ã‚ˆã‚Šå–å¾— */
         protected bool getServerArticle(String i_UserAgent, String i_Referer)
         {
-	        // ‰Šú‰»‚Æ’lƒ`ƒFƒbƒN
-	        _Xml = null;
-	        _GetArticleStatus = HttpStatusCode.PaymentRequired;
-	        _GetArticleException = null;
-	        // ‹L–‚ÌXMLƒf[ƒ^‚ğWikipediaƒT[ƒo[‚©‚çæ“¾
-	        try{
-		        HttpWebRequest req = (HttpWebRequest) WebRequest.Create(Url);
-		        // UserAgentİ’è
-		        // ¦Wikipedia‚ÍUserAgent‚ª‹ó‚Ìê‡ƒGƒ‰[‚Æ‚È‚é‚Ì‚ÅA•K‚¸İ’è‚·‚é
-		        if(!String.IsNullOrEmpty(i_UserAgent)){
-			        req.UserAgent = i_UserAgent;
-		        }
-		        else{
-			        Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-			        req.UserAgent = "WikipediaTranslationSupportTool/" + ver.Major + "." + String.Format("{0:D2}",ver.Minor);
-		        }
-		        // Refererİ’è
-		        if(!String.IsNullOrEmpty(i_Referer)){
-			        req.Referer = i_Referer;
-		        }
-		        HttpWebResponse res = (HttpWebResponse) req.GetResponse();
-		        _GetArticleStatus = res.StatusCode;
+            // åˆæœŸåŒ–ã¨å€¤ãƒã‚§ãƒƒã‚¯
+            _Xml = null;
+            _GetArticleStatus = HttpStatusCode.PaymentRequired;
+            _GetArticleException = null;
+            // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ã‚’Wikipediaã‚µãƒ¼ãƒãƒ¼ã‹ã‚‰å–å¾—
+            try{
+                HttpWebRequest req = (HttpWebRequest) WebRequest.Create(Url);
+                // UserAgentè¨­å®š
+                // â€»Wikipediaã¯UserAgentãŒç©ºã®å ´åˆã‚¨ãƒ©ãƒ¼ã¨ãªã‚‹ã®ã§ã€å¿…ãšè¨­å®šã™ã‚‹
+                if(!String.IsNullOrEmpty(i_UserAgent)){
+                    req.UserAgent = i_UserAgent;
+                }
+                else{
+                    Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                    req.UserAgent = "WikipediaTranslationSupportTool/" + ver.Major + "." + String.Format("{0:D2}",ver.Minor);
+                }
+                // Refererè¨­å®š
+                if(!String.IsNullOrEmpty(i_Referer)){
+                    req.Referer = i_Referer;
+                }
+                HttpWebResponse res = (HttpWebResponse) req.GetResponse();
+                _GetArticleStatus = res.StatusCode;
 
-		        // ‰“šƒf[ƒ^‚ğóM‚·‚é‚½‚ß‚ÌStream‚ğæ“¾‚µAƒf[ƒ^‚ğæ“¾
-		        // ¦æ“¾‚µ‚½XML‚ª³í‚©‚ÍA‚±‚±‚Å‚ÍŠm”F‚µ‚È‚¢
-		        _Xml = new XmlDocument();
-		        _Xml.Load(res.GetResponseStream());
-		        res.Close();
+                // å¿œç­”ãƒ‡ãƒ¼ã‚¿ã‚’å—ä¿¡ã™ã‚‹ãŸã‚ã®Streamã‚’å–å¾—ã—ã€ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
+                // â€»å–å¾—ã—ãŸXMLãŒæ­£å¸¸ã‹ã¯ã€ã“ã“ã§ã¯ç¢ºèªã—ãªã„
+                _Xml = new XmlDocument();
+                _Xml.Load(res.GetResponseStream());
+                res.Close();
 
-		        // æ“¾‚µ‚½XML‚ğˆêƒtƒHƒ‹ƒ_‚É•Û‘¶
-		        try{
-			        // ˆêƒtƒHƒ‹ƒ_‚ğŠm”F
-			        String tmpDir = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath));
-			        if(Directory.Exists(tmpDir) == false){
-				        // ˆêƒtƒHƒ‹ƒ_‚ğì¬
-				        Directory.CreateDirectory(tmpDir);
-			        }
-			        // ƒtƒ@ƒCƒ‹‚Ì•Û‘¶
-			        Xml.Save(Path.Combine(tmpDir, Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml"));
-		        }
-		        catch(Exception e){
-			        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getServerArticle > ˆêƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚É¸”s‚µ‚Ü‚µ‚½ : " + e.Message);
-		        }
-	        }
-	        catch(WebException e){
-		        // ProtocolErrorƒGƒ‰[‚Ìê‡AƒXƒe[ƒ^ƒXƒR[ƒh‚ğ•Û
-		        _Xml = null;
-		        if(e.Status == WebExceptionStatus.ProtocolError){
-			        _GetArticleStatus = ((HttpWebResponse) e.Response).StatusCode;
-		        }
-		        _GetArticleException = e;
-		        return false;
-	        }
-	        catch(Exception e){
-		        _Xml = null;
-		        _GetArticleException = e;
-		        return false;
-	        }
-	        return true;
+                // å–å¾—ã—ãŸXMLã‚’ä¸€æ™‚ãƒ•ã‚©ãƒ«ãƒ€ã«ä¿å­˜
+                try{
+                    // ä¸€æ™‚ãƒ•ã‚©ãƒ«ãƒ€ã‚’ç¢ºèª
+                    String tmpDir = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath));
+                    if(Directory.Exists(tmpDir) == false){
+                        // ä¸€æ™‚ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆ
+                        Directory.CreateDirectory(tmpDir);
+                    }
+                    // ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜
+                    Xml.Save(Path.Combine(tmpDir, Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml"));
+                }
+                catch(Exception e){
+                    System.Diagnostics.Debug.WriteLine("WikipediaArticle.getServerArticle > ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ã«å¤±æ•—ã—ã¾ã—ãŸ : " + e.Message);
+                }
+            }
+            catch(WebException e){
+                // ProtocolErrorã‚¨ãƒ©ãƒ¼ã®å ´åˆã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã‚’ä¿æŒ
+                _Xml = null;
+                if(e.Status == WebExceptionStatus.ProtocolError){
+                    _GetArticleStatus = ((HttpWebResponse) e.Response).StatusCode;
+                }
+                _GetArticleException = e;
+                return false;
+            }
+            catch(Exception e){
+                _Xml = null;
+                _GetArticleException = e;
+                return false;
+            }
+            return true;
         }
 
-        /* ‹L–‚ÌXML‚ğƒLƒƒƒbƒVƒ…‚æ‚èæ“¾ */
+        /* è¨˜äº‹ã®XMLã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚ˆã‚Šå–å¾— */
         protected bool getCacheArticle(TimeSpan i_CacheEnabledSpan)
         {
-	        // ‰Šú‰»‚Æ’lƒ`ƒFƒbƒN
-	        _Xml = null;
-	        _GetArticleStatus = HttpStatusCode.PaymentRequired;
-	        _GetArticleException = null;
-	        // ƒLƒƒƒbƒVƒ…‚ğg—p‚·‚éê‡‚Ì‚İ
-	        if(i_CacheEnabledSpan > new TimeSpan(0)){
-		        // ‹L–‚ÌXMLƒf[ƒ^‚ğƒLƒƒƒbƒVƒ…ƒtƒ@ƒCƒ‹‚©‚çæ“¾
-		        try{
-			        // ˆêƒtƒ@ƒCƒ‹‚ÉƒAƒNƒZƒX
-			        String tmpFile = Path.Combine(Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath)), Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
-			        if(File.Exists(tmpFile) == true){
-				        // ƒtƒ@ƒCƒ‹‚ª—LŒøŠúŒÀ“à‚Ì‚à‚Ì‚©‚ğŠm”F
-				        if((DateTime.UtcNow - File.GetLastWriteTimeUtc(tmpFile)) < i_CacheEnabledSpan){
-					        // ƒtƒ@ƒCƒ‹‚ğStream‚ÅŠJ‚«Aƒf[ƒ^‚ğæ“¾
-					        XmlDocument tmpXml = new XmlDocument();
-					        FileStream fs = File.OpenRead(tmpFile);
-					        try{
-						        tmpXml.Load(fs);
-					        }
-					        finally{
-						        fs.Close();
-					        }
-					        // æ“¾‚µ‚½XMLƒtƒ@ƒCƒ‹‚ªA–Ú“I‚Æ‚·‚é‹L–‚Ì‚à‚Ì‚©‚ğŠm”F
-					        XmlNamespaceManager nsMgr = new XmlNamespaceManager(tmpXml.NameTable);
-					        nsMgr.AddNamespace("ns", XMLNS);
-					        XmlElement rootElement = tmpXml.DocumentElement;
-					        XmlElement pageElement = (XmlElement) tmpXml.SelectSingleNode("/ns:mediawiki/ns:page/ns:title", nsMgr);
-					        if(pageElement != null){
-						        // Œ¾ŒêƒR[ƒhE‹L––¼‚ğƒ`ƒFƒbƒNB‘å•¶šE¬•¶š‚ªˆÙ‚È‚éê‡A•Ê‚Ì‹L–‚Æ”»•Ê‚·‚é
-						        // ¦Low Earth orbit‚Ö‚ÌƒŠƒ_ƒCƒŒƒNƒg‚ÅLow earth orbit‚İ‚½‚¢‚È‚Ì‚ª‚ ‚é‚½‚ß
-						        //   ‚½‚¾‚µæ“ª‚ÍWikipedia‚Ì‹Zp“I§ŒÀ‚Åí‚É‘å•¶š‚È‚½‚ßA‘å•¶š‚Åˆ—‚·‚é
-						        String title = char.ToUpper(Title[0]).ToString();
-						        if(Title.Length > 1){
-							        title += Title.Substring(1);
-						        }
-						        if(rootElement.GetAttribute("xml:lang") == Server.Code &&
-						           pageElement.InnerText == title){
-							        // XML‚ğƒƒ“ƒo•Ï”‚Éİ’è‚µA³íI—¹
-							        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getCacheArticle > ƒLƒƒƒbƒVƒ…“Ç‚İ : " + Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
-							        _Xml = tmpXml;
-							        return true;
-						        }
-					        }
-				        }
-			        }
-		        }
-		        catch(Exception e){
-			        _Xml = null;
-			        _GetArticleException = e;
-			        return false;
-		        }
-	        }
-	        _GetArticleStatus = HttpStatusCode.NotFound;
-	        return false;
+            // åˆæœŸåŒ–ã¨å€¤ãƒã‚§ãƒƒã‚¯
+            _Xml = null;
+            _GetArticleStatus = HttpStatusCode.PaymentRequired;
+            _GetArticleException = null;
+            // ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã®ã¿
+            if(i_CacheEnabledSpan > new TimeSpan(0)){
+                // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰å–å¾—
+                try{
+                    // ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«ã«ã‚¢ã‚¯ã‚»ã‚¹
+                    String tmpFile = Path.Combine(Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath)), Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
+                    if(File.Exists(tmpFile) == true){
+                        // ãƒ•ã‚¡ã‚¤ãƒ«ãŒæœ‰åŠ¹æœŸé™å†…ã®ã‚‚ã®ã‹ã‚’ç¢ºèª
+                        if((DateTime.UtcNow - File.GetLastWriteTimeUtc(tmpFile)) < i_CacheEnabledSpan){
+                            // ãƒ•ã‚¡ã‚¤ãƒ«ã‚’Streamã§é–‹ãã€ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
+                            XmlDocument tmpXml = new XmlDocument();
+                            FileStream fs = File.OpenRead(tmpFile);
+                            try{
+                                tmpXml.Load(fs);
+                            }
+                            finally{
+                                fs.Close();
+                            }
+                            // å–å¾—ã—ãŸXMLãƒ•ã‚¡ã‚¤ãƒ«ãŒã€ç›®çš„ã¨ã™ã‚‹è¨˜äº‹ã®ã‚‚ã®ã‹ã‚’ç¢ºèª
+                            XmlNamespaceManager nsMgr = new XmlNamespaceManager(tmpXml.NameTable);
+                            nsMgr.AddNamespace("ns", XMLNS);
+                            XmlElement rootElement = tmpXml.DocumentElement;
+                            XmlElement pageElement = (XmlElement) tmpXml.SelectSingleNode("/ns:mediawiki/ns:page/ns:title", nsMgr);
+                            if(pageElement != null){
+                                // è¨€èªã‚³ãƒ¼ãƒ‰ãƒ»è¨˜äº‹åã‚’ãƒã‚§ãƒƒã‚¯ã€‚å¤§æ–‡å­—ãƒ»å°æ–‡å­—ãŒç•°ãªã‚‹å ´åˆã€åˆ¥ã®è¨˜äº‹ã¨åˆ¤åˆ¥ã™ã‚‹
+                                // â€»Low Earth orbitã¸ã®ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã§Low earth orbitã¿ãŸã„ãªã®ãŒã‚ã‚‹ãŸã‚
+                                //   ãŸã ã—å…ˆé ­ã¯Wikipediaã®æŠ€è¡“çš„åˆ¶é™ã§å¸¸ã«å¤§æ–‡å­—ãªãŸã‚ã€å¤§æ–‡å­—ã§å‡¦ç†ã™ã‚‹
+                                String title = char.ToUpper(Title[0]).ToString();
+                                if(Title.Length > 1){
+                                    title += Title.Substring(1);
+                                }
+                                if(rootElement.GetAttribute("xml:lang") == Server.Code &&
+                                   pageElement.InnerText == title){
+                                    // XMLã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«è¨­å®šã—ã€æ­£å¸¸çµ‚äº†
+                                    System.Diagnostics.Debug.WriteLine("WikipediaArticle.getCacheArticle > ã‚­ãƒ£ãƒƒã‚·ãƒ¥èª­è¾¼ã¿ : " + Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml");
+                                    _Xml = tmpXml;
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch(Exception e){
+                    _Xml = null;
+                    _GetArticleException = e;
+                    return false;
+                }
+            }
+            _GetArticleStatus = HttpStatusCode.NotFound;
+            return false;
         }
 
-        /* w’è‚³‚ê‚½Œ¾ŒêƒR[ƒh‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚ğ•Ô‚· */
+        /* æŒ‡å®šã•ã‚ŒãŸè¨€èªã‚³ãƒ¼ãƒ‰ã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’è¿”ã™ */
         public virtual String GetInterWiki(String i_Code)
         {
-	        // ‰Šú‰»‚Æ’lƒ`ƒFƒbƒN
-	        String interWiki = "";
-	        if(Text == ""){
-		        // GetArticle‚ğs‚Á‚Ä‚¢‚È‚¢ê‡AInvalidOperationException‚ğ•Ô‚·
-		        throw new InvalidOperationException();
-	        }
-	        // ‹L–‚É‘¶İ‚·‚éw’èŒ¾Œê‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚ğæ“¾
-	        for(int i = 0 ; i < Text.Length ; i++){
-		        // ƒRƒƒ“ƒgi<!--j‚Ìƒ`ƒFƒbƒN
-		        String comment = "";
-		        int index = chkComment(ref comment, i);
-		        if(index != -1){
-			        i = index;
-		        }
-		        // w’èŒ¾Œê‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚Ìê‡A“à—e‚ğæ“¾‚µAˆ—I—¹
-		        else if(Honememo.Cmn.ChkTextInnerWith(Text, i, "[[" + i_Code + ":") == true){
-			        Link link = ParseInnerLink(Text.Substring(i));
-			        if(!String.IsNullOrEmpty(link.Text)){
-				        interWiki = link.Article;
-				        break;
-			        }
-		        }
-	        }
-	        return interWiki;
+            // åˆæœŸåŒ–ã¨å€¤ãƒã‚§ãƒƒã‚¯
+            String interWiki = "";
+            if(Text == ""){
+                // GetArticleã‚’è¡Œã£ã¦ã„ãªã„å ´åˆã€InvalidOperationExceptionã‚’è¿”ã™
+                throw new InvalidOperationException();
+            }
+            // è¨˜äº‹ã«å­˜åœ¨ã™ã‚‹æŒ‡å®šè¨€èªã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’å–å¾—
+            for(int i = 0 ; i < Text.Length ; i++){
+                // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ã®ãƒã‚§ãƒƒã‚¯
+                String comment = "";
+                int index = chkComment(ref comment, i);
+                if(index != -1){
+                    i = index;
+                }
+                // æŒ‡å®šè¨€èªã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã®å ´åˆã€å†…å®¹ã‚’å–å¾—ã—ã€å‡¦ç†çµ‚äº†
+                else if(Honememo.Cmn.ChkTextInnerWith(Text, i, "[[" + i_Code + ":") == true){
+                    Link link = ParseInnerLink(Text.Substring(i));
+                    if(!String.IsNullOrEmpty(link.Text)){
+                        interWiki = link.Article;
+                        break;
+                    }
+                }
+            }
+            return interWiki;
         }
 
-        /* ‹L–‚ÌXML‚©‚ç–¼‘O‹óŠÔî•ñ‚ğæ“¾ */
+        /* è¨˜äº‹ã®XMLã‹ã‚‰åå‰ç©ºé–“æƒ…å ±ã‚’å–å¾— */
         public virtual WikipediaInformation.Namespace[] GetNamespaces()
         {
-	        // XML‚©‚ç–¼‘O‹óŠÔî•ñ‚ğæ“¾
-	        WikipediaInformation.Namespace[] namespaces = new WikipediaInformation.Namespace[0];
-	        if(Xml == null){
-		        // GetArticle‚ğs‚Á‚Ä‚¢‚È‚¢ê‡AInvalidOperationException‚ğ•Ô‚·
-		        throw new InvalidOperationException();
-	        }
-	        XmlNamespaceManager nsMgr = new XmlNamespaceManager(Xml.NameTable);
-	        nsMgr.AddNamespace("ns", XMLNS);
-	        XmlNodeList nodeList = Xml.SelectNodes("/ns:mediawiki/ns:siteinfo/ns:namespaces/ns:namespace", nsMgr);
-	        foreach(XmlNode node in nodeList){
-		        XmlElement e = (XmlElement) node;
-		        if(e != null){
-			        try{
-				        WikipediaInformation.Namespace ns = new WikipediaInformation.Namespace();
+            // XMLã‹ã‚‰åå‰ç©ºé–“æƒ…å ±ã‚’å–å¾—
+            WikipediaInformation.Namespace[] namespaces = new WikipediaInformation.Namespace[0];
+            if(Xml == null){
+                // GetArticleã‚’è¡Œã£ã¦ã„ãªã„å ´åˆã€InvalidOperationExceptionã‚’è¿”ã™
+                throw new InvalidOperationException();
+            }
+            XmlNamespaceManager nsMgr = new XmlNamespaceManager(Xml.NameTable);
+            nsMgr.AddNamespace("ns", XMLNS);
+            XmlNodeList nodeList = Xml.SelectNodes("/ns:mediawiki/ns:siteinfo/ns:namespaces/ns:namespace", nsMgr);
+            foreach(XmlNode node in nodeList){
+                XmlElement e = (XmlElement) node;
+                if(e != null){
+                    try{
+                        WikipediaInformation.Namespace ns = new WikipediaInformation.Namespace();
                         ns.Key = Decimal.ToInt16(Decimal.Parse(e.GetAttribute("key")));
                         ns.Name = e.InnerText;
-				        Honememo.Cmn.AddArray(ref namespaces, ns);
-			        }
-                    catch (Exception ex) {
-                        System.Diagnostics.Debug.WriteLine("WikipediaArticle.GetNamespaces > —áŠO”­¶ : " + ex);
+                        Honememo.Cmn.AddArray(ref namespaces, ns);
                     }
-		        }
-	        }
-	        return namespaces;
+                    catch (Exception ex) {
+                        System.Diagnostics.Debug.WriteLine("WikipediaArticle.GetNamespaces > ä¾‹å¤–ç™ºç”Ÿ : " + ex);
+                    }
+                }
+            }
+            return namespaces;
         }
 
-        /* ‹L–‚ªƒŠƒ_ƒCƒŒƒNƒg‚©‚ğƒ`ƒFƒbƒN */
+        /* è¨˜äº‹ãŒãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã‹ã‚’ãƒã‚§ãƒƒã‚¯ */
         public virtual bool IsRedirect()
         {
-	        // ’lƒ`ƒFƒbƒN
-	        if(Text == ""){
-		        // GetArticle‚ğs‚Á‚Ä‚¢‚È‚¢ê‡AInvalidOperationException‚ğ•Ô‚·
-		        throw new InvalidOperationException();
-	        }
-	        // w’è‚³‚ê‚½‹L–‚ªƒŠƒ_ƒCƒŒƒNƒg‹L–i#REDIRECT“™j‚©‚ğƒ`ƒFƒbƒN
-	        // ¦“ú–{Œê”Å‚İ‚½‚¢‚ÉA#REDIRECT‚ÆŒ¾ŒêŒÅ—L‚Ì#“]‘—‚İ‚½‚¢‚È‚Ì‚ª‚ ‚é‚Æv‚í‚ê‚é‚Ì‚ÅA
-	        //   –|–óŒ³Œ¾Œê‚Æ‰pŒê”Å‚Ìİ’è‚Åƒ`ƒFƒbƒN
-	        for(int i = 0 ; i < 2 ; i++){
-		        String redirect = (String) Server.Redirect.Clone();
-		        if(i == 1){
-			        if(Server.Code == "en"){
-				        continue;
-			        }
+            // å€¤ãƒã‚§ãƒƒã‚¯
+            if(Text == ""){
+                // GetArticleã‚’è¡Œã£ã¦ã„ãªã„å ´åˆã€InvalidOperationExceptionã‚’è¿”ã™
+                throw new InvalidOperationException();
+            }
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹ãŒãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆè¨˜äº‹ï¼ˆ#REDIRECTç­‰ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
+            // â€»æ—¥æœ¬èªç‰ˆã¿ãŸã„ã«ã€#REDIRECTã¨è¨€èªå›ºæœ‰ã®#è»¢é€ã¿ãŸã„ãªã®ãŒã‚ã‚‹ã¨æ€ã‚ã‚Œã‚‹ã®ã§ã€
+            //   ç¿»è¨³å…ƒè¨€èªã¨è‹±èªç‰ˆã®è¨­å®šã§ãƒã‚§ãƒƒã‚¯
+            for(int i = 0 ; i < 2 ; i++){
+                String redirect = (String) Server.Redirect.Clone();
+                if(i == 1){
+                    if(Server.Code == "en"){
+                        continue;
+                    }
                     WikipediaInformation en = new WikipediaInformation("en");
-			        redirect = en.Redirect;
-		        }
-		        if(redirect != ""){
-			        if(Text.ToLower().StartsWith(redirect.ToLower())){
-				        Link link = ParseInnerLink(Text.Substring(redirect.Length).TrimStart());
-				        if(!String.IsNullOrEmpty(link.Text)){
-					        _Redirect = link.Article;
-					        return true;
-				        }
-			        }
-		        }
-	        }
-	        return false;
+                    redirect = en.Redirect;
+                }
+                if(redirect != ""){
+                    if(Text.ToLower().StartsWith(redirect.ToLower())){
+                        Link link = ParseInnerLink(Text.Substring(redirect.Length).TrimStart());
+                        if(!String.IsNullOrEmpty(link.Text)){
+                            _Redirect = link.Article;
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
-        /* ‹L–‚ªƒJƒeƒSƒŠ[‚©‚ğƒ`ƒFƒbƒN */
+        /* è¨˜äº‹ãŒã‚«ãƒ†ã‚´ãƒªãƒ¼ã‹ã‚’ãƒã‚§ãƒƒã‚¯ */
         public virtual bool IsCategory()
         {
-	        return IsCategory(Title);
+            return IsCategory(Title);
         }
 
-        /* ‹L–‚ª‰æ‘œ‚©‚ğƒ`ƒFƒbƒN */
+        /* è¨˜äº‹ãŒç”»åƒã‹ã‚’ãƒã‚§ãƒƒã‚¯ */
         public virtual bool IsImage()
         {
-	        return IsImage(Title);
+            return IsImage(Title);
         }
 
-        /* ‹L–‚ª•W€–¼‘O‹óŠÔˆÈŠO‚©‚ğƒ`ƒFƒbƒN */
+        /* è¨˜äº‹ãŒæ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã‹ã‚’ãƒã‚§ãƒƒã‚¯ */
         public bool IsNotMainNamespace()
         {
-	        return IsNotMainNamespace(Title);
+            return IsNotMainNamespace(Title);
         }
 
-        /* “n‚³‚ê‚½“à•”ƒŠƒ“ƒNEƒeƒ“ƒvƒŒ[ƒg‚ğ‰ğÍ */
+        /* æ¸¡ã•ã‚ŒãŸå†…éƒ¨ãƒªãƒ³ã‚¯ãƒ»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’è§£æ */
         protected virtual int chkLinkText(ref WikipediaFormat.Link o_Link, int i_Index)
         {
-	        return ChkLinkText(ref o_Link, Text, i_Index);
+            return ChkLinkText(ref o_Link, Text, i_Index);
         }
 
-        /* ‹L––{•¶‚Ìw’è‚³‚ê‚½ˆÊ’u‚É‘¶İ‚·‚é“à•”ƒŠƒ“ƒNEƒeƒ“ƒvƒŒ[ƒg‚ğ‰ğÍ */
+        /* è¨˜äº‹æœ¬æ–‡ã®æŒ‡å®šã•ã‚ŒãŸä½ç½®ã«å­˜åœ¨ã™ã‚‹å†…éƒ¨ãƒªãƒ³ã‚¯ãƒ»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’è§£æ */
         protected virtual int chkComment(ref String o_Text, int i_Index)
         {
-	        return ChkComment(ref o_Text, Text, i_Index);
+            return ChkComment(ref o_Text, Text, i_Index);
         }
 
-		// ‹L––¼
-		public String Title {
-			get {
-				return _Title;
-			}
-		}
-		// ‹L–‚ÌXMLƒf[ƒ^‚ÌURLipropertyj
-		public Uri Url {
-			get {
-				return _Url;
-			}
-		}
-		// ‹L–‚ÌXMLƒf[ƒ^
-		public XmlDocument Xml {
-			get {
-				return _Xml;
-			}
-		}
-		// ‹L–‚ÌÅIXV“úiUTCj
-		public DateTime Timestamp {
-			get {
-				return _Timestamp;
-			}
-		}
-		// ‹L––{•¶
-		public String Text {
-			get {
-				return _Text;
-			}
-		}
-		// ƒŠƒ_ƒCƒŒƒNƒgæ‹L––¼
-		public String Redirect {
-			get {
-				return _Redirect;
-			}
-		}
-		// GetArticleÀs‚ÌHttpStatus
-		public HttpStatusCode GetArticleStatus {
-			get {
-				return _GetArticleStatus;
-			}
-		}
-		// GetArticle—áŠO”­¶‚Ì—áŠOî•ñ
-		// ¦GetArticle()‚ªfalse‚ÅAGetArticleStatus‚ªNotFoundˆÈŠO‚Ì‚Æ‚«Aİ’è‚³‚ê‚é
-		public Exception GetArticleException {
-			get {
-				return _GetArticleException;
-			}
-		}
+        // è¨˜äº‹å
+        public String Title {
+            get {
+                return _Title;
+            }
+        }
+        // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ã®URLï¼ˆpropertyï¼‰
+        public Uri Url {
+            get {
+                return _Url;
+            }
+        }
+        // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿
+        public XmlDocument Xml {
+            get {
+                return _Xml;
+            }
+        }
+        // è¨˜äº‹ã®æœ€çµ‚æ›´æ–°æ—¥æ™‚ï¼ˆUTCï¼‰
+        public DateTime Timestamp {
+            get {
+                return _Timestamp;
+            }
+        }
+        // è¨˜äº‹æœ¬æ–‡
+        public String Text {
+            get {
+                return _Text;
+            }
+        }
+        // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå…ˆè¨˜äº‹å
+        public String Redirect {
+            get {
+                return _Redirect;
+            }
+        }
+        // GetArticleå®Ÿè¡Œæ™‚ã®HttpStatus
+        public HttpStatusCode GetArticleStatus {
+            get {
+                return _GetArticleStatus;
+            }
+        }
+        // GetArticleä¾‹å¤–ç™ºç”Ÿæ™‚ã®ä¾‹å¤–æƒ…å ±
+        // â€»GetArticle()ãŒfalseã§ã€GetArticleStatusãŒNotFoundä»¥å¤–ã®ã¨ãã€è¨­å®šã•ã‚Œã‚‹
+        public Exception GetArticleException {
+            get {
+                return _GetArticleException;
+            }
+        }
 
-		// Wikipedia‚ÌXML‚ÌŒÅ’è’l‚Ì‘®
-		public static readonly String XMLNS = "http://www.mediawiki.org/xml/export-0.4/";
+        // Wikipediaã®XMLã®å›ºå®šå€¤ã®æ›¸å¼
+        public static readonly String XMLNS = "http://www.mediawiki.org/xml/export-0.4/";
 
-		// ‹L––¼ipropertyj
-		protected String _Title;
-		// ‹L–‚ÌXMLƒf[ƒ^‚ÌURLipropertyj
-		protected Uri _Url;
-		// ‹L–‚ÌXMLƒf[ƒ^ipropertyj
-		protected XmlDocument _Xml;
-		// ‹L–‚ÌÅIXV“úiUTCjipropertyj
-		protected DateTime _Timestamp;
-		// ‹L––{•¶ipropertyj
-		protected String _Text;
-		// ƒŠƒ_ƒCƒŒƒNƒgæ‹L––¼ipropertyj
-		protected String _Redirect;
-		// GetArticleÀs‚ÌHttpStatusipropertyj
-		protected HttpStatusCode _GetArticleStatus;
-		// GetArticle—áŠO”­¶‚Ì—áŠOî•ñipropertyj
-		protected Exception _GetArticleException;
+        // è¨˜äº‹åï¼ˆpropertyï¼‰
+        protected String _Title;
+        // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ã®URLï¼ˆpropertyï¼‰
+        protected Uri _Url;
+        // è¨˜äº‹ã®XMLãƒ‡ãƒ¼ã‚¿ï¼ˆpropertyï¼‰
+        protected XmlDocument _Xml;
+        // è¨˜äº‹ã®æœ€çµ‚æ›´æ–°æ—¥æ™‚ï¼ˆUTCï¼‰ï¼ˆpropertyï¼‰
+        protected DateTime _Timestamp;
+        // è¨˜äº‹æœ¬æ–‡ï¼ˆpropertyï¼‰
+        protected String _Text;
+        // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå…ˆè¨˜äº‹åï¼ˆpropertyï¼‰
+        protected String _Redirect;
+        // GetArticleå®Ÿè¡Œæ™‚ã®HttpStatusï¼ˆpropertyï¼‰
+        protected HttpStatusCode _GetArticleStatus;
+        // GetArticleä¾‹å¤–ç™ºç”Ÿæ™‚ã®ä¾‹å¤–æƒ…å ±ï¼ˆpropertyï¼‰
+        protected Exception _GetArticleException;
     }
 }

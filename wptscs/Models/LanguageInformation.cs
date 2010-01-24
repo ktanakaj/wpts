@@ -3,92 +3,92 @@ using System.Xml.Serialization;
 
 namespace Honememo.Wptscs.Models
 {
-    // Œ¾Œê‚ÉŠÖ‚·‚éî•ñ‚ğŠi”[‚·‚éƒNƒ‰ƒX
+    // è¨€èªã«é–¢ã™ã‚‹æƒ…å ±ã‚’æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹
     public class LanguageInformation : IComparable
     {
-        // ‚ ‚éŒ¾Œê‚ÌAŠeŒ¾Œê‚Å‚Ì–¼ÌE—ªÌ‚ğŠi”[‚·‚é‚½‚ß‚Ì\‘¢‘Ì
+        // ã‚ã‚‹è¨€èªã®ã€å„è¨€èªã§ã®åç§°ãƒ»ç•¥ç§°ã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®æ§‹é€ ä½“
         public struct LanguageName : IComparable
         {
-			// Œ¾ŒêƒR[ƒh
-			[XmlAttributeAttribute("Code")]
-			public String Code {
-				get {
+            // è¨€èªã‚³ãƒ¼ãƒ‰
+            [XmlAttributeAttribute("Code")]
+            public String Code {
+                get {
                     return _Code;
-				}
-				set {
-					// ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
-					if(((value != null) ? value.Trim() : "") == ""){
-						throw new ArgumentNullException("value");
-					}
-					_Code = value.Trim().ToLower();
-				}
-			}
-			public String Name;			// ‚»‚ÌŒ¾Œê‚Ì–¼ÌiWikipedia‚Ìê‡A‹L––¼j
-			public String ShortName;		// ‚»‚ÌŒ¾Œê‚Ì—ªÌ
+                }
+                set {
+                    // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
+                    if(((value != null) ? value.Trim() : "") == ""){
+                        throw new ArgumentNullException("value");
+                    }
+                    _Code = value.Trim().ToLower();
+                }
+            }
+            public String Name;         // ãã®è¨€èªã®åç§°ï¼ˆWikipediaã®å ´åˆã€è¨˜äº‹åï¼‰
+            public String ShortName;    // ãã®è¨€èªã®ç•¥ç§°
 
-			// ”z—ñ‚Ìƒ\[ƒg—pƒƒ\ƒbƒh
+            // é…åˆ—ã®ã‚½ãƒ¼ãƒˆç”¨ãƒ¡ã‚½ãƒƒãƒ‰
             public int CompareTo(Object obj)
             {
-				// Œ¾ŒêƒR[ƒh‚Åƒ\[ƒg
+                // è¨€èªã‚³ãƒ¼ãƒ‰ã§ã‚½ãƒ¼ãƒˆ
                 LanguageName name = (LanguageName)obj;
-				return this.Code.CompareTo(name.Code);
-			}
-			// Œ¾ŒêƒR[ƒhipropertyj
-			private String _Code;
-		};
+                return this.Code.CompareTo(name.Code);
+            }
+            // è¨€èªã‚³ãƒ¼ãƒ‰ï¼ˆpropertyï¼‰
+            private String _Code;
+        };
 
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒVƒŠƒAƒ‰ƒCƒY—pj
+        // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ï¼‰
         public LanguageInformation() : this("unknown")
         {
-//			System.Diagnostics.Debug.WriteLine("LanguageInformation.LanguageInformation > „§‚³‚ê‚È‚¢ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğg—p‚µ‚Ä‚¢‚Ü‚·");
-			// “K“–‚È’l‚Å’Êí‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğÀs
-		}
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’Êíj
-		public LanguageInformation(String i_Code){
-			// ƒƒ“ƒo•Ï”‚Ì—ÌˆæŠm•Û‚Æ‰Šúİ’è
-			Code = i_Code;
-			Names = new LanguageName[1];
-			Names[0].Code = i_Code;
-			Names[0].Name = "";
-			Names[0].ShortName = "";
-		}
+            //System.Diagnostics.Debug.WriteLine("LanguageInformation.LanguageInformation > æ¨å¥¨ã•ã‚Œãªã„ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™");
+            // é©å½“ãªå€¤ã§é€šå¸¸ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’å®Ÿè¡Œ
+        }
+        // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆé€šå¸¸ï¼‰
+        public LanguageInformation(String i_Code){
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®é ˜åŸŸç¢ºä¿ã¨åˆæœŸè¨­å®š
+            Code = i_Code;
+            Names = new LanguageName[1];
+            Names[0].Code = i_Code;
+            Names[0].Name = "";
+            Names[0].ShortName = "";
+        }
 
-		// ”z—ñ‚Ìƒ\[ƒg—pƒƒ\ƒbƒh
+        // é…åˆ—ã®ã‚½ãƒ¼ãƒˆç”¨ãƒ¡ã‚½ãƒƒãƒ‰
         public virtual int CompareTo(Object obj)
         {
-			// Œ¾ŒêƒR[ƒh‚Åƒ\[ƒg
+            // è¨€èªã‚³ãƒ¼ãƒ‰ã§ã‚½ãƒ¼ãƒˆ
             LanguageInformation lang = obj as LanguageInformation;
-			return this.Code.CompareTo(lang.Code);
-		}
+            return this.Code.CompareTo(lang.Code);
+        }
 
-		// w’è‚µ‚½Œ¾Œê‚Å‚Ì–¼Ì‚ğæ“¾
-		public String GetName(String i_Code){
-			foreach(LanguageName name in Names){
-				if(name.Code == i_Code){
-					return name.Name;
-				}
-			}
-			return "";
-		}
+        // æŒ‡å®šã—ãŸè¨€èªã§ã®åç§°ã‚’å–å¾—
+        public String GetName(String i_Code){
+            foreach(LanguageName name in Names){
+                if(name.Code == i_Code){
+                    return name.Name;
+                }
+            }
+            return "";
+        }
 
-		// Œ¾ŒêƒR[ƒh
-		[XmlAttributeAttribute("Code")]
-		public String Code {
-			get {
-				return _Code;
-			}
-			set {
-				// ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
-				if(((value != null) ? value.Trim() : "") == ""){
-					throw new ArgumentNullException("value");
-				}
-				_Code = value.Trim().ToLower();
-			}
-		}
-		// ‚±‚ÌŒ¾Œê‚ÌAŠeŒ¾Œê‚Å‚Ì–¼Ì
-		public LanguageName[] Names;
+        // è¨€èªã‚³ãƒ¼ãƒ‰
+        [XmlAttributeAttribute("Code")]
+        public String Code {
+            get {
+                return _Code;
+            }
+            set {
+                // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
+                if(((value != null) ? value.Trim() : "") == ""){
+                    throw new ArgumentNullException("value");
+                }
+                _Code = value.Trim().ToLower();
+            }
+        }
+        // ã“ã®è¨€èªã®ã€å„è¨€èªã§ã®åç§°
+        public LanguageName[] Names;
 
-		// Œ¾ŒêƒR[ƒhipropertyj
-		private String _Code;
+        // è¨€èªã‚³ãƒ¼ãƒ‰ï¼ˆpropertyï¼‰
+        private String _Code;
     }
 }

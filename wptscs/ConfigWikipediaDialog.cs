@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      Wikipedia–|–óx‰‡ƒc[ƒ‹İ’è‰æ–ÊƒNƒ‰ƒXƒ\[ƒX</summary>
+//      Wikipediaç¿»è¨³æ”¯æ´ãƒ„ãƒ¼ãƒ«è¨­å®šç”»é¢ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="ConfigWikipediaDialog.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="ConfigWikipediaDialog.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -22,61 +22,61 @@ namespace Honememo.Wptscs
     using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// Wikipedia–|–óx‰‡ƒc[ƒ‹İ’è‰æ–Ê‚ÌƒNƒ‰ƒX‚Å‚·B
+    /// Wikipediaç¿»è¨³æ”¯æ´ãƒ„ãƒ¼ãƒ«è¨­å®šç”»é¢ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public partial class ConfigWikipediaDialog : Form
     {
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// ‹¤’ÊŠÖ”ƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒgB
+        /// å…±é€šé–¢æ•°ã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚
         /// </summary>
         private Honememo.Cmn cmnAP;
 
         /// <summary>
-        /// Šeíİ’èB
+        /// å„ç¨®è¨­å®šã€‚
         /// </summary>
         private Config config;
 
         /// <summary>
-        /// comboBoxColumn‚Å‘I‘ğ‚µ‚Ä‚¢‚½ƒAƒCƒeƒ€‚ÌƒoƒbƒNƒAƒbƒvB
+        /// comboBoxColumnã§é¸æŠã—ã¦ã„ãŸã‚¢ã‚¤ãƒ†ãƒ ã®ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã€‚
         /// </summary>
         private string comboBoxCodeSelectedText;
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B‰Šú‰»ƒƒ\ƒbƒhŒÄ‚Ño‚µ‚Ì‚İB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚åˆæœŸåŒ–ãƒ¡ã‚½ãƒƒãƒ‰å‘¼ã³å‡ºã—ã®ã¿ã€‚
         /// </summary>
         public ConfigWikipediaDialog()
         {
-            // Windows ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å¶¬‚³‚ê‚½ƒR[ƒh
+            // Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰
             InitializeComponent();
         }
 
         #endregion
 
-        #region ŠeƒCƒxƒ“ƒg‚Ìƒƒ\ƒbƒh
+        #region å„ã‚¤ãƒ™ãƒ³ãƒˆã®ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// ƒtƒH[ƒ€ƒ[ƒh‚Ìˆ—B‰Šú‰»B
+        /// ãƒ•ã‚©ãƒ¼ãƒ ãƒ­ãƒ¼ãƒ‰æ™‚ã®å‡¦ç†ã€‚åˆæœŸåŒ–ã€‚
         /// </summary>
-        /// <param name="sender">ƒCƒxƒ“ƒg”­¶ƒIƒuƒWƒFƒNƒgB</param>
-        /// <param name="e">”­¶‚µ‚½ƒCƒxƒ“ƒgB</param>
+        /// <param name="sender">ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚</param>
+        /// <param name="e">ç™ºç”Ÿã—ãŸã‚¤ãƒ™ãƒ³ãƒˆã€‚</param>
         private void ConfigWikipediaDialog_Load(object sender, EventArgs e)
         {
-            // ‰Šú‰»ˆ—
+            // åˆæœŸåŒ–å‡¦ç†
             this.cmnAP = new Honememo.Cmn();
             this.config = new Config(Path.Combine(Application.StartupPath, Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".xml"));
 
-            // ƒf[ƒ^İ’è
+            // ãƒ‡ãƒ¼ã‚¿è¨­å®š
             comboBoxCodeSelectedText = "";
             comboBoxCode.Items.Clear();
             dataGridViewName.Rows.Clear();
             dataGridViewTitleKey.Columns.Clear();
-            // g—pŒ¾Œêæ“¾
+            // ä½¿ç”¨è¨€èªå–å¾—
             String showCode = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
             int x = 0;
             foreach (LanguageInformation lang in config.Languages)
@@ -84,7 +84,7 @@ namespace Honememo.Wptscs
                 WikipediaInformation svr = lang as WikipediaInformation;
                 if (svr != null)
                 {
-                    // •\ƒ^ƒCƒgƒ‹İ’è
+                    // è¡¨ã‚¿ã‚¤ãƒˆãƒ«è¨­å®š
                     String name = svr.GetName(showCode);
                     if (name != "")
                     {
@@ -95,7 +95,7 @@ namespace Honememo.Wptscs
                         name = svr.Code;
                     }
                     dataGridViewTitleKey.Columns.Add(svr.Code, name);
-                    // •\ƒf[ƒ^İ’è
+                    // è¡¨ãƒ‡ãƒ¼ã‚¿è¨­å®š
                     for (int y = 0; y < svr.TitleKeys.Length; y++)
                     {
                         if (dataGridViewTitleKey.RowCount - 1 <= y)
@@ -104,9 +104,9 @@ namespace Honememo.Wptscs
                         }
                         dataGridViewTitleKey[x, y].Value = svr.TitleKeys[y];
                     }
-                    // ƒRƒ“ƒ{ƒ{ƒbƒNƒXİ’è
+                    // ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹è¨­å®š
                     comboBoxCode.Items.Add(svr.Code);
-                    // Ÿ‚Ì—ñ‚Ö
+                    // æ¬¡ã®åˆ—ã¸
                     ++x;
                 }
             }
@@ -114,18 +114,18 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
-        /// Œ¾ŒêƒR[ƒhƒRƒ“ƒ{ƒ{ƒbƒNƒX•ÏX‚Ìˆ—B
+        /// è¨€èªã‚³ãƒ¼ãƒ‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹å¤‰æ›´æ™‚ã®å‡¦ç†ã€‚
         /// </summary>
-        /// <param name="sender">ƒCƒxƒ“ƒg”­¶ƒIƒuƒWƒFƒNƒgB</param>
-        /// <param name="e">”­¶‚µ‚½ƒCƒxƒ“ƒgB</param>
+        /// <param name="sender">ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚</param>
+        /// <param name="e">ç™ºç”Ÿã—ãŸã‚¤ãƒ™ãƒ³ãƒˆã€‚</param>
         private void comboBoxCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("ConfigLanguageDialog._SelectedIndexChanged > "
                 + comboBoxCodeSelectedText + " . "
                 + ((comboBoxCode.SelectedItem != null) ? (comboBoxCode.SelectedItem.ToString()) : ("")));
 
-            // •ÏX‘O‚Ìİ’è‚ğ•Û‘¶
-            // ¦•ÏX‘O‚É‚µ‚ë•ÏXŒã‚É‚µ‚ëA–‘O‚É’Ç‰Á‚µ‚Ä‚¢‚é‚Ì‚ÅGetLanguage‚ÅŒ©‚Â‚©‚ç‚È‚¢‚±‚Æ‚Í–³‚¢EEE‚Í‚¸
+            // å¤‰æ›´å‰ã®è¨­å®šã‚’ä¿å­˜
+            // â€»å¤‰æ›´å‰ã«ã—ã‚å¤‰æ›´å¾Œã«ã—ã‚ã€äº‹å‰ã«è¿½åŠ ã—ã¦ã„ã‚‹ã®ã§GetLanguageã§è¦‹ã¤ã‹ã‚‰ãªã„ã“ã¨ã¯ç„¡ã„ãƒ»ãƒ»ãƒ»ã¯ãš
             if (comboBoxCodeSelectedText != "")
             {
                 WikipediaInformation svr = config.GetLanguage(comboBoxCodeSelectedText) as WikipediaInformation;
@@ -133,12 +133,12 @@ namespace Honememo.Wptscs
                 {
                     svr.ArticleXmlPath = textBoxXml.Text.Trim();
                     svr.Redirect = textBoxRedirect.Text.Trim();
-                    // •\‚©‚çŒÄÌ‚Ìî•ñ‚à•Û‘¶
+                    // è¡¨ã‹ã‚‰å‘¼ç§°ã®æƒ…å ±ã‚‚ä¿å­˜
                     dataGridViewName.Sort(dataGridViewName.Columns["Code"], ListSortDirection.Ascending);
                     svr.Names = new LanguageInformation.LanguageName[0];
                     for (int y = 0; y < dataGridViewName.RowCount - 1; y++)
                     {
-                        // ’l‚ª“ü‚Á‚Ä‚È‚¢‚Æ‚©‚ÍƒK[ƒh‚µ‚Ä‚¢‚é‚Í‚¸‚¾‚ªAˆê‰ƒ`ƒFƒbƒN
+                        // å€¤ãŒå…¥ã£ã¦ãªã„ã¨ã‹ã¯ã‚¬ãƒ¼ãƒ‰ã—ã¦ã„ã‚‹ã¯ãšã ãŒã€ä¸€å¿œãƒã‚§ãƒƒã‚¯
                         String code = Honememo.Cmn.NullCheckAndTrim(dataGridViewName["Code", y]);
                         if (code != "")
                         {
@@ -151,16 +151,16 @@ namespace Honememo.Wptscs
                     }
                 }
             }
-            // •ÏXŒã‚Ì’l‚É‰‚¶‚ÄA‰æ–Ê•\¦‚ğXV
+            // å¤‰æ›´å¾Œã®å€¤ã«å¿œã˜ã¦ã€ç”»é¢è¡¨ç¤ºã‚’æ›´æ–°
             if (comboBoxCode.SelectedItem != null)
             {
-                // ’l‚ğİ’è
+                // å€¤ã‚’è¨­å®š
                 WikipediaInformation svr = config.GetLanguage(comboBoxCode.SelectedItem.ToString()) as WikipediaInformation;
                 if (svr != null)
                 {
                     textBoxXml.Text = svr.ArticleXmlPath;
                     textBoxRedirect.Text = svr.Redirect;
-                    // ŒÄÌ‚Ìî•ñ‚ğ•\‚Éİ’è
+                    // å‘¼ç§°ã®æƒ…å ±ã‚’è¡¨ã«è¨­å®š
                     dataGridViewName.Rows.Clear();
                     foreach (LanguageInformation.LanguageName name in svr.Names)
                     {
@@ -170,26 +170,26 @@ namespace Honememo.Wptscs
                         dataGridViewName["ShortName", index].Value = name.ShortName;
                     }
                 }
-                // Œ¾Œê‚ÌƒvƒƒpƒeƒB‚ğ—LŒø‚É
+                // è¨€èªã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’æœ‰åŠ¹ã«
                 groupBoxStyle.Enabled = true;
                 groupBoxName.Enabled = true;
-                // Œ»İ‚Ì‘I‘ğ’l‚ğXV
+                // ç¾åœ¨ã®é¸æŠå€¤ã‚’æ›´æ–°
                 comboBoxCodeSelectedText = comboBoxCode.SelectedItem.ToString();
             }
             else
             {
-                // Œ¾Œê‚ÌƒvƒƒpƒeƒB‚ğ–³Œø‚É
+                // è¨€èªã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ç„¡åŠ¹ã«
                 groupBoxStyle.Enabled = false;
                 groupBoxName.Enabled = false;
-                // Œ»İ‚Ì‘I‘ğ’l‚ğXV
+                // ç¾åœ¨ã®é¸æŠå€¤ã‚’æ›´æ–°
                 comboBoxCodeSelectedText = "";
             }
         }
 
-        /* Œ¾ŒêƒR[ƒhƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Å‚ÌƒL[“ü—Í */
+        /* è¨€èªã‚³ãƒ¼ãƒ‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã§ã®ã‚­ãƒ¼å…¥åŠ› */
         private void comboBoxCode_KeyDown(object sender, KeyEventArgs e)
         {
-            // ƒGƒ“ƒ^[ƒL[‚ª‰Ÿ‚³‚ê‚½ê‡AŒ»İ‚Ì’l‚ªˆê——‚É–³‚¯‚ê‚Î“o˜^‚·‚éiƒtƒH[ƒJƒX‚ğ¸‚Á‚½‚Æ‚«‚Ìˆ—j
+            // ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã€ç¾åœ¨ã®å€¤ãŒä¸€è¦§ã«ç„¡ã‘ã‚Œã°ç™»éŒ²ã™ã‚‹ï¼ˆãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’å¤±ã£ãŸã¨ãã®å‡¦ç†ï¼‰
             if (e.KeyCode == Keys.Enter)
             {
                 System.Diagnostics.Debug.WriteLine("ConfigLanguageDialog._KeyDown > " + comboBoxCode.Text);
@@ -197,51 +197,51 @@ namespace Honememo.Wptscs
             }
         }
 
-        /* Œ¾ŒêƒR[ƒhƒRƒ“ƒ{ƒ{ƒbƒNƒX‚©‚çƒtƒH[ƒJƒX‚ğ—£‚µ‚½‚Æ‚« */
+        /* è¨€èªã‚³ãƒ¼ãƒ‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã‹ã‚‰ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’é›¢ã—ãŸã¨ã */
         private void comboBoxCode_Leave(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("ConfigLanguageDialog._Leave > " + comboBoxCode.Text);
-            // Œ»İ‚Ì’l‚ªˆê——‚É–³‚¯‚ê‚Î“o˜^‚·‚é
+            // ç¾åœ¨ã®å€¤ãŒä¸€è¦§ã«ç„¡ã‘ã‚Œã°ç™»éŒ²ã™ã‚‹
             comboBoxCode.Text = comboBoxCode.Text.Trim().ToLower();
             if (comboBoxCode.Text != "")
             {
                 if (Honememo.Cmn.AddComboBoxNewItem(ref comboBoxCode) == true)
                 {
-                    // “o˜^‚µ‚½ê‡ƒƒ“ƒo•Ï”‚É‚à“o˜^
+                    // ç™»éŒ²ã—ãŸå ´åˆãƒ¡ãƒ³ãƒå¤‰æ•°ã«ã‚‚ç™»éŒ²
                     WikipediaInformation svr = config.GetLanguage(comboBoxCode.Text) as WikipediaInformation;
-                    // ‘¶İ‚µ‚È‚¢‚Í‚¸‚¾‚ªˆê‰‚ÍŠm”F‚µ‚Ä’Ç‰Á
+                    // å­˜åœ¨ã—ãªã„ã¯ãšã ãŒä¸€å¿œã¯ç¢ºèªã—ã¦è¿½åŠ 
                     if (svr == null)
                     {
                         svr = new WikipediaInformation(comboBoxCode.Text);
                         Honememo.Cmn.AddArray(ref config.Languages, (LanguageInformation)svr);
-                        // ’èŒ^‹å‚Ìİ’è•\‚É—ñ‚ğ’Ç‰Á
+                        // å®šå‹å¥ã®è¨­å®šè¡¨ã«åˆ—ã‚’è¿½åŠ 
                         dataGridViewTitleKey.Columns.Add(comboBoxCode.Text, comboBoxCode.Text);
                     }
-                    // “o˜^‚µ‚½’l‚ğ‘I‘ğó‘Ô‚É•ÏX
+                    // ç™»éŒ²ã—ãŸå€¤ã‚’é¸æŠçŠ¶æ…‹ã«å¤‰æ›´
                     comboBoxCode.SelectedItem = comboBoxCode.Text;
                 }
             }
             else
             {
-                // ‹ó‚É‚µ‚½‚Æ‚«A•ÏX‚ÅƒCƒxƒ“ƒg‚ª‹N‚±‚ç‚È‚¢‚æ‚¤‚È‚Ì‚ÅA‹­§“I‚ÉŒÄ‚Ô
+                // ç©ºã«ã—ãŸã¨ãã€å¤‰æ›´ã§ã‚¤ãƒ™ãƒ³ãƒˆãŒèµ·ã“ã‚‰ãªã„ã‚ˆã†ãªã®ã§ã€å¼·åˆ¶çš„ã«å‘¼ã¶
                 comboBoxCode_SelectedIndexChanged(sender, e);
             }
         }
 
-        /* Œ¾ŒêƒR[ƒhƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ÌƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[FŒ¾ŒêƒR[ƒh‚ğ•ÏX */
+        /* è¨€èªã‚³ãƒ¼ãƒ‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼šè¨€èªã‚³ãƒ¼ãƒ‰ã‚’å¤‰æ›´ */
         private void toolStripMenuItemModify_Click(object sender, EventArgs e)
         {
-            // ‘I‘ğ‚³‚ê‚Ä‚¢‚éŒ¾ŒêƒR[ƒh‚ÉŠÖ˜A‚·‚éî•ñ‚ğXV
+            // é¸æŠã•ã‚Œã¦ã„ã‚‹è¨€èªã‚³ãƒ¼ãƒ‰ã«é–¢é€£ã™ã‚‹æƒ…å ±ã‚’æ›´æ–°
             if (comboBoxCode.SelectedIndex != -1)
             {
                 String oldCode = comboBoxCode.SelectedItem.ToString();
-                // “ü—Í‰æ–Ê‚É‚Ä•ÏXŒã‚ÌŒ¾ŒêƒR[ƒh‚ğæ“¾
+                // å…¥åŠ›ç”»é¢ã«ã¦å¤‰æ›´å¾Œã®è¨€èªã‚³ãƒ¼ãƒ‰ã‚’å–å¾—
                 InputLanguageCodeDialog dialog = new InputLanguageCodeDialog();
                 dialog.LanguageCode = oldCode;
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     String newCode = dialog.LanguageCode;
-                    // ƒƒ“ƒo•Ï”‚ğXV
+                    // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’æ›´æ–°
                     LanguageInformation lang = config.GetLanguage(oldCode);
                     if (lang != null)
                     {
@@ -261,10 +261,10 @@ namespace Honememo.Wptscs
                             }
                         }
                     }
-                    // ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ğXV
+                    // ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã‚’æ›´æ–°
                     int index = comboBoxCode.Items.IndexOf(comboBoxCode.SelectedItem);
                     comboBoxCode.Items[index] = newCode;
-                    // ’èŒ^‹å‚Ìİ’è•\‚ğXV
+                    // å®šå‹å¥ã®è¨­å®šè¡¨ã‚’æ›´æ–°
                     String header = lang.GetName(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
                     if (header != "")
                     {
@@ -276,20 +276,20 @@ namespace Honememo.Wptscs
                     }
                     dataGridViewTitleKey.Columns[oldCode].HeaderText = header;
                     dataGridViewTitleKey.Columns[oldCode].Name = newCode;
-                    // ‰æ–Ê‚Ìó‘Ô‚ğXV
+                    // ç”»é¢ã®çŠ¶æ…‹ã‚’æ›´æ–°
                     comboBoxCode_SelectedIndexChanged(sender, e);
                 }
             }
         }
 
-        /* Œ¾ŒêƒR[ƒhƒRƒ“ƒ{ƒ{ƒbƒNƒX‚ÌƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[FŒ¾Œê‚ğíœ */
+        /* è¨€èªã‚³ãƒ¼ãƒ‰ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼šè¨€èªã‚’å‰Šé™¤ */
         private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
         {
-            // ‘I‘ğ‚³‚ê‚Ä‚¢‚éŒ¾ŒêƒR[ƒh‚ÉŠÖ˜A‚·‚éî•ñ‚ğíœ
+            // é¸æŠã•ã‚Œã¦ã„ã‚‹è¨€èªã‚³ãƒ¼ãƒ‰ã«é–¢é€£ã™ã‚‹æƒ…å ±ã‚’å‰Šé™¤
             if (comboBoxCode.SelectedIndex != -1)
             {
                 dataGridViewTitleKey.Columns.Remove(comboBoxCode.SelectedItem.ToString());
-                // ƒƒ“ƒo•Ï”‚©‚ç‚àíœ
+                // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‹ã‚‰ã‚‚å‰Šé™¤
                 LanguageInformation[] newLanguages = new LanguageInformation[0];
                 foreach (LanguageInformation lang in config.Languages)
                 {
@@ -303,22 +303,22 @@ namespace Honememo.Wptscs
                 config.Languages = newLanguages;
             }
             Honememo.Cmn.RemoveComboBoxItem(ref comboBoxCode);
-            // ‰æ–Ê‚Ìó‘Ô‚ğXV
+            // ç”»é¢ã®çŠ¶æ…‹ã‚’æ›´æ–°
             comboBoxCode_SelectedIndexChanged(sender, e);
         }
 
-        /* ŠeŒ¾Œê‚Å‚ÌŒÄÌ•\‚©‚çƒtƒH[ƒJƒX‚ğ—£‚µ‚½‚Æ‚« */
+        /* å„è¨€èªã§ã®å‘¼ç§°è¡¨ã‹ã‚‰ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’é›¢ã—ãŸã¨ã */
         private void dataGridViewName_Leave(object sender, EventArgs e)
         {
-            // ’lƒ`ƒFƒbƒN
+            // å€¤ãƒã‚§ãƒƒã‚¯
             String codeUnsetRows = "";
             String nameUnsetRows = "";
             String redundantCodeRows = "";
             for (int y = 0; y < dataGridViewName.RowCount - 1; y++)
             {
-                // Œ¾ŒêƒR[ƒh—ñ‚ÍA¬•¶š‚Ìƒf[ƒ^‚É•ÏŠ·
+                // è¨€èªã‚³ãƒ¼ãƒ‰åˆ—ã¯ã€å°æ–‡å­—ã®ãƒ‡ãƒ¼ã‚¿ã«å¤‰æ›
                 dataGridViewName["Code", y].Value = Honememo.Cmn.NullCheckAndTrim(dataGridViewName["Code", y]).ToLower();
-                // Œ¾ŒêƒR[ƒh‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢s‚ª‚ ‚é‚©H
+                // è¨€èªã‚³ãƒ¼ãƒ‰ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„è¡ŒãŒã‚ã‚‹ã‹ï¼Ÿ
                 if (dataGridViewName["Code", y].Value.ToString() == "")
                 {
                     if (codeUnsetRows != "")
@@ -329,7 +329,7 @@ namespace Honememo.Wptscs
                 }
                 else
                 {
-                    // Œ¾ŒêƒR[ƒh‚ªd•¡‚µ‚Ä‚¢‚È‚¢‚©H
+                    // è¨€èªã‚³ãƒ¼ãƒ‰ãŒé‡è¤‡ã—ã¦ã„ãªã„ã‹ï¼Ÿ
                     for (int i = 0; i < y; i++)
                     {
                         if (dataGridViewName["Code", i].Value.ToString() == dataGridViewName["Code", y].Value.ToString())
@@ -342,7 +342,7 @@ namespace Honememo.Wptscs
                             break;
                         }
                     }
-                    // ŒÄÌ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚É—ªÌ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢‚©H
+                    // å‘¼ç§°ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ã®ã«ç•¥ç§°ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ã‹ï¼Ÿ
                     if (Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ShortName", y]) != "" &&
                        Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ArticleName", y]) == "")
                     {
@@ -354,7 +354,7 @@ namespace Honememo.Wptscs
                     }
                 }
             }
-            // Œ‹‰Ê‚Ì•\¦
+            // çµæœã®è¡¨ç¤º
             String errorMessage = "";
             if (codeUnsetRows != "")
             {
@@ -383,14 +383,14 @@ namespace Honememo.Wptscs
             }
         }
 
-        /* OKƒ{ƒ^ƒ“‰Ÿ‰º */
+        /* OKãƒœã‚¿ãƒ³æŠ¼ä¸‹ */
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            // İ’è‚ğ•Û‘¶‚µA‰æ–Ê‚ğ•Â‚¶‚é
-            // •\¦—ñ‚ÌŒ»İˆ—’†ƒf[ƒ^‚ğŠm’è
+            // è¨­å®šã‚’ä¿å­˜ã—ã€ç”»é¢ã‚’é–‰ã˜ã‚‹
+            // è¡¨ç¤ºåˆ—ã®ç¾åœ¨å‡¦ç†ä¸­ãƒ‡ãƒ¼ã‚¿ã‚’ç¢ºå®š
             comboBoxCode_SelectedIndexChanged(sender, e);
-            // •\‚Ìó‘Ô‚ğƒƒ“ƒo•Ï”‚É•Û‘¶
-            // —Ìˆæ‚Ì‰Šú‰»
+            // è¡¨ã®çŠ¶æ…‹ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«ä¿å­˜
+            // é ˜åŸŸã®åˆæœŸåŒ–
             foreach (LanguageInformation lang in config.Languages)
             {
                 WikipediaInformation svr = lang as WikipediaInformation;
@@ -399,7 +399,7 @@ namespace Honememo.Wptscs
                     Array.Resize(ref svr.TitleKeys, dataGridViewTitleKey.RowCount - 1);
                 }
             }
-            // ƒf[ƒ^‚Ì•Û‘¶
+            // ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜
             for (int x = 0; x < dataGridViewTitleKey.ColumnCount; x++)
             {
                 WikipediaInformation svr = config.GetLanguage(dataGridViewTitleKey.Columns[x].Name) as WikipediaInformation;
@@ -418,18 +418,18 @@ namespace Honememo.Wptscs
                     }
                 }
             }
-            // ƒ\[ƒg
+            // ã‚½ãƒ¼ãƒˆ
             Array.Sort(config.Languages);
 
-            // İ’è‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶
+            // è¨­å®šã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜
             if (config.Save() == true)
             {
-                // ‰æ–Ê‚ğ•Â‚¶‚ÄAİ’èI—¹
+                // ç”»é¢ã‚’é–‰ã˜ã¦ã€è¨­å®šçµ‚äº†
                 this.Close();
             }
             else
             {
-                // ƒGƒ‰[ƒƒbƒZ[ƒW‚ğ•\¦A‰æ–Ê‚ÍŠJ‚¢‚½‚Ü‚Ü
+                // ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã€ç”»é¢ã¯é–‹ã„ãŸã¾ã¾
                 cmnAP.ErrorDialogResource("ErrorMessage_MissConfigSave");
             }
         }

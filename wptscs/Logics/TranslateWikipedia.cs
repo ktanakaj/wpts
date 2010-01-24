@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      Wikipedia—p‚Ì–|–óx‰‡ˆ—À‘•ƒNƒ‰ƒXƒ\[ƒX</summary>
+//      Wikipediaç”¨ã®ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè£…ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="TranslateWikipedia.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="TranslateWikipedia.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -18,17 +18,17 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// Wikipedia—p‚Ì–|–óx‰‡ˆ—À‘•ƒNƒ‰ƒX‚Å‚·B
+    /// Wikipediaç”¨ã®ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè£…ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public class TranslateWikipedia : TranslateNetworkObject
     {
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
         /// </summary>
-        /// <param name="source">–|–óŒ³Œ¾ŒêB</param>
-        /// <param name="target">–|–óæŒ¾ŒêB</param>
+        /// <param name="source">ç¿»è¨³å…ƒè¨€èªã€‚</param>
+        /// <param name="target">ç¿»è¨³å…ˆè¨€èªã€‚</param>
         public TranslateWikipedia(
             WikipediaInformation source, WikipediaInformation target)
             : base(source, target)
@@ -37,24 +37,24 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
-        #region ƒƒ\ƒbƒh
+        #region ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// –|–óx‰‡ˆ—Às•”‚Ì–{‘ÌB
-        /// ¦Œp³ƒNƒ‰ƒX‚Å‚ÍA‚±‚ÌŠÖ”‚Éˆ—‚ğÀ‘•‚·‚é‚±‚Æ
+        /// ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè¡Œéƒ¨ã®æœ¬ä½“ã€‚
+        /// â€»ç¶™æ‰¿ã‚¯ãƒ©ã‚¹ã§ã¯ã€ã“ã®é–¢æ•°ã«å‡¦ç†ã‚’å®Ÿè£…ã™ã‚‹ã“ã¨
         /// </summary>
-        /// <param name="i_Name">‹L––¼B</param>
-        /// <returns><c>true</c> ˆ—¬Œ÷B</returns>
+        /// <param name="i_Name">è¨˜äº‹åã€‚</param>
+        /// <returns><c>true</c> å‡¦ç†æˆåŠŸã€‚</returns>
         protected override bool RunBody(string i_Name)
         {
             System.Diagnostics.Debug.WriteLine("\nTranslateWikipedia.runBody > " + i_Name);
-            // ‘ÎÛ‹L–‚ğæ“¾
+            // å¯¾è±¡è¨˜äº‹ã‚’å–å¾—
             WikipediaArticle article = chkTargetArticle(i_Name);
             if (article.Text == "")
             {
                 return false;
             }
-            // ‘ÎÛ‹L–‚ÉŒ¾ŒêŠÔƒŠƒ“ƒN‚ª‘¶İ‚·‚éê‡Aˆ—‚ğŒp‘±‚·‚é‚©Šm”F
+            // å¯¾è±¡è¨˜äº‹ã«è¨€èªé–“ãƒªãƒ³ã‚¯ãŒå­˜åœ¨ã™ã‚‹å ´åˆã€å‡¦ç†ã‚’ç¶™ç¶šã™ã‚‹ã‹ç¢ºèª
             String interWiki = article.GetInterWiki(target.Code);
             if (interWiki != "")
             {
@@ -70,11 +70,11 @@ namespace Honememo.Wptscs.Logics
                 }
                 else
                 {
-                    LogLine("¨ " + String.Format(Resources.LogMessage_ArticleExistInterWiki, interWiki));
+                    LogLine("â†’ " + String.Format(Resources.LogMessage_ArticleExistInterWiki, interWiki));
                 }
             }
 
-            // –`“ª•”‚ğì¬
+            // å†’é ­éƒ¨ã‚’ä½œæˆ
             Text += "'''xxx'''";
             String bracket = ((WikipediaInformation)target).Bracket;
             if (bracket.Contains("{0}") == true)
@@ -88,21 +88,21 @@ namespace Honememo.Wptscs.Logics
                 Text += String.Format(bracket, originalName + "'''" + i_Name + "'''");
             }
             Text += "\n\n";
-            // Œ¾ŒêŠÔƒŠƒ“ƒNE’èŒ^‹å‚Ì•ÏŠ·
-            LogLine(ENTER + "¨ " + String.Format(Resources.LogMessage_CheckAndReplaceStart, interWiki));
+            // è¨€èªé–“ãƒªãƒ³ã‚¯ãƒ»å®šå‹å¥ã®å¤‰æ›
+            LogLine(ENTER + "â†’ " + String.Format(Resources.LogMessage_CheckAndReplaceStart, interWiki));
             Text += replaceText(article.Text, article.Title);
-            // ƒ†[ƒU[‚©‚ç‚Ì’†~—v‹‚ğƒ`ƒFƒbƒN
+            // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã‚‰ã®ä¸­æ­¢è¦æ±‚ã‚’ãƒã‚§ãƒƒã‚¯
             if (CancellationPending)
             {
                 return false;
             }
-            // V‚µ‚¢Œ¾ŒêŠÔƒŠƒ“ƒN‚ÆAƒRƒƒ“ƒg‚ğ’Ç‹L
+            // æ–°ã—ã„è¨€èªé–“ãƒªãƒ³ã‚¯ã¨ã€ã‚³ãƒ¡ãƒ³ãƒˆã‚’è¿½è¨˜
             Text += ("\n\n[[" + source.Code + ":" + i_Name + "]]\n");
             Text += (String.Format(Resources.ArticleFooter, Honememo.Cmn.GetProductName(),
                 source.Code, i_Name, article.Timestamp.ToString("U")) + "\n");
-            // ƒ_ƒEƒ“ƒ[ƒh‚³‚ê‚éƒeƒLƒXƒg‚ªLF‚È‚Ì‚ÅA‚±‚±‚Å‘S‚ÄCRLF‚É•ÏŠ·
-            // ¦ƒ_ƒEƒ“ƒ[ƒh‚ÉCRLF‚É‚·‚é‚æ‚¤‚Èd‘g‚İ‚ªŒ©‚Â‚©‚ê‚ÎA‚»‚¿‚ç‚ğg‚¤
-            //   ‚»‚Ìê‡Aã‚Ì‚æ‚¤‚É\n‚ğ‚×‚½‚É“f‚¢‚Ä‚¢‚é•”•ª‚ğC³‚·‚é
+            // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã•ã‚Œã‚‹ãƒ†ã‚­ã‚¹ãƒˆãŒLFãªã®ã§ã€ã“ã“ã§å…¨ã¦CRLFã«å¤‰æ›
+            // â€»ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ™‚ã«CRLFã«ã™ã‚‹ã‚ˆã†ãªä»•çµ„ã¿ãŒè¦‹ã¤ã‹ã‚Œã°ã€ãã¡ã‚‰ã‚’ä½¿ã†
+            //   ãã®å ´åˆã€ä¸Šã®ã‚ˆã†ã«\nã‚’ã¹ãŸã«åã„ã¦ã„ã‚‹éƒ¨åˆ†ã‚’ä¿®æ­£ã™ã‚‹
             Text = Text.Replace("\n", ENTER);
 
             System.Diagnostics.Debug.WriteLine("TranslateWikipedia.runBody > Success!");
@@ -110,46 +110,46 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// –|–óx‰‡‘ÎÛ‚Ì‹L–‚ğæ“¾B
+        /// ç¿»è¨³æ”¯æ´å¯¾è±¡ã®è¨˜äº‹ã‚’å–å¾—ã€‚
         /// </summary>
-        /// <param name="i_Name">‹L––¼B</param>
-        /// <returns>æ“¾‚µ‚½‹L–B</returns>
+        /// <param name="i_Name">è¨˜äº‹åã€‚</param>
+        /// <returns>å–å¾—ã—ãŸè¨˜äº‹ã€‚</returns>
         protected WikipediaArticle chkTargetArticle(string i_Name)
         {
-            // w’è‚³‚ê‚½‹L–‚Ì¶ƒf[ƒ^‚ğWikipedia‚©‚çæ“¾
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹ã®ç”Ÿãƒ‡ãƒ¼ã‚¿ã‚’Wikipediaã‹ã‚‰å–å¾—
             LogLine(String.Format(Resources.LogMessage_GetArticle, "http://" + ((WikipediaInformation)source).Server, i_Name));
             WikipediaArticle article = new WikipediaArticle((WikipediaInformation)source, i_Name);
             if (article.GetArticle(UserAgent, Referer, new TimeSpan(0)) == false)
             {
                 if (article.GetArticleStatus == HttpStatusCode.NotFound)
                 {
-                    LogLine("¨ " + Resources.LogMessage_ArticleNothing);
+                    LogLine("â†’ " + Resources.LogMessage_ArticleNothing);
                 }
                 else
                 {
-                    LogLine("¨ " + article.GetArticleException.Message);
-                    LogLine("¨ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
+                    LogLine("â†’ " + article.GetArticleException.Message);
+                    LogLine("â†’ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
                 }
             }
             else
             {
-                // Wikipedia‚Ö‚Ì‰‰ñƒAƒNƒZƒX‚ÉA–¼‘O‹óŠÔî•ñ‚ğæ“¾‚·‚é
+                // Wikipediaã¸ã®åˆå›ã‚¢ã‚¯ã‚»ã‚¹æ™‚ã«ã€åå‰ç©ºé–“æƒ…å ±ã‚’å–å¾—ã™ã‚‹
                 ((WikipediaInformation)source).Namespaces = article.GetNamespaces();
-                // ƒŠƒ_ƒCƒŒƒNƒg‚©‚ğƒ`ƒFƒbƒN‚µAƒŠƒ_ƒCƒŒƒNƒg‚Å‚ ‚ê‚ÎA‚»‚Ìæ‚Ì‹L–‚ğæ“¾
+                // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã‹ã‚’ãƒã‚§ãƒƒã‚¯ã—ã€ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã§ã‚ã‚Œã°ã€ãã®å…ˆã®è¨˜äº‹ã‚’å–å¾—
                 if (article.IsRedirect())
                 {
-                    LogLine("¨ " + Resources.LogMessage_Redirect + " [[" + article.Redirect + "]]");
+                    LogLine("â†’ " + Resources.LogMessage_Redirect + " [[" + article.Redirect + "]]");
                     article = new WikipediaArticle((WikipediaInformation)source, article.Redirect);
                     if (article.GetArticle(UserAgent, Referer, new TimeSpan(0)) == false)
                     {
                         if (article.GetArticleStatus == HttpStatusCode.NotFound)
                         {
-                            LogLine("¨ " + Resources.LogMessage_ArticleNothing);
+                            LogLine("â†’ " + Resources.LogMessage_ArticleNothing);
                         }
                         else
                         {
-                            LogLine("¨ " + article.GetArticleException.Message);
-                            LogLine("¨ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
+                            LogLine("â†’ " + article.GetArticleException.Message);
+                            LogLine("â†’ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
                         }
                     }
                 }
@@ -158,24 +158,24 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½‹L–‚ğæ“¾‚µAŒ¾ŒêŠÔƒŠƒ“ƒN‚ğŠm”FA•Ô‚·B
+        /// æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹ã‚’å–å¾—ã—ã€è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’ç¢ºèªã€è¿”ã™ã€‚
         /// </summary>
-        /// <param name="i_Name">‹L––¼B</param>
-        /// <param name="i_TemplateFlag"><c>true</c> ƒeƒ“ƒvƒŒ[ƒgB</param>
-        /// <returns>Œ¾ŒêŠÔƒŠƒ“ƒNæ‚Ì‹L–A‘¶İ‚µ‚È‚¢ê‡ <c>null</c>B</returns>
+        /// <param name="i_Name">è¨˜äº‹åã€‚</param>
+        /// <param name="i_TemplateFlag"><c>true</c> ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã€‚</param>
+        /// <returns>è¨€èªé–“ãƒªãƒ³ã‚¯å…ˆã®è¨˜äº‹ã€å­˜åœ¨ã—ãªã„å ´åˆ <c>null</c>ã€‚</returns>
         protected virtual string getInterWiki(string i_Name, bool i_TemplateFlag)
         {
-            // w’è‚³‚ê‚½‹L–‚Ì¶ƒf[ƒ^‚ğWikipedia‚©‚çæ“¾
-            // ¦‹L–©‘Ì‚ª‘¶İ‚µ‚È‚¢ê‡ANULL‚ğ•Ô‚·
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹ã®ç”Ÿãƒ‡ãƒ¼ã‚¿ã‚’Wikipediaã‹ã‚‰å–å¾—
+            // â€»è¨˜äº‹è‡ªä½“ãŒå­˜åœ¨ã—ãªã„å ´åˆã€NULLã‚’è¿”ã™
             String interWiki = null;
             String name = i_Name;
             if (!i_TemplateFlag)
             {
-                Log += "[[" + name + "]] ¨ ";
+                Log += "[[" + name + "]] â†’ ";
             }
             else
             {
-                Log += "{{" + name + "}} ¨ ";
+                Log += "{{" + name + "}} â†’ ";
             }
             WikipediaArticle article = new WikipediaArticle((WikipediaInformation)source, i_Name);
             if (article.GetArticle(UserAgent, Referer) == false)
@@ -186,33 +186,33 @@ namespace Honememo.Wptscs.Logics
                 }
                 else
                 {
-                    LogLine("¨ " + article.GetArticleException.Message);
-                    LogLine("¨ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
+                    LogLine("â†’ " + article.GetArticleException.Message);
+                    LogLine("â†’ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
                 }
             }
             else
             {
-                // ƒŠƒ_ƒCƒŒƒNƒg‚©‚ğƒ`ƒFƒbƒN‚µAƒŠƒ_ƒCƒŒƒNƒg‚Å‚ ‚ê‚ÎA‚»‚Ìæ‚Ì‹L–‚ğæ“¾
+                // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã‹ã‚’ãƒã‚§ãƒƒã‚¯ã—ã€ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã§ã‚ã‚Œã°ã€ãã®å…ˆã®è¨˜äº‹ã‚’å–å¾—
                 if (article.IsRedirect())
                 {
-                    Log += (Resources.LogMessage_Redirect + " [[" + article.Redirect + "]] ¨ ");
+                    Log += (Resources.LogMessage_Redirect + " [[" + article.Redirect + "]] â†’ ");
                     article = new WikipediaArticle((WikipediaInformation)source, article.Redirect);
                     if (article.GetArticle(UserAgent, Referer) == false)
                     {
                         if (article.GetArticleStatus == HttpStatusCode.NotFound)
                         {
-                            LogLine("¨ " + Resources.LogMessage_ArticleNothing);
+                            LogLine("â†’ " + Resources.LogMessage_ArticleNothing);
                         }
                         else
                         {
-                            LogLine("¨ " + article.GetArticleException.Message);
-                            LogLine("¨ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
+                            LogLine("â†’ " + article.GetArticleException.Message);
+                            LogLine("â†’ " + String.Format(Resources.LogMessage_ErrorURL, article.Url));
                         }
                     }
                 }
                 if (article.Text != "")
                 {
-                    // –|–óæŒ¾Œê‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚ğ‘{õ
+                    // ç¿»è¨³å…ˆè¨€èªã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’æœç´¢
                     interWiki = article.GetInterWiki(target.Code);
                     if (interWiki != "")
                     {
@@ -224,7 +224,7 @@ namespace Honememo.Wptscs.Logics
                     }
                 }
             }
-            // ‰üs‚ªo—Í‚³‚ê‚Ä‚¢‚È‚¢ê‡i³íjA‰üs
+            // æ”¹è¡ŒãŒå‡ºåŠ›ã•ã‚Œã¦ã„ãªã„å ´åˆï¼ˆæ­£å¸¸æ™‚ï¼‰ã€æ”¹è¡Œ
             if (Log.EndsWith(ENTER) == false)
             {
                 Log += ENTER;
@@ -233,56 +233,56 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½‹L–‚ğæ“¾‚µAŒ¾ŒêŠÔƒŠƒ“ƒN‚ğŠm”FA•Ô‚·iƒeƒ“ƒvƒŒ[ƒgˆÈŠOjB
+        /// æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹ã‚’å–å¾—ã—ã€è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’ç¢ºèªã€è¿”ã™ï¼ˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆä»¥å¤–ï¼‰ã€‚
         /// </summary>
-        /// <param name="name">‹L––¼B</param>
-        /// <returns>Œ¾ŒêŠÔƒŠƒ“ƒNæ‚Ì‹L–A‘¶İ‚µ‚È‚¢ê‡ <c>null</c>B</returns>
+        /// <param name="name">è¨˜äº‹åã€‚</param>
+        /// <returns>è¨€èªé–“ãƒªãƒ³ã‚¯å…ˆã®è¨˜äº‹ã€å­˜åœ¨ã—ãªã„å ´åˆ <c>null</c>ã€‚</returns>
         protected String getInterWiki(string name)
         {
             return getInterWiki(name, false);
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½ƒeƒLƒXƒg‚ğ‰ğÍ‚µAŒ¾ŒêŠÔƒŠƒ“ƒNEŒ©o‚µ“™‚Ì•ÏŠ·‚ğs‚¤B
+        /// æ¸¡ã•ã‚ŒãŸãƒ†ã‚­ã‚¹ãƒˆã‚’è§£æã—ã€è¨€èªé–“ãƒªãƒ³ã‚¯ãƒ»è¦‹å‡ºã—ç­‰ã®å¤‰æ›ã‚’è¡Œã†ã€‚
         /// </summary>
-        /// <param name="i_Text">‹L–ƒeƒLƒXƒgB</param>
+        /// <param name="i_Text">è¨˜äº‹ãƒ†ã‚­ã‚¹ãƒˆã€‚</param>
         /// <param name="i_Parent"></param>
         /// <param name="i_TitleFlag"></param>
-        /// <returns>•ÏŠ·Œã‚Ì‹L–ƒeƒLƒXƒgB</returns>
+        /// <returns>å¤‰æ›å¾Œã®è¨˜äº‹ãƒ†ã‚­ã‚¹ãƒˆã€‚</returns>
         protected string replaceText(string i_Text, string i_Parent, bool i_TitleFlag)
         {
-            // w’è‚³‚ê‚½‹L–‚ÌŒ¾ŒêŠÔƒŠƒ“ƒNEŒ©o‚µ‚ğ’Tõ‚µA–|–óæŒ¾Œê‚Å‚Ì–¼Ì‚É•ÏŠ·‚µA‚»‚ê‚É’uŠ·‚µ‚½•¶š—ñ‚ğ•Ô‚·
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹ã®è¨€èªé–“ãƒªãƒ³ã‚¯ãƒ»è¦‹å‡ºã—ã‚’æ¢ç´¢ã—ã€ç¿»è¨³å…ˆè¨€èªã§ã®åç§°ã«å¤‰æ›ã—ã€ãã‚Œã«ç½®æ›ã—ãŸæ–‡å­—åˆ—ã‚’è¿”ã™
             String result = "";
             bool enterFlag = true;
             WikipediaFormat wikiAP = new WikipediaFormat((WikipediaInformation)source);
             for (int i = 0; i < i_Text.Length; i++)
             {
-                // ƒ†[ƒU[‚©‚ç‚Ì’†~—v‹‚ğƒ`ƒFƒbƒN
+                // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã‚‰ã®ä¸­æ­¢è¦æ±‚ã‚’ãƒã‚§ãƒƒã‚¯
                 if (CancellationPending == true)
                 {
                     break;
                 }
                 char c = i_Text[i];
-                // Œ©o‚µ‚àˆ—‘ÎÛ‚Ìê‡
+                // è¦‹å‡ºã—ã‚‚å‡¦ç†å¯¾è±¡ã®å ´åˆ
                 if (i_TitleFlag)
                 {
-                    // ‰üs‚Ìê‡AŸ‚Ìƒ‹[ƒv‚ÅŒ©o‚µsƒ`ƒFƒbƒN‚ğs‚¤
+                    // æ”¹è¡Œã®å ´åˆã€æ¬¡ã®ãƒ«ãƒ¼ãƒ—ã§è¦‹å‡ºã—è¡Œãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†
                     if (c == '\n')
                     {
                         enterFlag = true;
                         result += c;
                         continue;
                     }
-                    // s‚Ìn‚ß‚Å‚ÍA‚»‚Ìs‚ªŒ©o‚µ‚Ìs‚©‚Ìƒ`ƒFƒbƒN‚ğs‚¤
+                    // è¡Œã®å§‹ã‚ã§ã¯ã€ãã®è¡ŒãŒè¦‹å‡ºã—ã®è¡Œã‹ã®ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã†
                     if (enterFlag)
                     {
                         String newTitleLine = "";
                         int index2 = chkTitleLine(ref newTitleLine, i_Text, i);
                         if (index2 != -1)
                         {
-                            // s‚ÌI‚í‚è‚Ü‚ÅƒCƒ“ƒfƒbƒNƒX‚ğˆÚ“®
+                            // è¡Œã®çµ‚ã‚ã‚Šã¾ã§ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ç§»å‹•
                             i = index2;
-                            // ’u‚«Š·‚¦‚ç‚ê‚½Œ©o‚µs‚ğo—Í
+                            // ç½®ãæ›ãˆã‚‰ã‚ŒãŸè¦‹å‡ºã—è¡Œã‚’å‡ºåŠ›
                             result += newTitleLine;
                             continue;
                         }
@@ -292,7 +292,7 @@ namespace Honememo.Wptscs.Logics
                         }
                     }
                 }
-                // ƒRƒƒ“ƒgi<!--j‚Ìƒ`ƒFƒbƒN
+                // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ã®ãƒã‚§ãƒƒã‚¯
                 String comment = "";
                 int index = WikipediaFormat.ChkComment(ref comment, i_Text, i);
                 if (index != -1)
@@ -305,7 +305,7 @@ namespace Honememo.Wptscs.Logics
                     }
                     continue;
                 }
-                // nowiki‚Ìƒ`ƒFƒbƒN
+                // nowikiã®ãƒã‚§ãƒƒã‚¯
                 String nowiki = "";
                 index = WikipediaFormat.ChkNowiki(ref nowiki, i_Text, i);
                 if (index != -1)
@@ -314,14 +314,14 @@ namespace Honememo.Wptscs.Logics
                     result += nowiki;
                     continue;
                 }
-                // •Ï”i{{{1}}}‚Æ‚©j‚Ìƒ`ƒFƒbƒN
+                // å¤‰æ•°ï¼ˆ{{{1}}}ã¨ã‹ï¼‰ã®ãƒã‚§ãƒƒã‚¯
                 String variable = "";
                 String value = "";
                 index = wikiAP.ChkVariable(ref variable, ref value, i_Text, i);
                 if (index != -1)
                 {
                     i = index;
-                    // •Ï”‚Ì | ˆÈ~‚É’l‚ª‹Lq‚³‚ê‚Ä‚¢‚éê‡A‚»‚ê‚É‘Î‚µ‚ÄÄ‹A“I‚Éˆ—‚ğs‚¤
+                    // å¤‰æ•°ã® | ä»¥é™ã«å€¤ãŒè¨˜è¿°ã•ã‚Œã¦ã„ã‚‹å ´åˆã€ãã‚Œã«å¯¾ã—ã¦å†å¸°çš„ã«å‡¦ç†ã‚’è¡Œã†
                     int valueIndex = variable.IndexOf('|');
                     if (valueIndex != -1 && !String.IsNullOrEmpty(value))
                     {
@@ -330,7 +330,7 @@ namespace Honememo.Wptscs.Logics
                     result += variable;
                     continue;
                 }
-                // “à•”ƒŠƒ“ƒNEƒeƒ“ƒvƒŒ[ƒg‚Ìƒ`ƒFƒbƒN••ÏŠ·AŒ¾ŒêŠÔƒŠƒ“ƒN‚ğæ“¾‚µo—Í‚·‚é
+                // å†…éƒ¨ãƒªãƒ³ã‚¯ãƒ»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®ãƒã‚§ãƒƒã‚¯ï¼†å¤‰æ›ã€è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’å–å¾—ã—å‡ºåŠ›ã™ã‚‹
                 String text = "";
                 index = replaceLink(ref text, i_Text, i, i_Parent);
                 if (index != -1)
@@ -339,25 +339,25 @@ namespace Honememo.Wptscs.Logics
                     result += text;
                     continue;
                 }
-                // ’Êí‚Í‚»‚Ì‚Ü‚ÜƒRƒs[
+                // é€šå¸¸ã¯ãã®ã¾ã¾ã‚³ãƒ”ãƒ¼
                 result += i_Text[i];
             }
             return result;
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½ƒeƒLƒXƒg‚ğ‰ğÍ‚µAŒ¾ŒêŠÔƒŠƒ“ƒNEŒ©o‚µ“™‚Ì•ÏŠ·‚ğs‚¤B
+        /// æ¸¡ã•ã‚ŒãŸãƒ†ã‚­ã‚¹ãƒˆã‚’è§£æã—ã€è¨€èªé–“ãƒªãƒ³ã‚¯ãƒ»è¦‹å‡ºã—ç­‰ã®å¤‰æ›ã‚’è¡Œã†ã€‚
         /// </summary>
-        /// <param name="text">‹L–ƒeƒLƒXƒgB</param>
+        /// <param name="text">è¨˜äº‹ãƒ†ã‚­ã‚¹ãƒˆã€‚</param>
         /// <param name="parent"></param>
-        /// <returns>•ÏŠ·Œã‚Ì‹L–ƒeƒLƒXƒgB</returns>
+        /// <returns>å¤‰æ›å¾Œã®è¨˜äº‹ãƒ†ã‚­ã‚¹ãƒˆã€‚</returns>
         protected String replaceText(string text, string parent)
         {
             return replaceText(text, parent, true);
         }
 
         /// <summary>
-        /// ƒŠƒ“ƒN‚Ì‰ğÍE’uŠ·‚ğs‚¤B
+        /// ãƒªãƒ³ã‚¯ã®è§£æãƒ»ç½®æ›ã‚’è¡Œã†ã€‚
         /// </summary>
         /// <param name="o_Link"></param>
         /// <param name="i_Text"></param>
@@ -366,16 +366,16 @@ namespace Honememo.Wptscs.Logics
         /// <returns></returns>
         protected int replaceLink(ref string o_Link, string i_Text, int i_Index, string i_Parent)
         {
-            // o—Í’l‰Šú‰»
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
             int lastIndex = -1;
             o_Link = "";
             WikipediaFormat.Link link = new WikipediaFormat.Link();
-            // “à•”ƒŠƒ“ƒNEƒeƒ“ƒvƒŒ[ƒg‚ÌŠm”F‚Æ‰ğÍ
+            // å†…éƒ¨ãƒªãƒ³ã‚¯ãƒ»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®ç¢ºèªã¨è§£æ
             WikipediaFormat wikiAP = new WikipediaFormat((WikipediaInformation)source);
             lastIndex = wikiAP.ChkLinkText(ref link, i_Text, i_Index);
             if (lastIndex != -1)
             {
-                // ‹L––¼‚É•Ï”‚ªg‚í‚ê‚Ä‚¢‚éê‡‚ª‚ ‚é‚Ì‚ÅA‚»‚Ìƒ`ƒFƒbƒN‚Æ“WŠJ
+                // è¨˜äº‹åã«å¤‰æ•°ãŒä½¿ã‚ã‚Œã¦ã„ã‚‹å ´åˆãŒã‚ã‚‹ã®ã§ã€ãã®ãƒã‚§ãƒƒã‚¯ã¨å±•é–‹
                 int index = link.Article.IndexOf("{{{");
                 if (index != -1)
                 {
@@ -384,7 +384,7 @@ namespace Honememo.Wptscs.Logics
                     int lastIndex2 = wikiAP.ChkVariable(ref variable, ref value, link.Article, index);
                     if (lastIndex2 != -1 && !String.IsNullOrEmpty(value))
                     {
-                        // •Ï”‚Ì | ˆÈ~‚É’l‚ª‹Lq‚³‚ê‚Ä‚¢‚éê‡A‚»‚ê‚É’u‚«Š·‚¦‚é
+                        // å¤‰æ•°ã® | ä»¥é™ã«å€¤ãŒè¨˜è¿°ã•ã‚Œã¦ã„ã‚‹å ´åˆã€ãã‚Œã«ç½®ãæ›ãˆã‚‹
                         String newArticle = (link.Article.Substring(0, index) + value);
                         if (lastIndex2 + 1 < link.Article.Length)
                         {
@@ -392,33 +392,33 @@ namespace Honememo.Wptscs.Logics
                         }
                         link.Article = newArticle;
                     }
-                    // ’l‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡Aˆ—‚µ‚Ä‚à‚µ‚å‚¤‚ª‚È‚¢‚Ì‚ÅAœŠO
+                    // å€¤ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€å‡¦ç†ã—ã¦ã‚‚ã—ã‚‡ã†ãŒãªã„ã®ã§ã€é™¤å¤–
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceLink > ‘ÎÛŠO : " + link.Text);
+                        System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceLink > å¯¾è±¡å¤– : " + link.Text);
                         return -1;
                     }
                 }
 
                 String newText = null;
-                // “à•”ƒŠƒ“ƒN‚Ìê‡
+                // å†…éƒ¨ãƒªãƒ³ã‚¯ã®å ´åˆ
                 if (i_Text[i_Index] == '[')
                 {
-                    // “à•”ƒŠƒ“ƒN‚Ì•ÏŠ·Œã•¶š—ñ‚ğæ“¾
+                    // å†…éƒ¨ãƒªãƒ³ã‚¯ã®å¤‰æ›å¾Œæ–‡å­—åˆ—ã‚’å–å¾—
                     newText = replaceInnerLink(link, i_Parent);
                 }
-                // ƒeƒ“ƒvƒŒ[ƒg‚Ìê‡
+                // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®å ´åˆ
                 else if (i_Text[i_Index] == '{')
                 {
-                    // ƒeƒ“ƒvƒŒ[ƒg‚Ì•ÏŠ·Œã•¶š—ñ‚ğæ“¾
+                    // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®å¤‰æ›å¾Œæ–‡å­—åˆ—ã‚’å–å¾—
                     newText = replaceTemplate(link, i_Parent);
                 }
-                // ã‹LˆÈŠO‚Ìê‡‚ÍA‘ÎÛŠO
+                // ä¸Šè¨˜ä»¥å¤–ã®å ´åˆã¯ã€å¯¾è±¡å¤–
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceLink > ƒvƒƒOƒ‰ƒ€ƒ~ƒX : " + link.Text);
+                    System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceLink > ãƒ—ãƒ­ã‚°ãƒ©ãƒ ãƒŸã‚¹ : " + link.Text);
                 }
-                // •ÏŠ·Œã•¶š—ñ‚ªNULLˆÈŠO
+                // å¤‰æ›å¾Œæ–‡å­—åˆ—ãŒNULLä»¥å¤–
                 if (newText != null)
                 {
                     o_Link = newText;
@@ -432,59 +432,59 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// “à•”ƒŠƒ“ƒN‚Ì•¶š—ñ‚ğ•ÏŠ·‚·‚éB
+        /// å†…éƒ¨ãƒªãƒ³ã‚¯ã®æ–‡å­—åˆ—ã‚’å¤‰æ›ã™ã‚‹ã€‚
         /// </summary>
         /// <param name="i_Link"></param>
         /// <param name="i_Parent"></param>
         /// <returns></returns>
         protected string replaceInnerLink(WikipediaFormat.Link i_Link, string i_Parent)
         {
-            // •Ï”‰Šúİ’è
+            // å¤‰æ•°åˆæœŸè¨­å®š
             String result = "[[";
             String comment = "";
             WikipediaFormat.Link link = i_Link;
-            // ‹L–“à‚ğw‚µ‚Ä‚¢‚éê‡i[[#ŠÖ˜A€–Ú]]‚¾‚¯‚Æ‚©jˆÈŠO
+            // è¨˜äº‹å†…ã‚’æŒ‡ã—ã¦ã„ã‚‹å ´åˆï¼ˆ[[#é–¢é€£é …ç›®]]ã ã‘ã¨ã‹ï¼‰ä»¥å¤–
             if (!String.IsNullOrEmpty(link.Article) &&
                !(link.Article == i_Parent && String.IsNullOrEmpty(link.Code) && !String.IsNullOrEmpty(link.Section)))
             {
-                // •ÏŠ·‚Ì‘ÎÛŠO‚Æ‚·‚éƒŠƒ“ƒN‚©‚ğƒ`ƒFƒbƒN
+                // å¤‰æ›ã®å¯¾è±¡å¤–ã¨ã™ã‚‹ãƒªãƒ³ã‚¯ã‹ã‚’ãƒã‚§ãƒƒã‚¯
                 WikipediaArticle article = new WikipediaArticle((WikipediaInformation)source, link.Article);
-                // ƒTƒuƒy[ƒW‚Ìê‡A‹L––¼‚ğ•â“U
+                // ã‚µãƒ–ãƒšãƒ¼ã‚¸ã®å ´åˆã€è¨˜äº‹åã‚’è£œå¡«
                 if (link.SubPageFlag)
                 {
                     link.Article = i_Parent + link.Article;
                 }
-                // Œ¾ŒêŠÔƒŠƒ“ƒNEo–…ƒvƒƒWƒFƒNƒg‚Ö‚ÌƒŠƒ“ƒNE‰æ‘œ‚Í‘ÎÛŠO
+                // è¨€èªé–“ãƒªãƒ³ã‚¯ãƒ»å§‰å¦¹ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã¸ã®ãƒªãƒ³ã‚¯ãƒ»ç”»åƒã¯å¯¾è±¡å¤–
                 else if (!String.IsNullOrEmpty(link.Code) || article.IsImage())
                 {
                     result = "";
-                    // æ“ª‚ª : ‚Å‚È‚¢A–|–óæŒ¾Œê‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚Ìê‡
+                    // å…ˆé ­ãŒ : ã§ãªã„ã€ç¿»è¨³å…ˆè¨€èªã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã®å ´åˆ
                     if (!link.StartColonFlag && link.Code == target.Code)
                     {
-                        // íœ‚·‚éB³íI—¹‚ÅA’uŠ·Œã•¶š—ñ‚È‚µ‚ğ•Ô‚·
-                        System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > " + link.Text + " ‚ğíœ");
+                        // å‰Šé™¤ã™ã‚‹ã€‚æ­£å¸¸çµ‚äº†ã§ã€ç½®æ›å¾Œæ–‡å­—åˆ—ãªã—ã‚’è¿”ã™
+                        System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > " + link.Text + " ã‚’å‰Šé™¤");
                         return "";
                     }
-                    // ‚»‚êˆÈŠO‚Í‘ÎÛŠO
-                    System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > ‘ÎÛŠO : " + link.Text);
+                    // ãã‚Œä»¥å¤–ã¯å¯¾è±¡å¤–
+                    System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > å¯¾è±¡å¤– : " + link.Text);
                     return null;
                 }
-                // ƒŠƒ“ƒN‚ğ’H‚èA‘ÎÛ‹L–‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚ğæ“¾
+                // ãƒªãƒ³ã‚¯ã‚’è¾¿ã‚Šã€å¯¾è±¡è¨˜äº‹ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’å–å¾—
                 String interWiki = getInterWiki(link.Article);
-                // ‹L–©‘Ì‚ª‘¶İ‚µ‚È‚¢iÔƒŠƒ“ƒNjê‡AƒŠƒ“ƒN‚Í‚»‚Ì‚Ü‚Ü
+                // è¨˜äº‹è‡ªä½“ãŒå­˜åœ¨ã—ãªã„ï¼ˆèµ¤ãƒªãƒ³ã‚¯ï¼‰å ´åˆã€ãƒªãƒ³ã‚¯ã¯ãã®ã¾ã¾
                 if (interWiki == null)
                 {
                     result += link.Article;
                 }
-                // Œ¾ŒêŠÔƒŠƒ“ƒN‚ª‘¶İ‚µ‚È‚¢ê‡A[[:en:xxx]]‚İ‚½‚¢‚ÈŒ`®‚É’uŠ·
+                // è¨€èªé–“ãƒªãƒ³ã‚¯ãŒå­˜åœ¨ã—ãªã„å ´åˆã€[[:en:xxx]]ã¿ãŸã„ãªå½¢å¼ã«ç½®æ›
                 else if (interWiki == "")
                 {
                     result += (":" + source.Code + ":" + link.Article);
                 }
-                // Œ¾ŒêŠÔƒŠƒ“ƒN‚ª‘¶İ‚·‚éê‡A‚»‚¿‚ç‚ğw‚·‚æ‚¤‚É’uŠ·
+                // è¨€èªé–“ãƒªãƒ³ã‚¯ãŒå­˜åœ¨ã™ã‚‹å ´åˆã€ãã¡ã‚‰ã‚’æŒ‡ã™ã‚ˆã†ã«ç½®æ›
                 else
                 {
-                    // ‘O‚Ì•¶š—ñ‚ğ•œŒ³
+                    // å‰ã®æ–‡å­—åˆ—ã‚’å¾©å…ƒ
                     if (link.SubPageFlag)
                     {
                         int index = interWiki.IndexOf('/');
@@ -503,42 +503,42 @@ namespace Honememo.Wptscs.Logics
                         result += interWiki;
                     }
                 }
-                // ƒJƒeƒSƒŠ[‚Ìê‡‚ÍAƒRƒƒ“ƒg‚ÅŒ³‚Ì•¶š—ñ‚ğ’Ç‰Á‚·‚é
+                // ã‚«ãƒ†ã‚´ãƒªãƒ¼ã®å ´åˆã¯ã€ã‚³ãƒ¡ãƒ³ãƒˆã§å…ƒã®æ–‡å­—åˆ—ã‚’è¿½åŠ ã™ã‚‹
                 if (article.IsCategory() && !link.StartColonFlag)
                 {
                     comment = (WikipediaFormat.COMMENTSTART + " " + link.Text + " " + WikipediaFormat.COMMENTEND);
-                    // ƒJƒeƒSƒŠ[‚Å[[:en:xxx]]‚İ‚½‚¢‚ÈŒ`®‚É‚µ‚½ê‡A| ˆÈ~‚Í•s—v‚È‚Ì‚Åíœ
+                    // ã‚«ãƒ†ã‚´ãƒªãƒ¼ã§[[:en:xxx]]ã¿ãŸã„ãªå½¢å¼ã«ã—ãŸå ´åˆã€| ä»¥é™ã¯ä¸è¦ãªã®ã§å‰Šé™¤
                     if (interWiki == "")
                     {
                         link.PipeTexts = new String[0];
                     }
                 }
-                // •\¦–¼‚ª‘¶İ‚µ‚È‚¢ê‡AŒ³‚Ì–¼‘O‚ğ•\¦–¼‚Éİ’è
+                // è¡¨ç¤ºåãŒå­˜åœ¨ã—ãªã„å ´åˆã€å…ƒã®åå‰ã‚’è¡¨ç¤ºåã«è¨­å®š
                 else if (link.PipeTexts.Length == 0 && interWiki != null)
                 {
                     Honememo.Cmn.AddArray(ref link.PipeTexts, article.Title);
                 }
             }
-            // Œ©o‚µi[[#ŠÖ˜A€–Ú]]‚Æ‚©j‚ğo—Í
+            // è¦‹å‡ºã—ï¼ˆ[[#é–¢é€£é …ç›®]]ã¨ã‹ï¼‰ã‚’å‡ºåŠ›
             if (!String.IsNullOrEmpty(link.Section))
             {
-                // Œ©o‚µ‚ÍA’èŒ^‹å•ÏŠ·‚ğ’Ê‚·
+                // è¦‹å‡ºã—ã¯ã€å®šå‹å¥å¤‰æ›ã‚’é€šã™
                 result += ("#" + getKeyWord(link.Section));
             }
-            // •\¦–¼‚ğo—Í
+            // è¡¨ç¤ºåã‚’å‡ºåŠ›
             foreach (String text in link.PipeTexts)
             {
                 result += "|";
                 if (!String.IsNullOrEmpty(text))
                 {
-                    // ‰æ‘œ‚Ìê‡A| ‚ÌŒã‚É“à•”ƒŠƒ“ƒN‚âƒeƒ“ƒvƒŒ[ƒg‚ª‘‚©‚ê‚Ä‚¢‚éê‡‚ª‚ ‚é‚ªA
-                    // ‰æ‘œ‚Íˆ—‘ÎÛŠO‚Å‚ ‚è‚»‚Ì’†‚ÌƒŠƒ“ƒN‚ÍŒÂ•Ê‚ÉÄ“xˆ—‚³‚ê‚é‚½‚ßA‚±‚±‚Å‚Í“Á‚É‰½‚à‚µ‚È‚¢
+                    // ç”»åƒã®å ´åˆã€| ã®å¾Œã«å†…éƒ¨ãƒªãƒ³ã‚¯ã‚„ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãŒæ›¸ã‹ã‚Œã¦ã„ã‚‹å ´åˆãŒã‚ã‚‹ãŒã€
+                    // ç”»åƒã¯å‡¦ç†å¯¾è±¡å¤–ã§ã‚ã‚Šãã®ä¸­ã®ãƒªãƒ³ã‚¯ã¯å€‹åˆ¥ã«å†åº¦å‡¦ç†ã•ã‚Œã‚‹ãŸã‚ã€ã“ã“ã§ã¯ç‰¹ã«ä½•ã‚‚ã—ãªã„
                     result += text;
                 }
             }
-            // ƒŠƒ“ƒN‚ğ•Â‚¶‚é
+            // ãƒªãƒ³ã‚¯ã‚’é–‰ã˜ã‚‹
             result += "]]";
-            // ƒRƒƒ“ƒg‚ğ•t‰Á
+            // ã‚³ãƒ¡ãƒ³ãƒˆã‚’ä»˜åŠ 
             if (comment != "")
             {
                 result += comment;
@@ -548,41 +548,41 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ƒeƒ“ƒvƒŒ[ƒg‚Ì•¶š—ñ‚ğ•ÏŠ·‚·‚éB
+        /// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®æ–‡å­—åˆ—ã‚’å¤‰æ›ã™ã‚‹ã€‚
         /// </summary>
         /// <param name="i_Link"></param>
         /// <param name="i_Parent"></param>
         /// <returns></returns>
         protected String replaceTemplate(WikipediaFormat.Link i_Link, string i_Parent)
         {
-            // •Ï”‰Šúİ’è
+            // å¤‰æ•°åˆæœŸè¨­å®š
             String result = "";
             WikipediaFormat.Link link = i_Link;
-            // ƒeƒ“ƒvƒŒ[ƒg‚Í‹L––¼‚ª•K{
+            // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã¯è¨˜äº‹åãŒå¿…é ˆ
             if (String.IsNullOrEmpty(link.Article))
             {
-                System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > ‘ÎÛŠO : " + link.Text);
+                System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > å¯¾è±¡å¤– : " + link.Text);
                 return null;
             }
-            // ƒVƒXƒeƒ€•Ï”‚Ìê‡‚Í‘ÎÛŠO
+            // ã‚·ã‚¹ãƒ†ãƒ å¤‰æ•°ã®å ´åˆã¯å¯¾è±¡å¤–
             if (((WikipediaInformation)source).ChkSystemVariable(link.Article) == true)
             {
-                System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > ƒVƒXƒeƒ€•Ï” : " + link.Text);
+                System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > ã‚·ã‚¹ãƒ†ãƒ å¤‰æ•° : " + link.Text);
                 return null;
             }
-            // ƒeƒ“ƒvƒŒ[ƒg–¼‘O‹óŠÔ‚©A•’Ê‚Ì‹L–‚©‚ğ”»’è
+            // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆåå‰ç©ºé–“ã‹ã€æ™®é€šã®è¨˜äº‹ã‹ã‚’åˆ¤å®š
             if (!link.StartColonFlag && !link.SubPageFlag)
             {
                 String templateStr = ((WikipediaInformation)source).GetNamespace(WikipediaInformation.TEMPLATENAMESPACENUMBER);
                 if (templateStr != "" && !link.Article.StartsWith(templateStr + ":"))
                 {
                     WikipediaArticle article = new WikipediaArticle((WikipediaInformation)source, templateStr + ":" + link.Article);
-                    // ‹L–‚ª‘¶İ‚·‚éê‡Aƒeƒ“ƒvƒŒ[ƒg‚ğ‚Â‚¯‚½–¼‘O‚Åæ“¾
+                    // è¨˜äº‹ãŒå­˜åœ¨ã™ã‚‹å ´åˆã€ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ã¤ã‘ãŸåå‰ã§å–å¾—
                     if (article.GetArticle(UserAgent, Referer) == true)
                     {
                         link.Article = article.Title;
                     }
-                    // ‹L–‚ªæ“¾‚Å‚«‚È‚¢ê‡‚àA404‚Å‚È‚¢ê‡‚Í‘¶İ‚·‚é‚Æ‚µ‚Äˆ—
+                    // è¨˜äº‹ãŒå–å¾—ã§ããªã„å ´åˆã‚‚ã€404ã§ãªã„å ´åˆã¯å­˜åœ¨ã™ã‚‹ã¨ã—ã¦å‡¦ç†
                     else if (article.GetArticleStatus != HttpStatusCode.NotFound)
                     {
                         LogLine(String.Format(Resources.LogMessage_TemplateUnknown, link.Article, templateStr, article.GetArticleException.Message));
@@ -590,29 +590,29 @@ namespace Honememo.Wptscs.Logics
                     }
                 }
             }
-            // ƒTƒuƒy[ƒW‚Ìê‡A‹L––¼‚ğ•â“U
+            // ã‚µãƒ–ãƒšãƒ¼ã‚¸ã®å ´åˆã€è¨˜äº‹åã‚’è£œå¡«
             else if (link.SubPageFlag)
             {
                 link.Article = i_Parent + link.Article;
             }
-            // ƒŠƒ“ƒN‚ğ’H‚èA‘ÎÛ‹L–‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚ğæ“¾
+            // ãƒªãƒ³ã‚¯ã‚’è¾¿ã‚Šã€å¯¾è±¡è¨˜äº‹ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’å–å¾—
             String interWiki = getInterWiki(link.Article, true);
-            // ‹L–©‘Ì‚ª‘¶İ‚µ‚È‚¢iÔƒŠƒ“ƒNjê‡AƒŠƒ“ƒN‚Í‚»‚Ì‚Ü‚Ü
+            // è¨˜äº‹è‡ªä½“ãŒå­˜åœ¨ã—ãªã„ï¼ˆèµ¤ãƒªãƒ³ã‚¯ï¼‰å ´åˆã€ãƒªãƒ³ã‚¯ã¯ãã®ã¾ã¾
             if (interWiki == null)
             {
                 result += link.Text;
             }
-            // Œ¾ŒêŠÔƒŠƒ“ƒN‚ª‘¶İ‚µ‚È‚¢ê‡A[[:en:Template:xxx]]‚İ‚½‚¢‚È•’Ê‚ÌƒŠƒ“ƒN‚É’uŠ·
+            // è¨€èªé–“ãƒªãƒ³ã‚¯ãŒå­˜åœ¨ã—ãªã„å ´åˆã€[[:en:Template:xxx]]ã¿ãŸã„ãªæ™®é€šã®ãƒªãƒ³ã‚¯ã«ç½®æ›
             else if (interWiki == "")
             {
-                // ‚¨‚Ü‚¯‚ÅAŒ³‚Ìƒeƒ“ƒvƒŒ[ƒg‚Ìó‘Ô‚ğƒRƒƒ“ƒg‚Å‚Â‚¯‚é
+                // ãŠã¾ã‘ã§ã€å…ƒã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®çŠ¶æ…‹ã‚’ã‚³ãƒ¡ãƒ³ãƒˆã§ã¤ã‘ã‚‹
                 result += ("[[:" + source.Code + ":" + link.Article + "]]" + WikipediaFormat.COMMENTSTART + " " + link.Text + " " + WikipediaFormat.COMMENTEND);
             }
-            // Œ¾ŒêŠÔƒŠƒ“ƒN‚ª‘¶İ‚·‚éê‡A‚»‚¿‚ç‚ğw‚·‚æ‚¤‚É’uŠ·
+            // è¨€èªé–“ãƒªãƒ³ã‚¯ãŒå­˜åœ¨ã™ã‚‹å ´åˆã€ãã¡ã‚‰ã‚’æŒ‡ã™ã‚ˆã†ã«ç½®æ›
             else
             {
                 result += "{{";
-                // ‘O‚Ì•¶š—ñ‚ğ•œŒ³
+                // å‰ã®æ–‡å­—åˆ—ã‚’å¾©å…ƒ
                 if (link.StartColonFlag)
                 {
                     result += ":";
@@ -621,24 +621,24 @@ namespace Honememo.Wptscs.Logics
                 {
                     result += WikipediaFormat.MSGNW;
                 }
-                // : ‚æ‚è‘O‚Ì•”•ª‚ğíœ‚µ‚Äo—Íi: ‚ª–³‚¢‚Æ‚«‚Í-1+1‚Å0‚©‚çj
+                // : ã‚ˆã‚Šå‰ã®éƒ¨åˆ†ã‚’å‰Šé™¤ã—ã¦å‡ºåŠ›ï¼ˆ: ãŒç„¡ã„ã¨ãã¯-1+1ã§0ã‹ã‚‰ï¼‰
                 result += interWiki.Substring(interWiki.IndexOf(':') + 1);
-                // ‰üs‚ğ•œŒ³
+                // æ”¹è¡Œã‚’å¾©å…ƒ
                 if (link.EnterFlag)
                 {
                     result += "\n";
                 }
-                // | ‚ÌŒã‚ğ•t‰Á
+                // | ã®å¾Œã‚’ä»˜åŠ 
                 foreach (String text in link.PipeTexts)
                 {
                     result += "|";
                     if (!String.IsNullOrEmpty(text))
                     {
-                        // | ‚ÌŒã‚É“à•”ƒŠƒ“ƒN‚âƒeƒ“ƒvƒŒ[ƒg‚ª‘‚©‚ê‚Ä‚¢‚éê‡‚ª‚ ‚é‚Ì‚ÅAÄ‹A“I‚Éˆ—‚·‚é
+                        // | ã®å¾Œã«å†…éƒ¨ãƒªãƒ³ã‚¯ã‚„ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆãŒæ›¸ã‹ã‚Œã¦ã„ã‚‹å ´åˆãŒã‚ã‚‹ã®ã§ã€å†å¸°çš„ã«å‡¦ç†ã™ã‚‹
                         result += replaceText(text, i_Parent);
                     }
                 }
-                // ƒŠƒ“ƒN‚ğ•Â‚¶‚é
+                // ãƒªãƒ³ã‚¯ã‚’é–‰ã˜ã‚‹
                 result += "}}";
             }
             System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > " + link.Text);
@@ -646,7 +646,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX‚ÌˆÊ’u‚É‘¶İ‚·‚éŒ©o‚µ(==ŠÖ˜A€–Ú==‚İ‚½‚¢‚È‚Ì)‚ğ‰ğÍ‚µA‰Â”\‚Å‚ ‚ê‚Î•ÏŠ·‚µ‚Ä•Ô‚·B
+        /// æŒ‡å®šã•ã‚ŒãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®ä½ç½®ã«å­˜åœ¨ã™ã‚‹è¦‹å‡ºã—(==é–¢é€£é …ç›®==ã¿ãŸã„ãªã®)ã‚’è§£æã—ã€å¯èƒ½ã§ã‚ã‚Œã°å¤‰æ›ã—ã¦è¿”ã™ã€‚
         /// </summary>
         /// <param name="o_Title"></param>
         /// <param name="i_Text"></param>
@@ -654,12 +654,12 @@ namespace Honememo.Wptscs.Logics
         /// <returns></returns>
         protected virtual int chkTitleLine(ref String o_Title, String i_Text, int i_Index)
         {
-            // ‰Šú‰»
-            // ¦Œ©o‚µ‚Å‚Í‚È‚¢A\•¶‚ª‚¨‚©‚µ‚¢‚È‚Ç‚Ìê‡A-1‚ğ•Ô‚·
+            // åˆæœŸåŒ–
+            // â€»è¦‹å‡ºã—ã§ã¯ãªã„ã€æ§‹æ–‡ãŒãŠã‹ã—ã„ãªã©ã®å ´åˆã€-1ã‚’è¿”ã™
             int lastIndex = -1;
             o_Title = "";
-            /*          // “ü—Í’lŠm”FAƒtƒ@ƒCƒ‹‚Ìæ“ªA‚Ü‚½‚Í‰üsŒã‚Ì==‚Ån‚Ü‚Á‚Ä‚¢‚é‚©‚ğƒ`ƒFƒbƒN
-                        // ¦ƒRƒƒ“ƒg‚Æ‚©l‚¦‚é‚Æƒ€ƒY‚¢‚Ì‚ÅA==‚¾‚¯ƒ`ƒFƒbƒN‚µ‚ÄAŒã‚ÍŒÄ‚Ño‚µŒ³‚Ås‚¤
+            /*          // å…¥åŠ›å€¤ç¢ºèªã€ãƒ•ã‚¡ã‚¤ãƒ«ã®å…ˆé ­ã€ã¾ãŸã¯æ”¹è¡Œå¾Œã®==ã§å§‹ã¾ã£ã¦ã„ã‚‹ã‹ã‚’ãƒã‚§ãƒƒã‚¯
+                        // â€»ã‚³ãƒ¡ãƒ³ãƒˆæ™‚ã¨ã‹è€ƒãˆã‚‹ã¨ãƒ ã‚ºã„ã®ã§ã€==ã ã‘ãƒã‚§ãƒƒã‚¯ã—ã¦ã€å¾Œã¯å‘¼ã³å‡ºã—å…ƒã§è¡Œã†
                         if(i_Index != 0){
                             if((MYAPP.Cmn.ChkTextInnerWith(i_Text, i_Index - 1, "\n==") == false){
                                 return lastIndex;
@@ -669,23 +669,23 @@ namespace Honememo.Wptscs.Logics
                             return lastIndex;
                         }
             */
-            // \•¶‚ğ‰ğÍ‚µ‚ÄA1s‚Ì•¶š—ñ‚ÆA=‚ÌŒÂ”‚ğæ“¾
-            // ¦\•¶‚ÍWikipedia‚ÌƒvƒŒƒrƒ…[‚ÅFX‚µ‚ÄŠm”FA‘«‚è‚È‚©‚Á‚½‚èŠÔˆá‚Á‚Ä‚½‚è‚·‚é‚©‚àEEE
-            // ¦Wikipedia‚Å‚Í <!--test-.=<!--test-.=ŠÖ˜A€–Ú<!--test-.==<!--test-. ‚İ‚½‚¢‚È‚Ì‚Å‚à
-            //   ³í‚É”F¯‚·‚é‚Ì‚ÅA‚Å‚«‚é‚¾‚¯‘Î‰‚·‚é
-            // ¦•ÏŠ·‚ª³í‚És‚í‚ê‚½ê‡AƒRƒƒ“ƒg‚Ííœ‚³‚ê‚é
+            // æ§‹æ–‡ã‚’è§£æã—ã¦ã€1è¡Œã®æ–‡å­—åˆ—ã¨ã€=ã®å€‹æ•°ã‚’å–å¾—
+            // â€»æ§‹æ–‡ã¯Wikipediaã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã§è‰²ã€…è©¦ã—ã¦ç¢ºèªã€è¶³ã‚Šãªã‹ã£ãŸã‚Šé–“é•ã£ã¦ãŸã‚Šã™ã‚‹ã‹ã‚‚ãƒ»ãƒ»ãƒ»
+            // â€»Wikipediaã§ã¯ <!--test-.=<!--test-.=é–¢é€£é …ç›®<!--test-.==<!--test-. ã¿ãŸã„ãªã®ã§ã‚‚
+            //   æ­£å¸¸ã«èªè­˜ã™ã‚‹ã®ã§ã€ã§ãã‚‹ã ã‘å¯¾å¿œã™ã‚‹
+            // â€»å¤‰æ›ãŒæ­£å¸¸ã«è¡Œã‚ã‚ŒãŸå ´åˆã€ã‚³ãƒ¡ãƒ³ãƒˆã¯å‰Šé™¤ã•ã‚Œã‚‹
             bool startFlag = true;
             int startSignCounter = 0;
             String nonCommentLine = "";
             for (lastIndex = i_Index; lastIndex < i_Text.Length; lastIndex++)
             {
                 char c = i_Text[lastIndex];
-                // ‰üs‚Ü‚Å
+                // æ”¹è¡Œã¾ã§
                 if (c == '\n')
                 {
                     break;
                 }
-                // ƒRƒƒ“ƒg‚Í–³‹‚·‚é
+                // ã‚³ãƒ¡ãƒ³ãƒˆã¯ç„¡è¦–ã™ã‚‹
                 String comment = "";
                 int index = WikipediaArticle.ChkComment(ref comment, i_Text, lastIndex);
                 if (index != -1)
@@ -694,7 +694,7 @@ namespace Honememo.Wptscs.Logics
                     lastIndex = index;
                     continue;
                 }
-                // æ“ª•”‚Ìê‡A=‚Ì”‚ğ”‚¦‚é
+                // å…ˆé ­éƒ¨ã®å ´åˆã€=ã®æ•°ã‚’æ•°ãˆã‚‹
                 else if (startFlag)
                 {
                     if (c == '=')
@@ -709,16 +709,16 @@ namespace Honememo.Wptscs.Logics
                 nonCommentLine += c;
                 o_Title += c;
             }
-            // ‰üs•¶šA‚Ü‚½‚Í•¶Í‚ÌÅŒã+1‚É‚È‚Á‚Ä‚¢‚é‚Í‚¸‚È‚Ì‚ÅA1•¶š–ß‚·
+            // æ”¹è¡Œæ–‡å­—ã€ã¾ãŸã¯æ–‡ç« ã®æœ€å¾Œ+1ã«ãªã£ã¦ã„ã‚‹ã¯ãšãªã®ã§ã€1æ–‡å­—æˆ»ã™
             --lastIndex;
-            // = ‚Ån‚Ü‚és‚Å‚Í‚È‚¢ê‡Aˆ—‘ÎÛŠO
+            // = ã§å§‹ã¾ã‚‹è¡Œã§ã¯ãªã„å ´åˆã€å‡¦ç†å¯¾è±¡å¤–
             if (startSignCounter < 1)
             {
                 o_Title = "";
                 return -1;
             }
-            // I‚í‚è‚Ì = ‚Ì”‚ğŠm”F
-            // ¦«‚Ìˆ—‚¾‚Æ’†g‚Ì–³‚¢si====‚Æ‚©j‚Í’e‚©‚ê‚Ä‚µ‚Ü‚¤‚ªA‚Ç‚¤‚¹ˆ—‚Å‚«‚È‚¢‚Ì‚Å‹–—e‚·‚é
+            // çµ‚ã‚ã‚Šã® = ã®æ•°ã‚’ç¢ºèª
+            // â€»â†“ã®å‡¦ç†ã ã¨ä¸­èº«ã®ç„¡ã„è¡Œï¼ˆ====ã¨ã‹ï¼‰ã¯å¼¾ã‹ã‚Œã¦ã—ã¾ã†ãŒã€ã©ã†ã›å‡¦ç†ã§ããªã„ã®ã§è¨±å®¹ã™ã‚‹
             int endSignCounter = 0;
             for (int i = nonCommentLine.Length - 1; i >= startSignCounter; i--)
             {
@@ -731,19 +731,19 @@ namespace Honememo.Wptscs.Logics
                     break;
                 }
             }
-            // = ‚ÅI‚í‚és‚Å‚Í‚È‚¢ê‡Aˆ—‘ÎÛŠO
+            // = ã§çµ‚ã‚ã‚‹è¡Œã§ã¯ãªã„å ´åˆã€å‡¦ç†å¯¾è±¡å¤–
             if (endSignCounter < 1)
             {
                 o_Title = "";
                 return -1;
             }
-            // n‚Ü‚è‚ÆI‚í‚èA=‚Ì­‚È‚¢‚Ù‚¤‚É‚ ‚í‚¹‚éi==test===‚Æ‚©—p‚Ìˆ—j
+            // å§‹ã¾ã‚Šã¨çµ‚ã‚ã‚Šã€=ã®å°‘ãªã„ã»ã†ã«ã‚ã‚ã›ã‚‹ï¼ˆ==test===ã¨ã‹ç”¨ã®å‡¦ç†ï¼‰
             int signCounter = startSignCounter;
             if (startSignCounter > endSignCounter)
             {
                 signCounter = endSignCounter;
             }
-            // ’èŒ^‹å•ÏŠ·
+            // å®šå‹å¥å¤‰æ›
             String oldText = nonCommentLine.Substring(signCounter, nonCommentLine.Length - (signCounter * 2)).Trim();
             String newText = getKeyWord(oldText);
             if (oldText != newText)
@@ -754,7 +754,7 @@ namespace Honememo.Wptscs.Logics
                     sign += "=";
                 }
                 String newTitle = (sign + newText + sign);
-                LogLine(ENTER + o_Title + " ¨ " + newTitle);
+                LogLine(ENTER + o_Title + " â†’ " + newTitle);
                 o_Title = newTitle;
             }
             else
@@ -765,13 +765,13 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½ƒR[ƒh‚Å‚Ì’èŒ^‹å‚É‘Š“–‚·‚éA•Ê‚ÌŒ¾Œê‚Å‚Ì’èŒ^‹å‚ğæ“¾B
+        /// æŒ‡å®šã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ã§ã®å®šå‹å¥ã«ç›¸å½“ã™ã‚‹ã€åˆ¥ã®è¨€èªã§ã®å®šå‹å¥ã‚’å–å¾—ã€‚
         /// </summary>
         /// <param name="i_Key"></param>
         /// <returns></returns>
         protected virtual String getKeyWord(String i_Key)
         {
-            // ¦İ’è‚ª‘¶İ‚µ‚È‚¢ê‡A“ü—Í’èŒ^‹å‚ğ‚»‚Ì‚Ü‚Ü‚ğ•Ô‚·
+            // â€»è¨­å®šãŒå­˜åœ¨ã—ãªã„å ´åˆã€å…¥åŠ›å®šå‹å¥ã‚’ãã®ã¾ã¾ã‚’è¿”ã™
             String key = ((i_Key != null) ? i_Key : "");
             WikipediaInformation src = (WikipediaInformation)source;
             WikipediaInformation tar = (WikipediaInformation)target;

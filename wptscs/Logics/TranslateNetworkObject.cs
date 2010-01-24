@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      ƒlƒbƒgƒ[ƒN‚ğg—p‚·‚é–|–óx‰‡ˆ—‚ğÀ‘•‚·‚é‚½‚ß‚Ì‹¤’ÊƒNƒ‰ƒXƒ\[ƒX</summary>
+//      ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’ä½¿ç”¨ã™ã‚‹ç¿»è¨³æ”¯æ´å‡¦ç†ã‚’å®Ÿè£…ã™ã‚‹ãŸã‚ã®å…±é€šã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="TranslateNetworkObject.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="TranslateNetworkObject.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -17,31 +17,31 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// ƒlƒbƒgƒ[ƒN‚ğg—p‚·‚é–|–óx‰‡ˆ—‚ğÀ‘•‚·‚é‚½‚ß‚Ì‹¤’ÊƒNƒ‰ƒX‚Å‚·B
+    /// ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚’ä½¿ç”¨ã™ã‚‹ç¿»è¨³æ”¯æ´å‡¦ç†ã‚’å®Ÿè£…ã™ã‚‹ãŸã‚ã®å…±é€šã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public abstract class TranslateNetworkObject : Translate
     {
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// ’ÊM‚Ég—p‚·‚éUserAgentB
+        /// é€šä¿¡æ™‚ã«ä½¿ç”¨ã™ã‚‹UserAgentã€‚
         /// </summary>
         public string UserAgent;
 
         /// <summary>
-        /// ’ÊM‚Ég—p‚·‚éRefererB
+        /// é€šä¿¡æ™‚ã«ä½¿ç”¨ã™ã‚‹Refererã€‚
         /// </summary>
         public string Referer;
         
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
         /// </summary>
-        /// <param name="source">–|–óŒ³Œ¾ŒêB</param>
-        /// <param name="target">–|–óæŒ¾ŒêB</param>
+        /// <param name="source">ç¿»è¨³å…ƒè¨€èªã€‚</param>
+        /// <param name="target">ç¿»è¨³å…ˆè¨€èªã€‚</param>
         public TranslateNetworkObject(
             LanguageWithServerInformation source, LanguageWithServerInformation target)
             : base(source, target)
@@ -50,37 +50,37 @@ namespace Honememo.Wptscs.Logics
         
         #endregion
         
-        #region ƒƒ\ƒbƒh
+        #region ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// –|–óx‰‡ˆ—ÀsB
+        /// ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè¡Œã€‚
         /// </summary>
-        /// <param name="name">‹L––¼B</param>
-        /// <returns><c>true</c> ˆ—¬Œ÷B</returns>
+        /// <param name="name">è¨˜äº‹åã€‚</param>
+        /// <returns><c>true</c> å‡¦ç†æˆåŠŸã€‚</returns>
         public override bool Run(string name)
         {
-            // •Ï”‚ğ‰Šú‰»
+            // å¤‰æ•°ã‚’åˆæœŸåŒ–
             RunInitialize();
 
-            // ƒT[ƒo[Ú‘±ƒ`ƒFƒbƒN
+            // ã‚µãƒ¼ãƒãƒ¼æ¥ç¶šãƒã‚§ãƒƒã‚¯
             if (this.Ping(((LanguageWithServerInformation) source).Server) == false)
             {
                 return false;
             }
 
-            // –|–óx‰‡ˆ—Às•”‚Ì–{‘Ì‚ğÀs
-            // ¦ˆÈ~‚Ìˆ—‚ÍAŒp³ƒNƒ‰ƒX‚É‚Ä’è‹`
+            // ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè¡Œéƒ¨ã®æœ¬ä½“ã‚’å®Ÿè¡Œ
+            // â€»ä»¥é™ã®å‡¦ç†ã¯ã€ç¶™æ‰¿ã‚¯ãƒ©ã‚¹ã«ã¦å®šç¾©
             return RunBody(name);
         }
 
         /// <summary>
-        /// ƒT[ƒo[Ú‘±ƒ`ƒFƒbƒNB
+        /// ã‚µãƒ¼ãƒãƒ¼æ¥ç¶šãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <param name="server">ƒT[ƒo[–¼B</param>
-        /// <returns><c>true</c> Ú‘±¬Œ÷B</returns>
+        /// <param name="server">ã‚µãƒ¼ãƒãƒ¼åã€‚</param>
+        /// <returns><c>true</c> æ¥ç¶šæˆåŠŸã€‚</returns>
         private bool Ping(string server)
         {
-            // ƒT[ƒo[Ú‘±ƒ`ƒFƒbƒN
+            // ã‚µãƒ¼ãƒãƒ¼æ¥ç¶šãƒã‚§ãƒƒã‚¯
             Ping ping = new Ping();
             try
             {

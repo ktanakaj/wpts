@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      �f�[�^�擾�����̒��ۉ��p�C���^�t�F�[�X�\�[�X</summary>
+//      データ取得処理の抽象化用インタフェースソース</summary>
 //
-// <copyright file="IDataSource.cs" company="honeplus�̃�����">
+// <copyright file="IDataSource.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -15,7 +15,7 @@ namespace Honememo.Wptscs.Models
     using System.Text;
 
     /// <summary>
-    /// �f�[�^�擾�����̒��ۉ��p�C���^�t�F�[�X�ł��B
+    /// データ取得処理の抽象化用インタフェースです。
     /// </summary>
     public interface IDataSource
     {

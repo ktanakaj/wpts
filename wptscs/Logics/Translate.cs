@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      –|–óx‰‡ˆ—‚ğÀ‘•‚·‚é‚½‚ß‚Ì‹¤’ÊƒNƒ‰ƒXƒ\[ƒX</summary>
+//      ç¿»è¨³æ”¯æ´å‡¦ç†ã‚’å®Ÿè£…ã™ã‚‹ãŸã‚ã®å…±é€šã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="Translate.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="Translate.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -16,59 +16,59 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Wptscs.Models;
 
     /// <summary>
-    /// –|–óx‰‡ˆ—‚ğÀ‘•‚·‚é‚½‚ß‚Ì‹¤’ÊƒNƒ‰ƒX‚Å‚·B
+    /// ç¿»è¨³æ”¯æ´å‡¦ç†ã‚’å®Ÿè£…ã™ã‚‹ãŸã‚ã®å…±é€šã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public abstract class Translate
     {
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// ‰üsƒR[ƒhB
+        /// æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã€‚
         /// </summary>
         public static readonly string ENTER = "\r\n";
 
         /// <summary>
-        /// ˆ—‚ğ“r’†‚ÅI—¹‚³‚¹‚é‚½‚ß‚Ìƒtƒ‰ƒOB
+        /// å‡¦ç†ã‚’é€”ä¸­ã§çµ‚äº†ã•ã›ã‚‹ãŸã‚ã®ãƒ•ãƒ©ã‚°ã€‚
         /// </summary>
         public bool CancellationPending;
 
         /// <summary>
-        /// ‹¤’ÊŠÖ”ƒNƒ‰ƒX‚ÌƒIƒuƒWƒFƒNƒgB
+        /// å…±é€šé–¢æ•°ã‚¯ãƒ©ã‚¹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚
         /// </summary>
         protected Honememo.Cmn cmnAP;
 
         /// <summary>
-        /// –|–óŒ³Œ¾Œê‚ÌŒ¾ŒêƒR[ƒhB
+        /// ç¿»è¨³å…ƒè¨€èªã®è¨€èªã‚³ãƒ¼ãƒ‰ã€‚
         /// </summary>
         protected LanguageInformation source;
 
         /// <summary>
-        /// –|–óæŒ¾Œê‚ÌŒ¾ŒêƒR[ƒhB
+        /// ç¿»è¨³å…ˆè¨€èªã®è¨€èªã‚³ãƒ¼ãƒ‰ã€‚
         /// </summary>
         protected LanguageInformation target;
 
         /// <summary>
-        /// ƒƒOƒƒbƒZ[ƒWipropertyjB
+        /// ãƒ­ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ï¼ˆpropertyï¼‰ã€‚
         /// </summary>
         private string log;
 
         /// <summary>
-        /// •ÏŠ·ŒãƒeƒLƒXƒgipropertyjB
+        /// å¤‰æ›å¾Œãƒ†ã‚­ã‚¹ãƒˆï¼ˆpropertyï¼‰ã€‚
         /// </summary>
         private string text;
         
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
         /// </summary>
-        /// <param name="source">–|–óŒ³Œ¾ŒêB</param>
-        /// <param name="target">–|–óæŒ¾ŒêB</param>
+        /// <param name="source">ç¿»è¨³å…ƒè¨€èªã€‚</param>
+        /// <param name="target">ç¿»è¨³å…ˆè¨€èªã€‚</param>
         public Translate(LanguageInformation source, LanguageInformation target)
         {
-            // ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
+            // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
             if (source == null)
             {
                 throw new ArgumentNullException("source");
@@ -78,7 +78,7 @@ namespace Honememo.Wptscs.Logics
                 throw new ArgumentNullException("target");
             }
 
-            // ƒƒ“ƒo•Ï”‚Ì‰Šú‰»
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸåŒ–
             this.cmnAP = new Honememo.Cmn();
             this.source = source;
             this.target = target;
@@ -87,19 +87,19 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
-        #region ƒCƒxƒ“ƒg
+        #region ã‚¤ãƒ™ãƒ³ãƒˆ
 
         /// <summary>
-        /// ƒƒOXV“`’BƒCƒxƒ“ƒgB
+        /// ãƒ­ã‚°æ›´æ–°ä¼é”ã‚¤ãƒ™ãƒ³ãƒˆã€‚
         /// </summary>
         public event EventHandler LogUpdate;
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
         /// <summary>
-        /// ƒƒOƒƒbƒZ[ƒWB
+        /// ãƒ­ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚
         /// </summary>
         public string Log
         {
@@ -116,7 +116,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// •ÏŠ·ŒãƒeƒLƒXƒgB
+        /// å¤‰æ›å¾Œãƒ†ã‚­ã‚¹ãƒˆã€‚
         /// </summary>
         public string Text
         {
@@ -133,49 +133,49 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
-        #region ƒƒ\ƒbƒh
+        #region ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// –|–óx‰‡ˆ—ÀsB
+        /// ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè¡Œã€‚
         /// </summary>
-        /// <param name="name">‹L––¼B</param>
-        /// <returns><c>true</c> ˆ—¬Œ÷</returns>
+        /// <param name="name">è¨˜äº‹åã€‚</param>
+        /// <returns><c>true</c> å‡¦ç†æˆåŠŸ</returns>
         public virtual bool Run(string name)
         {
-            // •Ï”‚ğ‰Šú‰»
+            // å¤‰æ•°ã‚’åˆæœŸåŒ–
             this.RunInitialize();
 
-            // –|–óx‰‡ˆ—Às•”‚Ì–{‘Ì‚ğÀs
-            // ¦ˆÈ~‚Ìˆ—‚ÍAŒp³ƒNƒ‰ƒX‚É‚Ä’è‹`
+            // ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè¡Œéƒ¨ã®æœ¬ä½“ã‚’å®Ÿè¡Œ
+            // â€»ä»¥é™ã®å‡¦ç†ã¯ã€ç¶™æ‰¿ã‚¯ãƒ©ã‚¹ã«ã¦å®šç¾©
             return this.RunBody(name);
         }
 
         /// <summary>
-        /// –|–óx‰‡ˆ—Às•”‚Ì–{‘ÌB
-        /// ¦Œp³ƒNƒ‰ƒX‚Å‚ÍA‚±‚ÌŠÖ”‚Éˆ—‚ğÀ‘•‚·‚é‚±‚Æ
+        /// ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè¡Œéƒ¨ã®æœ¬ä½“ã€‚
+        /// â€»ç¶™æ‰¿ã‚¯ãƒ©ã‚¹ã§ã¯ã€ã“ã®é–¢æ•°ã«å‡¦ç†ã‚’å®Ÿè£…ã™ã‚‹ã“ã¨
         /// </summary>
-        /// <param name="name">‹L––¼B</param>
-        /// <returns><c>true</c> ˆ—¬Œ÷</returns>
+        /// <param name="name">è¨˜äº‹åã€‚</param>
+        /// <returns><c>true</c> å‡¦ç†æˆåŠŸ</returns>
         protected abstract bool RunBody(string name);
 
         /// <summary>
-        /// –|–óx‰‡ˆ—Às‚Ì‰Šú‰»ˆ—B
+        /// ç¿»è¨³æ”¯æ´å‡¦ç†å®Ÿè¡Œæ™‚ã®åˆæœŸåŒ–å‡¦ç†ã€‚
         /// </summary>
         protected void RunInitialize()
         {
-            // •Ï”‚ğ‰Šú‰»
+            // å¤‰æ•°ã‚’åˆæœŸåŒ–
             this.log = String.Empty;
             this.Text = String.Empty;
             this.CancellationPending = false;
         }
 
         /// <summary>
-        /// ƒƒOƒƒbƒZ[ƒW‚ğ1s’Ç‰Áo—ÍB
+        /// ãƒ­ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’1è¡Œè¿½åŠ å‡ºåŠ›ã€‚
         /// </summary>
-        /// <param name="log">ƒƒOƒƒbƒZ[ƒWB</param>
+        /// <param name="log">ãƒ­ã‚°ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚</param>
         protected void LogLine(string log)
         {
-            // ’¼‘O‚ÌƒƒO‚ª‰üs‚³‚ê‚Ä‚¢‚È‚¢ê‡A‰üs‚µ‚Äo—Í
+            // ç›´å‰ã®ãƒ­ã‚°ãŒæ”¹è¡Œã•ã‚Œã¦ã„ãªã„å ´åˆã€æ”¹è¡Œã—ã¦å‡ºåŠ›
             if (this.Log != String.Empty && this.Log.EndsWith(ENTER) == false)
             {
                 this.Log += ENTER + log + ENTER;

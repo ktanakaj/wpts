@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      XML‚Ö‚Ìİ’è•Û‘¶—pƒNƒ‰ƒXƒ\[ƒX</summary>
+//      XMLã¸ã®è¨­å®šä¿å­˜ç”¨ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="Config.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="Config.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -14,17 +14,17 @@ namespace Honememo.Wptscs.Models
     using System.Xml.Serialization;
 
     /// <summary>
-    /// XML‚Ö‚Ìİ’è•Û‘¶—pƒNƒ‰ƒX‚Å‚·B
+    /// XMLã¸ã®è¨­å®šä¿å­˜ç”¨ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public class Config
     {
         /// <summary>
-        /// ƒNƒ‰ƒCƒAƒ“ƒg‚Æ‚µ‚Ä‚Ì‹@”\ŠÖŒW‚Ìİ’è‚ğ•Û‘¶B
+        /// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã—ã¦ã®æ©Ÿèƒ½é–¢ä¿‚ã®è¨­å®šã‚’ä¿å­˜ã€‚
         /// </summary>
         public ClientConfig Client;
 
         /// <summary>
-        /// Œ¾Œê‚²‚Æ‚Ìî•ñiƒT[ƒo[‚Ìİ’è‚È‚Ç‚àj‚ğ•Û‘¶B
+        /// è¨€èªã”ã¨ã®æƒ…å ±ï¼ˆã‚µãƒ¼ãƒãƒ¼ã®è¨­å®šãªã©ã‚‚ï¼‰ã‚’ä¿å­˜ã€‚
         /// </summary>
         [XmlArrayItem(typeof(LanguageInformation)),
         XmlArrayItem(typeof(LanguageWithServerInformation)),
@@ -32,55 +32,55 @@ namespace Honememo.Wptscs.Models
         public LanguageInformation[] Languages;
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìƒtƒ@ƒCƒ‹–¼B
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ãƒ•ã‚¡ã‚¤ãƒ«åã€‚
         /// </summary>
         private string path;
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’ÊíjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆé€šå¸¸ï¼‰ã€‚
         /// </summary>
         public Config()
         {
-            // ƒƒ“ƒo•Ï”‚Ì—ÌˆæŠm•ÛE‰Šúİ’è
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®é ˜åŸŸç¢ºä¿ãƒ»åˆæœŸè¨­å®š
             this.Client = new ClientConfig();
             this.Languages = new LanguageInformation[0];
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒtƒ@ƒCƒ‹“Ç‚İ‚İ‚ ‚èjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚ã‚Šï¼‰ã€‚
         /// </summary>
-        /// <param name="path">İ’èƒtƒ@ƒCƒ‹ƒpƒXB</param>
+        /// <param name="path">è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã€‚</param>
         public Config(string path)
         {
-            // ƒtƒ@ƒCƒ‹‚©‚çİ’è‚ğ“Ç‚İ‚İ
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰è¨­å®šã‚’èª­ã¿è¾¼ã¿
             this.path = Honememo.Cmn.NullCheckAndTrim(path);
             if (this.Load() == false)
             {
-                // ¸”s‚µ‚½ê‡A’Êí‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Æ“¯‚¶ˆ—‚Å‰Šú‰»
+                // å¤±æ•—ã—ãŸå ´åˆã€é€šå¸¸ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¨åŒã˜å‡¦ç†ã§åˆæœŸåŒ–
                 this.Client = new ClientConfig();
                 this.Languages = new LanguageInformation[0];
             }
         }
 
         /// <summary>
-        /// ƒvƒƒOƒ‰ƒ€‚Ìˆ—ƒ‚[ƒh‚ğ¦‚·—ñ‹“’l‚Å‚·B
+        /// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®å‡¦ç†ãƒ¢ãƒ¼ãƒ‰ã‚’ç¤ºã™åˆ—æŒ™å€¤ã§ã™ã€‚
         /// </summary>
         public enum RunType
         {
             /// <summary>
-            /// WikipediaE‚Ü‚½‚Ío–…ƒTƒCƒg
+            /// Wikipediaãƒ»ã¾ãŸã¯å§‰å¦¹ã‚µã‚¤ãƒˆ
             /// </summary>
             [XmlEnum(Name = "Wikipedia")]
             Wikipedia
         }
 
         /// <summary>
-        /// İ’è‚ğƒtƒ@ƒCƒ‹‚É‘‚«o‚µB
+        /// è¨­å®šã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«æ›¸ãå‡ºã—ã€‚
         /// </summary>
-        /// <returns><c>true</c> ‘‚«o‚µ¬Œ÷</returns>
+        /// <returns><c>true</c> æ›¸ãå‡ºã—æˆåŠŸ</returns>
         public bool Save()
         {
-            // İ’è‚ğƒVƒŠƒAƒ‰ƒCƒY‰»
+            // è¨­å®šã‚’ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºåŒ–
             if (this.path == String.Empty)
             {
                 return false;
@@ -90,12 +90,12 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// İ’è‚ğƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚İB
+        /// è¨­å®šã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã¿ã€‚
         /// </summary>
-        /// <returns><c>true</c> “Ç‚İ‚İ¬Œ÷</returns>
+        /// <returns><c>true</c> èª­ã¿è¾¼ã¿æˆåŠŸ</returns>
         public bool Load()
         {
-            // İ’è‚ğƒfƒVƒŠƒAƒ‰ƒCƒY‰»
+            // è¨­å®šã‚’ãƒ‡ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºåŒ–
             if (this.path == String.Empty)
             {
                 return false;
@@ -117,12 +117,12 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½ƒR[ƒh‚ÌŒ¾Œêî•ñiƒT[ƒo[î•ñj‚ğæ“¾B
-        /// ¦ ‘¶İ‚µ‚È‚¢ê‡A<c>null</c>
+        /// æŒ‡å®šã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ã®è¨€èªæƒ…å ±ï¼ˆã‚µãƒ¼ãƒãƒ¼æƒ…å ±ï¼‰ã‚’å–å¾—ã€‚
+        /// â€» å­˜åœ¨ã—ãªã„å ´åˆã€<c>null</c>
         /// </summary>
-        /// <param name="code">Œ¾ŒêƒR[ƒhB</param>
-        /// <param name="mode">ˆ—ƒ‚[ƒhB</param>
-        /// <returns>Œ¾Œêî•ñiƒT[ƒo[î•ñj</returns>
+        /// <param name="code">è¨€èªã‚³ãƒ¼ãƒ‰ã€‚</param>
+        /// <param name="mode">å‡¦ç†ãƒ¢ãƒ¼ãƒ‰ã€‚</param>
+        /// <returns>è¨€èªæƒ…å ±ï¼ˆã‚µãƒ¼ãƒãƒ¼æƒ…å ±ï¼‰</returns>
         public LanguageInformation GetLanguage(string code, RunType mode)
         {
             Type type;
@@ -150,56 +150,56 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½ƒR[ƒh‚ÌŒ¾Œêî•ñiƒT[ƒo[î•ñj‚ğæ“¾iRunType‚ÌŒ^jB
+        /// æŒ‡å®šã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ã®è¨€èªæƒ…å ±ï¼ˆã‚µãƒ¼ãƒãƒ¼æƒ…å ±ï¼‰ã‚’å–å¾—ï¼ˆRunTypeã®å‹ï¼‰ã€‚
         /// </summary>
-        /// <param name="code">Œ¾ŒêƒR[ƒhB</param>
-        /// <returns>Œ¾Œêî•ñiƒT[ƒo[î•ñj</returns>
+        /// <param name="code">è¨€èªã‚³ãƒ¼ãƒ‰ã€‚</param>
+        /// <returns>è¨€èªæƒ…å ±ï¼ˆã‚µãƒ¼ãƒãƒ¼æƒ…å ±ï¼‰</returns>
         public LanguageInformation GetLanguage(string code)
         {
             return this.GetLanguage(code, this.Client.RunMode);
         }
 
         /// <summary>
-        /// ƒNƒ‰ƒCƒAƒ“ƒg‚Æ‚µ‚Ä‚Ì‹@”\ŠÖŒW‚Ìİ’è‚ğŠi”[‚·‚éƒNƒ‰ƒX‚Å‚·B
+        /// ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã—ã¦ã®æ©Ÿèƒ½é–¢ä¿‚ã®è¨­å®šã‚’æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
         /// </summary>
         public class ClientConfig
         {
             /// <summary>
-            /// ƒvƒƒOƒ‰ƒ€‚Ìˆ—‘ÎÛB
+            /// ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®å‡¦ç†å¯¾è±¡ã€‚
             /// </summary>
             public RunType RunMode;
 
             /// <summary>
-            /// ÀsŒ‹‰Ê‚ğ•Û‘¶‚·‚éƒtƒHƒ‹ƒ_B
+            /// å®Ÿè¡Œçµæœã‚’ä¿å­˜ã™ã‚‹ãƒ•ã‚©ãƒ«ãƒ€ã€‚
             /// </summary>
             public string SaveDirectory;
 
             /// <summary>
-            /// ÅŒã‚Éw’è‚µ‚Ä‚¢‚½–|–óŒ³Œ¾ŒêB
+            /// æœ€å¾Œã«æŒ‡å®šã—ã¦ã„ãŸç¿»è¨³å…ƒè¨€èªã€‚
             /// </summary>
             public string LastSelectedSource;
 
             /// <summary>
-            /// ÅŒã‚Éw’è‚µ‚Ä‚¢‚½–|–óæŒ¾ŒêB
+            /// æœ€å¾Œã«æŒ‡å®šã—ã¦ã„ãŸç¿»è¨³å…ˆè¨€èªã€‚
             /// </summary>
             public string LastSelectedTarget;
 
             /// <summary>
-            /// ’ÊM‚Ég—p‚·‚éUserAgentB
+            /// é€šä¿¡æ™‚ã«ä½¿ç”¨ã™ã‚‹UserAgentã€‚
             /// </summary>
             public string UserAgent;
 
             /// <summary>
-            /// ’ÊM‚Ég—p‚·‚éRefererB
+            /// é€šä¿¡æ™‚ã«ä½¿ç”¨ã™ã‚‹Refererã€‚
             /// </summary>
             public string Referer;
 
             /// <summary>
-            /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B
+            /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚
             /// </summary>
             public ClientConfig()
             {
-                // ƒƒ“ƒo•Ï”‚Ì—ÌˆæŠm•ÛE‰Šúİ’è
+                // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®é ˜åŸŸç¢ºä¿ãƒ»åˆæœŸè¨­å®š
                 this.RunMode = RunType.Wikipedia;
                 this.SaveDirectory = String.Empty;
                 this.LastSelectedSource = "en";

@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      Œ¾Œê‚ÉŠÖ‚·‚éî•ñ‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒXƒ\[ƒX</summary>
+//      è¨€èªã«é–¢ã™ã‚‹æƒ…å ±ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="Language.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="Language.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -15,52 +15,52 @@ namespace Honememo.Wptscs.Models
     using System.Xml.Serialization;
 
     /// <summary>
-    /// Œ¾Œê‚ÉŠÖ‚·‚éî•ñ‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒX‚Å‚·B
+    /// è¨€èªã«é–¢ã™ã‚‹æƒ…å ±ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public class Language : IComparable
     {
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// Œ¾Œê‚ÌƒR[ƒhB
+        /// è¨€èªã®ã‚³ãƒ¼ãƒ‰ã€‚
         /// </summary>
         private string code;
 
         /// <summary>
-        /// ‚±‚ÌŒ¾Œê‚ÌAŠeŒ¾Œê‚Å‚Ì–¼ÌB
+        /// ã“ã®è¨€èªã®ã€å„è¨€èªã§ã®åç§°ã€‚
         /// </summary>
         private IDictionary<string, LanguageName> names = new Dictionary<string, LanguageName>();
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒVƒŠƒAƒ‰ƒCƒY—pjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ï¼‰ã€‚
         /// </summary>
         public Language()
             : this("unknown")
         {
-            // ª“K“–‚È’l‚Å’Êí‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğÀs
-            System.Diagnostics.Debug.WriteLine("Language.Language : „§‚³‚ê‚È‚¢ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğg—p‚µ‚Ä‚¢‚Ü‚·");
+            // â†‘é©å½“ãªå€¤ã§é€šå¸¸ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’å®Ÿè¡Œ
+            System.Diagnostics.Debug.WriteLine("Language.Language : æ¨å¥¨ã•ã‚Œãªã„ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™");
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’ÊíjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆé€šå¸¸ï¼‰ã€‚
         /// </summary>
-        /// <param name="code">Œ¾Œê‚ÌƒR[ƒhBB</param>
+        /// <param name="code">è¨€èªã®ã‚³ãƒ¼ãƒ‰ã€‚ã€‚</param>
         public Language(string code)
         {
-            // ƒƒ“ƒo•Ï”‚Ì‰Šúİ’è
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸè¨­å®š
             this.Code = code;
         }
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
         /// <summary>
-        /// Œ¾Œê‚ÌƒR[ƒhB
+        /// è¨€èªã®ã‚³ãƒ¼ãƒ‰ã€‚
         /// </summary>
         [XmlAttributeAttribute("Code")]
         public string Code
@@ -72,7 +72,7 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
+                // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
                 if (String.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("code");
@@ -83,7 +83,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ‚±‚ÌŒ¾Œê‚ÌAŠeŒ¾Œê‚Å‚Ì–¼ÌB
+        /// ã“ã®è¨€èªã®ã€å„è¨€èªã§ã®åç§°ã€‚
         /// </summary>
         public IDictionary<string, LanguageName> Names
         {
@@ -94,7 +94,7 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
+                // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
                 if (value == null)
                 {
                     throw new ArgumentNullException("names");
@@ -106,36 +106,36 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region ƒƒ\ƒbƒh
+        #region ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// ”z—ñ‚Ìƒ\[ƒg—pƒƒ\ƒbƒhB
+        /// é…åˆ—ã®ã‚½ãƒ¼ãƒˆç”¨ãƒ¡ã‚½ãƒƒãƒ‰ã€‚
         /// </summary>
-        /// <param name="obj">”äŠr‘ÎÛ‚ÌƒIƒuƒWƒFƒNƒgB</param>
-        /// <returns>”äŠr‘ÎÛƒIƒuƒWƒFƒNƒg‚Ì‘Š‘Î‡˜‚ğ¦‚·®”’lB</returns>
+        /// <param name="obj">æ¯”è¼ƒå¯¾è±¡ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚</param>
+        /// <returns>æ¯”è¼ƒå¯¾è±¡ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç›¸å¯¾é †åºã‚’ç¤ºã™æ•´æ•°å€¤ã€‚</returns>
         public int CompareTo(object obj)
         {
-            // Œ¾ŒêƒR[ƒh‚Åƒ\[ƒg
+            // è¨€èªã‚³ãƒ¼ãƒ‰ã§ã‚½ãƒ¼ãƒˆ
             Language lang = obj as Language;
             return this.Code.CompareTo(lang.Code);
         }
 
         #endregion
 
-        #region \‘¢‘Ì
+        #region æ§‹é€ ä½“
 
         /// <summary>
-        /// ‚ ‚éŒ¾Œê‚ÌAŠeŒ¾Œê‚Å‚Ì–¼ÌE—ªÌ‚ğŠi”[‚·‚é‚½‚ß‚Ì\‘¢‘Ì‚Å‚·B
+        /// ã‚ã‚‹è¨€èªã®ã€å„è¨€èªã§ã®åç§°ãƒ»ç•¥ç§°ã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®æ§‹é€ ä½“ã§ã™ã€‚
         /// </summary>
         public struct LanguageName
         {
             /// <summary>
-            /// Œ¾Œê‚Ì–¼ÌB
+            /// è¨€èªã®åç§°ã€‚
             /// </summary>
             public string Name;
 
             /// <summary>
-            /// Œ¾Œê‚Ì—ªÌB
+            /// è¨€èªã®ç•¥ç§°ã€‚
             /// </summary>
             public string ShortName;
         }

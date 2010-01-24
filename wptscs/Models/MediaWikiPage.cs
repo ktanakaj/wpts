@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      MediaWiki‚Ìƒy[ƒW‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒXƒ\[ƒX</summary>
+//      MediaWikiã®ãƒšãƒ¼ã‚¸ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="MediaWikiPage.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="MediaWikiPage.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -16,125 +16,125 @@ namespace Honememo.Wptscs.Models
     using System.Xml;
 
     /// <summary>
-    /// MediaWiki‚Ìƒy[ƒW‚ğ‚ ‚ç‚í‚·ƒ‚ƒfƒ‹ƒNƒ‰ƒX‚Å‚·B
+    /// MediaWikiã®ãƒšãƒ¼ã‚¸ã‚’ã‚ã‚‰ã‚ã™ãƒ¢ãƒ‡ãƒ«ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public class MediaWikiPage : Page
     {
-        #region ’è”éŒ¾
+        #region å®šæ•°å®£è¨€
 
         /// <summary>
-        /// ƒRƒƒ“ƒg‚ÌŠJnB
+        /// ã‚³ãƒ¡ãƒ³ãƒˆã®é–‹å§‹ã€‚
         /// </summary>
         public static readonly string CommentStart = "<!--";
 
         /// <summary>
-        /// ƒRƒƒ“ƒg‚ÌI—¹B
+        /// ã‚³ãƒ¡ãƒ³ãƒˆã®çµ‚äº†ã€‚
         /// </summary>
         public static readonly string CommentEnd = "-->";
 
         /// <summary>
-        /// nowiki‚ÌŠJnB
+        /// nowikiã®é–‹å§‹ã€‚
         /// </summary>
         public static readonly string NowikiStart = "<nowiki>";
 
         /// <summary>
-        /// nowiki‚ÌI—¹B
+        /// nowikiã®çµ‚äº†ã€‚
         /// </summary>
         public static readonly string NowikiEnd = "</nowiki>";
 
         /// <summary>
-        /// msgnw‚Ì‘®B
+        /// msgnwã®æ›¸å¼ã€‚
         /// </summary>
         public static readonly string Msgnw = "msgnw:";
 
         #endregion
 
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// ƒy[ƒW‚ÌXMLƒf[ƒ^B
+        /// ãƒšãƒ¼ã‚¸ã®XMLãƒ‡ãƒ¼ã‚¿ã€‚
         /// </summary>
         private XmlDocument xml;
 
         /// <summary>
-        /// ƒŠƒ_ƒCƒŒƒNƒgæ‚Ìƒy[ƒW–¼B
+        /// ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå…ˆã®ãƒšãƒ¼ã‚¸åã€‚
         /// </summary>
         private string redirect;
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒy[ƒWî•ñjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆãƒšãƒ¼ã‚¸æƒ…å ±ï¼‰ã€‚
         /// </summary>
-        /// <param name="website">ƒy[ƒW‚ªŠ‘®‚·‚éƒEƒFƒuƒTƒCƒgB</param>
-        /// <param name="title">ƒy[ƒWƒ^ƒCƒgƒ‹B</param>
-        /// <param name="text">ƒy[ƒW‚Ì–{•¶B</param>
-        /// <param name="timestamp">ƒy[ƒW‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒvB</param>
+        /// <param name="website">ãƒšãƒ¼ã‚¸ãŒæ‰€å±ã™ã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã€‚</param>
+        /// <param name="title">ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚</param>
+        /// <param name="text">ãƒšãƒ¼ã‚¸ã®æœ¬æ–‡ã€‚</param>
+        /// <param name="timestamp">ãƒšãƒ¼ã‚¸ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã€‚</param>
         public MediaWikiPage(MediaWiki website, string title, string text, DateTime timestamp)
             : base(website, title, text, timestamp)
         {
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒy[ƒWî•ñjB
-        /// ƒy[ƒW‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚É‚ÍŒ»İ“ú (UTC) ‚ğİ’èB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆãƒšãƒ¼ã‚¸æƒ…å ±ï¼‰ã€‚
+        /// ãƒšãƒ¼ã‚¸ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—ã«ã¯ç¾åœ¨æ—¥æ™‚ (UTC) ã‚’è¨­å®šã€‚
         /// </summary>
-        /// <param name="website">ƒy[ƒW‚ªŠ‘®‚·‚éƒEƒFƒuƒTƒCƒgB</param>
-        /// <param name="title">ƒy[ƒWƒ^ƒCƒgƒ‹B</param>
-        /// <param name="text">ƒy[ƒW‚Ì–{•¶B</param>
+        /// <param name="website">ãƒšãƒ¼ã‚¸ãŒæ‰€å±ã™ã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã€‚</param>
+        /// <param name="title">ãƒšãƒ¼ã‚¸ã‚¿ã‚¤ãƒˆãƒ«ã€‚</param>
+        /// <param name="text">ãƒšãƒ¼ã‚¸ã®æœ¬æ–‡ã€‚</param>
         public MediaWikiPage(MediaWiki website, string title, string text)
             : base(website, title, text)
         {
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^iXMLjB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆXMLï¼‰ã€‚
         /// </summary>
-        /// <param name="website">ƒy[ƒW‚ªŠ‘®‚·‚éƒEƒFƒuƒTƒCƒgB</param>
-        /// <param name="xml">MediaWiki‚ÅƒGƒNƒXƒ|[ƒg‚µ‚½ƒy[ƒWXMLB</param>
+        /// <param name="website">ãƒšãƒ¼ã‚¸ãŒæ‰€å±ã™ã‚‹ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã€‚</param>
+        /// <param name="xml">MediaWikiã§ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã—ãŸãƒšãƒ¼ã‚¸XMLã€‚</param>
         public MediaWikiPage(MediaWiki website, XmlDocument xml)
             : base(website, null, null)
         {
-            // ‚±‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Å‚ÍXML‚Í•K{
+            // ã“ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã§ã¯XMLã¯å¿…é ˆ
             if (xml == null)
             {
                 throw new ArgumentNullException("xml");
             }
 
-            // ‰Šúİ’è
+            // åˆæœŸè¨­å®š
             this.Xml = xml;
 
-            // XML‚ğ‰ğÍ‚µAƒƒ“ƒo‚Éİ’è
+            // XMLã‚’è§£æã—ã€ãƒ¡ãƒ³ãƒã«è¨­å®š
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(this.Xml.NameTable);
             nsmgr.AddNamespace("ns", MediaWiki.Xmlns);
             XmlElement pageElement = this.Xml.SelectSingleNode("/ns:mediawiki/ns:page", nsmgr) as XmlElement;
             if (pageElement != null)
             {
-                // ‹L––¼‚Ìã‘‚«
+                // è¨˜äº‹åã®ä¸Šæ›¸ã
                 XmlElement titleElement = pageElement.SelectSingleNode("ns:title", nsmgr) as XmlElement;
                 this.Title = titleElement.InnerText;
 
-                // ÅIXV“ú
+                // æœ€çµ‚æ›´æ–°æ—¥æ™‚
                 XmlElement timeElement = pageElement.SelectSingleNode("ns:revision/ns:timestamp", nsmgr) as XmlElement;
                 this.Timestamp = DateTime.Parse(timeElement.InnerText);
 
-                // ‹L––{•¶
+                // è¨˜äº‹æœ¬æ–‡
                 XmlElement textElement = pageElement.SelectSingleNode("ns:revision/ns:text", nsmgr) as XmlElement;
                 this.Text = textElement.InnerText;
 
-                // ƒŠƒ_ƒCƒŒƒNƒg‚Ìƒ`ƒFƒbƒN‚ğs‚¢A‘®«’l‚ğXV‚·‚é
+                // ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã®ãƒã‚§ãƒƒã‚¯ã‚’è¡Œã„ã€å±æ€§å€¤ã‚’æ›´æ–°ã™ã‚‹
                 this.IsRedirect();
             }
         }
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
         /// <summary>
-        /// ƒy[ƒW‚ÌXMLƒf[ƒ^B
+        /// ãƒšãƒ¼ã‚¸ã®XMLãƒ‡ãƒ¼ã‚¿ã€‚
         /// </summary>
         public XmlDocument Xml
         {
@@ -150,7 +150,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒŠƒ_ƒCƒŒƒNƒgæ‚Ìƒy[ƒW–¼B
+        /// ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆå…ˆã®ãƒšãƒ¼ã‚¸åã€‚
         /// </summary>
         public string Redirect
         {
@@ -167,10 +167,10 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region Ã“Iƒƒ\ƒbƒh
+        #region é™çš„ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// nowiki‹æŠÔ‚Ìƒ`ƒFƒbƒNB
+        /// nowikiåŒºé–“ã®ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
         /// <param name="o_Text"></param>
         /// <param name="i_Text"></param>
@@ -178,27 +178,27 @@ namespace Honememo.Wptscs.Models
         /// <returns></returns>
         public static int ChkNowiki(ref string o_Text, string i_Text, int i_Index)
         {
-            // o—Í’l‰Šú‰»
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
             int lastIndex = -1;
             o_Text = String.Empty;
 
-            // “ü—Í’lŠm”F
+            // å…¥åŠ›å€¤ç¢ºèª
             if (Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, NowikiStart.ToLower()) == false)
             {
                 return lastIndex;
             }
 
-            // ƒuƒƒbƒNI—¹‚Ü‚Åæ“¾
+            // ãƒ–ãƒ­ãƒƒã‚¯çµ‚äº†ã¾ã§å–å¾—
             for (int i = i_Index + NowikiStart.Length; i < i_Text.Length; i++)
             {
-                // I—¹ğŒ‚Ìƒ`ƒFƒbƒN
+                // çµ‚äº†æ¡ä»¶ã®ãƒã‚§ãƒƒã‚¯
                 if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, NowikiEnd))
                 {
                     lastIndex = i + NowikiEnd.Length - 1;
                     break;
                 }
 
-                // ƒRƒƒ“ƒgi<!--j‚Ìƒ`ƒFƒbƒN
+                // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ã®ãƒã‚§ãƒƒã‚¯
                 string dummy = String.Empty;
                 int index = ChkComment(ref dummy, i_Text, i);
                 if (index != -1)
@@ -208,7 +208,7 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // I‚í‚è‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍA‘S‚ÄnowikiƒuƒƒbƒN‚Æ”»’f
+            // çµ‚ã‚ã‚ŠãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€å…¨ã¦nowikiãƒ–ãƒ­ãƒƒã‚¯ã¨åˆ¤æ–­
             if (lastIndex == -1)
             {
                 lastIndex = i_Text.Length - 1;
@@ -219,7 +219,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒRƒƒ“ƒg‹æŠÔ‚Ìƒ`ƒFƒbƒNB
+        /// ã‚³ãƒ¡ãƒ³ãƒˆåŒºé–“ã®ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
         /// <param name="o_Text"></param>
         /// <param name="i_Text"></param>
@@ -227,17 +227,17 @@ namespace Honememo.Wptscs.Models
         /// <returns></returns>
         public static int ChkComment(ref string o_Text, string i_Text, int i_Index)
         {
-            // o—Í’l‰Šú‰»
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
             int lastIndex = -1;
             o_Text = String.Empty;
 
-            // “ü—Í’lŠm”F
+            // å…¥åŠ›å€¤ç¢ºèª
             if (Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, CommentStart) == false)
             {
                 return lastIndex;
             }
 
-            // ƒRƒƒ“ƒgI—¹‚Ü‚Åæ“¾
+            // ã‚³ãƒ¡ãƒ³ãƒˆçµ‚äº†ã¾ã§å–å¾—
             for (int i = i_Index + CommentStart.Length; i < i_Text.Length; i++)
             {
                 if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, CommentEnd))
@@ -247,7 +247,7 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // I‚í‚è‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍA‘S‚ÄƒRƒƒ“ƒg‚Æ”»’f
+            // çµ‚ã‚ã‚ŠãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€å…¨ã¦ã‚³ãƒ¡ãƒ³ãƒˆã¨åˆ¤æ–­
             if (lastIndex == -1)
             {
                 lastIndex = i_Text.Length - 1;
@@ -259,27 +259,27 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region ƒCƒ“ƒXƒ^ƒ“ƒXƒƒ\ƒbƒh
+        #region ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// w’è‚³‚ê‚½Œ¾ŒêƒR[ƒh‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚ğ•Ô‚·B
+        /// æŒ‡å®šã•ã‚ŒãŸè¨€èªã‚³ãƒ¼ãƒ‰ã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’è¿”ã™ã€‚
         /// </summary>
-        /// <param name="code">Œ¾ŒêƒR[ƒhB</param>
-        /// <returns>Œ¾ŒêŠÔƒŠƒ“ƒNæ‚Ì‹L––¼BŒ©‚Â‚©‚ç‚È‚¢ê‡‚Í‹óB</returns>
+        /// <param name="code">è¨€èªã‚³ãƒ¼ãƒ‰ã€‚</param>
+        /// <returns>è¨€èªé–“ãƒªãƒ³ã‚¯å…ˆã®è¨˜äº‹åã€‚è¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ç©ºã€‚</returns>
         public string GetInterWiki(string code)
         {
-            // ‰Šú‰»‚Æ’lƒ`ƒFƒbƒN
+            // åˆæœŸåŒ–ã¨å€¤ãƒã‚§ãƒƒã‚¯
             string interWiki = String.Empty;
             if (String.IsNullOrEmpty(Text))
             {
-                // ƒy[ƒW–{•¶‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡Às•s‰Â
+                // ãƒšãƒ¼ã‚¸æœ¬æ–‡ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆå®Ÿè¡Œä¸å¯
                 throw new InvalidOperationException();
             }
 
-            // ‹L–‚É‘¶İ‚·‚éw’èŒ¾Œê‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚ğæ“¾
+            // è¨˜äº‹ã«å­˜åœ¨ã™ã‚‹æŒ‡å®šè¨€èªã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã‚’å–å¾—
             for (int i = 0; i < Text.Length; i++)
             {
-                // ƒRƒƒ“ƒgi<!--j‚Ìƒ`ƒFƒbƒN
+                // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ã®ãƒã‚§ãƒƒã‚¯
                 string comment = String.Empty;
                 int index = this.ChkComment(ref comment, i);
                 if (index != -1)
@@ -288,7 +288,7 @@ namespace Honememo.Wptscs.Models
                 }
                 else if (Honememo.Cmn.ChkTextInnerWith(Text, i, "[[" + code + ":") == true)
                 {
-                    // w’èŒ¾Œê‚Ö‚ÌŒ¾ŒêŠÔƒŠƒ“ƒN‚Ìê‡A“à—e‚ğæ“¾‚µAˆ—I—¹
+                    // æŒ‡å®šè¨€èªã¸ã®è¨€èªé–“ãƒªãƒ³ã‚¯ã®å ´åˆã€å†…å®¹ã‚’å–å¾—ã—ã€å‡¦ç†çµ‚äº†
                     Link link = this.ParseInnerLink(Text.Substring(i));
                     if (!String.IsNullOrEmpty(link.Text))
                     {
@@ -302,21 +302,21 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒy[ƒW‚ªƒŠƒ_ƒCƒŒƒNƒg‚©‚ğƒ`ƒFƒbƒNB
+        /// ãƒšãƒ¼ã‚¸ãŒãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã‹ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <returns><c>true</c> ƒŠƒ_ƒCƒŒƒNƒgB</returns>
+        /// <returns><c>true</c> ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã€‚</returns>
         public bool IsRedirect()
         {
-            // ’lƒ`ƒFƒbƒN
+            // å€¤ãƒã‚§ãƒƒã‚¯
             if (Text == String.Empty)
             {
-                // ƒy[ƒW–{•¶‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡Às•s‰Â
+                // ãƒšãƒ¼ã‚¸æœ¬æ–‡ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆå®Ÿè¡Œä¸å¯
                 throw new InvalidOperationException();
             }
 
-            // w’è‚³‚ê‚½ƒy[ƒW‚ªƒŠƒ_ƒCƒŒƒNƒgƒy[ƒWi#REDIRECT“™j‚©‚ğƒ`ƒFƒbƒN
-            // ¦“ú–{Œê”Å‚İ‚½‚¢‚ÉA#REDIRECT‚ÆŒ¾ŒêŒÅ—L‚Ì#“]‘—‚İ‚½‚¢‚È‚Ì‚ª‚ ‚é‚Æv‚í‚ê‚é‚Ì‚ÅA
-            //   –|–óŒ³Œ¾Œê‚Æ‰pŒê”Å‚Ìİ’è‚Åƒ`ƒFƒbƒN
+            // æŒ‡å®šã•ã‚ŒãŸãƒšãƒ¼ã‚¸ãŒãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆãƒšãƒ¼ã‚¸ï¼ˆ#REDIRECTç­‰ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
+            // â€»æ—¥æœ¬èªç‰ˆã¿ãŸã„ã«ã€#REDIRECTã¨è¨€èªå›ºæœ‰ã®#è»¢é€ã¿ãŸã„ãªã®ãŒã‚ã‚‹ã¨æ€ã‚ã‚Œã‚‹ã®ã§ã€
+            //   ç¿»è¨³å…ƒè¨€èªã¨è‹±èªç‰ˆã®è¨­å®šã§ãƒã‚§ãƒƒã‚¯
             for (int i = 0; i < 2; i++)
             {
                 string redirect = (Website as MediaWiki).Redirect.Clone() as string;
@@ -349,40 +349,40 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒy[ƒW‚ªƒJƒeƒSƒŠ[‚©‚ğƒ`ƒFƒbƒNB
+        /// ãƒšãƒ¼ã‚¸ãŒã‚«ãƒ†ã‚´ãƒªãƒ¼ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <returns><c>true</c> ƒJƒeƒSƒŠ[B</returns>
+        /// <returns><c>true</c> ã‚«ãƒ†ã‚´ãƒªãƒ¼ã€‚</returns>
         public bool IsCategory()
         {
             return this.IsCategory(Title);
         }
 
         /// <summary>
-        /// ƒy[ƒW‚ª‰æ‘œ‚©‚ğƒ`ƒFƒbƒNB
+        /// ãƒšãƒ¼ã‚¸ãŒç”»åƒã‹ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <returns><c>true</c> ‰æ‘œB</returns>
+        /// <returns><c>true</c> ç”»åƒã€‚</returns>
         public bool IsImage()
         {
             return this.IsImage(Title);
         }
 
         /// <summary>
-        /// ƒy[ƒW‚ª•W€–¼‘O‹óŠÔˆÈŠO‚©‚ğƒ`ƒFƒbƒNB
+        /// ãƒšãƒ¼ã‚¸ãŒæ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <returns><c>true</c> •W€–¼‘O‹óŠÔˆÈŠOB</returns>
+        /// <returns><c>true</c> æ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã€‚</returns>
         public bool IsNotMainNamespace()
         {
             return this.IsNotMainNamespace(Title);
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½ƒy[ƒW–¼‚ªƒJƒeƒSƒŠ[‚©‚ğƒ`ƒFƒbƒNB
+        /// æ¸¡ã•ã‚ŒãŸãƒšãƒ¼ã‚¸åãŒã‚«ãƒ†ã‚´ãƒªãƒ¼ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <param name="title">ƒy[ƒW–¼B</param>
-        /// <returns><c>true</c> ƒJƒeƒSƒŠ[B</returns>
+        /// <param name="title">ãƒšãƒ¼ã‚¸åã€‚</param>
+        /// <returns><c>true</c> ã‚«ãƒ†ã‚´ãƒªãƒ¼ã€‚</returns>
         public bool IsCategory(string title)
         {
-            // w’è‚³‚ê‚½‹L––¼‚ªƒJƒeƒSƒŠ[iCategory:“™‚Ån‚Ü‚éj‚©‚ğƒ`ƒFƒbƒN
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹åãŒã‚«ãƒ†ã‚´ãƒªãƒ¼ï¼ˆCategory:ç­‰ã§å§‹ã¾ã‚‹ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
             string category = (Website as MediaWiki).Namespaces[MediaWiki.CategoryNamespaceNumber];
             if (category != String.Empty)
             {
@@ -396,15 +396,15 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½ƒy[ƒW–¼‚ª‰æ‘œ‚©‚ğƒ`ƒFƒbƒNB
+        /// æ¸¡ã•ã‚ŒãŸãƒšãƒ¼ã‚¸åãŒç”»åƒã‹ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <param name="title">ƒy[ƒW–¼B</param>
-        /// <returns><c>true</c> ‰æ‘œB</returns>
+        /// <param name="title">ãƒšãƒ¼ã‚¸åã€‚</param>
+        /// <returns><c>true</c> ç”»åƒã€‚</returns>
         public bool IsImage(string title)
         {
-            // w’è‚³‚ê‚½ƒy[ƒW–¼‚ª‰æ‘œiImage:“™‚Ån‚Ü‚éj‚©‚ğƒ`ƒFƒbƒN
-            // ¦“ú–{Œê”Å‚İ‚½‚¢‚ÉAimage: ‚ÆŒ¾ŒêŒÅ—L‚Ì ‰æ‘œ: ‚İ‚½‚¢‚È‚Ì‚ª‚ ‚é‚Æv‚í‚ê‚é‚Ì‚ÅA
-            //   –|–óŒ³Œ¾Œê‚Æ‰pŒê”Å‚Ìİ’è‚Åƒ`ƒFƒbƒN
+            // æŒ‡å®šã•ã‚ŒãŸãƒšãƒ¼ã‚¸åãŒç”»åƒï¼ˆImage:ç­‰ã§å§‹ã¾ã‚‹ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
+            // â€»æ—¥æœ¬èªç‰ˆã¿ãŸã„ã«ã€image: ã¨è¨€èªå›ºæœ‰ã® ç”»åƒ: ã¿ãŸã„ãªã®ãŒã‚ã‚‹ã¨æ€ã‚ã‚Œã‚‹ã®ã§ã€
+            //   ç¿»è¨³å…ƒè¨€èªã¨è‹±èªç‰ˆã®è¨­å®šã§ãƒã‚§ãƒƒã‚¯
             for (int i = 0; i < 2; i++)
             {
                 string image = (Website as MediaWiki).Namespaces[MediaWiki.ImageNamespaceNumber];
@@ -432,13 +432,13 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½ƒy[ƒW–¼‚ª•W€–¼‘O‹óŠÔˆÈŠO‚©‚ğƒ`ƒFƒbƒNB
+        /// æ¸¡ã•ã‚ŒãŸãƒšãƒ¼ã‚¸åãŒæ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
-        /// <param name="title">ƒy[ƒW–¼B</param>
-        /// <returns><c>true</c> •W€–¼‘O‹óŠÔˆÈŠOB</returns>
+        /// <param name="title">ãƒšãƒ¼ã‚¸åã€‚</param>
+        /// <returns><c>true</c> æ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã€‚</returns>
         public bool IsNotMainNamespace(string title)
         {
-            // w’è‚³‚ê‚½ƒy[ƒW–¼‚ª•W€–¼‘O‹óŠÔˆÈŠO‚Ì–¼‘O‹óŠÔiWikipedia:“™‚Ån‚Ü‚éj‚©‚ğƒ`ƒFƒbƒN
+            // æŒ‡å®šã•ã‚ŒãŸãƒšãƒ¼ã‚¸åãŒæ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã®åå‰ç©ºé–“ï¼ˆWikipedia:ç­‰ã§å§‹ã¾ã‚‹ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
             foreach (string ns in (Website as MediaWiki).Namespaces.Values)
             {
                 if (title.ToLower().StartsWith(ns.ToLower() + ":") == true)
@@ -451,24 +451,24 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½Wikipedia‚Ì“à•”ƒŠƒ“ƒN‚ğ‰ğÍB
+        /// æ¸¡ã•ã‚ŒãŸWikipediaã®å†…éƒ¨ãƒªãƒ³ã‚¯ã‚’è§£æã€‚
         /// </summary>
-        /// <param name="i_Text">[[‚Ån‚Ü‚é•¶š—ñ</param>
-        /// <returns>ƒŠƒ“ƒNB</returns>
+        /// <param name="i_Text">[[ã§å§‹ã¾ã‚‹æ–‡å­—åˆ—</param>
+        /// <returns>ãƒªãƒ³ã‚¯ã€‚</returns>
         public Link ParseInnerLink(string i_Text)
         {
-            // o—Í’l‰Šú‰»
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
             Link result = new Link();
             result.Initialize();
 
-            // “ü—Í’lŠm”F
+            // å…¥åŠ›å€¤ç¢ºèª
             if (i_Text.StartsWith("[[") == false)
             {
                 return result;
             }
 
-            // \•¶‚ğ‰ğÍ‚µ‚ÄA[[]]“à•”‚Ì•¶š—ñ‚ğæ“¾
-            // ¦\•¶‚ÍWikipedia‚ÌƒvƒŒƒrƒ…[‚ÅFX‚µ‚ÄŠm”FA‘«‚è‚È‚©‚Á‚½‚èŠÔˆá‚Á‚Ä‚½‚è‚·‚é‚©‚àEEE
+            // æ§‹æ–‡ã‚’è§£æã—ã¦ã€[[]]å†…éƒ¨ã®æ–‡å­—åˆ—ã‚’å–å¾—
+            // â€»æ§‹æ–‡ã¯Wikipediaã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã§è‰²ã€…è©¦ã—ã¦ç¢ºèªã€è¶³ã‚Šãªã‹ã£ãŸã‚Šé–“é•ã£ã¦ãŸã‚Šã™ã‚‹ã‹ã‚‚ãƒ»ãƒ»ãƒ»
             string article = String.Empty;
             string section = String.Empty;
             string[] pipeTexts = new string[0];
@@ -479,14 +479,14 @@ namespace Honememo.Wptscs.Models
             {
                 char c = i_Text[i];
 
-                // ]]‚ªŒ©‚Â‚©‚Á‚½‚çAˆ—³íI—¹
+                // ]]ãŒè¦‹ã¤ã‹ã£ãŸã‚‰ã€å‡¦ç†æ­£å¸¸çµ‚äº†
                 if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, "]]") == true)
                 {
                     lastIndex = ++i;
                     break;
                 }
 
-                // | ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚Í•\¦–¼‚È‚Ç‚Æ‚µ‚Äˆµ‚¤
+                // | ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯è¡¨ç¤ºåãªã©ã¨ã—ã¦æ‰±ã†
                 if (c == '|')
                 {
                     ++pipeCounter;
@@ -494,7 +494,7 @@ namespace Honememo.Wptscs.Models
                     continue;
                 }
 
-                // •Ï”i[[{{{1}}}]]‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
+                // å¤‰æ•°ï¼ˆ[[{{{1}}}]]ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
                 string dummy = String.Empty;
                 string variable = String.Empty;
                 int index = this.ChkVariable(ref variable, ref dummy, i_Text, i);
@@ -517,19 +517,19 @@ namespace Honememo.Wptscs.Models
                     continue;
                 }
 
-                // | ‚Ì‘O‚Ì‚Æ‚«
+                // | ã®å‰ã®ã¨ã
                 if (pipeCounter <= 0)
                 {
-                    // •Ï”ˆÈŠO‚Å { } ‚Ü‚½‚Í < > [ ] \n ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
+                    // å¤‰æ•°ä»¥å¤–ã§ { } ã¾ãŸã¯ < > [ ] \n ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
                     if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n'))
                     {
                         break;
                     }
 
-                    // # ‚Ì‘O‚Ì‚Æ‚«
+                    // # ã®å‰ã®ã¨ã
                     if (!sharpFlag)
                     {
-                        // #‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚ÍŒ©o‚µ‚Ö‚ÌƒŠƒ“ƒN‚Æ‚µ‚Äˆµ‚¤i1‚Â‚ß‚Ì#‚Ì‚İ—LŒøj
+                        // #ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯è¦‹å‡ºã—ã¸ã®ãƒªãƒ³ã‚¯ã¨ã—ã¦æ‰±ã†ï¼ˆ1ã¤ã‚ã®#ã®ã¿æœ‰åŠ¹ï¼‰
                         if (c == '#')
                         {
                             sharpFlag = true;
@@ -541,20 +541,20 @@ namespace Honememo.Wptscs.Models
                     }
                     else
                     {
-                        // # ‚ÌŒã‚Ì‚Æ‚«
+                        // # ã®å¾Œã®ã¨ã
                         section += c;
                     }
                 }
                 else
                 {
-                    // | ‚ÌŒã‚Ì‚Æ‚«
-                    // ƒRƒƒ“ƒgi<!--j‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
+                    // | ã®å¾Œã®ã¨ã
+                    // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
                     if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, CommentStart))
                     {
                         break;
                     }
 
-                    // nowiki‚Ìƒ`ƒFƒbƒN
+                    // nowikiã®ãƒã‚§ãƒƒã‚¯
                     string nowiki = String.Empty;
                     index = ChkNowiki(ref nowiki, i_Text, i);
                     if (index != -1)
@@ -564,7 +564,7 @@ namespace Honememo.Wptscs.Models
                         continue;
                     }
 
-                    // ƒŠƒ“ƒN [[ {{ i[[image:xx|[[test]]‚Ì‰æ‘œ]]‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
+                    // ãƒªãƒ³ã‚¯ [[ {{ ï¼ˆ[[image:xx|[[test]]ã®ç”»åƒ]]ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
                     Link link = new Link();
                     index = this.ChkLinkText(ref link, i_Text, i);
                     if (index != -1)
@@ -578,37 +578,37 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // ‰ğÍ‚É¬Œ÷‚µ‚½ê‡AŒ‹‰Ê‚ğ–ß‚è’l‚Éİ’è
+            // è§£æã«æˆåŠŸã—ãŸå ´åˆã€çµæœã‚’æˆ»ã‚Šå€¤ã«è¨­å®š
             if (lastIndex != -1)
             {
-                // •Ï”ƒuƒƒbƒN‚Ì•¶š—ñ‚ğƒŠƒ“ƒN‚ÌƒeƒLƒXƒg‚Éİ’è
+                // å¤‰æ•°ãƒ–ãƒ­ãƒƒã‚¯ã®æ–‡å­—åˆ—ã‚’ãƒªãƒ³ã‚¯ã®ãƒ†ã‚­ã‚¹ãƒˆã«è¨­å®š
                 result.Text = i_Text.Substring(0, lastIndex + 1);
 
-                // ‘OŒã‚ÌƒXƒy[ƒX‚ÍíœiŒ©o‚µ‚ÍŒã‚ë‚Ì‚İj
+                // å‰å¾Œã®ã‚¹ãƒšãƒ¼ã‚¹ã¯å‰Šé™¤ï¼ˆè¦‹å‡ºã—ã¯å¾Œã‚ã®ã¿ï¼‰
                 result.Article = article.Trim();
                 result.Section = section.TrimEnd();
 
-                // | ˆÈ~‚Í‚»‚Ì‚Ü‚Üİ’è
+                // | ä»¥é™ã¯ãã®ã¾ã¾è¨­å®š
                 result.PipeTexts = pipeTexts;
 
-                // ‹L––¼‚©‚çî•ñ‚ğ’Šo
-                // ƒTƒuƒy[ƒW
+                // è¨˜äº‹åã‹ã‚‰æƒ…å ±ã‚’æŠ½å‡º
+                // ã‚µãƒ–ãƒšãƒ¼ã‚¸
                 if (result.Article.StartsWith("/"))
                 {
                     result.SubPageFlag = true;
                 }
                 else if (result.Article.StartsWith(":"))
                 {
-                    // æ“ª‚ª :
+                    // å…ˆé ­ãŒ :
                     result.StartColonFlag = true;
                     result.Article = result.Article.TrimStart(':').TrimStart();
                 }
 
-                // •W€–¼‘O‹óŠÔˆÈŠO‚Å[[xxx:yyy]]‚Ì‚æ‚¤‚É‚È‚Á‚Ä‚¢‚éê‡AŒ¾ŒêƒR[ƒh
+                // æ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã§[[xxx:yyy]]ã®ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹å ´åˆã€è¨€èªã‚³ãƒ¼ãƒ‰
                 if (result.Article.Contains(":") && !this.IsNotMainNamespace(result.Article))
                 {
-                    // ¦–{“–‚ÍAŒ¾ŒêƒR[ƒh“™‚Ìˆê——‚ğì‚èA‘´ˆ‚Æˆê’v‚·‚é‚à‚Ì‚ğEEE‚Æ‚·‚×‚«‚¾‚ë‚¤‚ªA
-                    //   ƒƒ“ƒe‚µ‚«‚ê‚È‚¢‚Ì‚Å : ‚ğŠÜ‚Ş–¼‘O‹óŠÔˆÈŠO‚ğ‘S‚ÄŒ¾ŒêƒR[ƒh“™‚Æ”»’è
+                    // â€»æœ¬å½“ã¯ã€è¨€èªã‚³ãƒ¼ãƒ‰ç­‰ã®ä¸€è¦§ã‚’ä½œã‚Šã€å…¶å‡¦ã¨ä¸€è‡´ã™ã‚‹ã‚‚ã®ã‚’ãƒ»ãƒ»ãƒ»ã¨ã™ã¹ãã ã‚ã†ãŒã€
+                    //   ãƒ¡ãƒ³ãƒ†ã—ãã‚Œãªã„ã®ã§ : ã‚’å«ã‚€åå‰ç©ºé–“ä»¥å¤–ã‚’å…¨ã¦è¨€èªã‚³ãƒ¼ãƒ‰ç­‰ã¨åˆ¤å®š
                     result.Code = result.Article.Substring(0, result.Article.IndexOf(':')).TrimEnd();
                     result.Article = result.Article.Substring(result.Article.IndexOf(':') + 1).TrimStart();
                 }
@@ -618,25 +618,25 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½Wikipedia‚Ìƒeƒ“ƒvƒŒ[ƒg‚ğ‰ğÍB
+        /// æ¸¡ã•ã‚ŒãŸWikipediaã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’è§£æã€‚
         /// </summary>
-        /// <param name="i_Text">{{‚Ån‚Ü‚é•¶š—ñ</param>
-        /// <returns>ƒeƒ“ƒvƒŒ[ƒg‚ÌƒŠƒ“ƒNB</returns>
+        /// <param name="i_Text">{{ã§å§‹ã¾ã‚‹æ–‡å­—åˆ—</param>
+        /// <returns>ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®ãƒªãƒ³ã‚¯ã€‚</returns>
         public Link ParseTemplate(string i_Text)
         {
-            // o—Í’l‰Šú‰»
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
             Link result = new Link();
             result.Initialize();
             result.TemplateFlag = true;
 
-            // “ü—Í’lŠm”F
+            // å…¥åŠ›å€¤ç¢ºèª
             if (i_Text.StartsWith("{{") == false)
             {
                 return result;
             }
 
-            // \•¶‚ğ‰ğÍ‚µ‚ÄA{{}}“à•”‚Ì•¶š—ñ‚ğæ“¾
-            // ¦\•¶‚ÍWikipedia‚ÌƒvƒŒƒrƒ…[‚ÅFX‚µ‚ÄŠm”FA‘«‚è‚È‚©‚Á‚½‚èŠÔˆá‚Á‚Ä‚½‚è‚·‚é‚©‚àEEE
+            // æ§‹æ–‡ã‚’è§£æã—ã¦ã€{{}}å†…éƒ¨ã®æ–‡å­—åˆ—ã‚’å–å¾—
+            // â€»æ§‹æ–‡ã¯Wikipediaã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã§è‰²ã€…è©¦ã—ã¦ç¢ºèªã€è¶³ã‚Šãªã‹ã£ãŸã‚Šé–“é•ã£ã¦ãŸã‚Šã™ã‚‹ã‹ã‚‚ãƒ»ãƒ»ãƒ»
             string article = String.Empty;
             string[] pipeTexts = new string[0];
             int lastIndex = -1;
@@ -645,14 +645,14 @@ namespace Honememo.Wptscs.Models
             {
                 char c = i_Text[i];
 
-                // }}‚ªŒ©‚Â‚©‚Á‚½‚çAˆ—³íI—¹
+                // }}ãŒè¦‹ã¤ã‹ã£ãŸã‚‰ã€å‡¦ç†æ­£å¸¸çµ‚äº†
                 if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}") == true)
                 {
                     lastIndex = ++i;
                     break;
                 }
 
-                // | ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚Íˆø”‚È‚Ç‚Æ‚µ‚Äˆµ‚¤
+                // | ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯å¼•æ•°ãªã©ã¨ã—ã¦æ‰±ã†
                 if (c == '|')
                 {
                     ++pipeCounter;
@@ -660,7 +660,7 @@ namespace Honememo.Wptscs.Models
                     continue;
                 }
 
-                // •Ï”i[[{{{1}}}]]‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
+                // å¤‰æ•°ï¼ˆ[[{{{1}}}]]ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
                 string dummy = String.Empty;
                 string variable = String.Empty;
                 int index = this.ChkVariable(ref variable, ref dummy, i_Text, i);
@@ -679,10 +679,10 @@ namespace Honememo.Wptscs.Models
                     continue;
                 }
 
-                // | ‚Ì‘O‚Ì‚Æ‚«
+                // | ã®å‰ã®ã¨ã
                 if (pipeCounter <= 0)
                 {
-                    // •Ï”ˆÈŠO‚Å < > [ ] { } ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
+                    // å¤‰æ•°ä»¥å¤–ã§ < > [ ] { } ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
                     if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}'))
                     {
                         break;
@@ -692,14 +692,14 @@ namespace Honememo.Wptscs.Models
                 }
                 else
                 {
-                    // | ‚ÌŒã‚Ì‚Æ‚«
-                    // ƒRƒƒ“ƒgi<!--j‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
+                    // | ã®å¾Œã®ã¨ã
+                    // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
                     if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, CommentStart))
                     {
                         break;
                     }
 
-                    // nowiki‚Ìƒ`ƒFƒbƒN
+                    // nowikiã®ãƒã‚§ãƒƒã‚¯
                     string nowiki = String.Empty;
                     index = ChkNowiki(ref nowiki, i_Text, i);
                     if (index != -1)
@@ -709,7 +709,7 @@ namespace Honememo.Wptscs.Models
                         continue;
                     }
 
-                    // ƒŠƒ“ƒN [[ {{ i{{test|[[—á]]}}‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
+                    // ãƒªãƒ³ã‚¯ [[ {{ ï¼ˆ{{test|[[ä¾‹]]}}ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
                     Link link = new Link();
                     index = this.ChkLinkText(ref link, i_Text, i);
                     if (index != -1)
@@ -723,39 +723,39 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // ‰ğÍ‚É¬Œ÷‚µ‚½ê‡AŒ‹‰Ê‚ğ–ß‚è’l‚Éİ’è
+            // è§£æã«æˆåŠŸã—ãŸå ´åˆã€çµæœã‚’æˆ»ã‚Šå€¤ã«è¨­å®š
             if (lastIndex != -1)
             {
-                // •Ï”ƒuƒƒbƒN‚Ì•¶š—ñ‚ğƒŠƒ“ƒN‚ÌƒeƒLƒXƒg‚Éİ’è
+                // å¤‰æ•°ãƒ–ãƒ­ãƒƒã‚¯ã®æ–‡å­—åˆ—ã‚’ãƒªãƒ³ã‚¯ã®ãƒ†ã‚­ã‚¹ãƒˆã«è¨­å®š
                 result.Text = i_Text.Substring(0, lastIndex + 1);
 
-                // ‘OŒã‚ÌƒXƒy[ƒXE‰üs‚ÍíœiŒ©o‚µ‚ÍŒã‚ë‚Ì‚İj
+                // å‰å¾Œã®ã‚¹ãƒšãƒ¼ã‚¹ãƒ»æ”¹è¡Œã¯å‰Šé™¤ï¼ˆè¦‹å‡ºã—ã¯å¾Œã‚ã®ã¿ï¼‰
                 result.Article = article.Trim();
 
-                // | ˆÈ~‚Í‚»‚Ì‚Ü‚Üİ’è
+                // | ä»¥é™ã¯ãã®ã¾ã¾è¨­å®š
                 result.PipeTexts = pipeTexts;
 
-                // ‹L––¼‚©‚çî•ñ‚ğ’Šo
-                // ƒTƒuƒy[ƒW
+                // è¨˜äº‹åã‹ã‚‰æƒ…å ±ã‚’æŠ½å‡º
+                // ã‚µãƒ–ãƒšãƒ¼ã‚¸
                 if (result.Article.StartsWith("/") == true)
                 {
                     result.SubPageFlag = true;
                 }
                 else if (result.Article.StartsWith(":"))
                 {
-                    // æ“ª‚ª :
+                    // å…ˆé ­ãŒ :
                     result.StartColonFlag = true;
                     result.Article = result.Article.TrimStart(':').TrimStart();
                 }
 
-                // æ“ª‚ª msgnw:
+                // å…ˆé ­ãŒ msgnw:
                 result.MsgnwFlag = result.Article.ToLower().StartsWith(Msgnw.ToLower());
                 if (result.MsgnwFlag)
                 {
                     result.Article = result.Article.Substring(Msgnw.Length);
                 }
 
-                // ‹L––¼’¼Œã‚Ì‰üs‚Ì—L–³
+                // è¨˜äº‹åç›´å¾Œã®æ”¹è¡Œã®æœ‰ç„¡
                 if (article.TrimEnd(' ').EndsWith("\n"))
                 {
                     result.EnterFlag = true;
@@ -766,31 +766,31 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½ƒeƒLƒXƒg‚Ìw’è‚³‚ê‚½ˆÊ’u‚É‘¶İ‚·‚éWikipedia‚Ì“à•”ƒŠƒ“ƒNEƒeƒ“ƒvƒŒ[ƒg‚ğƒ`ƒFƒbƒNB
+        /// æ¸¡ã•ã‚ŒãŸãƒ†ã‚­ã‚¹ãƒˆã®æŒ‡å®šã•ã‚ŒãŸä½ç½®ã«å­˜åœ¨ã™ã‚‹Wikipediaã®å†…éƒ¨ãƒªãƒ³ã‚¯ãƒ»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
         /// <param name="o_Link"></param>
         /// <param name="i_Text"></param>
         /// <param name="i_Index"></param>
-        /// <returns>³í‚Ì–ß‚è’l‚É‚ÍA]]‚ÌŒã‚ë‚Ì]‚ÌˆÊ’u‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ•Ô‚·BˆÙí‚Í-1</returns>
+        /// <returns>æ­£å¸¸æ™‚ã®æˆ»ã‚Šå€¤ã«ã¯ã€]]ã®å¾Œã‚ã®]ã®ä½ç½®ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¿”ã™ã€‚ç•°å¸¸æ™‚ã¯-1</returns>
         public int ChkLinkText(ref Link o_Link, string i_Text, int i_Index)
         {
-            // o—Í’l‰Šú‰»
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
             int lastIndex = -1;
             o_Link.Initialize();
 
-            // “ü—Í’l‚É‰‚¶‚ÄAˆ—‚ğU‚è•ª‚¯
+            // å…¥åŠ›å€¤ã«å¿œã˜ã¦ã€å‡¦ç†ã‚’æŒ¯ã‚Šåˆ†ã‘
             if (Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "[[") == true)
             {
-                // “à•”ƒŠƒ“ƒN
+                // å†…éƒ¨ãƒªãƒ³ã‚¯
                 o_Link = this.ParseInnerLink(i_Text.Substring(i_Index));
             }
             else if (Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "{{") == true)
             {
-                // ƒeƒ“ƒvƒŒ[ƒg
+                // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
                 o_Link = this.ParseTemplate(i_Text.Substring(i_Index));
             }
 
-            // ˆ—Œ‹‰ÊŠm”F
+            // å‡¦ç†çµæœç¢ºèª
             if (!String.IsNullOrEmpty(o_Link.Text))
             {
                 lastIndex = i_Index + o_Link.Text.Length - 1;
@@ -800,7 +800,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½ƒeƒLƒXƒg‚Ìw’è‚³‚ê‚½ˆÊ’u‚É‘¶İ‚·‚é•Ï”‚ğ‰ğÍB
+        /// æ¸¡ã•ã‚ŒãŸãƒ†ã‚­ã‚¹ãƒˆã®æŒ‡å®šã•ã‚ŒãŸä½ç½®ã«å­˜åœ¨ã™ã‚‹å¤‰æ•°ã‚’è§£æã€‚
         /// </summary>
         /// <param name="o_Variable"></param>
         /// <param name="o_Value"></param>
@@ -809,29 +809,29 @@ namespace Honememo.Wptscs.Models
         /// <returns></returns>
         public int ChkVariable(ref string o_Variable, ref string o_Value, string i_Text, int i_Index)
         {
-            // o—Í’l‰Šú‰»
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
             int lastIndex = -1;
             o_Variable = String.Empty;
             o_Value = String.Empty;
 
-            // “ü—Í’lŠm”F
+            // å…¥åŠ›å€¤ç¢ºèª
             if (Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, "{{{") == false)
             {
                 return lastIndex;
             }
 
-            // ƒuƒƒbƒNI—¹‚Ü‚Åæ“¾
+            // ãƒ–ãƒ­ãƒƒã‚¯çµ‚äº†ã¾ã§å–å¾—
             bool pipeFlag = false;
             for (int i = i_Index + 3; i < i_Text.Length; i++)
             {
-                // I—¹ğŒ‚Ìƒ`ƒFƒbƒN
+                // çµ‚äº†æ¡ä»¶ã®ãƒã‚§ãƒƒã‚¯
                 if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}}") == true)
                 {
                     lastIndex = i + 2;
                     break;
                 }
 
-                // ƒRƒƒ“ƒgi<!--j‚Ìƒ`ƒFƒbƒN
+                // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ã®ãƒã‚§ãƒƒã‚¯
                 string dummy = String.Empty;
                 int index = ChkComment(ref dummy, i_Text, i);
                 if (index != -1)
@@ -840,17 +840,17 @@ namespace Honememo.Wptscs.Models
                     continue;
                 }
 
-                // | ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚Í‘ã“ü‚³‚ê‚½’l‚Æ‚µ‚Äˆµ‚¤
+                // | ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯ä»£å…¥ã•ã‚ŒãŸå€¤ã¨ã—ã¦æ‰±ã†
                 if (i_Text[i] == '|')
                 {
                     pipeFlag = true;
                 }
                 else if (!pipeFlag)
                 {
-                    // | ‚Ì‘O‚Ì‚Æ‚«
-                    // ¦Wikipedia‚Ìd—lã‚ÍA{{{1{|•\¦}}} ‚Ì‚æ‚¤‚É•Ï”–¼‚Ì—“‚É { ‚ğ
-                    //   ŠÜ‚ß‚é‚±‚Æ‚ª‚Å‚«‚é‚æ‚¤‚¾‚ªA”»•Ê‚µ‚«‚ê‚È‚¢‚Ì‚ÅAƒGƒ‰[‚Æ‚·‚é
-                    //   i‚Ç‚¤‚¹ˆÓ}‚µ‚Ä‚»‚ñ‚È‚±‚Æ‚·‚él‚Í‹‚È‚¢‚¾‚ë‚¤‚µEEEj
+                    // | ã®å‰ã®ã¨ã
+                    // â€»Wikipediaã®ä»•æ§˜ä¸Šã¯ã€{{{1{|è¡¨ç¤º}}} ã®ã‚ˆã†ã«å¤‰æ•°åã®æ¬„ã« { ã‚’
+                    //   å«ã‚ã‚‹ã“ã¨ãŒã§ãã‚‹ã‚ˆã†ã ãŒã€åˆ¤åˆ¥ã—ãã‚Œãªã„ã®ã§ã€ã‚¨ãƒ©ãƒ¼ã¨ã™ã‚‹
+                    //   ï¼ˆã©ã†ã›æ„å›³ã—ã¦ãã‚“ãªã“ã¨ã™ã‚‹äººã¯å±…ãªã„ã ã‚ã†ã—ãƒ»ãƒ»ãƒ»ï¼‰
                     if (i_Text[i] == '{')
                     {
                         break;
@@ -858,8 +858,8 @@ namespace Honememo.Wptscs.Models
                 }
                 else
                 {
-                    // | ‚ÌŒã‚Ì‚Æ‚«
-                    // nowiki‚Ìƒ`ƒFƒbƒN
+                    // | ã®å¾Œã®ã¨ã
+                    // nowikiã®ãƒã‚§ãƒƒã‚¯
                     string nowiki = String.Empty;
                     index = ChkNowiki(ref nowiki, i_Text, i);
                     if (index != -1)
@@ -869,7 +869,7 @@ namespace Honememo.Wptscs.Models
                         continue;
                     }
 
-                    // •Ï”i{{{1|{{{2}}}}}}‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
+                    // å¤‰æ•°ï¼ˆ{{{1|{{{2}}}}}}ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
                     string variable = String.Empty;
                     index = this.ChkVariable(ref variable, ref dummy, i_Text, i);
                     if (index != -1)
@@ -879,7 +879,7 @@ namespace Honememo.Wptscs.Models
                         continue;
                     }
 
-                    // ƒŠƒ“ƒN [[ {{ i{{{1|[[test]]}}}‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
+                    // ãƒªãƒ³ã‚¯ [[ {{ ï¼ˆ{{{1|[[test]]}}}ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
                     Link link = new Link();
                     index = this.ChkLinkText(ref link, i_Text, i);
                     if (index != -1)
@@ -893,14 +893,14 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // •Ï”ƒuƒƒbƒN‚Ì•¶š—ñ‚ğo—Í’l‚Éİ’è
+            // å¤‰æ•°ãƒ–ãƒ­ãƒƒã‚¯ã®æ–‡å­—åˆ—ã‚’å‡ºåŠ›å€¤ã«è¨­å®š
             if (lastIndex != -1)
             {
                 o_Variable = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
             }
             else
             {
-                // ³í‚È\•¶‚Å‚Í‚È‚©‚Á‚½ê‡Ao—Í’l‚ğƒNƒŠƒA
+                // æ­£å¸¸ãªæ§‹æ–‡ã§ã¯ãªã‹ã£ãŸå ´åˆã€å‡ºåŠ›å€¤ã‚’ã‚¯ãƒªã‚¢
                 o_Variable = String.Empty;
                 o_Value = String.Empty;
             }
@@ -909,10 +909,10 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// “n‚³‚ê‚½“à•”ƒŠƒ“ƒNEƒeƒ“ƒvƒŒ[ƒg‚ğ‰ğÍB
+        /// æ¸¡ã•ã‚ŒãŸå†…éƒ¨ãƒªãƒ³ã‚¯ãƒ»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’è§£æã€‚
         /// </summary>
-        /// <param name="link">ƒŠƒ“ƒNB</param>
-        /// <param name="index">–{•¶‚Ì‰ğÍŠJnˆÊ’u‚ÌƒCƒ“ƒfƒbƒNƒXB</param>
+        /// <param name="link">ãƒªãƒ³ã‚¯ã€‚</param>
+        /// <param name="index">æœ¬æ–‡ã®è§£æé–‹å§‹ä½ç½®ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€‚</param>
         /// <returns></returns>
         protected int ChkLinkText(ref Link link, int index)
         {
@@ -920,10 +920,10 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ƒRƒƒ“ƒg‹æŠÔ‚Ìƒ`ƒFƒbƒNB
+        /// ã‚³ãƒ¡ãƒ³ãƒˆåŒºé–“ã®ãƒã‚§ãƒƒã‚¯ã€‚
         /// </summary>
         /// <param name="text"></param>
-        /// <param name="index">–{•¶‚Ì‰ğÍŠJnˆÊ’u‚ÌƒCƒ“ƒfƒbƒNƒXB</param>
+        /// <param name="index">æœ¬æ–‡ã®è§£æé–‹å§‹ä½ç½®ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã€‚</param>
         /// <returns></returns>
         protected int ChkComment(ref string text, int index)
         {
@@ -932,69 +932,69 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region \‘¢‘Ì
+        #region æ§‹é€ ä½“
 
         /// <summary>
-        /// Wikipedia‚ÌƒŠƒ“ƒN‚Ì—v‘f‚ğŠi”[‚·‚é‚½‚ß‚Ì\‘¢‘ÌB
+        /// Wikipediaã®ãƒªãƒ³ã‚¯ã®è¦ç´ ã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®æ§‹é€ ä½“ã€‚
         /// </summary>
         public struct Link
         {
             /// <summary>
-            /// ƒŠƒ“ƒN‚ÌƒeƒLƒXƒgi[[`]]jB
+            /// ãƒªãƒ³ã‚¯ã®ãƒ†ã‚­ã‚¹ãƒˆï¼ˆ[[ï½]]ï¼‰ã€‚
             /// </summary>
             public string Text;
 
             /// <summary>
-            /// ƒŠƒ“ƒN‚Ì‹L––¼B
+            /// ãƒªãƒ³ã‚¯ã®è¨˜äº‹åã€‚
             /// </summary>
             public string Article;
 
             /// <summary>
-            /// ƒŠƒ“ƒN‚ÌƒZƒNƒVƒ‡ƒ“–¼i#jB
+            /// ãƒªãƒ³ã‚¯ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³åï¼ˆ#ï¼‰ã€‚
             /// </summary>
             public string Section;
 
             /// <summary>
-            /// ƒŠƒ“ƒN‚ÌƒpƒCƒvŒã‚Ì•¶š—ñi|jB
+            /// ãƒªãƒ³ã‚¯ã®ãƒ‘ã‚¤ãƒ—å¾Œã®æ–‡å­—åˆ—ï¼ˆ|ï¼‰ã€‚
             /// </summary>
             public string[] PipeTexts;
 
             /// <summary>
-            /// Œ¾ŒêŠÔ‚Ü‚½‚Í‘¼ƒvƒƒWƒFƒNƒg‚Ö‚ÌƒŠƒ“ƒN‚Ìê‡AƒR[ƒhB
+            /// è¨€èªé–“ã¾ãŸã¯ä»–ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã¸ã®ãƒªãƒ³ã‚¯ã®å ´åˆã€ã‚³ãƒ¼ãƒ‰ã€‚
             /// </summary>
             public string Code;
 
             /// <summary>
-            /// ƒeƒ“ƒvƒŒ[ƒgi{{`}}j‚©‚ğ¦‚·ƒtƒ‰ƒOB
+            /// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆï¼ˆ{{ï½}}ï¼‰ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°ã€‚
             /// </summary>
             public bool TemplateFlag;
 
             /// <summary>
-            /// ‹L––¼‚Ìæ“ª‚ª / ‚Ån‚Ü‚é‚©‚ğ¦‚·ƒtƒ‰ƒOB
+            /// è¨˜äº‹åã®å…ˆé ­ãŒ / ã§å§‹ã¾ã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°ã€‚
             /// </summary>
             public bool SubPageFlag;
 
             /// <summary>
-            /// ƒŠƒ“ƒN‚Ìæ“ª‚ª : ‚Ån‚Ü‚é‚©‚ğ¦‚·ƒtƒ‰ƒOB
+            /// ãƒªãƒ³ã‚¯ã®å…ˆé ­ãŒ : ã§å§‹ã¾ã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°ã€‚
             /// </summary>
             public bool StartColonFlag;
 
             /// <summary>
-            /// ƒeƒ“ƒvƒŒ[ƒg‚Ìê‡Amsgnw: ‚ª•t‰Á‚³‚ê‚Ä‚¢‚é‚©‚ğ¦‚·ƒtƒ‰ƒOB
+            /// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®å ´åˆã€msgnw: ãŒä»˜åŠ ã•ã‚Œã¦ã„ã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°ã€‚
             /// </summary>
             public bool MsgnwFlag;
 
             /// <summary>
-            /// ƒeƒ“ƒvƒŒ[ƒg‚Ìê‡A‹L––¼‚ÌŒã‚Å‰üs‚³‚ê‚é‚©‚ğ¦‚·ƒtƒ‰ƒOB
+            /// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®å ´åˆã€è¨˜äº‹åã®å¾Œã§æ”¹è¡Œã•ã‚Œã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°ã€‚
             /// </summary>
             public bool EnterFlag;
 
             /// <summary>
-            /// ‰Šú‰»B
+            /// åˆæœŸåŒ–ã€‚
             /// </summary>
             public void Initialize()
             {
-                // ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ì‘ã‚í‚è‚ÉA•K—v‚È‚ç‚±‚ê‚Å‰Šú‰»
+                // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®ä»£ã‚ã‚Šã«ã€å¿…è¦ãªã‚‰ã“ã‚Œã§åˆæœŸåŒ–
                 this.Text = null;
                 this.Article = null;
                 this.Section = null;
@@ -1008,15 +1008,15 @@ namespace Honememo.Wptscs.Models
             }
 
             /// <summary>
-            /// Œ»İ‚ÌTextˆÈŠO‚Ì‘®«’l‚©‚çAText‘®«’l‚ğ¶¬B
+            /// ç¾åœ¨ã®Textä»¥å¤–ã®å±æ€§å€¤ã‹ã‚‰ã€Textå±æ€§å€¤ã‚’ç”Ÿæˆã€‚
             /// </summary>
-            /// <returns>¶¬‚µ‚½Text‚Ì•¶š—ñB</returns>
+            /// <returns>ç”Ÿæˆã—ãŸTextã®æ–‡å­—åˆ—ã€‚</returns>
             public string MakeText()
             {
-                // –ß‚è’l‰Šú‰»
+                // æˆ»ã‚Šå€¤åˆæœŸåŒ–
                 string result = String.Empty;
 
-                // ˜g‚Ìİ’è
+                // æ ã®è¨­å®š
                 string startSign = "[[";
                 string endSign = "]]";
                 if (this.TemplateFlag)
@@ -1025,46 +1025,46 @@ namespace Honememo.Wptscs.Models
                     endSign = "}}";
                 }
 
-                // æ“ª‚Ì˜g‚Ì•t‰Á
+                // å…ˆé ­ã®æ ã®ä»˜åŠ 
                 result += startSign;
 
-                // æ“ª‚Ì : ‚Ì•t‰Á
+                // å…ˆé ­ã® : ã®ä»˜åŠ 
                 if (this.StartColonFlag)
                 {
                     result += ":";
                 }
 
-                // msgnw: iƒeƒ“ƒvƒŒ[ƒg‚ğ<nowiki>ƒ^ƒO‚Å‹²‚Şj‚Ì•t‰Á
+                // msgnw: ï¼ˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’<nowiki>ã‚¿ã‚°ã§æŒŸã‚€ï¼‰ã®ä»˜åŠ 
                 if (this.TemplateFlag && this.MsgnwFlag)
                 {
                     result += Msgnw;
                 }
 
-                // Œ¾ŒêƒR[ƒhE‘¼ƒvƒƒWƒFƒNƒgƒR[ƒh‚Ì•t‰Á
+                // è¨€èªã‚³ãƒ¼ãƒ‰ãƒ»ä»–ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚³ãƒ¼ãƒ‰ã®ä»˜åŠ 
                 if (!String.IsNullOrEmpty(this.Code))
                 {
                     result += this.Code;
                 }
 
-                // ƒŠƒ“ƒN‚Ì•t‰Á
+                // ãƒªãƒ³ã‚¯ã®ä»˜åŠ 
                 if (!String.IsNullOrEmpty(this.Article))
                 {
                     result += this.Article;
                 }
 
-                // ƒZƒNƒVƒ‡ƒ“–¼‚Ì•t‰Á
+                // ã‚»ã‚¯ã‚·ãƒ§ãƒ³åã®ä»˜åŠ 
                 if (!String.IsNullOrEmpty(this.Section))
                 {
                     result += "#" + this.Section;
                 }
 
-                // ‰üs‚Ì•t‰Á
+                // æ”¹è¡Œã®ä»˜åŠ 
                 if (this.EnterFlag)
                 {
                     result += '\n';
                 }
 
-                // ƒpƒCƒvŒã‚Ì•¶š—ñ‚Ì•t‰Á
+                // ãƒ‘ã‚¤ãƒ—å¾Œã®æ–‡å­—åˆ—ã®ä»˜åŠ 
                 if (this.PipeTexts != null)
                 {
                     foreach (string text in this.PipeTexts)
@@ -1077,7 +1077,7 @@ namespace Honememo.Wptscs.Models
                     }
                 }
 
-                // I‚í‚è‚Ì˜g‚Ì•t‰Á
+                // çµ‚ã‚ã‚Šã®æ ã®ä»˜åŠ 
                 result += endSign;
                 return result;
             }

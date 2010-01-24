@@ -2,37 +2,37 @@ using System;
 
 namespace Honememo.Wptscs.Models
 {
-    // Œ¾Œêî•ñ‚ÆAŠÖ˜A‚·‚éƒT[ƒo[î•ñ‚ğŠi”[‚·‚éƒNƒ‰ƒX
+    // è¨€èªæƒ…å ±ã¨ã€é–¢é€£ã™ã‚‹ã‚µãƒ¼ãƒãƒ¼æƒ…å ±ã‚’æ ¼ç´ã™ã‚‹ã‚¯ãƒ©ã‚¹
     public class LanguageWithServerInformation : LanguageInformation
     {
-        // ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒVƒŠƒAƒ‰ƒCƒY—pj
+        // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ï¼‰
         public LanguageWithServerInformation() : this("unknown")
         {
-//			System.Diagnostics.Debug.WriteLine("LanguageWithServerInformation.LanguageWithServerInformation > „§‚³‚ê‚È‚¢ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğg—p‚µ‚Ä‚¢‚Ü‚·");
-			// “K“–‚È’l‚Å’Êí‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğÀs
-		}
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i’Êíj
-		public LanguageWithServerInformation(String i_Code) : base(i_Code){
-			// ‰Šú’lİ’è
-			// ¦‚±‚ÌƒNƒ‰ƒX‚Í’è‹`‚Ì‚İBÀÛ‚Ìİ’è‚ÍAŒp³‚µ‚½ƒNƒ‰ƒX‚Ås‚¤
-			Server = "unknown";
-		}
+            //System.Diagnostics.Debug.WriteLine("LanguageWithServerInformation.LanguageWithServerInformation > æ¨å¥¨ã•ã‚Œãªã„ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™");
+            // é©å½“ãªå€¤ã§é€šå¸¸ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’å®Ÿè¡Œ
+        }
+        // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆé€šå¸¸ï¼‰
+        public LanguageWithServerInformation(String i_Code) : base(i_Code){
+            // åˆæœŸå€¤è¨­å®š
+            // â€»ã“ã®ã‚¯ãƒ©ã‚¹ã¯å®šç¾©ã®ã¿ã€‚å®Ÿéš›ã®è¨­å®šã¯ã€ç¶™æ‰¿ã—ãŸã‚¯ãƒ©ã‚¹ã§è¡Œã†
+            Server = "unknown";
+        }
 
-		// ƒT[ƒo[‚Ì–¼Ì
-		public String Server {
-			get {
-				return _Server;
-			}
-			set {
-				// ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
-				if(((value != null) ? value.Trim() : "") == ""){
-					throw new ArgumentNullException("i_Name");
-				}
-				_Server = value.Trim();
-			}
-		}
+        // ã‚µãƒ¼ãƒãƒ¼ã®åç§°
+        public String Server {
+            get {
+                return _Server;
+            }
+            set {
+                // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
+                if(((value != null) ? value.Trim() : "") == ""){
+                    throw new ArgumentNullException("i_Name");
+                }
+                _Server = value.Trim();
+            }
+        }
 
-		// ƒT[ƒo[‚Ì–¼Ìipropertyj
-		private String _Server;
+        // ã‚µãƒ¼ãƒãƒ¼ã®åç§°ï¼ˆpropertyï¼‰
+        private String _Server;
     }
 }

@@ -3,565 +3,565 @@ using Honememo;
 
 namespace Honememo.Wptscs.Models
 {
-    // Wikipedia‚Ì‹L–‚Ì‘®‚ğˆµ‚¤‚½‚ß‚ÌƒNƒ‰ƒX
+    // Wikipediaã®è¨˜äº‹ã®æ›¸å¼ã‚’æ‰±ã†ãŸã‚ã®ã‚¯ãƒ©ã‚¹
     public class WikipediaFormat
     {
-		// Wikipedia‚ÌƒŠƒ“ƒN‚Ì—v‘f‚ğŠi”[‚·‚é‚½‚ß‚Ì\‘¢‘Ì
-		public struct Link {
-			public String Text;				// ƒŠƒ“ƒN‚ÌƒeƒLƒXƒgi[[`]]j
-			public String Article;			// ƒŠƒ“ƒN‚Ì‹L––¼
-			public String Section;			// ƒŠƒ“ƒN‚ÌƒZƒNƒVƒ‡ƒ“–¼i#j
-			public String[] PipeTexts;	// ƒŠƒ“ƒN‚ÌƒpƒCƒvŒã‚Ì•¶š—ñi|j
-			public String Code;				// Œ¾ŒêŠÔ‚Ü‚½‚Í‘¼ƒvƒƒWƒFƒNƒg‚Ö‚ÌƒŠƒ“ƒN‚Ìê‡AƒR[ƒh
-			public bool TemplateFlag;			// ƒeƒ“ƒvƒŒ[ƒgi{{`}}j‚©‚ğ¦‚·ƒtƒ‰ƒO
-			public bool SubPageFlag;			// ‹L––¼‚Ìæ“ª‚ª / ‚Ån‚Ü‚é‚©‚ğ¦‚·ƒtƒ‰ƒO
-			public bool StartColonFlag;		// ƒŠƒ“ƒN‚Ìæ“ª‚ª : ‚Ån‚Ü‚é‚©‚ğ¦‚·ƒtƒ‰ƒO
-			public bool MsgnwFlag;				// ƒeƒ“ƒvƒŒ[ƒg‚Ìê‡Amsgnw: ‚ª•t‰Á‚³‚ê‚Ä‚¢‚é‚©‚ğ¦‚·ƒtƒ‰ƒO
-			public bool EnterFlag;				// ƒeƒ“ƒvƒŒ[ƒg‚Ìê‡A‹L––¼‚ÌŒã‚Å‰üs‚³‚ê‚é‚©‚ğ¦‚·ƒtƒ‰ƒO
+        // Wikipediaã®ãƒªãƒ³ã‚¯ã®è¦ç´ ã‚’æ ¼ç´ã™ã‚‹ãŸã‚ã®æ§‹é€ ä½“
+        public struct Link {
+            public String Text;             // ãƒªãƒ³ã‚¯ã®ãƒ†ã‚­ã‚¹ãƒˆï¼ˆ[[ï½]]ï¼‰
+            public String Article;          // ãƒªãƒ³ã‚¯ã®è¨˜äº‹å
+            public String Section;          // ãƒªãƒ³ã‚¯ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³åï¼ˆ#ï¼‰
+            public String[] PipeTexts;      // ãƒªãƒ³ã‚¯ã®ãƒ‘ã‚¤ãƒ—å¾Œã®æ–‡å­—åˆ—ï¼ˆ|ï¼‰
+            public String Code;             // è¨€èªé–“ã¾ãŸã¯ä»–ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã¸ã®ãƒªãƒ³ã‚¯ã®å ´åˆã€ã‚³ãƒ¼ãƒ‰
+            public bool TemplateFlag;       // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆï¼ˆ{{ï½}}ï¼‰ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°
+            public bool SubPageFlag;        // è¨˜äº‹åã®å…ˆé ­ãŒ / ã§å§‹ã¾ã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°
+            public bool StartColonFlag;     // ãƒªãƒ³ã‚¯ã®å…ˆé ­ãŒ : ã§å§‹ã¾ã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°
+            public bool MsgnwFlag;          // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®å ´åˆã€msgnw: ãŒä»˜åŠ ã•ã‚Œã¦ã„ã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°
+            public bool EnterFlag;          // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®å ´åˆã€è¨˜äº‹åã®å¾Œã§æ”¹è¡Œã•ã‚Œã‚‹ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°
 
-            /* ‰Šú‰» */
+            /* åˆæœŸåŒ– */
             public void Initialize()
             {
-	            // ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ì‘ã‚í‚è‚ÉA•K—v‚È‚ç‚±‚ê‚Å‰Šú‰»
-	            Text = null;
-	            Article = null;
-	            Section = null;
-	            PipeTexts = new String[0];
-	            Code = null;
-	            TemplateFlag = false;
-	            SubPageFlag = false;
-	            StartColonFlag = false;
-	            MsgnwFlag = false;
-	            EnterFlag = false;
+                // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®ä»£ã‚ã‚Šã«ã€å¿…è¦ãªã‚‰ã“ã‚Œã§åˆæœŸåŒ–
+                Text = null;
+                Article = null;
+                Section = null;
+                PipeTexts = new String[0];
+                Code = null;
+                TemplateFlag = false;
+                SubPageFlag = false;
+                StartColonFlag = false;
+                MsgnwFlag = false;
+                EnterFlag = false;
             }
 
-            /* Œ»İ‚ÌTextˆÈŠO‚Ì’l‚©‚çAText‚ğ¶¬ */
+            /* ç¾åœ¨ã®Textä»¥å¤–ã®å€¤ã‹ã‚‰ã€Textã‚’ç”Ÿæˆ */
             public String MakeText()
             {
-	            // –ß‚è’l‰Šú‰»
-	            String result = "";
-	            // ˜g‚Ìİ’è
-	            String startSign = "[[";
-	            String endSign = "]]";
-	            if(TemplateFlag){
-		            startSign = "{{";
-		            endSign = "}}";
-	            }
-	            // æ“ª‚Ì˜g‚Ì•t‰Á
-	            result += startSign;
-	            // æ“ª‚Ì : ‚Ì•t‰Á
-	            if(StartColonFlag){
-		            result += ":";
-	            }
-	            // msgnw: iƒeƒ“ƒvƒŒ[ƒg‚ğ<nowiki>ƒ^ƒO‚Å‹²‚Şj‚Ì•t‰Á
-	            if(TemplateFlag && MsgnwFlag){
-		            result += MSGNW;
-	            }
-	            // Œ¾ŒêƒR[ƒhE‘¼ƒvƒƒWƒFƒNƒgƒR[ƒh‚Ì•t‰Á
-	            if(!String.IsNullOrEmpty(Code)){
-		            result += Code;
-	            }
-	            // ƒŠƒ“ƒN‚Ì•t‰Á
-	            if(!String.IsNullOrEmpty(Article)){
-		            result += Article;
-	            }
-	            // ƒZƒNƒVƒ‡ƒ“–¼‚Ì•t‰Á
-	            if(!String.IsNullOrEmpty(Section)){
-		            result += ("#" + Section);
-	            }
-	            // ‰üs‚Ì•t‰Á
-	            if(EnterFlag){
-		            result += '\n';
-	            }
-	            // ƒpƒCƒvŒã‚Ì•¶š—ñ‚Ì•t‰Á
-	            if(PipeTexts != null){
-		            foreach(String text in PipeTexts){
-			            result += "|";
-			            if(!String.IsNullOrEmpty(text)){
-				            result += text;
-			            }
-		            }
-	            }
-	            // I‚í‚è‚Ì˜g‚Ì•t‰Á
-	            result += endSign;
-	            return result;
+                // æˆ»ã‚Šå€¤åˆæœŸåŒ–
+                String result = "";
+                // æ ã®è¨­å®š
+                String startSign = "[[";
+                String endSign = "]]";
+                if(TemplateFlag){
+                    startSign = "{{";
+                    endSign = "}}";
+                }
+                // å…ˆé ­ã®æ ã®ä»˜åŠ 
+                result += startSign;
+                // å…ˆé ­ã® : ã®ä»˜åŠ 
+                if(StartColonFlag){
+                    result += ":";
+                }
+                // msgnw: ï¼ˆãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’<nowiki>ã‚¿ã‚°ã§æŒŸã‚€ï¼‰ã®ä»˜åŠ 
+                if(TemplateFlag && MsgnwFlag){
+                    result += MSGNW;
+                }
+                // è¨€èªã‚³ãƒ¼ãƒ‰ãƒ»ä»–ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚³ãƒ¼ãƒ‰ã®ä»˜åŠ 
+                if(!String.IsNullOrEmpty(Code)){
+                    result += Code;
+                }
+                // ãƒªãƒ³ã‚¯ã®ä»˜åŠ 
+                if(!String.IsNullOrEmpty(Article)){
+                    result += Article;
+                }
+                // ã‚»ã‚¯ã‚·ãƒ§ãƒ³åã®ä»˜åŠ 
+                if(!String.IsNullOrEmpty(Section)){
+                    result += ("#" + Section);
+                }
+                // æ”¹è¡Œã®ä»˜åŠ 
+                if(EnterFlag){
+                    result += '\n';
+                }
+                // ãƒ‘ã‚¤ãƒ—å¾Œã®æ–‡å­—åˆ—ã®ä»˜åŠ 
+                if(PipeTexts != null){
+                    foreach(String text in PipeTexts){
+                        result += "|";
+                        if(!String.IsNullOrEmpty(text)){
+                            result += text;
+                        }
+                    }
+                }
+                // çµ‚ã‚ã‚Šã®æ ã®ä»˜åŠ 
+                result += endSign;
+                return result;
             }
-		};
+        };
 
-        /* ƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒT[ƒo[‚ğw’èj */
+        /* ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚µãƒ¼ãƒãƒ¼ã‚’æŒ‡å®šï¼‰ */
         public WikipediaFormat(WikipediaInformation i_Server)
         {
-	        // ¦•K{‚Èî•ñ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡AArgumentNullException‚ğ•Ô‚·
-	        if(i_Server == null){
-		        throw new ArgumentNullException("i_Server");
-	        }
-	        // ƒƒ“ƒo•Ï”‚Ì‰Šú‰»
-	        _Server = i_Server;
+            // â€»å¿…é ˆãªæƒ…å ±ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆã€ArgumentNullExceptionã‚’è¿”ã™
+            if(i_Server == null){
+                throw new ArgumentNullException("i_Server");
+            }
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã®åˆæœŸåŒ–
+            _Server = i_Server;
         }
 
-        /* “n‚³‚ê‚½‹L––¼‚ªƒJƒeƒSƒŠ[‚©‚ğƒ`ƒFƒbƒN */
+        /* æ¸¡ã•ã‚ŒãŸè¨˜äº‹åãŒã‚«ãƒ†ã‚´ãƒªãƒ¼ã‹ã‚’ãƒã‚§ãƒƒã‚¯ */
         public virtual bool IsCategory(String i_Name)
         {
-	        // w’è‚³‚ê‚½‹L––¼‚ªƒJƒeƒSƒŠ[iCategory:“™‚Ån‚Ü‚éj‚©‚ğƒ`ƒFƒbƒN
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹åãŒã‚«ãƒ†ã‚´ãƒªãƒ¼ï¼ˆCategory:ç­‰ã§å§‹ã¾ã‚‹ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
             String category = Server.GetNamespace(WikipediaInformation.CATEGORYNAMESPACENUMBER);
-	        if(category != ""){
-		        if(i_Name.ToLower().StartsWith(category.ToLower() + ":") == true){
-			        return true;
-		        }
-	        }
-	        return false;
+            if(category != ""){
+                if(i_Name.ToLower().StartsWith(category.ToLower() + ":") == true){
+                    return true;
+                }
+            }
+            return false;
         }
 
-        /* “n‚³‚ê‚½‹L––¼‚ª‰æ‘œ‚©‚ğƒ`ƒFƒbƒN */
+        /* æ¸¡ã•ã‚ŒãŸè¨˜äº‹åãŒç”»åƒã‹ã‚’ãƒã‚§ãƒƒã‚¯ */
         public virtual bool IsImage(String i_Name)
         {
-	        // w’è‚³‚ê‚½‹L––¼‚ª‰æ‘œiImage:“™‚Ån‚Ü‚éj‚©‚ğƒ`ƒFƒbƒN
-	        // ¦“ú–{Œê”Å‚İ‚½‚¢‚ÉAimage: ‚ÆŒ¾ŒêŒÅ—L‚Ì ‰æ‘œ: ‚İ‚½‚¢‚È‚Ì‚ª‚ ‚é‚Æv‚í‚ê‚é‚Ì‚ÅA
-	        //   –|–óŒ³Œ¾Œê‚Æ‰pŒê”Å‚Ìİ’è‚Åƒ`ƒFƒbƒN
-	        for(int i = 0 ; i < 2 ; i++){
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹åãŒç”»åƒï¼ˆImage:ç­‰ã§å§‹ã¾ã‚‹ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
+            // â€»æ—¥æœ¬èªç‰ˆã¿ãŸã„ã«ã€image: ã¨è¨€èªå›ºæœ‰ã® ç”»åƒ: ã¿ãŸã„ãªã®ãŒã‚ã‚‹ã¨æ€ã‚ã‚Œã‚‹ã®ã§ã€
+            //   ç¿»è¨³å…ƒè¨€èªã¨è‹±èªç‰ˆã®è¨­å®šã§ãƒã‚§ãƒƒã‚¯
+            for(int i = 0 ; i < 2 ; i++){
                 String image = Server.GetNamespace(WikipediaInformation.IMAGENAMESPACENUMBER);
-		        if(i == 1){
-			        if(Server.Code == "en"){
-				        continue;
-			        }
-			        WikipediaInformation en = new WikipediaInformation("en");
+                if(i == 1){
+                    if(Server.Code == "en"){
+                        continue;
+                    }
+                    WikipediaInformation en = new WikipediaInformation("en");
                     image = en.GetNamespace(WikipediaInformation.IMAGENAMESPACENUMBER);
-		        }
-		        if(image != ""){
-			        if(i_Name.ToLower().StartsWith(image.ToLower() + ":") == true){
-				        return true;
-			        }
-		        }
-	        }
-	        return false;
+                }
+                if(image != ""){
+                    if(i_Name.ToLower().StartsWith(image.ToLower() + ":") == true){
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
-        /* “n‚³‚ê‚½‹L––¼‚ª•W€–¼‘O‹óŠÔˆÈŠO‚©‚ğƒ`ƒFƒbƒN */
+        /* æ¸¡ã•ã‚ŒãŸè¨˜äº‹åãŒæ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã‹ã‚’ãƒã‚§ãƒƒã‚¯ */
         public virtual bool IsNotMainNamespace(String i_Name)
         {
-	        // w’è‚³‚ê‚½‹L––¼‚ª•W€–¼‘O‹óŠÔˆÈŠO‚Ì–¼‘O‹óŠÔiWikipedia:“™‚Ån‚Ü‚éj‚©‚ğƒ`ƒFƒbƒN
-	        foreach(WikipediaInformation.Namespace ns in Server.Namespaces){
-		        if(i_Name.ToLower().StartsWith(ns.Name.ToLower() + ":") == true){
-			        return true;
-		        }
-	        }
-	        return false;
+            // æŒ‡å®šã•ã‚ŒãŸè¨˜äº‹åãŒæ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã®åå‰ç©ºé–“ï¼ˆWikipedia:ç­‰ã§å§‹ã¾ã‚‹ï¼‰ã‹ã‚’ãƒã‚§ãƒƒã‚¯
+            foreach(WikipediaInformation.Namespace ns in Server.Namespaces){
+                if(i_Name.ToLower().StartsWith(ns.Name.ToLower() + ":") == true){
+                    return true;
+                }
+            }
+            return false;
         }
 
-        /* “n‚³‚ê‚½Wikipedia‚Ì“à•”ƒŠƒ“ƒN‚ğ‰ğÍ */
+        /* æ¸¡ã•ã‚ŒãŸWikipediaã®å†…éƒ¨ãƒªãƒ³ã‚¯ã‚’è§£æ */
         public virtual Link ParseInnerLink(String i_Text)
         {
-	        // o—Í’l‰Šú‰»
-	        Link result = new Link();
-	        result.Initialize();
-	        // “ü—Í’lŠm”F
-	        if(i_Text.StartsWith("[[") == false){
-		        return result;
-	        }
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
+            Link result = new Link();
+            result.Initialize();
+            // å…¥åŠ›å€¤ç¢ºèª
+            if(i_Text.StartsWith("[[") == false){
+                return result;
+            }
 
-	        // \•¶‚ğ‰ğÍ‚µ‚ÄA[[]]“à•”‚Ì•¶š—ñ‚ğæ“¾
-	        // ¦\•¶‚ÍWikipedia‚ÌƒvƒŒƒrƒ…[‚ÅFX‚µ‚ÄŠm”FA‘«‚è‚È‚©‚Á‚½‚èŠÔˆá‚Á‚Ä‚½‚è‚·‚é‚©‚àEEE
-	        String article = "";
-	        String section = "";
-	        String[] pipeTexts = new String[0];
-	        int lastIndex = -1;
-	        int pipeCounter = 0;
-	        bool sharpFlag = false;
-	        for(int i = 2 ; i < i_Text.Length ; i++){
-		        char c = i_Text[i];
-		        // ]]‚ªŒ©‚Â‚©‚Á‚½‚çAˆ—³íI—¹
-		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "]]") == true){
-			        lastIndex = ++i;
-			        break;
-		        }
-		        // | ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚Í•\¦–¼‚È‚Ç‚Æ‚µ‚Äˆµ‚¤
-		        if(c == '|'){
-			        ++pipeCounter;
-			        Honememo.Cmn.AddArray(ref pipeTexts, "");
-			        continue;
-		        }
-		        // •Ï”i[[{{{1}}}]]‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
-		        String dummy = "";
-		        String variable = "";
-		        int index = ChkVariable(ref variable, ref dummy, i_Text, i);
-		        if(index != -1){
-			        i = index;
-			        if(pipeCounter > 0){
-				        pipeTexts[pipeCounter - 1] += variable;
-			        }
-			        else if(sharpFlag){
-				        section += variable;
-			        }
-			        else{
-				        article += variable;
-			        }
-			        continue;
-		        }
+            // æ§‹æ–‡ã‚’è§£æã—ã¦ã€[[]]å†…éƒ¨ã®æ–‡å­—åˆ—ã‚’å–å¾—
+            // â€»æ§‹æ–‡ã¯Wikipediaã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã§è‰²ã€…è©¦ã—ã¦ç¢ºèªã€è¶³ã‚Šãªã‹ã£ãŸã‚Šé–“é•ã£ã¦ãŸã‚Šã™ã‚‹ã‹ã‚‚ãƒ»ãƒ»ãƒ»
+            String article = "";
+            String section = "";
+            String[] pipeTexts = new String[0];
+            int lastIndex = -1;
+            int pipeCounter = 0;
+            bool sharpFlag = false;
+            for(int i = 2 ; i < i_Text.Length ; i++){
+                char c = i_Text[i];
+                // ]]ãŒè¦‹ã¤ã‹ã£ãŸã‚‰ã€å‡¦ç†æ­£å¸¸çµ‚äº†
+                if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "]]") == true){
+                    lastIndex = ++i;
+                    break;
+                }
+                // | ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯è¡¨ç¤ºåãªã©ã¨ã—ã¦æ‰±ã†
+                if(c == '|'){
+                    ++pipeCounter;
+                    Honememo.Cmn.AddArray(ref pipeTexts, "");
+                    continue;
+                }
+                // å¤‰æ•°ï¼ˆ[[{{{1}}}]]ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
+                String dummy = "";
+                String variable = "";
+                int index = ChkVariable(ref variable, ref dummy, i_Text, i);
+                if(index != -1){
+                    i = index;
+                    if(pipeCounter > 0){
+                        pipeTexts[pipeCounter - 1] += variable;
+                    }
+                    else if(sharpFlag){
+                        section += variable;
+                    }
+                    else{
+                        article += variable;
+                    }
+                    continue;
+                }
 
-		        // | ‚Ì‘O‚Ì‚Æ‚«
-		        if(pipeCounter <= 0){
-			        // •Ï”ˆÈŠO‚Å { } ‚Ü‚½‚Í < > [ ] \n ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
-			        if((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n')){
-				        break;
-			        }
+                // | ã®å‰ã®ã¨ã
+                if(pipeCounter <= 0){
+                    // å¤‰æ•°ä»¥å¤–ã§ { } ã¾ãŸã¯ < > [ ] \n ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
+                    if((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n')){
+                        break;
+                    }
 
-			        // # ‚Ì‘O‚Ì‚Æ‚«
-			        if(!sharpFlag){
-				        // #‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚ÍŒ©o‚µ‚Ö‚ÌƒŠƒ“ƒN‚Æ‚µ‚Äˆµ‚¤i1‚Â‚ß‚Ì#‚Ì‚İ—LŒøj
-				        if(c == '#'){
-					        sharpFlag = true;
-				        }
-				        else{
-					        article += c;
-				        }
-			        }
-			        // # ‚ÌŒã‚Ì‚Æ‚«
-			        else{
-				        section += c;
-			        }
-		        }
-		        // | ‚ÌŒã‚Ì‚Æ‚«
-		        else{
-			        // ƒRƒƒ“ƒgi<!--j‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
-			        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
-				        break;
-			        }
-			        // nowiki‚Ìƒ`ƒFƒbƒN
-			        String nowiki = "";
-			        index = ChkNowiki(ref nowiki, i_Text, i);
-			        if(index != -1){
-				        i = index;
-				        pipeTexts[pipeCounter - 1] += nowiki;
-				        continue;
-			        }
-			        // ƒŠƒ“ƒN [[ {{ i[[image:xx|[[test]]‚Ì‰æ‘œ]]‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
-			        Link link = new Link();
-			        index = ChkLinkText(ref link, i_Text, i);
-			        if(index != -1){
-				        i = index;
-				        pipeTexts[pipeCounter - 1] += link.Text;
-				        continue;
-			        }
-			        pipeTexts[pipeCounter - 1] += c;
-		        }
-	        }
-	        // ‰ğÍ‚É¬Œ÷‚µ‚½ê‡AŒ‹‰Ê‚ğ–ß‚è’l‚Éİ’è
-	        if(lastIndex != -1){
-		        // •Ï”ƒuƒƒbƒN‚Ì•¶š—ñ‚ğƒŠƒ“ƒN‚ÌƒeƒLƒXƒg‚Éİ’è
-		        result.Text = i_Text.Substring(0, lastIndex + 1);
-		        // ‘OŒã‚ÌƒXƒy[ƒX‚ÍíœiŒ©o‚µ‚ÍŒã‚ë‚Ì‚İj
-		        result.Article = article.Trim();
-		        result.Section = section.TrimEnd();
-		        // | ˆÈ~‚Í‚»‚Ì‚Ü‚Üİ’è
-		        result.PipeTexts = pipeTexts;
-		        // ‹L––¼‚©‚çî•ñ‚ğ’Šo
-		        // ƒTƒuƒy[ƒW
-		        if(result.Article.StartsWith("/") == true){
-			        result.SubPageFlag = true;
-		        }
-		        // æ“ª‚ª :
-		        else if(result.Article.StartsWith(":")){
-			        result.StartColonFlag = true;
-			        result.Article = result.Article.TrimStart(':').TrimStart();
-		        }
-		        // •W€–¼‘O‹óŠÔˆÈŠO‚Å[[xxx:yyy]]‚Ì‚æ‚¤‚É‚È‚Á‚Ä‚¢‚éê‡AŒ¾ŒêƒR[ƒh
-		        if(result.Article.Contains(":") == true && !IsNotMainNamespace(result.Article)){
-			        // ¦–{“–‚ÍAŒ¾ŒêƒR[ƒh“™‚Ìˆê——‚ğì‚èA‘´ˆ‚Æˆê’v‚·‚é‚à‚Ì‚ğEEE‚Æ‚·‚×‚«‚¾‚ë‚¤‚ªA
-			        //   ƒƒ“ƒe‚µ‚«‚ê‚È‚¢‚Ì‚Å : ‚ğŠÜ‚Ş–¼‘O‹óŠÔˆÈŠO‚ğ‘S‚ÄŒ¾ŒêƒR[ƒh“™‚Æ”»’è
-			        result.Code = result.Article.Substring(0, result.Article.IndexOf(':')).TrimEnd();
-			        result.Article = result.Article.Substring(result.Article.IndexOf(':') + 1).TrimStart();
-		        }
-	        }
-	        return result;
+                    // # ã®å‰ã®ã¨ã
+                    if(!sharpFlag){
+                        // #ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯è¦‹å‡ºã—ã¸ã®ãƒªãƒ³ã‚¯ã¨ã—ã¦æ‰±ã†ï¼ˆ1ã¤ã‚ã®#ã®ã¿æœ‰åŠ¹ï¼‰
+                        if(c == '#'){
+                            sharpFlag = true;
+                        }
+                        else{
+                            article += c;
+                        }
+                    }
+                    // # ã®å¾Œã®ã¨ã
+                    else{
+                        section += c;
+                    }
+                }
+                // | ã®å¾Œã®ã¨ã
+                else{
+                    // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
+                    if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
+                        break;
+                    }
+                    // nowikiã®ãƒã‚§ãƒƒã‚¯
+                    String nowiki = "";
+                    index = ChkNowiki(ref nowiki, i_Text, i);
+                    if(index != -1){
+                        i = index;
+                        pipeTexts[pipeCounter - 1] += nowiki;
+                        continue;
+                    }
+                    // ãƒªãƒ³ã‚¯ [[ {{ ï¼ˆ[[image:xx|[[test]]ã®ç”»åƒ]]ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
+                    Link link = new Link();
+                    index = ChkLinkText(ref link, i_Text, i);
+                    if(index != -1){
+                        i = index;
+                        pipeTexts[pipeCounter - 1] += link.Text;
+                        continue;
+                    }
+                    pipeTexts[pipeCounter - 1] += c;
+                }
+            }
+            // è§£æã«æˆåŠŸã—ãŸå ´åˆã€çµæœã‚’æˆ»ã‚Šå€¤ã«è¨­å®š
+            if(lastIndex != -1){
+                // å¤‰æ•°ãƒ–ãƒ­ãƒƒã‚¯ã®æ–‡å­—åˆ—ã‚’ãƒªãƒ³ã‚¯ã®ãƒ†ã‚­ã‚¹ãƒˆã«è¨­å®š
+                result.Text = i_Text.Substring(0, lastIndex + 1);
+                // å‰å¾Œã®ã‚¹ãƒšãƒ¼ã‚¹ã¯å‰Šé™¤ï¼ˆè¦‹å‡ºã—ã¯å¾Œã‚ã®ã¿ï¼‰
+                result.Article = article.Trim();
+                result.Section = section.TrimEnd();
+                // | ä»¥é™ã¯ãã®ã¾ã¾è¨­å®š
+                result.PipeTexts = pipeTexts;
+                // è¨˜äº‹åã‹ã‚‰æƒ…å ±ã‚’æŠ½å‡º
+                // ã‚µãƒ–ãƒšãƒ¼ã‚¸
+                if(result.Article.StartsWith("/") == true){
+                    result.SubPageFlag = true;
+                }
+                // å…ˆé ­ãŒ :
+                else if(result.Article.StartsWith(":")){
+                    result.StartColonFlag = true;
+                    result.Article = result.Article.TrimStart(':').TrimStart();
+                }
+                // æ¨™æº–åå‰ç©ºé–“ä»¥å¤–ã§[[xxx:yyy]]ã®ã‚ˆã†ã«ãªã£ã¦ã„ã‚‹å ´åˆã€è¨€èªã‚³ãƒ¼ãƒ‰
+                if(result.Article.Contains(":") == true && !IsNotMainNamespace(result.Article)){
+                    // â€»æœ¬å½“ã¯ã€è¨€èªã‚³ãƒ¼ãƒ‰ç­‰ã®ä¸€è¦§ã‚’ä½œã‚Šã€å…¶å‡¦ã¨ä¸€è‡´ã™ã‚‹ã‚‚ã®ã‚’ãƒ»ãƒ»ãƒ»ã¨ã™ã¹ãã ã‚ã†ãŒã€
+                    //   ãƒ¡ãƒ³ãƒ†ã—ãã‚Œãªã„ã®ã§ : ã‚’å«ã‚€åå‰ç©ºé–“ä»¥å¤–ã‚’å…¨ã¦è¨€èªã‚³ãƒ¼ãƒ‰ç­‰ã¨åˆ¤å®š
+                    result.Code = result.Article.Substring(0, result.Article.IndexOf(':')).TrimEnd();
+                    result.Article = result.Article.Substring(result.Article.IndexOf(':') + 1).TrimStart();
+                }
+            }
+            return result;
         }
 
-        /* “n‚³‚ê‚½Wikipedia‚Ìƒeƒ“ƒvƒŒ[ƒg‚ğ‰ğÍ */
+        /* æ¸¡ã•ã‚ŒãŸWikipediaã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’è§£æ */
         public virtual Link ParseTemplate(String i_Text)
         {
-	        // o—Í’l‰Šú‰»
-	        Link result = new Link();
-	        result.Initialize();
-	        result.TemplateFlag = true;
-	        // “ü—Í’lŠm”F
-	        if(i_Text.StartsWith("{{") == false){
-		        return result;
-	        }
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
+            Link result = new Link();
+            result.Initialize();
+            result.TemplateFlag = true;
+            // å…¥åŠ›å€¤ç¢ºèª
+            if(i_Text.StartsWith("{{") == false){
+                return result;
+            }
 
-	        // \•¶‚ğ‰ğÍ‚µ‚ÄA{{}}“à•”‚Ì•¶š—ñ‚ğæ“¾
-	        // ¦\•¶‚ÍWikipedia‚ÌƒvƒŒƒrƒ…[‚ÅFX‚µ‚ÄŠm”FA‘«‚è‚È‚©‚Á‚½‚èŠÔˆá‚Á‚Ä‚½‚è‚·‚é‚©‚àEEE
-	        String article = "";
-	        String[] pipeTexts = new String[0];
-	        int lastIndex = -1;
-	        int pipeCounter = 0;
-	        for(int i = 2 ; i < i_Text.Length ; i++){
-		        char c = i_Text[i];
-		        // }}‚ªŒ©‚Â‚©‚Á‚½‚çAˆ—³íI—¹
-		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}") == true){
-			        lastIndex = ++i;
-			        break;
-		        }
-		        // | ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚Íˆø”‚È‚Ç‚Æ‚µ‚Äˆµ‚¤
-		        if(c == '|'){
-			        ++pipeCounter;
-			        Honememo.Cmn.AddArray(ref pipeTexts, "");
-			        continue;
-		        }
-		        // •Ï”i[[{{{1}}}]]‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
-		        String dummy = "";
-		        String variable = "";
-		        int index = ChkVariable(ref variable, ref dummy, i_Text, i);
-		        if(index != -1){
-			        i = index;
-			        if(pipeCounter > 0){
-				        pipeTexts[pipeCounter - 1] += variable;
-			        }
-			        else{
-				        article += variable;
-			        }
-			        continue;
-		        }
+            // æ§‹æ–‡ã‚’è§£æã—ã¦ã€{{}}å†…éƒ¨ã®æ–‡å­—åˆ—ã‚’å–å¾—
+            // â€»æ§‹æ–‡ã¯Wikipediaã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ã§è‰²ã€…è©¦ã—ã¦ç¢ºèªã€è¶³ã‚Šãªã‹ã£ãŸã‚Šé–“é•ã£ã¦ãŸã‚Šã™ã‚‹ã‹ã‚‚ãƒ»ãƒ»ãƒ»
+            String article = "";
+            String[] pipeTexts = new String[0];
+            int lastIndex = -1;
+            int pipeCounter = 0;
+            for(int i = 2 ; i < i_Text.Length ; i++){
+                char c = i_Text[i];
+                // }}ãŒè¦‹ã¤ã‹ã£ãŸã‚‰ã€å‡¦ç†æ­£å¸¸çµ‚äº†
+                if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}") == true){
+                    lastIndex = ++i;
+                    break;
+                }
+                // | ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯å¼•æ•°ãªã©ã¨ã—ã¦æ‰±ã†
+                if(c == '|'){
+                    ++pipeCounter;
+                    Honememo.Cmn.AddArray(ref pipeTexts, "");
+                    continue;
+                }
+                // å¤‰æ•°ï¼ˆ[[{{{1}}}]]ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
+                String dummy = "";
+                String variable = "";
+                int index = ChkVariable(ref variable, ref dummy, i_Text, i);
+                if(index != -1){
+                    i = index;
+                    if(pipeCounter > 0){
+                        pipeTexts[pipeCounter - 1] += variable;
+                    }
+                    else{
+                        article += variable;
+                    }
+                    continue;
+                }
 
-		        // | ‚Ì‘O‚Ì‚Æ‚«
-		        if(pipeCounter <= 0){
-			        // •Ï”ˆÈŠO‚Å < > [ ] { } ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
-			        if((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}')){
-				        break;
-			        }
-			        article += c;
-		        }
-		        // | ‚ÌŒã‚Ì‚Æ‚«
-		        else{
-			        // ƒRƒƒ“ƒgi<!--j‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AƒŠƒ“ƒN‚Í–³Œø
-			        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
-				        break;
-			        }
-			        // nowiki‚Ìƒ`ƒFƒbƒN
-			        String nowiki = "";
-			        index = ChkNowiki(ref nowiki, i_Text, i);
-			        if(index != -1){
-				        i = index;
-				        pipeTexts[pipeCounter - 1] += nowiki;
-				        continue;
-			        }
-			        // ƒŠƒ“ƒN [[ {{ i{{test|[[—á]]}}‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
-			        Link link = new Link();
-			        index = ChkLinkText(ref link, i_Text, i);
-			        if(index != -1){
-				        i = index;
-				        pipeTexts[pipeCounter - 1] += link.Text;
-				        continue;
-			        }
-			        pipeTexts[pipeCounter - 1] += c;
-		        }
-	        }
-	        // ‰ğÍ‚É¬Œ÷‚µ‚½ê‡AŒ‹‰Ê‚ğ–ß‚è’l‚Éİ’è
-	        if(lastIndex != -1){
-		        // •Ï”ƒuƒƒbƒN‚Ì•¶š—ñ‚ğƒŠƒ“ƒN‚ÌƒeƒLƒXƒg‚Éİ’è
-		        result.Text = i_Text.Substring(0, lastIndex + 1);
-		        // ‘OŒã‚ÌƒXƒy[ƒXE‰üs‚ÍíœiŒ©o‚µ‚ÍŒã‚ë‚Ì‚İj
-		        result.Article = article.Trim();
-		        // | ˆÈ~‚Í‚»‚Ì‚Ü‚Üİ’è
-		        result.PipeTexts = pipeTexts;
-		        // ‹L––¼‚©‚çî•ñ‚ğ’Šo
-		        // ƒTƒuƒy[ƒW
-		        if(result.Article.StartsWith("/") == true){
-			        result.SubPageFlag = true;
-		        }
-		        // æ“ª‚ª :
-		        else if(result.Article.StartsWith(":")){
-			        result.StartColonFlag = true;
-			        result.Article = result.Article.TrimStart(':').TrimStart();
-		        }
-		        // æ“ª‚ª msgnw:
-		        result.MsgnwFlag = result.Article.ToLower().StartsWith(MSGNW.ToLower());
-		        if(result.MsgnwFlag){
-			        result.Article = result.Article.Substring(MSGNW.Length);
-		        }
-		        // ‹L––¼’¼Œã‚Ì‰üs‚Ì—L–³
-		        if(article.TrimEnd(' ').EndsWith("\n")){
-			        result.EnterFlag = true;
-		        }
-	        }
-	        return result;
+                // | ã®å‰ã®ã¨ã
+                if(pipeCounter <= 0){
+                    // å¤‰æ•°ä»¥å¤–ã§ < > [ ] { } ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
+                    if((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}')){
+                        break;
+                    }
+                    article += c;
+                }
+                // | ã®å¾Œã®ã¨ã
+                else{
+                    // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ãƒªãƒ³ã‚¯ã¯ç„¡åŠ¹
+                    if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTSTART)){
+                        break;
+                    }
+                    // nowikiã®ãƒã‚§ãƒƒã‚¯
+                    String nowiki = "";
+                    index = ChkNowiki(ref nowiki, i_Text, i);
+                    if(index != -1){
+                        i = index;
+                        pipeTexts[pipeCounter - 1] += nowiki;
+                        continue;
+                    }
+                    // ãƒªãƒ³ã‚¯ [[ {{ ï¼ˆ{{test|[[ä¾‹]]}}ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
+                    Link link = new Link();
+                    index = ChkLinkText(ref link, i_Text, i);
+                    if(index != -1){
+                        i = index;
+                        pipeTexts[pipeCounter - 1] += link.Text;
+                        continue;
+                    }
+                    pipeTexts[pipeCounter - 1] += c;
+                }
+            }
+            // è§£æã«æˆåŠŸã—ãŸå ´åˆã€çµæœã‚’æˆ»ã‚Šå€¤ã«è¨­å®š
+            if(lastIndex != -1){
+                // å¤‰æ•°ãƒ–ãƒ­ãƒƒã‚¯ã®æ–‡å­—åˆ—ã‚’ãƒªãƒ³ã‚¯ã®ãƒ†ã‚­ã‚¹ãƒˆã«è¨­å®š
+                result.Text = i_Text.Substring(0, lastIndex + 1);
+                // å‰å¾Œã®ã‚¹ãƒšãƒ¼ã‚¹ãƒ»æ”¹è¡Œã¯å‰Šé™¤ï¼ˆè¦‹å‡ºã—ã¯å¾Œã‚ã®ã¿ï¼‰
+                result.Article = article.Trim();
+                // | ä»¥é™ã¯ãã®ã¾ã¾è¨­å®š
+                result.PipeTexts = pipeTexts;
+                // è¨˜äº‹åã‹ã‚‰æƒ…å ±ã‚’æŠ½å‡º
+                // ã‚µãƒ–ãƒšãƒ¼ã‚¸
+                if(result.Article.StartsWith("/") == true){
+                    result.SubPageFlag = true;
+                }
+                // å…ˆé ­ãŒ :
+                else if(result.Article.StartsWith(":")){
+                    result.StartColonFlag = true;
+                    result.Article = result.Article.TrimStart(':').TrimStart();
+                }
+                // å…ˆé ­ãŒ msgnw:
+                result.MsgnwFlag = result.Article.ToLower().StartsWith(MSGNW.ToLower());
+                if(result.MsgnwFlag){
+                    result.Article = result.Article.Substring(MSGNW.Length);
+                }
+                // è¨˜äº‹åç›´å¾Œã®æ”¹è¡Œã®æœ‰ç„¡
+                if(article.TrimEnd(' ').EndsWith("\n")){
+                    result.EnterFlag = true;
+                }
+            }
+            return result;
         }
 
-        /* “n‚³‚ê‚½ƒeƒLƒXƒg‚Ìw’è‚³‚ê‚½ˆÊ’u‚É‘¶İ‚·‚éWikipedia‚Ì“à•”ƒŠƒ“ƒNEƒeƒ“ƒvƒŒ[ƒg‚ğƒ`ƒFƒbƒN */
-        // ¦³í‚Ì–ß‚è’l‚É‚ÍA]]‚ÌŒã‚ë‚Ì]‚ÌˆÊ’u‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ•Ô‚·BˆÙí‚Í-1
+        /* æ¸¡ã•ã‚ŒãŸãƒ†ã‚­ã‚¹ãƒˆã®æŒ‡å®šã•ã‚ŒãŸä½ç½®ã«å­˜åœ¨ã™ã‚‹Wikipediaã®å†…éƒ¨ãƒªãƒ³ã‚¯ãƒ»ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ãƒã‚§ãƒƒã‚¯ */
+        // â€»æ­£å¸¸æ™‚ã®æˆ»ã‚Šå€¤ã«ã¯ã€]]ã®å¾Œã‚ã®]ã®ä½ç½®ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¿”ã™ã€‚ç•°å¸¸æ™‚ã¯-1
         public int ChkLinkText(ref Link o_Link, String i_Text, int i_Index)
         {
-	        // o—Í’l‰Šú‰»
-	        int lastIndex = -1;
-	        o_Link.Initialize();
-	        // “ü—Í’l‚É‰‚¶‚ÄAˆ—‚ğU‚è•ª‚¯
-	        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "[[") == true){
-		        // “à•”ƒŠƒ“ƒN
-		        o_Link = ParseInnerLink(i_Text.Substring(i_Index));
-	        }
-	        else if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "{{") == true){
-		        // ƒeƒ“ƒvƒŒ[ƒg
-		        o_Link = ParseTemplate(i_Text.Substring(i_Index));
-	        }
-	        // ˆ—Œ‹‰ÊŠm”F
-	        if(!String.IsNullOrEmpty(o_Link.Text)){
-		        lastIndex = i_Index + o_Link.Text.Length - 1;
-	        }
-	        return lastIndex;
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
+            int lastIndex = -1;
+            o_Link.Initialize();
+            // å…¥åŠ›å€¤ã«å¿œã˜ã¦ã€å‡¦ç†ã‚’æŒ¯ã‚Šåˆ†ã‘
+            if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "[[") == true){
+                // å†…éƒ¨ãƒªãƒ³ã‚¯
+                o_Link = ParseInnerLink(i_Text.Substring(i_Index));
+            }
+            else if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "{{") == true){
+                // ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
+                o_Link = ParseTemplate(i_Text.Substring(i_Index));
+            }
+            // å‡¦ç†çµæœç¢ºèª
+            if(!String.IsNullOrEmpty(o_Link.Text)){
+                lastIndex = i_Index + o_Link.Text.Length - 1;
+            }
+            return lastIndex;
         }
 
-        /* “n‚³‚ê‚½ƒeƒLƒXƒg‚Ìw’è‚³‚ê‚½ˆÊ’u‚É‘¶İ‚·‚é•Ï”‚ğ‰ğÍ */
+        /* æ¸¡ã•ã‚ŒãŸãƒ†ã‚­ã‚¹ãƒˆã®æŒ‡å®šã•ã‚ŒãŸä½ç½®ã«å­˜åœ¨ã™ã‚‹å¤‰æ•°ã‚’è§£æ */
         public virtual int ChkVariable(ref String o_Variable, ref String o_Value, String i_Text, int i_Index)
         {
-	        // o—Í’l‰Šú‰»
-	        int lastIndex = -1;
-	        o_Variable = "";
-	        o_Value = "";
-	        // “ü—Í’lŠm”F
-	        if(Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, "{{{") == false){
-		        return lastIndex;
-	        }
-	        // ƒuƒƒbƒNI—¹‚Ü‚Åæ“¾
-	        bool pipeFlag = false;
-	        for(int i = i_Index + 3; i < i_Text.Length ; i++){
-		        // I—¹ğŒ‚Ìƒ`ƒFƒbƒN
-		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}}") == true){
-			        lastIndex = i + 2;
-			        break;
-		        }
-		        // ƒRƒƒ“ƒgi<!--j‚Ìƒ`ƒFƒbƒN
-		        String dummy = "";
-		        int index = WikipediaArticle.ChkComment(ref dummy, i_Text, i);
-		        if(index != -1){
-			        i = index;
-			        continue;
-		        }
-		        // | ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡AˆÈ~‚Ì•¶š—ñ‚Í‘ã“ü‚³‚ê‚½’l‚Æ‚µ‚Äˆµ‚¤
-		        if(i_Text[i] == '|'){
-			        pipeFlag = true;
-		        }
-		        // | ‚Ì‘O‚Ì‚Æ‚«
-		        else if(!pipeFlag){
-			        // ¦Wikipedia‚Ìd—lã‚ÍA{{{1{|•\¦}}} ‚Ì‚æ‚¤‚É•Ï”–¼‚Ì—“‚É { ‚ğ
-			        //   ŠÜ‚ß‚é‚±‚Æ‚ª‚Å‚«‚é‚æ‚¤‚¾‚ªA”»•Ê‚µ‚«‚ê‚È‚¢‚Ì‚ÅAƒGƒ‰[‚Æ‚·‚é
-			        //   i‚Ç‚¤‚¹ˆÓ}‚µ‚Ä‚»‚ñ‚È‚±‚Æ‚·‚él‚Í‹‚È‚¢‚¾‚ë‚¤‚µEEEj
-			        if(i_Text[i] == '{'){
-				        break;
-			        }
-		        }
-		        // | ‚ÌŒã‚Ì‚Æ‚«
-		        else{
-			        // nowiki‚Ìƒ`ƒFƒbƒN
-			        String nowiki = "";
-			        index = ChkNowiki(ref nowiki, i_Text, i);
-			        if(index != -1){
-				        i = index;
-				        o_Value += nowiki;
-				        continue;
-			        }
-			        // •Ï”i{{{1|{{{2}}}}}}‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
-			        String variable = "";
-			        index = ChkVariable(ref variable, ref dummy, i_Text, i);
-			        if(index != -1){
-				        i = index;
-				        o_Value += variable;
-				        continue;
-			        }
-			        // ƒŠƒ“ƒN [[ {{ i{{{1|[[test]]}}}‚Æ‚©j‚ÌÄ‹Aƒ`ƒFƒbƒN
-			        Link link = new Link();
-			        index = ChkLinkText(ref link, i_Text, i);
-			        if(index != -1){
-				        i = index;
-				        o_Value += link.Text;
-				        continue;
-			        }
-			        o_Value += i_Text[i];
-		        }
-	        }
-	        // •Ï”ƒuƒƒbƒN‚Ì•¶š—ñ‚ğo—Í’l‚Éİ’è
-	        if(lastIndex != -1){
-		        o_Variable = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
-	        }
-	        // ³í‚È\•¶‚Å‚Í‚È‚©‚Á‚½ê‡Ao—Í’l‚ğƒNƒŠƒA
-	        else{
-		        o_Variable = "";
-		        o_Value = "";
-	        }
-	        return lastIndex;
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
+            int lastIndex = -1;
+            o_Variable = "";
+            o_Value = "";
+            // å…¥åŠ›å€¤ç¢ºèª
+            if(Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, "{{{") == false){
+                return lastIndex;
+            }
+            // ãƒ–ãƒ­ãƒƒã‚¯çµ‚äº†ã¾ã§å–å¾—
+            bool pipeFlag = false;
+            for(int i = i_Index + 3; i < i_Text.Length ; i++){
+                // çµ‚äº†æ¡ä»¶ã®ãƒã‚§ãƒƒã‚¯
+                if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}}") == true){
+                    lastIndex = i + 2;
+                    break;
+                }
+                // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ã®ãƒã‚§ãƒƒã‚¯
+                String dummy = "";
+                int index = WikipediaArticle.ChkComment(ref dummy, i_Text, i);
+                if(index != -1){
+                    i = index;
+                    continue;
+                }
+                // | ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã€ä»¥é™ã®æ–‡å­—åˆ—ã¯ä»£å…¥ã•ã‚ŒãŸå€¤ã¨ã—ã¦æ‰±ã†
+                if(i_Text[i] == '|'){
+                    pipeFlag = true;
+                }
+                // | ã®å‰ã®ã¨ã
+                else if(!pipeFlag){
+                    // â€»Wikipediaã®ä»•æ§˜ä¸Šã¯ã€{{{1{|è¡¨ç¤º}}} ã®ã‚ˆã†ã«å¤‰æ•°åã®æ¬„ã« { ã‚’
+                    //   å«ã‚ã‚‹ã“ã¨ãŒã§ãã‚‹ã‚ˆã†ã ãŒã€åˆ¤åˆ¥ã—ãã‚Œãªã„ã®ã§ã€ã‚¨ãƒ©ãƒ¼ã¨ã™ã‚‹
+                    //   ï¼ˆã©ã†ã›æ„å›³ã—ã¦ãã‚“ãªã“ã¨ã™ã‚‹äººã¯å±…ãªã„ã ã‚ã†ã—ãƒ»ãƒ»ãƒ»ï¼‰
+                    if(i_Text[i] == '{'){
+                        break;
+                    }
+                }
+                // | ã®å¾Œã®ã¨ã
+                else{
+                    // nowikiã®ãƒã‚§ãƒƒã‚¯
+                    String nowiki = "";
+                    index = ChkNowiki(ref nowiki, i_Text, i);
+                    if(index != -1){
+                        i = index;
+                        o_Value += nowiki;
+                        continue;
+                    }
+                    // å¤‰æ•°ï¼ˆ{{{1|{{{2}}}}}}ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
+                    String variable = "";
+                    index = ChkVariable(ref variable, ref dummy, i_Text, i);
+                    if(index != -1){
+                        i = index;
+                        o_Value += variable;
+                        continue;
+                    }
+                    // ãƒªãƒ³ã‚¯ [[ {{ ï¼ˆ{{{1|[[test]]}}}ã¨ã‹ï¼‰ã®å†å¸°ãƒã‚§ãƒƒã‚¯
+                    Link link = new Link();
+                    index = ChkLinkText(ref link, i_Text, i);
+                    if(index != -1){
+                        i = index;
+                        o_Value += link.Text;
+                        continue;
+                    }
+                    o_Value += i_Text[i];
+                }
+            }
+            // å¤‰æ•°ãƒ–ãƒ­ãƒƒã‚¯ã®æ–‡å­—åˆ—ã‚’å‡ºåŠ›å€¤ã«è¨­å®š
+            if(lastIndex != -1){
+                o_Variable = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
+            }
+            // æ­£å¸¸ãªæ§‹æ–‡ã§ã¯ãªã‹ã£ãŸå ´åˆã€å‡ºåŠ›å€¤ã‚’ã‚¯ãƒªã‚¢
+            else{
+                o_Variable = "";
+                o_Value = "";
+            }
+            return lastIndex;
         }
 
-        /* nowiki‹æŠÔ‚Ìƒ`ƒFƒbƒN */
+        /* nowikiåŒºé–“ã®ãƒã‚§ãƒƒã‚¯ */
         public static int ChkNowiki(ref String o_Text, String i_Text, int i_Index)
         {
-	        // o—Í’l‰Šú‰»
-	        int lastIndex = -1;
-	        o_Text = "";
-	        // “ü—Í’lŠm”F
-	        if(Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, NOWIKISTART.ToLower()) == false){
-		        return lastIndex;
-	        }
-	        // ƒuƒƒbƒNI—¹‚Ü‚Åæ“¾
-	        for(int i = i_Index + NOWIKISTART.Length; i < i_Text.Length ; i++){
-		        // I—¹ğŒ‚Ìƒ`ƒFƒbƒN
-		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, NOWIKIEND)){
-			        lastIndex = i + NOWIKIEND.Length - 1;
-			        break;
-		        }
-		        // ƒRƒƒ“ƒgi<!--j‚Ìƒ`ƒFƒbƒN
-		        String dummy = "";
-		        int index = WikipediaArticle.ChkComment(ref dummy, i_Text, i);
-		        if(index != -1){
-			        i = index;
-			        continue;
-		        }
-	        }
-	        // I‚í‚è‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍA‘S‚ÄnowikiƒuƒƒbƒN‚Æ”»’f
-	        if(lastIndex == -1){
-		        lastIndex = i_Text.Length - 1;
-	        }
-	        o_Text = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
-	        return lastIndex;
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
+            int lastIndex = -1;
+            o_Text = "";
+            // å…¥åŠ›å€¤ç¢ºèª
+            if(Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, NOWIKISTART.ToLower()) == false){
+                return lastIndex;
+            }
+            // ãƒ–ãƒ­ãƒƒã‚¯çµ‚äº†ã¾ã§å–å¾—
+            for(int i = i_Index + NOWIKISTART.Length; i < i_Text.Length ; i++){
+                // çµ‚äº†æ¡ä»¶ã®ãƒã‚§ãƒƒã‚¯
+                if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, NOWIKIEND)){
+                    lastIndex = i + NOWIKIEND.Length - 1;
+                    break;
+                }
+                // ã‚³ãƒ¡ãƒ³ãƒˆï¼ˆ<!--ï¼‰ã®ãƒã‚§ãƒƒã‚¯
+                String dummy = "";
+                int index = WikipediaArticle.ChkComment(ref dummy, i_Text, i);
+                if(index != -1){
+                    i = index;
+                    continue;
+                }
+            }
+            // çµ‚ã‚ã‚ŠãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€å…¨ã¦nowikiãƒ–ãƒ­ãƒƒã‚¯ã¨åˆ¤æ–­
+            if(lastIndex == -1){
+                lastIndex = i_Text.Length - 1;
+            }
+            o_Text = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
+            return lastIndex;
         }
 
-        /* ƒRƒƒ“ƒg‹æŠÔ‚Ìƒ`ƒFƒbƒN */
+        /* ã‚³ãƒ¡ãƒ³ãƒˆåŒºé–“ã®ãƒã‚§ãƒƒã‚¯ */
         public static int ChkComment(ref String o_Text, String i_Text, int i_Index)
         {
-	        // o—Í’l‰Šú‰»
-	        int lastIndex = -1;
-	        o_Text = "";
-	        // “ü—Í’lŠm”F
-	        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, COMMENTSTART) == false){
-		        return lastIndex;
-	        }
-	        // ƒRƒƒ“ƒgI—¹‚Ü‚Åæ“¾
-	        for(int i = i_Index + COMMENTSTART.Length; i < i_Text.Length ; i++){
-		        if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTEND)){
-			        lastIndex = i + COMMENTEND.Length - 1;
-			        break;
-		        }
-	        }
-	        // I‚í‚è‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍA‘S‚ÄƒRƒƒ“ƒg‚Æ”»’f
-	        if(lastIndex == -1){
-		        lastIndex = i_Text.Length - 1;
-	        }
-	        o_Text = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
-	        return lastIndex;
+            // å‡ºåŠ›å€¤åˆæœŸåŒ–
+            int lastIndex = -1;
+            o_Text = "";
+            // å…¥åŠ›å€¤ç¢ºèª
+            if(Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, COMMENTSTART) == false){
+                return lastIndex;
+            }
+            // ã‚³ãƒ¡ãƒ³ãƒˆçµ‚äº†ã¾ã§å–å¾—
+            for(int i = i_Index + COMMENTSTART.Length; i < i_Text.Length ; i++){
+                if(Honememo.Cmn.ChkTextInnerWith(i_Text, i, COMMENTEND)){
+                    lastIndex = i + COMMENTEND.Length - 1;
+                    break;
+                }
+            }
+            // çµ‚ã‚ã‚ŠãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€å…¨ã¦ã‚³ãƒ¡ãƒ³ãƒˆã¨åˆ¤æ–­
+            if(lastIndex == -1){
+                lastIndex = i_Text.Length - 1;
+            }
+            o_Text = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
+            return lastIndex;
         }
 
-		// Wikipedia‚ÌŒÅ’è’l‚Ì‘®
+        // Wikipediaã®å›ºå®šå€¤ã®æ›¸å¼
         public static readonly String COMMENTSTART = "<!--";
         public static readonly String COMMENTEND = "-->";
         public static readonly String NOWIKISTART = "<nowiki>";
         public static readonly String NOWIKIEND = "</nowiki>";
         public static readonly String MSGNW = "msgnw:";
 
-		// ‹L–‚ªŠ‘®‚·‚éƒT[ƒo[î•ñ
-		public WikipediaInformation Server
+        // è¨˜äº‹ãŒæ‰€å±ã™ã‚‹ã‚µãƒ¼ãƒãƒ¼æƒ…å ±
+        public WikipediaInformation Server
         {
-			get {
-				return _Server;
-			}
-		}
+            get {
+                return _Server;
+            }
+        }
 
-		// ‹L–‚ªŠ‘®‚·‚éƒT[ƒo[î•ñipropertyj
-		protected WikipediaInformation _Server;
+        // è¨˜äº‹ãŒæ‰€å±ã™ã‚‹ã‚µãƒ¼ãƒãƒ¼æƒ…å ±ï¼ˆpropertyï¼‰
+        protected WikipediaInformation _Server;
     }
 }

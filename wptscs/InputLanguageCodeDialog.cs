@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      Wikipedia–|–óx‰‡ƒc[ƒ‹ƒR[ƒh“ü—Íƒ_ƒCƒAƒƒOƒNƒ‰ƒXƒ\[ƒX</summary>
+//      Wikipediaç¿»è¨³æ”¯æ´ãƒ„ãƒ¼ãƒ«ã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹</summary>
 //
-// <copyright file="InputLanguageCodeDialog.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="InputLanguageCodeDialog.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -19,42 +19,42 @@ namespace Honememo.Wptscs
     using System.Windows.Forms;
 
     /// <summary>
-    /// Wikipedia–|–óx‰‡ƒc[ƒ‹ƒR[ƒh“ü—Íƒ_ƒCƒAƒƒO‚ÌƒNƒ‰ƒX‚Å‚·B
+    /// Wikipediaç¿»è¨³æ”¯æ´ãƒ„ãƒ¼ãƒ«ã‚³ãƒ¼ãƒ‰å…¥åŠ›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public partial class InputLanguageCodeDialog : Form
     {
-        #region private•Ï”
+        #region privateå¤‰æ•°
 
         /// <summary>
-        /// Œ¾ŒêƒR[ƒhiƒf[ƒ^‚â‚èæ‚è—pjB
+        /// è¨€èªã‚³ãƒ¼ãƒ‰ï¼ˆãƒ‡ãƒ¼ã‚¿ã‚„ã‚Šå–ã‚Šç”¨ï¼‰ã€‚
         /// </summary>
         public string LanguageCode;
 
         #endregion
         
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^B‰Šú‰»ƒƒ\ƒbƒhŒÄ‚Ño‚µ‚Ì‚İB
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€‚åˆæœŸåŒ–ãƒ¡ã‚½ãƒƒãƒ‰å‘¼ã³å‡ºã—ã®ã¿ã€‚
         /// </summary>
         public InputLanguageCodeDialog()
         {
-            // Windows ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å¶¬‚³‚ê‚½ƒR[ƒh
+            // Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰
             InitializeComponent();
         }
         
         #endregion
 
-        #region ŠeƒCƒxƒ“ƒg‚Ìƒƒ\ƒbƒh
+        #region å„ã‚¤ãƒ™ãƒ³ãƒˆã®ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// ƒtƒH[ƒ€ƒ[ƒh‚Ìˆ—B‰Šú‰»B
+        /// ãƒ•ã‚©ãƒ¼ãƒ ãƒ­ãƒ¼ãƒ‰æ™‚ã®å‡¦ç†ã€‚åˆæœŸåŒ–ã€‚
         /// </summary>
-        /// <param name="sender">ƒCƒxƒ“ƒg”­¶ƒIƒuƒWƒFƒNƒgB</param>
-        /// <param name="e">”­¶‚µ‚½ƒCƒxƒ“ƒgB</param>
+        /// <param name="sender">ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚</param>
+        /// <param name="e">ç™ºç”Ÿã—ãŸã‚¤ãƒ™ãƒ³ãƒˆã€‚</param>
         private void InputLanguageCodeDialog_Load(object sender, EventArgs e)
         {
-            // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ÉŒ¾ŒêƒR[ƒh‚ğİ’è
+            // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã«è¨€èªã‚³ãƒ¼ãƒ‰ã‚’è¨­å®š
             if (this.LanguageCode != null)
             {
                 textBoxCode.Text = this.LanguageCode;
@@ -62,13 +62,13 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ€ƒNƒ[ƒY‚Ìˆ—Bƒf[ƒ^•Û‘¶B
+        /// ãƒ•ã‚©ãƒ¼ãƒ ã‚¯ãƒ­ãƒ¼ã‚ºæ™‚ã®å‡¦ç†ã€‚ãƒ‡ãƒ¼ã‚¿ä¿å­˜ã€‚
         /// </summary>
-        /// <param name="sender">ƒCƒxƒ“ƒg”­¶ƒIƒuƒWƒFƒNƒgB</param>
-        /// <param name="e">”­¶‚µ‚½ƒCƒxƒ“ƒgB</param>
+        /// <param name="sender">ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã€‚</param>
+        /// <param name="e">ç™ºç”Ÿã—ãŸã‚¤ãƒ™ãƒ³ãƒˆã€‚</param>
         private void InputLanguageCodeDialog_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // ƒeƒLƒXƒgƒ{ƒbƒNƒX‚ÌŒ¾ŒêƒR[ƒh‚ğ•Û‘¶
+            // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã®è¨€èªã‚³ãƒ¼ãƒ‰ã‚’ä¿å­˜
             this.LanguageCode = textBoxCode.Text.Trim();
         }
         
