@@ -22,5 +22,101 @@ namespace Honememo.Wptscs.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("wptscs")]
+        public string ApplicationFolder {
+            get {
+                return ((string)(this["ApplicationFolder"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("config.xml")]
+        public string ConfigurationFile {
+            get {
+                return ((string)(this["ConfigurationFile"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("WikipediaTranslationSupportTool/{0}.{1:D2}")]
+        public string DefaultUserAgent {
+            get {
+                return ((string)(this["DefaultUserAgent"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://{0}.wikipedia.org")]
+        public string WikipediaLocation {
+            get {
+                return ((string)(this["WikipediaLocation"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SaveDirectory {
+            get {
+                return ((string)(this["SaveDirectory"]));
+            }
+            set {
+                this["SaveDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        public string LastSelectedSource {
+            get {
+                return ((string)(this["LastSelectedSource"]));
+            }
+            set {
+                this["LastSelectedSource"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastSelectedTarget {
+            get {
+                return ((string)(this["LastSelectedTarget"]));
+            }
+            set {
+                this["LastSelectedTarget"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserAgent {
+            get {
+                return ((string)(this["UserAgent"]));
+            }
+            set {
+                this["UserAgent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Referer {
+            get {
+                return ((string)(this["Referer"]));
+            }
+            set {
+                this["Referer"] = value;
+            }
+        }
     }
 }

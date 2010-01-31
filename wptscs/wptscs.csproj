@@ -19,7 +19,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\wptscs_doc.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\wptscs.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,17 +61,11 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs" />
-    <Compile Include="Models\IDataSource.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\MediaWiki.cs" />
-    <Compile Include="Models\LanguageInformation.cs" />
-    <Compile Include="Models\LanguageWithServerInformation.cs" />
     <Compile Include="Models\MediaWikiPage.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Website.cs" />
-    <Compile Include="Models\WikipediaArticle.cs" />
-    <Compile Include="Models\WikipediaFormat.cs" />
-    <Compile Include="Models\WikipediaInformation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ConfigWikipediaDialog.resx">
@@ -96,6 +90,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,12 +100,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Utilities\FormUtils.cs" />
+    <Compile Include="Utilities\SerializableDictionary.cs" />
+    <Compile Include="Utilities\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
     <Content Include="License.txt" />
     <Content Include="Readme.txt" />
-    <Content Include="wptscs.xml">
+    <Content Include="config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

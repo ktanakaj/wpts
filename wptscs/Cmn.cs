@@ -18,6 +18,7 @@ namespace Honememo
     using System.Resources;
     using System.Windows.Forms;
     using System.Xml.Serialization;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
@@ -26,10 +27,16 @@ namespace Honememo
     /// </summary>
     public class Cmn
     {
+        #region 変数定義
+
         /// <summary>
         /// リソースマネージャー
         /// </summary>
         public ResourceManager Resource;
+
+        #endregion
+
+        #region コンストラクタ
 
         /// <summary>
         /// コンストラクタ（exeと同名のリソースマネージャーを起動フォルダから読み込み）。
@@ -65,7 +72,7 @@ namespace Honememo
             try
             {
                 // ファイルから設定を読み込み
-                Resource = ResourceManager.CreateFileBasedResourceManager(i_Resource, i_Dir, null);
+                this.Resource = ResourceManager.CreateFileBasedResourceManager(i_Resource, i_Dir, null);
             }
             catch (Exception e)
             {
@@ -84,7 +91,9 @@ namespace Honememo
             this.Resource = resource;
         }
 
-        // ↓以下は静的メンバ
+        #endregion
+
+        #region 静的メソッド
 
         /// <summary>
         /// StringのNULL値チェック＆Trim。
@@ -192,83 +201,6 @@ namespace Honememo
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// オブジェクトのXMLへのシリアライズ。
-        /// </summary>
-        /// <param name="i_Obj">オブジェクト。</param>
-        /// <param name="i_FileName">XMLファイルパス。</param>
-        /// <returns><c>true</c> シリアライズ成功</returns>
-        public static bool XmlSerialize(object i_Obj, string i_FileName)
-        {
-            // ※例外は投げない。失敗した場合は全てfalse
-
-            // 設定をシリアライズ化
-            System.Diagnostics.Debug.WriteLine("Cmn.Serialize > " + i_FileName + "にシリアライズ");
-
-            XmlSerializer serializer = new XmlSerializer(i_Obj.GetType());
-            try
-            {
-                Stream writer = new FileStream(i_FileName, FileMode.Create);
-                try
-                {
-                    serializer.Serialize(writer, i_Obj);
-                }
-                finally
-                {
-                    writer.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("Cmn.Serialize > 例外発生：" + e.ToString());
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// オブジェクトのXMLからのデシリアライズ。
-        /// </summary>
-        /// <param name="o_Obj">オブジェクト。</param>
-        /// <param name="i_Type">オブジェクトの型。</param>
-        /// <param name="i_FileName">XMLファイルパス。</param>
-        /// <returns><c>true</c> デシリアライズ成功</returns>
-        public static bool XmlDeserialize(ref object o_Obj, Type i_Type, string i_FileName)
-        {
-            // ※例外は投げない。失敗した場合は全てfalse
-
-            // 設定をデシリアライズ化
-            System.Diagnostics.Debug.WriteLine("Cmn.Deserialize > " + i_FileName + "からデシリアライズ");
-
-            // 出力値初期化
-            o_Obj = null;
-
-            // ↓このgcnewでログ上に例外が出るが、MSDNによれば無視していいらしい・・・
-            XmlSerializer serializer = new XmlSerializer(i_Type);
-            try
-            {
-                Stream reader = new FileStream(i_FileName, FileMode.Open, FileAccess.Read);
-                try
-                {
-                    // ※ ほんとはObjectの型にキャストして代入したいのだが、
-                    //    方法不明なため、現状は呼び出し元で行う
-                    o_Obj = serializer.Deserialize(reader);
-                }
-                finally
-                {
-                    reader.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("Cmn.Deserialize > 例外発生：" + e.ToString());
-                return false;
-            }
-
-            return true;
         }
 
         /// <summary>
@@ -387,256 +319,9 @@ namespace Honememo
             return true;
         }
 
-        // ↓要リソースマネージャーのメンバ
+        #endregion
 
-        // 共通ダイアログ（通知／警告／エラー）
-        // ※共通ダイアログは、入力された文字列をそのまま表示するものと、入力された文字列
-        //   でリソースを取得、フォーマットして表示するものの各2種類
-
-        /// <summary>
-        /// 共通通知ダイアログ（入力された文字列を表示）。
-        /// </summary>
-        /// <param name="msg">メッセージ。</param>
-        public virtual void InformationDialog(string msg)
-        {
-            // 渡された文字列で通知ダイアログを表示
-            // ※Resource等がNULLの場合、NullReferenceException等をそのまま返す
-            MessageBox.Show(
-                msg,
-                Resources.InformationTitle,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
-        /// <summary>
-        /// 共通通知ダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
-        /// </summary>
-        /// <param name="i_Key">リソースのキー。</param>
-        /// <param name="i_args">フォーマットの引数。</param>
-        public virtual void InformationDialogResource(string i_Key, params object[] i_args)
-        {
-            // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
-            //   それ以外はNullReferenceException等をそのまま返す
-
-            // キー値が簡略化されている場合、先頭に追加して処理
-            string key = (string) i_Key.Clone();
-            if (key.StartsWith("InformationMessage_") == false)
-            {
-                key = "InformationMessage_" + i_Key;
-            }
-
-            // .resourcesから指定されたメッセージを読み込み
-            string text = this.Resource.GetString(key);
-            if (text == null)
-            {
-                throw new ArgumentException("Resource \"" + key + "\" Not Exist!", "i_Key");
-            }
-
-            // 表示用関数をコール
-            this.InformationDialog(String.Format(text, i_args));
-        }
-
-        /// <summary>
-        /// 共通警告ダイアログ（入力された文字列を表示）。
-        /// </summary>
-        /// <param name="msg">メッセージ。</param>
-        public virtual void WarningDialog(string msg)
-        {
-            // 渡された文字列で警告ダイアログを表示
-            // ※Resource等がNULLの場合、NullReferenceException等をそのまま返す
-            MessageBox.Show(
-                msg,
-                Resources.WarningTitle,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-        }
-
-        /// <summary>
-        /// 共通警告ダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
-        /// </summary>
-        /// <param name="i_Key">リソースのキー。</param>
-        /// <param name="i_args">フォーマットの引数。</param>
-        public virtual void WarningDialogResource(string i_Key, params object[] i_args)
-        {
-            // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
-            //   それ以外はNullReferenceException等をそのまま返す
-
-            // キー値が簡略化されている場合、先頭に追加して処理
-            string key = (string) i_Key.Clone();
-            if (key.StartsWith("WarningMessage_") == false)
-            {
-                key = "WarningMessage_" + i_Key;
-            }
-
-            // .resourcesから指定されたメッセージを読み込み
-            string text = this.Resource.GetString(key);
-            if (text == null)
-            {
-                throw new ArgumentException("Resource \"" + key + "\" Not Exist!", "i_Key");
-            }
-
-            // 表示用関数をコール
-            this.WarningDialog(String.Format(text, i_args));
-        }
-
-        /// <summary>
-        /// 共通エラーダイアログ（入力された文字列を表示）。
-        /// </summary>
-        /// <param name="msg">メッセージ。</param>
-        public virtual void ErrorDialog(string msg)
-        {
-            // 渡された文字列でエラーダイアログを表示
-            // ※Resource等がNULLの場合、NullReferenceException等をそのまま返す
-            MessageBox.Show(
-                msg,
-                Resources.ErrorTitle,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-        }
-
-        /// <summary>
-        /// 共通エラーダイアログ（入力された文字列でリソースを取得、フォーマットして表示）。
-        /// </summary>
-        /// <param name="i_Key">リソースのキー。</param>
-        /// <param name="i_args">フォーマットの引数。</param>
-        public virtual void ErrorDialogResource(string i_Key, params object[] i_args)
-        {
-            // ※ファイルからリソースが読み取れない場合はArgumentExceptionを。
-            //   それ以外はNullReferenceException等をそのまま返す
-
-            // キー値が簡略化されている場合、先頭に追加して処理
-            string key = (string) i_Key.Clone();
-            if (key.StartsWith("ErrorMessage_") == false)
-            {
-                key = "ErrorMessage_" + i_Key;
-            }
-
-            // .resourcesから指定されたメッセージを読み込み
-            string text = this.Resource.GetString(key);
-            if (text == null)
-            {
-                throw new ArgumentException("Resource \"" + key + "\" Not Exist!", "i_Key");
-            }
-
-            // 表示用関数をコール
-            this.ErrorDialog(String.Format(text, i_args));
-        }
-
-        // ↓リソースマネージャーがnullでも動作、その場合はダイアログが出ない
-
-        /// <summary>
-        /// フォルダオープン。
-        /// </summary>
-        /// <param name="i_Path">フォルダのパス。</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
-        /// <returns><c>true</c> オープン成功</returns>
-        public virtual bool OpenFolder(string i_Path, bool i_ShowEnabled)
-        {
-            // ※例外は投げない。失敗した場合は全てfalse
-            System.Diagnostics.Debug.WriteLine("Cmn.OpenFolder > " + i_Path);
-
-            // 空の場合は除外
-            if (String.IsNullOrEmpty(i_Path))
-            {
-                return false;
-            }
-
-            // 対象データのフォルダを開く
-            if (Directory.Exists(i_Path))
-            {
-                try
-                {
-                    System.Diagnostics.Process.Start("explorer.exe", "/n," + i_Path);
-                }
-                catch (Exception e)
-                {
-                    if (this.Resource != null && i_ShowEnabled)
-                    {
-                        this.ErrorDialogResource("ErrorMessage_NotDataOpen", e.Message);
-                    }
-
-                    return false;
-                }
-            }
-            else
-            {
-                if (this.Resource != null && i_ShowEnabled)
-                {
-                    this.ErrorDialogResource("ErrorMessage_NotDataExist");
-                }
-
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// フォルダオープン（エラー時にダイアログを表示）。
-        /// </summary>
-        /// <param name="path">フォルダのパス。</param>
-        /// <returns><c>true</c> オープン成功</returns>
-        public bool OpenFolder(string path)
-        {
-            return this.OpenFolder(path, true);
-        }
-
-        /// <summary>
-        /// ファイルオープン。
-        /// </summary>
-        /// <param name="i_Path">ファイルのパス。</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
-        /// <returns><c>true</c> オープン成功</returns>
-        public virtual bool OpenFile(string i_Path, bool i_ShowEnabled)
-        {
-            // ※例外は投げない。失敗した場合は全てfalse
-            System.Diagnostics.Debug.WriteLine("Cmn.OpenFile > " + i_Path);
-
-            // 空のセルは除外
-            if (String.IsNullOrEmpty(i_Path))
-            {
-                return false;
-            }
-
-            // 対象データを開く
-            if (File.Exists(i_Path))
-            {
-                try
-                {
-                    System.Diagnostics.Process.Start(i_Path);
-                }
-                catch (Exception e)
-                {
-                    if (this.Resource != null && i_ShowEnabled)
-                    {
-                        this.ErrorDialogResource("ErrorMessage_NotDataOpen", e.Message);
-                    }
-
-                    return false;
-                }
-            }
-            else
-            {
-                if (this.Resource != null && i_ShowEnabled)
-                {
-                    this.ErrorDialogResource("ErrorMessage_NotDataExist");
-                }
-
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// ファイルオープン（エラー時にダイアログを表示）。
-        /// </summary>
-        /// <param name="path">ファイルのパス。</param>
-        /// <returns><c>true</c> オープン成功</returns>
-        public bool OpenFile(string path)
-        {
-            return this.OpenFile(path, true);
-        }
+        #region インスタンスメソッド
 
         /// <summary>
         /// サーバー接続チェック。
@@ -655,9 +340,9 @@ namespace Honememo
                 PingReply reply = ping.Send(i_Server);
                 if (reply.Status != IPStatus.Success)
                 {
-                    if (this.Resource != null && i_ShowEnabled)
+                    if (i_ShowEnabled)
                     {
-                        this.ErrorDialogResource("ErrorMessage_MissNetworkAccess", reply.Status.ToString());
+                        FormUtils.ErrorDialog(Resources.ErrorMessage_MissNetworkAccess, reply.Status.ToString());
                     }
 
                     return false;
@@ -665,9 +350,9 @@ namespace Honememo
             }
             catch (Exception e)
             {
-                if (this.Resource != null && i_ShowEnabled)
+                if (i_ShowEnabled)
                 {
-                    this.ErrorDialogResource("ErrorMessage_MissNetworkAccess", e.InnerException.Message);
+                    FormUtils.ErrorDialog(Resources.ErrorMessage_MissNetworkAccess, e.InnerException.Message);
                 }
 
                 return false;
@@ -686,87 +371,6 @@ namespace Honememo
             return this.Ping(server, true);
         }
 
-        /// <summary>
-        /// DataGridViewのCSVファイルへの出力。
-        /// </summary>
-        /// <param name="i_View">CSVファイルを出力するDataGridView。</param>
-        /// <param name="i_Path">CSVファイルパス。</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
-        /// <returns><c>true</c> 出力成功</returns>
-        public virtual bool SaveDataGridViewCsv(DataGridView i_View, string i_Path, bool i_ShowEnabled)
-        {
-            // ※例外は投げない。失敗した場合は全てfalse
-            try
-            {
-                // DataGridViewの表示内容をCSVファイルに出力
-                StreamWriter sw = new StreamWriter(i_Path, false, System.Text.Encoding.GetEncoding("Shift-JIS"));
-                try
-                {
-                    // ヘッダー出力
-                    string header = String.Empty;
-                    foreach (DataGridViewColumn column in i_View.Columns)
-                    {
-                        if (header != String.Empty)
-                        {
-                            header += ",";
-                        }
-
-                        header += "\"" + column.HeaderText + "\"";
-                    }
-
-                    sw.WriteLine(header);
-
-                    // 本体出力
-                    for (int y = 0; y < i_View.RowCount; y++)
-                    {
-                        // 表示されていない行は除外
-                        if (i_View.Rows[y].Visible == false)
-                        {
-                            continue;
-                        }
-
-                        // 1行ごとに出力
-                        string line = String.Empty;
-                        for (int x = 0; x < i_View.ColumnCount; x++)
-                        {
-                            if (x != 0)
-                            {
-                                line += ",";
-                            }
-
-                            line += "\"" + NullCheckAndTrim(i_View[x, y]) + "\"";
-                        }
-
-                        sw.WriteLine(line);
-                    }
-                }
-                finally
-                {
-                    sw.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                if (this.Resource != null && i_ShowEnabled)
-                {
-                    this.ErrorDialogResource("ErrorMessage_MissFileSaveView", e.Message);
-                }
-
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// DataGridViewのCSVファイルへの出力（エラー時にダイアログを表示）。
-        /// </summary>
-        /// <param name="i_View">CSVファイルを出力するDataGridView。</param>
-        /// <param name="i_Path">CSVファイルパス。</param>
-        /// <returns><c>true</c> 出力成功</returns>
-        public bool SaveDataGridViewCsv(DataGridView i_View, string i_Path)
-        {
-            return this.SaveDataGridViewCsv(i_View, i_Path, true);
-        }
+        #endregion
     }
 }

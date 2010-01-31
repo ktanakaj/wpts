@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Wikipedia 翻訳支援ツール")]
 [assembly: AssemblyDescription("Wikipediaでの言語間翻訳をサポートするためのツール")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("-")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Wikipedia 翻訳支援ツール")]
 [assembly: AssemblyCopyright("Copyright (C) Honeplus 2009")]
 [assembly: AssemblyTrademark("")]

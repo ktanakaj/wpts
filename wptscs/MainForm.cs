@@ -18,6 +18,7 @@ namespace Honememo.Wptscs
     using System.IO;
     using System.Text;
     using System.Windows.Forms;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Logics;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
@@ -77,7 +78,18 @@ namespace Honememo.Wptscs
             try
             {
                 this.cmnAP = new Honememo.Cmn();
-                this.config = new Config(Path.Combine(Application.StartupPath, Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".xml"));
+                this.config = Config.GetInstance();
+            }
+            catch (FileNotFoundException ex)
+            {
+                // 設定ファイルが見つからない場合
+                System.Diagnostics.Debug.WriteLine("MainForm._Load > 初期化中に例外 : " + ex.Message);
+                FormUtils.ErrorDialog(
+                    Resources.ErrorMessageConfigNotFound,
+                    Settings.Default.ConfigurationFile);
+
+                // どうしようもないのでそのまま終了
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -91,9 +103,9 @@ namespace Honememo.Wptscs
             this.Initialize();
 
             // 前回の処理状態を復元
-            textBoxSaveDirectory.Text = this.config.Client.SaveDirectory;
-            comboBoxSource.SelectedText = this.config.Client.LastSelectedSource;
-            comboBoxTarget.SelectedText = this.config.Client.LastSelectedTarget;
+            textBoxSaveDirectory.Text = Settings.Default.SaveDirectory;
+            comboBoxSource.SelectedText = Settings.Default.LastSelectedSource;
+            comboBoxTarget.SelectedText = Settings.Default.LastSelectedTarget;
 
             // コンボボックス変更時の処理をコール
             this.comboBoxSource_SelectedIndexChanged(sender, e);
@@ -107,51 +119,11 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // 複数立ち上げの場合、言語設定が更新されている可能性があるので、設定を再読み込み
-            try
-            {
-                this.config.Load();
-
-                // 現在の作業フォルダ、絞込み文字列を保存
-                this.config.Client.SaveDirectory = textBoxSaveDirectory.Text;
-                this.config.Client.LastSelectedSource = comboBoxSource.Text;
-                this.config.Client.LastSelectedTarget = comboBoxTarget.Text;
-                this.config.Save();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("MainForm._FormClosed > 設定保存中に例外 : " + ex.Message);
-            }
-
-            // キャッシュフォルダの古いファイルのクリア
-            try
-            {
-                DirectoryInfo dir = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath)));
-                if (dir.Exists == true)
-                {
-                    FileInfo[] files = dir.GetFiles("*.xml");
-                    foreach (FileInfo file in files)
-                    {
-                        // 1週間以上前のキャッシュは削除
-                        if ((DateTime.UtcNow - file.LastWriteTimeUtc) > new TimeSpan(7, 0, 0, 0))
-                        {
-                            // 万が一消せなかったら、無視して次のファイルへ
-                            try
-                            {
-                                file.Delete();
-                            }
-                            catch (Exception ex)
-                            {
-                                System.Diagnostics.Debug.WriteLine("MainForm._FormClosed > キャッシュ削除時に例外 : " + ex.Message);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("MainForm._FormClosed > キャッシュ削除中に例外 : " + ex.Message);
-            }
+            // 現在の作業フォルダ、絞込み文字列を保存
+            Settings.Default.SaveDirectory = textBoxSaveDirectory.Text;
+            Settings.Default.LastSelectedSource = comboBoxSource.Text;
+            Settings.Default.LastSelectedTarget = comboBoxTarget.Text;
+            Settings.Default.Save();
         }
 
         /// <summary>
@@ -162,45 +134,29 @@ namespace Honememo.Wptscs
         private void comboBoxSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ラベルに言語名を表示する
-            if (comboBoxSource.Text != String.Empty)
+            labelSource.Text = String.Empty;
+            linkLabelSourceURL.Text = "http://";
+            if (!String.IsNullOrEmpty(comboBoxSource.Text))
             {
                 comboBoxSource.Text = comboBoxSource.Text.Trim().ToLower();
-                LanguageInformation lang = this.config.GetLanguage(this.comboBoxSource.Text);
-                if (lang != null)
+                Website site = this.config.GetWebsite(this.comboBoxSource.Text);
+                if (site != null)
                 {
-                    labelSource.Text = lang.GetName(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-                }
-                else
-                {
-                    labelSource.Text = String.Empty;
-                }
+                    // その言語の、ユーザーが使用している言語での表示名を表示
+                    // （日本語環境だったら日本語を、英語だったら英語を）
+                    labelSource.Text = site.Lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
 
-                // サーバーURLの表示
-                if (this.config.Client.RunMode == Config.RunType.Wikipedia)
-                {
-                    WikipediaInformation svr = new WikipediaInformation();
-                    if (lang != null)
+                    // サーバーURLの表示
+                    if (this.config.Mode == Config.RunMode.Wikipedia)
                     {
-                        svr = lang as WikipediaInformation;
-                    }
+                        if (site == null)
+                        {
+                            site = new MediaWiki(new Language(comboBoxSource.Text));
+                        }
 
-                    if (svr == null)
-                    {
-                        svr = new WikipediaInformation(comboBoxSource.Text);
+                        linkLabelSourceURL.Text = site.Location;
                     }
-
-                    linkLabelSourceURL.Text = "http://" + svr.Server;
                 }
-                else
-                {
-                    // 将来の拡張（？）用
-                    linkLabelSourceURL.Text = "http://";
-                }
-            }
-            else
-            {
-                labelSource.Text = String.Empty;
-                linkLabelSourceURL.Text = "http://";
             }
         }
 
@@ -234,22 +190,17 @@ namespace Honememo.Wptscs
         private void comboBoxTarget_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ラベルに言語名を表示する
-            if (comboBoxTarget.Text != String.Empty)
+            labelTarget.Text = String.Empty;
+            if (!String.IsNullOrEmpty(comboBoxTarget.Text))
             {
                 comboBoxTarget.Text = comboBoxTarget.Text.Trim().ToLower();
-                LanguageInformation lang = this.config.GetLanguage(comboBoxTarget.Text);
-                if (lang != null)
+                Website site = this.config.GetWebsite(this.comboBoxTarget.Text);
+                if (site != null)
                 {
-                    labelTarget.Text = lang.GetName(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+                    // その言語の、ユーザーが使用している言語での表示名を表示
+                    // （日本語環境だったら日本語を、英語だったら英語を）
+                    labelTarget.Text = site.Lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
                 }
-                else
-                {
-                    labelTarget.Text = String.Empty;
-                }
-            }
-            else
-            {
-                labelTarget.Text = String.Empty;
             }
         }
 
@@ -271,14 +222,11 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void buttonConfig_Click(object sender, EventArgs e)
         {
-            if (this.config.Client.RunMode == Config.RunType.Wikipedia)
+            if (this.config.Mode == Config.RunMode.Wikipedia)
             {
                 // 言語の設定画面を開く
                 ConfigWikipediaDialog dialog = new ConfigWikipediaDialog();
                 dialog.ShowDialog();
-
-                // 結果に関係なく、設定を再読み込み
-                this.config.Load();
 
                 // コンボボックス設定
                 string backupSourceSelected = comboBoxSource.SelectedText;
@@ -294,7 +242,7 @@ namespace Honememo.Wptscs
             else
             {
                 // 将来の拡張（？）用
-                this.cmnAP.InformationDialogResource("InformationMessage_DevelopingMethod", "Wikipedia以外の処理");
+                FormUtils.InformationDialog(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理");
             }
         }
 
@@ -347,25 +295,25 @@ namespace Honememo.Wptscs
             // 必要な情報が設定されていない場合は処理不可
             if (Directory.Exists(textBoxSaveDirectory.Text) == false)
             {
-                this.cmnAP.WarningDialogResource("WarningMessage_UnuseSaveDirectory");
+                FormUtils.WarningDialog(Resources.WarningMessage_UnuseSaveDirectory);
                 buttonSaveDirectory.Focus();
                 return;
             }
             else if (comboBoxSource.Text == String.Empty)
             {
-                this.cmnAP.WarningDialogResource("WarningMessage_NotSelectedSource");
+                FormUtils.WarningDialog(Resources.WarningMessage_NotSelectedSource);
                 comboBoxSource.Focus();
                 return;
             }
             else if (comboBoxTarget.Text == String.Empty)
             {
-                this.cmnAP.WarningDialogResource("WarningMessage_NotSelectedTarget");
+                FormUtils.WarningDialog(Resources.WarningMessage_NotSelectedTarget);
                 comboBoxTarget.Focus();
                 return;
             }
             else if (comboBoxSource.Text == comboBoxTarget.Text)
             {
-                this.cmnAP.WarningDialogResource("WarningMessage_SourceEqualTarget");
+                FormUtils.WarningDialog(Resources.WarningMessage_SourceEqualTarget);
                 comboBoxTarget.Focus();
                 return;
             }
@@ -422,29 +370,27 @@ namespace Honememo.Wptscs
 
                 // 翻訳支援処理を実行し、結果とログをファイルに出力
                 // ※処理対象に応じてTranslateを継承したオブジェクトを生成
-                if (this.config.Client.RunMode == Config.RunType.Wikipedia)
+                if (this.config.Mode == Config.RunMode.Wikipedia)
                 {
-                    WikipediaInformation source = this.config.GetLanguage(comboBoxSource.Text) as WikipediaInformation;
+                    Website source = this.config.GetWebsite(comboBoxSource.Text) as Website;
                     if (source == null)
                     {
-                        source = new WikipediaInformation(comboBoxSource.Text);
+                        source = new MediaWiki(new Language(comboBoxSource.Text));
                     }
 
-                    WikipediaInformation target = this.config.GetLanguage(comboBoxTarget.Text) as WikipediaInformation;
+                    Website target = this.config.GetWebsite(comboBoxTarget.Text) as Website;
                     if (target == null)
                     {
-                        target = new WikipediaInformation(comboBoxTarget.Text);
+                        target = new MediaWiki(new Language(comboBoxTarget.Text));
                     }
 
-                    this.transAP = new TranslateWikipedia(source, target);
-                    ((TranslateWikipedia)this.transAP).UserAgent = this.config.Client.UserAgent;
-                    ((TranslateWikipedia)this.transAP).Referer = this.config.Client.Referer;
+                    this.transAP = new TranslateWikipedia(source as MediaWiki, target as MediaWiki);
                 }
                 else
                 {
                     // 将来の拡張（？）用
                     textBoxLog.AppendText(String.Format(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理"));
-                    this.cmnAP.InformationDialogResource("InformationMessage_DevelopingMethod", "Wikipedia以外の処理");
+                    FormUtils.InformationDialog(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理");
                     return;
                 }
 
@@ -534,13 +480,21 @@ namespace Honememo.Wptscs
         /// </summary>
         private void Initialize()
         {
+            // もし古いバージョンの設定があればバージョンアップ
+            // ※ 互換性がなくなるときはコメントアウトする
+            Properties.Settings.Default.Upgrade();
+
             // コンボボックス設定
             comboBoxSource.Items.Clear();
             comboBoxTarget.Items.Clear();
-            foreach (LanguageInformation lang in this.config.Languages)
+            if (this.config.Websites.ContainsKey(this.config.Mode))
             {
-                comboBoxSource.Items.Add(lang.Code);
-                comboBoxTarget.Items.Add(lang.Code);
+                // 設定ファイルに存在する全言語を選択肢として登録する
+                foreach (Website site in this.config.Websites[this.config.Mode])
+                {
+                    comboBoxSource.Items.Add(site.Lang.Code);
+                    comboBoxTarget.Items.Add(site.Lang.Code);
+                }
             }
         }
 

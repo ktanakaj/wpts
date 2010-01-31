@@ -12,8 +12,10 @@ namespace Honememo.Wptscs.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
+    using System.IO;
+    using System.Xml;
     using System.Xml.Serialization;
+    using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// MediaWikiのウェブサイト（システム）をあらわすモデルクラスです。
@@ -22,10 +24,18 @@ namespace Honememo.Wptscs.Models
     {
         #region 定数定義
 
+        // TODO: ここで定義している定数は、すべて可変のプロパティにする。
+        //       （サーバーごとに変えたいかもしれないので。）
+
         /// <summary>
         /// WikipediaのXMLの固定値の書式。
         /// </summary>
         public static readonly string Xmlns = "http://www.mediawiki.org/xml/export-0.4/";
+
+        /// <summary>
+        /// 名前空間情報取得用にアクセスするページ（存在不要）。
+        /// </summary>
+        public static readonly string DummyPage = "Main_Page";
 
         /// <summary>
         /// テンプレートの名前空間を示す番号。
@@ -43,8 +53,6 @@ namespace Honememo.Wptscs.Models
         public static readonly int ImageNamespaceNumber = 6;
 
         #endregion
-
-        #region private変数
 
         // ※各変数の初期値は2006年9月時点のWikipedia英語版より
 
@@ -82,21 +90,23 @@ namespace Honememo.Wptscs.Models
         public string Redirect = "#REDIRECT";
 
         /// <summary>
-        /// 名前空間の設定。
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        public IDictionary<int, string> Namespaces = new Dictionary<int, string>();
-
-        /// <summary>
         /// 見出しの定型句。
         /// </summary>
         [XmlArrayItem("Title")]
         public string[] TitleKeys = new string[0];
 
+        #region private変数
+
+        /// <summary>
+        /// MediaWikiの名前空間の情報。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        private IDictionary<int, string> namespaces;
+
         /// <summary>
         /// 記事のXMLデータが存在するパス。
         /// </summary>
-        private string exportPath = "wiki/Special:Export/";
+        private string exportPath = "wiki/Special:Export/{0}";
 
         #endregion
 
@@ -113,14 +123,14 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// コンストラクタ（通常）。
+        /// コンストラクタ（Wikipedia用）。
         /// </summary>
         /// <param name="lang">ウェブサイトの言語。</param>
         public MediaWiki(Language lang)
             : base(lang)
         {
             // メンバ変数の初期設定
-            this.Server = String.Format("{0}.wikipedia.org", lang.Code);
+            this.Location = String.Format(Settings.Default.WikipediaLocation, lang.Code);
         }
 
         #endregion
@@ -128,84 +138,61 @@ namespace Honememo.Wptscs.Models
         #region プロパティ
 
         /// <summary>
-        /// ページを取得。
+        /// MediaWikiの名前空間の情報。
         /// </summary>
-        /// <param name="title">ページタイトル。</param>
-        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
-        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
-        public override Page this[string title]
+        public IDictionary<int, string> Namespaces
         {
             get
             {
-                // 初期化と値チェック
-                _Xml = null;
-                _GetArticleStatus = HttpStatusCode.PaymentRequired;
-                _GetArticleException = null;
-                // 記事のXMLデータをWikipediaサーバーから取得
-                try
+                lock (this.namespaces)
                 {
-                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(Url);
-                    // UserAgent設定
-                    // ※WikipediaはUserAgentが空の場合エラーとなるので、必ず設定する
-                    if (!String.IsNullOrEmpty(i_UserAgent))
+                    // 値が設定されていない場合、サーバーから取得して初期化する
+                    // ※ コンストラクタ等で初期化していないのは、通信の準備が整うまで行えないため
+                    if (this.namespaces != null)
                     {
-                        req.UserAgent = i_UserAgent;
+                        return this.namespaces;
                     }
-                    else
-                    {
-                        Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                        req.UserAgent = "WikipediaTranslationSupportTool/" + ver.Major + "." + String.Format("{0:D2}", ver.Minor);
-                    }
-                    // Referer設定
-                    if (!String.IsNullOrEmpty(i_Referer))
-                    {
-                        req.Referer = i_Referer;
-                    }
-                    HttpWebResponse res = (HttpWebResponse)req.GetResponse();
-                    _GetArticleStatus = res.StatusCode;
 
-                    // 応答データを受信するためのStreamを取得し、データを取得
-                    // ※取得したXMLが正常かは、ここでは確認しない
-                    _Xml = new XmlDocument();
-                    _Xml.Load(res.GetResponseStream());
-                    res.Close();
+                    // 適当なページのXMLデータをMediaWikiサーバーから取得
+                    XmlDocument xml = this.GetXml(MediaWiki.DummyPage);
 
-                    // 取得したXMLを一時フォルダに保存
-                    try
+                    // ルートエレメントまで取得し、フォーマットをチェック
+                    XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
+                    nsmgr.AddNamespace("ns", Xmlns);
+                    XmlElement rootElement = xml.SelectSingleNode("/ns:mediawiki", nsmgr) as XmlElement;
+                    if (rootElement == null)
                     {
-                        // 一時フォルダを確認
-                        String tmpDir = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Application.ExecutablePath));
-                        if (Directory.Exists(tmpDir) == false)
+                        // XMLは取得できたが空 or フォーマットが想定外
+                        throw new InvalidDataException("parse failed");
+                    }
+
+                    // ネームスペースを取得
+                    this.namespaces = new Dictionary<int, string>();
+                    XmlNodeList nodeList = rootElement.SelectNodes("ns:siteinfo/ns:namespaces/ns:namespace", nsmgr);
+                    foreach (XmlNode node in nodeList)
+                    {
+                        XmlElement namespaceElement = node as XmlElement;
+                        if (namespaceElement != null)
                         {
-                            // 一時フォルダを作成
-                            Directory.CreateDirectory(tmpDir);
+                            try
+                            {
+                                this.namespaces[Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("key")))] = namespaceElement.InnerText;
+                            }
+                            catch (Exception e)
+                            {
+                                // キャッチしているのは、万が一想定外の書式が返された場合に、完璧に動かなくなるのを防ぐため
+                                System.Diagnostics.Debug.WriteLine("MediaWiki.Namespaces > 例外発生 : " + e);
+                            }
                         }
-                        // ファイルの保存
-                        Xml.Save(Path.Combine(tmpDir, Honememo.Cmn.ReplaceInvalidFileNameChars(Title) + ".xml"));
-                    }
-                    catch (Exception e)
-                    {
-                        System.Diagnostics.Debug.WriteLine("WikipediaArticle.getServerArticle > 一時ファイルの保存に失敗しました : " + e.Message);
                     }
                 }
-                catch (WebException e)
-                {
-                    // ProtocolErrorエラーの場合、ステータスコードを保持
-                    _Xml = null;
-                    if (e.Status == WebExceptionStatus.ProtocolError)
-                    {
-                        _GetArticleStatus = ((HttpWebResponse)e.Response).StatusCode;
-                    }
-                    _GetArticleException = e;
-                    return false;
-                }
-                catch (Exception e)
-                {
-                    _Xml = null;
-                    _GetArticleException = e;
-                    return false;
-                }
-                return true;
+
+                return this.namespaces;
+            }
+
+            set
+            {
+                this.namespaces = value;
             }
         }
 
@@ -228,6 +215,49 @@ namespace Honememo.Wptscs.Models
         #endregion
 
         #region メソッド
+
+        /// <summary>
+        /// ページを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        public override Page GetPage(string title)
+        {
+            // ページのXMLデータをMediaWikiサーバーから取得
+            XmlDocument xml = this.GetXml(title);
+
+            // ルートエレメントまで取得し、フォーマットをチェック
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
+            nsmgr.AddNamespace("ns", Xmlns);
+            XmlElement rootElement = xml.SelectSingleNode("/ns:mediawiki", nsmgr) as XmlElement;
+            if (rootElement == null)
+            {
+                // XMLは取得できたが空 or フォーマットが想定外
+                throw new InvalidDataException("parse failed");
+            }
+
+            // ページの解析
+            XmlElement pageElement = rootElement.SelectSingleNode("ns:page", nsmgr) as XmlElement;
+            if (pageElement == null)
+            {
+                // ページ無し
+                throw new FileNotFoundException("page not found");
+            }
+
+            // ページ名、ページ本文、最終更新日時
+            XmlElement titleElement = pageElement.SelectSingleNode("ns:title", nsmgr) as XmlElement;
+            XmlElement textElement = pageElement.SelectSingleNode("ns:revision/ns:text", nsmgr) as XmlElement;
+            XmlElement timeElement = pageElement.SelectSingleNode("ns:revision/ns:timestamp", nsmgr) as XmlElement;
+
+            // ページ情報を作成して返す
+            // ※ 一応、各項目が無くても動作するようにする
+            return new MediaWikiPage(
+                this,
+                titleElement != null ? titleElement.InnerText : title,
+                textElement != null ? textElement.InnerText : null,
+                timeElement != null ? DateTime.Parse(timeElement.InnerText) : DateTime.UtcNow);
+        }
 
         /// <summary>
         /// 指定した言語での言語名称を ページ名|略称 の形式で取得。
@@ -279,6 +309,29 @@ namespace Honememo.Wptscs.Models
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// MediaWikiから指定されたページのXMLを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <returns>取得したXML。</returns>
+        /// <remarks>
+        /// 取得できない場合（通信エラーなど）は例外を投げる。
+        /// ただし取得したXMLのチェックはしないので、ページ情報等が入っていない可能性がある。
+        /// </remarks>
+        protected XmlDocument GetXml(string title)
+        {
+            // ページのXMLデータをMediaWikiサーバーから取得
+            XmlDocument xml = new XmlDocument();
+            UriBuilder uri = new UriBuilder(this.Location);
+            uri.Path = String.Format(this.exportPath, title);
+            using (Stream reader = this.GetStream(uri.Uri))
+            {
+                xml.Load(reader);
+            }
+
+            return xml;
         }
 
         #endregion

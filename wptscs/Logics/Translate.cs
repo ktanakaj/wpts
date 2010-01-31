@@ -28,24 +28,9 @@ namespace Honememo.Wptscs.Logics
         public static readonly string ENTER = "\r\n";
 
         /// <summary>
-        /// 処理を途中で終了させるためのフラグ。
-        /// </summary>
-        public bool CancellationPending;
-
-        /// <summary>
         /// 共通関数クラスのオブジェクト。
         /// </summary>
         protected Honememo.Cmn cmnAP;
-
-        /// <summary>
-        /// 翻訳元言語の言語コード。
-        /// </summary>
-        protected LanguageInformation source;
-
-        /// <summary>
-        /// 翻訳先言語の言語コード。
-        /// </summary>
-        protected LanguageInformation target;
 
         /// <summary>
         /// ログメッセージ（property）。
@@ -56,7 +41,22 @@ namespace Honememo.Wptscs.Logics
         /// 変換後テキスト（property）。
         /// </summary>
         private string text;
-        
+
+        /// <summary>
+        /// 処理を途中で終了させるためのフラグ。
+        /// </summary>
+        private bool cancellationPending;
+
+        /// <summary>
+        /// 翻訳元言語のサイト／言語情報。
+        /// </summary>
+        private Website source;
+
+        /// <summary>
+        /// 翻訳先言語のサイト／言語情報。
+        /// </summary>
+        private Website target;
+
         #endregion
 
         #region コンストラクタ
@@ -64,9 +64,9 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// コンストラクタ。
         /// </summary>
-        /// <param name="source">翻訳元言語。</param>
-        /// <param name="target">翻訳先言語。</param>
-        public Translate(LanguageInformation source, LanguageInformation target)
+        /// <param name="source">翻訳元サイト／言語。</param>
+        /// <param name="target">翻訳先サイト／言語。</param>
+        public Translate(Website source, Website target)
         {
             // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
             if (source == null)
@@ -128,6 +128,44 @@ namespace Honememo.Wptscs.Logics
             protected set
             {
                 this.text = (value != null) ? value : String.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 処理を途中で終了させるためのフラグ。
+        /// </summary>
+        public bool CancellationPending
+        {
+            get
+            {
+                return this.cancellationPending;
+            }
+
+            set
+            {
+                this.cancellationPending = value;
+            }
+        }
+
+        /// <summary>
+        /// 翻訳元言語のサイト／言語情報。
+        /// </summary>
+        protected Website Source
+        {
+            get
+            {
+                return this.source;
+            }
+        }
+
+        /// <summary>
+        /// 翻訳先言語のサイト／言語情報。
+        /// </summary>
+        protected Website Target
+        {
+            get
+            {
+                return this.target;
             }
         }
 

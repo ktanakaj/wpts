@@ -67,7 +67,18 @@ namespace Honememo.Wptscs.Models
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
         public Page(Website website, string title, string text)
-            : this(website, title, text, System.DateTime.UtcNow)
+            : this(website, title, text, DateTime.UtcNow)
+        {
+        }
+
+        /// <summary>
+        /// コンストラクタ。
+        /// ページの本文には<c>null</c>を、タイムスタンプには現在日時 (UTC) を設定。
+        /// </summary>
+        /// <param name="website">ページが所属するウェブサイト。</param>
+        /// <param name="title">ページタイトル。</param>
+        public Page(Website website, string title)
+            : this(website, title, null, DateTime.UtcNow)
         {
         }
 

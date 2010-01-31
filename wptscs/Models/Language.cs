@@ -13,11 +13,12 @@ namespace Honememo.Wptscs.Models
     using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
+    using Honememo.Utilities;
 
     /// <summary>
     /// 言語に関する情報をあらわすモデルクラスです。
     /// </summary>
-    public class Language : IComparable
+    public class Language
     {
         #region private変数
 
@@ -29,7 +30,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// この言語の、各言語での名称。
         /// </summary>
-        private IDictionary<string, LanguageName> names = new Dictionary<string, LanguageName>();
+        private IDictionary<string, LanguageName> names = new SerializableDictionary<string, LanguageName>();
 
         #endregion
 
@@ -102,22 +103,6 @@ namespace Honememo.Wptscs.Models
 
                 this.names = value;
             }
-        }
-
-        #endregion
-
-        #region メソッド
-
-        /// <summary>
-        /// 配列のソート用メソッド。
-        /// </summary>
-        /// <param name="obj">比較対象のオブジェクト。</param>
-        /// <returns>比較対象オブジェクトの相対順序を示す整数値。</returns>
-        public int CompareTo(object obj)
-        {
-            // 言語コードでソート
-            Language lang = obj as Language;
-            return this.Code.CompareTo(lang.Code);
         }
 
         #endregion

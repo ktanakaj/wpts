@@ -11,9 +11,6 @@
 namespace Honememo.Wptscs.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Xml;
 
     /// <summary>
     /// MediaWikiのページをあらわすモデルクラスです。
@@ -52,11 +49,6 @@ namespace Honememo.Wptscs.Models
         #region private変数
 
         /// <summary>
-        /// ページのXMLデータ。
-        /// </summary>
-        private XmlDocument xml;
-
-        /// <summary>
         /// リダイレクト先のページ名。
         /// </summary>
         private string redirect;
@@ -66,7 +58,7 @@ namespace Honememo.Wptscs.Models
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ（ページ情報）。
+        /// コンストラクタ。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
@@ -75,10 +67,15 @@ namespace Honememo.Wptscs.Models
         public MediaWikiPage(MediaWiki website, string title, string text, DateTime timestamp)
             : base(website, title, text, timestamp)
         {
+            // 本文の指定がある場合は、リダイレクトのチェックを行い属性値を更新する
+            if (String.IsNullOrEmpty(text))
+            {
+                this.IsRedirect();
+            }
         }
 
         /// <summary>
-        /// コンストラクタ（ページ情報）。
+        /// コンストラクタ。
         /// ページのタイムスタンプには現在日時 (UTC) を設定。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
@@ -87,67 +84,27 @@ namespace Honememo.Wptscs.Models
         public MediaWikiPage(MediaWiki website, string title, string text)
             : base(website, title, text)
         {
-        }
-
-        /// <summary>
-        /// コンストラクタ（XML）。
-        /// </summary>
-        /// <param name="website">ページが所属するウェブサイト。</param>
-        /// <param name="xml">MediaWikiでエクスポートしたページXML。</param>
-        public MediaWikiPage(MediaWiki website, XmlDocument xml)
-            : base(website, null, null)
-        {
-            // このコンストラクタではXMLは必須
-            if (xml == null)
+            // 本文の指定がある場合は、リダイレクトのチェックを行い属性値を更新する
+            if (String.IsNullOrEmpty(text))
             {
-                throw new ArgumentNullException("xml");
-            }
-
-            // 初期設定
-            this.Xml = xml;
-
-            // XMLを解析し、メンバに設定
-            XmlNamespaceManager nsmgr = new XmlNamespaceManager(this.Xml.NameTable);
-            nsmgr.AddNamespace("ns", MediaWiki.Xmlns);
-            XmlElement pageElement = this.Xml.SelectSingleNode("/ns:mediawiki/ns:page", nsmgr) as XmlElement;
-            if (pageElement != null)
-            {
-                // 記事名の上書き
-                XmlElement titleElement = pageElement.SelectSingleNode("ns:title", nsmgr) as XmlElement;
-                this.Title = titleElement.InnerText;
-
-                // 最終更新日時
-                XmlElement timeElement = pageElement.SelectSingleNode("ns:revision/ns:timestamp", nsmgr) as XmlElement;
-                this.Timestamp = DateTime.Parse(timeElement.InnerText);
-
-                // 記事本文
-                XmlElement textElement = pageElement.SelectSingleNode("ns:revision/ns:text", nsmgr) as XmlElement;
-                this.Text = textElement.InnerText;
-
-                // リダイレクトのチェックを行い、属性値を更新する
                 this.IsRedirect();
             }
+        }
+        
+        /// <summary>
+        /// コンストラクタ。
+        /// ページの本文には<c>null</c>を、タイムスタンプには現在日時 (UTC) を設定。
+        /// </summary>
+        /// <param name="website">ページが所属するウェブサイト。</param>
+        /// <param name="title">ページタイトル。</param>
+        public MediaWikiPage(MediaWiki website, string title)
+            : base(website, title)
+        {
         }
 
         #endregion
 
         #region プロパティ
-
-        /// <summary>
-        /// ページのXMLデータ。
-        /// </summary>
-        public XmlDocument Xml
-        {
-            get
-            {
-                return this.xml;
-            }
-
-            protected set
-            {
-                this.xml = value;
-            }
-        }
 
         /// <summary>
         /// リダイレクト先のページ名。

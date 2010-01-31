@@ -11,8 +11,9 @@
 namespace Honememo.Wptscs.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using System.IO;
+    using System.Net;
+    using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// ウェブサイトをあらわすモデルクラスです。
@@ -23,9 +24,11 @@ namespace Honememo.Wptscs.Models
         #region private変数
 
         /// <summary>
-        /// サーバー名（ドメイン or IPアドレス）。
+        /// ウェブサイトの場所。
         /// </summary>
-        private string server;
+        /// <example>http://en.wikipedia.org</example>
+        /// <remarks>動作確認はhttpとfileスキームのみ。</remarks>
+        private string location;
 
         /// <summary>
         /// ウェブサイトの言語。
@@ -61,24 +64,20 @@ namespace Honememo.Wptscs.Models
         #region プロパティ
 
         /// <summary>
-        /// サーバー名（ドメイン or IPアドレス）。
+        /// ウェブサイトの場所。
         /// </summary>
-        public string Server
+        /// <example>http://en.wikipedia.org</example>
+        /// <remarks>動作確認はhttpとfileスキームのみ。</remarks>
+        public string Location
         {
             get
             {
-                return this.server;
+                return this.location;
             }
 
             protected set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("server");
-                }
-
-                this.server = value;
+                this.location = value;
             }
         }
 
@@ -104,15 +103,64 @@ namespace Honememo.Wptscs.Models
             }
         }
 
+        #endregion
+        
+        #region メソッド
+
         /// <summary>
         /// ページを取得。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
         /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
-        public abstract Page this[string title]
+        public abstract Page GetPage(string title);
+
+        /// <summary>
+        /// 指定されたURIの情報をストリームで取得。
+        /// </summary>
+        /// <param name="uri">取得対象のURI。</param>
+        /// <returns>取得したストリーム。使用後は必ずクローズすること。</returns>
+        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        protected Stream GetStream(Uri uri)
         {
-            get;
+            // URIに応じたWebRequestを取得
+            WebRequest req = WebRequest.Create(uri);
+
+            // 設定が必要なRequestの場合は、必要な設定を行う
+            // ※ FileWebRequestであれば特になし、それ以外は通すが未確認
+            if (req as HttpWebRequest != null)
+            {
+                // HTTP/HTTPSの場合
+                HttpWebRequest h = req as HttpWebRequest;
+
+                // UserAgent設定
+                string ua = Settings.Default.UserAgent;
+                if (String.IsNullOrEmpty(ua))
+                {
+                    // 特に設定が無い場合はデフォルトの値を設定
+                    Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                    h.UserAgent = String.Format(
+                        Settings.Default.DefaultUserAgent,
+                        ver.Major,
+                        ver.Minor);
+                }
+
+                h.UserAgent = ua;
+
+                // Referer設定
+                string referer = Settings.Default.Referer;
+                if (String.IsNullOrEmpty(referer))
+                {
+                    // 空の場合は、遷移元のURLを自動設定
+                    // TODO: 実装したらサーバーにやさしいかなと思う。
+                    referer = String.Empty;
+                }
+
+                h.Referer = referer;
+            }
+
+            // 応答データを受信するためのStreamを取得し、データを取得
+            return req.GetResponse().GetResponseStream();
         }
 
         #endregion

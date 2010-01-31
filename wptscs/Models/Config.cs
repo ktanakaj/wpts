@@ -1,6 +1,6 @@
 // ================================================================================================
 // <summary>
-//      XMLへの設定保存用クラスソース</summary>
+//      アプリケーションの設定を保持するクラスソース</summary>
 //
 // <copyright file="Config.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
@@ -11,137 +11,205 @@
 namespace Honememo.Wptscs.Models
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Windows.Forms;
     using System.Xml.Serialization;
+    using Honememo.Utilities;
+    using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// XMLへの設定保存用クラスです。
+    /// アプリケーションの設定を保持するクラスです。
     /// </summary>
     public class Config
     {
-        /// <summary>
-        /// クライアントとしての機能関係の設定を保存。
-        /// </summary>
-        public ClientConfig Client;
+        #region 静的変数
 
         /// <summary>
-        /// 言語ごとの情報（サーバーの設定なども）を保存。
+        /// アプリケーション内でのインスタンス保持変数。
         /// </summary>
-        [XmlArrayItem(typeof(LanguageInformation)),
-        XmlArrayItem(typeof(LanguageWithServerInformation)),
-        XmlArrayItem(typeof(WikipediaInformation))]
-        public LanguageInformation[] Languages;
+        private static Config config;
 
         /// <summary>
-        /// インスタンスのファイル名。
+        /// <see cref="config"/>初期化時のロック用オブジェクト。
         /// </summary>
-        private string path;
+        private static object lockObj = new object();
+
+        #endregion
+
+        #region private変数
 
         /// <summary>
-        /// コンストラクタ（通常）。
+        /// プログラムの処理対象。
         /// </summary>
-        public Config()
+        private RunMode mode = RunMode.Wikipedia;
+
+        /// <summary>
+        /// ウェブサイト／言語の情報。
+        /// </summary>
+        private IDictionary<RunMode, IList<Website>> websites = new SerializableDictionary<RunMode, IList<Website>>();
+
+        #endregion
+
+        #region コンストラクタ
+
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
+        /// <remarks>通常は<see cref="GetInstance()"/>を使用する。</remarks>
+        private Config()
         {
-            // メンバ変数の領域確保・初期設定
-            this.Client = new ClientConfig();
-            this.Languages = new LanguageInformation[0];
         }
 
-        /// <summary>
-        /// コンストラクタ（ファイル読み込みあり）。
-        /// </summary>
-        /// <param name="path">設定ファイルパス。</param>
-        public Config(string path)
-        {
-            // ファイルから設定を読み込み
-            this.path = Honememo.Cmn.NullCheckAndTrim(path);
-            if (this.Load() == false)
-            {
-                // 失敗した場合、通常のコンストラクタと同じ処理で初期化
-                this.Client = new ClientConfig();
-                this.Languages = new LanguageInformation[0];
-            }
-        }
+        #endregion
+
+        #region 定数定義
 
         /// <summary>
         /// プログラムの処理モードを示す列挙値です。
         /// </summary>
-        public enum RunType
+        public enum RunMode
         {
             /// <summary>
-            /// Wikipedia・または姉妹サイト
+            /// Wikipediaやその姉妹サイト等。
             /// </summary>
+            /// <remarks>MediaWikiのサイトすべてを共通にするかは要検討。</remarks>
             [XmlEnum(Name = "Wikipedia")]
             Wikipedia
         }
 
+        #endregion
+
+        #region プロパティ
+
         /// <summary>
-        /// 設定をファイルに書き出し。
+        /// この言語の、各言語での名称。
         /// </summary>
-        /// <returns><c>true</c> 書き出し成功</returns>
-        public bool Save()
+        public RunMode Mode
         {
-            // 設定をシリアライズ化
-            if (this.path == String.Empty)
+            get
             {
-                return false;
+                return this.mode;
             }
 
-            return Honememo.Cmn.XmlSerialize(this, this.path);
+            set
+            {
+                this.mode = value;
+            }
         }
 
         /// <summary>
-        /// 設定をファイルから読み込み。
+        /// ウェブサイト／言語の情報。
         /// </summary>
-        /// <returns><c>true</c> 読み込み成功</returns>
-        public bool Load()
+        public IDictionary<RunMode, IList<Website>> Websites
         {
-            // 設定をデシリアライズ化
-            if (this.path == String.Empty)
+            get
             {
-                return false;
+                return this.websites;
             }
 
-            object obj = null;
-            if (Honememo.Cmn.XmlDeserialize(ref obj, this.GetType(), this.path) == true)
+            set
             {
-                Config config = obj as Config;
-                if (config != null)
+                this.websites = value;
+            }
+        }
+
+        #endregion
+
+        #region 静的メソッド
+
+        /// <summary>
+        /// アプリケーションの設定を取得する。
+        /// ユーザーごとの設定ファイルがあればその内容を、
+        /// なければアプリケーション標準の設定ファイルの内容を
+        /// 読み込んで、インスタンスを作成する。
+        /// </summary>
+        /// <returns>作成した／既に存在するインスタンス。</returns>
+        public static Config GetInstance()
+        {
+            // シングルトンとするため、処理をロック
+            // ※ 別オブジェクトを使っているのは、最初のnull時にロックできないため
+            lock (lockObj)
+            {
+                // 既に作成済みのインスタンスがあればその値を使用
+                if (Config.config != null)
                 {
-                    this.Client = config.Client;
-                    this.Languages = config.Languages;
-                    return true;
+                    return Config.config;
+                }
+
+                // 無い場合はユーザーごとの設定ファイルを読み込み
+                Config.config = GetInstance(Path.Combine(
+                    Path.Combine(
+                        System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                        Settings.Default.ApplicationFolder),
+                    Settings.Default.ConfigurationFile));
+                if (Config.config != null)
+                {
+                    return Config.config;
+                }
+
+                // 無い場合は、exeと同じフォルダから初期設定ファイルを探索
+                Config.config = GetInstance(Path.Combine(
+                    Application.StartupPath, Settings.Default.ConfigurationFile));
+                if (Config.config != null)
+                {
+                    return Config.config;
                 }
             }
 
-            return false;
+            // どちらにも無い場合は例外を投げる
+            // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
+            // Config.config = new Config();
+            // return Config.config;
+            throw new FileNotFoundException(Settings.Default.ConfigurationFile + " is not found");
+        }
+
+        #endregion
+
+        #region インスタンスメソッド
+
+        /// <summary>
+        /// 設定をユーザーごとの設定ファイルに書き出し。
+        /// </summary>
+        public void Save()
+        {
+            // 設定ファイル名は決まっているため、ロック
+            lock (Config.config)
+            {
+                // 最初にディレクトリの有無を確認し作成
+                string path = Path.Combine(
+                    System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    Settings.Default.ApplicationFolder);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                // 設定ファイルをシリアライズ
+                path = Path.Combine(
+                    path, Settings.Default.ConfigurationFile);
+                XmlSerializer serializer = new XmlSerializer(typeof(Config));
+                using (Stream writer = new FileStream(path, FileMode.Create))
+                {
+                    serializer.Serialize(writer, this);
+                }
+            }
         }
 
         /// <summary>
-        /// 指定されたコードの言語情報（サーバー情報）を取得。
-        /// ※ 存在しない場合、<c>null</c>
+        /// ウェブサイト／言語の情報から、現在の処理対象・指定された言語の情報を取得する。
         /// </summary>
-        /// <param name="code">言語コード。</param>
-        /// <param name="mode">処理モード。</param>
-        /// <returns>言語情報（サーバー情報）</returns>
-        public LanguageInformation GetLanguage(string code, RunType mode)
+        /// <param name="lang">言語コード。</param>
+        /// <returns>ウェブサイト／言語の情報。存在しない場合は <c>null</c>。</returns>
+        public Website GetWebsite(string lang)
         {
-            Type type;
-            if (mode == RunType.Wikipedia)
+            if (this.websites.ContainsKey(this.Mode))
             {
-                type = typeof(WikipediaInformation);
-            }
-            else
-            {
-                type = typeof(LanguageInformation);
-            }
-
-            foreach (LanguageInformation lang in this.Languages)
-            {
-                if (lang.GetType() == type)
+                foreach (Website site in this.websites[this.Mode])
                 {
-                    if (lang.Code == code)
+                    if (site.Lang.Code == lang)
                     {
-                        return lang;
+                        return site;
                     }
                 }
             }
@@ -149,64 +217,31 @@ namespace Honememo.Wptscs.Models
             return null;
         }
 
-        /// <summary>
-        /// 指定されたコードの言語情報（サーバー情報）を取得（RunTypeの型）。
-        /// </summary>
-        /// <param name="code">言語コード。</param>
-        /// <returns>言語情報（サーバー情報）</returns>
-        public LanguageInformation GetLanguage(string code)
-        {
-            return this.GetLanguage(code, this.Client.RunMode);
-        }
+        #endregion
+
+        #region 静的privateメソッド
 
         /// <summary>
-        /// クライアントとしての機能関係の設定を格納するクラスです。
+        /// 指定されたファイルからアプリケーションの設定を取得する。
         /// </summary>
-        public class ClientConfig
+        /// <param name="path">設定ファイルパス</param>
+        /// <returns>ファイルから作成したインスタンス。ファイルが存在しない場合は <c>null</c>。</returns>
+        private static Config GetInstance(string path)
         {
-            /// <summary>
-            /// プログラムの処理対象。
-            /// </summary>
-            public RunType RunMode;
-
-            /// <summary>
-            /// 実行結果を保存するフォルダ。
-            /// </summary>
-            public string SaveDirectory;
-
-            /// <summary>
-            /// 最後に指定していた翻訳元言語。
-            /// </summary>
-            public string LastSelectedSource;
-
-            /// <summary>
-            /// 最後に指定していた翻訳先言語。
-            /// </summary>
-            public string LastSelectedTarget;
-
-            /// <summary>
-            /// 通信時に使用するUserAgent。
-            /// </summary>
-            public string UserAgent;
-
-            /// <summary>
-            /// 通信時に使用するReferer。
-            /// </summary>
-            public string Referer;
-
-            /// <summary>
-            /// コンストラクタ。
-            /// </summary>
-            public ClientConfig()
+            // ファイルが存在しない場合はnullを返す
+            if (!File.Exists(path))
             {
-                // メンバ変数の領域確保・初期設定
-                this.RunMode = RunType.Wikipedia;
-                this.SaveDirectory = String.Empty;
-                this.LastSelectedSource = "en";
-                this.LastSelectedTarget = "ja";
-                this.UserAgent = String.Empty;
-                this.Referer = String.Empty;
+                return null;
+            }
+
+            // 設定ファイルからデシリアライズ
+            XmlSerializer serializer = new XmlSerializer(typeof(Config));
+            using (Stream reader = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                return serializer.Deserialize(reader) as Config;
             }
         }
+
+        #endregion
     }
 }

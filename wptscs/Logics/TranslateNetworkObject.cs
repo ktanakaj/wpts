@@ -12,7 +12,6 @@ namespace Honememo.Wptscs.Logics
 {
     using System;
     using System.Net.NetworkInformation;
-
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
 
@@ -21,29 +20,15 @@ namespace Honememo.Wptscs.Logics
     /// </summary>
     public abstract class TranslateNetworkObject : Translate
     {
-        #region private変数
-
-        /// <summary>
-        /// 通信時に使用するUserAgent。
-        /// </summary>
-        public string UserAgent;
-
-        /// <summary>
-        /// 通信時に使用するReferer。
-        /// </summary>
-        public string Referer;
-        
-        #endregion
-
         #region コンストラクタ
 
         /// <summary>
         /// コンストラクタ。
         /// </summary>
-        /// <param name="source">翻訳元言語。</param>
-        /// <param name="target">翻訳先言語。</param>
+        /// <param name="source">翻訳元サイト／言語。</param>
+        /// <param name="target">翻訳先サイト／言語。</param>
         public TranslateNetworkObject(
-            LanguageWithServerInformation source, LanguageWithServerInformation target)
+            Website source, Website target)
             : base(source, target)
         {
         }
@@ -63,7 +48,7 @@ namespace Honememo.Wptscs.Logics
             RunInitialize();
 
             // サーバー接続チェック
-            if (this.Ping(((LanguageWithServerInformation) source).Server) == false)
+            if (!this.Ping(this.Source.Location))
             {
                 return false;
             }

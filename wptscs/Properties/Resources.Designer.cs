@@ -106,6 +106,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   設定ファイル{0}が見つかりません。インストールファイルを確認してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ErrorMessageConfigNotFound {
+            get {
+                return ResourceManager.GetString("ErrorMessageConfigNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   エラー に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorTitle {
@@ -281,6 +290,15 @@ namespace Honememo.Wptscs.Properties {
         internal static string QuestionTitle {
             get {
                 return ResourceManager.GetString("QuestionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
