@@ -110,7 +110,6 @@
     <Content Include="License.txt" />
     <Content Include="Readme.txt" />
     <Content Include="config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

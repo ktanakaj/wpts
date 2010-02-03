@@ -14,6 +14,7 @@ namespace Honememo.Wptscs.Models
     using System.Collections.Generic;
     using System.IO;
     using System.Windows.Forms;
+    using System.Xml;
     using System.Xml.Serialization;
     using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
@@ -139,10 +140,7 @@ namespace Honememo.Wptscs.Models
 
                 // 無い場合はユーザーごとの設定ファイルを読み込み
                 Config.config = GetInstance(Path.Combine(
-                    Path.Combine(
-                        System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                        Settings.Default.ApplicationFolder),
-                    Settings.Default.ConfigurationFile));
+                    Application.UserAppDataPath, Settings.Default.ConfigurationFile));
                 if (Config.config != null)
                 {
                     return Config.config;
@@ -159,9 +157,9 @@ namespace Honememo.Wptscs.Models
 
             // どちらにも無い場合は例外を投げる
             // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
-            // Config.config = new Config();
-            // return Config.config;
-            throw new FileNotFoundException(Settings.Default.ConfigurationFile + " is not found");
+            Config.config = new Config();
+            return Config.config;
+            // throw new FileNotFoundException(Settings.Default.ConfigurationFile + " is not found");
         }
 
         #endregion
@@ -177,21 +175,22 @@ namespace Honememo.Wptscs.Models
             lock (Config.config)
             {
                 // 最初にディレクトリの有無を確認し作成
-                string path = Path.Combine(
-                    System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    Settings.Default.ApplicationFolder);
+                string path = Application.UserAppDataPath;
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
 
                 // 設定ファイルをシリアライズ
-                path = Path.Combine(
-                    path, Settings.Default.ConfigurationFile);
-                XmlSerializer serializer = new XmlSerializer(typeof(Config));
-                using (Stream writer = new FileStream(path, FileMode.Create))
+                using (Stream stream = new FileStream(Path.Combine(
+                    path, Settings.Default.ConfigurationFile), FileMode.Create))
                 {
-                    serializer.Serialize(writer, this);
+                    XmlWriterSettings settings = new XmlWriterSettings();
+                    settings.Indent = true;
+                    using (XmlWriter writer = XmlWriter.Create(stream, settings))
+                    {
+                        this.WriteXml(writer);
+                    }
                 }
             }
         }
@@ -240,6 +239,95 @@ namespace Honememo.Wptscs.Models
             {
                 return serializer.Deserialize(reader) as Config;
             }
+        }
+
+        #endregion
+
+        #region privateメソッド
+
+        /// <summary>
+        /// XMLからオブジェクトをデシリアライズする。
+        /// </summary>
+        /// <param name="reader">デシリアライズ元のXmlReader</param>
+        private void ReadXml(XmlReader reader)
+        {
+            //XmlSerializer serializer = new XmlSerializer(typeof(KeyValue));
+            //reader.Read();
+            //while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+            //{
+            //    KeyValue kv = serializer.Deserialize(reader) as KeyValue;
+            //    if (kv != null)
+            //    {
+            //        Add(kv.Key, kv.Value);
+            //    }
+            //}
+
+            //reader.Read();
+        }
+
+        /// <summary>
+        /// オブジェクトをXMLにシリアライズする。
+        /// </summary>
+        /// <param name="writer">シリアライズ先のXmlWriter</param>
+        private void WriteXml(XmlWriter writer)
+        {
+            XmlDocument xml = new XmlDocument();
+
+            // ルート
+            XmlNode rootElement = xml.CreateElement("Config");
+            xml.AppendChild(rootElement);
+
+            // 処理モード
+            foreach (KeyValuePair<RunMode, IList<Website>> sites in this.Websites)
+            {
+                XmlNode sitesElement = xml.CreateElement("Websites");
+                rootElement.AppendChild(sitesElement);
+                XmlAttribute modeAttribute = xml.CreateAttribute("RunMode");
+                modeAttribute.Value = sites.Key.ToString();
+                sitesElement.Attributes.Append(modeAttribute);
+
+                // 各処理モードのWebサイト
+                foreach (Website site in sites.Value)
+                {
+                    XmlNode siteElement = xml.CreateElement("Website");
+                    sitesElement.AppendChild(siteElement);
+                    XmlNode locationNode = xml.CreateElement("Location");
+                    locationNode.InnerText = site.Location;
+                    siteElement.AppendChild(locationNode);
+
+                    // 言語情報
+                    XmlNode langElement = xml.CreateElement("Language");
+                    siteElement.AppendChild(langElement);
+                    XmlAttribute codeAttribute = xml.CreateAttribute("Code");
+                    codeAttribute.Value = site.Lang.Code;
+                    langElement.Attributes.Append(codeAttribute);
+
+                    // 言語の呼称情報
+                    XmlNode namesElement = xml.CreateElement("Names");
+                    langElement.AppendChild(namesElement);
+                    foreach (KeyValuePair<string, Language.LanguageName> name in site.Lang.Names)
+                    {
+                        XmlNode nameElement = xml.CreateElement("LanguageName");
+                        namesElement.AppendChild(nameElement);
+                        XmlNode longNameElement = xml.CreateElement("Name");
+                        longNameElement.InnerText = name.Value.Name;
+                        nameElement.AppendChild(longNameElement);
+                        XmlNode shortNameElement = xml.CreateElement("ShortName");
+                        shortNameElement.InnerText = name.Value.ShortName;
+                        nameElement.AppendChild(shortNameElement);
+                    }
+
+                    // MediaWiki時の情報
+                    if (site as MediaWiki != null)
+                    {
+                        MediaWiki wiki = site as MediaWiki;
+                        XmlNode exportPathElement = xml.CreateElement("ExportPath");
+                        exportPathElement.InnerText = wiki.ExportPath;
+                        siteElement.AppendChild(exportPathElement);
+                    }
+                }
+            }
+            xml.Save(writer);
         }
 
         #endregion

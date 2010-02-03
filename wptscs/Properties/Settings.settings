@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Honememo.Wptscs.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ApplicationFolder" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">wptscs</Value>
-    </Setting>
     <Setting Name="ConfigurationFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">config.xml</Value>
     </Setting>
