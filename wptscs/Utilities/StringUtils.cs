@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      Apache Commons Lang �� StringUtils���Q�l�ɂ������[�e�B���e�B�N���X�\�[�X�B</summary>
+//      Apache Commons Lang の StringUtilsを参考にしたユーティリティクラスソース。</summary>
 //
-// <copyright file="StringUtils.cs" company="honeplus�̃�����">
+// <copyright file="StringUtils.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -13,30 +13,30 @@ namespace Honememo.Utilities
     using System;
 
     /// <summary>
-    /// Apache Commons Lang �� StringUtils���Q�l�ɂ������[�e�B���e�B�N���X�ł��B
+    /// Apache Commons Lang の StringUtilsを参考にしたユーティリティクラスです。
     /// </summary>
     public static class StringUtils
     {
-        #region �ÓI���\�b�h
+        #region 静的メソッド
 
         /// <summary>
-        /// �n���ꂽ��������`�F�b�N���Anull �������ꍇ�ɂ͋�̕������Ԃ��܂��B
-        /// ����ȊO�̏ꍇ�ɂ͓n���ꂽ�������Ԃ��܂��B
+        /// 渡された文字列をチェックし、null だった場合には空の文字列を返します。
+        /// それ以外の場合には渡された文字列を返します。
         /// </summary>
-        /// <param name="str">�`�F�b�N���s���ΏۂƂȂ镶����B</param>
-        /// <returns>�n���ꂽ������Anull �̏ꍇ�ɂ͋�̕�����B</returns>
+        /// <param name="str">チェックを行う対象となる文字列。</param>
+        /// <returns>渡された文字列、null の場合には空の文字列。</returns>
         public static string DefaultString(string str)
         {
             return DefaultString(str, String.Empty);
         }
 
         /// <summary>
-        /// �n���ꂽ��������`�F�b�N���Anull �������ꍇ�ɂ͎w�肳�ꂽ�f�t�H���g�̕������Ԃ��܂��B
-        /// ����ȊO�̏ꍇ�ɂ͓n���ꂽ�������Ԃ��܂��B
+        /// 渡された文字列をチェックし、null だった場合には指定されたデフォルトの文字列を返します。
+        /// それ以外の場合には渡された文字列を返します。
         /// </summary>
-        /// <param name="str">�`�F�b�N���s���ΏۂƂȂ镶����B</param>
-        /// <param name="defaultString">�n���ꂽ������ null �̏ꍇ�ɕԂ����f�t�H���g�̕�����B</param>
-        /// <returns>�n���ꂽ������Anull �̏ꍇ�ɂ̓f�t�H���g�̕�����B</returns>
+        /// <param name="str">チェックを行う対象となる文字列。</param>
+        /// <param name="defaultString">渡された文字列が null の場合に返されるデフォルトの文字列。</param>
+        /// <returns>渡された文字列、null の場合にはデフォルトの文字列。</returns>
         public static string DefaultString(string str, string defaultString)
         {
             if (str == null)

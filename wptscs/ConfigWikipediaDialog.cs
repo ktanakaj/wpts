@@ -486,6 +486,7 @@ namespace Honememo.Wptscs
             {
                 // エラーメッセージを表示、画面は開いたまま
                 System.Diagnostics.Debug.WriteLine("ConfigWikipediaDialog.buttonOK_Click > 設定保存中に例外 : " + ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 FormUtils.ErrorDialog(Resources.ErrorMessage_MissConfigSave);
             }
 

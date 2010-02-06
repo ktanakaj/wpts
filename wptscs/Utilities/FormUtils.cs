@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      Windowsˆ—‚ÉŠÖ‚·‚éƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒXƒ\[ƒXB</summary>
+//      Windowså‡¦ç†ã«é–¢ã™ã‚‹ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹ã‚½ãƒ¼ã‚¹ã€‚</summary>
 //
-// <copyright file="FormUtils.cs" company="honeplus‚Ìƒƒ‚’ ">
+// <copyright file="FormUtils.cs" company="honeplusã®ãƒ¡ãƒ¢å¸³">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -13,23 +13,23 @@ namespace Honememo.Utilities
     using System;
     using System.Windows.Forms;
 
-    // ¦ ƒvƒƒpƒeƒB‚ðŠÜ‚Þ‚Ì‚ÅA‚»‚Ì‚Ü‚Ü‘¼‚ÌƒvƒƒWƒFƒNƒg‚É—¬—p‚·‚é‚±‚Æ‚Í‚Å‚«‚È‚¢
+    // â€» ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å«ã‚€ã®ã§ã€ãã®ã¾ã¾ä»–ã®ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã«æµç”¨ã™ã‚‹ã“ã¨ã¯ã§ããªã„
     using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// Windowsˆ—‚ÉŠÖ‚·‚éƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX‚Å‚·B
+    /// Windowså‡¦ç†ã«é–¢ã™ã‚‹ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹ã§ã™ã€‚
     /// </summary>
     public static class FormUtils
     {
-        #region ƒ_ƒCƒAƒƒO
+        #region ãƒ€ã‚¤ã‚¢ãƒ­ã‚°
 
         /// <summary>
-        /// ’PƒƒfƒUƒCƒ“‚Ì’Ê’mƒ_ƒCƒAƒƒOi“ü—Í‚³‚ê‚½•¶Žš—ñ‚ð•\Ž¦jB
+        /// å˜ç´”ãƒ‡ã‚¶ã‚¤ãƒ³ã®é€šçŸ¥ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ï¼ˆå…¥åŠ›ã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’è¡¨ç¤ºï¼‰ã€‚
         /// </summary>
-        /// <param name="msg">ƒƒbƒZ[ƒWB</param>
+        /// <param name="msg">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚</param>
         public static void InformationDialog(string msg)
         {
-            // “n‚³‚ê‚½•¶Žš—ñ‚Å’Ê’mƒ_ƒCƒAƒƒO‚ð•\Ž¦
+            // æ¸¡ã•ã‚ŒãŸæ–‡å­—åˆ—ã§é€šçŸ¥ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤º
             MessageBox.Show(
                 msg,
                 Resources.InformationTitle,
@@ -38,23 +38,23 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// ’PƒƒfƒUƒCƒ“‚Ì’Ê’mƒ_ƒCƒAƒƒOi“ü—Í‚³‚ê‚½•¶Žš—ñ‚ð‘Ž®‰»‚µ‚Ä•\Ž¦jB
+        /// å˜ç´”ãƒ‡ã‚¶ã‚¤ãƒ³ã®é€šçŸ¥ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ï¼ˆå…¥åŠ›ã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ›¸å¼åŒ–ã—ã¦è¡¨ç¤ºï¼‰ã€‚
         /// </summary>
-        /// <param name="format">‘Ž®€–Ú‚ðŠÜ‚ñ‚¾ƒƒbƒZ[ƒWB</param>
-        /// <param name="args">‘Ž®Ý’è‘ÎÛƒIƒuƒWƒFƒNƒg”z—ñB</param>
+        /// <param name="format">æ›¸å¼é …ç›®ã‚’å«ã‚“ã ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚</param>
+        /// <param name="args">æ›¸å¼è¨­å®šå¯¾è±¡ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé…åˆ—ã€‚</param>
         public static void InformationDialog(string format, params object[] args)
         {
-            // ƒI[ƒo[ƒ[ƒhƒƒ\ƒbƒh‚ðƒR[ƒ‹
+            // ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ã‚³ãƒ¼ãƒ«
             FormUtils.InformationDialog(String.Format(format, args));
         }
 
         /// <summary>
-        /// ’PƒƒfƒUƒCƒ“‚ÌŒxƒ_ƒCƒAƒƒOi“ü—Í‚³‚ê‚½•¶Žš—ñ‚ð•\Ž¦jB
+        /// å˜ç´”ãƒ‡ã‚¶ã‚¤ãƒ³ã®è­¦å‘Šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ï¼ˆå…¥åŠ›ã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’è¡¨ç¤ºï¼‰ã€‚
         /// </summary>
-        /// <param name="msg">ƒƒbƒZ[ƒWB</param>
+        /// <param name="msg">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚</param>
         public static void WarningDialog(string msg)
         {
-            // “n‚³‚ê‚½•¶Žš—ñ‚ÅŒxƒ_ƒCƒAƒƒO‚ð•\Ž¦
+            // æ¸¡ã•ã‚ŒãŸæ–‡å­—åˆ—ã§è­¦å‘Šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤º
             MessageBox.Show(
                 msg,
                 Resources.WarningTitle,
@@ -63,23 +63,23 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// ’PƒƒfƒUƒCƒ“‚ÌŒxƒ_ƒCƒAƒƒOi“ü—Í‚³‚ê‚½•¶Žš—ñ‚ð‘Ž®‰»‚µ‚Ä•\Ž¦jB
+        /// å˜ç´”ãƒ‡ã‚¶ã‚¤ãƒ³ã®è­¦å‘Šãƒ€ã‚¤ã‚¢ãƒ­ã‚°ï¼ˆå…¥åŠ›ã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ›¸å¼åŒ–ã—ã¦è¡¨ç¤ºï¼‰ã€‚
         /// </summary>
-        /// <param name="format">‘Ž®€–Ú‚ðŠÜ‚ñ‚¾ƒƒbƒZ[ƒWB</param>
-        /// <param name="args">‘Ž®Ý’è‘ÎÛƒIƒuƒWƒFƒNƒg”z—ñB</param>
+        /// <param name="format">æ›¸å¼é …ç›®ã‚’å«ã‚“ã ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚</param>
+        /// <param name="args">æ›¸å¼è¨­å®šå¯¾è±¡ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé…åˆ—ã€‚</param>
         public static void WarningDialog(string format, params object[] args)
         {
-            // ƒI[ƒo[ƒ[ƒhƒƒ\ƒbƒh‚ðƒR[ƒ‹
+            // ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ã‚³ãƒ¼ãƒ«
             FormUtils.WarningDialog(String.Format(format, args));
         }
 
         /// <summary>
-        /// ’PƒƒfƒUƒCƒ“‚ÌƒGƒ‰[ƒ_ƒCƒAƒƒOi“ü—Í‚³‚ê‚½•¶Žš—ñ‚ð•\Ž¦jB
+        /// å˜ç´”ãƒ‡ã‚¶ã‚¤ãƒ³ã®ã‚¨ãƒ©ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ï¼ˆå…¥åŠ›ã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’è¡¨ç¤ºï¼‰ã€‚
         /// </summary>
-        /// <param name="msg">ƒƒbƒZ[ƒWB</param>
+        /// <param name="msg">ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚</param>
         public static void ErrorDialog(string msg)
         {
-            // “n‚³‚ê‚½•¶Žš—ñ‚ÅƒGƒ‰[ƒ_ƒCƒAƒƒO‚ð•\Ž¦
+            // æ¸¡ã•ã‚ŒãŸæ–‡å­—åˆ—ã§ã‚¨ãƒ©ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’è¡¨ç¤º
             MessageBox.Show(
                 msg,
                 Resources.ErrorTitle,
@@ -88,13 +88,13 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// ’PƒƒfƒUƒCƒ“‚ÌƒGƒ‰[ƒ_ƒCƒAƒƒOi“ü—Í‚³‚ê‚½•¶Žš—ñ‚ð‘Ž®‰»‚µ‚Ä•\Ž¦jB
+        /// å˜ç´”ãƒ‡ã‚¶ã‚¤ãƒ³ã®ã‚¨ãƒ©ãƒ¼ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ï¼ˆå…¥åŠ›ã•ã‚ŒãŸæ–‡å­—åˆ—ã‚’æ›¸å¼åŒ–ã—ã¦è¡¨ç¤ºï¼‰ã€‚
         /// </summary>
-        /// <param name="format">‘Ž®€–Ú‚ðŠÜ‚ñ‚¾ƒƒbƒZ[ƒWB</param>
-        /// <param name="args">‘Ž®Ý’è‘ÎÛƒIƒuƒWƒFƒNƒg”z—ñB</param>
+        /// <param name="format">æ›¸å¼é …ç›®ã‚’å«ã‚“ã ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã€‚</param>
+        /// <param name="args">æ›¸å¼è¨­å®šå¯¾è±¡ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé…åˆ—ã€‚</param>
         public static void ErrorDialog(string format, params object[] args)
         {
-            // ƒI[ƒo[ƒ[ƒhƒƒ\ƒbƒh‚ðƒR[ƒ‹
+            // ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ã‚³ãƒ¼ãƒ«
             FormUtils.ErrorDialog(String.Format(format, args));
         }
 

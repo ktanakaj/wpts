@@ -12,11 +12,14 @@ namespace Honememo.Wptscs.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using Honememo.Utilities;
 
     /// <summary>
     /// 言語に関する情報をあらわすモデルクラスです。
     /// </summary>
-    public class Language
+    public class Language : IXmlSerializable
     {
         #region private変数
 
@@ -42,6 +45,13 @@ namespace Honememo.Wptscs.Models
         {
             // メンバ変数の初期設定
             this.Code = code;
+        }
+
+        /// <summary>
+        /// コンストラクタ（シリアライズ or 拡張用）。
+        /// </summary>
+        protected Language()
+        {
         }
 
         #endregion
@@ -90,6 +100,81 @@ namespace Honememo.Wptscs.Models
 
                 this.names = value;
             }
+        }
+
+        #endregion
+
+        #region XMLシリアライズ用メソッド
+
+        /// <summary>
+        /// シリアライズするXMLのスキーマ定義を返す。
+        /// </summary>
+        /// <returns>XML表現を記述するXmlSchema。</returns>
+        public System.Xml.Schema.XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// XMLからオブジェクトをデシリアライズする。
+        /// </summary>
+        /// <param name="reader">デシリアライズ元のXmlReader</param>
+        public void ReadXml(XmlReader reader)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.Load(reader);
+
+            // Webサイトの言語情報
+            XmlElement langElement = xml.SelectSingleNode("Language") as XmlElement;
+            if (langElement == null)
+            {
+                return;
+            }
+
+            this.Code = langElement.GetAttribute("Code");
+
+            // 言語の呼称情報
+            foreach (XmlNode nameNode in langElement.SelectNodes("Names/LanguageName"))
+            {
+                XmlElement nameElement = nameNode as XmlElement;
+                Language.LanguageName name = new Language.LanguageName();
+                XmlElement longNameElement = nameElement.SelectSingleNode("Name") as XmlElement;
+                if (longNameElement != null)
+                {
+                    name.Name = longNameElement.InnerText;
+                }
+
+                XmlElement shortNameElement = nameElement.SelectSingleNode("ShortName") as XmlElement;
+                if (shortNameElement != null)
+                {
+                    name.ShortName = shortNameElement.InnerText;
+                }
+
+                this.Names[nameElement.GetAttribute("Code")] = name;
+            }
+        }
+
+        /// <summary>
+        /// オブジェクトをXMLにシリアライズする。
+        /// </summary>
+        /// <param name="writer">シリアライズ先のXmlWriter</param>
+        public void WriteXml(XmlWriter writer)
+        {
+            // Webサイトの言語情報
+            writer.WriteAttributeString("Code", this.Code);
+
+            // 言語の呼称情報
+            writer.WriteStartElement("Names");
+            foreach (KeyValuePair<string, Language.LanguageName> name in this.Names)
+            {
+                writer.WriteStartElement("LanguageName");
+                writer.WriteAttributeString("Code", name.Key);
+                writer.WriteElementString("Name", name.Value.Name);
+                writer.WriteElementString("ShortName", name.Value.ShortName);
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
         }
 
         #endregion

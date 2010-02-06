@@ -40,13 +40,13 @@ namespace Honememo.Wptscs.Models
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ（通常）。
+        /// コンストラクタ。
         /// </summary>
-        /// <param name="lang">ウェブサイトの言語。</param>
-        public Website(Language lang)
+        /// <remarks>継承クラスでは忘れずに
+        /// <see cref="Location"/>, <see cref="Lang"/>
+        /// の設定を行ってください。</remarks>
+        public Website()
         {
-            // メンバ変数の初期設定
-            this.lang = lang;
         }
 
         #endregion
@@ -65,8 +65,14 @@ namespace Honememo.Wptscs.Models
                 return this.location;
             }
 
-            set
+            protected set
             {
+                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("location");
+                }
+
                 this.location = value;
             }
         }

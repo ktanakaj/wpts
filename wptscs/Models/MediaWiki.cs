@@ -14,12 +14,13 @@ namespace Honememo.Wptscs.Models
     using System.Collections.Generic;
     using System.IO;
     using System.Xml;
+    using System.Xml.Serialization;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// MediaWikiのウェブサイト（システム）をあらわすモデルクラスです。
     /// </summary>
-    public class MediaWiki : Website
+    public class MediaWiki : Website, IXmlSerializable
     {
         #region 定数定義
 
@@ -109,14 +110,31 @@ namespace Honememo.Wptscs.Models
         #region コンストラクタ
 
         /// <summary>
+        /// コンストラクタ（MediaWiki全般）。
+        /// </summary>
+        /// <param name="lang">ウェブサイトの言語。</param>
+        /// <param name="location">ウェブサイトの場所。</param>
+        public MediaWiki(Language lang, string location)
+        {
+            // メンバ変数の初期設定
+            this.Lang = lang;
+            this.Location = location;
+        }
+
+        /// <summary>
         /// コンストラクタ（Wikipedia用）。
         /// </summary>
         /// <param name="lang">ウェブサイトの言語。</param>
         public MediaWiki(Language lang)
-            : base(lang)
+            : this(lang, String.Format(Settings.Default.WikipediaLocation, lang.Code))
         {
-            // メンバ変数の初期設定
-            this.Location = String.Format(Settings.Default.WikipediaLocation, lang.Code);
+        }
+
+        /// <summary>
+        /// コンストラクタ（シリアライズ or 拡張用）。
+        /// </summary>
+        protected MediaWiki()
+        {
         }
 
         #endregion
@@ -198,7 +216,7 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region メソッド
+        #region 公開メソッド
 
         /// <summary>
         /// ページを取得。
@@ -294,6 +312,115 @@ namespace Honememo.Wptscs.Models
 
             return false;
         }
+        
+        #endregion
+
+        #region XMLシリアライズ用メソッド
+
+        /// <summary>
+        /// シリアライズするXMLのスキーマ定義を返す。
+        /// </summary>
+        /// <returns>XML表現を記述するXmlSchema。</returns>
+        public System.Xml.Schema.XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// XMLからオブジェクトをデシリアライズする。
+        /// </summary>
+        /// <param name="reader">デシリアライズ元のXmlReader</param>
+        public void ReadXml(XmlReader reader)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.Load(reader);
+
+            // Webサイト
+            XmlElement siteElement = xml.SelectSingleNode("MediaWiki") as XmlElement;
+            if (siteElement == null)
+            {
+                return;
+            }
+
+            // Webサイトの言語情報
+            using (XmlReader r = XmlReader.Create(
+                new StringReader(siteElement.SelectSingleNode("Language").OuterXml), reader.Settings))
+            {
+                this.Lang = new XmlSerializer(typeof(Language)).Deserialize(r) as Language;
+            }
+
+            this.Location = siteElement.SelectSingleNode("Location").InnerText;
+            this.ExportPath = siteElement.SelectSingleNode("ExportPath").InnerText;
+            this.Bracket = siteElement.SelectSingleNode("Bracket").InnerText;
+            this.Redirect = siteElement.SelectSingleNode("Redirect").InnerText;
+
+            // システム定義変数
+            IList<string> variables = new List<string>();
+            foreach (XmlNode variableNode in siteElement.SelectNodes("SystemVariables/Variable"))
+            {
+                variables.Add(variableNode.InnerText);
+            }
+
+            this.SystemVariables = variables;
+
+            // 見出しの置き換えパターン
+            IDictionary<int, string> titleKeys = new Dictionary<int, string>();
+            foreach (XmlNode titleNode in siteElement.SelectNodes("TitleKeys/Title"))
+            {
+                XmlElement titleElement = titleNode as XmlElement;
+                titleKeys[int.Parse(titleElement.GetAttribute("no"))] = titleElement.InnerText;
+            }
+
+            this.TitleKeys = titleKeys;
+        }
+
+        /// <summary>
+        /// オブジェクトをXMLにシリアライズする。
+        /// </summary>
+        /// <param name="writer">シリアライズ先のXmlWriter</param>
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteElementString("Location", this.Location);
+
+            // Webサイトの言語情報
+            new XmlSerializer(typeof(Language)).Serialize(writer, this.Lang);
+
+            // MediaWiki固有の情報
+            // ※ 定数値については、将来的に変数にする予定のため出力
+            writer.WriteElementString("Xmlns", MediaWiki.Xmlns);
+            writer.WriteElementString("ExportPath", this.ExportPath);
+            writer.WriteElementString("TemplateNamespaceNumber", MediaWiki.TemplateNamespaceNumber.ToString());
+            writer.WriteElementString("CategoryNamespaceNumber", MediaWiki.CategoryNamespaceNumber.ToString());
+            writer.WriteElementString("ImageNamespaceNumber", MediaWiki.ImageNamespaceNumber.ToString());
+            writer.WriteElementString("DummyPage", MediaWiki.DummyPage);
+            writer.WriteElementString("Bracket", this.Bracket);
+            writer.WriteElementString("Redirect", this.Redirect);
+
+            // システム定義変数
+            writer.WriteStartElement("SystemVariables");
+            foreach (string variable in this.SystemVariables)
+            {
+                writer.WriteElementString("Variable", variable);
+            }
+
+            writer.WriteEndElement();
+
+            // 見出しの置き換えパターン
+            writer.WriteStartElement("TitleKeys");
+            foreach (KeyValuePair<int, string> title in this.TitleKeys)
+            {
+                writer.WriteStartElement("Title");
+                writer.WriteAttributeString("no", title.Key.ToString());
+                writer.WriteValue(title.Value);
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+        }
+
+        #endregion
+
+        #region 内部処理メソッド
 
         /// <summary>
         /// MediaWikiから指定されたページのXMLを取得。

@@ -15,12 +15,13 @@ namespace Honememo.Wptscs.Models
     using System.IO;
     using System.Windows.Forms;
     using System.Xml;
+    using System.Xml.Serialization;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// アプリケーションの設定を保持するクラスです。
     /// </summary>
-    public class Config
+    public class Config : IXmlSerializable
     {
         #region 静的変数
 
@@ -136,27 +137,29 @@ namespace Honememo.Wptscs.Models
                 }
 
                 // 無い場合はユーザーごとの設定ファイルを読み込み
-                Config.config = GetInstance(Path.Combine(
-                    Application.UserAppDataPath, Settings.Default.ConfigurationFile));
-                if (Config.config != null)
+                string path = Path.Combine(
+                    Application.UserAppDataPath, Settings.Default.ConfigurationFile);
+                if (!File.Exists(path))
                 {
-                    return Config.config;
+                    // 無い場合は、exeと同じフォルダから初期設定ファイルを探索
+                    path = Path.Combine(
+                        Application.StartupPath, Settings.Default.ConfigurationFile);
+                    if (!File.Exists(path))
+                    {
+                        // どちらにも無い場合は例外を投げる
+                        // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
+                        throw new FileNotFoundException(Settings.Default.ConfigurationFile + " is not found");
+                    }
                 }
 
-                // 無い場合は、exeと同じフォルダから初期設定ファイルを探索
-                Config.config = GetInstance(Path.Combine(
-                    Application.StartupPath, Settings.Default.ConfigurationFile));
-                if (Config.config != null)
+                // 設定ファイルを読み込み
+                using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
-                    return Config.config;
+                    Config.config = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
                 }
             }
 
-            // どちらにも無い場合は例外を投げる
-            // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
-            // Config.config = new Config();
-            // return Config.config;
-            throw new FileNotFoundException(Settings.Default.ConfigurationFile + " is not found");
+            return Config.config;
         }
 
         #endregion
@@ -183,12 +186,7 @@ namespace Honememo.Wptscs.Models
                     Path.Combine(path, Settings.Default.ConfigurationFile),
                     FileMode.Create))
                 {
-                    XmlWriterSettings settings = new XmlWriterSettings();
-                    settings.Indent = true;
-                    using (XmlWriter writer = XmlWriter.Create(stream, settings))
-                    {
-                        this.WriteXml(writer);
-                    }
+                    new XmlSerializer(typeof(Config)).Serialize(stream, this);
                 }
             }
         }
@@ -216,43 +214,22 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        #region 静的privateメソッド
+        #region XMLシリアライズ用メソッド
 
         /// <summary>
-        /// 指定されたファイルからアプリケーションの設定を取得する。
+        /// シリアライズするXMLのスキーマ定義を返す。
         /// </summary>
-        /// <param name="path">設定ファイルパス</param>
-        /// <returns>ファイルから作成したインスタンス。ファイルが存在しない場合は <c>null</c>。</returns>
-        private static Config GetInstance(string path)
+        /// <returns>XML表現を記述するXmlSchema。</returns>
+        public System.Xml.Schema.XmlSchema GetSchema()
         {
-            // ファイルが存在しない場合はnullを返す
-            if (!File.Exists(path))
-            {
-                return null;
-            }
-
-            // 設定ファイルを読み込み
-            Config config = new Config();
-            using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                using (XmlReader reader = XmlReader.Create(stream))
-                {
-                    config.ReadXml(reader);
-                }
-            }
-
-            return config;
+            return null;
         }
-
-        #endregion
-
-        #region XML入出力メソッド
 
         /// <summary>
         /// XMLからオブジェクトを読み込む。
         /// </summary>
         /// <param name="reader">読込元のXmlReader</param>
-        private void ReadXml(XmlReader reader)
+        public void ReadXml(XmlReader reader)
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(reader);
@@ -293,83 +270,24 @@ namespace Honememo.Wptscs.Models
                 foreach (XmlNode siteNode in sitesNode.ChildNodes)
                 {
                     // Webサイト
-                    XmlElement siteElement = siteNode as XmlElement;
-                    if (siteElement == null)
-                    {
-                        continue;
-                    }
-
-                    // Webサイトの言語情報
-                    XmlElement langElement = siteElement.SelectSingleNode("Language") as XmlElement;
-                    Language lang = new Language(langElement.GetAttribute("Code"));
-
-                    // 言語の呼称情報
-                    foreach (XmlNode nameNode in langElement.SelectNodes("Names/LanguageName"))
-                    {
-                        XmlElement nameElement = nameNode as XmlElement;
-                        Language.LanguageName name = new Language.LanguageName();
-                        XmlElement longNameElement = nameElement.SelectSingleNode("Name") as XmlElement;
-                        if (longNameElement != null)
-                        {
-                            name.Name = longNameElement.InnerText;
-                        }
-
-                        XmlElement shortNameElement = nameElement.SelectSingleNode("ShortName") as XmlElement;
-                        if (shortNameElement != null)
-                        {
-                            name.ShortName = shortNameElement.InnerText;
-                        }
-
-                        lang.Names[nameElement.GetAttribute("Code")] = name;
-                    }
-
-                    // Webサイトの種類に応じて取得
-                    Website site = null;
-                    switch (siteElement.Name)
+                    XmlSerializer serializer = null;
+                    switch (siteNode.Name)
                     {
                         case "MediaWiki":
-                            site = new MediaWiki(lang);
+                            serializer = new XmlSerializer(typeof(MediaWiki));
                             break;
                     }
 
-                    if (site == null)
+                    if (serializer == null)
                     {
-                        System.Diagnostics.Debug.WriteLine("Config.ReadXml > 未対応のWebサイト : " + siteElement.Name);
+                        System.Diagnostics.Debug.WriteLine("Config.ReadXml > 未対応のWebサイト : " + siteNode.Name);
                         continue;
                     }
 
-                    site.Location = siteElement.SelectSingleNode("Location").InnerText;
-
-                    // MediaWiki時の情報
-                    // ※ 基本的にMediaWikiのはず
-                    MediaWiki wiki = site as MediaWiki;
-                    if (wiki != null)
+                    using (XmlReader r = XmlReader.Create(new StringReader(siteNode.OuterXml), reader.Settings))
                     {
-                        wiki.ExportPath = siteElement.SelectSingleNode("ExportPath").InnerText;
-                        wiki.Bracket = siteElement.SelectSingleNode("Bracket").InnerText;
-                        wiki.Redirect = siteElement.SelectSingleNode("Redirect").InnerText;
-
-                        // システム定義変数
-                        IList<string> variables = new List<string>();
-                        foreach (XmlNode variableNode in siteElement.SelectNodes("SystemVariables/Variable"))
-                        {
-                            variables.Add(variableNode.InnerText);
-                        }
-
-                        wiki.SystemVariables = variables;
-
-                        // 見出しの置き換えパターン
-                        IDictionary<int, string> titleKeys = new Dictionary<int, string>();
-                        foreach (XmlNode titleNode in siteElement.SelectNodes("TitleKeys/Title"))
-                        {
-                            XmlElement titleElement = titleNode as XmlElement;
-                            titleKeys[int.Parse(titleElement.GetAttribute("no"))] = titleElement.InnerText;
-                        }
-
-                        wiki.TitleKeys = titleKeys;
+                        sites.Add(serializer.Deserialize(r) as Website);
                     }
-
-                    sites.Add(site);
                 }
 
                 this.Websites[runMode] = sites;
@@ -380,7 +298,7 @@ namespace Honememo.Wptscs.Models
         /// オブジェクトをXMLに出力する。
         /// </summary>
         /// <param name="writer">出力先のXmlWriter</param>
-        private void WriteXml(XmlWriter writer)
+        public void WriteXml(XmlWriter writer)
         {
             // ルート
             writer.WriteStartElement("Config");
@@ -395,65 +313,10 @@ namespace Honememo.Wptscs.Models
                 writer.WriteStartElement("Websites");
                 foreach (Website site in sites.Value)
                 {
-                    // Webサイト
-                    // ※ 基本的にMediaWikiのはず
-                    MediaWiki wiki = site as MediaWiki;
-                    writer.WriteStartElement(wiki != null ? "MediaWiki" : "Website");
-                    writer.WriteElementString("Location", site.Location);
-
-                    // Webサイトの言語情報
-                    writer.WriteStartElement("Language");
-                    writer.WriteAttributeString("Code", site.Lang.Code);
-
-                    // 言語の呼称情報
-                    writer.WriteStartElement("Names");
-                    foreach (KeyValuePair<string, Language.LanguageName> name in site.Lang.Names)
+                    if (site as MediaWiki != null)
                     {
-                        writer.WriteStartElement("LanguageName");
-                        writer.WriteAttributeString("Code", name.Key);
-                        writer.WriteElementString("Name", name.Value.Name);
-                        writer.WriteElementString("ShortName", name.Value.ShortName);
-                        writer.WriteEndElement();
+                        new XmlSerializer(typeof(MediaWiki)).Serialize(writer, site);
                     }
-
-                    writer.WriteEndElement();
-                    writer.WriteEndElement();
-
-                    // MediaWiki時の情報
-                    if (wiki != null)
-                    {
-                        writer.WriteElementString("Xmlns", MediaWiki.Xmlns);
-                        writer.WriteElementString("ExportPath", wiki.ExportPath);
-                        writer.WriteElementString("TemplateNamespaceNumber", MediaWiki.TemplateNamespaceNumber.ToString());
-                        writer.WriteElementString("CategoryNamespaceNumber", MediaWiki.CategoryNamespaceNumber.ToString());
-                        writer.WriteElementString("ImageNamespaceNumber", MediaWiki.ImageNamespaceNumber.ToString());
-                        writer.WriteElementString("DummyPage", MediaWiki.DummyPage);
-                        writer.WriteElementString("Bracket", wiki.Bracket);
-                        writer.WriteElementString("Redirect", wiki.Redirect);
-
-                        // システム定義変数
-                        writer.WriteStartElement("SystemVariables");
-                        foreach (string variable in wiki.SystemVariables)
-                        {
-                            writer.WriteElementString("Variable", variable);
-                        }
-
-                        writer.WriteEndElement();
-
-                        // 見出しの置き換えパターン
-                        writer.WriteStartElement("TitleKeys");
-                        foreach (KeyValuePair<int, string> title in wiki.TitleKeys)
-                        {
-                            writer.WriteStartElement("Title");
-                            writer.WriteAttributeString("no", title.Key.ToString());
-                            writer.WriteValue(title.Value);
-                            writer.WriteEndElement();
-                        }
-
-                        writer.WriteEndElement();
-                    }
-
-                    writer.WriteEndElement();
                 }
 
                 writer.WriteEndElement();
