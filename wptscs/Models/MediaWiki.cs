@@ -14,7 +14,6 @@ namespace Honememo.Wptscs.Models
     using System.Collections.Generic;
     using System.IO;
     using System.Xml;
-    using System.Xml.Serialization;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
@@ -59,8 +58,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Wikipedia書式のシステム定義変数。
         /// </summary>
-        [XmlArrayItem("Variable")]
-        public string[] SystemVariables = new string[]
+        public IList<string> SystemVariables = new string[]
         {
                 "CURRENTMONTH",
                 "CURRENTMONTHNAME",
@@ -92,16 +90,14 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 見出しの定型句。
         /// </summary>
-        [XmlArrayItem("Title")]
-        public string[] TitleKeys = new string[0];
+        public IDictionary<int, string> TitleKeys = new Dictionary<int, string>();
 
         #region private変数
 
         /// <summary>
         /// MediaWikiの名前空間の情報。
         /// </summary>
-        [XmlIgnoreAttribute()]
-        private IDictionary<int, string> namespaces;
+        private IDictionary<int, string> namespaces = new Dictionary<int, string>();
 
         /// <summary>
         /// 記事のXMLデータが存在するパス。
@@ -111,16 +107,6 @@ namespace Honememo.Wptscs.Models
         #endregion
 
         #region コンストラクタ
-
-        /// <summary>
-        /// コンストラクタ（シリアライズ用）。
-        /// </summary>
-        public MediaWiki()
-            : this(new Language("unknown"))
-        {
-            // 適当な値で通常のコンストラクタを実行
-            System.Diagnostics.Debug.WriteLine("MediaWiki.MediaWiki > 推奨されないコンストラクタを使用しています");
-        }
 
         /// <summary>
         /// コンストラクタ（Wikipedia用）。
@@ -148,7 +134,7 @@ namespace Honememo.Wptscs.Models
                 {
                     // 値が設定されていない場合、サーバーから取得して初期化する
                     // ※ コンストラクタ等で初期化していないのは、通信の準備が整うまで行えないため
-                    if (this.namespaces != null)
+                    if (this.namespaces.Count > 0)
                     {
                         return this.namespaces;
                     }
@@ -167,9 +153,7 @@ namespace Honememo.Wptscs.Models
                     }
 
                     // ネームスペースを取得
-                    this.namespaces = new Dictionary<int, string>();
-                    XmlNodeList nodeList = rootElement.SelectNodes("ns:siteinfo/ns:namespaces/ns:namespace", nsmgr);
-                    foreach (XmlNode node in nodeList)
+                    foreach (XmlNode node in rootElement.SelectNodes("ns:siteinfo/ns:namespaces/ns:namespace", nsmgr))
                     {
                         XmlElement namespaceElement = node as XmlElement;
                         if (namespaceElement != null)

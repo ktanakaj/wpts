@@ -48,7 +48,7 @@ namespace Honememo.Wptscs.Logics
             RunInitialize();
 
             // サーバー接続チェック
-            if (!this.Ping(this.Source.Location))
+            if (!this.Ping(new Uri(this.Source.Location).Host))
             {
                 return false;
             }

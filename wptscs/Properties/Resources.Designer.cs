@@ -70,15 +70,6 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   想定外のエラーが発生しました。以降の動作は保障できません。プログラムを再起動してください。\n問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。\nまた、手順や現在の設定を確認し、開発者にご連絡ください。（{0}） に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorMessage_DevelopmentMiss {
-            get {
-                return ResourceManager.GetString("ErrorMessage_DevelopmentMiss", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   設定の保存に失敗しました。設定ファイルが読み取り専用でないか等、確認してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessage_MissConfigSave {
@@ -106,11 +97,35 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ErrorMessageConfigLordFailed {
+            get {
+                return ResourceManager.GetString("ErrorMessageConfigLordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   設定ファイル{0}が見つかりません。インストールファイルを確認してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessageConfigNotFound {
             get {
                 return ResourceManager.GetString("ErrorMessageConfigNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   想定外のエラーが発生しました。プログラムが不安定な状態になった可能性があります。プログラムを再起動してください。
+        ///問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。
+        ///また、手順や現在の設定を確認し、開発者にご連絡ください。
+        ///
+        ///＜エラーの内容＞
+        ///{0}
+        ///{1} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ErrorMessageDevelopmentError {
+            get {
+                return ResourceManager.GetString("ErrorMessageDevelopmentError", resourceCulture);
             }
         }
         
@@ -290,15 +305,6 @@ namespace Honememo.Wptscs.Properties {
         internal static string QuestionTitle {
             get {
                 return ResourceManager.GetString("QuestionTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///    に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

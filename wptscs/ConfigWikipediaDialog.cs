@@ -100,18 +100,18 @@ namespace Honememo.Wptscs
                     this.dataGridViewTitleKey.Columns.Add(site.Lang.Code, name);
 
                     // 表データ設定
-                    if (site as MediaWiki != null)
-                    {
-                        for (int y = 0; y < (site as MediaWiki).TitleKeys.Length; y++)
-                        {
-                            if (this.dataGridViewTitleKey.RowCount - 1 <= y)
-                            {
-                                this.dataGridViewTitleKey.Rows.Add();
-                            }
+                    //if (site as MediaWiki != null)
+                    //{
+                    //    for (int y = 0; y < (site as MediaWiki).TitleKeys.Length; y++)
+                    //    {
+                    //        if (this.dataGridViewTitleKey.RowCount - 1 <= y)
+                    //        {
+                    //            this.dataGridViewTitleKey.Rows.Add();
+                    //        }
 
-                            this.dataGridViewTitleKey[x, y].Value = (site as MediaWiki).TitleKeys[y];
-                        }
-                    }
+                    //        this.dataGridViewTitleKey[x, y].Value = (site as MediaWiki).TitleKeys[y];
+                    //    }
+                    //}
 
                     // コンボボックス設定
                     this.comboBoxCode.Items.Add(site.Lang.Code);
@@ -457,30 +457,18 @@ namespace Honememo.Wptscs
                 this.config.Websites.Add(Config.RunMode.Wikipedia, new List<Website>());
             }
 
-            foreach (Website site in this.config.Websites[Config.RunMode.Wikipedia])
-            {
-                MediaWiki svr = site as MediaWiki;
-                if (svr != null)
-                {
-                    Array.Resize(ref svr.TitleKeys, dataGridViewTitleKey.RowCount - 1);
-                }
-            }
-
             // データの保存
             for (int x = 0; x < this.dataGridViewTitleKey.ColumnCount; x++)
             {
                 MediaWiki svr = this.config.GetWebsite(this.dataGridViewTitleKey.Columns[x].Name) as MediaWiki;
                 if (svr != null)
                 {
+                    svr.TitleKeys.Clear();
                     for (int y = 0; y < this.dataGridViewTitleKey.RowCount - 1; y++)
                     {
                         if (this.dataGridViewTitleKey[x, y].Value != null)
                         {
                             svr.TitleKeys[y] = this.dataGridViewTitleKey[x, y].Value.ToString().Trim();
-                        }
-                        else
-                        {
-                            svr.TitleKeys[y] = String.Empty;
                         }
                     }
                 }

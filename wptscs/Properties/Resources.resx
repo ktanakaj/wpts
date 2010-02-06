@@ -120,9 +120,6 @@
   <data name="ArticleFooter" xml:space="preserve">
     <value>&lt;!-- {0}、[[:{1}:{2}]]（{3}(UTC)）より --&gt;</value>
   </data>
-  <data name="ErrorMessage_DevelopmentMiss" xml:space="preserve">
-    <value>想定外のエラーが発生しました。以降の動作は保障できません。プログラムを再起動してください。\n問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。\nまた、手順や現在の設定を確認し、開発者にご連絡ください。（{0}）</value>
-  </data>
   <data name="ErrorMessage_MissConfigSave" xml:space="preserve">
     <value>設定の保存に失敗しました。設定ファイルが読み取り専用でないか等、確認してください。</value>
   </data>
@@ -132,17 +129,34 @@
   <data name="ErrorMessage_TemporayError" xml:space="preserve">
     <value>一時ファイルの作成に失敗しました。設定ファイルに異常が無いか、また以下のフォルダにファイルが作成可能かを確認してください。</value>
   </data>
+  <data name="ErrorMessageConfigLordFailed" xml:space="preserve">
+    <value>設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。</value>
+    <comment>設定ファイルの読み込み時にエラーが発生した場合のメッセージ</comment>
+  </data>
   <data name="ErrorMessageConfigNotFound" xml:space="preserve">
     <value>設定ファイル{0}が見つかりません。インストールファイルを確認してください。</value>
+    <comment>プログラム付属の設定ファイルが存在しない場合のメッセージ</comment>
+  </data>
+  <data name="ErrorMessageDevelopmentError" xml:space="preserve">
+    <value>想定外のエラーが発生しました。プログラムが不安定な状態になった可能性があります。プログラムを再起動してください。
+問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。
+また、手順や現在の設定を確認し、開発者にご連絡ください。
+
+＜エラーの内容＞
+{0}
+{1}</value>
+    <comment>プログラムで想定していない何らかのエラーが発生した場合のメッセージ</comment>
   </data>
   <data name="ErrorTitle" xml:space="preserve">
     <value>エラー</value>
+    <comment>エラーダイアログのタイトル</comment>
   </data>
   <data name="InformationMessage_DevelopingMethod" xml:space="preserve">
     <value>現在、{0}には未対応ですm(__)m</value>
   </data>
   <data name="InformationTitle" xml:space="preserve">
     <value>お知らせ</value>
+    <comment>お知らせダイアログのタイトル</comment>
   </data>
   <data name="LogMessage_ArticleExistInterWiki" xml:space="preserve">
     <value>注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。</value>
@@ -199,9 +213,7 @@
   </data>
   <data name="QuestionTitle" xml:space="preserve">
     <value>確認</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+    <comment>確認ダイアログのタイトル</comment>
   </data>
   <data name="WarningMessage_FormatUncompleateBracket" xml:space="preserve">
     <value>括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。</value>
@@ -230,5 +242,6 @@
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>警告</value>
+    <comment>警告ダイアログのタイトル</comment>
   </data>
 </root>

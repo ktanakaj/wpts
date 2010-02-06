@@ -102,7 +102,6 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Utilities\FormUtils.cs" />
-    <Compile Include="Utilities\SerializableDictionary.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +109,7 @@
     <Content Include="License.txt" />
     <Content Include="Readme.txt" />
     <Content Include="config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -38,16 +38,6 @@ namespace Honememo.Wptscs.Models
         #endregion
 
         #region コンストラクタ
-        
-        /// <summary>
-        /// コンストラクタ（シリアライズ用）。
-        /// </summary>
-        public Website()
-            : this(new Language("unknown"))
-        {
-            // ↑適当な値で通常のコンストラクタを実行
-            System.Diagnostics.Debug.WriteLine("Website.Website : 推奨されないコンストラクタを使用しています");
-        }
 
         /// <summary>
         /// コンストラクタ（通常）。
@@ -75,7 +65,7 @@ namespace Honememo.Wptscs.Models
                 return this.location;
             }
 
-            protected set
+            set
             {
                 this.location = value;
             }
@@ -139,7 +129,7 @@ namespace Honememo.Wptscs.Models
                 {
                     // 特に設定が無い場合はデフォルトの値を設定
                     Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                    h.UserAgent = String.Format(
+                    ua = String.Format(
                         Settings.Default.DefaultUserAgent,
                         ver.Major,
                         ver.Minor);

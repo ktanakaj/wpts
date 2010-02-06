@@ -94,6 +94,12 @@ namespace Honememo.Wptscs
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("MainForm._Load > 初期化中に例外 : " + ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                FormUtils.ErrorDialog(
+                    Resources.ErrorMessageConfigLordFailed);
+
+                // どうしようもないのでそのまま終了
+                this.Close();
             }
 
             this.transAP = null;
@@ -456,7 +462,9 @@ namespace Honememo.Wptscs
             }
             catch (Exception ex)
             {
-                textBoxLog.AppendText("\r\n" + String.Format(Resources.ErrorMessage_DevelopmentMiss, ex.Message) + "\r\n");
+                textBoxLog.AppendText("\r\n" + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + "\r\n");
+                System.Diagnostics.Debug.WriteLine("MainForm.backgroundWorkerRun_DoWork > 想定外のエラー : " + ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
         }
 

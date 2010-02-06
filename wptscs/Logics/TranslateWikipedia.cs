@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Logics
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Windows.Forms;
@@ -318,7 +319,7 @@ namespace Honememo.Wptscs.Logics
             // 指定された記事の言語間リンク・見出しを探索し、翻訳先言語での名称に変換し、それに置換した文字列を返す
             string result = String.Empty;
             bool enterFlag = true;
-            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, String.Empty, null);
+            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, MediaWiki.DummyPage, null);
             for (int i = 0; i < i_Text.Length; i++)
             {
                 // ユーザーからの中止要求をチェック
@@ -449,7 +450,7 @@ namespace Honememo.Wptscs.Logics
             MediaWikiPage.Link link = new MediaWikiPage.Link();
 
             // 内部リンク・テンプレートの確認と解析
-            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, String.Empty, null);
+            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, MediaWiki.DummyPage, null);
             lastIndex = wikiAP.ChkLinkText(ref link, i_Text, i_Index);
             if (lastIndex != -1)
             {
@@ -897,31 +898,21 @@ namespace Honememo.Wptscs.Logics
         protected string GetKeyWord(string key)
         {
             // ※設定が存在しない場合、入力定型句をそのままを返す
-            string s = (key != null) ? key : String.Empty;
+            string s = (key != null) ? key.Trim().ToLower() : String.Empty;
             MediaWiki src = (MediaWiki)Source;
             MediaWiki tar = (MediaWiki)Target;
-            if (s.Trim() == String.Empty)
+            if (!String.IsNullOrEmpty(s))
             {
-                return s;
-            }
-
-            for (int i = 0; i < src.TitleKeys.Length; i++)
-            {
-                if (src.TitleKeys[i].ToLower() == s.Trim().ToLower())
+                foreach (KeyValuePair<int, string> title in src.TitleKeys)
                 {
-                    if (tar.TitleKeys.Length > i)
+                    if (title.Value.ToLower() == s)
                     {
-                        if (tar.TitleKeys[i] != String.Empty)
-                        {
-                            s = tar.TitleKeys[i];
-                        }
-
-                        break;
+                        return tar.TitleKeys[title.Key];
                     }
                 }
             }
 
-            return s;
+            return key;
         }
 
         #endregion

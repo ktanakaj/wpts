@@ -12,8 +12,6 @@ namespace Honememo.Wptscs.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml.Serialization;
-    using Honememo.Utilities;
 
     /// <summary>
     /// 言語に関する情報をあらわすモデルクラスです。
@@ -30,21 +28,11 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// この言語の、各言語での名称。
         /// </summary>
-        private IDictionary<string, LanguageName> names = new SerializableDictionary<string, LanguageName>();
+        private IDictionary<string, LanguageName> names = new Dictionary<string, LanguageName>();
 
         #endregion
 
         #region コンストラクタ
-
-        /// <summary>
-        /// コンストラクタ（シリアライズ用）。
-        /// </summary>
-        public Language()
-            : this("unknown")
-        {
-            // ↑適当な値で通常のコンストラクタを実行
-            System.Diagnostics.Debug.WriteLine("Language.Language : 推奨されないコンストラクタを使用しています");
-        }
 
         /// <summary>
         /// コンストラクタ（通常）。
@@ -63,7 +51,6 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 言語のコード。
         /// </summary>
-        [XmlAttributeAttribute("Code")]
         public string Code
         {
             get

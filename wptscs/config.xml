@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
-  <Websites RunMode="Wikipedia">
-    <Website>
+  <Wikipedia>
+  <Websites>
+    <MediaWiki>
       <Language Code="ar">
         <Names>
           <LanguageName Code="ar">
@@ -38,23 +39,10 @@
       </SystemVariables>
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-      </TitleKeys>
-      <ExportPath>wiki/خاص:Export/</ExportPath>
-    </Website>
-    <Website>
+      <TitleKeys />
+      <ExportPath>wiki/خاص:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="de">
       <Names>
         <LanguageName Code="de">
@@ -100,22 +88,14 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>Weblinks</Title>
-        <Title />
-        <Title>Quellen</Title>
-        <Title>Literatur</Title>
-        <Title>Siehe auch</Title>
-        <Title />
+        <Title no="6">Weblinks</Title>
+        <Title no="8">Quellen</Title>
+        <Title no="9">Literatur</Title>
+        <Title no="10">Siehe auch</Title>
       </TitleKeys>
-      <ExportPath>wiki/Spezial:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="en">
       <Names>
         <LanguageName Code="de">
@@ -169,22 +149,22 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title>Advantages</Title>
-        <Title>Background</Title>
-        <Title>Costs</Title>
-        <Title>Criticism</Title>
-        <Title>Disadvantages</Title>
-        <Title>Example</Title>
-        <Title>External links</Title>
-        <Title>History</Title>
-        <Title>Notes</Title>
-        <Title>References</Title>
-        <Title>See Also</Title>
-        <Title>Theory</Title>
+        <Title no="0">Advantages</Title>
+        <Title no="1">Background</Title>
+        <Title no="2">Costs</Title>
+        <Title no="3">Criticism</Title>
+        <Title no="4">Disadvantages</Title>
+        <Title no="5">Example</Title>
+        <Title no="6">External links</Title>
+        <Title no="7">History</Title>
+        <Title no="8">Notes</Title>
+        <Title no="9">References</Title>
+        <Title no="10">See Also</Title>
+        <Title no="11">Theory</Title>
       </TitleKeys>
-      <ExportPath>wiki/Special:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/Special:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="es">
       <Names>
         <LanguageName Code="en">
@@ -230,45 +210,38 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>Enlaces externos</Title>
-        <Title>Historia</Title>
-        <Title>Notas</Title>
-        <Title>Referencias</Title>
-        <Title>Véase también</Title>
-        <Title />
+        <Title no="6">Enlaces externos</Title>
+        <Title no="7">Historia</Title>
+        <Title no="8">Notas</Title>
+        <Title no="9">Referencias</Title>
+        <Title no="10">Véase también</Title>
       </TitleKeys>
-      <ExportPath>wiki/Especial:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/Especial:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="fr">
-      <Names>
-        <LanguageName Code="en">
-          <Name>French language</Name>
-          <ShortName>French</ShortName>
-        </LanguageName>
-        <LanguageName Code="fr">
-          <Name>Français</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>フランス語</Name>
-          <ShortName>仏</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>프랑스어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>法语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
+        <Names>
+          <LanguageName Code="en">
+            <Name>French language</Name>
+            <ShortName>French</ShortName>
+          </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Français</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>フランス語</Name>
+            <ShortName>仏</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>프랑스어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>法语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <Location>http://fr.wikipedia.org</Location>
       <SystemVariables>
@@ -291,22 +264,15 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>Liens externes</Title>
-        <Title>Histoire</Title>
-        <Title>Notes</Title>
-        <Title>Bibliographie</Title>
-        <Title>Voir aussi</Title>
-        <Title />
+        <Title no="6">Liens externes</Title>
+        <Title no="7">Histoire</Title>
+        <Title no="8">Notes</Title>
+        <Title no="9">Bibliographie</Title>
+        <Title no="10">Voir aussi</Title>
       </TitleKeys>
-      <ExportPath>wiki/Special:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/Special:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="it">
       <Names>
         <LanguageName Code="en">
@@ -352,53 +318,44 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>Collegamenti esterni</Title>
-        <Title />
-        <Title />
-        <Title>Bibliografia</Title>
-        <Title>Voci correlate</Title>
-        <Title />
+        <Title no="6">Collegamenti esterni</Title>
+        <Title no="9">Bibliografia</Title>
+        <Title no="10">Voci correlate</Title>
       </TitleKeys>
-      <ExportPath>wiki/Speciale:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="ja">
-      <Names>
-        <LanguageName Code="de">
-          <Name>Japanische Sprache</Name>
-          <ShortName>Japanisch</ShortName>
-        </LanguageName>
-        <LanguageName Code="en">
-          <Name>Japanese language</Name>
-          <ShortName>Japanese</ShortName>
-        </LanguageName>
-        <LanguageName Code="es">
-          <Name>Idioma japonés</Name>
-          <ShortName>Japonés</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>日本語</Name>
-          <ShortName>日</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>일본어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="pt">
-          <Name>Língua japonesa</Name>
-          <ShortName>Japonês</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>日语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
+        <Names>
+          <LanguageName Code="de">
+            <Name>Japanische Sprache</Name>
+            <ShortName>Japanisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Japanese language</Name>
+            <ShortName>Japanese</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma japonés</Name>
+            <ShortName>Japonés</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>日本語</Name>
+            <ShortName>日</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>일본어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua japonesa</Name>
+            <ShortName>Japonês</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>日语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <Location>http://ja.wikipedia.org</Location>
       <SystemVariables>
@@ -421,22 +378,22 @@
       <Bracket>（{0}）</Bracket>
       <Redirect>#転送</Redirect>
       <TitleKeys>
-        <Title>利点</Title>
-        <Title>背景</Title>
-        <Title>費用</Title>
-        <Title>批判</Title>
-        <Title>欠点</Title>
-        <Title>例</Title>
-        <Title>外部リンク</Title>
-        <Title>歴史</Title>
-        <Title>脚注</Title>
-        <Title>参考文献</Title>
-        <Title>関連項目</Title>
-        <Title>理論</Title>
+        <Title no="0">利点</Title>
+        <Title no="1">背景</Title>
+        <Title no="2">費用</Title>
+        <Title no="3">批判</Title>
+        <Title no="4">欠点</Title>
+        <Title no="5">例</Title>
+        <Title no="6">外部リンク</Title>
+        <Title no="7">歴史</Title>
+        <Title no="8">脚注</Title>
+        <Title no="9">参考文献</Title>
+        <Title no="10">関連項目</Title>
+        <Title no="11">理論</Title>
       </TitleKeys>
-      <ExportPath>wiki/特別:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/特別:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="ko">
       <Names>
         <LanguageName Code="en">
@@ -478,45 +435,36 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>바깥 고리</Title>
-        <Title />
-        <Title />
-        <Title>참고 자료</Title>
-        <Title>관련항목</Title>
-        <Title />
+        <Title no="6">바깥 고리</Title>
+        <Title no="9">참고 자료</Title>
+        <Title no="10">관련항목</Title>
       </TitleKeys>
-      <ExportPath>wiki/특수기능:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="pt">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Portuguese language</Name>
-          <ShortName>Portuguese</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>ポルトガル語</Name>
-          <ShortName>葡</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>포르투갈어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="pt">
-          <Name>Língua portuguesa</Name>
-          <ShortName>Português</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>葡萄牙語</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
+        <Names>
+          <LanguageName Code="en">
+            <Name>Portuguese language</Name>
+            <ShortName>Portuguese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ポルトガル語</Name>
+            <ShortName>葡</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>포르투갈어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua portuguesa</Name>
+            <ShortName>Português</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>葡萄牙語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <Location>http://pt.wikipedia.org</Location>
       <SystemVariables>
@@ -539,45 +487,35 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>Links Externos</Title>
-        <Title />
-        <Title />
-        <Title />
-        <Title>Ver também</Title>
-        <Title />
+        <Title no="6">Links Externos</Title>
+        <Title no="10">Ver também</Title>
       </TitleKeys>
-      <ExportPath>wiki/Especial:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/Especial:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="ru">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Russian language</Name>
-          <ShortName>Russian</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>ロシア語</Name>
-          <ShortName>露</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>러시아어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="ru">
-          <Name>Русский язык</Name>
-          <ShortName>Русский</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>俄语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
+        <Names>
+          <LanguageName Code="en">
+            <Name>Russian language</Name>
+            <ShortName>Russian</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ロシア語</Name>
+            <ShortName>露</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>러시아어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Русский язык</Name>
+            <ShortName>Русский</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>俄语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <Location>http://ru.wikipedia.org</Location>
       <SystemVariables>
@@ -600,41 +538,32 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>Примечания</Title>
-        <Title>Ссылки</Title>
-        <Title>См. также</Title>
-        <Title />
+        <Title no="8">Примечания</Title>
+        <Title no="9">Ссылки</Title>
+        <Title no="10">См. также</Title>
       </TitleKeys>
-      <ExportPath>wiki/Служебная:Export/</ExportPath>
-    </Website>
-    <Website>
+      <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
+    </MediaWiki>
+    <MediaWiki>
       <Language Code="zh">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Chinese language</Name>
-          <ShortName>Chinese</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>中国語</Name>
-          <ShortName>中</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>중국어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>中文</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
+        <Names>
+          <LanguageName Code="en">
+            <Name>Chinese language</Name>
+            <ShortName>Chinese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>中国語</Name>
+            <ShortName>中</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>중국어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>中文</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <Location>http://zh.wikipedia.org</Location>
       <SystemVariables>
@@ -657,20 +586,14 @@
       <Bracket> ({0}) </Bracket>
       <Redirect>#REDIRECT</Redirect>
       <TitleKeys>
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title />
-        <Title>外部連結</Title>
-        <Title>歷史</Title>
-        <Title>注釋</Title>
-        <Title>参考文献</Title>
-        <Title>參見</Title>
-        <Title />
+        <Title no="6">外部連結</Title>
+        <Title no="7">歷史</Title>
+        <Title no="8">注釋</Title>
+        <Title no="9">参考文献</Title>
+        <Title no="10">參見</Title>
       </TitleKeys>
-      <ExportPath>wiki/Special:Export/</ExportPath>
-    </Website>
+      <ExportPath>wiki/Special:Export/{0}</ExportPath>
+    </MediaWiki>
   </Websites>
+  </Wikipedia>
 </Config>

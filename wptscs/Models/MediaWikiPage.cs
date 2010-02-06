@@ -85,7 +85,7 @@ namespace Honememo.Wptscs.Models
             : base(website, title, text)
         {
             // 本文の指定がある場合は、リダイレクトのチェックを行い属性値を更新する
-            if (String.IsNullOrEmpty(text))
+            if (!String.IsNullOrEmpty(text))
             {
                 this.IsRedirect();
             }
@@ -265,7 +265,7 @@ namespace Honememo.Wptscs.Models
         public bool IsRedirect()
         {
             // 値チェック
-            if (Text == String.Empty)
+            if (String.IsNullOrEmpty(Text))
             {
                 // ページ本文が設定されていない場合実行不可
                 throw new InvalidOperationException();
@@ -288,7 +288,7 @@ namespace Honememo.Wptscs.Models
                     redirect = en.Redirect;
                 }
 
-                if (redirect != String.Empty)
+                if (!String.IsNullOrEmpty(redirect))
                 {
                     if (Text.ToLower().StartsWith(redirect.ToLower()))
                     {
