@@ -100,18 +100,18 @@ namespace Honememo.Wptscs
                     this.dataGridViewTitleKey.Columns.Add(site.Lang.Code, name);
 
                     // 表データ設定
-                    //if (site as MediaWiki != null)
-                    //{
-                    //    for (int y = 0; y < (site as MediaWiki).TitleKeys.Length; y++)
-                    //    {
-                    //        if (this.dataGridViewTitleKey.RowCount - 1 <= y)
-                    //        {
-                    //            this.dataGridViewTitleKey.Rows.Add();
-                    //        }
+                    if (site as MediaWiki != null)
+                    {
+                        foreach (KeyValuePair<int, string> title in (site as MediaWiki).TitleKeys)
+                        {
+                            while (this.dataGridViewTitleKey.RowCount - 1 <= title.Key)
+                            {
+                                this.dataGridViewTitleKey.Rows.Add();
+                            }
 
-                    //        this.dataGridViewTitleKey[x, y].Value = (site as MediaWiki).TitleKeys[y];
-                    //    }
-                    //}
+                            this.dataGridViewTitleKey[x, title.Key].Value = title.Value;
+                        }
+                    }
 
                     // コンボボックス設定
                     this.comboBoxCode.Items.Add(site.Lang.Code);

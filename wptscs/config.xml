@@ -1,599 +1,654 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <Config>
   <Wikipedia>
-  <Websites>
-    <MediaWiki>
-      <Language Code="ar">
-        <Names>
-          <LanguageName Code="ar">
-            <Name>لغة عربية</Name>
-            <ShortName />
-          </LanguageName>
-          <LanguageName Code="en">
-            <Name>Arabic language</Name>
-            <ShortName>Arabic</ShortName>
-          </LanguageName>
-          <LanguageName Code="ja">
-            <Name>アラビア語</Name>
-            <ShortName />
-          </LanguageName>
-        </Names>
-      </Language>
-      <Location>http://ar.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys />
-      <ExportPath>wiki/خاص:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="de">
-      <Names>
-        <LanguageName Code="de">
-          <Name>Deutsche Sprache</Name>
-          <ShortName>Deutsch</ShortName>
-        </LanguageName>
-        <LanguageName Code="en">
-          <Name>German language</Name>
-          <ShortName>German</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>ドイツ語</Name>
-          <ShortName>独</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>독일어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>德语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-      </Language>
-      <Location>http://de.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="6">Weblinks</Title>
-        <Title no="8">Quellen</Title>
-        <Title no="9">Literatur</Title>
-        <Title no="10">Siehe auch</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="en">
-      <Names>
-        <LanguageName Code="de">
-          <Name>Englische Sprache</Name>
-          <ShortName>Englisch</ShortName>
-        </LanguageName>
-        <LanguageName Code="en">
-          <Name>English language</Name>
-          <ShortName>English</ShortName>
-        </LanguageName>
-        <LanguageName Code="es">
-          <Name>Idioma inglés</Name>
-          <ShortName>Inglés</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>英語</Name>
-          <ShortName>英</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>영어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="pt">
-          <Name>Língua inglesa</Name>
-          <ShortName>Inglês</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>英语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-      </Language>
-      <Location>http://en.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="0">Advantages</Title>
-        <Title no="1">Background</Title>
-        <Title no="2">Costs</Title>
-        <Title no="3">Criticism</Title>
-        <Title no="4">Disadvantages</Title>
-        <Title no="5">Example</Title>
-        <Title no="6">External links</Title>
-        <Title no="7">History</Title>
-        <Title no="8">Notes</Title>
-        <Title no="9">References</Title>
-        <Title no="10">See Also</Title>
-        <Title no="11">Theory</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Special:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="es">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Spanish language</Name>
-          <ShortName>Spanish</ShortName>
-        </LanguageName>
-        <LanguageName Code="es">
-          <Name>Idioma español</Name>
-          <ShortName>Español</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>スペイン語</Name>
-          <ShortName>西</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>에스파냐어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>西班牙语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-      </Language>
-      <Location>http://es.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="6">Enlaces externos</Title>
-        <Title no="7">Historia</Title>
-        <Title no="8">Notas</Title>
-        <Title no="9">Referencias</Title>
-        <Title no="10">Véase también</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Especial:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="fr">
-        <Names>
-          <LanguageName Code="en">
-            <Name>French language</Name>
-            <ShortName>French</ShortName>
-          </LanguageName>
-          <LanguageName Code="fr">
-            <Name>Français</Name>
-            <ShortName />
-          </LanguageName>
-          <LanguageName Code="ja">
-            <Name>フランス語</Name>
-            <ShortName>仏</ShortName>
-          </LanguageName>
-          <LanguageName Code="ko">
-            <Name>프랑스어</Name>
-            <ShortName />
-          </LanguageName>
-          <LanguageName Code="zh">
-            <Name>法语</Name>
-            <ShortName />
-          </LanguageName>
-        </Names>
-      </Language>
-      <Location>http://fr.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="6">Liens externes</Title>
-        <Title no="7">Histoire</Title>
-        <Title no="8">Notes</Title>
-        <Title no="9">Bibliographie</Title>
-        <Title no="10">Voir aussi</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Special:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="it">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Italian language</Name>
-          <ShortName>Italian</ShortName>
-        </LanguageName>
-        <LanguageName Code="it">
-          <Name>Lingua italiana</Name>
-          <ShortName>Italiano</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>イタリア語</Name>
-          <ShortName>伊</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>이탈리아어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>意大利语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-      </Language>
-      <Location>http://it.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="6">Collegamenti esterni</Title>
-        <Title no="9">Bibliografia</Title>
-        <Title no="10">Voci correlate</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="ja">
-        <Names>
-          <LanguageName Code="de">
-            <Name>Japanische Sprache</Name>
-            <ShortName>Japanisch</ShortName>
-          </LanguageName>
-          <LanguageName Code="en">
-            <Name>Japanese language</Name>
-            <ShortName>Japanese</ShortName>
-          </LanguageName>
-          <LanguageName Code="es">
-            <Name>Idioma japonés</Name>
-            <ShortName>Japonés</ShortName>
-          </LanguageName>
-          <LanguageName Code="ja">
-            <Name>日本語</Name>
-            <ShortName>日</ShortName>
-          </LanguageName>
-          <LanguageName Code="ko">
-            <Name>일본어</Name>
-            <ShortName />
-          </LanguageName>
-          <LanguageName Code="pt">
-            <Name>Língua japonesa</Name>
-            <ShortName>Japonês</ShortName>
-          </LanguageName>
-          <LanguageName Code="zh">
-            <Name>日语</Name>
-            <ShortName />
-          </LanguageName>
-        </Names>
-      </Language>
-      <Location>http://ja.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket>（{0}）</Bracket>
-      <Redirect>#転送</Redirect>
-      <TitleKeys>
-        <Title no="0">利点</Title>
-        <Title no="1">背景</Title>
-        <Title no="2">費用</Title>
-        <Title no="3">批判</Title>
-        <Title no="4">欠点</Title>
-        <Title no="5">例</Title>
-        <Title no="6">外部リンク</Title>
-        <Title no="7">歴史</Title>
-        <Title no="8">脚注</Title>
-        <Title no="9">参考文献</Title>
-        <Title no="10">関連項目</Title>
-        <Title no="11">理論</Title>
-      </TitleKeys>
-      <ExportPath>wiki/特別:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="ko">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Korean language</Name>
-          <ShortName>Korean</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>朝鮮語</Name>
-          <ShortName>ハングル</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>한국어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>朝鮮語</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-      </Language>
-      <Location>http://ko.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="6">바깥 고리</Title>
-        <Title no="9">참고 자료</Title>
-        <Title no="10">관련항목</Title>
-      </TitleKeys>
-      <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="pt">
-        <Names>
-          <LanguageName Code="en">
-            <Name>Portuguese language</Name>
-            <ShortName>Portuguese</ShortName>
-          </LanguageName>
-          <LanguageName Code="ja">
-            <Name>ポルトガル語</Name>
-            <ShortName>葡</ShortName>
-          </LanguageName>
-          <LanguageName Code="ko">
-            <Name>포르투갈어</Name>
-            <ShortName />
-          </LanguageName>
-          <LanguageName Code="pt">
-            <Name>Língua portuguesa</Name>
-            <ShortName>Português</ShortName>
-          </LanguageName>
-          <LanguageName Code="zh">
-            <Name>葡萄牙語</Name>
-            <ShortName />
-          </LanguageName>
-        </Names>
-      </Language>
-      <Location>http://pt.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="6">Links Externos</Title>
-        <Title no="10">Ver também</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Especial:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="ru">
-        <Names>
-          <LanguageName Code="en">
-            <Name>Russian language</Name>
-            <ShortName>Russian</ShortName>
-          </LanguageName>
-          <LanguageName Code="ja">
-            <Name>ロシア語</Name>
-            <ShortName>露</ShortName>
-          </LanguageName>
-          <LanguageName Code="ko">
-            <Name>러시아어</Name>
-            <ShortName />
-          </LanguageName>
-          <LanguageName Code="ru">
-            <Name>Русский язык</Name>
-            <ShortName>Русский</ShortName>
-          </LanguageName>
-          <LanguageName Code="zh">
-            <Name>俄语</Name>
-            <ShortName />
-          </LanguageName>
-        </Names>
-      </Language>
-      <Location>http://ru.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="8">Примечания</Title>
-        <Title no="9">Ссылки</Title>
-        <Title no="10">См. также</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
-    </MediaWiki>
-    <MediaWiki>
-      <Language Code="zh">
-        <Names>
-          <LanguageName Code="en">
-            <Name>Chinese language</Name>
-            <ShortName>Chinese</ShortName>
-          </LanguageName>
-          <LanguageName Code="ja">
-            <Name>中国語</Name>
-            <ShortName>中</ShortName>
-          </LanguageName>
-          <LanguageName Code="ko">
-            <Name>중국어</Name>
-            <ShortName />
-          </LanguageName>
-          <LanguageName Code="zh">
-            <Name>中文</Name>
-            <ShortName />
-          </LanguageName>
-        </Names>
-      </Language>
-      <Location>http://zh.wikipedia.org</Location>
-      <SystemVariables>
-        <Variable>CURRENTMONTH</Variable>
-        <Variable>CURRENTMONTHNAME</Variable>
-        <Variable>CURRENTDAY</Variable>
-        <Variable>CURRENTDAYNAME</Variable>
-        <Variable>CURRENTYEAR</Variable>
-        <Variable>CURRENTTIME</Variable>
-        <Variable>NUMBEROFARTICLES</Variable>
-        <Variable>SITENAME</Variable>
-        <Variable>SERVER</Variable>
-        <Variable>NAMESPACE</Variable>
-        <Variable>PAGENAME</Variable>
-        <Variable>ns:</Variable>
-        <Variable>localurl:</Variable>
-        <Variable>fullurl:</Variable>
-        <Variable>#if:</Variable>
-      </SystemVariables>
-      <Bracket> ({0}) </Bracket>
-      <Redirect>#REDIRECT</Redirect>
-      <TitleKeys>
-        <Title no="6">外部連結</Title>
-        <Title no="7">歷史</Title>
-        <Title no="8">注釋</Title>
-        <Title no="9">参考文献</Title>
-        <Title no="10">參見</Title>
-      </TitleKeys>
-      <ExportPath>wiki/Special:Export/{0}</ExportPath>
-    </MediaWiki>
-  </Websites>
+    <Websites>
+      <MediaWiki>
+        <Location>http://ar.wikipedia.org</Location>
+        <Language Code="ar">
+          <Names>
+            <LanguageName Code="ar">
+              <Name>لغة عربية</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="en">
+              <Name>Arabic language</Name>
+              <ShortName>Arabic</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>アラビア語</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/خاص:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys />
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://de.wikipedia.org</Location>
+        <Language Code="de">
+          <Names>
+            <LanguageName Code="de">
+              <Name>Deutsche Sprache</Name>
+              <ShortName>Deutsch</ShortName>
+            </LanguageName>
+            <LanguageName Code="en">
+              <Name>German language</Name>
+              <ShortName>German</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>ドイツ語</Name>
+              <ShortName>独</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>독일어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>德语</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="6">Weblinks</Title>
+          <Title no="8">Quellen</Title>
+          <Title no="9">Literatur</Title>
+          <Title no="10">Siehe auch</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://en.wikipedia.org</Location>
+        <Language Code="en">
+          <Names>
+            <LanguageName Code="de">
+              <Name>Englische Sprache</Name>
+              <ShortName>Englisch</ShortName>
+            </LanguageName>
+            <LanguageName Code="en">
+              <Name>English language</Name>
+              <ShortName>English</ShortName>
+            </LanguageName>
+            <LanguageName Code="es">
+              <Name>Idioma inglés</Name>
+              <ShortName>Inglés</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>英語</Name>
+              <ShortName>英</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>영어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="pt">
+              <Name>Língua inglesa</Name>
+              <ShortName>Inglês</ShortName>
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>英语</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Special:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="0">Advantages</Title>
+          <Title no="1">Background</Title>
+          <Title no="2">Costs</Title>
+          <Title no="3">Criticism</Title>
+          <Title no="4">Disadvantages</Title>
+          <Title no="5">Example</Title>
+          <Title no="6">External links</Title>
+          <Title no="7">History</Title>
+          <Title no="8">Notes</Title>
+          <Title no="9">References</Title>
+          <Title no="10">See Also</Title>
+          <Title no="11">Theory</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://es.wikipedia.org</Location>
+        <Language Code="es">
+          <Names>
+            <LanguageName Code="en">
+              <Name>Spanish language</Name>
+              <ShortName>Spanish</ShortName>
+            </LanguageName>
+            <LanguageName Code="es">
+              <Name>Idioma español</Name>
+              <ShortName>Español</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>スペイン語</Name>
+              <ShortName>西</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>에스파냐어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>西班牙语</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Especial:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="6">Enlaces externos</Title>
+          <Title no="7">Historia</Title>
+          <Title no="8">Notas</Title>
+          <Title no="9">Referencias</Title>
+          <Title no="10">Véase también</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://fr.wikipedia.org</Location>
+        <Language Code="fr">
+          <Names>
+            <LanguageName Code="en">
+              <Name>French language</Name>
+              <ShortName>French</ShortName>
+            </LanguageName>
+            <LanguageName Code="fr">
+              <Name>Français</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>フランス語</Name>
+              <ShortName>仏</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>프랑스어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>法语</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Special:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="6">Liens externes</Title>
+          <Title no="7">Histoire</Title>
+          <Title no="8">Notes</Title>
+          <Title no="9">Bibliographie</Title>
+          <Title no="10">Voir aussi</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://it.wikipedia.org</Location>
+        <Language Code="it">
+          <Names>
+            <LanguageName Code="en">
+              <Name>Italian language</Name>
+              <ShortName>Italian</ShortName>
+            </LanguageName>
+            <LanguageName Code="it">
+              <Name>Lingua italiana</Name>
+              <ShortName>Italiano</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>イタリア語</Name>
+              <ShortName>伊</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>이탈리아어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>意大利语</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="6">Collegamenti esterni</Title>
+          <Title no="9">Bibliografia</Title>
+          <Title no="10">Voci correlate</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://ja.wikipedia.org</Location>
+        <Language Code="ja">
+          <Names>
+            <LanguageName Code="de">
+              <Name>Japanische Sprache</Name>
+              <ShortName>Japanisch</ShortName>
+            </LanguageName>
+            <LanguageName Code="en">
+              <Name>Japanese language</Name>
+              <ShortName>Japanese</ShortName>
+            </LanguageName>
+            <LanguageName Code="es">
+              <Name>Idioma japonés</Name>
+              <ShortName>Japonés</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>日本語</Name>
+              <ShortName>日</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>일본어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="pt">
+              <Name>Língua japonesa</Name>
+              <ShortName>Japonês</ShortName>
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>日语</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/特別:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket>（{0}）</Bracket>
+        <Redirect>#転送</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="0">利点</Title>
+          <Title no="1">背景</Title>
+          <Title no="2">費用</Title>
+          <Title no="3">批判</Title>
+          <Title no="4">欠点</Title>
+          <Title no="5">例</Title>
+          <Title no="6">外部リンク</Title>
+          <Title no="7">歴史</Title>
+          <Title no="8">脚注</Title>
+          <Title no="9">参考文献</Title>
+          <Title no="10">関連項目</Title>
+          <Title no="11">理論</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://ko.wikipedia.org</Location>
+        <Language Code="ko">
+          <Names>
+            <LanguageName Code="en">
+              <Name>Korean language</Name>
+              <ShortName>Korean</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>朝鮮語</Name>
+              <ShortName>ハングル</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>한국어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>朝鮮語</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="6">바깥 고리</Title>
+          <Title no="9">참고 자료</Title>
+          <Title no="10">관련항목</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://pt.wikipedia.org</Location>
+        <Language Code="pt">
+          <Names>
+            <LanguageName Code="en">
+              <Name>Portuguese language</Name>
+              <ShortName>Portuguese</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>ポルトガル語</Name>
+              <ShortName>葡</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>포르투갈어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="pt">
+              <Name>Língua portuguesa</Name>
+              <ShortName>Português</ShortName>
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>葡萄牙語</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Especial:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="6">Links Externos</Title>
+          <Title no="10">Ver também</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://ru.wikipedia.org</Location>
+        <Language Code="ru">
+          <Names>
+            <LanguageName Code="en">
+              <Name>Russian language</Name>
+              <ShortName>Russian</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>ロシア語</Name>
+              <ShortName>露</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>러시아어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="ru">
+              <Name>Русский язык</Name>
+              <ShortName>Русский</ShortName>
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>俄语</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="8">Примечания</Title>
+          <Title no="9">Ссылки</Title>
+          <Title no="10">См. также</Title>
+        </TitleKeys>
+      </MediaWiki>
+      <MediaWiki>
+        <Location>http://zh.wikipedia.org</Location>
+        <Language Code="zh">
+          <Names>
+            <LanguageName Code="en">
+              <Name>Chinese language</Name>
+              <ShortName>Chinese</ShortName>
+            </LanguageName>
+            <LanguageName Code="ja">
+              <Name>中国語</Name>
+              <ShortName>中</ShortName>
+            </LanguageName>
+            <LanguageName Code="ko">
+              <Name>중국어</Name>
+              <ShortName />
+            </LanguageName>
+            <LanguageName Code="zh">
+              <Name>中文</Name>
+              <ShortName />
+            </LanguageName>
+          </Names>
+        </Language>
+        <Xmlns>http://www.mediawiki.org/xml/export-0.4/</Xmlns>
+        <ExportPath>wiki/Special:Export/{0}</ExportPath>
+        <TemplateNamespaceNumber>10</TemplateNamespaceNumber>
+        <CategoryNamespaceNumber>14</CategoryNamespaceNumber>
+        <ImageNamespaceNumber>6</ImageNamespaceNumber>
+        <DummyPage>Main_Page</DummyPage>
+        <Bracket> ({0}) </Bracket>
+        <Redirect>#REDIRECT</Redirect>
+        <SystemVariables>
+          <Variable>CURRENTMONTH</Variable>
+          <Variable>CURRENTMONTHNAME</Variable>
+          <Variable>CURRENTDAY</Variable>
+          <Variable>CURRENTDAYNAME</Variable>
+          <Variable>CURRENTYEAR</Variable>
+          <Variable>CURRENTTIME</Variable>
+          <Variable>NUMBEROFARTICLES</Variable>
+          <Variable>SITENAME</Variable>
+          <Variable>SERVER</Variable>
+          <Variable>NAMESPACE</Variable>
+          <Variable>PAGENAME</Variable>
+          <Variable>ns:</Variable>
+          <Variable>localurl:</Variable>
+          <Variable>fullurl:</Variable>
+          <Variable>#if:</Variable>
+        </SystemVariables>
+        <TitleKeys>
+          <Title no="6">外部連結</Title>
+          <Title no="7">歷史</Title>
+          <Title no="8">注釋</Title>
+          <Title no="9">参考文献</Title>
+          <Title no="10">參見</Title>
+        </TitleKeys>
+      </MediaWiki>
+    </Websites>
   </Wikipedia>
 </Config>

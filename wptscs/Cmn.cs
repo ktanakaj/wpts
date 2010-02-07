@@ -11,88 +11,16 @@
 namespace Honememo
 {
     using System;
-    using System.IO;
-    using System.Net;
-    using System.Net.NetworkInformation;
-    using System.Reflection;
-    using System.Resources;
     using System.Windows.Forms;
-    using System.Xml.Serialization;
     using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// 画面・機能によらない、共通的な関数のクラスです。
-    /// ※ 整理予定
     /// </summary>
+    /// <remarks>機能ごとにユーティリティや抽象クラスに整理予定</remarks>
     public class Cmn
     {
-        #region 変数定義
-
-        /// <summary>
-        /// リソースマネージャー
-        /// </summary>
-        public ResourceManager Resource;
-
-        #endregion
-
-        #region コンストラクタ
-
-        /// <summary>
-        /// コンストラクタ（exeと同名のリソースマネージャーを起動フォルダから読み込み）。
-        /// </summary>
-        public Cmn()
-        {
-            // コンストラクタであるため、例外は投げない。異常時はNULLで初期化
-            try
-            {
-                // ファイルから設定を読み込み
-                this.Resource = ResourceManager.CreateFileBasedResourceManager(
-                    Path.GetFileNameWithoutExtension(Application.ExecutablePath),
-                    Application.StartupPath,
-                    null);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("Cmn.Cmn > 例外発生：" + e.ToString());
-                this.Resource = null;
-            }
-        }
-
-        /// <summary>
-        /// コンストラクタ（指定されたリソースマネージャーを指定されたフォルダから設定）。
-        /// </summary>
-        /// <param name="i_Resource">リソースマネージャー。</param>
-        /// <param name="i_Dir">リソースのあるフォルダ。</param>
-        public Cmn(string i_Resource, string i_Dir)
-        {
-            System.Diagnostics.Debug.WriteLine("Cmn.Cmn > " + i_Resource + ", " + i_Dir);
-
-            // コンストラクタであるため、例外は投げない。異常時はNULLで初期化
-            try
-            {
-                // ファイルから設定を読み込み
-                this.Resource = ResourceManager.CreateFileBasedResourceManager(i_Resource, i_Dir, null);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("Cmn.Cmn > 例外発生：" + e.ToString());
-                this.Resource = null;
-            }
-        }
-
-        /// <summary>
-        /// コンストラクタ（渡されたリソースマネージャーを使用）。
-        /// </summary>
-        /// <param name="resource">リソースマネージャー。</param>
-        public Cmn(ResourceManager resource)
-        {
-            // 渡されたリソースマネージャーをそのまま使用
-            this.Resource = resource;
-        }
-
-        #endregion
-
         #region 静的メソッド
 
         /// <summary>
@@ -163,44 +91,6 @@ namespace Honememo
             int index = AddArray(ref io_Array);
             io_Array[index] = i_Obj;
             return index;
-        }
-
-        /// <summary>
-        /// ソフト名+バージョン情報の文字列取得（アセンブリから取得）。
-        /// </summary>
-        /// <returns>ソフト情報</returns>
-        public static string GetProductName()
-        {
-            // ※例外なし。もし発生する場合はそのまま返す
-
-            // アセンブリから製品名を取得し、バージョン情報(x.xx形式)を付けて返す
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            AssemblyProductAttribute product =
-                (AssemblyProductAttribute)Attribute.GetCustomAttribute(
-                    assembly,
-                    typeof(AssemblyProductAttribute));
-            Version ver = assembly.GetName().Version;
-
-            // 戻り値を返す、ビルド番号・リビジョンは無視
-            return product.Product + " Ver" + ver.Major + "." + String.Format("{0:D2}", ver.Minor);
-        }
-
-        /// <summary>
-        /// 文字列中のファイル名に使用できない文字を置換。
-        /// </summary>
-        /// <param name="s">ファイル名。</param>
-        /// <returns>置換後の文字列</returns>
-        public static string ReplaceInvalidFileNameChars(string s)
-        {
-            // 渡された文字列にファイル名に使えない文字が含まれている場合、_ に置き換える
-            string result = s;
-            char[] unuseChars = Path.GetInvalidFileNameChars();
-            foreach (char c in unuseChars)
-            {
-                result = result.Replace(c, '_');
-            }
-
-            return result;
         }
 
         /// <summary>
@@ -317,58 +207,6 @@ namespace Honememo
             }
 
             return true;
-        }
-
-        #endregion
-
-        #region インスタンスメソッド
-
-        /// <summary>
-        /// サーバー接続チェック。
-        /// </summary>
-        /// <param name="i_Server">サーバー名。</param>
-        /// <param name="i_ShowEnabled"><c>true</c> エラー時にダイアログを表示。</param>
-        /// <returns><c>true</c> 接続成功</returns>
-        public virtual bool Ping(string i_Server, bool i_ShowEnabled)
-        {
-            // ※例外は投げない。失敗した場合は全てfalse
-
-            // サーバー接続チェック
-            Ping ping = new Ping();
-            try
-            {
-                PingReply reply = ping.Send(i_Server);
-                if (reply.Status != IPStatus.Success)
-                {
-                    if (i_ShowEnabled)
-                    {
-                        FormUtils.ErrorDialog(Resources.ErrorMessage_MissNetworkAccess, reply.Status.ToString());
-                    }
-
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                if (i_ShowEnabled)
-                {
-                    FormUtils.ErrorDialog(Resources.ErrorMessage_MissNetworkAccess, e.InnerException.Message);
-                }
-
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// サーバー接続チェック（エラー時にダイアログを表示）。
-        /// </summary>
-        /// <param name="server">サーバー名。</param>
-        /// <returns><c>true</c> 接続成功</returns>
-        public bool Ping(string server)
-        {
-            return this.Ping(server, true);
         }
 
         #endregion

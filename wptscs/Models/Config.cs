@@ -16,6 +16,7 @@ namespace Honememo.Wptscs.Models
     using System.Windows.Forms;
     using System.Xml;
     using System.Xml.Serialization;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
@@ -136,23 +137,17 @@ namespace Honememo.Wptscs.Models
                     return Config.config;
                 }
 
-                // 無い場合はユーザーごとの設定ファイルを読み込み
-                string path = Path.Combine(
-                    Application.UserAppDataPath, Settings.Default.ConfigurationFile);
-                if (!File.Exists(path))
+                // 無い場合はユーザーごと・または初期設定用の設定ファイルを読み込み
+                string path = FormUtils.SearchUserAppData(Settings.Default.ConfigurationFile, "0.80.0.0");
+                if (String.IsNullOrEmpty(path))
                 {
-                    // 無い場合は、exeと同じフォルダから初期設定ファイルを探索
-                    path = Path.Combine(
-                        Application.StartupPath, Settings.Default.ConfigurationFile);
-                    if (!File.Exists(path))
-                    {
-                        // どちらにも無い場合は例外を投げる
-                        // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
-                        throw new FileNotFoundException(Settings.Default.ConfigurationFile + " is not found");
-                    }
+                    // どこにも無い場合は例外を投げる
+                    // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
+                    throw new FileNotFoundException(Settings.Default.ConfigurationFile + " is not found");
                 }
 
                 // 設定ファイルを読み込み
+                System.Diagnostics.Debug.WriteLine("Config.GetInstance > " + path + " を読み込み");
                 using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     Config.config = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
@@ -300,9 +295,6 @@ namespace Honememo.Wptscs.Models
         /// <param name="writer">出力先のXmlWriter</param>
         public void WriteXml(XmlWriter writer)
         {
-            // ルート
-            writer.WriteStartElement("Config");
-
             // 処理モードごとにループ
             foreach (KeyValuePair<RunMode, IList<Website>> sites in this.Websites)
             {
@@ -322,8 +314,6 @@ namespace Honememo.Wptscs.Models
                 writer.WriteEndElement();
                 writer.WriteEndElement();
             }
-
-            writer.WriteEndElement();
         }
 
         #endregion

@@ -61,6 +61,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   Wikipedia 翻訳支援ツール Ver{0}.{1:D2} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ApplicationName {
+            get {
+                return ResourceManager.GetString("ApplicationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   &lt;!-- {0}、[[:{1}:{2}]]（{3}(UTC)）より --&gt; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ArticleFooter {

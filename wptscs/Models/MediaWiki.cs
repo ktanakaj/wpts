@@ -54,12 +54,25 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
-        // ※各変数の初期値は2006年9月時点のWikipedia英語版より
+        #region private変数
+
+        // ※各変数の初期値は、新しくサイトを登録する際の初期値として使用する。
+        //   2006年9月時点のWikipedia英語版より調査した値を設定。
+
+        /// <summary>
+        /// MediaWikiの名前空間の情報。
+        /// </summary>
+        private IDictionary<int, string> namespaces = new Dictionary<int, string>();
+
+        /// <summary>
+        /// 記事のXMLデータが存在するパス。
+        /// </summary>
+        private string exportPath = "wiki/Special:Export/{0}";
 
         /// <summary>
         /// Wikipedia書式のシステム定義変数。
         /// </summary>
-        public IList<string> SystemVariables = new string[]
+        private IList<string> systemVariables = new string[]
         {
                 "CURRENTMONTH",
                 "CURRENTMONTHNAME",
@@ -81,29 +94,17 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 括弧のフォーマット。
         /// </summary>
-        public string Bracket = " ({0}) ";
+        private string bracket = " ({0}) ";
 
         /// <summary>
         /// リダイレクトの文字列。
         /// </summary>
-        public string Redirect = "#REDIRECT";
+        private string redirect = "#REDIRECT";
 
         /// <summary>
         /// 見出しの定型句。
         /// </summary>
-        public IDictionary<int, string> TitleKeys = new Dictionary<int, string>();
-
-        #region private変数
-
-        /// <summary>
-        /// MediaWikiの名前空間の情報。
-        /// </summary>
-        private IDictionary<int, string> namespaces = new Dictionary<int, string>();
-
-        /// <summary>
-        /// 記事のXMLデータが存在するパス。
-        /// </summary>
-        private string exportPath = "wiki/Special:Export/{0}";
+        private IDictionary<int, string> titleKeys = new Dictionary<int, string>();
 
         #endregion
 
@@ -211,6 +212,70 @@ namespace Honememo.Wptscs.Models
             set
             {
                 this.exportPath = value;
+            }
+        }
+
+        /// <summary>
+        /// 括弧のフォーマット。
+        /// </summary>
+        public string Bracket
+        {
+            get
+            {
+                return this.bracket;
+            }
+
+            set
+            {
+                this.bracket = value;
+            }
+        }
+
+        /// <summary>
+        /// リダイレクトの文字列。
+        /// </summary>
+        public string Redirect
+        {
+            get
+            {
+                return this.redirect;
+            }
+
+            set
+            {
+                this.redirect = value;
+            }
+        }
+
+        /// <summary>
+        /// 見出しの定型句。
+        /// </summary>
+        public IDictionary<int, string> TitleKeys
+        {
+            get
+            {
+                return this.titleKeys;
+            }
+
+            set
+            {
+                this.titleKeys = value;
+            }
+        }
+
+        /// <summary>
+        /// Wikipedia書式のシステム定義変数。
+        /// </summary>
+        public IList<string> SystemVariables
+        {
+            get
+            {
+                return this.systemVariables;
+            }
+
+            set
+            {
+                this.systemVariables = value;
             }
         }
 

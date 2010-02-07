@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Logics
     using System.IO;
     using System.Net;
     using System.Windows.Forms;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
 
@@ -108,7 +109,7 @@ namespace Honememo.Wptscs.Logics
             this.Text += "\n\n[[" + this.Source.Lang.Code + ":" + i_Name + "]]\n";
             this.Text += String.Format(
                 Resources.ArticleFooter,
-                Honememo.Cmn.GetProductName(),
+                FormUtils.ApplicationName(),
                 this.Source.Lang.Code,
                 i_Name,
                 article.Timestamp.ToString("U")) + "\n";

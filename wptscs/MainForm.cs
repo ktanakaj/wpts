@@ -366,7 +366,7 @@ namespace Honememo.Wptscs
                 textBoxLog.AppendText(
                     String.Format(
                         Resources.LogMessage_Start,
-                        Honememo.Cmn.GetProductName(),
+                        FormUtils.ApplicationName(),
                         DateTime.Now.ToString("F")));
 
                 // 処理結果とログのための出力ファイル名を作成
@@ -553,7 +553,7 @@ namespace Honememo.Wptscs
             // 出力先フォルダに存在しないファイル名（の拡張子より前）を作成
             // ※渡されたWikipedia等の記事名にファイル名に使えない文字が含まれている場合、_ に置き換える
             //   また、ファイル名が重複している場合、xx[0].txtのように連番を付ける
-            string fileNameBase = Honememo.Cmn.ReplaceInvalidFileNameChars(i_Text);
+            string fileNameBase = FormUtils.ReplaceInvalidFileNameChars(i_Text);
             string fileName = fileNameBase + ".txt";
             string logName = fileNameBase + ".log";
             bool successFlag = false;
