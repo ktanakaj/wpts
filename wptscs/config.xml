@@ -28,24 +28,91 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys />
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings />
       </MediaWiki>
       <MediaWiki>
         <Location>http://de.wikipedia.org</Location>
@@ -81,29 +148,96 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="6">Weblinks</Title>
-          <Title no="8">Quellen</Title>
-          <Title no="9">Literatur</Title>
-          <Title no="10">Siehe auch</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="6">Weblinks</Heading>
+          <Heading no="8">Quellen</Heading>
+          <Heading no="9">Literatur</Heading>
+          <Heading no="10">Siehe auch</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://en.wikipedia.org</Location>
@@ -147,37 +281,104 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="0">Advantages</Title>
-          <Title no="1">Background</Title>
-          <Title no="2">Costs</Title>
-          <Title no="3">Criticism</Title>
-          <Title no="4">Disadvantages</Title>
-          <Title no="5">Example</Title>
-          <Title no="6">External links</Title>
-          <Title no="7">History</Title>
-          <Title no="8">Notes</Title>
-          <Title no="9">References</Title>
-          <Title no="10">See Also</Title>
-          <Title no="11">Theory</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="0">Advantages</Heading>
+          <Heading no="1">Background</Heading>
+          <Heading no="2">Costs</Heading>
+          <Heading no="3">Criticism</Heading>
+          <Heading no="4">Disadvantages</Heading>
+          <Heading no="5">Example</Heading>
+          <Heading no="6">External links</Heading>
+          <Heading no="7">History</Heading>
+          <Heading no="8">Notes</Heading>
+          <Heading no="9">References</Heading>
+          <Heading no="10">See Also</Heading>
+          <Heading no="11">Theory</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://es.wikipedia.org</Location>
@@ -213,30 +414,97 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="6">Enlaces externos</Title>
-          <Title no="7">Historia</Title>
-          <Title no="8">Notas</Title>
-          <Title no="9">Referencias</Title>
-          <Title no="10">Véase también</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="6">Enlaces externos</Heading>
+          <Heading no="7">Historia</Heading>
+          <Heading no="8">Notas</Heading>
+          <Heading no="9">Referencias</Heading>
+          <Heading no="10">Véase también</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://fr.wikipedia.org</Location>
@@ -272,30 +540,97 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="6">Liens externes</Title>
-          <Title no="7">Histoire</Title>
-          <Title no="8">Notes</Title>
-          <Title no="9">Bibliographie</Title>
-          <Title no="10">Voir aussi</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="6">Liens externes</Heading>
+          <Heading no="7">Histoire</Heading>
+          <Heading no="8">Notes</Heading>
+          <Heading no="9">Bibliographie</Heading>
+          <Heading no="10">Voir aussi</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://it.wikipedia.org</Location>
@@ -331,28 +666,95 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="6">Collegamenti esterni</Title>
-          <Title no="9">Bibliografia</Title>
-          <Title no="10">Voci correlate</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="6">Collegamenti esterni</Heading>
+          <Heading no="9">Bibliografia</Heading>
+          <Heading no="10">Voci correlate</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://ja.wikipedia.org</Location>
@@ -396,37 +798,104 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket>（{0}）</Bracket>
         <Redirect>#転送</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="0">利点</Title>
-          <Title no="1">背景</Title>
-          <Title no="2">費用</Title>
-          <Title no="3">批判</Title>
-          <Title no="4">欠点</Title>
-          <Title no="5">例</Title>
-          <Title no="6">外部リンク</Title>
-          <Title no="7">歴史</Title>
-          <Title no="8">脚注</Title>
-          <Title no="9">参考文献</Title>
-          <Title no="10">関連項目</Title>
-          <Title no="11">理論</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="0">利点</Heading>
+          <Heading no="1">背景</Heading>
+          <Heading no="2">費用</Heading>
+          <Heading no="3">批判</Heading>
+          <Heading no="4">欠点</Heading>
+          <Heading no="5">例</Heading>
+          <Heading no="6">外部リンク</Heading>
+          <Heading no="7">歴史</Heading>
+          <Heading no="8">脚注</Heading>
+          <Heading no="9">参考文献</Heading>
+          <Heading no="10">関連項目</Heading>
+          <Heading no="11">理論</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://ko.wikipedia.org</Location>
@@ -458,28 +927,95 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="6">바깥 고리</Title>
-          <Title no="9">참고 자료</Title>
-          <Title no="10">관련항목</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="6">바깥 고리</Heading>
+          <Heading no="9">참고 자료</Heading>
+          <Heading no="10">관련항목</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://pt.wikipedia.org</Location>
@@ -515,27 +1051,94 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="6">Links Externos</Title>
-          <Title no="10">Ver também</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="6">Links Externos</Heading>
+          <Heading no="10">Ver também</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://ru.wikipedia.org</Location>
@@ -571,28 +1174,95 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="8">Примечания</Title>
-          <Title no="9">Ссылки</Title>
-          <Title no="10">См. также</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="8">Примечания</Heading>
+          <Heading no="9">Ссылки</Heading>
+          <Heading no="10">См. также</Heading>
+        </Headings>
       </MediaWiki>
       <MediaWiki>
         <Location>http://zh.wikipedia.org</Location>
@@ -624,30 +1294,97 @@
         <DummyPage>Main_Page</DummyPage>
         <Bracket> ({0}) </Bracket>
         <Redirect>#REDIRECT</Redirect>
-        <SystemVariables>
-          <Variable>CURRENTMONTH</Variable>
-          <Variable>CURRENTMONTHNAME</Variable>
-          <Variable>CURRENTDAY</Variable>
-          <Variable>CURRENTDAYNAME</Variable>
-          <Variable>CURRENTYEAR</Variable>
-          <Variable>CURRENTTIME</Variable>
-          <Variable>NUMBEROFARTICLES</Variable>
-          <Variable>SITENAME</Variable>
-          <Variable>SERVER</Variable>
-          <Variable>NAMESPACE</Variable>
-          <Variable>PAGENAME</Variable>
-          <Variable>ns:</Variable>
-          <Variable>localurl:</Variable>
-          <Variable>fullurl:</Variable>
-          <Variable>#if:</Variable>
-        </SystemVariables>
-        <TitleKeys>
-          <Title no="6">外部連結</Title>
-          <Title no="7">歷史</Title>
-          <Title no="8">注釋</Title>
-          <Title no="9">参考文献</Title>
-          <Title no="10">參見</Title>
-        </TitleKeys>
+        <MagicWords>
+          <Variables>
+            <Variable>CURRENTDAY</Variable>
+            <Variable>CURRENTDAY2</Variable>
+            <Variable>CURRENTDAYNAME</Variable>
+            <Variable>CURRENTDOW</Variable>
+            <Variable>CURRENTMONTH</Variable>
+            <Variable>CURRENTMONTHABBREV</Variable>
+            <Variable>CURRENTMONTHNAME</Variable>
+            <Variable>CURRENTTIME</Variable>
+            <Variable>CURRENTHOUR</Variable>
+            <Variable>CURRENTWEEK</Variable>
+            <Variable>CURRENTYEAR</Variable>
+            <Variable>CURRENTTIMESTAMP</Variable>
+            <Variable>CURRENTVERSION</Variable>
+            <Variable>NUMBEROFEDITS</Variable>
+            <Variable>NUMBEROFEDITS:R</Variable>
+            <Variable>NUMBEROFARTICLES</Variable>
+            <Variable>NUMBEROFARTICLES:R</Variable>
+            <Variable>NUMBEROFPAGES</Variable>
+            <Variable>NUMBEROFPAGES:R</Variable>
+            <Variable>NUMBEROFFILES</Variable>
+            <Variable>NUMBEROFFILES:R</Variable>
+            <Variable>NUMBEROFUSERS</Variable>
+            <Variable>NUMBEROFUSERS:R</Variable>
+            <Variable>NUMBEROFACTIVEUSERS</Variable>
+            <Variable>NUMBEROFACTIVEUSERS:R</Variable>
+            <Variable>NUMBEROFADMINS</Variable>
+            <Variable>NUMBEROFADMINS:R</Variable>
+            <Variable>NUMBERINGROUP:groupname</Variable>
+            <Variable>NUMBERINGROUP:groupname|R</Variable>
+            <Variable>NUMBERINGROUP:bureaucrat|R</Variable>
+            <Variable>PAGESINNAMESPACE</Variable>
+            <Variable>PAGESINNS:ns</Variable>
+            <Variable>PAGESINNS:ns|R</Variable>
+            <Variable>PAGENAME</Variable>
+            <Variable>PAGENAMEE</Variable>
+            <Variable>BASEPAGENAME</Variable>
+            <Variable>BASEPAGENAMEE</Variable>
+            <Variable>SUBPAGENAME</Variable>
+            <Variable>SUBPAGENAMEE</Variable>
+            <Variable>NAMESPACE</Variable>
+            <Variable>NAMESPACEE</Variable>
+            <Variable>FULLPAGENAME</Variable>
+            <Variable>FULLPAGENAMEE</Variable>
+            <Variable>TALKSPACE</Variable>
+            <Variable>TALKSPACEE</Variable>
+            <Variable>SUBJECTSPACE</Variable>
+            <Variable>SUBJECTSPACEE</Variable>
+            <Variable>ARTICLESPACE</Variable>
+            <Variable>ARTICLESPACEE</Variable>
+            <Variable>TALKPAGENAME</Variable>
+            <Variable>TALKPAGENAMEE</Variable>
+            <Variable>SUBJECTPAGENAME</Variable>
+            <Variable>SUBJECTPAGENAMEE</Variable>
+            <Variable>ARTICLEPAGENAME</Variable>
+            <Variable>ARTICLEPAGENAMEE</Variable>
+            <Variable>REVISIONID</Variable>
+            <Variable>REVISIONDAY</Variable>
+            <Variable>REVISIONDAY2</Variable>
+            <Variable>REVISIONMONTH</Variable>
+            <Variable>REVISIONYEAR</Variable>
+            <Variable>REVISIONTIMESTAMP</Variable>
+            <Variable>SITENAME</Variable>
+            <Variable>SERVER</Variable>
+            <Variable>SCRIPTPATH</Variable>
+            <Variable>SERVERNAME</Variable>
+            <Variable>PAGESINCATEGORY:category</Variable>
+            <Variable>PAGESINCATEGORY:category|R</Variable>
+            <Variable>PAGESINCATEGORY:User en|R</Variable>
+            <Variable>PAGESINCAT:category</Variable>
+            <Variable>PAGESINCAT:category|R</Variable>
+            <Variable>PAGESINCAT:User en|R</Variable>
+            <Variable>PAGESIZE:page</Variable>
+            <Variable>PAGESIZE:page|R</Variable>
+            <Variable>PAGESIZE:Help:Magic_words|R</Variable>
+            <Variable>GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</Variable>
+            <Variable>CONTENTLANGUAGE</Variable>
+            <Variable>ns:</Variable>
+            <Variable>localurl:</Variable>
+            <Variable>fullurl:</Variable>
+            <Variable>#if:</Variable>
+          </Variables>
+        </MagicWords>
+        <Headings>
+          <Heading no="6">外部連結</Heading>
+          <Heading no="7">歷史</Heading>
+          <Heading no="8">注釋</Heading>
+          <Heading no="9">参考文献</Heading>
+          <Heading no="10">參見</Heading>
+        </Headings>
       </MediaWiki>
     </Websites>
   </Wikipedia>

@@ -102,7 +102,7 @@ namespace Honememo.Wptscs
                     // 表データ設定
                     if (site as MediaWiki != null)
                     {
-                        foreach (KeyValuePair<int, string> title in (site as MediaWiki).TitleKeys)
+                        foreach (KeyValuePair<int, string> title in (site as MediaWiki).Headings)
                         {
                             while (this.dataGridViewTitleKey.RowCount - 1 <= title.Key)
                             {
@@ -463,12 +463,12 @@ namespace Honememo.Wptscs
                 MediaWiki svr = this.config.GetWebsite(this.dataGridViewTitleKey.Columns[x].Name) as MediaWiki;
                 if (svr != null)
                 {
-                    svr.TitleKeys.Clear();
+                    svr.Headings.Clear();
                     for (int y = 0; y < this.dataGridViewTitleKey.RowCount - 1; y++)
                     {
                         if (this.dataGridViewTitleKey[x, y].Value != null)
                         {
-                            svr.TitleKeys[y] = this.dataGridViewTitleKey[x, y].Value.ToString().Trim();
+                            svr.Headings[y] = this.dataGridViewTitleKey[x, y].Value.ToString().Trim();
                         }
                     }
                 }

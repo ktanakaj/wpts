@@ -26,5 +26,86 @@
     <Setting Name="Referer" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="MediaWikiMagicWordsVariables" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;CURRENTDAY&lt;/string&gt;
+  &lt;string&gt;CURRENTDAY2&lt;/string&gt;
+  &lt;string&gt;CURRENTDAYNAME&lt;/string&gt;
+  &lt;string&gt;CURRENTDOW&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTH&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTHABBREV&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTHNAME&lt;/string&gt;
+  &lt;string&gt;CURRENTTIME&lt;/string&gt;
+  &lt;string&gt;CURRENTHOUR&lt;/string&gt;
+  &lt;string&gt;CURRENTWEEK&lt;/string&gt;
+  &lt;string&gt;CURRENTYEAR&lt;/string&gt;
+  &lt;string&gt;CURRENTTIMESTAMP&lt;/string&gt;
+  &lt;string&gt;CURRENTVERSION&lt;/string&gt;
+  &lt;string&gt;NUMBEROFEDITS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFEDITS:R&lt;/string&gt;
+  &lt;string&gt;NUMBEROFARTICLES&lt;/string&gt;
+  &lt;string&gt;NUMBEROFARTICLES:R&lt;/string&gt;
+  &lt;string&gt;NUMBEROFPAGES&lt;/string&gt;
+  &lt;string&gt;NUMBEROFPAGES:R&lt;/string&gt;
+  &lt;string&gt;NUMBEROFFILES&lt;/string&gt;
+  &lt;string&gt;NUMBEROFFILES:R&lt;/string&gt;
+  &lt;string&gt;NUMBEROFUSERS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFUSERS:R&lt;/string&gt;
+  &lt;string&gt;NUMBEROFACTIVEUSERS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFACTIVEUSERS:R&lt;/string&gt;
+  &lt;string&gt;NUMBEROFADMINS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFADMINS:R&lt;/string&gt;
+  &lt;string&gt;NUMBERINGROUP:groupname&lt;/string&gt;
+  &lt;string&gt;NUMBERINGROUP:groupname|R&lt;/string&gt;
+  &lt;string&gt;NUMBERINGROUP:bureaucrat|R&lt;/string&gt;
+  &lt;string&gt;PAGESINNAMESPACE&lt;/string&gt;
+  &lt;string&gt;PAGESINNS:ns&lt;/string&gt;
+  &lt;string&gt;PAGESINNS:ns|R&lt;/string&gt;
+  &lt;string&gt;PAGENAME&lt;/string&gt;
+  &lt;string&gt;PAGENAMEE&lt;/string&gt;
+  &lt;string&gt;BASEPAGENAME&lt;/string&gt;
+  &lt;string&gt;BASEPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;SUBPAGENAME&lt;/string&gt;
+  &lt;string&gt;SUBPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;NAMESPACE&lt;/string&gt;
+  &lt;string&gt;NAMESPACEE&lt;/string&gt;
+  &lt;string&gt;FULLPAGENAME&lt;/string&gt;
+  &lt;string&gt;FULLPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;TALKSPACE&lt;/string&gt;
+  &lt;string&gt;TALKSPACEE&lt;/string&gt;
+  &lt;string&gt;SUBJECTSPACE&lt;/string&gt;
+  &lt;string&gt;SUBJECTSPACEE&lt;/string&gt;
+  &lt;string&gt;ARTICLESPACE&lt;/string&gt;
+  &lt;string&gt;ARTICLESPACEE&lt;/string&gt;
+  &lt;string&gt;TALKPAGENAME&lt;/string&gt;
+  &lt;string&gt;TALKPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;SUBJECTPAGENAME&lt;/string&gt;
+  &lt;string&gt;SUBJECTPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;ARTICLEPAGENAME&lt;/string&gt;
+  &lt;string&gt;ARTICLEPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;REVISIONID&lt;/string&gt;
+  &lt;string&gt;REVISIONDAY&lt;/string&gt;
+  &lt;string&gt;REVISIONDAY2&lt;/string&gt;
+  &lt;string&gt;REVISIONMONTH&lt;/string&gt;
+  &lt;string&gt;REVISIONYEAR&lt;/string&gt;
+  &lt;string&gt;REVISIONTIMESTAMP&lt;/string&gt;
+  &lt;string&gt;SITENAME&lt;/string&gt;
+  &lt;string&gt;SERVER&lt;/string&gt;
+  &lt;string&gt;SCRIPTPATH&lt;/string&gt;
+  &lt;string&gt;SERVERNAME&lt;/string&gt;
+  &lt;string&gt;PAGESINCATEGORY:category&lt;/string&gt;
+  &lt;string&gt;PAGESINCATEGORY:category|R&lt;/string&gt;
+  &lt;string&gt;PAGESINCATEGORY:User en|R&lt;/string&gt;
+  &lt;string&gt;PAGESINCAT:category&lt;/string&gt;
+  &lt;string&gt;PAGESINCAT:category|R&lt;/string&gt;
+  &lt;string&gt;PAGESINCAT:User en|R&lt;/string&gt;
+  &lt;string&gt;PAGESIZE:page&lt;/string&gt;
+  &lt;string&gt;PAGESIZE:page|R&lt;/string&gt;
+  &lt;string&gt;PAGESIZE:Help:Magic_words|R&lt;/string&gt;
+  &lt;string&gt;GENDER:username|TEXTIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED&lt;/string&gt;
+  &lt;string&gt;CONTENTLANGUAGE&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

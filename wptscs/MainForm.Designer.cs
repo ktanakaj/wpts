@@ -77,92 +77,64 @@ namespace Honememo.Wptscs
             this.groupBoxTransfer.Controls.Add(this.linkLabelSourceURL);
             this.groupBoxTransfer.Controls.Add(this.labelSource);
             this.groupBoxTransfer.Controls.Add(this.comboBoxSource);
-            this.groupBoxTransfer.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.groupBoxTransfer, "groupBoxTransfer");
             this.groupBoxTransfer.Name = "groupBoxTransfer";
-            this.groupBoxTransfer.Size = new System.Drawing.Size(395, 96);
-            this.groupBoxTransfer.TabIndex = 0;
             this.groupBoxTransfer.TabStop = false;
-            this.groupBoxTransfer.Text = "翻訳元→先の言語を設定";
-            this.toolTip.SetToolTip(this.groupBoxTransfer, "翻訳元・先の言語を選択してください。\r\nコンボボックスに目的の言語コードが存在しない場合は、設定画面で登録を行ってください。");
+            this.toolTip.SetToolTip(this.groupBoxTransfer, resources.GetString("groupBoxTransfer.ToolTip"));
             // 
             // buttonConfig
             // 
-            this.buttonConfig.Location = new System.Drawing.Point(191, 61);
+            resources.ApplyResources(this.buttonConfig, "buttonConfig");
             this.buttonConfig.Name = "buttonConfig";
-            this.buttonConfig.Size = new System.Drawing.Size(43, 23);
-            this.buttonConfig.TabIndex = 5;
-            this.buttonConfig.Text = "設定";
-            this.toolTip.SetToolTip(this.buttonConfig, "言語に関する設定を行います。");
+            this.toolTip.SetToolTip(this.buttonConfig, resources.GetString("buttonConfig.ToolTip"));
             this.buttonConfig.UseVisualStyleBackColor = true;
             this.buttonConfig.Click += new System.EventHandler(this.buttonConfig_Click);
             // 
             // labelTarget
             // 
             this.labelTarget.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelTarget.Location = new System.Drawing.Point(74, 64);
+            resources.ApplyResources(this.labelTarget, "labelTarget");
             this.labelTarget.Name = "labelTarget";
-            this.labelTarget.Size = new System.Drawing.Size(101, 21);
-            this.labelTarget.TabIndex = 6;
-            this.labelTarget.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.labelTarget, "翻訳先の言語です。");
+            this.toolTip.SetToolTip(this.labelTarget, resources.GetString("labelTarget.ToolTip"));
             // 
             // comboBoxTarget
             // 
             this.comboBoxTarget.FormattingEnabled = true;
-            this.comboBoxTarget.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.comboBoxTarget.Location = new System.Drawing.Point(11, 64);
-            this.comboBoxTarget.MaxLength = 10;
+            resources.ApplyResources(this.comboBoxTarget, "comboBoxTarget");
             this.comboBoxTarget.Name = "comboBoxTarget";
-            this.comboBoxTarget.Size = new System.Drawing.Size(57, 20);
             this.comboBoxTarget.Sorted = true;
-            this.comboBoxTarget.TabIndex = 2;
-            this.toolTip.SetToolTip(this.comboBoxTarget, "翻訳先の言語を選択、または入力します。\r\n入力の場合、Wikipediaで使用されている言語コードを入力してください。");
+            this.toolTip.SetToolTip(this.comboBoxTarget, resources.GetString("comboBoxTarget.ToolTip"));
             this.comboBoxTarget.SelectedIndexChanged += new System.EventHandler(this.comboBoxTarget_SelectedIndexChanged);
             this.comboBoxTarget.Leave += new System.EventHandler(this.comboBoxTarget_Leave);
             // 
             // labelArrow
             // 
-            this.labelArrow.AutoSize = true;
-            this.labelArrow.Location = new System.Drawing.Point(75, 46);
+            resources.ApplyResources(this.labelArrow, "labelArrow");
             this.labelArrow.Name = "labelArrow";
-            this.labelArrow.Size = new System.Drawing.Size(17, 12);
-            this.labelArrow.TabIndex = 5;
-            this.labelArrow.Text = "↓";
             // 
             // linkLabelSourceURL
             // 
             this.linkLabelSourceURL.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.linkLabelSourceURL.Location = new System.Drawing.Point(191, 21);
+            resources.ApplyResources(this.linkLabelSourceURL, "linkLabelSourceURL");
             this.linkLabelSourceURL.Name = "linkLabelSourceURL";
-            this.linkLabelSourceURL.Size = new System.Drawing.Size(191, 20);
-            this.linkLabelSourceURL.TabIndex = 4;
             this.linkLabelSourceURL.TabStop = true;
-            this.linkLabelSourceURL.Text = "http://";
-            this.linkLabelSourceURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.linkLabelSourceURL, "翻訳元WikipediaのURLです。");
+            this.toolTip.SetToolTip(this.linkLabelSourceURL, resources.GetString("linkLabelSourceURL.ToolTip"));
             this.linkLabelSourceURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSourceURL_LinkClicked);
             // 
             // labelSource
             // 
             this.labelSource.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelSource.Location = new System.Drawing.Point(74, 21);
+            resources.ApplyResources(this.labelSource, "labelSource");
             this.labelSource.Name = "labelSource";
-            this.labelSource.Size = new System.Drawing.Size(101, 21);
-            this.labelSource.TabIndex = 1;
-            this.labelSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.labelSource, "翻訳元の言語です。");
+            this.toolTip.SetToolTip(this.labelSource, resources.GetString("labelSource.ToolTip"));
             // 
             // comboBoxSource
             // 
             this.comboBoxSource.FormattingEnabled = true;
-            this.comboBoxSource.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.comboBoxSource.Location = new System.Drawing.Point(11, 21);
-            this.comboBoxSource.MaxLength = 10;
+            resources.ApplyResources(this.comboBoxSource, "comboBoxSource");
             this.comboBoxSource.Name = "comboBoxSource";
-            this.comboBoxSource.Size = new System.Drawing.Size(57, 20);
             this.comboBoxSource.Sorted = true;
-            this.comboBoxSource.TabIndex = 0;
-            this.toolTip.SetToolTip(this.comboBoxSource, "翻訳元の言語を選択、または入力します。\r\n入力の場合、Wikipediaで使用されている言語コードを入力してください。");
+            this.toolTip.SetToolTip(this.comboBoxSource, resources.GetString("comboBoxSource.ToolTip"));
             this.comboBoxSource.SelectedIndexChanged += new System.EventHandler(this.comboBoxSource_SelectedIndexChanged);
             this.comboBoxSource.Leave += new System.EventHandler(this.comboBoxSource_Leave);
             // 
@@ -170,115 +142,79 @@ namespace Honememo.Wptscs
             // 
             this.groupBoxSaveDirectory.Controls.Add(this.textBoxSaveDirectory);
             this.groupBoxSaveDirectory.Controls.Add(this.buttonSaveDirectory);
-            this.groupBoxSaveDirectory.Location = new System.Drawing.Point(12, 114);
+            resources.ApplyResources(this.groupBoxSaveDirectory, "groupBoxSaveDirectory");
             this.groupBoxSaveDirectory.Name = "groupBoxSaveDirectory";
-            this.groupBoxSaveDirectory.Size = new System.Drawing.Size(329, 49);
-            this.groupBoxSaveDirectory.TabIndex = 1;
             this.groupBoxSaveDirectory.TabStop = false;
-            this.groupBoxSaveDirectory.Text = "処理結果を出力するフォルダの選択";
-            this.toolTip.SetToolTip(this.groupBoxSaveDirectory, "処理結果を出力するフォルダを選択してください。\r\n指定されたフォルダに記事テキストとログを出力します。");
+            this.toolTip.SetToolTip(this.groupBoxSaveDirectory, resources.GetString("groupBoxSaveDirectory.ToolTip"));
             // 
             // textBoxSaveDirectory
             // 
-            this.textBoxSaveDirectory.Location = new System.Drawing.Point(60, 18);
+            resources.ApplyResources(this.textBoxSaveDirectory, "textBoxSaveDirectory");
             this.textBoxSaveDirectory.Name = "textBoxSaveDirectory";
-            this.textBoxSaveDirectory.Size = new System.Drawing.Size(256, 19);
-            this.textBoxSaveDirectory.TabIndex = 1;
-            this.toolTip.SetToolTip(this.textBoxSaveDirectory, "処理結果の出力先フォルダは、「参照」ボタンから選択する以外に、こちらに直接指定することもできます。");
+            this.toolTip.SetToolTip(this.textBoxSaveDirectory, resources.GetString("textBoxSaveDirectory.ToolTip"));
             this.textBoxSaveDirectory.Leave += new System.EventHandler(this.textBoxSaveDirectory_Leave);
             // 
             // buttonSaveDirectory
             // 
-            this.buttonSaveDirectory.Location = new System.Drawing.Point(11, 16);
+            resources.ApplyResources(this.buttonSaveDirectory, "buttonSaveDirectory");
             this.buttonSaveDirectory.Name = "buttonSaveDirectory";
-            this.buttonSaveDirectory.Size = new System.Drawing.Size(43, 23);
-            this.buttonSaveDirectory.TabIndex = 0;
-            this.buttonSaveDirectory.Text = "参照";
-            this.toolTip.SetToolTip(this.buttonSaveDirectory, "処理結果を出力するフォルダを選択します。");
+            this.toolTip.SetToolTip(this.buttonSaveDirectory, resources.GetString("buttonSaveDirectory.ToolTip"));
             this.buttonSaveDirectory.UseVisualStyleBackColor = true;
             this.buttonSaveDirectory.Click += new System.EventHandler(this.buttonSaveDirectory_Click);
             // 
             // groupBoxRun
             // 
-            this.groupBoxRun.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.groupBoxRun, "groupBoxRun");
             this.groupBoxRun.Controls.Add(this.textBoxLog);
             this.groupBoxRun.Controls.Add(this.buttonStop);
             this.groupBoxRun.Controls.Add(this.buttonRun);
             this.groupBoxRun.Controls.Add(this.textBoxArticle);
             this.groupBoxRun.Controls.Add(this.labelArticle);
-            this.groupBoxRun.Location = new System.Drawing.Point(12, 169);
             this.groupBoxRun.Name = "groupBoxRun";
-            this.groupBoxRun.Size = new System.Drawing.Size(440, 262);
-            this.groupBoxRun.TabIndex = 2;
             this.groupBoxRun.TabStop = false;
-            this.groupBoxRun.Text = "翻訳する記事を指定して、実行";
-            this.toolTip.SetToolTip(this.groupBoxRun, "目的の記事の、翻訳元言語のWikipediaでの記事名を入力し、実行ボタンを押してください。");
+            this.toolTip.SetToolTip(this.groupBoxRun, resources.GetString("groupBoxRun.ToolTip"));
             // 
             // textBoxLog
             // 
             this.textBoxLog.AcceptsReturn = true;
             this.textBoxLog.AcceptsTab = true;
-            this.textBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.textBoxLog, "textBoxLog");
             this.textBoxLog.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxLog.Location = new System.Drawing.Point(12, 56);
-            this.textBoxLog.MaxLength = 0;
-            this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
-            this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxLog.Size = new System.Drawing.Size(416, 193);
-            this.textBoxLog.TabIndex = 4;
             this.textBoxLog.TabStop = false;
             // 
             // buttonStop
             // 
-            this.buttonStop.Enabled = false;
-            this.buttonStop.Location = new System.Drawing.Point(241, 18);
+            resources.ApplyResources(this.buttonStop, "buttonStop");
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(43, 23);
-            this.buttonStop.TabIndex = 3;
-            this.buttonStop.Text = "中止";
-            this.toolTip.SetToolTip(this.buttonStop, "処理を中断します。");
+            this.toolTip.SetToolTip(this.buttonStop, resources.GetString("buttonStop.ToolTip"));
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // buttonRun
             // 
-            this.buttonRun.Location = new System.Drawing.Point(183, 18);
+            resources.ApplyResources(this.buttonRun, "buttonRun");
             this.buttonRun.Name = "buttonRun";
-            this.buttonRun.Size = new System.Drawing.Size(43, 23);
-            this.buttonRun.TabIndex = 2;
-            this.buttonRun.Text = "実行";
-            this.toolTip.SetToolTip(this.buttonRun, "記事にアクセスし、翻訳支援処理を行います。\r\n作成した翻訳支援ファイルとログは、出力先フォルダに出力されます。");
+            this.toolTip.SetToolTip(this.buttonRun, resources.GetString("buttonRun.ToolTip"));
             this.buttonRun.UseVisualStyleBackColor = true;
             this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
             // 
             // textBoxArticle
             // 
-            this.textBoxArticle.Location = new System.Drawing.Point(62, 20);
-            this.textBoxArticle.MaxLength = 255;
+            resources.ApplyResources(this.textBoxArticle, "textBoxArticle");
             this.textBoxArticle.Name = "textBoxArticle";
-            this.textBoxArticle.Size = new System.Drawing.Size(108, 19);
-            this.textBoxArticle.TabIndex = 1;
-            this.toolTip.SetToolTip(this.textBoxArticle, "翻訳元Wikipediaでの記事名を入力します。");
+            this.toolTip.SetToolTip(this.textBoxArticle, resources.GetString("textBoxArticle.ToolTip"));
             // 
             // labelArticle
             // 
-            this.labelArticle.AutoSize = true;
-            this.labelArticle.Location = new System.Drawing.Point(15, 23);
+            resources.ApplyResources(this.labelArticle, "labelArticle");
             this.labelArticle.Name = "labelArticle";
-            this.labelArticle.Size = new System.Drawing.Size(41, 12);
-            this.labelArticle.TabIndex = 0;
-            this.labelArticle.Text = "記事名";
-            this.toolTip.SetToolTip(this.labelArticle, "翻訳元Wikipediaでの記事名を入力します。");
+            this.toolTip.SetToolTip(this.labelArticle, resources.GetString("labelArticle.ToolTip"));
             // 
             // folderBrowserDialogSaveDirectory
             // 
-            this.folderBrowserDialogSaveDirectory.Description = "処理結果を出力するフォルダを選択してください。";
+            resources.ApplyResources(this.folderBrowserDialogSaveDirectory, "folderBrowserDialogSaveDirectory");
             // 
             // backgroundWorkerRun
             // 
@@ -294,16 +230,12 @@ namespace Honememo.Wptscs
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 443);
             this.Controls.Add(this.groupBoxRun);
             this.Controls.Add(this.groupBoxSaveDirectory);
             this.Controls.Add(this.groupBoxTransfer);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(480, 480);
             this.Name = "MainForm";
-            this.Text = "Wikipedia 翻訳支援ツール C#";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.groupBoxTransfer.ResumeLayout(false);

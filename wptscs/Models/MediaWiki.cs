@@ -57,7 +57,7 @@ namespace Honememo.Wptscs.Models
         #region private変数
 
         // ※各変数の初期値は、新しくサイトを登録する際の初期値として使用する。
-        //   2006年9月時点のWikipedia英語版より調査した値を設定。
+        //   2010年2月時点のWikipediaより調査した値を設定。
 
         /// <summary>
         /// MediaWikiの名前空間の情報。
@@ -72,24 +72,8 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Wikipedia書式のシステム定義変数。
         /// </summary>
-        private IList<string> systemVariables = new string[]
-        {
-                "CURRENTMONTH",
-                "CURRENTMONTHNAME",
-                "CURRENTDAY",
-                "CURRENTDAYNAME",
-                "CURRENTYEAR",
-                "CURRENTTIME",
-                "NUMBEROFARTICLES",
-                "SITENAME",
-                "SERVER",
-                "NAMESPACE",
-                "PAGENAME",
-                "ns:",
-                "localurl:",
-                "fullurl:",
-                "#if:"
-        };
+        /// <remarks>初期値は http://meta.wikimedia.org/wiki/Help:Magic_words を参照</remarks>
+        private IList<string> variables;
 
         /// <summary>
         /// 括弧のフォーマット。
@@ -104,7 +88,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 見出しの定型句。
         /// </summary>
-        private IDictionary<int, string> titleKeys = new Dictionary<int, string>();
+        private IDictionary<int, string> headings = new Dictionary<int, string>();
 
         #endregion
 
@@ -120,6 +104,11 @@ namespace Honememo.Wptscs.Models
             // メンバ変数の初期設定
             this.Lang = lang;
             this.Location = location;
+
+            // 処理的に変数宣言では入れられないのでここで初期化
+            string[] variables = new string[Settings.Default.MediaWikiMagicWordsVariables.Count];
+            Settings.Default.MediaWikiMagicWordsVariables.CopyTo(variables, 0);
+            this.Variables = variables;
         }
 
         /// <summary>
@@ -250,32 +239,32 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 見出しの定型句。
         /// </summary>
-        public IDictionary<int, string> TitleKeys
+        public IDictionary<int, string> Headings
         {
             get
             {
-                return this.titleKeys;
+                return this.headings;
             }
 
             set
             {
-                this.titleKeys = value;
+                this.headings = value;
             }
         }
 
         /// <summary>
         /// Wikipedia書式のシステム定義変数。
         /// </summary>
-        public IList<string> SystemVariables
+        public IList<string> Variables
         {
             get
             {
-                return this.systemVariables;
+                return this.variables;
             }
 
             set
             {
-                this.systemVariables = value;
+                this.variables = value;
             }
         }
 
@@ -360,7 +349,7 @@ namespace Honememo.Wptscs.Models
 
             // 基本は全文一致だが、定数が : で終わっている場合、textの:より前のみを比較
             // ※ {{ns:1}}みたいな場合に備えて
-            foreach (string variable in this.SystemVariables)
+            foreach (string variable in this.Variables)
             {
                 if (variable.EndsWith(":") == true)
                 {
@@ -421,22 +410,22 @@ namespace Honememo.Wptscs.Models
 
             // システム定義変数
             IList<string> variables = new List<string>();
-            foreach (XmlNode variableNode in siteElement.SelectNodes("SystemVariables/Variable"))
+            foreach (XmlNode variableNode in siteElement.SelectNodes("MagicWords/Variables/Variable"))
             {
                 variables.Add(variableNode.InnerText);
             }
 
-            this.SystemVariables = variables;
+            this.Variables = variables;
 
             // 見出しの置き換えパターン
-            IDictionary<int, string> titleKeys = new Dictionary<int, string>();
-            foreach (XmlNode titleNode in siteElement.SelectNodes("TitleKeys/Title"))
+            IDictionary<int, string> headings = new Dictionary<int, string>();
+            foreach (XmlNode headingNode in siteElement.SelectNodes("Headings/Heading"))
             {
-                XmlElement titleElement = titleNode as XmlElement;
-                titleKeys[int.Parse(titleElement.GetAttribute("no"))] = titleElement.InnerText;
+                XmlElement headingElement = headingNode as XmlElement;
+                headings[int.Parse(headingElement.GetAttribute("no"))] = headingElement.InnerText;
             }
 
-            this.TitleKeys = titleKeys;
+            this.Headings = headings;
         }
 
         /// <summary>
@@ -462,21 +451,23 @@ namespace Honememo.Wptscs.Models
             writer.WriteElementString("Redirect", this.Redirect);
 
             // システム定義変数
-            writer.WriteStartElement("SystemVariables");
-            foreach (string variable in this.SystemVariables)
+            writer.WriteStartElement("MagicWords");
+            writer.WriteStartElement("Variables");
+            foreach (string variable in this.Variables)
             {
                 writer.WriteElementString("Variable", variable);
             }
 
             writer.WriteEndElement();
+            writer.WriteEndElement();
 
             // 見出しの置き換えパターン
-            writer.WriteStartElement("TitleKeys");
-            foreach (KeyValuePair<int, string> title in this.TitleKeys)
+            writer.WriteStartElement("Headings");
+            foreach (KeyValuePair<int, string> heading in this.Headings)
             {
-                writer.WriteStartElement("Title");
-                writer.WriteAttributeString("no", title.Key.ToString());
-                writer.WriteValue(title.Value);
+                writer.WriteStartElement("Heading");
+                writer.WriteAttributeString("no", heading.Key.ToString());
+                writer.WriteValue(heading.Value);
                 writer.WriteEndElement();
             }
 

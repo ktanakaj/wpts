@@ -904,11 +904,11 @@ namespace Honememo.Wptscs.Logics
             MediaWiki tar = (MediaWiki)Target;
             if (!String.IsNullOrEmpty(s))
             {
-                foreach (KeyValuePair<int, string> title in src.TitleKeys)
+                foreach (KeyValuePair<int, string> title in src.Headings)
                 {
                     if (title.Value.ToLower() == s)
                     {
-                        return tar.TitleKeys[title.Key];
+                        return tar.Headings[title.Key];
                     }
                 }
             }

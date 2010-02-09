@@ -110,15 +110,48 @@ namespace Honememo.Wptscs.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>CURRENTDAY</string>\r\n  <string>CURRENTDAY2</string>\r\n  <string>CURRENTDAYN" +
+            "AME</string>\r\n  <string>CURRENTDOW</string>\r\n  <string>CURRENTMONTH</string>\r\n  " +
+            "<string>CURRENTMONTHABBREV</string>\r\n  <string>CURRENTMONTHNAME</string>\r\n  <str" +
+            "ing>CURRENTTIME</string>\r\n  <string>CURRENTHOUR</string>\r\n  <string>CURRENTWEEK<" +
+            "/string>\r\n  <string>CURRENTYEAR</string>\r\n  <string>CURRENTTIMESTAMP</string>\r\n " +
+            " <string>CURRENTVERSION</string>\r\n  <string>NUMBEROFEDITS</string>\r\n  <string>NU" +
+            "MBEROFEDITS:R</string>\r\n  <string>NUMBEROFARTICLES</string>\r\n  <string>NUMBEROFA" +
+            "RTICLES:R</string>\r\n  <string>NUMBEROFPAGES</string>\r\n  <string>NUMBEROFPAGES:R<" +
+            "/string>\r\n  <string>NUMBEROFFILES</string>\r\n  <string>NUMBEROFFILES:R</string>\r\n" +
+            "  <string>NUMBEROFUSERS</string>\r\n  <string>NUMBEROFUSERS:R</string>\r\n  <string>" +
+            "NUMBEROFACTIVEUSERS</string>\r\n  <string>NUMBEROFACTIVEUSERS:R</string>\r\n  <strin" +
+            "g>NUMBEROFADMINS</string>\r\n  <string>NUMBEROFADMINS:R</string>\r\n  <string>NUMBER" +
+            "INGROUP:groupname</string>\r\n  <string>NUMBERINGROUP:groupname|R</string>\r\n  <str" +
+            "ing>NUMBERINGROUP:bureaucrat|R</string>\r\n  <string>PAGESINNAMESPACE</string>\r\n  " +
+            "<string>PAGESINNS:ns</string>\r\n  <string>PAGESINNS:ns|R</string>\r\n  <string>PAGE" +
+            "NAME</string>\r\n  <string>PAGENAMEE</string>\r\n  <string>BASEPAGENAME</string>\r\n  " +
+            "<string>BASEPAGENAMEE</string>\r\n  <string>SUBPAGENAME</string>\r\n  <string>SUBPAG" +
+            "ENAMEE</string>\r\n  <string>NAMESPACE</string>\r\n  <string>NAMESPACEE</string>\r\n  " +
+            "<string>FULLPAGENAME</string>\r\n  <string>FULLPAGENAMEE</string>\r\n  <string>TALKS" +
+            "PACE</string>\r\n  <string>TALKSPACEE</string>\r\n  <string>SUBJECTSPACE</string>\r\n " +
+            " <string>SUBJECTSPACEE</string>\r\n  <string>ARTICLESPACE</string>\r\n  <string>ARTI" +
+            "CLESPACEE</string>\r\n  <string>TALKPAGENAME</string>\r\n  <string>TALKPAGENAMEE</st" +
+            "ring>\r\n  <string>SUBJECTPAGENAME</string>\r\n  <string>SUBJECTPAGENAMEE</string>\r\n" +
+            "  <string>ARTICLEPAGENAME</string>\r\n  <string>ARTICLEPAGENAMEE</string>\r\n  <stri" +
+            "ng>REVISIONID</string>\r\n  <string>REVISIONDAY</string>\r\n  <string>REVISIONDAY2</" +
+            "string>\r\n  <string>REVISIONMONTH</string>\r\n  <string>REVISIONYEAR</string>\r\n  <s" +
+            "tring>REVISIONTIMESTAMP</string>\r\n  <string>SITENAME</string>\r\n  <string>SERVER<" +
+            "/string>\r\n  <string>SCRIPTPATH</string>\r\n  <string>SERVERNAME</string>\r\n  <strin" +
+            "g>PAGESINCATEGORY:category</string>\r\n  <string>PAGESINCATEGORY:category|R</strin" +
+            "g>\r\n  <string>PAGESINCATEGORY:User en|R</string>\r\n  <string>PAGESINCAT:category<" +
+            "/string>\r\n  <string>PAGESINCAT:category|R</string>\r\n  <string>PAGESINCAT:User en" +
+            "|R</string>\r\n  <string>PAGESIZE:page</string>\r\n  <string>PAGESIZE:page|R</string" +
+            ">\r\n  <string>PAGESIZE:Help:Magic_words|R</string>\r\n  <string>GENDER:username|TEX" +
+            "TIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</string>\r\n  <string>CONTENTLANGUAGE</stri" +
+            "ng>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection MediaWikiMagicWordsVariables {
             get {
-                return ((string)(this["Setting"]));
-            }
-            set {
-                this["Setting"] = value;
+                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWordsVariables"]));
             }
         }
     }
