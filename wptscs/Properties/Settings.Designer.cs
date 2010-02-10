@@ -114,44 +114,123 @@ namespace Honememo.Wptscs.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>CURRENTDAY</string>\r\n  <string>CURRENTDAY2</string>\r\n  <string>CURRENTDAYN" +
-            "AME</string>\r\n  <string>CURRENTDOW</string>\r\n  <string>CURRENTMONTH</string>\r\n  " +
-            "<string>CURRENTMONTHABBREV</string>\r\n  <string>CURRENTMONTHNAME</string>\r\n  <str" +
-            "ing>CURRENTTIME</string>\r\n  <string>CURRENTHOUR</string>\r\n  <string>CURRENTWEEK<" +
-            "/string>\r\n  <string>CURRENTYEAR</string>\r\n  <string>CURRENTTIMESTAMP</string>\r\n " +
-            " <string>CURRENTVERSION</string>\r\n  <string>NUMBEROFEDITS</string>\r\n  <string>NU" +
-            "MBEROFEDITS:R</string>\r\n  <string>NUMBEROFARTICLES</string>\r\n  <string>NUMBEROFA" +
-            "RTICLES:R</string>\r\n  <string>NUMBEROFPAGES</string>\r\n  <string>NUMBEROFPAGES:R<" +
-            "/string>\r\n  <string>NUMBEROFFILES</string>\r\n  <string>NUMBEROFFILES:R</string>\r\n" +
-            "  <string>NUMBEROFUSERS</string>\r\n  <string>NUMBEROFUSERS:R</string>\r\n  <string>" +
-            "NUMBEROFACTIVEUSERS</string>\r\n  <string>NUMBEROFACTIVEUSERS:R</string>\r\n  <strin" +
-            "g>NUMBEROFADMINS</string>\r\n  <string>NUMBEROFADMINS:R</string>\r\n  <string>NUMBER" +
-            "INGROUP:groupname</string>\r\n  <string>NUMBERINGROUP:groupname|R</string>\r\n  <str" +
-            "ing>NUMBERINGROUP:bureaucrat|R</string>\r\n  <string>PAGESINNAMESPACE</string>\r\n  " +
-            "<string>PAGESINNS:ns</string>\r\n  <string>PAGESINNS:ns|R</string>\r\n  <string>PAGE" +
-            "NAME</string>\r\n  <string>PAGENAMEE</string>\r\n  <string>BASEPAGENAME</string>\r\n  " +
-            "<string>BASEPAGENAMEE</string>\r\n  <string>SUBPAGENAME</string>\r\n  <string>SUBPAG" +
-            "ENAMEE</string>\r\n  <string>NAMESPACE</string>\r\n  <string>NAMESPACEE</string>\r\n  " +
-            "<string>FULLPAGENAME</string>\r\n  <string>FULLPAGENAMEE</string>\r\n  <string>TALKS" +
-            "PACE</string>\r\n  <string>TALKSPACEE</string>\r\n  <string>SUBJECTSPACE</string>\r\n " +
-            " <string>SUBJECTSPACEE</string>\r\n  <string>ARTICLESPACE</string>\r\n  <string>ARTI" +
-            "CLESPACEE</string>\r\n  <string>TALKPAGENAME</string>\r\n  <string>TALKPAGENAMEE</st" +
-            "ring>\r\n  <string>SUBJECTPAGENAME</string>\r\n  <string>SUBJECTPAGENAMEE</string>\r\n" +
-            "  <string>ARTICLEPAGENAME</string>\r\n  <string>ARTICLEPAGENAMEE</string>\r\n  <stri" +
-            "ng>REVISIONID</string>\r\n  <string>REVISIONDAY</string>\r\n  <string>REVISIONDAY2</" +
-            "string>\r\n  <string>REVISIONMONTH</string>\r\n  <string>REVISIONYEAR</string>\r\n  <s" +
-            "tring>REVISIONTIMESTAMP</string>\r\n  <string>SITENAME</string>\r\n  <string>SERVER<" +
-            "/string>\r\n  <string>SCRIPTPATH</string>\r\n  <string>SERVERNAME</string>\r\n  <strin" +
-            "g>PAGESINCATEGORY:category</string>\r\n  <string>PAGESINCATEGORY:category|R</strin" +
-            "g>\r\n  <string>PAGESINCATEGORY:User en|R</string>\r\n  <string>PAGESINCAT:category<" +
-            "/string>\r\n  <string>PAGESINCAT:category|R</string>\r\n  <string>PAGESINCAT:User en" +
-            "|R</string>\r\n  <string>PAGESIZE:page</string>\r\n  <string>PAGESIZE:page|R</string" +
-            ">\r\n  <string>PAGESIZE:Help:Magic_words|R</string>\r\n  <string>GENDER:username|TEX" +
-            "TIFMALE|TEXTIFFEMALE|TEXTIFUNSPECIFIED</string>\r\n  <string>CONTENTLANGUAGE</stri" +
-            "ng>\r\n</ArrayOfString>")]
+            "tring>CURRENTYEAR</string>\r\n  <string>CURRENTMONTH</string>\r\n  <string>CURRENTMO" +
+            "NTHNAME</string>\r\n  <string>CURRENTDAY</string>\r\n  <string>CURRENTDAY2</string>\r" +
+            "\n  <string>CURRENTDOW</string>\r\n  <string>CURRENTDAYNAME</string>\r\n  <string>CUR" +
+            "RENTTIME</string>\r\n  <string>CURRENTHOUR</string>\r\n  <string>CURRENTWEEK</string" +
+            ">\r\n  <string>CURRENTTIMESTAMP</string>\r\n  <string>LOCALYEAR</string>\r\n  <string>" +
+            "LOCALMONTH</string>\r\n  <string>LOCALMONTHNAME</string>\r\n  <string>LOCALMONTHNAME" +
+            "GEN</string>\r\n  <string>LOCALMONTHABBREV</string>\r\n  <string>LOCALDAY</string>\r\n" +
+            "  <string>LOCALDAY2</string>\r\n  <string>LOCALDOW</string>\r\n  <string>LOCALDAYNAM" +
+            "E</string>\r\n  <string>LOCALTIME</string>\r\n  <string>LOCALHOUR</string>\r\n  <strin" +
+            "g>LOCALWEEK</string>\r\n  <string>LOCALTIMESTAMP</string>\r\n  <string>SITENAME</str" +
+            "ing>\r\n  <string>SERVER</string>\r\n  <string>SERVERNAME</string>\r\n  <string>DIRMAR" +
+            "K</string>\r\n  <string>DIRECTIONMARK</string>\r\n  <string>SCRIPTPATH</string>\r\n  <" +
+            "string>STYLEPATH</string>\r\n  <string>CURRENTVERSION</string>\r\n  <string>CONTENTL" +
+            "ANGUAGE</string>\r\n  <string>CONTENTLANG</string>\r\n  <string>REVISIONID</string>\r" +
+            "\n  <string>REVISIONDAY</string>\r\n  <string>REVISIONDAY2</string>\r\n  <string>REVI" +
+            "SIONMONTH</string>\r\n  <string>REVISIONYEAR</string>\r\n  <string>REVISIONTIMESTAMP" +
+            "</string>\r\n  <string>REVISIONUSER</string>\r\n  <string>PAGESIZE</string>\r\n  <stri" +
+            "ng>PROTECTIONLEVEL</string>\r\n  <string>DISPLAYTITLE</string>\r\n  <string>DEFAULTS" +
+            "ORT</string>\r\n  <string>DEFAULTSORTKEY</string>\r\n  <string>DEFAULTCATEGORYSORT</" +
+            "string>\r\n  <string>NUMBEROFPAGES</string>\r\n  <string>NUMBEROFARTICLES</string>\r\n" +
+            "  <string>NUMBEROFFILES</string>\r\n  <string>NUMBEROFEDITS</string>\r\n  <string>NU" +
+            "MBEROFVIEWS</string>\r\n  <string>NUMBEROFUSERS</string>\r\n  <string>NUMBEROFADMINS" +
+            "</string>\r\n  <string>NUMBEROFACTIVEUSERS</string>\r\n  <string>PAGESINCATEGORY</st" +
+            "ring>\r\n  <string>PAGESINCAT</string>\r\n  <string>NUMBERINGROUP</string>\r\n  <strin" +
+            "g>NUMINGROUP</string>\r\n  <string>PAGESINNS</string>\r\n  <string>PAGESINNAMESPACE<" +
+            "/string>\r\n  <string>FULLPAGENAME</string>\r\n  <string>PAGENAME</string>\r\n  <strin" +
+            "g>BASEPAGENAME</string>\r\n  <string>SUBPAGENAME</string>\r\n  <string>SUBJECTPAGENA" +
+            "ME</string>\r\n  <string>TALKPAGENAME</string>\r\n  <string>FULLPAGENAMEE</string>\r\n" +
+            "  <string>PAGENAMEE</string>\r\n  <string>BASEPAGENAMEE</string>\r\n  <string>SUBPAG" +
+            "ENAMEE</string>\r\n  <string>SUBJECTPAGENAMEE</string>\r\n  <string>TALKPAGENAMEE</s" +
+            "tring>\r\n  <string>NAMESPACE</string>\r\n  <string>SUBJECTSPACE</string>\r\n  <string" +
+            ">ARTICLESPACE</string>\r\n  <string>TALKSPACE</string>\r\n  <string>NAMESPACEE</stri" +
+            "ng>\r\n  <string>SUBJECTSPACEE</string>\r\n  <string>TALKSPACEE</string>\r\n  <string>" +
+            "localurl</string>\r\n  <string>fullurl</string>\r\n  <string>filepath</string>\r\n  <s" +
+            "tring>urlencode</string>\r\n  <string>anchorencode</string>\r\n  <string>ns</string>" +
+            "\r\n  <string>lc</string>\r\n  <string>lcfirst</string>\r\n  <string>uc</string>\r\n  <s" +
+            "tring>ucfirst</string>\r\n  <string>formatnum</string>\r\n  <string>#dateformat</str" +
+            "ing>\r\n  <string>#formatdate</string>\r\n  <string>padleft</string>\r\n  <string>padr" +
+            "ight</string>\r\n  <string>plural</string>\r\n  <string>grammar</string>\r\n  <string>" +
+            "int</string>\r\n  <string>#language</string>\r\n  <string>#special</string>\r\n  <stri" +
+            "ng>#tag</string>\r\n  <string>gender</string>\r\n  <string>groupconvert</string>\r\n</" +
+            "ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection MediaWikiMagicWordsVariables {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWordsVariables"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("wiki/Special:Export/{0}")]
+        public string MediaWikiExportPath {
+            get {
+                return ((string)(this["MediaWikiExportPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(" ({0}) ")]
+        public string MediaWikiBracket {
+            get {
+                return ((string)(this["MediaWikiBracket"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#REDIRECT")]
+        public string MediaWikiRedirect {
+            get {
+                return ((string)(this["MediaWikiRedirect"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.mediawiki.org/xml/export-0.4/")]
+        public string MediaWikiXmlns {
+            get {
+                return ((string)(this["MediaWikiXmlns"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Main_Page")]
+        public string MediaWikiDummyPage {
+            get {
+                return ((string)(this["MediaWikiDummyPage"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int MediaWikiTemplateNamespace {
+            get {
+                return ((int)(this["MediaWikiTemplateNamespace"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public int MediaWikiCategoryNamespace {
+            get {
+                return ((int)(this["MediaWikiCategoryNamespace"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public int MediaWikiFileNamespace {
+            get {
+                return ((int)(this["MediaWikiFileNamespace"]));
             }
         }
     }

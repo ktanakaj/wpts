@@ -22,42 +22,34 @@ namespace Honememo.Wptscs.Models
     /// </summary>
     public class MediaWiki : Website, IXmlSerializable
     {
-        #region 定数定義
+        #region private変数
 
-        // TODO: ここで定義している定数は、すべて可変のプロパティにする。
-        //       （サーバーごとに変えたいかもしれないので。）
+        // ※各変数の初期値は、新しくサイトを登録する際の初期値として使用する。
 
         /// <summary>
         /// WikipediaのXMLの固定値の書式。
         /// </summary>
-        public static readonly string Xmlns = "http://www.mediawiki.org/xml/export-0.4/";
+        private string xmlns = Settings.Default.MediaWikiXmlns;
 
         /// <summary>
         /// 名前空間情報取得用にアクセスするページ（存在不要）。
         /// </summary>
-        public static readonly string DummyPage = "Main_Page";
+        private string dummyPage = Settings.Default.MediaWikiDummyPage;
 
         /// <summary>
         /// テンプレートの名前空間を示す番号。
         /// </summary>
-        public static readonly int TemplateNamespaceNumber = 10;
+        private int templateNamespace = Settings.Default.MediaWikiTemplateNamespace;
 
         /// <summary>
         /// カテゴリの名前空間を示す番号。
         /// </summary>
-        public static readonly int CategoryNamespaceNumber = 14;
+        private int categoryNamespace = Settings.Default.MediaWikiCategoryNamespace;
 
         /// <summary>
         /// 画像の名前空間を示す番号。
         /// </summary>
-        public static readonly int ImageNamespaceNumber = 6;
-
-        #endregion
-
-        #region private変数
-
-        // ※各変数の初期値は、新しくサイトを登録する際の初期値として使用する。
-        //   2010年2月時点のWikipediaより調査した値を設定。
+        private int fileNamespace = Settings.Default.MediaWikiFileNamespace;
 
         /// <summary>
         /// MediaWikiの名前空間の情報。
@@ -67,23 +59,23 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 記事のXMLデータが存在するパス。
         /// </summary>
-        private string exportPath = "wiki/Special:Export/{0}";
+        private string exportPath = Settings.Default.MediaWikiExportPath;
 
         /// <summary>
         /// Wikipedia書式のシステム定義変数。
         /// </summary>
-        /// <remarks>初期値は http://meta.wikimedia.org/wiki/Help:Magic_words を参照</remarks>
+        /// <remarks>初期値は http://www.mediawiki.org/wiki/Help:Magic_words を参照</remarks>
         private IList<string> variables;
 
         /// <summary>
         /// 括弧のフォーマット。
         /// </summary>
-        private string bracket = " ({0}) ";
+        private string bracket = Settings.Default.MediaWikiBracket;
 
         /// <summary>
         /// リダイレクトの文字列。
         /// </summary>
-        private string redirect = "#REDIRECT";
+        private string redirect = Settings.Default.MediaWikiRedirect;
 
         /// <summary>
         /// 見出しの定型句。
@@ -108,7 +100,7 @@ namespace Honememo.Wptscs.Models
             // 処理的に変数宣言では入れられないのでここで初期化
             string[] variables = new string[Settings.Default.MediaWikiMagicWordsVariables.Count];
             Settings.Default.MediaWikiMagicWordsVariables.CopyTo(variables, 0);
-            this.Variables = variables;
+            this.MagicWords = variables;
         }
 
         /// <summary>
@@ -132,6 +124,86 @@ namespace Honememo.Wptscs.Models
         #region プロパティ
 
         /// <summary>
+        /// WikipediaのXMLの固定値の書式。
+        /// </summary>
+        public string Xmlns
+        {
+            get
+            {
+                return xmlns;
+            }
+
+            set
+            {
+                xmlns = value;
+            }
+        }
+
+        /// <summary>
+        /// 名前空間情報取得用にアクセスするページ（存在不要）。
+        /// </summary>
+        public string DummyPage
+        {
+            get
+            {
+                return dummyPage;
+            }
+
+            set
+            {
+                dummyPage = value;
+            }
+        }
+
+        /// <summary>
+        /// テンプレートの名前空間を示す番号。
+        /// </summary>
+        public int TemplateNamespace
+        {
+            get
+            {
+                return templateNamespace;
+            }
+
+            set
+            {
+                templateNamespace = value;
+            }
+        }
+
+        /// <summary>
+        /// カテゴリの名前空間を示す番号。
+        /// </summary>
+        public int CategoryNamespace
+        {
+            get
+            {
+                return categoryNamespace;
+            }
+
+            set
+            {
+                categoryNamespace = value;
+            }
+        }
+
+        /// <summary>
+        /// 画像の名前空間を示す番号。
+        /// </summary>
+        public int FileNamespace
+        {
+            get
+            {
+                return fileNamespace;
+            }
+
+            set
+            {
+                fileNamespace = value;
+            }
+        }
+
+        /// <summary>
         /// MediaWikiの名前空間の情報。
         /// </summary>
         public IDictionary<int, string> Namespaces
@@ -148,7 +220,7 @@ namespace Honememo.Wptscs.Models
                     }
 
                     // 適当なページのXMLデータをMediaWikiサーバーから取得
-                    XmlDocument xml = this.GetXml(MediaWiki.DummyPage);
+                    XmlDocument xml = this.GetXml(this.DummyPage);
 
                     // ルートエレメントまで取得し、フォーマットをチェック
                     XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
@@ -255,7 +327,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Wikipedia書式のシステム定義変数。
         /// </summary>
-        public IList<string> Variables
+        public IList<string> MagicWords
         {
             get
             {
@@ -349,7 +421,7 @@ namespace Honememo.Wptscs.Models
 
             // 基本は全文一致だが、定数が : で終わっている場合、textの:より前のみを比較
             // ※ {{ns:1}}みたいな場合に備えて
-            foreach (string variable in this.Variables)
+            foreach (string variable in this.MagicWords)
             {
                 if (variable.EndsWith(":") == true)
                 {
@@ -404,18 +476,23 @@ namespace Honememo.Wptscs.Models
             }
 
             this.Location = siteElement.SelectSingleNode("Location").InnerText;
+            this.Xmlns = siteElement.SelectSingleNode("Xmlns").InnerText;
             this.ExportPath = siteElement.SelectSingleNode("ExportPath").InnerText;
+            this.TemplateNamespace = int.Parse(siteElement.SelectSingleNode("TemplateNamespace").InnerText);
+            this.CategoryNamespace = int.Parse(siteElement.SelectSingleNode("CategoryNamespace").InnerText);
+            this.FileNamespace = int.Parse(siteElement.SelectSingleNode("FileNamespace").InnerText);
+            this.DummyPage = siteElement.SelectSingleNode("DummyPage").InnerText;
             this.Bracket = siteElement.SelectSingleNode("Bracket").InnerText;
             this.Redirect = siteElement.SelectSingleNode("Redirect").InnerText;
 
             // システム定義変数
             IList<string> variables = new List<string>();
-            foreach (XmlNode variableNode in siteElement.SelectNodes("MagicWords/Variables/Variable"))
+            foreach (XmlNode variableNode in siteElement.SelectNodes("MagicWords/Variable"))
             {
                 variables.Add(variableNode.InnerText);
             }
 
-            this.Variables = variables;
+            this.MagicWords = variables;
 
             // 見出しの置き換えパターン
             IDictionary<int, string> headings = new Dictionary<int, string>();
@@ -441,24 +518,22 @@ namespace Honememo.Wptscs.Models
 
             // MediaWiki固有の情報
             // ※ 定数値については、将来的に変数にする予定のため出力
-            writer.WriteElementString("Xmlns", MediaWiki.Xmlns);
+            writer.WriteElementString("Xmlns", this.Xmlns);
             writer.WriteElementString("ExportPath", this.ExportPath);
-            writer.WriteElementString("TemplateNamespaceNumber", MediaWiki.TemplateNamespaceNumber.ToString());
-            writer.WriteElementString("CategoryNamespaceNumber", MediaWiki.CategoryNamespaceNumber.ToString());
-            writer.WriteElementString("ImageNamespaceNumber", MediaWiki.ImageNamespaceNumber.ToString());
-            writer.WriteElementString("DummyPage", MediaWiki.DummyPage);
+            writer.WriteElementString("TemplateNamespace", this.TemplateNamespace.ToString());
+            writer.WriteElementString("CategoryNamespace", this.CategoryNamespace.ToString());
+            writer.WriteElementString("FileNamespace", this.FileNamespace.ToString());
+            writer.WriteElementString("DummyPage", this.DummyPage);
             writer.WriteElementString("Bracket", this.Bracket);
             writer.WriteElementString("Redirect", this.Redirect);
 
             // システム定義変数
             writer.WriteStartElement("MagicWords");
-            writer.WriteStartElement("Variables");
-            foreach (string variable in this.Variables)
+            foreach (string variable in this.MagicWords)
             {
                 writer.WriteElementString("Variable", variable);
             }
 
-            writer.WriteEndElement();
             writer.WriteEndElement();
 
             // 見出しの置き換えパターン

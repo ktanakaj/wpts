@@ -340,7 +340,7 @@ namespace Honememo.Wptscs.Models
         public bool IsCategory(string title)
         {
             // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
-            string category = (Website as MediaWiki).Namespaces[MediaWiki.CategoryNamespaceNumber];
+            string category = (this.Website as MediaWiki).Namespaces[(this.Website as MediaWiki).CategoryNamespace];
             if (category != String.Empty)
             {
                 if (title.ToLower().StartsWith(category.ToLower() + ":"))
@@ -364,16 +364,16 @@ namespace Honememo.Wptscs.Models
             //   翻訳元言語と英語版の設定でチェック
             for (int i = 0; i < 2; i++)
             {
-                string image = (Website as MediaWiki).Namespaces[MediaWiki.ImageNamespaceNumber];
+                string image = (this.Website as MediaWiki).Namespaces[(this.Website as MediaWiki).FileNamespace];
                 if (i == 1)
                 {
-                    if (Website.Lang.Code == "en")
+                    if (this.Website.Lang.Code == "en")
                     {
                         continue;
                     }
 
                     MediaWiki en = new MediaWiki(new Language("en"));
-                    image = en.Namespaces[MediaWiki.ImageNamespaceNumber];
+                    image = en.Namespaces[(this.Website as MediaWiki).FileNamespace];
                 }
 
                 if (image != String.Empty)

@@ -320,7 +320,7 @@ namespace Honememo.Wptscs.Logics
             // 指定された記事の言語間リンク・見出しを探索し、翻訳先言語での名称に変換し、それに置換した文字列を返す
             string result = String.Empty;
             bool enterFlag = true;
-            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, MediaWiki.DummyPage, null);
+            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, (this.Source as MediaWiki).DummyPage, null);
             for (int i = 0; i < i_Text.Length; i++)
             {
                 // ユーザーからの中止要求をチェック
@@ -451,7 +451,7 @@ namespace Honememo.Wptscs.Logics
             MediaWikiPage.Link link = new MediaWikiPage.Link();
 
             // 内部リンク・テンプレートの確認と解析
-            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, MediaWiki.DummyPage, null);
+            MediaWikiPage wikiAP = new MediaWikiPage(this.Source as MediaWiki, (this.Source as MediaWiki).DummyPage, null);
             lastIndex = wikiAP.ChkLinkText(ref link, i_Text, i_Index);
             if (lastIndex != -1)
             {
@@ -674,7 +674,7 @@ namespace Honememo.Wptscs.Logics
             // テンプレート名前空間か、普通の記事かを判定
             if (!link.StartColonFlag && !link.SubPageFlag)
             {
-                string templateStr = ((MediaWiki)this.Source).Namespaces[MediaWiki.TemplateNamespaceNumber];
+                string templateStr = ((MediaWiki)this.Source).Namespaces[((MediaWiki)this.Source).TemplateNamespace];
                 if (templateStr != String.Empty && !link.Article.StartsWith(templateStr + ":"))
                 {
                     MediaWikiPage page = null;
