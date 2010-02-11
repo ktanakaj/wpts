@@ -26,7 +26,7 @@
     <Setting Name="Referer" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="MediaWikiMagicWordsVariables" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+    <Setting Name="MediaWikiMagicWords" Type="System.Collections.Specialized.StringCollection" Scope="Application">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;CURRENTYEAR&lt;/string&gt;
@@ -157,6 +157,9 @@
     </Setting>
     <Setting Name="MediaWikiFileNamespace" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="CacheExpire" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">15.00:00:00</Value>
     </Setting>
   </Settings>
 </SettingsFile>

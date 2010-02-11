@@ -81,23 +81,20 @@ namespace Honememo.Wptscs
             // 使用言語取得
             string showCode = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
             int x = 0;
-            if (this.config.Websites.ContainsKey(this.config.Mode))
+            if (this.config.Configs.ContainsKey(this.config.Mode))
             {
                 // 設定ファイルに存在する全言語を選択肢として登録する
-                foreach (Website site in this.config.Websites[this.config.Mode])
+                foreach (Website site in this.config.Configs[this.config.Mode].Websites)
                 {
                     // 表タイトル設定
-                    string name = site.Lang.Names[showCode].Name;
-                    if (!String.IsNullOrEmpty(name))
+                    Language lang = Config.GetInstance().GetLanguage(site.Language);
+                    string name = site.Language;
+                    if (lang != null && !String.IsNullOrEmpty(lang.Names[showCode].Name))
                     {
-                        name += " (" + site.Lang.Code + ")";
-                    }
-                    else
-                    {
-                        name = site.Lang.Code;
+                        name = lang.Names[showCode].Name + " (" + site.Language + ")";
                     }
 
-                    this.dataGridViewTitleKey.Columns.Add(site.Lang.Code, name);
+                    this.dataGridViewTitleKey.Columns.Add(site.Language, name);
 
                     // 表データ設定
                     if (site as MediaWiki != null)
@@ -114,7 +111,7 @@ namespace Honememo.Wptscs
                     }
 
                     // コンボボックス設定
-                    this.comboBoxCode.Items.Add(site.Lang.Code);
+                    this.comboBoxCode.Items.Add(site.Language);
 
                     // 次の列へ
                     ++x;
@@ -147,7 +144,12 @@ namespace Honememo.Wptscs
 
                     // 表から呼称の情報も保存
                     this.dataGridViewName.Sort(this.dataGridViewName.Columns["Code"], ListSortDirection.Ascending);
-                    svr.Lang.Names.Clear();
+                    Language lang = Config.GetInstance().GetLanguage(svr.Language);
+                    if (lang == null)
+                    {
+                        lang = new Language(svr.Language);
+                    }
+                    lang.Names.Clear();
                     for (int y = 0; y < this.dataGridViewName.RowCount - 1; y++)
                     {
                         // 値が入ってないとかはガードしているはずだが、一応チェック
@@ -157,7 +159,7 @@ namespace Honememo.Wptscs
                             Language.LanguageName name = new Language.LanguageName();
                             name.Name = Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ArticleName", y]);
                             name.ShortName = Honememo.Cmn.NullCheckAndTrim(dataGridViewName["ShortName", y]);
-                            svr.Lang.Names.Add(code, name);
+                            lang.Names.Add(code, name);
                         }
                     }
                 }
@@ -175,7 +177,13 @@ namespace Honememo.Wptscs
 
                     // 呼称の情報を表に設定
                     this.dataGridViewName.Rows.Clear();
-                    foreach (KeyValuePair<string, Language.LanguageName> name in svr.Lang.Names)
+                    Language lang = Config.GetInstance().GetLanguage(svr.Language);
+                    if (lang == null)
+                    {
+                        lang = new Language(svr.Language);
+                    }
+
+                    foreach (KeyValuePair<string, Language.LanguageName> name in lang.Names)
                     {
                         int index = this.dataGridViewName.Rows.Add();
                         this.dataGridViewName["Code", index].Value = name.Key;
@@ -238,13 +246,13 @@ namespace Honememo.Wptscs
                     // 存在しないはずだが一応は確認して追加
                     if (svr == null)
                     {
-                        svr = new MediaWiki(new Language(this.comboBoxCode.Text));
-                        if (!this.config.Websites.ContainsKey(Config.RunMode.Wikipedia))
+                        svr = new MediaWiki(this.comboBoxCode.Text);
+                        if (!this.config.Configs.ContainsKey(Config.RunMode.Wikipedia))
                         {
-                            this.config.Websites.Add(Config.RunMode.Wikipedia, new List<Website>());
+                            this.config.Configs[Config.RunMode.Wikipedia] = new Config.ModeConfig();
                         }
 
-                        this.config.Websites[Config.RunMode.Wikipedia].Add(svr);
+                        this.config.Configs[Config.RunMode.Wikipedia].Websites.Add(svr);
 
                         // 定型句の設定表に列を追加
                         this.dataGridViewTitleKey.Columns.Add(this.comboBoxCode.Text, this.comboBoxCode.Text);
@@ -284,17 +292,17 @@ namespace Honememo.Wptscs
                     Website site = this.config.GetWebsite(oldCode);
                     if (site != null)
                     {
-                        site.Lang.Code = newCode;
+//                        site.Lang.Code = newCode;
                     }
 
                     // そのコードを参照している言語コードを更新
-                    if (this.config.Websites.ContainsKey(this.config.Mode))
+                    if (this.config.Configs.ContainsKey(this.config.Mode))
                     {
-                        foreach (Website s in this.config.Websites[this.config.Mode])
+                        foreach (Website s in this.config.Configs[this.config.Mode].Websites)
                         {
                             // もし新しいコードが既に存在する場合は上書き
-                            s.Lang.Names[newCode] = site.Lang.Names[oldCode];
-                            s.Lang.Names.Remove(oldCode);
+//                            s.Lang.Names[newCode] = site.Lang.Names[oldCode];
+//                            s.Lang.Names.Remove(oldCode);
                         }
                     }
 
@@ -303,17 +311,17 @@ namespace Honememo.Wptscs
                     this.comboBoxCode.Items[index] = newCode;
 
                     // 定型句の設定表を更新
-                    string header = site.Lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
-                    if (!String.IsNullOrEmpty(header))
-                    {
-                        header += " (" + newCode + ")";
-                    }
-                    else
-                    {
-                        header = newCode;
-                    }
+                    //string header = site.Lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                    //if (!String.IsNullOrEmpty(header))
+                    //{
+                    //    header += " (" + newCode + ")";
+                    //}
+                    //else
+                    //{
+                    //    header = newCode;
+                    //}
 
-                    this.dataGridViewTitleKey.Columns[oldCode].HeaderText = header;
+                    //this.dataGridViewTitleKey.Columns[oldCode].HeaderText = header;
                     this.dataGridViewTitleKey.Columns[oldCode].Name = newCode;
 
                     // 画面の状態を更新
@@ -338,7 +346,7 @@ namespace Honememo.Wptscs
                 Website site = this.config.GetWebsite(comboBoxCode.SelectedItem.ToString());
                 if (site != null)
                 {
-                    this.config.Websites[this.config.Mode].Remove(site);
+                    this.config.Configs[this.config.Mode].Websites.Remove(site);
                 }
             }
 
@@ -452,9 +460,9 @@ namespace Honememo.Wptscs
 
             // 表の状態をメンバ変数に保存
             // 領域の初期化
-            if (!this.config.Websites.ContainsKey(Config.RunMode.Wikipedia))
+            if (!this.config.Configs.ContainsKey(Config.RunMode.Wikipedia))
             {
-                this.config.Websites.Add(Config.RunMode.Wikipedia, new List<Website>());
+                this.config.Configs[Config.RunMode.Wikipedia] = new Config.ModeConfig();
             }
 
             // データの保存

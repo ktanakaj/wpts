@@ -279,12 +279,12 @@ namespace Honememo.Wptscs.Models
                 string redirect = (Website as MediaWiki).Redirect.Clone() as string;
                 if (i == 1)
                 {
-                    if (Website.Lang.Code == "en")
+                    if (Website.Language == "en")
                     {
                         continue;
                     }
 
-                    MediaWiki en = new MediaWiki(new Language("en"));
+                    MediaWiki en = new MediaWiki("en");
                     redirect = en.Redirect;
                 }
 
@@ -367,12 +367,12 @@ namespace Honememo.Wptscs.Models
                 string image = (this.Website as MediaWiki).Namespaces[(this.Website as MediaWiki).FileNamespace];
                 if (i == 1)
                 {
-                    if (this.Website.Lang.Code == "en")
+                    if (this.Website.Language == "en")
                     {
                         continue;
                     }
 
-                    MediaWiki en = new MediaWiki(new Language("en"));
+                    MediaWiki en = new MediaWiki("en");
                     image = en.Namespaces[(this.Website as MediaWiki).FileNamespace];
                 }
 

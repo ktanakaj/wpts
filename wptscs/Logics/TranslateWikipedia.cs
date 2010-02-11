@@ -59,7 +59,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 対象記事に言語間リンクが存在する場合、処理を継続するか確認
-            string interWiki = article.GetInterWiki(this.Target.Lang.Code);
+            string interWiki = article.GetInterWiki(this.Target.Language);
             if (interWiki != String.Empty)
             {
                 if (MessageBox.Show(
@@ -84,7 +84,7 @@ namespace Honememo.Wptscs.Logics
             if (bracket.Contains("{0}") == true)
             {
                 string originalName = String.Empty;
-                string langTitle = ((MediaWiki)this.Source).GetFullName(this.Target.Lang.Code);
+                string langTitle = this.GetFullName(this.Source, this.Target.Language);
                 if (langTitle != String.Empty)
                 {
                     originalName = "[[" + langTitle + "]]: ";
@@ -106,13 +106,13 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 新しい言語間リンクと、コメントを追記
-            this.Text += "\n\n[[" + this.Source.Lang.Code + ":" + i_Name + "]]\n";
+            this.Text += "\n\n[[" + this.Source.Language + ":" + i_Name + "]]\n";
             this.Text += String.Format(
                 Resources.ArticleFooter,
                 FormUtils.ApplicationName(),
-                this.Source.Lang.Code,
+                this.Source.Language,
                 i_Name,
-                article.Timestamp.ToString("U")) + "\n";
+                article.Timestamp.HasValue ? article.Timestamp.Value.ToString("U") : "") + "\n";
 
             // ダウンロードされるテキストがLFなので、ここで全てCRLFに変換
             // ※ダウンロード時にCRLFにするような仕組みが見つかれば、そちらを使う
@@ -278,7 +278,7 @@ namespace Honememo.Wptscs.Logics
             if (page != null)
             {
                 // 翻訳先言語への言語間リンクを捜索
-                interWiki = page.GetInterWiki(this.Target.Lang.Code);
+                interWiki = page.GetInterWiki(this.Target.Language);
                 if (interWiki != String.Empty)
                 {
                     Log += "[[" + interWiki + "]]";
@@ -546,7 +546,7 @@ namespace Honememo.Wptscs.Logics
                     result = String.Empty;
 
                     // 先頭が : でない、翻訳先言語への言語間リンクの場合
-                    if (!link.StartColonFlag && link.Code == this.Target.Lang.Code)
+                    if (!link.StartColonFlag && link.Code == this.Target.Language)
                     {
                         // 削除する。正常終了で、置換後文字列なしを返す
                         System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > " + link.Text + " を削除");
@@ -569,7 +569,7 @@ namespace Honememo.Wptscs.Logics
                 else if (interWiki == String.Empty)
                 {
                     // 言語間リンクが存在しない場合、[[:en:xxx]]みたいな形式に置換
-                    result += ":" + this.Source.Lang.Code + ":" + link.Article;
+                    result += ":" + this.Source.Language + ":" + link.Article;
                 }
                 else
                 {
@@ -665,7 +665,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // システム変数の場合は対象外
-            if (((MediaWiki)this.Source).ChkSystemVariable(link.Article) == true)
+            if (((MediaWiki)this.Source).IsMagicWord(link.Article) == true)
             {
                 System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > システム変数 : " + link.Text);
                 return null;
@@ -725,7 +725,7 @@ namespace Honememo.Wptscs.Logics
             {
                 // 言語間リンクが存在しない場合、[[:en:Template:xxx]]みたいな普通のリンクに置換
                 // おまけで、元のテンプレートの状態をコメントでつける
-                result += "[[:" + this.Source.Lang.Code + ":" + link.Article + "]]" + MediaWikiPage.CommentStart + " " + link.Text + " " + MediaWikiPage.CommentEnd;
+                result += "[[:" + this.Source.Language + ":" + link.Article + "]]" + MediaWikiPage.CommentStart + " " + link.Text + " " + MediaWikiPage.CommentEnd;
             }
             else
             {
@@ -914,6 +914,30 @@ namespace Honememo.Wptscs.Logics
             }
 
             return key;
+        }
+
+        /// <summary>
+        /// 指定した言語での言語名称を ページ名|略称 の形式で取得。
+        /// </summary>
+        /// <param name="site">サイト。</param>
+        /// <param name="code">言語のコード。</param>
+        /// <returns>ページ名|略称形式の言語名称。</returns>
+        protected string GetFullName(Website site, string code)
+        {
+            if (Config.GetInstance().GetLanguage(site.Language).Names.ContainsKey(code))
+            {
+                Language.LanguageName name = Config.GetInstance().GetLanguage(site.Language).Names[code];
+                if (!String.IsNullOrEmpty(name.ShortName))
+                {
+                    return name.Name + "|" + name.ShortName;
+                }
+                else
+                {
+                    return name.Name;
+                }
+            }
+
+            return String.Empty;
         }
 
         #endregion

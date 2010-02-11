@@ -33,7 +33,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ウェブサイトの言語。
         /// </summary>
-        private Language lang;
+        private string language;
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace Honememo.Wptscs.Models
         /// コンストラクタ。
         /// </summary>
         /// <remarks>継承クラスでは忘れずに
-        /// <see cref="Location"/>, <see cref="Lang"/>
+        /// <see cref="Location"/>, <see cref="Language"/>
         /// の設定を行ってください。</remarks>
         public Website()
         {
@@ -80,11 +80,11 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ウェブサイトの言語。
         /// </summary>
-        public Language Lang
+        public string Language
         {
             get
             {
-                return this.lang;
+                return this.language;
             }
 
             protected set
@@ -92,10 +92,10 @@ namespace Honememo.Wptscs.Models
                 // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
                 if (value == null)
                 {
-                    throw new ArgumentNullException("lang");
+                    throw new ArgumentNullException("language");
                 }
 
-                this.lang = value;
+                this.language = value;
             }
         }
 

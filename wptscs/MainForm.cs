@@ -140,28 +140,26 @@ namespace Honememo.Wptscs
         private void comboBoxSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ラベルに言語名を表示する
-            labelSource.Text = String.Empty;
-            linkLabelSourceURL.Text = "http://";
+            this.labelSource.Text = String.Empty;
+            this.linkLabelSourceURL.Text = "http://";
             if (!String.IsNullOrEmpty(comboBoxSource.Text))
             {
-                comboBoxSource.Text = comboBoxSource.Text.Trim().ToLower();
-                Website site = this.config.GetWebsite(this.comboBoxSource.Text);
-                if (site != null)
+                this.comboBoxSource.Text = this.comboBoxSource.Text.Trim().ToLower();
+                Language lang = Config.GetInstance().GetLanguage(this.comboBoxSource.Text);
+                if (lang != null)
                 {
                     // その言語の、ユーザーが使用している言語での表示名を表示
                     // （日本語環境だったら日本語を、英語だったら英語を）
-                    labelSource.Text = site.Lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                    this.labelSource.Text = lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
 
                     // サーバーURLの表示
-                    if (this.config.Mode == Config.RunMode.Wikipedia)
+                    Website site = Config.GetInstance().GetWebsite(this.comboBoxSource.Text);
+                    if (site == null && Config.GetInstance().Mode == Config.RunMode.Wikipedia)
                     {
-                        if (site == null)
-                        {
-                            site = new MediaWiki(new Language(comboBoxSource.Text));
-                        }
-
-                        linkLabelSourceURL.Text = site.Location;
+                        site = new MediaWiki(this.comboBoxSource.Text);
                     }
+
+                    this.linkLabelSourceURL.Text = site.Location;
                 }
             }
         }
@@ -200,12 +198,12 @@ namespace Honememo.Wptscs
             if (!String.IsNullOrEmpty(comboBoxTarget.Text))
             {
                 comboBoxTarget.Text = comboBoxTarget.Text.Trim().ToLower();
-                Website site = this.config.GetWebsite(this.comboBoxTarget.Text);
-                if (site != null)
+                Language lang = Config.GetInstance().GetLanguage(this.comboBoxTarget.Text);
+                if (lang != null)
                 {
                     // その言語の、ユーザーが使用している言語での表示名を表示
                     // （日本語環境だったら日本語を、英語だったら英語を）
-                    labelTarget.Text = site.Lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                    labelTarget.Text = lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
                 }
             }
         }
@@ -381,13 +379,13 @@ namespace Honememo.Wptscs
                     Website source = this.config.GetWebsite(comboBoxSource.Text) as Website;
                     if (source == null)
                     {
-                        source = new MediaWiki(new Language(comboBoxSource.Text));
+                        source = new MediaWiki(comboBoxSource.Text);
                     }
 
                     Website target = this.config.GetWebsite(comboBoxTarget.Text) as Website;
                     if (target == null)
                     {
-                        target = new MediaWiki(new Language(comboBoxTarget.Text));
+                        target = new MediaWiki(comboBoxTarget.Text);
                     }
 
                     this.transAP = new TranslateWikipedia(source as MediaWiki, target as MediaWiki);
@@ -495,13 +493,13 @@ namespace Honememo.Wptscs
             // コンボボックス設定
             comboBoxSource.Items.Clear();
             comboBoxTarget.Items.Clear();
-            if (this.config.Websites.ContainsKey(this.config.Mode))
+            if (Config.GetInstance().Configs.ContainsKey(this.config.Mode))
             {
                 // 設定ファイルに存在する全言語を選択肢として登録する
-                foreach (Website site in this.config.Websites[this.config.Mode])
+                foreach (Website site in Config.GetInstance().Configs[this.config.Mode].Websites)
                 {
-                    comboBoxSource.Items.Add(site.Lang.Code);
-                    comboBoxTarget.Items.Add(site.Lang.Code);
+                    comboBoxSource.Items.Add(site.Language);
+                    comboBoxTarget.Items.Add(site.Language);
                 }
             }
         }

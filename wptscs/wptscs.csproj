@@ -71,6 +71,7 @@
     <Compile Include="Models\MediaWiki.cs" />
     <Compile Include="Models\MediaWikiPage.cs" />
     <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\Translation.cs" />
     <Compile Include="Models\Website.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

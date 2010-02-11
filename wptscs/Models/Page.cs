@@ -37,7 +37,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ページのタイムスタンプ。
         /// </summary>
-        private DateTime timestamp;
+        private DateTime? timestamp;
 
         #endregion
 
@@ -50,7 +50,7 @@ namespace Honememo.Wptscs.Models
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
         /// <param name="timestamp">ページのタイムスタンプ。</param>
-        public Page(Website website, string title, string text, DateTime timestamp)
+        public Page(Website website, string title, string text, DateTime? timestamp)
         {
             // 初期値設定、基本的に以後外から変更されることを想定しない
             this.Website = website;
@@ -61,24 +61,24 @@ namespace Honememo.Wptscs.Models
 
         /// <summary>
         /// コンストラクタ。
-        /// ページのタイムスタンプには現在日時 (UTC) を設定。
+        /// ページのタイムスタンプには<c>null</c>を設定。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
         public Page(Website website, string title, string text)
-            : this(website, title, text, DateTime.UtcNow)
+            : this(website, title, text, null)
         {
         }
 
         /// <summary>
         /// コンストラクタ。
-        /// ページの本文には<c>null</c>を、タイムスタンプには現在日時 (UTC) を設定。
+        /// ページの本文, タイムスタンプには<c>null</c>を設定。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
         public Page(Website website, string title)
-            : this(website, title, null, DateTime.UtcNow)
+            : this(website, title, null, null)
         {
         }
 
@@ -149,7 +149,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ページのタイムスタンプ。
         /// </summary>
-        public DateTime Timestamp
+        public DateTime? Timestamp
         {
             get
             {

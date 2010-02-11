@@ -156,9 +156,9 @@ namespace Honememo.Wptscs.Properties {
             "int</string>\r\n  <string>#language</string>\r\n  <string>#special</string>\r\n  <stri" +
             "ng>#tag</string>\r\n  <string>gender</string>\r\n  <string>groupconvert</string>\r\n</" +
             "ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection MediaWikiMagicWordsVariables {
+        public global::System.Collections.Specialized.StringCollection MediaWikiMagicWords {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWordsVariables"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWords"]));
             }
         }
         
@@ -231,6 +231,18 @@ namespace Honememo.Wptscs.Properties {
         public int MediaWikiFileNamespace {
             get {
                 return ((int)(this["MediaWikiFileNamespace"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15.00:00:00")]
+        public global::System.TimeSpan CacheExpire {
+            get {
+                return ((global::System.TimeSpan)(this["CacheExpire"]));
+            }
+            set {
+                this["CacheExpire"] = value;
             }
         }
     }
