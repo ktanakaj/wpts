@@ -93,10 +93,10 @@ namespace Honememo.Wptscs
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("MainForm._Load > 初期化中に例外 : " + ex.Message);
                 System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 FormUtils.ErrorDialog(
-                    Resources.ErrorMessageConfigLordFailed);
+                    Resources.ErrorMessageConfigLordFailed,
+                    ex.Message);
 
                 // どうしようもないのでそのまま終了
                 this.Close();
@@ -226,28 +226,20 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void buttonConfig_Click(object sender, EventArgs e)
         {
-            if (this.config.Mode == Config.RunMode.Wikipedia)
-            {
-                // 言語の設定画面を開く
-                ConfigWikipediaDialog dialog = new ConfigWikipediaDialog();
-                dialog.ShowDialog();
+            // 設定画面を開く
+            ConfigForm form = new ConfigForm();
+            form.ShowDialog();
 
-                // コンボボックス設定
-                string backupSourceSelected = comboBoxSource.SelectedText;
-                string backupSourceTarget = comboBoxTarget.SelectedText;
-                this.Initialize();
-                comboBoxSource.SelectedText = backupSourceSelected;
-                comboBoxTarget.SelectedText = backupSourceTarget;
+            // コンボボックス設定
+            string backupSourceSelected = comboBoxSource.SelectedText;
+            string backupSourceTarget = comboBoxTarget.SelectedText;
+            this.Initialize();
+            comboBoxSource.SelectedText = backupSourceSelected;
+            comboBoxTarget.SelectedText = backupSourceTarget;
 
-                // コンボボックス変更時の処理をコール
-                this.comboBoxSource_SelectedIndexChanged(sender, e);
-                this.comboBoxTarget_SelectedIndexChanged(sender, e);
-            }
-            else
-            {
-                // 将来の拡張（？）用
-                FormUtils.InformationDialog(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理");
-            }
+            // コンボボックス変更時の処理をコール
+            this.comboBoxSource_SelectedIndexChanged(sender, e);
+            this.comboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>

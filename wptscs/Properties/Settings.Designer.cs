@@ -245,5 +245,17 @@ namespace Honememo.Wptscs.Properties {
                 this["CacheExpire"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.80.0.0")]
+        public string ConfigurationCompatible {
+            get {
+                return ((string)(this["ConfigurationCompatible"]));
+            }
+            set {
+                this["ConfigurationCompatible"] = value;
+            }
+        }
     }
 }

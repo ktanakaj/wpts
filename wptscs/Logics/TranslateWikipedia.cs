@@ -22,7 +22,7 @@ namespace Honememo.Wptscs.Logics
     /// <summary>
     /// Wikipedia用の翻訳支援処理実装クラスです。
     /// </summary>
-    public class TranslateWikipedia : TranslateNetworkObject
+    public class TranslateWikipedia : Translate
     {
         #region コンストラクタ
 

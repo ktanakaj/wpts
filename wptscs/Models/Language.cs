@@ -40,7 +40,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// コンストラクタ（通常）。
         /// </summary>
-        /// <param name="code">言語のコード。。</param>
+        /// <param name="code">言語のコード。</param>
         public Language(string code)
         {
             // メンバ変数の初期設定
@@ -125,12 +125,8 @@ namespace Honememo.Wptscs.Models
             xml.Load(reader);
 
             // Webサイトの言語情報
+            // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement langElement = xml.SelectSingleNode("Language") as XmlElement;
-            if (langElement == null)
-            {
-                return;
-            }
-
             this.Code = langElement.GetAttribute("Code");
 
             // 言語の呼称情報
@@ -138,18 +134,8 @@ namespace Honememo.Wptscs.Models
             {
                 XmlElement nameElement = nameNode as XmlElement;
                 Language.LanguageName name = new Language.LanguageName();
-                XmlElement longNameElement = nameElement.SelectSingleNode("Name") as XmlElement;
-                if (longNameElement != null)
-                {
-                    name.Name = longNameElement.InnerText;
-                }
-
-                XmlElement shortNameElement = nameElement.SelectSingleNode("ShortName") as XmlElement;
-                if (shortNameElement != null)
-                {
-                    name.ShortName = shortNameElement.InnerText;
-                }
-
+                name.Name = XmlUtils.InnerText(nameElement.SelectSingleNode("Name"));
+                name.ShortName = XmlUtils.InnerText(nameElement.SelectSingleNode("ShortName"));
                 this.Names[nameElement.GetAttribute("Code")] = name;
             }
         }

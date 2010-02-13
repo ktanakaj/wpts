@@ -32,9 +32,18 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPageInterWiki = new System.Windows.Forms.TabPage();
+            this.tabPageItems = new System.Windows.Forms.TabPage();
+            this.dataGridViewItems = new System.Windows.Forms.DataGridView();
+            this.ColumnFromCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnFromTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnArrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnToCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnToTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageHeadings = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
+            this.tabPageItems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOk
@@ -42,27 +51,87 @@
             resources.ApplyResources(this.buttonOk, "buttonOk");
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabPageInterWiki);
-            this.tabControl.Controls.Add(this.tabPageHeadings);
             resources.ApplyResources(this.tabControl, "tabControl");
+            this.tabControl.Controls.Add(this.tabPageItems);
+            this.tabControl.Controls.Add(this.tabPageHeadings);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             // 
-            // tabPageInterWiki
+            // tabPageItems
             // 
-            resources.ApplyResources(this.tabPageInterWiki, "tabPageInterWiki");
-            this.tabPageInterWiki.Name = "tabPageInterWiki";
-            this.tabPageInterWiki.UseVisualStyleBackColor = true;
+            this.tabPageItems.Controls.Add(this.dataGridViewItems);
+            resources.ApplyResources(this.tabPageItems, "tabPageItems");
+            this.tabPageItems.Name = "tabPageItems";
+            this.tabPageItems.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewItems
+            // 
+            resources.ApplyResources(this.dataGridViewItems, "dataGridViewItems");
+            this.dataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnFromCode,
+            this.ColumnFromTitle,
+            this.ColumnArrow,
+            this.ColumnToCode,
+            this.ColumnToTitle,
+            this.ColumnTimestamp});
+            this.dataGridViewItems.Name = "dataGridViewItems";
+            this.dataGridViewItems.RowTemplate.Height = 21;
+            this.dataGridViewItems.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGridViewItems_RowsAdded);
+            // 
+            // ColumnFromCode
+            // 
+            this.ColumnFromCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnFromCode, "ColumnFromCode");
+            this.ColumnFromCode.MaxInputLength = 16;
+            this.ColumnFromCode.Name = "ColumnFromCode";
+            // 
+            // ColumnFromTitle
+            // 
+            this.ColumnFromTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnFromTitle, "ColumnFromTitle");
+            this.ColumnFromTitle.MaxInputLength = 255;
+            this.ColumnFromTitle.Name = "ColumnFromTitle";
+            // 
+            // ColumnArrow
+            // 
+            this.ColumnArrow.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
+            this.ColumnArrow.Name = "ColumnArrow";
+            this.ColumnArrow.ReadOnly = true;
+            this.ColumnArrow.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnArrow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnToCode
+            // 
+            this.ColumnToCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnToCode, "ColumnToCode");
+            this.ColumnToCode.MaxInputLength = 16;
+            this.ColumnToCode.Name = "ColumnToCode";
+            // 
+            // ColumnToTitle
+            // 
+            this.ColumnToTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnToTitle, "ColumnToTitle");
+            this.ColumnToTitle.MaxInputLength = 255;
+            this.ColumnToTitle.Name = "ColumnToTitle";
+            // 
+            // ColumnTimestamp
+            // 
+            this.ColumnTimestamp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnTimestamp, "ColumnTimestamp");
+            this.ColumnTimestamp.Name = "ColumnTimestamp";
             // 
             // tabPageHeadings
             // 
@@ -83,7 +152,10 @@
             this.Name = "ConfigForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.tabControl.ResumeLayout(false);
+            this.tabPageItems.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -93,7 +165,14 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPageInterWiki;
+        private System.Windows.Forms.TabPage tabPageItems;
         private System.Windows.Forms.TabPage tabPageHeadings;
+        private System.Windows.Forms.DataGridView dataGridViewItems;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnArrow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
     }
 }

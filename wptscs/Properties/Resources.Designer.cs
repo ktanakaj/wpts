@@ -79,24 +79,6 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   設定の保存に失敗しました。設定ファイルが読み取り専用でないか等、確認してください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorMessage_MissConfigSave {
-            get {
-                return ResourceManager.GetString("ErrorMessage_MissConfigSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。（{0}） に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ErrorMessage_MissNetworkAccess {
-            get {
-                return ResourceManager.GetString("ErrorMessage_MissNetworkAccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   一時ファイルの作成に失敗しました。設定ファイルに異常が無いか、また以下のフォルダにファイルが作成可能かを確認してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessage_TemporayError {
@@ -106,7 +88,9 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。 に類似しているローカライズされた文字列を検索します。
+        ///   設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。
+        ///
+        ///{0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessageConfigLordFailed {
             get {
@@ -120,6 +104,26 @@ namespace Honememo.Wptscs.Properties {
         internal static string ErrorMessageConfigNotFound {
             get {
                 return ResourceManager.GetString("ErrorMessageConfigNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   設定ファイル保存時にエラーが発生しました。現在の設定は保存されていません。設定はアプリケーション終了まで有効です。
+        ///
+        ///{0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ErrorMessageConfigSaveFailed {
+            get {
+                return ResourceManager.GetString("ErrorMessageConfigSaveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。（{0}） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ErrorMessageConnectionFailed {
+            get {
+                return ResourceManager.GetString("ErrorMessageConnectionFailed", resourceCulture);
             }
         }
         
@@ -314,6 +318,15 @@ namespace Honememo.Wptscs.Properties {
         internal static string QuestionTitle {
             get {
                 return ResourceManager.GetString("QuestionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   → に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string RightArrow {
+            get {
+                return ResourceManager.GetString("RightArrow", resourceCulture);
             }
         }
         

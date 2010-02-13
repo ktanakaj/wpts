@@ -161,5 +161,8 @@
     <Setting Name="CacheExpire" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">15.00:00:00</Value>
     </Setting>
+    <Setting Name="ConfigurationCompatible" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0.80.0.0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

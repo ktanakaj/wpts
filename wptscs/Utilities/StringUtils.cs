@@ -17,7 +17,7 @@ namespace Honememo.Utilities
     /// </summary>
     public static class StringUtils
     {
-        #region 静的メソッド
+        #region 初期化用メソッド
 
         /// <summary>
         /// 渡された文字列をチェックし、null だった場合には空の文字列を返します。

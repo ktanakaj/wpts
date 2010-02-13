@@ -462,12 +462,8 @@ namespace Honememo.Wptscs.Models
             xml.Load(reader);
 
             // Webサイト
+            // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement siteElement = xml.SelectSingleNode("MediaWiki") as XmlElement;
-            if (siteElement == null)
-            {
-                return;
-            }
-
             this.Location = siteElement.SelectSingleNode("Location").InnerText;
             this.Language = siteElement.SelectSingleNode("Language").InnerText;
             this.Xmlns = siteElement.SelectSingleNode("Xmlns").InnerText;

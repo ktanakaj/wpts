@@ -58,7 +58,6 @@
       <DependentUpon>InputLanguageCodeDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Logics\Translate.cs" />
-    <Compile Include="Logics\TranslateNetworkObject.cs" />
     <Compile Include="Logics\TranslateWikipedia.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -113,7 +112,9 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Utilities\FormUtils.cs" />
+    <Compile Include="Utilities\ObjectUtils.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
+    <Compile Include="Utilities\XmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />

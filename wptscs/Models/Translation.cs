@@ -40,6 +40,29 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
+        #region コンストラクタ
+
+        /// <summary>
+        /// コンストラクタ（通常）。
+        /// </summary>
+        /// <param name="from">翻訳元言語コード。</param>
+        /// <param name="to">翻訳先言語コード。</param>
+        public Translation(string from, string to)
+        {
+            // メンバ変数の初期設定
+            this.From = from;
+            this.To = to;
+        }
+
+        /// <summary>
+        /// コンストラクタ（シリアライズ or 拡張用）。
+        /// </summary>
+        protected Translation()
+        {
+        }
+
+        #endregion
+
         #region プロパティ
 
         /// <summary>
@@ -54,6 +77,12 @@ namespace Honememo.Wptscs.Models
 
             set
             {
+                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("from");
+                }
+
                 this.from = value;
             }
         }
@@ -70,6 +99,12 @@ namespace Honememo.Wptscs.Models
 
             set
             {
+                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("to");
+                }
+
                 this.to = value;
             }
         }
@@ -86,6 +121,12 @@ namespace Honememo.Wptscs.Models
 
             set
             {
+                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                if (value == null)
+                {
+                    throw new ArgumentNullException("table");
+                }
+
                 this.table = value;
             }
         }
@@ -112,12 +153,8 @@ namespace Honememo.Wptscs.Models
             XmlDocument xml = new XmlDocument();
             xml.Load(reader);
 
+            // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement tableElement = xml.SelectSingleNode("Translation") as XmlElement;
-            if (tableElement == null)
-            {
-                return;
-            }
-
             this.From = tableElement.GetAttribute("From");
             this.To = tableElement.GetAttribute("To");
 
@@ -128,12 +165,12 @@ namespace Honememo.Wptscs.Models
                 Goal goal = new Goal();
                 goal.Word = itemElement.GetAttribute("To");
                 string timestamp = itemElement.GetAttribute("Timestamp");
-                if (String.IsNullOrEmpty(timestamp))
+                if (!String.IsNullOrEmpty(timestamp))
                 {
                     goal.Timestamp = DateTime.Parse(timestamp);
 
                     // 登録日時が有効期限より古い場合は破棄する
-                    if (goal.Timestamp.Value + Settings.Default.CacheExpire > DateTime.Now)
+                    if (DateTime.Now - Settings.Default.CacheExpire > goal.Timestamp.Value)
                     {
                         continue;
                     }

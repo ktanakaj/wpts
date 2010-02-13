@@ -124,22 +124,28 @@
   <data name="ArticleFooter" xml:space="preserve">
     <value>&lt;!-- {0}、[[:{1}:{2}]]（{3}(UTC)）より --&gt;</value>
   </data>
-  <data name="ErrorMessage_MissConfigSave" xml:space="preserve">
-    <value>設定の保存に失敗しました。設定ファイルが読み取り専用でないか等、確認してください。</value>
-  </data>
-  <data name="ErrorMessage_MissNetworkAccess" xml:space="preserve">
-    <value>サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。（{0}）</value>
-  </data>
   <data name="ErrorMessage_TemporayError" xml:space="preserve">
     <value>一時ファイルの作成に失敗しました。設定ファイルに異常が無いか、また以下のフォルダにファイルが作成可能かを確認してください。</value>
   </data>
   <data name="ErrorMessageConfigLordFailed" xml:space="preserve">
-    <value>設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。</value>
+    <value>設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。
+
+{0}</value>
     <comment>設定ファイルの読み込み時にエラーが発生した場合のメッセージ</comment>
   </data>
   <data name="ErrorMessageConfigNotFound" xml:space="preserve">
     <value>設定ファイル{0}が見つかりません。インストールファイルを確認してください。</value>
     <comment>プログラム付属の設定ファイルが存在しない場合のメッセージ</comment>
+  </data>
+  <data name="ErrorMessageConfigSaveFailed" xml:space="preserve">
+    <value>設定ファイル保存時にエラーが発生しました。現在の設定は保存されていません。設定はアプリケーション終了まで有効です。
+
+{0}</value>
+    <comment>設定ファイルの保存時にエラーが発生した場合のメッセージ</comment>
+  </data>
+  <data name="ErrorMessageConnectionFailed" xml:space="preserve">
+    <value>サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。（{0}）</value>
+    <comment>サーバーへの接続失敗</comment>
   </data>
   <data name="ErrorMessageDevelopmentError" xml:space="preserve">
     <value>想定外のエラーが発生しました。プログラムが不安定な状態になった可能性があります。プログラムを再起動してください。
@@ -218,6 +224,10 @@
   <data name="QuestionTitle" xml:space="preserve">
     <value>確認</value>
     <comment>確認ダイアログのタイトル</comment>
+  </data>
+  <data name="RightArrow" xml:space="preserve">
+    <value>→</value>
+    <comment>右矢印</comment>
   </data>
   <data name="WarningMessage_FormatUncompleateBracket" xml:space="preserve">
     <value>括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。</value>

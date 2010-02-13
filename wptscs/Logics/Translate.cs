@@ -11,9 +11,10 @@
 namespace Honememo.Wptscs.Logics
 {
     using System;
-    using System.Net;
+    using System.Net.NetworkInformation;
     using Honememo;
     using Honememo.Wptscs.Models;
+    using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// 翻訳支援処理を実装するための共通クラスです。
@@ -82,7 +83,7 @@ namespace Honememo.Wptscs.Logics
             this.cmnAP = new Honememo.Cmn();
             this.source = source;
             this.target = target;
-            this.RunInitialize();
+            this.Initialize();
         }
 
         #endregion
@@ -148,7 +149,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// 翻訳元言語のサイト／言語情報。
+        /// 翻訳元言語のサイト。
         /// </summary>
         protected Website Source
         {
@@ -159,7 +160,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// 翻訳先言語のサイト／言語情報。
+        /// 翻訳先言語のサイト。
         /// </summary>
         protected Website Target
         {
@@ -181,7 +182,17 @@ namespace Honememo.Wptscs.Logics
         public virtual bool Run(string name)
         {
             // 変数を初期化
-            this.RunInitialize();
+            this.Initialize();
+
+            // サーバー接続チェック
+            string host = new Uri(this.Source.Location).Host;
+            if (!String.IsNullOrEmpty(host))
+            {
+                if (!this.Ping(host))
+                {
+                    return false;
+                }
+            }
 
             // 翻訳支援処理実行部の本体を実行
             // ※以降の処理は、継承クラスにて定義
@@ -190,16 +201,16 @@ namespace Honememo.Wptscs.Logics
 
         /// <summary>
         /// 翻訳支援処理実行部の本体。
-        /// ※継承クラスでは、この関数に処理を実装すること
         /// </summary>
         /// <param name="name">記事名。</param>
         /// <returns><c>true</c> 処理成功</returns>
+        /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
         protected abstract bool RunBody(string name);
 
         /// <summary>
         /// 翻訳支援処理実行時の初期化処理。
         /// </summary>
-        protected void RunInitialize()
+        protected virtual void Initialize()
         {
             // 変数を初期化
             this.log = String.Empty;
@@ -222,6 +233,33 @@ namespace Honememo.Wptscs.Logics
             {
                 this.Log += log + ENTER;
             }
+        }
+
+        /// <summary>
+        /// サーバー接続チェック。
+        /// </summary>
+        /// <param name="server">サーバー名。</param>
+        /// <returns><c>true</c> 接続成功。</returns>
+        private bool Ping(string server)
+        {
+            // サーバー接続チェック
+            Ping ping = new Ping();
+            try
+            {
+                PingReply reply = ping.Send(server);
+                if (reply.Status != IPStatus.Success)
+                {
+                    LogLine(String.Format(Resources.ErrorMessageConnectionFailed, reply.Status.ToString()));
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                LogLine(String.Format(Resources.ErrorMessageConnectionFailed, e.InnerException.Message));
+                return false;
+            }
+
+            return true;
         }
 
         #endregion

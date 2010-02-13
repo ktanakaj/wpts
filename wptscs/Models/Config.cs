@@ -159,7 +159,9 @@ namespace Honememo.Wptscs.Models
                 }
 
                 // 無い場合はユーザーごと・または初期設定用の設定ファイルを読み込み
-                string path = FormUtils.SearchUserAppData(Settings.Default.ConfigurationFile, "0.80.0.0");
+                string path = FormUtils.SearchUserAppData(
+                    Settings.Default.ConfigurationFile,
+                    Settings.Default.ConfigurationCompatible);
                 if (String.IsNullOrEmpty(path))
                 {
                     // どこにも無い場合は例外を投げる
@@ -269,12 +271,8 @@ namespace Honememo.Wptscs.Models
             xml.Load(reader);
 
             // ルートエレメントを取得
+            // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement rootElement = xml.SelectSingleNode("/Config") as XmlElement;
-            if (rootElement == null)
-            {
-                // ルートエレメントも無い場合は終了
-                return;
-            }
 
             // 言語情報
             foreach (XmlNode langNode in rootElement.SelectNodes("Languages/Language"))
@@ -287,7 +285,6 @@ namespace Honememo.Wptscs.Models
             }
             
             // 処理モードごとにループ
-            // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             foreach (XmlNode modeNode in rootElement.ChildNodes)
             {
                 XmlElement modeElement = modeNode as XmlElement;
