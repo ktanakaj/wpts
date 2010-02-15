@@ -29,11 +29,6 @@ namespace Honememo.Wptscs.Logics
         public static readonly string ENTER = "\r\n";
 
         /// <summary>
-        /// 共通関数クラスのオブジェクト。
-        /// </summary>
-        protected Honememo.Cmn cmnAP;
-
-        /// <summary>
         /// ログメッセージ（property）。
         /// </summary>
         private string log;
@@ -51,12 +46,12 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 翻訳元言語のサイト／言語情報。
         /// </summary>
-        private Website source;
+        private Website from;
 
         /// <summary>
         /// 翻訳先言語のサイト／言語情報。
         /// </summary>
-        private Website target;
+        private Website to;
 
         #endregion
 
@@ -65,24 +60,23 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// コンストラクタ。
         /// </summary>
-        /// <param name="source">翻訳元サイト／言語。</param>
-        /// <param name="target">翻訳先サイト／言語。</param>
-        public Translate(Website source, Website target)
+        /// <param name="from">翻訳元サイト／言語。</param>
+        /// <param name="to">翻訳先サイト／言語。</param>
+        public Translate(Website from, Website to)
         {
             // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-            if (source == null)
+            if (from == null)
             {
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException("from");
             }
-            else if (target == null)
+            else if (to == null)
             {
-                throw new ArgumentNullException("target");
+                throw new ArgumentNullException("to");
             }
 
             // メンバ変数の初期化
-            this.cmnAP = new Honememo.Cmn();
-            this.source = source;
-            this.target = target;
+            this.from = from;
+            this.to = to;
             this.Initialize();
         }
 
@@ -151,28 +145,28 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 翻訳元言語のサイト。
         /// </summary>
-        protected Website Source
+        protected Website From
         {
             get
             {
-                return this.source;
+                return this.from;
             }
         }
 
         /// <summary>
         /// 翻訳先言語のサイト。
         /// </summary>
-        protected Website Target
+        protected Website To
         {
             get
             {
-                return this.target;
+                return this.to;
             }
         }
 
         #endregion
 
-        #region メソッド
+        #region publicメソッド
 
         /// <summary>
         /// 翻訳支援処理実行。
@@ -185,7 +179,7 @@ namespace Honememo.Wptscs.Logics
             this.Initialize();
 
             // サーバー接続チェック
-            string host = new Uri(this.Source.Location).Host;
+            string host = new Uri(this.From.Location).Host;
             if (!String.IsNullOrEmpty(host))
             {
                 if (!this.Ping(host))
@@ -198,6 +192,10 @@ namespace Honememo.Wptscs.Logics
             // ※以降の処理は、継承クラスにて定義
             return this.RunBody(name);
         }
+        
+        #endregion
+
+        #region protectedメソッド
 
         /// <summary>
         /// 翻訳支援処理実行部の本体。
@@ -206,17 +204,6 @@ namespace Honememo.Wptscs.Logics
         /// <returns><c>true</c> 処理成功</returns>
         /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
         protected abstract bool RunBody(string name);
-
-        /// <summary>
-        /// 翻訳支援処理実行時の初期化処理。
-        /// </summary>
-        protected virtual void Initialize()
-        {
-            // 変数を初期化
-            this.log = String.Empty;
-            this.Text = String.Empty;
-            this.CancellationPending = false;
-        }
 
         /// <summary>
         /// ログメッセージを1行追加出力。
@@ -236,6 +223,32 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
+        /// ログメッセージを1行追加出力（入力された文字列を書式化して表示）。
+        /// </summary>
+        /// <param name="format">書式項目を含んだログメッセージ。</param>
+        /// <param name="args">書式設定対象オブジェクト配列。</param>
+        protected void LogLine(string format, params object[] args)
+        {
+            // オーバーロードメソッドをコール
+            this.LogLine(String.Format(format, args));
+        }
+
+        #endregion
+
+        #region privateメソッド
+
+        /// <summary>
+        /// 翻訳支援処理実行時の初期化処理。
+        /// </summary>
+        private void Initialize()
+        {
+            // 変数を初期化
+            this.log = String.Empty;
+            this.Text = String.Empty;
+            this.CancellationPending = false;
+        }
+
+        /// <summary>
         /// サーバー接続チェック。
         /// </summary>
         /// <param name="server">サーバー名。</param>
@@ -249,13 +262,13 @@ namespace Honememo.Wptscs.Logics
                 PingReply reply = ping.Send(server);
                 if (reply.Status != IPStatus.Success)
                 {
-                    LogLine(String.Format(Resources.ErrorMessageConnectionFailed, reply.Status.ToString()));
+                    this.LogLine(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
                     return false;
                 }
             }
             catch (Exception e)
             {
-                LogLine(String.Format(Resources.ErrorMessageConnectionFailed, e.InnerException.Message));
+                this.LogLine(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
                 return false;
             }
 

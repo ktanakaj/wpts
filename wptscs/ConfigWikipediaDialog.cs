@@ -99,15 +99,15 @@ namespace Honememo.Wptscs
                     // 表データ設定
                     if (site as MediaWiki != null)
                     {
-                        foreach (KeyValuePair<int, string> title in (site as MediaWiki).Headings)
-                        {
-                            while (this.dataGridViewTitleKey.RowCount - 1 <= title.Key)
-                            {
-                                this.dataGridViewTitleKey.Rows.Add();
-                            }
+                        //foreach (KeyValuePair<int, string> title in (site as MediaWiki).Headings)
+                        //{
+                        //    while (this.dataGridViewTitleKey.RowCount - 1 <= title.Key)
+                        //    {
+                        //        this.dataGridViewTitleKey.Rows.Add();
+                        //    }
 
-                            this.dataGridViewTitleKey[x, title.Key].Value = title.Value;
-                        }
+                        //    this.dataGridViewTitleKey[x, title.Key].Value = title.Value;
+                        //}
                     }
 
                     // コンボボックス設定
@@ -471,14 +471,14 @@ namespace Honememo.Wptscs
                 MediaWiki svr = this.config.GetWebsite(this.dataGridViewTitleKey.Columns[x].Name) as MediaWiki;
                 if (svr != null)
                 {
-                    svr.Headings.Clear();
-                    for (int y = 0; y < this.dataGridViewTitleKey.RowCount - 1; y++)
-                    {
-                        if (this.dataGridViewTitleKey[x, y].Value != null)
-                        {
-                            svr.Headings[y] = this.dataGridViewTitleKey[x, y].Value.ToString().Trim();
-                        }
-                    }
+                    //svr.Headings.Clear();
+                    //for (int y = 0; y < this.dataGridViewTitleKey.RowCount - 1; y++)
+                    //{
+                    //    if (this.dataGridViewTitleKey[x, y].Value != null)
+                    //    {
+                    //        svr.Headings[y] = this.dataGridViewTitleKey[x, y].Value.ToString().Trim();
+                    //    }
+                    //}
                 }
             }
 

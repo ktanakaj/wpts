@@ -30,6 +30,11 @@ namespace Honememo.Wptscs.Models
         private string xmlns;
 
         /// <summary>
+        /// 名前空間情報取得用にアクセスするAPI。
+        /// </summary>
+        private string namespaceApi;
+
+        /// <summary>
         /// 名前空間情報取得用にアクセスするページ。
         /// </summary>
         /// <remarks>ページが存在する必要はない。</remarks>
@@ -74,12 +79,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// MediaWikiの名前空間の情報。
         /// </summary>
-        private IDictionary<int, string> namespaces = new Dictionary<int, string>();
-
-        /// <summary>
-        /// 見出しの定型句。
-        /// </summary>
-        private IDictionary<int, string> headings = new Dictionary<int, string>();
+        private IDictionary<int, IList<string>> namespaces = new Dictionary<int, IList<string>>();
 
         #endregion
 
@@ -139,9 +139,33 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
+        /// 名前空間情報取得用にアクセスするAPI。
+        /// </summary>
+        public string NamespaceApi
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(this.namespaceApi))
+                {
+                    return Settings.Default.MediaWikiNamespaceApi;
+                }
+
+                return this.namespaceApi;
+            }
+
+            set
+            {
+                this.namespaceApi = value;
+            }
+        }
+
+        /// <summary>
         /// 名前空間情報取得用にアクセスするページ。
         /// </summary>
-        /// <remarks>ページが存在する必要はない。</remarks>
+        /// <remarks>
+        /// <see cref="NamespaceApi"/>が使えない場合のみ使用。
+        /// ページが存在する必要はない。
+        /// </remarks>
         public string DummyPage
         {
             get
@@ -301,7 +325,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// MediaWikiの名前空間の情報。
         /// </summary>
-        public IDictionary<int, string> Namespaces
+        public IDictionary<int, IList<string>> Namespaces
         {
             get
             {
@@ -314,6 +338,7 @@ namespace Honememo.Wptscs.Models
                         return this.namespaces;
                     }
 
+                    //TODO: APIから取得するよう大幅変更
                     // 適当なページのXMLデータをMediaWikiサーバーから取得
                     XmlDocument xml = this.GetXml(this.DummyPage);
 
@@ -333,9 +358,11 @@ namespace Honememo.Wptscs.Models
                         XmlElement namespaceElement = node as XmlElement;
                         if (namespaceElement != null)
                         {
+                            IList<string> values = new List<string>();
+                            values.Add(namespaceElement.InnerText);
                             try
                             {
-                                this.namespaces[Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("key")))] = namespaceElement.InnerText;
+                                this.namespaces[Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("key")))] = values;
                             }
                             catch (Exception e)
                             {
@@ -344,6 +371,8 @@ namespace Honememo.Wptscs.Models
                             }
                         }
                     }
+
+                    // ネームスペースエイリアスを取得
                 }
 
                 return this.namespaces;
@@ -352,22 +381,6 @@ namespace Honememo.Wptscs.Models
             set
             {
                 this.namespaces = value;
-            }
-        }
-
-        /// <summary>
-        /// 見出しの定型句。
-        /// </summary>
-        public IDictionary<int, string> Headings
-        {
-            get
-            {
-                return this.headings;
-            }
-
-            set
-            {
-                this.headings = value;
             }
         }
 
@@ -415,7 +428,7 @@ namespace Honememo.Wptscs.Models
                 this,
                 titleElement != null ? titleElement.InnerText : title,
                 textElement != null ? textElement.InnerText : null,
-                timeElement != null ? DateTime.Parse(timeElement.InnerText) : DateTime.UtcNow);
+                timeElement != null ? new DateTime?(DateTime.Parse(timeElement.InnerText)) : null);
         }
 
         /// <summary>
@@ -498,16 +511,6 @@ namespace Honememo.Wptscs.Models
             }
 
             this.MagicWords = variables;
-
-            // 見出しの置き換えパターン
-            IDictionary<int, string> headings = new Dictionary<int, string>();
-            foreach (XmlNode headingNode in siteElement.SelectNodes("Headings/Heading"))
-            {
-                XmlElement headingElement = headingNode as XmlElement;
-                headings[int.Parse(headingElement.GetAttribute("no"))] = headingElement.InnerText;
-            }
-
-            this.Headings = headings;
         }
 
         /// <summary>
@@ -544,18 +547,6 @@ namespace Honememo.Wptscs.Models
                 {
                     writer.WriteElementString("Variable", variable);
                 }
-            }
-
-            writer.WriteEndElement();
-
-            // 見出しの置き換えパターン
-            writer.WriteStartElement("Headings");
-            foreach (KeyValuePair<int, string> heading in this.Headings)
-            {
-                writer.WriteStartElement("Heading");
-                writer.WriteAttributeString("no", heading.Key.ToString());
-                writer.WriteValue(heading.Value);
-                writer.WriteEndElement();
             }
 
             writer.WriteEndElement();

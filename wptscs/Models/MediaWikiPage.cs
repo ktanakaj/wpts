@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Models
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// MediaWikiのページをあらわすモデルクラスです。
@@ -64,7 +65,7 @@ namespace Honememo.Wptscs.Models
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
         /// <param name="timestamp">ページのタイムスタンプ。</param>
-        public MediaWikiPage(MediaWiki website, string title, string text, DateTime timestamp)
+        public MediaWikiPage(MediaWiki website, string title, string text, DateTime? timestamp)
             : base(website, title, text, timestamp)
         {
             // 本文の指定がある場合は、リダイレクトのチェックを行い属性値を更新する
@@ -76,7 +77,7 @@ namespace Honememo.Wptscs.Models
 
         /// <summary>
         /// コンストラクタ。
-        /// ページのタイムスタンプには現在日時 (UTC) を設定。
+        /// ページのタイムスタンプには<c>null</c>を設定。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
@@ -93,7 +94,7 @@ namespace Honememo.Wptscs.Models
         
         /// <summary>
         /// コンストラクタ。
-        /// ページの本文には<c>null</c>を、タイムスタンプには現在日時 (UTC) を設定。
+        /// ページの本文, タイムスタンプには<c>null</c>を設定。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
@@ -105,6 +106,22 @@ namespace Honememo.Wptscs.Models
         #endregion
 
         #region プロパティ
+
+        /// <summary>
+        /// ページが所属するウェブサイト。
+        /// </summary>
+        public new MediaWiki Website
+        {
+            get
+            {
+                return base.Website as MediaWiki;
+            }
+
+            protected set
+            {
+                base.Website = value;
+            }
+        }
 
         /// <summary>
         /// リダイレクト先のページ名。
@@ -276,10 +293,10 @@ namespace Honememo.Wptscs.Models
             //   翻訳元言語と英語版の設定でチェック
             for (int i = 0; i < 2; i++)
             {
-                string redirect = (Website as MediaWiki).Redirect.Clone() as string;
+                string redirect = this.Website.Redirect.Clone() as string;
                 if (i == 1)
                 {
-                    if (Website.Language == "en")
+                    if (this.Website.Language == "en")
                     {
                         continue;
                     }
@@ -311,100 +328,40 @@ namespace Honememo.Wptscs.Models
         /// <returns><c>true</c> カテゴリー。</returns>
         public bool IsCategory()
         {
-            return this.IsCategory(Title);
+            // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
+            return this.IsNamespacePage(this.Website.CategoryNamespace);
         }
 
         /// <summary>
         /// ページが画像かをチェック。
         /// </summary>
         /// <returns><c>true</c> 画像。</returns>
-        public bool IsImage()
+        public bool IsFile()
         {
-            return this.IsImage(Title);
+            // 指定されたページ名がファイル（Image:等で始まる）かをチェック
+            return this.IsNamespacePage(this.Website.FileNamespace);
         }
 
         /// <summary>
-        /// ページが標準名前空間以外かをチェック。
+        /// ページが標準名前空間かをチェック。
         /// </summary>
-        /// <returns><c>true</c> 標準名前空間以外。</returns>
-        public bool IsNotMainNamespace()
-        {
-            return this.IsNotMainNamespace(Title);
-        }
-
-        /// <summary>
-        /// 渡されたページ名がカテゴリーかをチェック。
-        /// </summary>
-        /// <param name="title">ページ名。</param>
-        /// <returns><c>true</c> カテゴリー。</returns>
-        public bool IsCategory(string title)
-        {
-            // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
-            string category = (this.Website as MediaWiki).Namespaces[(this.Website as MediaWiki).CategoryNamespace];
-            if (category != String.Empty)
-            {
-                if (title.ToLower().StartsWith(category.ToLower() + ":"))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 渡されたページ名が画像かをチェック。
-        /// </summary>
-        /// <param name="title">ページ名。</param>
-        /// <returns><c>true</c> 画像。</returns>
-        public bool IsImage(string title)
-        {
-            // 指定されたページ名が画像（Image:等で始まる）かをチェック
-            // ※日本語版みたいに、image: と言語固有の 画像: みたいなのがあると思われるので、
-            //   翻訳元言語と英語版の設定でチェック
-            for (int i = 0; i < 2; i++)
-            {
-                string image = (this.Website as MediaWiki).Namespaces[(this.Website as MediaWiki).FileNamespace];
-                if (i == 1)
-                {
-                    if (this.Website.Language == "en")
-                    {
-                        continue;
-                    }
-
-                    MediaWiki en = new MediaWiki("en");
-                    image = en.Namespaces[(this.Website as MediaWiki).FileNamespace];
-                }
-
-                if (image != String.Empty)
-                {
-                    if (title.ToLower().StartsWith(image.ToLower() + ":") == true)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 渡されたページ名が標準名前空間以外かをチェック。
-        /// </summary>
-        /// <param name="title">ページ名。</param>
-        /// <returns><c>true</c> 標準名前空間以外。</returns>
-        public bool IsNotMainNamespace(string title)
+        /// <returns><c>true</c> 標準名前空間。</returns>
+        public bool IsMain()
         {
             // 指定されたページ名が標準名前空間以外の名前空間（Wikipedia:等で始まる）かをチェック
-            foreach (string ns in (Website as MediaWiki).Namespaces.Values)
+            string title = this.Title.ToLower();
+            foreach (IList<string> prefixes in this.Website.Namespaces.Values)
             {
-                if (title.ToLower().StartsWith(ns.ToLower() + ":") == true)
+                foreach (string prefix in prefixes)
                 {
-                    return true;
+                    if (title.StartsWith(prefix.ToLower() + ":"))
+                    {
+                        return false;
+                    }
                 }
             }
 
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -562,7 +519,7 @@ namespace Honememo.Wptscs.Models
                 }
 
                 // 標準名前空間以外で[[xxx:yyy]]のようになっている場合、言語コード
-                if (result.Article.Contains(":") && !this.IsNotMainNamespace(result.Article))
+                if (result.Article.Contains(":") && new MediaWikiPage(this.Website, result.Article).IsMain())
                 {
                     // ※本当は、言語コード等の一覧を作り、其処と一致するものを・・・とすべきだろうが、
                     //   メンテしきれないので : を含む名前空間以外を全て言語コード等と判定
@@ -863,6 +820,30 @@ namespace Honememo.Wptscs.Models
             }
 
             return lastIndex;
+        }
+
+        /// <summary>
+        /// ページが指定された番号の名前空間に所属するかをチェック。
+        /// </summary>
+        /// <param name="id">名前空間のID。</param>
+        /// <returns><c>true</c> 所属する。</returns>
+        public bool IsNamespacePage(int id)
+        {
+            // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
+            IList<string> prefixes = this.Website.Namespaces[id];
+            if (prefixes != null)
+            {
+                string title = this.Title.ToLower();
+                foreach (string prefix in prefixes)
+                {
+                    if (title.StartsWith(prefix.ToLower() + ":"))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

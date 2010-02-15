@@ -257,5 +257,15 @@ namespace Honememo.Wptscs.Properties {
                 this["ConfigurationCompatible"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealias" +
+            "es")]
+        public string MediaWikiNamespaceApi {
+            get {
+                return ((string)(this["MediaWikiNamespaceApi"]));
+            }
+        }
     }
 }

@@ -164,5 +164,8 @@
     <Setting Name="ConfigurationCompatible" Type="System.String" Scope="User">
       <Value Profile="(Default)">0.80.0.0</Value>
     </Setting>
+    <Setting Name="MediaWikiNamespaceApi" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
