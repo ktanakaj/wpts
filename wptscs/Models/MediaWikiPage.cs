@@ -12,6 +12,7 @@ namespace Honememo.Wptscs.Models
 {
     using System;
     using System.Collections.Generic;
+    using Honememo.Utilities;
 
     /// <summary>
     /// MediaWikiのページをあらわすモデルクラスです。
@@ -157,7 +158,7 @@ namespace Honememo.Wptscs.Models
             o_Text = String.Empty;
 
             // 入力値確認
-            if (Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, NowikiStart.ToLower()) == false)
+            if (!StringUtils.StartsWith(i_Text.ToLower(), NowikiStart.ToLower(), i_Index))
             {
                 return lastIndex;
             }
@@ -166,7 +167,7 @@ namespace Honememo.Wptscs.Models
             for (int i = i_Index + NowikiStart.Length; i < i_Text.Length; i++)
             {
                 // 終了条件のチェック
-                if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, NowikiEnd))
+                if (StringUtils.StartsWith(i_Text, NowikiEnd, i))
                 {
                     lastIndex = i + NowikiEnd.Length - 1;
                     break;
@@ -206,7 +207,7 @@ namespace Honememo.Wptscs.Models
             o_Text = String.Empty;
 
             // 入力値確認
-            if (Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, CommentStart) == false)
+            if (!StringUtils.StartsWith(i_Text, CommentStart, i_Index))
             {
                 return lastIndex;
             }
@@ -214,7 +215,7 @@ namespace Honememo.Wptscs.Models
             // コメント終了まで取得
             for (int i = i_Index + CommentStart.Length; i < i_Text.Length; i++)
             {
-                if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, CommentEnd))
+                if (StringUtils.StartsWith(i_Text, CommentEnd, i))
                 {
                     lastIndex = i + CommentEnd.Length - 1;
                     break;
@@ -260,7 +261,7 @@ namespace Honememo.Wptscs.Models
                 {
                     i = index;
                 }
-                else if (Honememo.Cmn.ChkTextInnerWith(Text, i, "[[" + code + ":") == true)
+                else if (StringUtils.StartsWith(Text, "[[" + code + ":", i))
                 {
                     // 指定言語への言語間リンクの場合、内容を取得し、処理終了
                     Link link = this.ParseInnerLink(Text.Substring(i));
@@ -394,7 +395,7 @@ namespace Honememo.Wptscs.Models
                 char c = i_Text[i];
 
                 // ]]が見つかったら、処理正常終了
-                if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, "]]") == true)
+                if (StringUtils.StartsWith(i_Text, "]]", i))
                 {
                     lastIndex = ++i;
                     break;
@@ -463,7 +464,7 @@ namespace Honememo.Wptscs.Models
                 {
                     // | の後のとき
                     // コメント（<!--）が含まれている場合、リンクは無効
-                    if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, CommentStart))
+                    if (StringUtils.StartsWith(i_Text, CommentStart, i))
                     {
                         break;
                     }
@@ -560,7 +561,7 @@ namespace Honememo.Wptscs.Models
                 char c = i_Text[i];
 
                 // }}が見つかったら、処理正常終了
-                if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}") == true)
+                if (StringUtils.StartsWith(i_Text, "}}", i))
                 {
                     lastIndex = ++i;
                     break;
@@ -608,7 +609,7 @@ namespace Honememo.Wptscs.Models
                 {
                     // | の後のとき
                     // コメント（<!--）が含まれている場合、リンクは無効
-                    if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, CommentStart))
+                    if (StringUtils.StartsWith(i_Text, CommentStart, i))
                     {
                         break;
                     }
@@ -693,12 +694,12 @@ namespace Honememo.Wptscs.Models
             o_Link.Initialize();
 
             // 入力値に応じて、処理を振り分け
-            if (Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "[[") == true)
+            if (StringUtils.StartsWith(i_Text, "[[", i_Index))
             {
                 // 内部リンク
                 o_Link = this.ParseInnerLink(i_Text.Substring(i_Index));
             }
-            else if (Honememo.Cmn.ChkTextInnerWith(i_Text, i_Index, "{{") == true)
+            else if (StringUtils.StartsWith(i_Text, "{{", i_Index))
             {
                 // テンプレート
                 o_Link = this.ParseTemplate(i_Text.Substring(i_Index));
@@ -729,7 +730,7 @@ namespace Honememo.Wptscs.Models
             o_Value = String.Empty;
 
             // 入力値確認
-            if (Honememo.Cmn.ChkTextInnerWith(i_Text.ToLower(), i_Index, "{{{") == false)
+            if (!StringUtils.StartsWith(i_Text.ToLower(), "{{{", i_Index))
             {
                 return lastIndex;
             }
@@ -739,7 +740,7 @@ namespace Honememo.Wptscs.Models
             for (int i = i_Index + 3; i < i_Text.Length; i++)
             {
                 // 終了条件のチェック
-                if (Honememo.Cmn.ChkTextInnerWith(i_Text, i, "}}}") == true)
+                if (StringUtils.StartsWith(i_Text, "}}}", i))
                 {
                     lastIndex = i + 2;
                     break;
@@ -827,7 +828,7 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="id">名前空間のID。</param>
         /// <returns><c>true</c> 所属する。</returns>
-        public bool IsNamespacePage(int id)
+        protected bool IsNamespacePage(int id)
         {
             // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
             IList<string> prefixes = this.Website.Namespaces[id];

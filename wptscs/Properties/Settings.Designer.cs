@@ -164,7 +164,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("wiki/Special:Export/{0}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("/wiki/Special:Export/{0}")]
         public string MediaWikiExportPath {
             get {
                 return ((string)(this["MediaWikiExportPath"]));
@@ -195,15 +195,6 @@ namespace Honememo.Wptscs.Properties {
         public string MediaWikiXmlns {
             get {
                 return ((string)(this["MediaWikiXmlns"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Main_Page")]
-        public string MediaWikiDummyPage {
-            get {
-                return ((string)(this["MediaWikiDummyPage"]));
             }
         }
         
@@ -262,9 +253,9 @@ namespace Honememo.Wptscs.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealias" +
             "es")]
-        public string MediaWikiNamespaceApi {
+        public string MediaWikiNamespacePath {
             get {
-                return ((string)(this["MediaWikiNamespaceApi"]));
+                return ((string)(this["MediaWikiNamespacePath"]));
             }
         }
     }

@@ -380,7 +380,7 @@ namespace Honememo.Wptscs
                         target = new MediaWiki(comboBoxTarget.Text);
                     }
 
-                    this.transAP = new TranslateWikipedia(source as MediaWiki, target as MediaWiki);
+                    this.transAP = new TranslateMediaWiki(source as MediaWiki, target as MediaWiki);
                 }
                 else
                 {

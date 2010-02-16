@@ -24,22 +24,6 @@ namespace Honememo
         #region 静的メソッド
 
         /// <summary>
-        /// StringのNULL値チェック＆Trim。
-        /// </summary>
-        /// <param name="s">対象文字列。</param>
-        /// <returns>チェック後の文字列</returns>
-        public static string NullCheckAndTrim(string s)
-        {
-            // ※例外なし
-            if (s == null)
-            {
-                return String.Empty;
-            }
-
-            return s.Trim();
-        }
-
-        /// <summary>
         /// DataGridViewCellのNULL値チェック＆Trim。
         /// </summary>
         /// <param name="c">対象セル。</param>
@@ -91,50 +75,6 @@ namespace Honememo
             int index = AddArray(ref io_Array);
             io_Array[index] = i_Obj;
             return index;
-        }
-
-        /// <summary>
-        /// 対象の文字列が、渡された文字列のインデックス番目に存在するかをチェック。
-        /// </summary>
-        /// <param name="i_Text">文字列全体。</param>
-        /// <param name="i_Index">チェック位置。</param>
-        /// <param name="i_ChkStr">探索する文字列。</param>
-        /// <returns><c>true</c> 存在する</returns>
-        public static bool ChkTextInnerWith(string i_Text, int i_Index, string i_ChkStr)
-        {
-            // ※i_Text, i_ChkStrがNULLの場合はそのままNullReferenceExceptionを。
-            //   i_Indexがi_Textの範囲外のときはArgumentExceptionを返す
-
-            // 入力値チェック
-            if ((i_Index < 0) || (i_Index >= i_Text.Length))
-            {
-                throw new ArgumentException("IndexOutOfRange! : " + i_Index, "i_Index");
-            }
-
-            if (i_ChkStr == String.Empty)
-            {
-                return true;
-            }
-
-            if (i_Text == String.Empty)
-            {
-                return false;
-            }
-
-            // 文字列の一致をチェック
-            // ※1つ目のifは速度的にこっちの方が速いかなと思ってやっている。要らないかも・・・
-            if (i_Text[i_Index] == i_ChkStr[0])
-            {
-                if ((i_Index + i_ChkStr.Length) <= i_Text.Length)
-                {
-                    if (i_Text.Substring(i_Index, i_ChkStr.Length) == i_ChkStr)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
         /// <summary>

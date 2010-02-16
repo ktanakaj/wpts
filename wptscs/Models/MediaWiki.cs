@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Models
     using System.IO;
     using System.Xml;
     using System.Xml.Serialization;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
@@ -32,13 +33,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 名前空間情報取得用にアクセスするAPI。
         /// </summary>
-        private string namespaceApi;
-
-        /// <summary>
-        /// 名前空間情報取得用にアクセスするページ。
-        /// </summary>
-        /// <remarks>ページが存在する必要はない。</remarks>
-        private string dummyPage;
+        private string namespacePath;
 
         /// <summary>
         /// 記事のXMLデータが存在するパス。
@@ -141,46 +136,21 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 名前空間情報取得用にアクセスするAPI。
         /// </summary>
-        public string NamespaceApi
+        public string NamespacePath
         {
             get
             {
-                if (String.IsNullOrEmpty(this.namespaceApi))
+                if (String.IsNullOrEmpty(this.namespacePath))
                 {
-                    return Settings.Default.MediaWikiNamespaceApi;
+                    return Settings.Default.MediaWikiNamespacePath;
                 }
 
-                return this.namespaceApi;
+                return this.namespacePath;
             }
 
             set
             {
-                this.namespaceApi = value;
-            }
-        }
-
-        /// <summary>
-        /// 名前空間情報取得用にアクセスするページ。
-        /// </summary>
-        /// <remarks>
-        /// <see cref="NamespaceApi"/>が使えない場合のみ使用。
-        /// ページが存在する必要はない。
-        /// </remarks>
-        public string DummyPage
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(this.dummyPage))
-                {
-                    return Settings.Default.MediaWikiDummyPage;
-                }
-
-                return this.dummyPage;
-            }
-
-            set
-            {
-                this.dummyPage = value;
+                this.namespacePath = value;
             }
         }
 
@@ -338,31 +308,40 @@ namespace Honememo.Wptscs.Models
                         return this.namespaces;
                     }
 
-                    //TODO: APIから取得するよう大幅変更
-                    // 適当なページのXMLデータをMediaWikiサーバーから取得
-                    XmlDocument xml = this.GetXml(this.DummyPage);
+                    // APIのXMLデータをMediaWikiサーバーから取得
+                    XmlDocument xml = new XmlDocument();
+                    using (Stream reader = this.GetStream(new Uri(new Uri(this.Location), this.NamespacePath)))
+                    {
+                        xml.Load(reader);
+                    }
 
-                    // ルートエレメントまで取得し、フォーマットをチェック
-                    XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
-                    nsmgr.AddNamespace("ns", this.Xmlns);
-                    XmlElement rootElement = xml.SelectSingleNode("/ns:mediawiki", nsmgr) as XmlElement;
-                    if (rootElement == null)
+                    // ネームスペース情報を取得し、フォーマットをチェック
+                    XmlElement namespacesNode = xml.SelectSingleNode("/api/query/namespaces") as XmlElement;
+                    if (namespacesNode == null)
                     {
                         // XMLは取得できたが空 or フォーマットが想定外
                         throw new InvalidDataException("parse failed");
                     }
 
                     // ネームスペースを取得
-                    foreach (XmlNode node in rootElement.SelectNodes("ns:siteinfo/ns:namespaces/ns:namespace", nsmgr))
+                    foreach (XmlNode node in namespacesNode.SelectNodes("ns"))
                     {
                         XmlElement namespaceElement = node as XmlElement;
                         if (namespaceElement != null)
                         {
-                            IList<string> values = new List<string>();
-                            values.Add(namespaceElement.InnerText);
                             try
                             {
-                                this.namespaces[Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("key")))] = values;
+                                int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
+                                IList<string> values = new List<string>();
+                                values.Add(namespaceElement.InnerText);
+                                this.namespaces[id] = values;
+
+                                // あればシステム名？も設定
+                                string canonical = namespaceElement.GetAttribute("canonical");
+                                if (!String.IsNullOrEmpty(canonical))
+                                {
+                                    values.Add(canonical);
+                                }
                             }
                             catch (Exception e)
                             {
@@ -373,6 +352,33 @@ namespace Honememo.Wptscs.Models
                     }
 
                     // ネームスペースエイリアスを取得
+                    XmlNodeList aliaseNodes = xml.SelectNodes("/api/query/namespacealiases/ns");
+                    if (aliaseNodes != null)
+                    {
+                        foreach (XmlNode node in aliaseNodes)
+                        {
+                            XmlElement namespaceElement = node as XmlElement;
+                            if (namespaceElement != null)
+                            {
+                                try
+                                {
+                                    int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
+                                    IList<string> values = new List<string>();
+                                    if (this.namespaces.ContainsKey(id))
+                                    {
+                                        values = this.namespaces[id];
+                                    }
+
+                                    values.Add(namespaceElement.InnerText);
+                                }
+                                catch (Exception e)
+                                {
+                                    // キャッチしているのは、万が一想定外の書式が返された場合に、完璧に動かなくなるのを防ぐため
+                                    System.Diagnostics.Debug.WriteLine("MediaWiki.Namespaces > 例外発生 : " + e);
+                                }
+                            }
+                        }
+                    }
                 }
 
                 return this.namespaces;
@@ -397,7 +403,12 @@ namespace Honememo.Wptscs.Models
         public override Page GetPage(string title)
         {
             // ページのXMLデータをMediaWikiサーバーから取得
-            XmlDocument xml = this.GetXml(title);
+            XmlDocument xml = new XmlDocument();
+            using (Stream reader = this.GetStream(
+                new Uri(new Uri(this.Location), String.Format(this.ExportPath, title))))
+            {
+                xml.Load(reader);
+            }
 
             // ルートエレメントまで取得し、フォーマットをチェック
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
@@ -479,25 +490,25 @@ namespace Honememo.Wptscs.Models
             XmlElement siteElement = xml.SelectSingleNode("MediaWiki") as XmlElement;
             this.Location = siteElement.SelectSingleNode("Location").InnerText;
             this.Language = siteElement.SelectSingleNode("Language").InnerText;
-            this.Xmlns = siteElement.SelectSingleNode("Xmlns").InnerText;
-            this.ExportPath = siteElement.SelectSingleNode("ExportPath").InnerText;
-            this.DummyPage = siteElement.SelectSingleNode("DummyPage").InnerText;
-            this.Bracket = siteElement.SelectSingleNode("Bracket").InnerText;
-            this.Redirect = siteElement.SelectSingleNode("Redirect").InnerText;
+            this.Xmlns = XmlUtils.InnerText(siteElement.SelectSingleNode("Xmlns"));
+            this.NamespacePath = XmlUtils.InnerText(siteElement.SelectSingleNode("NamespacePath"));
+            this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
+            this.Bracket = XmlUtils.InnerText(siteElement.SelectSingleNode("Bracket"));
+            this.Redirect = XmlUtils.InnerText(siteElement.SelectSingleNode("Redirect"));
 
-            string text = siteElement.SelectSingleNode("TemplateNamespace").InnerText;
+            string text = XmlUtils.InnerText(siteElement.SelectSingleNode("TemplateNamespace"));
             if (!String.IsNullOrEmpty(text))
             {
                 this.TemplateNamespace = int.Parse(text);
             }
 
-            text = siteElement.SelectSingleNode("CategoryNamespace").InnerText;
+            text = XmlUtils.InnerText(siteElement.SelectSingleNode("CategoryNamespace"));
             if (!String.IsNullOrEmpty(text))
             {
                 this.CategoryNamespace = int.Parse(text);
             }
 
-            text = siteElement.SelectSingleNode("FileNamespace").InnerText;
+            text = XmlUtils.InnerText(siteElement.SelectSingleNode("FileNamespace"));
             if (!String.IsNullOrEmpty(text))
             {
                 this.FileNamespace = int.Parse(text);
@@ -525,7 +536,7 @@ namespace Honememo.Wptscs.Models
             // MediaWiki固有の情報
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力
             writer.WriteElementString("Xmlns", this.xmlns);
-            writer.WriteElementString("DummyPage", this.dummyPage);
+            writer.WriteElementString("NamespacePath", this.namespacePath);
             writer.WriteElementString("ExportPath", this.exportPath);
             writer.WriteElementString("Bracket", this.bracket);
             writer.WriteElementString("Redirect", this.redirect);
@@ -550,33 +561,6 @@ namespace Honememo.Wptscs.Models
             }
 
             writer.WriteEndElement();
-        }
-
-        #endregion
-
-        #region 内部処理メソッド
-
-        /// <summary>
-        /// MediaWikiから指定されたページのXMLを取得。
-        /// </summary>
-        /// <param name="title">ページタイトル。</param>
-        /// <returns>取得したXML。</returns>
-        /// <remarks>
-        /// 取得できない場合（通信エラーなど）は例外を投げる。
-        /// ただし取得したXMLのチェックはしないので、ページ情報等が入っていない可能性がある。
-        /// </remarks>
-        protected XmlDocument GetXml(string title)
-        {
-            // ページのXMLデータをMediaWikiサーバーから取得
-            XmlDocument xml = new XmlDocument();
-            UriBuilder uri = new UriBuilder(this.Location);
-            uri.Path = String.Format(this.exportPath, title);
-            using (Stream reader = this.GetStream(uri.Uri))
-            {
-                xml.Load(reader);
-            }
-
-            return xml;
         }
 
         #endregion

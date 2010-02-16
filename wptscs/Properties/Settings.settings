@@ -135,7 +135,7 @@
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="MediaWikiExportPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">wiki/Special:Export/{0}</Value>
+      <Value Profile="(Default)">/wiki/Special:Export/{0}</Value>
     </Setting>
     <Setting Name="MediaWikiBracket" Type="System.String" Scope="Application">
       <Value Profile="(Default)"> ({0}) </Value>
@@ -145,9 +145,6 @@
     </Setting>
     <Setting Name="MediaWikiXmlns" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://www.mediawiki.org/xml/export-0.4/</Value>
-    </Setting>
-    <Setting Name="MediaWikiDummyPage" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Main_Page</Value>
     </Setting>
     <Setting Name="MediaWikiTemplateNamespace" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">10</Value>
@@ -164,7 +161,7 @@
     <Setting Name="ConfigurationCompatible" Type="System.String" Scope="User">
       <Value Profile="(Default)">0.80.0.0</Value>
     </Setting>
-    <Setting Name="MediaWikiNamespaceApi" Type="System.String" Scope="Application">
+    <Setting Name="MediaWikiNamespacePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases</Value>
     </Setting>
   </Settings>

@@ -22,7 +22,7 @@ namespace Honememo.Wptscs.Logics
     /// <summary>
     /// Wikipedia用の翻訳支援処理実装クラスです。
     /// </summary>
-    public class TranslateWikipedia : Translate
+    public class TranslateMediaWiki : Translate
     {
         #region コンストラクタ
 
@@ -31,7 +31,7 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         /// <param name="from">翻訳元サイト。</param>
         /// <param name="to">翻訳先サイト。</param>
-        public TranslateWikipedia(
+        public TranslateMediaWiki(
             MediaWiki from, MediaWiki to)
             : base(from, to)
         {
@@ -346,7 +346,7 @@ namespace Honememo.Wptscs.Logics
             // 指定された記事の言語間リンク・見出しを探索し、翻訳先言語での名称に変換し、それに置換した文字列を返す
             string result = String.Empty;
             bool enterFlag = true;
-            MediaWikiPage wikiAP = new MediaWikiPage(this.From, this.From.DummyPage, null);
+            MediaWikiPage wikiAP = new MediaWikiPage(this.From, "dummy", null);
             for (int i = 0; i < i_Text.Length; i++)
             {
                 // ユーザーからの中止要求をチェック
@@ -477,7 +477,7 @@ namespace Honememo.Wptscs.Logics
             MediaWikiPage.Link link = new MediaWikiPage.Link();
 
             // 内部リンク・テンプレートの確認と解析
-            MediaWikiPage wikiAP = new MediaWikiPage(this.From, this.From.DummyPage, null);
+            MediaWikiPage wikiAP = new MediaWikiPage(this.From, "dummy", null);
             lastIndex = wikiAP.ChkLinkText(ref link, i_Text, i_Index);
             if (lastIndex != -1)
             {
