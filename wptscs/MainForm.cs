@@ -358,54 +358,16 @@ namespace Honememo.Wptscs
                 this.MakeFileName(ref fileName, ref logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
 
                 // 翻訳支援処理を実行し、結果とログをファイルに出力
-                // ※処理対象に応じてTranslateを継承したオブジェクトを生成
-                // TODO: この辺ファクトリメソッドにまとめる
-                Config config = Config.GetInstance();
-                Website source = config.GetWebsite(comboBoxSource.Text);
-                Website target = config.GetWebsite(comboBoxTarget.Text);
-                if (config.Mode == Config.RunMode.Wikipedia)
+                try
                 {
-                    if (source == null)
-                    {
-                        source = new MediaWiki(this.comboBoxSource.Text);
-                    }
-
-                    if (target == null)
-                    {
-                        target = new MediaWiki(this.comboBoxTarget.Text);
-                    }
-
-                    this.translate = new TranslateMediaWiki(source as MediaWiki, target as MediaWiki);
+                    this.translate = Translate.Create(Config.GetInstance().Mode, this.comboBoxSource.Text, this.comboBoxTarget.Text);
                 }
-                else
+                catch (NotImplementedException)
                 {
-                    // 将来の拡張（？）用
+                    // 将来の拡張用
                     this.textBoxLog.AppendText(String.Format(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理"));
                     FormUtils.InformationDialog(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理");
                     return;
-                }
-
-                if (config.Configs.ContainsKey(config.Mode))
-                {
-                    // 対訳表（項目）の設定
-                    foreach (Translation table in config.Configs[config.Mode].ItemTables)
-                    {
-                        if (table.From == this.comboBoxSource.Text && table.To == this.comboBoxTarget.Text)
-                        {
-                            this.translate.ItemTable = table;
-                            break;
-                        }
-                    }
-
-                    // 対訳表（見出し）の設定
-                    foreach (Translation table in config.Configs[config.Mode].HeadingTables)
-                    {
-                        if (table.From == this.comboBoxSource.Text && table.To == this.comboBoxTarget.Text)
-                        {
-                            this.translate.HeadingTable = table;
-                            break;
-                        }
-                    }
                 }
 
                 this.translate.LogUpdate += new EventHandler(this.GetLogUpdate);
