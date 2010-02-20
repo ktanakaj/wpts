@@ -386,7 +386,7 @@ namespace Honememo.Wptscs.Models
             // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
             string article = String.Empty;
             string section = String.Empty;
-            string[] pipeTexts = new string[0];
+            IList<string> pipeTexts = new List<string>();
             int lastIndex = -1;
             int pipeCounter = 0;
             bool sharpFlag = false;
@@ -405,7 +405,7 @@ namespace Honememo.Wptscs.Models
                 if (c == '|')
                 {
                     ++pipeCounter;
-                    Honememo.Cmn.AddArray(ref pipeTexts, String.Empty);
+                    pipeTexts.Add(String.Empty);
                     continue;
                 }
 
@@ -553,7 +553,7 @@ namespace Honememo.Wptscs.Models
             // 構文を解析して、{{}}内部の文字列を取得
             // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
             string article = String.Empty;
-            string[] pipeTexts = new string[0];
+            IList<string> pipeTexts = new List<string>();
             int lastIndex = -1;
             int pipeCounter = 0;
             for (int i = 2; i < i_Text.Length; i++)
@@ -571,7 +571,7 @@ namespace Honememo.Wptscs.Models
                 if (c == '|')
                 {
                     ++pipeCounter;
-                    Honememo.Cmn.AddArray(ref pipeTexts, String.Empty);
+                    pipeTexts.Add(String.Empty);
                     continue;
                 }
 
@@ -896,7 +896,7 @@ namespace Honememo.Wptscs.Models
             /// <summary>
             /// リンクのパイプ後の文字列（|）。
             /// </summary>
-            public string[] PipeTexts;
+            public IList<string> PipeTexts;
 
             /// <summary>
             /// 言語間または他プロジェクトへのリンクの場合、コード。
@@ -937,7 +937,7 @@ namespace Honememo.Wptscs.Models
                 this.Text = null;
                 this.Article = null;
                 this.Section = null;
-                this.PipeTexts = new string[0];
+                this.PipeTexts = new List<string>();
                 this.Code = null;
                 this.TemplateFlag = false;
                 this.SubPageFlag = false;

@@ -2,7 +2,7 @@
 // <summary>
 //      Wikipedia用の翻訳支援処理実装クラスソース</summary>
 //
-// <copyright file="TranslateWikipedia.cs" company="honeplusのメモ帳">
+// <copyright file="TranslateMediaWiki.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -65,7 +65,7 @@ namespace Honememo.Wptscs.Logics
         
         #endregion
 
-        #region メソッド
+        #region メイン処理メソッド
 
         /// <summary>
         /// 翻訳支援処理実行部の本体。
@@ -75,7 +75,7 @@ namespace Honememo.Wptscs.Logics
         /// <returns><c>true</c> 処理成功。</returns>
         protected override bool RunBody(string i_Name)
         {
-            System.Diagnostics.Debug.WriteLine("\nTranslateWikipedia.runBody > " + i_Name);
+            System.Diagnostics.Debug.WriteLine("\nTranslateMediaWiki.runBody > " + i_Name);
 
             // 対象記事を取得
             MediaWikiPage article = this.ChkTargetArticle(i_Name);
@@ -100,7 +100,7 @@ namespace Honememo.Wptscs.Logics
                 }
                 else
                 {
-                    LogLine("→ " + String.Format(Resources.LogMessage_ArticleExistInterWiki, interWiki));
+                    LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ArticleExistInterWiki, interWiki));
                 }
             }
 
@@ -122,7 +122,7 @@ namespace Honememo.Wptscs.Logics
             this.Text += "\n\n";
 
             // 言語間リンク・定型句の変換
-            LogLine(ENTER + "→ " + String.Format(Resources.LogMessage_CheckAndReplaceStart, interWiki));
+            LogLine(ENTER + Resources.RightArrow + " " + String.Format(Resources.LogMessage_CheckAndReplaceStart, interWiki));
             this.Text += this.ReplaceText(article.Text, article.Title);
 
             // ユーザーからの中止要求をチェック
@@ -138,88 +138,90 @@ namespace Honememo.Wptscs.Logics
                 FormUtils.ApplicationName(),
                 this.From.Language,
                 i_Name,
-                article.Timestamp.HasValue ? article.Timestamp.Value.ToString("U") : "") + "\n";
+                article.Timestamp.HasValue ? article.Timestamp.Value.ToString("U") : String.Empty) + "\n";
 
             // ダウンロードされるテキストがLFなので、ここで全てCRLFに変換
             // ※ダウンロード時にCRLFにするような仕組みが見つかれば、そちらを使う
             //   その場合、上のように\nをべたに吐いている部分を修正する
             this.Text = this.Text.Replace("\n", ENTER);
 
-            System.Diagnostics.Debug.WriteLine("TranslateWikipedia.runBody > Success!");
+            System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.runBody > Success!");
             return true;
         }
+
+        #endregion
+
+        #region 他のクラスの処理をこのクラスにあわせて拡張したメソッド
+
+        /// <summary>
+        /// ログメッセージを出力しつつページを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
+        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
+        protected new MediaWikiPage GetPage(string title, string notFoundMsg)
+        {
+            // 親クラスのメソッドを戻り値の型だけ変更
+            return base.GetPage(title, notFoundMsg) as MediaWikiPage;
+        }
+
+        /// <summary>
+        /// ページに存在する指定された言語コードへの言語間リンクを返す。
+        /// </summary>
+        /// <param name="page">ページ。</param>
+        /// <param name="code">言語コード。</param>
+        /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
+        /// <remarks>対訳表が指定されている場合、その内容を使用する。また取得結果を対訳表に追加する。</remarks>
+        protected string GetInterWiki(MediaWikiPage page, string code)
+        {
+            if (this.ItemTable == null)
+            {
+                // 対訳表が指定されていない場合は、普通と同じ処理
+                return page.GetInterWiki(code);
+            }
+
+            string interWiki;
+            lock (this.ItemTable)
+            {
+                if (this.ItemTable.Table.ContainsKey(page.Title))
+                {
+                    // 対訳表に存在する場合はその値を返す
+                    return this.ItemTable.Table[page.Title].Word;
+                }
+
+                // 対訳表に存在しない場合は、普通に取得し表に記録
+                // ※ nullも存在しないことの記録として格納
+                interWiki = page.GetInterWiki(code);
+                Translation.Goal goal = new Translation.Goal();
+                goal.Word = interWiki;
+                goal.Timestamp = DateTime.UtcNow;
+                this.ItemTable.Table[page.Title] = goal;
+            }
+
+            return interWiki;
+        }
+        
+        #endregion
+
+        #region 各処理のメソッド
 
         /// <summary>
         /// 翻訳支援対象のページを取得。
         /// </summary>
         /// <param name="title">ページ名。</param>
-        /// <returns>取得したページ。</returns>
+        /// <returns>取得したページ。取得失敗時は<c>null</c>。</returns>
         protected MediaWikiPage ChkTargetArticle(string title)
         {
             // 指定された記事の生データをWikipediaから取得
             LogLine(String.Format(Resources.LogMessage_GetArticle, this.From.Location, title));
-            MediaWikiPage page;
-            try
-            {
-                page = this.From.GetPage(title) as MediaWikiPage;
-            }
-            catch (WebException e)
-            {
-                if (e.Status == WebExceptionStatus.ProtocolError && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
-                {
-                    LogLine("→ " + Resources.LogMessage_ArticleNothing);
-                }
-                else
-                {
-                    LogLine("→ " + e.Message);
-                    LogLine("→ " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
-                }
-
-                return null;
-            }
-            catch (FileNotFoundException)
-            {
-                LogLine("→ " + Resources.LogMessage_ArticleNothing);
-                return null;
-            }
-            catch (Exception e)
-            {
-                LogLine("→ " + e.Message);
-                return null;
-            }
+            MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
-            if (page.IsRedirect())
+            if (page != null && page.IsRedirect())
             {
-                LogLine("→ " + Resources.LogMessage_Redirect + " [[" + page.Redirect + "]]");
-                try
-                {
-                    page = this.From.GetPage(page.Redirect) as MediaWikiPage;
-                }
-                catch (WebException e)
-                {
-                    if (e.Status == WebExceptionStatus.ProtocolError && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
-                    {
-                        LogLine("→ " + Resources.LogMessage_ArticleNothing);
-                    }
-                    else
-                    {
-                        LogLine("→ " + e.Message);
-                        LogLine("→ " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
-                    }
-
-                    return null;
-                }
-                catch (FileNotFoundException)
-                {
-                    LogLine("→ " + Resources.LogMessage_ArticleNothing);
-                    return null;
-                }
-                catch (Exception e)
-                {
-                    LogLine("→ " + e.Message);
-                    return null;
-                }
+                LogLine(Resources.RightArrow + " " + Resources.LogMessage_Redirect + " [[" + page.Redirect + "]]");
+                page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
             }
 
             return page;
@@ -238,74 +240,27 @@ namespace Honememo.Wptscs.Logics
             string interWiki = null;
             if (!template)
             {
-                Log += "[[" + title + "]] → ";
+                Log += "[[" + title + "]] " + Resources.RightArrow + " ";
             }
             else
             {
-                Log += "{{" + title + "}} → ";
+                Log += "{{" + title + "}} " + Resources.RightArrow + " ";
             }
 
-            MediaWikiPage page = null;
-            try
-            {
-                page = this.From.GetPage(title) as MediaWikiPage;
-            }
-            catch (WebException e)
-            {
-                if (e.Status == WebExceptionStatus.ProtocolError && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
-                {
-                    LogLine("→ " + Resources.LogMessage_LinkArticleNothing);
-                }
-                else
-                {
-                    LogLine("→ " + e.Message);
-                    LogLine("→ " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
-                }
-            }
-            catch (FileNotFoundException)
-            {
-                LogLine("→ " + Resources.LogMessage_LinkArticleNothing);
-            }
-            catch (Exception e)
-            {
-                LogLine("→ " + e.Message);
-            }
+            MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
-                Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] → ";
-                try
-                {
-                    page = this.From.GetPage(page.Redirect) as MediaWikiPage;
-                }
-                catch (WebException e)
-                {
-                    if (e.Status == WebExceptionStatus.ProtocolError && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
-                    {
-                        LogLine("→ " + Resources.LogMessage_LinkArticleNothing);
-                    }
-                    else
-                    {
-                        LogLine("→ " + e.Message);
-                        LogLine("→ " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
-                    }
-                }
-                catch (FileNotFoundException)
-                {
-                    LogLine("→ " + Resources.LogMessage_LinkArticleNothing);
-                }
-                catch (Exception e)
-                {
-                    LogLine("→ " + e.Message);
-                }
+                Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
+                page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
             }
 
             if (page != null)
             {
                 // 翻訳先言語への言語間リンクを捜索
-                interWiki = page.GetInterWiki(this.To.Language);
-                if (interWiki != String.Empty)
+                interWiki = this.GetInterWiki(page, this.To.Language);
+                if (!String.IsNullOrEmpty(interWiki))
                 {
                     Log += "[[" + interWiki + "]]";
                 }
@@ -316,7 +271,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 改行が出力されていない場合（正常時）、改行
-            if (Log.EndsWith(ENTER) == false)
+            if (!Log.EndsWith(ENTER))
             {
                 Log += ENTER;
             }
@@ -502,7 +457,7 @@ namespace Honememo.Wptscs.Logics
                     else
                     {
                         // 値が設定されていない場合、処理してもしょうがないので、除外
-                        System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceLink > 対象外 : " + link.Text);
+                        System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceLink > 対象外 : " + link.Text);
                         return -1;
                     }
                 }
@@ -524,7 +479,7 @@ namespace Honememo.Wptscs.Logics
                 else
                 {
                     // 上記以外の場合は、対象外
-                    System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceLink > プログラムミス : " + link.Text);
+                    System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceLink > プログラムミス : " + link.Text);
                 }
 
                 // 変換後文字列がNULL以外
@@ -575,12 +530,12 @@ namespace Honememo.Wptscs.Logics
                     if (!link.StartColonFlag && link.Code == this.To.Language)
                     {
                         // 削除する。正常終了で、置換後文字列なしを返す
-                        System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > " + link.Text + " を削除");
+                        System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > " + link.Text + " を削除");
                         return String.Empty;
                     }
 
                     // それ以外は対象外
-                    System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > 対象外 : " + link.Text);
+                    System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > 対象外 : " + link.Text);
                     return null;
                 }
 
@@ -629,13 +584,13 @@ namespace Honememo.Wptscs.Logics
                     // カテゴリーで[[:en:xxx]]みたいな形式にした場合、| 以降は不要なので削除
                     if (interWiki == String.Empty)
                     {
-                        link.PipeTexts = new string[0];
+                        link.PipeTexts = new List<string>();
                     }
                 }
-                else if (link.PipeTexts.Length == 0 && interWiki != null)
+                else if (link.PipeTexts.Count == 0 && interWiki != null)
                 {
                     // 表示名が存在しない場合、元の名前を表示名に設定
-                    Honememo.Cmn.AddArray(ref link.PipeTexts, article.Title);
+                    link.PipeTexts.Add(article.Title);
                 }
             }
 
@@ -643,7 +598,8 @@ namespace Honememo.Wptscs.Logics
             if (!String.IsNullOrEmpty(link.Section))
             {
                 // 見出しは、定型句変換を通す
-                result += "#" + this.GetKeyWord(link.Section);
+                string heading = this.GetHeading(link.Section);
+                result += "#" + (heading != null ? heading : link.Section);
             }
 
             // 表示名を出力
@@ -667,7 +623,7 @@ namespace Honememo.Wptscs.Logics
                 result += comment;
             }
 
-            System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceInnerLink > " + link.Text);
+            System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > " + link.Text);
             return result;
         }
 
@@ -686,14 +642,14 @@ namespace Honememo.Wptscs.Logics
             // テンプレートは記事名が必須
             if (String.IsNullOrEmpty(link.Article))
             {
-                System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > 対象外 : " + link.Text);
+                System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > 対象外 : " + link.Text);
                 return null;
             }
 
             // システム変数の場合は対象外
             if (this.From.IsMagicWord(link.Article))
             {
-                System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > システム変数 : " + link.Text);
+                System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > システム変数 : " + link.Text);
                 return null;
             }
 
@@ -706,35 +662,35 @@ namespace Honememo.Wptscs.Logics
                 {
                     prefix = prefixes[0];
                 }
+
                 if (!String.IsNullOrEmpty(prefix) && !link.Article.StartsWith(prefix + ":"))
                 {
+                    // 頭にTemplate:を付けた記事名でアクセスし、テンプレートが存在するかをチェック
+                    string title = prefix + ":" + link.Article;
                     MediaWikiPage page = null;
                     try
                     {
-                        page = this.From.GetPage(prefix + ":" + link.Article) as MediaWikiPage;
+                        page = this.From.GetPage(title) as MediaWikiPage;
                     }
                     catch (WebException e)
                     {
-                        // 記事が取得できない場合も、404でない場合は存在するとして処理
-                        if (e.Status == WebExceptionStatus.ProtocolError && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
+                        if (e.Status == WebExceptionStatus.ProtocolError
+                            && (e.Response as HttpWebResponse).StatusCode != HttpStatusCode.NotFound)
                         {
-                            LogLine(String.Format(Resources.LogMessage_TemplateUnknown, link.Article, prefix, e.Message));
-                            link.Article = page.Title;
+                            // 記事が取得できない場合も、404でない場合は存在するとして処理
+                            this.LogLine(String.Format(Resources.LogMessage_TemplateUnknown, link.Article, prefix, e.Message));
+                            link.Article = title;
                         }
                     }
-                    catch (FileNotFoundException e)
+                    catch (Exception e)
                     {
-                        LogLine(String.Format(Resources.LogMessage_TemplateUnknown, link.Article, prefix, e.Message));
-                        link.Article = page.Title;
-                    }
-                    catch (Exception)
-                    {
+                        System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.ReplaceTemplate > " + e.Message);
                     }
 
                     if (page != null)
                     {
-                        // 記事が存在する場合、テンプレートをつけた名前で取得
-                        link.Article = page.Title;
+                        // 記事が存在する場合、テンプレートをつけた名前を使用
+                        link.Article = title;
                     }
                 }
             }
@@ -798,7 +754,7 @@ namespace Honememo.Wptscs.Logics
                 result += "}}";
             }
 
-            System.Diagnostics.Debug.WriteLine("TranslateWikipedia.replaceTemplate > " + link.Text);
+            System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > " + link.Text);
             return result;
         }
 
@@ -901,8 +857,8 @@ namespace Honememo.Wptscs.Logics
 
             // 定型句変換
             string oldText = nonCommentLine.Substring(signCounter, nonCommentLine.Length - (signCounter * 2)).Trim();
-            string newText = this.GetKeyWord(oldText);
-            if (oldText != newText)
+            string newText = this.GetHeading(oldText);
+            if (newText != null)
             {
                 string sign = "=";
                 for (int i = 1; i < signCounter; i++)
@@ -911,7 +867,7 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 string newTitle = sign + newText + sign;
-                LogLine(ENTER + o_Title + " → " + newTitle);
+                LogLine(ENTER + o_Title + " " + Resources.RightArrow + " " + newTitle);
                 o_Title = newTitle;
             }
             else
@@ -923,26 +879,25 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// 指定されたコードでの定型句に相当する、別の言語での定型句を取得。
+        /// 指定されたコードでの見出しに相当する、別の言語での見出しを取得。
         /// </summary>
-        /// <param name="key">翻訳元言語での定型句。</param>
-        /// <returns>翻訳先言語での定型句。</returns>
-        protected string GetKeyWord(string key)
+        /// <param name="heading">翻訳元言語での見出し。</param>
+        /// <returns>翻訳先言語での見出し。値が存在しない場合は<c>null</c>。</returns>
+        protected string GetHeading(string heading)
         {
-            // ※設定が存在しない場合、入力定型句をそのままを返す
-            string s = (key != null) ? key.Trim().ToLower() : String.Empty;
-            if (!String.IsNullOrEmpty(s))
+            if (!String.IsNullOrEmpty(heading) && this.HeadingTable != null)
             {
-                //foreach (KeyValuePair<int, string> title in From.Headings)
-                //{
-                //    if (title.Value.ToLower() == s)
-                //    {
-                //        return To.Headings[title.Key];
-                //    }
-                //}
+                // そのまま返してしまうと大文字小文字違いを判定できないので回す
+                foreach (KeyValuePair<string, Translation.Goal> p in this.HeadingTable.Table)
+                {
+                    if (p.Key.ToLower() == heading.ToLower())
+                    {
+                        return p.Value.Word;
+                    }
+                }
             }
 
-            return key;
+            return null;
         }
 
         /// <summary>

@@ -115,6 +115,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// WikipediaのXMLの固定値の書式。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public string Xmlns
         {
             get
@@ -136,6 +137,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 名前空間情報取得用にアクセスするAPI。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public string NamespacePath
         {
             get
@@ -157,6 +159,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 記事のXMLデータが存在するパス。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public string ExportPath
         {
             get
@@ -178,6 +181,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 括弧のフォーマット。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public string Bracket
         {
             get
@@ -199,6 +203,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// リダイレクトの文字列。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public string Redirect
         {
             get
@@ -220,6 +225,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// テンプレートの名前空間を示す番号。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public int TemplateNamespace
         {
             get
@@ -236,6 +242,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// カテゴリの名前空間を示す番号。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public int CategoryNamespace
         {
             get
@@ -252,6 +259,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 画像の名前空間を示す番号。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public int FileNamespace
         {
             get
@@ -268,6 +276,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Wikipedia書式のシステム定義変数。
         /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public IList<string> MagicWords
         {
             get
@@ -295,6 +304,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// MediaWikiの名前空間の情報。
         /// </summary>
+        /// <remarks>値が指定されていない場合、サーバーから情報を取得。</remarks>
         public IDictionary<int, IList<string>> Namespaces
         {
             get
@@ -386,6 +396,12 @@ namespace Honememo.Wptscs.Models
 
             set
             {
+                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                if (value == null)
+                {
+                    throw new ArgumentNullException("namespaces");
+                }
+
                 this.namespaces = value;
             }
         }
@@ -398,7 +414,7 @@ namespace Honememo.Wptscs.Models
         /// ページを取得。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
-        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <returns>取得したページ。</returns>
         /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
         public override Page GetPage(string title)
         {

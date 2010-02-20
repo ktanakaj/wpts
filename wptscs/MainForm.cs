@@ -31,19 +31,9 @@ namespace Honememo.Wptscs
         #region private変数
 
         /// <summary>
-        /// 共通関数クラスのオブジェクト。
-        /// </summary>
-        private Honememo.Cmn cmnAP;
-
-        /// <summary>
-        /// 各種設定クラスのオブジェクト。
-        /// </summary>
-        private Config config;
-
-        /// <summary>
         /// 検索支援処理クラスのオブジェクト。
         /// </summary>
-        private Translate transAP;
+        private Translate translate;
 
         /// <summary>
         /// 表示済みログ文字列長。
@@ -74,11 +64,10 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // 初期化処理
+            // 設定ファイルの読み込みが行えるか確認
             try
             {
-                this.cmnAP = new Honememo.Cmn();
-                this.config = Config.GetInstance();
+                Config.GetInstance();
             }
             catch (FileNotFoundException ex)
             {
@@ -102,20 +91,20 @@ namespace Honememo.Wptscs
                 this.Close();
             }
 
-            this.transAP = null;
+            this.translate = null;
             Control.CheckForIllegalCrossThreadCalls = false;
 
             // コンボボックス設定
             this.Initialize();
 
             // 前回の処理状態を復元
-            textBoxSaveDirectory.Text = Settings.Default.SaveDirectory;
-            comboBoxSource.SelectedText = Settings.Default.LastSelectedSource;
-            comboBoxTarget.SelectedText = Settings.Default.LastSelectedTarget;
+            this.textBoxSaveDirectory.Text = Settings.Default.SaveDirectory;
+            this.comboBoxSource.SelectedText = Settings.Default.LastSelectedSource;
+            this.comboBoxTarget.SelectedText = Settings.Default.LastSelectedTarget;
 
             // コンボボックス変更時の処理をコール
-            this.comboBoxSource_SelectedIndexChanged(sender, e);
-            this.comboBoxTarget_SelectedIndexChanged(sender, e);
+            this.ComboBoxSource_SelectedIndexChanged(sender, e);
+            this.ComboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -126,10 +115,14 @@ namespace Honememo.Wptscs
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // 現在の作業フォルダ、絞込み文字列を保存
-            Settings.Default.SaveDirectory = textBoxSaveDirectory.Text;
-            Settings.Default.LastSelectedSource = comboBoxSource.Text;
-            Settings.Default.LastSelectedTarget = comboBoxTarget.Text;
+            Settings.Default.SaveDirectory = this.textBoxSaveDirectory.Text;
+            Settings.Default.LastSelectedSource = this.comboBoxSource.Text;
+            Settings.Default.LastSelectedTarget = this.comboBoxTarget.Text;
             Settings.Default.Save();
+
+            // 設定ファイルの内容も保存
+            //TODO: 二重起動とかを考えるともうちょいちゃんとやるべき
+            Config.GetInstance().Save();
         }
 
         /// <summary>
@@ -137,7 +130,7 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void comboBoxSource_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ラベルに言語名を表示する
             this.labelSource.Text = String.Empty;
@@ -169,10 +162,10 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void comboBoxSource_Leave(object sender, EventArgs e)
+        private void ComboBoxSource_Leave(object sender, EventArgs e)
         {
             // 直接入力された場合の対策、変更字の処理をコール
-            this.comboBoxSource_SelectedIndexChanged(sender, e);
+            this.ComboBoxSource_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -180,10 +173,10 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void linkLabelSourceURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabelSourceURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // リンクを開く
-            System.Diagnostics.Process.Start(linkLabelSourceURL.Text);
+            System.Diagnostics.Process.Start(this.linkLabelSourceURL.Text);
         }
 
         /// <summary>
@@ -191,19 +184,19 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void comboBoxTarget_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxTarget_SelectedIndexChanged(object sender, EventArgs e)
         {
             // ラベルに言語名を表示する
-            labelTarget.Text = String.Empty;
-            if (!String.IsNullOrEmpty(comboBoxTarget.Text))
+            this.labelTarget.Text = String.Empty;
+            if (!String.IsNullOrEmpty(this.comboBoxTarget.Text))
             {
-                comboBoxTarget.Text = comboBoxTarget.Text.Trim().ToLower();
+                this.comboBoxTarget.Text = this.comboBoxTarget.Text.Trim().ToLower();
                 Language lang = Config.GetInstance().GetLanguage(this.comboBoxTarget.Text);
                 if (lang != null)
                 {
                     // その言語の、ユーザーが使用している言語での表示名を表示
                     // （日本語環境だったら日本語を、英語だったら英語を）
-                    labelTarget.Text = lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                    this.labelTarget.Text = lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
                 }
             }
         }
@@ -213,10 +206,10 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void comboBoxTarget_Leave(object sender, EventArgs e)
+        private void ComboBoxTarget_Leave(object sender, EventArgs e)
         {
             // 直接入力された場合の対策、変更字の処理をコール
-            this.comboBoxTarget_SelectedIndexChanged(sender, e);
+            this.ComboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -224,22 +217,22 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void buttonConfig_Click(object sender, EventArgs e)
+        private void ButtonConfig_Click(object sender, EventArgs e)
         {
             // 設定画面を開く
             ConfigForm form = new ConfigForm();
             form.ShowDialog();
 
             // コンボボックス設定
-            string backupSourceSelected = comboBoxSource.SelectedText;
-            string backupSourceTarget = comboBoxTarget.SelectedText;
+            string backupSourceSelected = this.comboBoxSource.SelectedText;
+            string backupSourceTarget = this.comboBoxTarget.SelectedText;
             this.Initialize();
-            comboBoxSource.SelectedText = backupSourceSelected;
-            comboBoxTarget.SelectedText = backupSourceTarget;
+            this.comboBoxSource.SelectedText = backupSourceSelected;
+            this.comboBoxTarget.SelectedText = backupSourceTarget;
 
             // コンボボックス変更時の処理をコール
-            this.comboBoxSource_SelectedIndexChanged(sender, e);
-            this.comboBoxTarget_SelectedIndexChanged(sender, e);
+            this.ComboBoxSource_SelectedIndexChanged(sender, e);
+            this.ComboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -247,19 +240,19 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void buttonSaveDirectory_Click(object sender, EventArgs e)
+        private void ButtonSaveDirectory_Click(object sender, EventArgs e)
         {
             // フォルダ名が入力されている場合、それを初期位置に設定
-            if (textBoxSaveDirectory.Text != String.Empty)
+            if (!String.IsNullOrEmpty(this.textBoxSaveDirectory.Text))
             {
-                folderBrowserDialogSaveDirectory.SelectedPath = textBoxSaveDirectory.Text;
+                this.folderBrowserDialogSaveDirectory.SelectedPath = this.textBoxSaveDirectory.Text;
             }
 
             // フォルダ選択画面をオープン
-            if (folderBrowserDialogSaveDirectory.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (this.folderBrowserDialogSaveDirectory.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 // フォルダが選択された場合、フォルダ名に選択されたフォルダを設定
-                textBoxSaveDirectory.Text = folderBrowserDialogSaveDirectory.SelectedPath;
+                this.textBoxSaveDirectory.Text = this.folderBrowserDialogSaveDirectory.SelectedPath;
             }
         }
 
@@ -268,10 +261,10 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void textBoxSaveDirectory_Leave(object sender, EventArgs e)
+        private void TextBoxSaveDirectory_Leave(object sender, EventArgs e)
         {
             // 空白を削除
-            textBoxSaveDirectory.Text = textBoxSaveDirectory.Text.Trim();
+            this.textBoxSaveDirectory.Text = this.textBoxSaveDirectory.Text.Trim();
         }
 
         /// <summary>
@@ -279,38 +272,38 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void buttonRun_Click(object sender, EventArgs e)
+        private void ButtonRun_Click(object sender, EventArgs e)
         {
             // 入力値チェック
-            if (textBoxArticle.Text.Trim() == String.Empty)
+            if (this.textBoxArticle.Text.Trim() == String.Empty)
             {
                 // 値が設定されていないときは処理無し
                 return;
             }
 
             // 必要な情報が設定されていない場合は処理不可
-            if (Directory.Exists(textBoxSaveDirectory.Text) == false)
+            if (Directory.Exists(this.textBoxSaveDirectory.Text) == false)
             {
                 FormUtils.WarningDialog(Resources.WarningMessage_UnuseSaveDirectory);
-                buttonSaveDirectory.Focus();
+                this.buttonSaveDirectory.Focus();
                 return;
             }
-            else if (comboBoxSource.Text == String.Empty)
+            else if (this.comboBoxSource.Text == String.Empty)
             {
                 FormUtils.WarningDialog(Resources.WarningMessage_NotSelectedSource);
-                comboBoxSource.Focus();
+                this.comboBoxSource.Focus();
                 return;
             }
-            else if (comboBoxTarget.Text == String.Empty)
+            else if (this.comboBoxTarget.Text == String.Empty)
             {
                 FormUtils.WarningDialog(Resources.WarningMessage_NotSelectedTarget);
-                comboBoxTarget.Focus();
+                this.comboBoxTarget.Focus();
                 return;
             }
-            else if (comboBoxSource.Text == comboBoxTarget.Text)
+            else if (this.comboBoxSource.Text == this.comboBoxTarget.Text)
             {
                 FormUtils.WarningDialog(Resources.WarningMessage_SourceEqualTarget);
-                comboBoxTarget.Focus();
+                this.comboBoxTarget.Focus();
                 return;
             }
 
@@ -318,7 +311,7 @@ namespace Honememo.Wptscs
             this.LockOperation();
 
             // バックグラウンド処理を実行
-            backgroundWorkerRun.RunWorkerAsync();
+            this.backgroundWorkerRun.RunWorkerAsync();
         }
 
         /// <summary>
@@ -326,17 +319,17 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void buttonStop_Click(object sender, EventArgs e)
+        private void ButtonStop_Click(object sender, EventArgs e)
         {
             // 処理を中断
-            buttonStop.Enabled = false;
-            if (backgroundWorkerRun.IsBusy == true)
+            this.buttonStop.Enabled = false;
+            if (this.backgroundWorkerRun.IsBusy == true)
             {
                 System.Diagnostics.Debug.WriteLine("MainForm.-Stop_Click > 処理中断");
-                backgroundWorkerRun.CancelAsync();
-                if (this.transAP != null)
+                this.backgroundWorkerRun.CancelAsync();
+                if (this.translate != null)
                 {
-                    this.transAP.CancellationPending = true;
+                    this.translate.CancellationPending = true;
                 }
             }
         }
@@ -346,14 +339,14 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void backgroundWorkerRun_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorkerRun_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
                 // 翻訳支援処理の前処理
-                textBoxLog.Clear();
+                this.textBoxLog.Clear();
                 this.logLastLength = 0;
-                textBoxLog.AppendText(
+                this.textBoxLog.AppendText(
                     String.Format(
                         Resources.LogMessage_Start,
                         FormUtils.ApplicationName(),
@@ -362,48 +355,73 @@ namespace Honememo.Wptscs
                 // 処理結果とログのための出力ファイル名を作成
                 string fileName = String.Empty;
                 string logName = String.Empty;
-                this.MakeFileName(ref fileName, ref logName, textBoxArticle.Text.Trim(), textBoxSaveDirectory.Text);
+                this.MakeFileName(ref fileName, ref logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
 
                 // 翻訳支援処理を実行し、結果とログをファイルに出力
                 // ※処理対象に応じてTranslateを継承したオブジェクトを生成
-                if (this.config.Mode == Config.RunMode.Wikipedia)
+                // TODO: この辺ファクトリメソッドにまとめる
+                Config config = Config.GetInstance();
+                Website source = config.GetWebsite(comboBoxSource.Text);
+                Website target = config.GetWebsite(comboBoxTarget.Text);
+                if (config.Mode == Config.RunMode.Wikipedia)
                 {
-                    Website source = this.config.GetWebsite(comboBoxSource.Text) as Website;
                     if (source == null)
                     {
-                        source = new MediaWiki(comboBoxSource.Text);
+                        source = new MediaWiki(this.comboBoxSource.Text);
                     }
 
-                    Website target = this.config.GetWebsite(comboBoxTarget.Text) as Website;
                     if (target == null)
                     {
-                        target = new MediaWiki(comboBoxTarget.Text);
+                        target = new MediaWiki(this.comboBoxTarget.Text);
                     }
 
-                    this.transAP = new TranslateMediaWiki(source as MediaWiki, target as MediaWiki);
+                    this.translate = new TranslateMediaWiki(source as MediaWiki, target as MediaWiki);
                 }
                 else
                 {
                     // 将来の拡張（？）用
-                    textBoxLog.AppendText(String.Format(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理"));
+                    this.textBoxLog.AppendText(String.Format(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理"));
                     FormUtils.InformationDialog(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理");
                     return;
                 }
 
-                this.transAP.LogUpdate += new EventHandler(this.GetLogUpdate);
+                if (config.Configs.ContainsKey(config.Mode))
+                {
+                    // 対訳表（項目）の設定
+                    foreach (Translation table in config.Configs[config.Mode].ItemTables)
+                    {
+                        if (table.From == this.comboBoxSource.Text && table.To == this.comboBoxTarget.Text)
+                        {
+                            this.translate.ItemTable = table;
+                            break;
+                        }
+                    }
+
+                    // 対訳表（見出し）の設定
+                    foreach (Translation table in config.Configs[config.Mode].HeadingTables)
+                    {
+                        if (table.From == this.comboBoxSource.Text && table.To == this.comboBoxTarget.Text)
+                        {
+                            this.translate.HeadingTable = table;
+                            break;
+                        }
+                    }
+                }
+
+                this.translate.LogUpdate += new EventHandler(this.GetLogUpdate);
 
                 // 実行前に、ユーザーから中止要求がされているかをチェック
                 if (backgroundWorkerRun.CancellationPending == true)
                 {
-                    textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
+                    this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
                 }
                 else
                 {
                     // 翻訳支援処理を実行
-                    bool successFlag = this.transAP.Run(textBoxArticle.Text.Trim());
+                    bool successFlag = this.translate.Run(textBoxArticle.Text.Trim());
 
                     // 処理に時間がかかるため、出力ファイル名を再確認
-                    this.MakeFileName(ref fileName, ref logName, textBoxArticle.Text.Trim(), textBoxSaveDirectory.Text);
+                    this.MakeFileName(ref fileName, ref logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
                     if (successFlag)
                     {
                         // 処理結果を出力
@@ -412,8 +430,8 @@ namespace Honememo.Wptscs
                             StreamWriter sw = new StreamWriter(Path.Combine(textBoxSaveDirectory.Text, fileName));
                             try
                             {
-                                sw.Write(this.transAP.Text);
-                                textBoxLog.AppendText(String.Format(Resources.LogMessage_End, fileName, logName));
+                                sw.Write(this.translate.Text);
+                                this.textBoxLog.AppendText(String.Format(Resources.LogMessage_End, fileName, logName));
                             }
                             finally
                             {
@@ -422,23 +440,23 @@ namespace Honememo.Wptscs
                         }
                         catch (Exception ex)
                         {
-                            textBoxLog.AppendText(String.Format(Resources.LogMessage_ErrorFileSave, Path.Combine(textBoxSaveDirectory.Text, fileName), ex.Message));
-                            textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
+                            this.textBoxLog.AppendText(String.Format(Resources.LogMessage_ErrorFileSave, Path.Combine(this.textBoxSaveDirectory.Text, fileName), ex.Message));
+                            this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
                         }
                     }
                     else
                     {
-                        textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
+                        this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
                     }
                 }
 
                 // ログを出力
                 try
                 {
-                    StreamWriter sw = new StreamWriter(Path.Combine(textBoxSaveDirectory.Text, logName));
+                    StreamWriter sw = new StreamWriter(Path.Combine(this.textBoxSaveDirectory.Text, logName));
                     try
                     {
-                        sw.Write(textBoxLog.Text);
+                        sw.Write(this.textBoxLog.Text);
                     }
                     finally
                     {
@@ -447,12 +465,12 @@ namespace Honememo.Wptscs
                 }
                 catch (Exception ex)
                 {
-                    textBoxLog.AppendText(String.Format(Resources.LogMessage_ErrorFileSave, Path.Combine(textBoxSaveDirectory.Text, logName), ex.Message));
+                    this.textBoxLog.AppendText(String.Format(Resources.LogMessage_ErrorFileSave, Path.Combine(this.textBoxSaveDirectory.Text, logName), ex.Message));
                 }
             }
             catch (Exception ex)
             {
-                textBoxLog.AppendText("\r\n" + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + "\r\n");
+                this.textBoxLog.AppendText("\r\n" + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + "\r\n");
                 System.Diagnostics.Debug.WriteLine("MainForm.backgroundWorkerRun_DoWork > 想定外のエラー : " + ex.Message);
                 System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
@@ -463,7 +481,7 @@ namespace Honememo.Wptscs
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void backgroundWorkerRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorkerRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // 画面をロック中から解放
             this.Release();
@@ -483,15 +501,15 @@ namespace Honememo.Wptscs
             Properties.Settings.Default.Upgrade();
 
             // コンボボックス設定
-            comboBoxSource.Items.Clear();
-            comboBoxTarget.Items.Clear();
-            if (Config.GetInstance().Configs.ContainsKey(this.config.Mode))
+            this.comboBoxSource.Items.Clear();
+            this.comboBoxTarget.Items.Clear();
+            if (Config.GetInstance().Configs.ContainsKey(Config.GetInstance().Mode))
             {
                 // 設定ファイルに存在する全言語を選択肢として登録する
-                foreach (Website site in Config.GetInstance().Configs[this.config.Mode].Websites)
+                foreach (Website site in Config.GetInstance().Configs[Config.GetInstance().Mode].Websites)
                 {
-                    comboBoxSource.Items.Add(site.Language);
-                    comboBoxTarget.Items.Add(site.Language);
+                    this.comboBoxSource.Items.Add(site.Language);
+                    this.comboBoxTarget.Items.Add(site.Language);
                 }
             }
         }
@@ -502,13 +520,13 @@ namespace Honememo.Wptscs
         private void LockOperation()
         {
             // 各種ボタンなどを入力不可に変更
-            groupBoxTransfer.Enabled = false;
-            groupBoxSaveDirectory.Enabled = false;
-            textBoxArticle.Enabled = false;
-            buttonRun.Enabled = false;
+            this.groupBoxTransfer.Enabled = false;
+            this.groupBoxSaveDirectory.Enabled = false;
+            this.textBoxArticle.Enabled = false;
+            this.buttonRun.Enabled = false;
 
             // 中止ボタンを有効に変更
-            buttonStop.Enabled = true;
+            this.buttonStop.Enabled = true;
         }
 
         /// <summary>
@@ -517,43 +535,39 @@ namespace Honememo.Wptscs
         private void Release()
         {
             // 中止ボタンを入力不可に変更
-            buttonStop.Enabled = false;
+            this.buttonStop.Enabled = false;
 
             // 各種ボタンなどを有効に変更
-            groupBoxTransfer.Enabled = true;
-            groupBoxSaveDirectory.Enabled = true;
-            textBoxArticle.Enabled = true;
-            buttonRun.Enabled = true;
+            this.groupBoxTransfer.Enabled = true;
+            this.groupBoxSaveDirectory.Enabled = true;
+            this.textBoxArticle.Enabled = true;
+            this.buttonRun.Enabled = true;
         }
 
         /// <summary>
         /// 渡された文字列から.txtと.logの重複していないファイル名を作成。
         /// </summary>
-        /// <param name="o_FileName">出力結果ファイル名。</param>
-        /// <param name="o_LogName">出力ログファイル名。</param>
-        /// <param name="i_Text">出力する結果テキスト。</param>
-        /// <param name="i_Dir">出力先ディレクトリ。</param>
+        /// <param name="fileName">出力結果ファイル名。</param>
+        /// <param name="logName">出力ログファイル名。</param>
+        /// <param name="text">出力する結果テキスト。</param>
+        /// <param name="dir">出力先ディレクトリ。</param>
         /// <returns><c>true</c> 出力成功</returns>
-        private bool MakeFileName(ref string o_FileName, ref string o_LogName, string i_Text, string i_Dir)
+        private bool MakeFileName(ref string fileName, ref string logName, string text, string dir)
         {
-            // 出力値初期化
-            o_FileName = String.Empty;
-            o_LogName = String.Empty;
-
             // 出力先フォルダに存在しないファイル名（の拡張子より前）を作成
             // ※渡されたWikipedia等の記事名にファイル名に使えない文字が含まれている場合、_ に置き換える
             //   また、ファイル名が重複している場合、xx[0].txtのように連番を付ける
-            string fileNameBase = FormUtils.ReplaceInvalidFileNameChars(i_Text);
-            string fileName = fileNameBase + ".txt";
-            string logName = fileNameBase + ".log";
-            bool successFlag = false;
+            string fileNameBase = FormUtils.ReplaceInvalidFileNameChars(text);
+            fileName = fileNameBase + ".txt";
+            logName = fileNameBase + ".log";
+            bool success = false;
             for (int i = 0; i < 100000; i++)
             {
                 // ※100000まで試して空きが見つからないことは無いはず、もし見つからなかったら最後のを上書き
-                if (File.Exists(Path.Combine(i_Dir, fileName)) == false
-                    && File.Exists(Path.Combine(i_Dir, logName)) == false)
+                if (!File.Exists(Path.Combine(dir, fileName))
+                    && !File.Exists(Path.Combine(dir, logName)))
                 {
-                    successFlag = true;
+                    success = true;
                     break;
                 }
 
@@ -562,9 +576,7 @@ namespace Honememo.Wptscs
             }
 
             // 結果設定
-            o_FileName = fileName;
-            o_LogName = logName;
-            return successFlag;
+            return success;
         }
 
         /// <summary>
@@ -575,10 +587,10 @@ namespace Honememo.Wptscs
         private void GetLogUpdate(object sender, System.EventArgs e)
         {
             // 前回以降に追加されたログをテキストボックスに出力
-            int length = this.transAP.Log.Length;
+            int length = this.translate.Log.Length;
             if (length > this.logLastLength)
             {
-                textBoxLog.AppendText(this.transAP.Log.Substring(this.logLastLength, length - this.logLastLength));
+                this.textBoxLog.AppendText(this.translate.Log.Substring(this.logLastLength, length - this.logLastLength));
             }
 
             this.logLastLength = length;

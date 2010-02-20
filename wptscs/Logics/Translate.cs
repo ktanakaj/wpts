@@ -11,8 +11,9 @@
 namespace Honememo.Wptscs.Logics
 {
     using System;
+    using System.IO;
+    using System.Net;
     using System.Net.NetworkInformation;
-    using Honememo;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
 
@@ -52,6 +53,16 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳先言語のサイト／言語情報。
         /// </summary>
         private Website to;
+
+        /// <summary>
+        /// 言語間の項目の対訳表。
+        /// </summary>
+        private Translation itemTable;
+
+        /// <summary>
+        /// 言語間の見出しの対訳表。
+        /// </summary>
+        private Translation headingTable;
 
         #endregion
 
@@ -94,10 +105,45 @@ namespace Honememo.Wptscs.Logics
         #region プロパティ
 
         /// <summary>
+        /// 言語間の項目の対訳表。
+        /// </summary>
+        public Translation ItemTable
+        {
+            get
+            {
+                return this.itemTable;
+            }
+            
+            set
+            {
+                this.itemTable = value;
+            }
+        }
+
+        /// <summary>
+        /// 言語間の見出しの対訳表。
+        /// </summary>
+        public Translation HeadingTable
+        {
+            get
+            {
+                return this.headingTable;
+            }
+
+            set
+            {
+                this.headingTable = value;
+            }
+        }
+
+        /// <summary>
         /// ログメッセージ。
         /// </summary>
         public string Log
         {
+            // ※ 将来的には、ロジックでログメッセージを出すなんて形を止めて
+            //    データとして保持させてメッセージはビューで・・・としたいが、
+            //    手間を考えて当面はこの形のまま実装する。
             get
             {
                 return this.log;
@@ -231,6 +277,51 @@ namespace Honememo.Wptscs.Logics
         {
             // オーバーロードメソッドをコール
             this.LogLine(String.Format(format, args));
+        }
+
+        /// <summary>
+        /// ログメッセージを出力しつつページを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
+        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
+        protected Page GetPage(string title, string notFoundMsg)
+        {
+            try
+            {
+                // 取得できた場合はここで終了
+                return this.From.GetPage(title);
+            }
+            catch (WebException e)
+            {
+                // 通信エラー
+                if (e.Status == WebExceptionStatus.ProtocolError
+                    && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
+                {
+                    // 404
+                    this.LogLine(notFoundMsg);
+                }
+                else
+                {
+                    // それ以外のエラー
+                    this.LogLine(Resources.RightArrow + " " + e.Message);
+                    this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                // ファイル無し
+                this.LogLine(notFoundMsg);
+            }
+            catch (Exception e)
+            {
+                // その他の想定外のエラー
+                this.LogLine(Resources.RightArrow + " " + e.Message);
+            }
+
+            // 取得失敗時いずれの場合もnull
+            return null;
         }
 
         #endregion

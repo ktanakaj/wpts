@@ -112,6 +112,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 対訳パターン。
         /// </summary>
+        /// <remarks>空でもオブジェクトは存在。</remarks>
         public IDictionary<string, Goal> Table
         {
             get

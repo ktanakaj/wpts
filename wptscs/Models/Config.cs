@@ -106,6 +106,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 言語に関する情報。
         /// </summary>
+        /// <remarks>空でもオブジェクトは存在。</remarks>
         public IList<Language> Languages
         {
             get
@@ -115,6 +116,12 @@ namespace Honememo.Wptscs.Models
 
             set
             {
+                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                if (value == null)
+                {
+                    throw new ArgumentNullException("languages");
+                }
+
                 this.languages = value;
             }
         }
@@ -122,6 +129,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 処理対象ごとの設定。
         /// </summary>
+        /// <remarks>空でもオブジェクトは存在。</remarks>
         public IDictionary<RunMode, ModeConfig> Configs
         {
             get
@@ -131,6 +139,12 @@ namespace Honememo.Wptscs.Models
 
             set
             {
+                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                if (value == null)
+                {
+                    throw new ArgumentNullException("configs");
+                }
+
                 this.configs = value;
             }
         }
@@ -153,6 +167,7 @@ namespace Honememo.Wptscs.Models
             lock (lockObj)
             {
                 // 既に作成済みのインスタンスがあればその値を使用
+                // （設定ファイルのタイムスタンプとか確認して再読み込みした方がよい？）
                 if (Config.config != null)
                 {
                     return Config.config;
@@ -447,6 +462,7 @@ namespace Honememo.Wptscs.Models
             /// <summary>
             /// ウェブサイトの情報。
             /// </summary>
+            /// <remarks>空でもオブジェクトは存在。</remarks>
             public IList<Website> Websites
             {
                 get
@@ -456,6 +472,12 @@ namespace Honememo.Wptscs.Models
 
                 set
                 {
+                    // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                    if (value == null)
+                    {
+                        throw new ArgumentNullException("websites");
+                    }
+
                     this.websites = value;
                 }
             }
@@ -463,6 +485,7 @@ namespace Honememo.Wptscs.Models
             /// <summary>
             /// 言語間の項目の対訳表。
             /// </summary>
+            /// <remarks>空でもオブジェクトは存在。</remarks>
             public IList<Translation> ItemTables
             {
                 get
@@ -472,6 +495,12 @@ namespace Honememo.Wptscs.Models
 
                 set
                 {
+                    // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                    if (value == null)
+                    {
+                        throw new ArgumentNullException("itemTables");
+                    }
+
                     this.itemTables = value;
                 }
             }
@@ -479,6 +508,7 @@ namespace Honememo.Wptscs.Models
             /// <summary>
             /// 言語間の見出しの対訳表。
             /// </summary>
+            /// <remarks>空でもオブジェクトは存在。</remarks>
             public IList<Translation> HeadingTables
             {
                 get
@@ -488,6 +518,12 @@ namespace Honememo.Wptscs.Models
 
                 set
                 {
+                    // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
+                    if (value == null)
+                    {
+                        throw new ArgumentNullException("headingTables");
+                    }
+
                     this.headingTables = value;
                 }
             }

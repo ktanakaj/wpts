@@ -83,6 +83,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// この言語の、各言語での名称。
         /// </summary>
+        /// <remarks>空でもオブジェクトは存在。</remarks>
         public IDictionary<string, LanguageName> Names
         {
             get

@@ -107,7 +107,7 @@ namespace Honememo.Wptscs.Models
         /// ページを取得。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
-        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <returns>取得したページ。</returns>
         /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
         public abstract Page GetPage(string title);
 

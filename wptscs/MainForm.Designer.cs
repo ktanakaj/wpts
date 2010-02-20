@@ -88,7 +88,7 @@ namespace Honememo.Wptscs
             this.buttonConfig.Name = "buttonConfig";
             this.toolTip.SetToolTip(this.buttonConfig, resources.GetString("buttonConfig.ToolTip"));
             this.buttonConfig.UseVisualStyleBackColor = true;
-            this.buttonConfig.Click += new System.EventHandler(this.buttonConfig_Click);
+            this.buttonConfig.Click += new System.EventHandler(this.ButtonConfig_Click);
             // 
             // labelTarget
             // 
@@ -104,8 +104,8 @@ namespace Honememo.Wptscs
             this.comboBoxTarget.Name = "comboBoxTarget";
             this.comboBoxTarget.Sorted = true;
             this.toolTip.SetToolTip(this.comboBoxTarget, resources.GetString("comboBoxTarget.ToolTip"));
-            this.comboBoxTarget.SelectedIndexChanged += new System.EventHandler(this.comboBoxTarget_SelectedIndexChanged);
-            this.comboBoxTarget.Leave += new System.EventHandler(this.comboBoxTarget_Leave);
+            this.comboBoxTarget.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTarget_SelectedIndexChanged);
+            this.comboBoxTarget.Leave += new System.EventHandler(this.ComboBoxTarget_Leave);
             // 
             // labelArrow
             // 
@@ -119,7 +119,7 @@ namespace Honememo.Wptscs
             this.linkLabelSourceURL.Name = "linkLabelSourceURL";
             this.linkLabelSourceURL.TabStop = true;
             this.toolTip.SetToolTip(this.linkLabelSourceURL, resources.GetString("linkLabelSourceURL.ToolTip"));
-            this.linkLabelSourceURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSourceURL_LinkClicked);
+            this.linkLabelSourceURL.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelSourceURL_LinkClicked);
             // 
             // labelSource
             // 
@@ -135,8 +135,8 @@ namespace Honememo.Wptscs
             this.comboBoxSource.Name = "comboBoxSource";
             this.comboBoxSource.Sorted = true;
             this.toolTip.SetToolTip(this.comboBoxSource, resources.GetString("comboBoxSource.ToolTip"));
-            this.comboBoxSource.SelectedIndexChanged += new System.EventHandler(this.comboBoxSource_SelectedIndexChanged);
-            this.comboBoxSource.Leave += new System.EventHandler(this.comboBoxSource_Leave);
+            this.comboBoxSource.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSource_SelectedIndexChanged);
+            this.comboBoxSource.Leave += new System.EventHandler(this.ComboBoxSource_Leave);
             // 
             // groupBoxSaveDirectory
             // 
@@ -152,7 +152,7 @@ namespace Honememo.Wptscs
             resources.ApplyResources(this.textBoxSaveDirectory, "textBoxSaveDirectory");
             this.textBoxSaveDirectory.Name = "textBoxSaveDirectory";
             this.toolTip.SetToolTip(this.textBoxSaveDirectory, resources.GetString("textBoxSaveDirectory.ToolTip"));
-            this.textBoxSaveDirectory.Leave += new System.EventHandler(this.textBoxSaveDirectory_Leave);
+            this.textBoxSaveDirectory.Leave += new System.EventHandler(this.TextBoxSaveDirectory_Leave);
             // 
             // buttonSaveDirectory
             // 
@@ -160,7 +160,7 @@ namespace Honememo.Wptscs
             this.buttonSaveDirectory.Name = "buttonSaveDirectory";
             this.toolTip.SetToolTip(this.buttonSaveDirectory, resources.GetString("buttonSaveDirectory.ToolTip"));
             this.buttonSaveDirectory.UseVisualStyleBackColor = true;
-            this.buttonSaveDirectory.Click += new System.EventHandler(this.buttonSaveDirectory_Click);
+            this.buttonSaveDirectory.Click += new System.EventHandler(this.ButtonSaveDirectory_Click);
             // 
             // groupBoxRun
             // 
@@ -190,7 +190,7 @@ namespace Honememo.Wptscs
             this.buttonStop.Name = "buttonStop";
             this.toolTip.SetToolTip(this.buttonStop, resources.GetString("buttonStop.ToolTip"));
             this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            this.buttonStop.Click += new System.EventHandler(this.ButtonStop_Click);
             // 
             // buttonRun
             // 
@@ -198,7 +198,7 @@ namespace Honememo.Wptscs
             this.buttonRun.Name = "buttonRun";
             this.toolTip.SetToolTip(this.buttonRun, resources.GetString("buttonRun.ToolTip"));
             this.buttonRun.UseVisualStyleBackColor = true;
-            this.buttonRun.Click += new System.EventHandler(this.buttonRun_Click);
+            this.buttonRun.Click += new System.EventHandler(this.ButtonRun_Click);
             // 
             // textBoxArticle
             // 
@@ -219,8 +219,8 @@ namespace Honememo.Wptscs
             // backgroundWorkerRun
             // 
             this.backgroundWorkerRun.WorkerSupportsCancellation = true;
-            this.backgroundWorkerRun.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerRun_DoWork);
-            this.backgroundWorkerRun.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerRun_RunWorkerCompleted);
+            this.backgroundWorkerRun.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorkerRun_DoWork);
+            this.backgroundWorkerRun.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorkerRun_RunWorkerCompleted);
             // 
             // toolTip
             // 
