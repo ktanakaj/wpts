@@ -106,8 +106,8 @@ namespace Honememo.Wptscs.Logics
 
             // 冒頭部を作成
             this.Text += "'''xxx'''";
-            string bracket = this.To.Bracket;
-            if (bracket.Contains("{0}") == true)
+            string bracket = Config.GetInstance().GetLanguage(this.To.Language).Bracket;
+            if (bracket.Contains("{0}"))
             {
                 string originalName = String.Empty;
                 string langTitle = this.GetFullName(this.From, this.To.Language);
@@ -166,42 +166,6 @@ namespace Honememo.Wptscs.Logics
             return base.GetPage(title, notFoundMsg) as MediaWikiPage;
         }
 
-        /// <summary>
-        /// ページに存在する指定された言語コードへの言語間リンクを返す。
-        /// </summary>
-        /// <param name="page">ページ。</param>
-        /// <param name="code">言語コード。</param>
-        /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
-        /// <remarks>対訳表が指定されている場合、その内容を使用する。また取得結果を対訳表に追加する。</remarks>
-        protected string GetInterWiki(MediaWikiPage page, string code)
-        {
-            if (this.ItemTable == null)
-            {
-                // 対訳表が指定されていない場合は、普通と同じ処理
-                return page.GetInterWiki(code);
-            }
-
-            string interWiki;
-            lock (this.ItemTable)
-            {
-                if (this.ItemTable.Table.ContainsKey(page.Title))
-                {
-                    // 対訳表に存在する場合はその値を返す
-                    return this.ItemTable.Table[page.Title].Word;
-                }
-
-                // 対訳表に存在しない場合は、普通に取得し表に記録
-                // ※ nullも存在しないことの記録として格納
-                interWiki = page.GetInterWiki(code);
-                Translation.Goal goal = new Translation.Goal();
-                goal.Word = interWiki;
-                goal.Timestamp = DateTime.UtcNow;
-                this.ItemTable.Table[page.Title] = goal;
-            }
-
-            return interWiki;
-        }
-        
         #endregion
 
         #region 各処理のメソッド
@@ -228,38 +192,28 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// 指定された記事を取得し、言語間リンクを確認、返す。
+        /// ログメッセージを出力しつつ、指定された記事の指定された言語コードへの言語間リンクを返す。
         /// </summary>
         /// <param name="title">記事名。</param>
-        /// <param name="template"><c>true</c> テンプレート。</param>
-        /// <returns>言語間リンク先の記事、存在しない場合 <c>null</c>。</returns>
-        protected string GetInterWiki(string title, bool template)
+        /// <param name="code">言語コード。</param>
+        /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
+        /// <remarks>対訳表が指定されている場合、その内容を使用する。また取得結果を対訳表に追加する。</remarks>
+        protected string GetInterWiki(string title, string code)
         {
-            // 指定された記事の生データをWikipediaから取得
-            // ※記事自体が存在しない場合、NULLを返す
-            string interWiki = null;
-            if (!template)
-            {
-                Log += "[[" + title + "]] " + Resources.RightArrow + " ";
-            }
-            else
-            {
-                Log += "{{" + title + "}} " + Resources.RightArrow + " ";
-            }
-
             MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
-                Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
+                this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
                 page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
             }
 
+            // 記事があればその言語間リンクを取得
+            string interWiki = null;
             if (page != null)
             {
-                // 翻訳先言語への言語間リンクを捜索
-                interWiki = this.GetInterWiki(page, this.To.Language);
+                interWiki = page.GetInterWiki(this.To.Language);
                 if (!String.IsNullOrEmpty(interWiki))
                 {
                     Log += "[[" + interWiki + "]]";
@@ -269,6 +223,78 @@ namespace Honememo.Wptscs.Logics
                     Log += Resources.LogMessage_InterWikiNothing;
                 }
             }
+
+            return interWiki;
+        }
+
+        /// <summary>
+        /// ログメッセージを出力しつつ、指定された記事の指定された言語コードへの言語間リンクを返す。
+        /// </summary>
+        /// <param name="title">記事名。</param>
+        /// <param name="code">言語コード。</param>
+        /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
+        /// <remarks>対訳表が指定されている場合、その内容を使用する。また取得結果を対訳表に追加する。</remarks>
+        protected string GetInterWikiUseTable(string title, string code)
+        {
+            if (this.ItemTable == null)
+            {
+                // 対訳表が指定されていない場合は、普通に記事を取得
+                return this.GetInterWiki(title, code);
+            }
+
+            string interWiki;
+            lock (this.ItemTable)
+            {
+                if (this.ItemTable.ContainsKey(title))
+                {
+                    // 対訳表に存在する場合はその値を使用
+                    interWiki = this.ItemTable[title].Word;
+                    if (!String.IsNullOrEmpty(interWiki))
+                    {
+                        Log += "[[" + interWiki + "]]";
+                    }
+                    else
+                    {
+                        Log += Resources.LogMessage_InterWikiNothing;
+                    }
+
+                    Log += Resources.LogMessageTranslation;
+                    return interWiki;
+                }
+
+                // 対訳表に存在しない場合は、普通に取得し表に記録
+                // ※ nullも存在しないことの記録として格納
+                interWiki = this.GetInterWiki(title, code);
+                Translation.Goal goal = new Translation.Goal();
+                goal.Word = interWiki;
+                goal.Timestamp = DateTime.UtcNow;
+                this.ItemTable[title] = goal;
+            }
+
+            return interWiki;
+        }
+        
+        /// <summary>
+        /// 指定された記事を取得し、言語間リンクを確認、返す。
+        /// </summary>
+        /// <param name="title">記事名。</param>
+        /// <param name="template"><c>true</c> テンプレート。</param>
+        /// <returns>言語間リンク先の記事、存在しない場合 <c>null</c>。</returns>
+        protected string GetInterWiki(string title, bool template)
+        {
+            // 指定された記事の生データをWikipediaから取得
+            // ※記事自体が存在しない場合、NULLを返す
+            if (!template)
+            {
+                Log += "[[" + title + "]] " + Resources.RightArrow + " ";
+            }
+            else
+            {
+                Log += "{{" + title + "}} " + Resources.RightArrow + " ";
+            }
+
+            // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
+            string interWiki = this.GetInterWikiUseTable(title, this.To.Language);
 
             // 改行が出力されていない場合（正常時）、改行
             if (!Log.EndsWith(ENTER))
@@ -888,7 +914,7 @@ namespace Honememo.Wptscs.Logics
             if (!String.IsNullOrEmpty(heading) && this.HeadingTable != null)
             {
                 // そのまま返してしまうと大文字小文字違いを判定できないので回す
-                foreach (KeyValuePair<string, Translation.Goal> p in this.HeadingTable.Table)
+                foreach (KeyValuePair<string, Translation.Goal> p in this.HeadingTable)
                 {
                     if (p.Key.ToLower() == heading.ToLower())
                     {

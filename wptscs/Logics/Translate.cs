@@ -218,8 +218,8 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理のインスタンスを作成。
         /// </summary>
         /// <param name="mode">処理モード。</param>
-        /// <param name="from">翻訳元サイト。</param>
-        /// <param name="to">翻訳先サイト。</param>
+        /// <param name="from">翻訳元言語。</param>
+        /// <param name="to">翻訳先言語。</param>
         /// <returns>生成したインスタンス。</returns>
         /// <remarks>
         /// 設定は設定クラスより取得、無ければ一部自動生成する。
@@ -229,59 +229,11 @@ namespace Honememo.Wptscs.Logics
         {
             // 処理対象に応じてTranslateを継承したオブジェクトを生成
             Translate translate = null;
-
-            // 設定情報の取得
-            Config.ModeConfig config = null;
-            if (Config.GetInstance().Configs.ContainsKey(mode))
-            {
-                config = Config.GetInstance().Configs[mode];
-            }
-
-            // もし無ければ設定を保存する
-            if (config == null)
-            {
-                config = new Config.ModeConfig();
-                Config.GetInstance().Configs[mode] = config;
-            }
+            Config config = Config.GetInstance();
 
             // Webサイトの設定
-            Website source = null;
-            foreach (Website s in config.Websites)
-            {
-                if (s.Language == from)
-                {
-                    source = s;
-                }
-            }
-
-            if (source == null)
-            {
-                if (mode == Config.RunMode.Wikipedia)
-                {
-                    // 設定として登録されていない場合、初期設定でWebサイトを作成
-                    source = new MediaWiki(from);
-                    config.Websites.Add(source);
-                }
-            }
-
-            Website target = null;
-            foreach (Website s in config.Websites)
-            {
-                if (s.Language == to)
-                {
-                    target = s;
-                }
-            }
-
-            if (target == null)
-            {
-                if (mode == Config.RunMode.Wikipedia)
-                {
-                    // 設定として登録されていない場合、初期設定でWebサイトを作成
-                    target = new MediaWiki(to);
-                    config.Websites.Add(target);
-                }
-            }
+            Website source = config.GetWebsite(mode, from);
+            Website target = config.GetWebsite(mode, to);
 
             // モードがWikipediaの場合
             if (mode == Config.RunMode.Wikipedia)
@@ -296,36 +248,10 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 対訳表（項目）の設定
-            foreach (Translation table in config.ItemTables)
-            {
-                if (table.From == from && table.To == to)
-                {
-                    translate.ItemTable = table;
-                    break;
-                }
-            }
-
-            if (translate.ItemTable == null)
-            {
-                translate.ItemTable = new Translation(from, to);
-                config.ItemTables.Add(translate.ItemTable);
-            }
+            translate.ItemTable = config.GetItemTable(from, to);
 
             // 対訳表（見出し）の設定
-            foreach (Translation table in config.HeadingTables)
-            {
-                if (table.From == from && table.To == to)
-                {
-                    translate.HeadingTable = table;
-                    break;
-                }
-            }
-
-            if (translate.HeadingTable == null)
-            {
-                translate.HeadingTable = new Translation(from, to);
-                config.HeadingTables.Add(translate.HeadingTable);
-            }
+            translate.HeadingTable = config.GetHeadingTable(from, to);
 
             return translate;
         }

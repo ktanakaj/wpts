@@ -49,12 +49,9 @@ namespace Honememo.Wptscs
         {
             // 各タブの内容を初期化する
             Config config = Config.GetInstance();
-            Config.ModeConfig wikipedia = config.Configs[Config.RunMode.Wikipedia];
-            if (wikipedia != null)
-            {
-                // 記事の置き換えタブの初期化
-                this.ImportTranslationTableView(dataGridViewItems, wikipedia.ItemTables);
-            }
+
+            // 記事の置き換えタブの初期化
+            this.ImportTranslationTableView(dataGridViewItems, config.GetModeConfig(Config.RunMode.Wikipedia).ItemTables);
         }
 
         /// <summary>
@@ -86,10 +83,7 @@ namespace Honememo.Wptscs
 
             // Wikipediaに関する設定
             // ※ 無かったら新規作成
-            Config.ModeConfig wikipedia = ObjectUtils.DefaultIfNull<Config.ModeConfig>(
-                config.Configs[Config.RunMode.Wikipedia],
-                new Config.ModeConfig());
-            config.Configs[Config.RunMode.Wikipedia] = wikipedia;
+            Config.ModeConfig wikipedia = config.GetModeConfig(Config.RunMode.Wikipedia);
 
             // 記事の置き換えタブの保存
             wikipedia.ItemTables = this.ExportTranslationTableView(this.dataGridViewItems);
@@ -127,14 +121,14 @@ namespace Honememo.Wptscs
             view.Rows.Clear();
             foreach (Translation table in tables)
             {
-                foreach (KeyValuePair<string, Translation.Goal> item in table.Table)
+                foreach (KeyValuePair<string, Translation.Goal> item in table)
                 {
                     // 1行分の初期値を設定。右矢印は別途イベントで追加すること
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(view);
                     row.Cells[0].Value = table.From;
-                    row.Cells[1].Value = table.To;
-                    row.Cells[3].Value = item.Key;
+                    row.Cells[1].Value = item.Key;
+                    row.Cells[3].Value = table.To;
                     row.Cells[4].Value = item.Value.Word;
                     row.Cells[5].Value = item.Value.Timestamp;
                     view.Rows.Add(row);
@@ -193,7 +187,7 @@ namespace Honememo.Wptscs
                     goal.Timestamp = DateTime.Parse(timestamp);
                 }
 
-                table.Table[ObjectUtils.ToString(row.Cells[1].Value)] = goal;
+                table[ObjectUtils.ToString(row.Cells[1].Value)] = goal;
             }
 
             return tables;

@@ -121,7 +121,7 @@ namespace Honememo.Wptscs
             Settings.Default.Save();
 
             // 設定ファイルの内容も保存
-            //TODO: 二重起動とかを考えるともうちょいちゃんとやるべき
+            // TODO: 二重起動とかを考えるともうちょいちゃんとやるべき
             Config.GetInstance().Save();
         }
 
@@ -138,22 +138,15 @@ namespace Honememo.Wptscs
             if (!String.IsNullOrEmpty(comboBoxSource.Text))
             {
                 this.comboBoxSource.Text = this.comboBoxSource.Text.Trim().ToLower();
-                Language lang = Config.GetInstance().GetLanguage(this.comboBoxSource.Text);
-                if (lang != null)
-                {
-                    // その言語の、ユーザーが使用している言語での表示名を表示
-                    // （日本語環境だったら日本語を、英語だったら英語を）
-                    this.labelSource.Text = lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
 
-                    // サーバーURLの表示
-                    Website site = Config.GetInstance().GetWebsite(this.comboBoxSource.Text);
-                    if (site == null && Config.GetInstance().Mode == Config.RunMode.Wikipedia)
-                    {
-                        site = new MediaWiki(this.comboBoxSource.Text);
-                    }
+                // その言語の、ユーザーが使用している言語での表示名を表示
+                // （日本語環境だったら日本語を、英語だったら英語を）
+                this.labelSource.Text = Config.GetInstance().GetLanguage(
+                    this.comboBoxSource.Text).Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
 
-                    this.linkLabelSourceURL.Text = site.Location;
-                }
+                // サーバーURLの表示
+                this.linkLabelSourceURL.Text = Config.GetInstance().GetWebsite(
+                    this.comboBoxSource.Text).Location;
             }
         }
 
@@ -191,13 +184,11 @@ namespace Honememo.Wptscs
             if (!String.IsNullOrEmpty(this.comboBoxTarget.Text))
             {
                 this.comboBoxTarget.Text = this.comboBoxTarget.Text.Trim().ToLower();
-                Language lang = Config.GetInstance().GetLanguage(this.comboBoxTarget.Text);
-                if (lang != null)
-                {
-                    // その言語の、ユーザーが使用している言語での表示名を表示
-                    // （日本語環境だったら日本語を、英語だったら英語を）
-                    this.labelTarget.Text = lang.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
-                }
+
+                // その言語の、ユーザーが使用している言語での表示名を表示
+                // （日本語環境だったら日本語を、英語だったら英語を）
+                this.labelTarget.Text = Config.GetInstance().GetLanguage(
+                    this.comboBoxTarget.Text).Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
             }
         }
 
@@ -373,7 +364,7 @@ namespace Honememo.Wptscs
                 this.translate.LogUpdate += new EventHandler(this.GetLogUpdate);
 
                 // 実行前に、ユーザーから中止要求がされているかをチェック
-                if (backgroundWorkerRun.CancellationPending == true)
+                if (backgroundWorkerRun.CancellationPending)
                 {
                     this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
                 }
@@ -465,14 +456,12 @@ namespace Honememo.Wptscs
             // コンボボックス設定
             this.comboBoxSource.Items.Clear();
             this.comboBoxTarget.Items.Clear();
-            if (Config.GetInstance().Configs.ContainsKey(Config.GetInstance().Mode))
+
+            // 設定ファイルに存在する全言語を選択肢として登録する
+            foreach (Website site in Config.GetInstance().GetModeConfig().Websites)
             {
-                // 設定ファイルに存在する全言語を選択肢として登録する
-                foreach (Website site in Config.GetInstance().Configs[Config.GetInstance().Mode].Websites)
-                {
-                    this.comboBoxSource.Items.Add(site.Language);
-                    this.comboBoxTarget.Items.Add(site.Language);
-                }
+                this.comboBoxSource.Items.Add(site.Language);
+                this.comboBoxTarget.Items.Add(site.Language);
             }
         }
 

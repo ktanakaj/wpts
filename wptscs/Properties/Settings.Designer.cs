@@ -174,9 +174,9 @@ namespace Honememo.Wptscs.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(" ({0}) ")]
-        public string MediaWikiBracket {
+        public string Bracket {
             get {
-                return ((string)(this["MediaWikiBracket"]));
+                return ((string)(this["Bracket"]));
             }
         }
         
@@ -256,18 +256,6 @@ namespace Honememo.Wptscs.Properties {
         public string MediaWikiNamespacePath {
             get {
                 return ((string)(this["MediaWikiNamespacePath"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Proxy {
-            get {
-                return ((string)(this["Proxy"]));
-            }
-            set {
-                this["Proxy"] = value;
             }
         }
     }

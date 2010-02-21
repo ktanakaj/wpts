@@ -215,6 +215,10 @@
   <data name="LogMessage_TemplateUnknown" xml:space="preserve">
     <value>{{{{0}}}} の識別に失敗しました。{{{{0}}}} は {{1}}名前空間の記事して処理します。（{{2}}）</value>
   </data>
+  <data name="LogMessageTranslation" xml:space="preserve">
+    <value> （対訳表より）</value>
+    <comment>対訳表使用時の注釈</comment>
+  </data>
   <data name="QuestionMessage_ArticleExist" xml:space="preserve">
     <value>対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？</value>
   </data>

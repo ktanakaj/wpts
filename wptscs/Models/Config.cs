@@ -223,44 +223,178 @@ namespace Honememo.Wptscs.Models
                 }
             }
         }
+        
+        #endregion
+
+        #region 設定値取得用インスタンスメソッド
 
         /// <summary>
-        /// ウェブサイトから、指定された言語の情報を取得する。
+        /// 設定から、指定された言語の情報を取得する。
         /// </summary>
         /// <param name="code">言語コード。</param>
-        /// <returns>言語の情報。存在しない場合は <c>null</c>。</returns>
+        /// <returns>言語の情報。存在しない場合は自動生成した情報を返す。</returns>
         public Language GetLanguage(string code)
         {
-            foreach (Language lang in this.Languages)
+            // 設定が存在すれば取得した値を返す
+            foreach (Language l in this.Languages)
             {
-                if (lang.Code == code)
+                if (l.Code == code)
                 {
-                    return lang;
+                    return l;
                 }
             }
 
-            return null;
+            // 存在しない場合自動生成した値を返す
+            Language lang = new Language(code);
+            this.Languages.Add(lang);
+            return lang;
         }
 
         /// <summary>
-        /// ウェブサイトから、現在の処理対象・指定された言語の情報を取得する。
+        /// 設定から、指定された処理対象ごとの設定情報を取得する。
         /// </summary>
-        /// <param name="lang">言語コード。</param>
-        /// <returns>ウェブサイトの情報。存在しない場合は <c>null</c>。</returns>
-        public Website GetWebsite(string lang)
+        /// <param name="mode">プログラムの処理対象。</param>
+        /// <returns>処理対象ごとの設定情報。存在しない場合は可能であれば自動生成した情報を返す。</returns>
+        public ModeConfig GetModeConfig(RunMode mode)
         {
-            if (this.Configs.ContainsKey(this.Mode))
+            // 設定が存在すれば取得した値を返す
+            if (this.Configs.ContainsKey(mode))
             {
-                foreach (Website site in this.Configs[this.Mode].Websites)
+                return this.Configs[mode];
+            }
+
+            // 存在しない場合自動生成した値を返す
+            ModeConfig config = new ModeConfig();
+            this.Configs[mode] = config;
+            return config;
+        }
+
+        /// <summary>
+        /// 設定から、現在の処理対象ごとの設定情報を取得する。
+        /// </summary>
+        /// <returns>処理対象ごとの設定情報。存在しない場合は可能であれば自動生成した情報を返す。</returns>
+        public ModeConfig GetModeConfig()
+        {
+            // 現在の処理対象から、オーバーロードメソッドをコール
+            return this.GetModeConfig(this.Mode);
+        }
+
+        /// <summary>
+        /// 設定から、指定された処理対象・言語のウェブサイトを取得する。
+        /// </summary>
+        /// <param name="mode">プログラムの処理対象。</param>
+        /// <param name="lang">言語コード。</param>
+        /// <returns>ウェブサイトの情報。存在しない場合は可能であれば自動生成した情報を、できなければ<c>null</c>返す。</returns>
+        public Website GetWebsite(RunMode mode, string lang)
+        {
+            // 設定が存在すれば取得した値を返す
+            ModeConfig config = this.GetModeConfig(mode);
+            foreach (Website s in config.Websites)
+            {
+                if (s.Language == lang)
                 {
-                    if (site.Language == lang)
-                    {
-                        return site;
-                    }
+                    return s;
                 }
             }
 
-            return null;
+            // 存在しない場合自動生成した値を返す
+            // （自動生成できない場合はnull）
+            Website site = null;
+            if (mode == RunMode.Wikipedia)
+            {
+                // 現時点ではMediaWikiのみ対応
+                site = new MediaWiki(lang);
+                config.Websites.Add(site);
+            }
+
+            return site;
+        }
+
+        /// <summary>
+        /// 設定から、現在の処理対象・指定された言語のウェブサイトを取得する。
+        /// </summary>
+        /// <param name="lang">言語コード。</param>
+        /// <returns>ウェブサイトの情報。存在しない場合は可能であれば自動生成した情報を、できなければ<c>null</c>返す。</returns>
+        public Website GetWebsite(string lang)
+        {
+            // 現在の処理対象から、オーバーロードメソッドをコール
+            return this.GetWebsite(this.Mode, lang);
+        }
+
+        /// <summary>
+        /// 設定から、指定された処理対象・言語の対訳表（項目）を取得する。
+        /// </summary>
+        /// <param name="mode">プログラムの処理対象。</param>
+        /// <param name="from">翻訳元言語。</param>
+        /// <param name="to">翻訳先言語。</param>
+        /// <returns>対訳表の情報。存在しない場合は自動生成した情報を返す。</returns>
+        public Translation GetItemTable(RunMode mode, string from, string to)
+        {
+            // 設定が存在すれば取得した値を返す
+            ModeConfig config = this.GetModeConfig(mode);
+            foreach (Translation t in config.ItemTables)
+            {
+                if (t.From == from && t.To == to)
+                {
+                    return t;
+                }
+            }
+
+            // 存在しない場合自動生成した値を返す
+            // （自動生成できない場合はnull）
+            Translation table = new Translation(from, to);
+            config.ItemTables.Add(table);
+            return table;
+        }
+
+        /// <summary>
+        /// 設定から、現在の処理対象・指定された言語の対訳表（項目）を取得する。
+        /// </summary>
+        /// <param name="from">翻訳元言語。</param>
+        /// <param name="to">翻訳先言語。</param>
+        /// <returns>対訳表の情報。存在しない場合は自動生成した情報を返す。</returns>
+        public Translation GetItemTable(string from, string to)
+        {
+            // 現在の処理対象から、オーバーロードメソッドをコール
+            return this.GetItemTable(this.Mode, from, to);
+        }
+
+        /// <summary>
+        /// 設定から、指定された処理対象・言語の対訳表（見出し）を取得する。
+        /// </summary>
+        /// <param name="mode">プログラムの処理対象。</param>
+        /// <param name="from">翻訳元言語。</param>
+        /// <param name="to">翻訳先言語。</param>
+        /// <returns>対訳表の情報。存在しない場合は自動生成した情報を返す。</returns>
+        public Translation GetHeadingTable(RunMode mode, string from, string to)
+        {
+            // 設定が存在すれば取得した値を返す
+            ModeConfig config = this.GetModeConfig(mode);
+            foreach (Translation t in config.HeadingTables)
+            {
+                if (t.From == from && t.To == to)
+                {
+                    return t;
+                }
+            }
+
+            // 存在しない場合自動生成した値を返す
+            // （自動生成できない場合はnull）
+            Translation table = new Translation(from, to);
+            config.HeadingTables.Add(table);
+            return table;
+        }
+
+        /// <summary>
+        /// 設定から、現在の処理対象・指定された言語の対訳表（見出し）を取得する。
+        /// </summary>
+        /// <param name="from">翻訳元言語。</param>
+        /// <param name="to">翻訳先言語。</param>
+        /// <returns>対訳表の情報。存在しない場合は自動生成した情報を返す。</returns>
+        public Translation GetHeadingTable(string from, string to)
+        {
+            // 現在の処理対象から、オーバーロードメソッドをコール
+            return this.GetHeadingTable(this.Mode, from, to);
         }
 
         #endregion

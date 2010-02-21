@@ -176,6 +176,7 @@
           <ShortName />
         </LanguageName>
       </Names>
+      <Bracket>（{0}）</Bracket>
     </Language>
     <Language Code="ko">
       <Names>
@@ -346,7 +347,6 @@
         <Location>http://ja.wikipedia.org</Location>
         <Language>ja</Language>
         <ExportPath>wiki/特別:Export/{0}</ExportPath>
-        <Bracket>（{0}）</Bracket>
         <Redirect>#転送</Redirect>
         <MagicWords />
         <Headings>

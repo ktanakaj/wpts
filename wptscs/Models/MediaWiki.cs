@@ -41,11 +41,6 @@ namespace Honememo.Wptscs.Models
         private string exportPath;
 
         /// <summary>
-        /// 括弧のフォーマット。
-        /// </summary>
-        private string bracket;
-
-        /// <summary>
         /// リダイレクトの文字列。
         /// </summary>
         private string redirect;
@@ -175,28 +170,6 @@ namespace Honememo.Wptscs.Models
             set
             {
                 this.exportPath = value;
-            }
-        }
-
-        /// <summary>
-        /// 括弧のフォーマット。
-        /// </summary>
-        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
-        public string Bracket
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(this.bracket))
-                {
-                    return Settings.Default.MediaWikiBracket;
-                }
-
-                return this.bracket;
-            }
-
-            set
-            {
-                this.bracket = value;
             }
         }
 
@@ -509,7 +482,6 @@ namespace Honememo.Wptscs.Models
             this.Xmlns = XmlUtils.InnerText(siteElement.SelectSingleNode("Xmlns"));
             this.NamespacePath = XmlUtils.InnerText(siteElement.SelectSingleNode("NamespacePath"));
             this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
-            this.Bracket = XmlUtils.InnerText(siteElement.SelectSingleNode("Bracket"));
             this.Redirect = XmlUtils.InnerText(siteElement.SelectSingleNode("Redirect"));
 
             string text = XmlUtils.InnerText(siteElement.SelectSingleNode("TemplateNamespace"));
@@ -554,7 +526,6 @@ namespace Honememo.Wptscs.Models
             writer.WriteElementString("Xmlns", this.xmlns);
             writer.WriteElementString("NamespacePath", this.namespacePath);
             writer.WriteElementString("ExportPath", this.exportPath);
-            writer.WriteElementString("Bracket", this.bracket);
             writer.WriteElementString("Redirect", this.redirect);
             writer.WriteElementString(
                 "TemplateNamespace",

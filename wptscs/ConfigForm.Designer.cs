@@ -41,9 +41,14 @@
             this.ColumnToTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageHeadings = new System.Windows.Forms.TabPage();
+            this.dataGridViewHeading = new System.Windows.Forms.DataGridView();
+            this.tabPageServer = new System.Windows.Forms.TabPage();
+            this.tabPageApplication = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
+            this.tabPageHeadings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHeading)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOk
@@ -65,6 +70,8 @@
             resources.ApplyResources(this.tabControl, "tabControl");
             this.tabControl.Controls.Add(this.tabPageItems);
             this.tabControl.Controls.Add(this.tabPageHeadings);
+            this.tabControl.Controls.Add(this.tabPageServer);
+            this.tabControl.Controls.Add(this.tabPageApplication);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             // 
@@ -135,9 +142,29 @@
             // 
             // tabPageHeadings
             // 
+            this.tabPageHeadings.Controls.Add(this.dataGridViewHeading);
             resources.ApplyResources(this.tabPageHeadings, "tabPageHeadings");
             this.tabPageHeadings.Name = "tabPageHeadings";
             this.tabPageHeadings.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewHeading
+            // 
+            resources.ApplyResources(this.dataGridViewHeading, "dataGridViewHeading");
+            this.dataGridViewHeading.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewHeading.Name = "dataGridViewHeading";
+            this.dataGridViewHeading.RowTemplate.Height = 21;
+            // 
+            // tabPageServer
+            // 
+            resources.ApplyResources(this.tabPageServer, "tabPageServer");
+            this.tabPageServer.Name = "tabPageServer";
+            this.tabPageServer.UseVisualStyleBackColor = true;
+            // 
+            // tabPageApplication
+            // 
+            resources.ApplyResources(this.tabPageApplication, "tabPageApplication");
+            this.tabPageApplication.Name = "tabPageApplication";
+            this.tabPageApplication.UseVisualStyleBackColor = true;
             // 
             // ConfigForm
             // 
@@ -156,6 +183,8 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageItems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).EndInit();
+            this.tabPageHeadings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHeading)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -174,5 +203,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
+        private System.Windows.Forms.DataGridView dataGridViewHeading;
+        private System.Windows.Forms.TabPage tabPageServer;
+        private System.Windows.Forms.TabPage tabPageApplication;
     }
 }

@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Models
     using System.Xml;
     using System.Xml.Serialization;
     using Honememo.Utilities;
+    using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// 言語に関する情報をあらわすモデルクラスです。
@@ -32,6 +33,11 @@ namespace Honememo.Wptscs.Models
         /// この言語の、各言語での名称。
         /// </summary>
         private IDictionary<string, LanguageName> names = new Dictionary<string, LanguageName>();
+
+        /// <summary>
+        /// 括弧のフォーマット。
+        /// </summary>
+        private string bracket;
 
         #endregion
 
@@ -103,6 +109,28 @@ namespace Honememo.Wptscs.Models
             }
         }
 
+        /// <summary>
+        /// 括弧のフォーマット。
+        /// </summary>
+        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
+        public string Bracket
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(this.bracket))
+                {
+                    return Settings.Default.Bracket;
+                }
+
+                return this.bracket;
+            }
+
+            set
+            {
+                this.bracket = value;
+            }
+        }
+
         #endregion
 
         #region XMLシリアライズ用メソッド
@@ -129,6 +157,7 @@ namespace Honememo.Wptscs.Models
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement langElement = xml.SelectSingleNode("Language") as XmlElement;
             this.Code = langElement.GetAttribute("Code");
+            this.Bracket = XmlUtils.InnerText(langElement.SelectSingleNode("Bracket"));
 
             // 言語の呼称情報
             foreach (XmlNode nameNode in langElement.SelectNodes("Names/LanguageName"))
@@ -162,6 +191,7 @@ namespace Honememo.Wptscs.Models
             }
 
             writer.WriteEndElement();
+            writer.WriteElementString("Bracket", this.bracket);
         }
 
         #endregion

@@ -156,6 +156,7 @@ namespace Honememo.Wptscs.Models
             }
 
             // 応答データを受信するためのStreamを取得し、データを取得
+            System.Diagnostics.Debug.WriteLine("Website.GetStream > " + uri.ToString());
             return req.GetResponse().GetResponseStream();
         }
 

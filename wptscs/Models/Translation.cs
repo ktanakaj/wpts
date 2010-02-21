@@ -19,7 +19,7 @@ namespace Honememo.Wptscs.Models
     /// <summary>
     /// 言語間の対訳表をあらわすモデルクラスです。
     /// </summary>
-    public class Translation : IXmlSerializable
+    public class Translation : Dictionary<string, Translation.Goal>, IXmlSerializable
     {
         #region private変数
 
@@ -32,11 +32,6 @@ namespace Honememo.Wptscs.Models
         /// 翻訳先言語コード。
         /// </summary>
         private string to;
-
-        /// <summary>
-        /// 対訳パターン。
-        /// </summary>
-        private IDictionary<string, Goal> table = new Dictionary<string, Goal>();
 
         #endregion
 
@@ -109,29 +104,6 @@ namespace Honememo.Wptscs.Models
             }
         }
 
-        /// <summary>
-        /// 対訳パターン。
-        /// </summary>
-        /// <remarks>空でもオブジェクトは存在。</remarks>
-        public IDictionary<string, Goal> Table
-        {
-            get
-            {
-                return this.table;
-            }
-
-            set
-            {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (value == null)
-                {
-                    throw new ArgumentNullException("table");
-                }
-
-                this.table = value;
-            }
-        }
-
         #endregion
 
         #region XMLシリアライズ用メソッド
@@ -177,7 +149,7 @@ namespace Honememo.Wptscs.Models
                     }
                 }
 
-                this.Table[itemElement.GetAttribute("From")] = goal;
+                this[itemElement.GetAttribute("From")] = goal;
             }
         }
 
@@ -191,7 +163,7 @@ namespace Honememo.Wptscs.Models
             writer.WriteAttributeString("To", this.To);
 
             // 各対訳の出力
-            foreach (KeyValuePair<string, Goal> item in this.Table)
+            foreach (KeyValuePair<string, Goal> item in this)
             {
                 writer.WriteStartElement("Item");
                 writer.WriteAttributeString("From", item.Key);

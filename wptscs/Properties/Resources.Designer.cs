@@ -295,6 +295,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///    （対訳表より） に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageTranslation {
+            get {
+                return ResourceManager.GetString("LogMessageTranslation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string QuestionMessage_ArticleExist {

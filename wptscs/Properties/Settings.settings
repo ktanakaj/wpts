@@ -137,7 +137,7 @@
     <Setting Name="MediaWikiExportPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/wiki/Special:Export/{0}</Value>
     </Setting>
-    <Setting Name="MediaWikiBracket" Type="System.String" Scope="Application">
+    <Setting Name="Bracket" Type="System.String" Scope="Application">
       <Value Profile="(Default)"> ({0}) </Value>
     </Setting>
     <Setting Name="MediaWikiRedirect" Type="System.String" Scope="Application">
