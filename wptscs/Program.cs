@@ -24,6 +24,14 @@ namespace Honememo.Wptscs
         [STAThread]
         private static void Main()
         {
+            // 初回実行時は古いバージョンの設定があればバージョンアップ
+            if (!Properties.Settings.Default.IsUpgraded)
+            {
+                // 現バージョンを上書きしてしまうため一度だけ実施
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.IsUpgraded = true;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

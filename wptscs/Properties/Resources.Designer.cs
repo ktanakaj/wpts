@@ -412,6 +412,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   キャッシュ有効期限には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageCacheExpireValue {
+            get {
+                return ResourceManager.GetString("WarningMessageCacheExpireValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   警告 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningTitle {

@@ -15,6 +15,7 @@ namespace Honememo.Wptscs
     using System.ComponentModel;
     using System.Data;
     using System.Drawing;
+    using System.Reflection;
     using System.Text;
     using System.Windows.Forms;
     using Honememo.Utilities;
@@ -52,6 +53,19 @@ namespace Honememo.Wptscs
 
             // 記事の置き換えタブの初期化
             this.ImportTranslationTableView(dataGridViewItems, config.GetModeConfig(Config.RunMode.Wikipedia).ItemTables);
+
+            // その他タブの初期化
+            this.textBoxCacheExpire.Text = Settings.Default.CacheExpire.Days.ToString();
+            this.textBoxUserAgent.Text = Settings.Default.UserAgent;
+            this.textBoxReferer.Text = Settings.Default.Referer;
+            this.labelApplicationName.Text = FormUtils.ApplicationName();
+            AssemblyCopyrightAttribute copyright = Attribute.GetCustomAttribute(
+                Assembly.GetExecutingAssembly(),
+                typeof(AssemblyCopyrightAttribute)) as AssemblyCopyrightAttribute;
+            if (copyright != null)
+            {
+                this.labelCopyright.Text = copyright.Copyright;
+            }
         }
 
         /// <summary>
@@ -87,8 +101,14 @@ namespace Honememo.Wptscs
 
             // 記事の置き換えタブの保存
             wikipedia.ItemTables = this.ExportTranslationTableView(this.dataGridViewItems);
-            
+
+            // その他タブの保存
+            Settings.Default.CacheExpire = new TimeSpan(int.Parse(this.textBoxCacheExpire.Text), 0, 0, 0);
+            Settings.Default.UserAgent = this.textBoxUserAgent.Text;
+            Settings.Default.Referer = this.textBoxReferer.Text;
+
             // 設定をファイルに保存
+            Settings.Default.Save();
             try
             {
                 config.Save();
@@ -103,6 +123,32 @@ namespace Honememo.Wptscs
 
             // 画面を閉じる
             this.Close();
+        }
+
+        /// <summary>
+        /// キャッシュ有効期限ボックスフォーカス喪失時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxCacheExpire_Leave(object sender, EventArgs e)
+        {
+            int expire;
+            if (!int.TryParse(this.textBoxCacheExpire.Text, out expire) || expire < 0)
+            {
+                FormUtils.WarningDialog(Resources.WarningMessageCacheExpireValue);
+                this.textBoxCacheExpire.Focus();
+            }
+        }
+
+        /// <summary>
+        /// ウェブサイトURLクリック時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void LinkLabelWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // リンクを開く
+            System.Diagnostics.Process.Start(this.linkLabelWebsite.Text);
         }
 
         #endregion

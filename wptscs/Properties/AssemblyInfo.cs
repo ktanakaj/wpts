@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Wikipedia 翻訳支援ツール")]
-[assembly: AssemblyCopyright("Copyright (C) Honeplus 2009")]
+[assembly: AssemblyCopyright("Copyright (C) Honeplus 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

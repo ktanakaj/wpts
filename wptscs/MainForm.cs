@@ -449,10 +449,6 @@ namespace Honememo.Wptscs
         /// </summary>
         private void Initialize()
         {
-            // もし古いバージョンの設定があればバージョンアップ
-            // ※ 互換性がなくなるときはコメントアウトする
-            Properties.Settings.Default.Upgrade();
-
             // コンボボックス設定
             this.comboBoxSource.Items.Clear();
             this.comboBoxTarget.Items.Clear();

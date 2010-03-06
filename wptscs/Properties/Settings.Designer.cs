@@ -237,15 +237,12 @@ namespace Honememo.Wptscs.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.80.0.0")]
         public string ConfigurationCompatible {
             get {
                 return ((string)(this["ConfigurationCompatible"]));
-            }
-            set {
-                this["ConfigurationCompatible"] = value;
             }
         }
         
@@ -256,6 +253,18 @@ namespace Honememo.Wptscs.Properties {
         public string MediaWikiNamespacePath {
             get {
                 return ((string)(this["MediaWikiNamespacePath"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsUpgraded {
+            get {
+                return ((bool)(this["IsUpgraded"]));
+            }
+            set {
+                this["IsUpgraded"] = value;
             }
         }
     }
