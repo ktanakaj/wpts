@@ -132,6 +132,40 @@ namespace Honememo.Utilities
 
         #endregion
 
+        #region null値許容メソッド
+
+        /// <summary>
+        /// <seealso cref="DataGridViewCell"/>が<c>null</c>の場合に空の文字列を返す<c>ToString</c>。
+        /// </summary>
+        /// <param name="obj"><c>ToString</c>するオブジェクト。<c>null</c>も可。</param>
+        /// <returns>渡されたオブジェクトの<c>Value</c>を<c>ToString</c>した結果。<c>null</c>の場合には空の文字列。</returns>
+        public static string ToString(DataGridViewCell obj)
+        {
+            return ToString(obj, String.Empty);
+        }
+
+        /// <summary>
+        /// <seealso cref="DataGridViewCell"/>が<c>null</c>の場合に指定された文字列を返す<c>ToString</c>。
+        /// </summary>
+        /// <param name="obj"><c>ToString</c>するオブジェクト。<c>null</c>も可。</param>
+        /// <param name="nullStr">渡されたオブジェクトが<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>
+        /// <returns>渡されたオブジェクトの<c>Value</c>を<c>ToString</c>した結果。<c>null</c>の場合には指定された文字列。</returns>
+        public static string ToString(DataGridViewCell obj, string nullStr)
+        {
+            if (obj == null)
+            {
+                return nullStr;
+            }
+            else if (obj.Value == null)
+            {
+                return nullStr;
+            }
+
+            return obj.Value.ToString();
+        }
+
+        #endregion
+
         #region ダイアログ
 
         /// <summary>

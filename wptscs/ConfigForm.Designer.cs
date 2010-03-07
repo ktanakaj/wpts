@@ -43,7 +43,32 @@
             this.tabPageHeadings = new System.Windows.Forms.TabPage();
             this.dataGridViewHeading = new System.Windows.Forms.DataGridView();
             this.tabPageServer = new System.Windows.Forms.TabPage();
-            this.comboBoxLanguuage = new System.Windows.Forms.ComboBox();
+            this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
+            this.groupBoxLanguageName = new System.Windows.Forms.GroupBox();
+            this.dataGridViewLanguageName = new System.Windows.Forms.DataGridView();
+            this.ColumnLanguageNameCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLanguageNameName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnLanguageNameShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxBracket = new System.Windows.Forms.TextBox();
+            this.labelBracket = new System.Windows.Forms.Label();
+            this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.textBoxFileNamespace = new System.Windows.Forms.TextBox();
+            this.labelFileNamespace = new System.Windows.Forms.Label();
+            this.textBoxCategoryNamespace = new System.Windows.Forms.TextBox();
+            this.labelCategoryNamespace = new System.Windows.Forms.Label();
+            this.textBoxTemplateNamespace = new System.Windows.Forms.TextBox();
+            this.labelTemplateNamespace = new System.Windows.Forms.Label();
+            this.textBoxRedirect = new System.Windows.Forms.TextBox();
+            this.labelRedirect = new System.Windows.Forms.Label();
+            this.textBoxExportPath = new System.Windows.Forms.TextBox();
+            this.labelExportPath = new System.Windows.Forms.Label();
+            this.textBoxNamespacePath = new System.Windows.Forms.TextBox();
+            this.labelNamespacePath = new System.Windows.Forms.Label();
+            this.textBoxXmlns = new System.Windows.Forms.TextBox();
+            this.labelXmlns = new System.Windows.Forms.Label();
+            this.textBoxLocation = new System.Windows.Forms.TextBox();
+            this.labelLocation = new System.Windows.Forms.Label();
+            this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
             this.labelLanguage = new System.Windows.Forms.Label();
             this.tabPageApplication = new System.Windows.Forms.TabPage();
             this.groupBoxInformation = new System.Windows.Forms.GroupBox();
@@ -67,6 +92,10 @@
             this.tabPageHeadings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHeading)).BeginInit();
             this.tabPageServer.SuspendLayout();
+            this.groupBoxLanguage.SuspendLayout();
+            this.groupBoxLanguageName.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLanguageName)).BeginInit();
+            this.groupBoxServer.SuspendLayout();
             this.tabPageApplication.SuspendLayout();
             this.groupBoxInformation.SuspendLayout();
             this.groupBoxApplicationConfig.SuspendLayout();
@@ -177,17 +206,183 @@
             // 
             // tabPageServer
             // 
-            this.tabPageServer.Controls.Add(this.comboBoxLanguuage);
+            this.tabPageServer.Controls.Add(this.groupBoxLanguage);
+            this.tabPageServer.Controls.Add(this.groupBoxServer);
+            this.tabPageServer.Controls.Add(this.comboBoxLanguage);
             this.tabPageServer.Controls.Add(this.labelLanguage);
             resources.ApplyResources(this.tabPageServer, "tabPageServer");
             this.tabPageServer.Name = "tabPageServer";
             this.tabPageServer.UseVisualStyleBackColor = true;
             // 
-            // comboBoxLanguuage
+            // groupBoxLanguage
             // 
-            this.comboBoxLanguuage.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBoxLanguuage, "comboBoxLanguuage");
-            this.comboBoxLanguuage.Name = "comboBoxLanguuage";
+            resources.ApplyResources(this.groupBoxLanguage, "groupBoxLanguage");
+            this.groupBoxLanguage.Controls.Add(this.groupBoxLanguageName);
+            this.groupBoxLanguage.Controls.Add(this.textBoxBracket);
+            this.groupBoxLanguage.Controls.Add(this.labelBracket);
+            this.groupBoxLanguage.Name = "groupBoxLanguage";
+            this.groupBoxLanguage.TabStop = false;
+            // 
+            // groupBoxLanguageName
+            // 
+            resources.ApplyResources(this.groupBoxLanguageName, "groupBoxLanguageName");
+            this.groupBoxLanguageName.Controls.Add(this.dataGridViewLanguageName);
+            this.groupBoxLanguageName.Name = "groupBoxLanguageName";
+            this.groupBoxLanguageName.TabStop = false;
+            // 
+            // dataGridViewLanguageName
+            // 
+            resources.ApplyResources(this.dataGridViewLanguageName, "dataGridViewLanguageName");
+            this.dataGridViewLanguageName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLanguageName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnLanguageNameCode,
+            this.ColumnLanguageNameName,
+            this.ColumnLanguageNameShortName});
+            this.dataGridViewLanguageName.Name = "dataGridViewLanguageName";
+            this.dataGridViewLanguageName.RowTemplate.Height = 21;
+            // 
+            // ColumnLanguageNameCode
+            // 
+            this.ColumnLanguageNameCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnLanguageNameCode, "ColumnLanguageNameCode");
+            this.ColumnLanguageNameCode.MaxInputLength = 10;
+            this.ColumnLanguageNameCode.Name = "ColumnLanguageNameCode";
+            // 
+            // ColumnLanguageNameName
+            // 
+            this.ColumnLanguageNameName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnLanguageNameName, "ColumnLanguageNameName");
+            this.ColumnLanguageNameName.MaxInputLength = 255;
+            this.ColumnLanguageNameName.Name = "ColumnLanguageNameName";
+            // 
+            // ColumnLanguageNameShortName
+            // 
+            this.ColumnLanguageNameShortName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnLanguageNameShortName, "ColumnLanguageNameShortName");
+            this.ColumnLanguageNameShortName.MaxInputLength = 20;
+            this.ColumnLanguageNameShortName.Name = "ColumnLanguageNameShortName";
+            // 
+            // textBoxBracket
+            // 
+            resources.ApplyResources(this.textBoxBracket, "textBoxBracket");
+            this.textBoxBracket.Name = "textBoxBracket";
+            // 
+            // labelBracket
+            // 
+            resources.ApplyResources(this.labelBracket, "labelBracket");
+            this.labelBracket.Name = "labelBracket";
+            // 
+            // groupBoxServer
+            // 
+            resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
+            this.groupBoxServer.Controls.Add(this.textBoxFileNamespace);
+            this.groupBoxServer.Controls.Add(this.labelFileNamespace);
+            this.groupBoxServer.Controls.Add(this.textBoxCategoryNamespace);
+            this.groupBoxServer.Controls.Add(this.labelCategoryNamespace);
+            this.groupBoxServer.Controls.Add(this.textBoxTemplateNamespace);
+            this.groupBoxServer.Controls.Add(this.labelTemplateNamespace);
+            this.groupBoxServer.Controls.Add(this.textBoxRedirect);
+            this.groupBoxServer.Controls.Add(this.labelRedirect);
+            this.groupBoxServer.Controls.Add(this.textBoxExportPath);
+            this.groupBoxServer.Controls.Add(this.labelExportPath);
+            this.groupBoxServer.Controls.Add(this.textBoxNamespacePath);
+            this.groupBoxServer.Controls.Add(this.labelNamespacePath);
+            this.groupBoxServer.Controls.Add(this.textBoxXmlns);
+            this.groupBoxServer.Controls.Add(this.labelXmlns);
+            this.groupBoxServer.Controls.Add(this.textBoxLocation);
+            this.groupBoxServer.Controls.Add(this.labelLocation);
+            this.groupBoxServer.Name = "groupBoxServer";
+            this.groupBoxServer.TabStop = false;
+            // 
+            // textBoxFileNamespace
+            // 
+            resources.ApplyResources(this.textBoxFileNamespace, "textBoxFileNamespace");
+            this.textBoxFileNamespace.Name = "textBoxFileNamespace";
+            this.textBoxFileNamespace.Leave += new System.EventHandler(this.TextBoxFileNamespace_Leave);
+            // 
+            // labelFileNamespace
+            // 
+            resources.ApplyResources(this.labelFileNamespace, "labelFileNamespace");
+            this.labelFileNamespace.Name = "labelFileNamespace";
+            // 
+            // textBoxCategoryNamespace
+            // 
+            resources.ApplyResources(this.textBoxCategoryNamespace, "textBoxCategoryNamespace");
+            this.textBoxCategoryNamespace.Name = "textBoxCategoryNamespace";
+            this.textBoxCategoryNamespace.Leave += new System.EventHandler(this.TextBoxCategoryNamespace_Leave);
+            // 
+            // labelCategoryNamespace
+            // 
+            resources.ApplyResources(this.labelCategoryNamespace, "labelCategoryNamespace");
+            this.labelCategoryNamespace.Name = "labelCategoryNamespace";
+            // 
+            // textBoxTemplateNamespace
+            // 
+            resources.ApplyResources(this.textBoxTemplateNamespace, "textBoxTemplateNamespace");
+            this.textBoxTemplateNamespace.Name = "textBoxTemplateNamespace";
+            this.textBoxTemplateNamespace.Leave += new System.EventHandler(this.TextBoxTemplateNamespace_Leave);
+            // 
+            // labelTemplateNamespace
+            // 
+            resources.ApplyResources(this.labelTemplateNamespace, "labelTemplateNamespace");
+            this.labelTemplateNamespace.Name = "labelTemplateNamespace";
+            // 
+            // textBoxRedirect
+            // 
+            resources.ApplyResources(this.textBoxRedirect, "textBoxRedirect");
+            this.textBoxRedirect.Name = "textBoxRedirect";
+            // 
+            // labelRedirect
+            // 
+            resources.ApplyResources(this.labelRedirect, "labelRedirect");
+            this.labelRedirect.Name = "labelRedirect";
+            // 
+            // textBoxExportPath
+            // 
+            resources.ApplyResources(this.textBoxExportPath, "textBoxExportPath");
+            this.textBoxExportPath.Name = "textBoxExportPath";
+            // 
+            // labelExportPath
+            // 
+            resources.ApplyResources(this.labelExportPath, "labelExportPath");
+            this.labelExportPath.Name = "labelExportPath";
+            // 
+            // textBoxNamespacePath
+            // 
+            resources.ApplyResources(this.textBoxNamespacePath, "textBoxNamespacePath");
+            this.textBoxNamespacePath.Name = "textBoxNamespacePath";
+            // 
+            // labelNamespacePath
+            // 
+            resources.ApplyResources(this.labelNamespacePath, "labelNamespacePath");
+            this.labelNamespacePath.Name = "labelNamespacePath";
+            // 
+            // textBoxXmlns
+            // 
+            resources.ApplyResources(this.textBoxXmlns, "textBoxXmlns");
+            this.textBoxXmlns.Name = "textBoxXmlns";
+            // 
+            // labelXmlns
+            // 
+            resources.ApplyResources(this.labelXmlns, "labelXmlns");
+            this.labelXmlns.Name = "labelXmlns";
+            // 
+            // textBoxLocation
+            // 
+            resources.ApplyResources(this.textBoxLocation, "textBoxLocation");
+            this.textBoxLocation.Name = "textBoxLocation";
+            // 
+            // labelLocation
+            // 
+            resources.ApplyResources(this.labelLocation, "labelLocation");
+            this.labelLocation.Name = "labelLocation";
+            // 
+            // comboBoxLanguage
+            // 
+            this.comboBoxLanguage.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
+            this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLanguuage_SelectedIndexChanged);
             // 
             // labelLanguage
             // 
@@ -316,6 +511,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHeading)).EndInit();
             this.tabPageServer.ResumeLayout(false);
             this.tabPageServer.PerformLayout();
+            this.groupBoxLanguage.ResumeLayout(false);
+            this.groupBoxLanguage.PerformLayout();
+            this.groupBoxLanguageName.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLanguageName)).EndInit();
+            this.groupBoxServer.ResumeLayout(false);
+            this.groupBoxServer.PerformLayout();
             this.tabPageApplication.ResumeLayout(false);
             this.groupBoxInformation.ResumeLayout(false);
             this.groupBoxInformation.PerformLayout();
@@ -336,7 +537,7 @@
         private System.Windows.Forms.DataGridView dataGridViewHeading;
         private System.Windows.Forms.TabPage tabPageServer;
         private System.Windows.Forms.TabPage tabPageApplication;
-        private System.Windows.Forms.ComboBox comboBoxLanguuage;
+        private System.Windows.Forms.ComboBox comboBoxLanguage;
         private System.Windows.Forms.Label labelLanguage;
         private System.Windows.Forms.TextBox textBoxUserAgent;
         private System.Windows.Forms.Label labelUserAgent;
@@ -359,5 +560,30 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
+        private System.Windows.Forms.GroupBox groupBoxServer;
+        private System.Windows.Forms.TextBox textBoxLocation;
+        private System.Windows.Forms.Label labelLocation;
+        private System.Windows.Forms.TextBox textBoxXmlns;
+        private System.Windows.Forms.Label labelXmlns;
+        private System.Windows.Forms.TextBox textBoxNamespacePath;
+        private System.Windows.Forms.Label labelNamespacePath;
+        private System.Windows.Forms.TextBox textBoxExportPath;
+        private System.Windows.Forms.Label labelExportPath;
+        private System.Windows.Forms.TextBox textBoxRedirect;
+        private System.Windows.Forms.Label labelRedirect;
+        private System.Windows.Forms.Label labelTemplateNamespace;
+        private System.Windows.Forms.TextBox textBoxTemplateNamespace;
+        private System.Windows.Forms.Label labelFileNamespace;
+        private System.Windows.Forms.TextBox textBoxCategoryNamespace;
+        private System.Windows.Forms.Label labelCategoryNamespace;
+        private System.Windows.Forms.TextBox textBoxFileNamespace;
+        private System.Windows.Forms.GroupBox groupBoxLanguage;
+        private System.Windows.Forms.Label labelBracket;
+        private System.Windows.Forms.TextBox textBoxBracket;
+        private System.Windows.Forms.GroupBox groupBoxLanguageName;
+        private System.Windows.Forms.DataGridView dataGridViewLanguageName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLanguageNameCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLanguageNameName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLanguageNameShortName;
     }
 }

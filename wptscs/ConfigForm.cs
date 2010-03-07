@@ -27,6 +27,15 @@ namespace Honememo.Wptscs
     /// </summary>
     public partial class ConfigForm : Form
     {
+        #region private変数
+
+        /// <summary>
+        /// <seealso cref="comboBoxLanguage"/>で選択していたアイテムのバックアップ。
+        /// </summary>
+        private string comboBoxLanguageSelectedText;
+
+        #endregion
+
         #region コンストラクタ
 
         /// <summary>
@@ -39,7 +48,7 @@ namespace Honememo.Wptscs
 
         #endregion
 
-        #region 各イベントのメソッド
+        #region フォームの各イベントのメソッド
 
         /// <summary>
         /// フォームロード時の処理。
@@ -54,6 +63,12 @@ namespace Honememo.Wptscs
             // 記事の置き換えタブの初期化
             this.ImportTranslationTableView(dataGridViewItems, config.GetModeConfig(Config.RunMode.Wikipedia).ItemTables);
 
+            // サーバー／言語タブの初期化
+            foreach (Website site in  config.GetModeConfig(Config.RunMode.Wikipedia).Websites)
+            {
+                this.comboBoxLanguage.Items.Add(site.Language);
+            }
+
             // その他タブの初期化
             this.textBoxCacheExpire.Text = Settings.Default.CacheExpire.Days.ToString();
             this.textBoxUserAgent.Text = Settings.Default.UserAgent;
@@ -65,23 +80,6 @@ namespace Honememo.Wptscs
             if (copyright != null)
             {
                 this.labelCopyright.Text = copyright.Copyright;
-            }
-        }
-
-        /// <summary>
-        /// 記事の置き換え対訳表への行追加時の処理。
-        /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void DataGridViewItems_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            for (int i = e.RowIndex - 1; i < this.dataGridViewItems.Rows.Count; i++)
-            {
-                // プログラムから追加された場合は現在のインデックス、画面から追加した場合は+1したインデックスが来る
-                if (i >= 0)
-                {
-                    this.dataGridViewItems.Rows[i].Cells["ColumnArrow"].Value = Resources.RightArrow;
-                }
             }
         }
 
@@ -125,6 +123,178 @@ namespace Honememo.Wptscs
             this.Close();
         }
 
+        #endregion
+
+        #region 記事の置き換えタブのイベントのメソッド
+
+        /// <summary>
+        /// 記事の置き換え対訳表への行追加時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void DataGridViewItems_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = e.RowIndex - 1; i < this.dataGridViewItems.Rows.Count; i++)
+            {
+                // プログラムから追加された場合は現在のインデックス、画面から追加した場合は+1したインデックスが来る
+                if (i >= 0)
+                {
+                    this.dataGridViewItems.Rows[i].Cells["ColumnArrow"].Value = Resources.RightArrow;
+                }
+            }
+        }
+
+        #endregion
+
+        #region 言語／サーバータブのイベントのメソッド
+
+        /// <summary>
+        /// 言語コンボボックス変更時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ComboBoxLanguuage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("ConfigForm._SelectedIndexChanged > "
+                + this.comboBoxLanguageSelectedText + " -> "
+                + ObjectUtils.ToString(this.comboBoxLanguage.SelectedItem));
+
+            // 変更前の設定を保存
+            if (!String.IsNullOrEmpty(this.comboBoxLanguageSelectedText))
+            {
+                // 設定が存在しなければ基本的に自動生成されるのでそのまま格納
+                //TODO: 値の保管先
+                MediaWiki wiki = new MediaWiki(this.comboBoxLanguageSelectedText, StringUtils.DefaultString(this.textBoxLocation.Text).Trim());
+                wiki.ExportPath = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
+                wiki.Xmlns = StringUtils.DefaultString(this.textBoxXmlns.Text).Trim();
+                wiki.NamespacePath = StringUtils.DefaultString(this.textBoxNamespacePath.Text).Trim();
+                wiki.Redirect = StringUtils.DefaultString(this.textBoxRedirect.Text).Trim();
+
+                // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
+                wiki.TemplateNamespace = int.Parse(this.textBoxTemplateNamespace.Text);
+                wiki.CategoryNamespace = int.Parse(this.textBoxCategoryNamespace.Text);
+                wiki.FileNamespace = int.Parse(this.textBoxFileNamespace.Text);
+
+                // 表から呼称の情報も保存
+                this.dataGridViewLanguageName.Sort(this.dataGridViewLanguageName.Columns["ColumnLanguageNameCode"], ListSortDirection.Ascending);
+                Language lang = Config.GetInstance().GetLanguage(this.comboBoxLanguageSelectedText);
+                lang.Bracket = StringUtils.DefaultString(this.textBoxBracket.Text).Trim();
+                lang.Names.Clear();
+                for (int y = 0; y < this.dataGridViewLanguageName.RowCount - 1; y++)
+                {
+                    // 値が入ってないとかはガードしているはずだが、一応チェック
+                    string code = FormUtils.ToString(this.dataGridViewLanguageName["ColumnLanguageNameCode", y]).Trim();
+                    if (!String.IsNullOrEmpty(code))
+                    {
+                        Language.LanguageName name = new Language.LanguageName();
+                        name.Name = FormUtils.ToString(this.dataGridViewLanguageName["ColumnLanguageNameName", y]).Trim();
+                        name.ShortName = FormUtils.ToString(this.dataGridViewLanguageName["ColumnLanguageNameShortName", y]).Trim();
+                        lang.Names[code] = name;
+                    }
+                }
+            }
+
+            // 変更後の値に応じて、画面表示を更新
+            if (this.comboBoxLanguage.SelectedItem != null)
+            {
+                // 設定が存在しなければ基本的に自動生成されるのでそのまま使用
+                //TODO: nullの場合の初期化が不十分（今のところnullは無いけど）
+                Website site = Config.GetInstance().GetWebsite(this.comboBoxLanguage.SelectedItem.ToString());
+                this.textBoxLocation.Text = site.Location;
+                MediaWiki wiki = site as MediaWiki;
+                if (wiki != null)
+                {
+                    this.textBoxExportPath.Text = wiki.ExportPath;
+                    this.textBoxXmlns.Text = wiki.Xmlns;
+                    this.textBoxNamespacePath.Text = wiki.NamespacePath;
+                    this.textBoxTemplateNamespace.Text = wiki.TemplateNamespace.ToString();
+                    this.textBoxCategoryNamespace.Text = wiki.CategoryNamespace.ToString();
+                    this.textBoxFileNamespace.Text = wiki.FileNamespace.ToString();
+                    this.textBoxRedirect.Text = wiki.Redirect;
+                }
+
+                // 呼称の情報を表に設定
+                this.dataGridViewLanguageName.Rows.Clear();
+                Language lang = Config.GetInstance().GetLanguage(this.comboBoxLanguage.SelectedItem.ToString());
+                this.textBoxBracket.Text = lang.Bracket;
+                foreach (KeyValuePair<string, Language.LanguageName> name in lang.Names)
+                {
+                    int index = this.dataGridViewLanguageName.Rows.Add();
+                    this.dataGridViewLanguageName["ColumnLanguageNameCode", index].Value = name.Key;
+                    this.dataGridViewLanguageName["ColumnLanguageNameName", index].Value = name.Value.Name;
+                    this.dataGridViewLanguageName["ColumnLanguageNameShortName", index].Value = name.Value.ShortName;
+                }
+
+                // 各入力欄を有効に
+                this.groupBoxServer.Enabled = true;
+                this.groupBoxLanguage.Enabled = true;
+
+                // 現在の選択値を更新
+                this.comboBoxLanguageSelectedText = this.comboBoxLanguage.SelectedItem.ToString();
+            }
+            else
+            {
+                // 各入力欄を無効に
+                this.groupBoxServer.Enabled = false;
+                this.groupBoxLanguage.Enabled = false;
+
+                // 現在の選択値を更新
+                this.comboBoxLanguageSelectedText = String.Empty;
+            }
+        }
+
+        /// <summary>
+        /// テンプレート名前空間のIDボックスフォーカス喪失時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxTemplateNamespace_Leave(object sender, EventArgs e)
+        {
+            this.textBoxTemplateNamespace.Text = StringUtils.DefaultString(this.textBoxTemplateNamespace.Text).Trim();
+            int value;
+            if (!int.TryParse(this.textBoxTemplateNamespace.Text, out value))
+            {
+                FormUtils.WarningDialog(Resources.WarningMessageNamespaceNumberValue);
+                this.textBoxTemplateNamespace.Focus();
+            }
+        }
+
+        /// <summary>
+        /// カテゴリ名前空間のIDボックスフォーカス喪失時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxCategoryNamespace_Leave(object sender, EventArgs e)
+        {
+            this.textBoxCategoryNamespace.Text = StringUtils.DefaultString(this.textBoxCategoryNamespace.Text).Trim();
+            int value;
+            if (!int.TryParse(this.textBoxCategoryNamespace.Text, out value))
+            {
+                FormUtils.WarningDialog(Resources.WarningMessageNamespaceNumberValue);
+                this.textBoxCategoryNamespace.Focus();
+            }
+        }
+
+        /// <summary>
+        /// ファイル名前空間のIDボックスフォーカス喪失時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxFileNamespace_Leave(object sender, EventArgs e)
+        {
+            this.textBoxFileNamespace.Text = StringUtils.DefaultString(this.textBoxFileNamespace.Text).Trim();
+            int value;
+            if (!int.TryParse(this.textBoxFileNamespace.Text, out value))
+            {
+                FormUtils.WarningDialog(Resources.WarningMessageNamespaceNumberValue);
+                this.textBoxFileNamespace.Focus();
+            }
+        }
+
+        #endregion
+
+        #region その他タブのイベントのメソッド
+
         /// <summary>
         /// キャッシュ有効期限ボックスフォーカス喪失時の処理。
         /// </summary>
@@ -132,6 +302,7 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void TextBoxCacheExpire_Leave(object sender, EventArgs e)
         {
+            this.textBoxCacheExpire.Text = StringUtils.DefaultString(this.textBoxCacheExpire.Text).Trim();
             int expire;
             if (!int.TryParse(this.textBoxCacheExpire.Text, out expire) || expire < 0)
             {

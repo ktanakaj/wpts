@@ -421,6 +421,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   名前空間のIDには数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageNamespaceNumberValue {
+            get {
+                return ResourceManager.GetString("WarningMessageNamespaceNumberValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   警告 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningTitle {

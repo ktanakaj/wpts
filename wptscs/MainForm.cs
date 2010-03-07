@@ -141,8 +141,14 @@ namespace Honememo.Wptscs
 
                 // その言語の、ユーザーが使用している言語での表示名を表示
                 // （日本語環境だったら日本語を、英語だったら英語を）
-                this.labelSource.Text = Config.GetInstance().GetLanguage(
-                    this.comboBoxSource.Text).Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                Language.LanguageName name;
+                this.labelSource.Text = String.Empty;
+                if (Config.GetInstance().GetLanguage(this.comboBoxSource.Text).Names.TryGetValue(
+                    System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
+                    out name))
+                {
+                    this.labelSource.Text = name.Name;
+                }
 
                 // サーバーURLの表示
                 this.linkLabelSourceURL.Text = Config.GetInstance().GetWebsite(
