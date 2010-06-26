@@ -1,24 +1,46 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wptscs", "wptscs\wptscs.csproj", "{4E20E523-0230-474C-B8F1-1E991360F5F5}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wptscs", "wptscs\Wptscs.csproj", "{4E20E523-0230-474C-B8F1-1E991360F5F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WptscsTest", "WptscsTest\WptscsTest.csproj", "{FDBDFBB8-2975-4521-87C6-D75CF9144DED}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4E20E523-0230-474C-B8F1-1E991360F5F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal
