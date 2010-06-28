@@ -30,39 +30,14 @@ namespace Honememo.Wptscs.Logics
         public static readonly string ENTER = "\r\n";
 
         /// <summary>
-        /// ログメッセージ（property）。
+        /// ログメッセージ。
         /// </summary>
         private string log;
 
         /// <summary>
-        /// 変換後テキスト（property）。
+        /// 変換後テキスト。
         /// </summary>
         private string text;
-
-        /// <summary>
-        /// 処理を途中で終了させるためのフラグ。
-        /// </summary>
-        private bool cancellationPending;
-
-        /// <summary>
-        /// 翻訳元言語のサイト／言語情報。
-        /// </summary>
-        private Website from;
-
-        /// <summary>
-        /// 翻訳先言語のサイト／言語情報。
-        /// </summary>
-        private Website to;
-
-        /// <summary>
-        /// 言語間の項目の対訳表。
-        /// </summary>
-        private Translation itemTable;
-
-        /// <summary>
-        /// 言語間の見出しの対訳表。
-        /// </summary>
-        private Translation headingTable;
 
         #endregion
 
@@ -86,8 +61,8 @@ namespace Honememo.Wptscs.Logics
             }
 
             // メンバ変数の初期化
-            this.from = from;
-            this.to = to;
+            this.From = from;
+            this.To = to;
             this.Initialize();
         }
 
@@ -109,15 +84,8 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         public Translation ItemTable
         {
-            get
-            {
-                return this.itemTable;
-            }
-            
-            set
-            {
-                this.itemTable = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -125,15 +93,8 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         public Translation HeadingTable
         {
-            get
-            {
-                return this.headingTable;
-            }
-
-            set
-            {
-                this.headingTable = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -177,15 +138,8 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         public bool CancellationPending
         {
-            get
-            {
-                return this.cancellationPending;
-            }
-
-            set
-            {
-                this.cancellationPending = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -193,10 +147,8 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         protected Website From
         {
-            get
-            {
-                return this.from;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -204,10 +156,8 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         protected Website To
         {
-            get
-            {
-                return this.to;
-            }
+            get;
+            private set;
         }
 
         #endregion

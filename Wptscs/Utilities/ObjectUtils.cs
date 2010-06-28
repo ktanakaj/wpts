@@ -26,6 +26,7 @@ namespace Honememo.Utilities
         /// <param name="obj">テストするオブジェクト。<c>null</c>も可。</param>
         /// <param name="defaultValue">渡されたオブジェクトが<c>null</c>の場合に返されるデフォルトのオブジェクト。</param>
         /// <returns>渡されたオブジェクト、<c>null</c>の場合にはデフォルトのオブジェクト。</returns>
+        /// <typeparam name="T">オブジェクトの型。</typeparam>
         public static T DefaultIfNull<T>(T obj, T defaultValue)
         {
             if (obj == null)

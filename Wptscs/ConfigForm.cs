@@ -43,7 +43,7 @@ namespace Honememo.Wptscs
         /// </summary>
         public ConfigForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
@@ -61,10 +61,10 @@ namespace Honememo.Wptscs
             Config config = Config.GetInstance();
 
             // 記事の置き換えタブの初期化
-            this.ImportTranslationTableView(dataGridViewItems, config.GetModeConfig(Config.RunMode.Wikipedia).ItemTables);
+            this.ImportTranslationTableView(this.dataGridViewItems, config.GetModeConfig(Config.RunMode.Wikipedia).ItemTables);
 
             // サーバー／言語タブの初期化
-            foreach (Website site in  config.GetModeConfig(Config.RunMode.Wikipedia).Websites)
+            foreach (Website site in config.GetModeConfig(Config.RunMode.Wikipedia).Websites)
             {
                 this.comboBoxLanguage.Items.Add(site.Language);
             }
@@ -163,7 +163,7 @@ namespace Honememo.Wptscs
             if (!String.IsNullOrEmpty(this.comboBoxLanguageSelectedText))
             {
                 // 設定が存在しなければ基本的に自動生成されるのでそのまま格納
-                //TODO: 値の保管先
+                // TODO: 値の保管先
                 MediaWiki wiki = new MediaWiki(this.comboBoxLanguageSelectedText, StringUtils.DefaultString(this.textBoxLocation.Text).Trim());
                 wiki.ExportPath = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
                 wiki.Xmlns = StringUtils.DefaultString(this.textBoxXmlns.Text).Trim();
@@ -198,7 +198,7 @@ namespace Honememo.Wptscs
             if (this.comboBoxLanguage.SelectedItem != null)
             {
                 // 設定が存在しなければ基本的に自動生成されるのでそのまま使用
-                //TODO: nullの場合の初期化が不十分（今のところnullは無いけど）
+                // TODO: nullの場合の初期化が不十分（今のところnullは無いけど）
                 Website site = Config.GetInstance().GetWebsite(this.comboBoxLanguage.SelectedItem.ToString());
                 this.textBoxLocation.Text = site.Location;
                 MediaWiki wiki = site as MediaWiki;

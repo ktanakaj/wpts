@@ -50,7 +50,7 @@ namespace Honememo.Wptscs
         public MainForm()
         {
             // Windows フォーム デザイナで生成されたコード
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         #endregion
@@ -135,7 +135,7 @@ namespace Honememo.Wptscs
             // ラベルに言語名を表示する
             this.labelSource.Text = String.Empty;
             this.linkLabelSourceURL.Text = "http://";
-            if (!String.IsNullOrEmpty(comboBoxSource.Text))
+            if (!String.IsNullOrEmpty(this.comboBoxSource.Text))
             {
                 this.comboBoxSource.Text = this.comboBoxSource.Text.Trim().ToLower();
 
@@ -370,14 +370,14 @@ namespace Honememo.Wptscs
                 this.translate.LogUpdate += new EventHandler(this.GetLogUpdate);
 
                 // 実行前に、ユーザーから中止要求がされているかをチェック
-                if (backgroundWorkerRun.CancellationPending)
+                if (this.backgroundWorkerRun.CancellationPending)
                 {
                     this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
                 }
                 else
                 {
                     // 翻訳支援処理を実行
-                    bool successFlag = this.translate.Run(textBoxArticle.Text.Trim());
+                    bool successFlag = this.translate.Run(this.textBoxArticle.Text.Trim());
 
                     // 処理に時間がかかるため、出力ファイル名を再確認
                     this.MakeFileName(ref fileName, ref logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
@@ -386,7 +386,7 @@ namespace Honememo.Wptscs
                         // 処理結果を出力
                         try
                         {
-                            StreamWriter sw = new StreamWriter(Path.Combine(textBoxSaveDirectory.Text, fileName));
+                            StreamWriter sw = new StreamWriter(Path.Combine(this.textBoxSaveDirectory.Text, fileName));
                             try
                             {
                                 sw.Write(this.translate.Text);
