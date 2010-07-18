@@ -28,16 +28,16 @@ namespace Honememo.Utilities
         public void TestDefaultString()
         {
             // 引数一つ
-            Assert.AreEqual(StringUtils.DefaultString(null), String.Empty);
-            Assert.AreEqual(StringUtils.DefaultString(String.Empty), String.Empty);
-            Assert.AreEqual(StringUtils.DefaultString(" "), " ");
-            Assert.AreEqual(StringUtils.DefaultString("null以外の文字列"), "null以外の文字列");
+            Assert.AreEqual(String.Empty, StringUtils.DefaultString(null));
+            Assert.AreEqual(String.Empty, StringUtils.DefaultString(String.Empty));
+            Assert.AreEqual(" ", StringUtils.DefaultString(" "));
+            Assert.AreEqual("null以外の文字列", StringUtils.DefaultString("null以外の文字列"));
 
             // 引数二つ
-            Assert.AreEqual(StringUtils.DefaultString(null, "初期値"), "初期値");
-            Assert.AreEqual(StringUtils.DefaultString(String.Empty, "初期値"), String.Empty);
-            Assert.AreEqual(StringUtils.DefaultString(" ", "初期値"), " ");
-            Assert.AreEqual(StringUtils.DefaultString("null以外の文字列", "初期値"), "null以外の文字列");
+            Assert.AreEqual("初期値", StringUtils.DefaultString(null, "初期値"));
+            Assert.AreEqual(String.Empty, StringUtils.DefaultString(String.Empty, "初期値"));
+            Assert.AreEqual(" ", StringUtils.DefaultString(" ", "初期値"));
+            Assert.AreEqual("null以外の文字列", StringUtils.DefaultString("null以外の文字列", "初期値"));
         }
 
         /// <summary>

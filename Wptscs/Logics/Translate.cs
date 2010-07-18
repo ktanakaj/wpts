@@ -113,7 +113,10 @@ namespace Honememo.Wptscs.Logics
             protected set
             {
                 this.log = (value != null) ? value : String.Empty;
-                this.LogUpdate(this, EventArgs.Empty);
+                if (this.LogUpdate != null)
+                {
+                    this.LogUpdate(this, EventArgs.Empty);
+                }
             }
         }
 

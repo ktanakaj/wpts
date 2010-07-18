@@ -95,12 +95,12 @@ namespace Honememo.Wptscs.Logics
                         MessageBoxIcon.Question)
                    == System.Windows.Forms.DialogResult.No)
                 {
-                    LogLine(ENTER + String.Format(Resources.QuestionMessage_ArticleExist, interWiki));
+                    this.LogLine(ENTER + String.Format(Resources.QuestionMessage_ArticleExist, interWiki));
                     return false;
                 }
                 else
                 {
-                    LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ArticleExistInterWiki, interWiki));
+                    this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ArticleExistInterWiki, interWiki));
                 }
             }
 
@@ -122,7 +122,7 @@ namespace Honememo.Wptscs.Logics
             this.Text += "\n\n";
 
             // 言語間リンク・定型句の変換
-            LogLine(ENTER + Resources.RightArrow + " " + String.Format(Resources.LogMessage_CheckAndReplaceStart, interWiki));
+            this.LogLine(ENTER + Resources.RightArrow + " " + String.Format(Resources.LogMessage_CheckAndReplaceStart, interWiki));
             this.Text += this.ReplaceText(article.Text, article.Title);
 
             // ユーザーからの中止要求をチェック
@@ -178,13 +178,13 @@ namespace Honememo.Wptscs.Logics
         protected MediaWikiPage ChkTargetArticle(string title)
         {
             // 指定された記事の生データをWikipediaから取得
-            LogLine(String.Format(Resources.LogMessage_GetArticle, this.From.Location, title));
+            this.LogLine(String.Format(Resources.LogMessage_GetArticle, this.From.Location, title));
             MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
-                LogLine(Resources.RightArrow + " " + Resources.LogMessage_Redirect + " [[" + page.Redirect + "]]");
+                this.LogLine(Resources.RightArrow + " " + Resources.LogMessage_Redirect + " [[" + page.Redirect + "]]");
                 page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
             }
 
@@ -893,12 +893,12 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 string newTitle = sign + newText + sign;
-                LogLine(ENTER + o_Title + " " + Resources.RightArrow + " " + newTitle);
+                this.LogLine(ENTER + o_Title + " " + Resources.RightArrow + " " + newTitle);
                 o_Title = newTitle;
             }
             else
             {
-                LogLine(ENTER + o_Title);
+                this.LogLine(ENTER + o_Title);
             }
 
             return lastIndex;
