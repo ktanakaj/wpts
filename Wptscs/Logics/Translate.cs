@@ -305,7 +305,10 @@ namespace Honememo.Wptscs.Logics
                 {
                     // それ以外のエラー
                     this.LogLine(Resources.RightArrow + " " + e.Message);
-                    this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
+                    if (e.Response != null)
+                    {
+                        this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
+                    }
                 }
             }
             catch (FileNotFoundException)

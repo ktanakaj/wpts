@@ -53,24 +53,65 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\MediaWiki\en\.example.xml" />
-    <Content Include="Data\MediaWiki\en\_api.xml" />
-    <Content Include="Data\MediaWiki\en\Example %28rapper%29.xml" />
-    <Content Include="Data\MediaWiki\en\example.com.xml" />
-    <Content Include="Data\MediaWiki\en\example.net.xml" />
-    <Content Include="Data\MediaWiki\en\example.org.xml" />
-    <Content Include="Data\MediaWiki\en\example.xml" />
-    <Content Include="Data\MediaWiki\en\Exemplar.xml" />
-    <Content Include="Data\MediaWiki\en\Exemplum.xml" />
-    <Content Include="Data\MediaWiki\en\Template_disambig.xml" />
-    <Content Include="Data\MediaWiki\en\Template_wikiquote.xml" />
-    <Content Include="Data\MediaWiki\en\Template_wiktionary.xml" />
-    <Content Include="Data\MediaWiki\result\example.txt" />
-    <Content Include="Data\MediaWiki\result\example_定型句なし.txt" />
+    <Content Include="Data\config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\.example.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\_api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Example %28rapper%29.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\example.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\example.net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\example.org.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\example.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Exemplar.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Exemplum.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_disambig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_wikiquote.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_wiktionary.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\result\example.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\result\example_キャッシュ使用.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\result\example_定型句なし.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\MediaWiki\result\example.log" />
-    <None Include="Data\MediaWiki\result\example_定型句なし.log" />
+    <None Include="Data\MediaWiki\result\example.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MediaWiki\result\example_キャッシュ使用.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MediaWiki\result\example_定型句なし.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -185,7 +185,7 @@ namespace Honememo.Wptscs.Logics
             if (page != null && page.IsRedirect())
             {
                 this.LogLine(Resources.RightArrow + " " + Resources.LogMessage_Redirect + " [[" + page.Redirect + "]]");
-                page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
+                page = this.GetPage(page.Redirect, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
             }
 
             return page;
@@ -206,7 +206,7 @@ namespace Honememo.Wptscs.Logics
             if (page != null && page.IsRedirect())
             {
                 this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
-                page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
+                page = this.GetPage(page.Redirect, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
             }
 
             // 記事があればその言語間リンクを取得
@@ -242,15 +242,21 @@ namespace Honememo.Wptscs.Logics
                 return this.GetInterWiki(title, code);
             }
 
-            string interWiki;
+            string interWiki = null;
             lock (this.ItemTable)
             {
                 if (this.ItemTable.ContainsKey(title))
                 {
                     // 対訳表に存在する場合はその値を使用
-                    interWiki = this.ItemTable[title].Word;
-                    if (!String.IsNullOrEmpty(interWiki))
+                    // リダイレクトがあれば、そのメッセージも表示
+                    if (!String.IsNullOrWhiteSpace(this.ItemTable[title].Redirect))
                     {
+                        this.Log += Resources.LogMessage_Redirect + " [[" + this.ItemTable[title].Redirect + "]] " + Resources.RightArrow + " ";
+                    }
+
+                    if (!String.IsNullOrEmpty(this.ItemTable[title].Word))
+                    {
+                        interWiki = this.ItemTable[title].Word;
                         Log += "[[" + interWiki + "]]";
                     }
                     else
@@ -264,10 +270,33 @@ namespace Honememo.Wptscs.Logics
 
                 // 対訳表に存在しない場合は、普通に取得し表に記録
                 // ※ nullも存在しないことの記録として格納
-                interWiki = this.GetInterWiki(title, code);
                 Translation.Goal goal = new Translation.Goal();
-                goal.Word = interWiki;
                 goal.Timestamp = DateTime.UtcNow;
+                MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
+
+                // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
+                if (page != null && page.IsRedirect())
+                {
+                    goal.Redirect = page.Redirect;
+                    this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
+                    page = this.GetPage(page.Redirect, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
+                }
+
+                // 記事があればその言語間リンクを取得
+                if (page != null)
+                {
+                    interWiki = page.GetInterWiki(this.To.Language);
+                    if (!String.IsNullOrEmpty(interWiki))
+                    {
+                        Log += "[[" + interWiki + "]]";
+                    }
+                    else
+                    {
+                        Log += Resources.LogMessage_InterWikiNothing;
+                    }
+                }
+
+                goal.Word = interWiki;
                 this.ItemTable[title] = goal;
             }
 

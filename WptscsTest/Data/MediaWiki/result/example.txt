@@ -1,8 +1,8 @@
 '''xxx'''（[[英語|英]]: '''example'''）
 
 [[File:Example.png|thumb|Wikipedia's example image. (Example.png)]]
-[[:en:Template:Wiktionary]]<!-- {{wiktionary}} -->
-[[:en:Template:Wikiquote]]<!-- {{wikiquote}} -->
+[[:en:Template:wiktionary]]<!-- {{wiktionary}} -->
+[[:en:Template:wikiquote]]<!-- {{wikiquote}} -->
 '''Example''' may refer to:
 
 *[[:en:Example (rapper)|Example (rapper)]], a British rapper
@@ -12,7 +12,7 @@
 *[[:en:Exemplum|Exemplum]], medieval collections of short stories to be told in sermons
 *[[:en:Exemplar|Exemplar]], a prototype or model which others can use to understand a topic better
 
-[[:en:Template:Disambig]]<!-- {{disambig}} -->
+[[:en:Template:disambig]]<!-- {{disambig}} -->
 
 [[fr:Example]]
 [[ksh:Example (Watt ėßß datt?)]]

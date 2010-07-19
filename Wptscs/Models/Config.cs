@@ -195,6 +195,21 @@ namespace Honememo.Wptscs.Models
             return Config.config;
         }
 
+        /// <summary>
+        /// 指定された設定ファイルからアプリケーションの設定を読み込む。
+        /// </summary>
+        /// <param name="path">設定ファイルパス。</param>
+        /// <remarks>主にテスト用。</remarks>
+        public static void SetInstance(string path)
+        {
+            // 設定ファイルを読み込み
+            System.Diagnostics.Debug.WriteLine("Config.SetInstance > " + path + " を読み込み");
+            using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                Config.config = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
+            }
+        }
+
         #endregion
 
         #region インスタンスメソッド

@@ -137,6 +137,7 @@ namespace Honememo.Wptscs.Models
                 XmlElement itemElement = itemNode as XmlElement;
                 Goal goal = new Goal();
                 goal.Word = itemElement.GetAttribute("To");
+                goal.Redirect = itemElement.GetAttribute("Redirect");
                 string timestamp = itemElement.GetAttribute("Timestamp");
                 if (!String.IsNullOrEmpty(timestamp))
                 {
@@ -168,6 +169,11 @@ namespace Honememo.Wptscs.Models
                 writer.WriteStartElement("Item");
                 writer.WriteAttributeString("From", item.Key);
                 writer.WriteAttributeString("To", item.Value.Word);
+                if (!String.IsNullOrWhiteSpace(item.Value.Redirect))
+                {
+                    writer.WriteAttributeString("Redirect", item.Value.Redirect);
+                }
+
                 if (item.Value.Timestamp.HasValue)
                 {
                     writer.WriteAttributeString("Timestamp", item.Value.Timestamp.Value.ToString("U"));
@@ -189,13 +195,20 @@ namespace Honememo.Wptscs.Models
             /// <summary>
             /// 翻訳先語句。
             /// </summary>
-            /// <remarks>翻訳先の語句が存在しないことを明示する場合<c>null</c>。</remarks>
+            /// <remarks>翻訳先の語句が存在しないことを明示する場合<c>null</c>または空。</remarks>
             public string Word;
 
             /// <summary>
             /// 登録日時。
             /// </summary>
+            /// <remarks>有効期間としても使用。無期限である場合<c>null</c>。</remarks>
             public DateTime? Timestamp;
+
+            /// <summary>
+            /// 翻訳先別名。
+            /// </summary>
+            /// <remarks>Wikipediaのリダイレクト等を意図。別名が無い場合<c>null</c>または空。</remarks>
+            public string Redirect;
         }
 
         #endregion

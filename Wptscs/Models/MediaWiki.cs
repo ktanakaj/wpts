@@ -391,10 +391,18 @@ namespace Honememo.Wptscs.Models
         /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
         public override Page GetPage(string title)
         {
+            // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
+            // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
+            string escapeTitle = title;
+            if (new Uri(this.Location).Scheme == "file")
+            {
+                escapeTitle = FormUtils.ReplaceInvalidFileNameChars(title);
+            }
+
             // ページのXMLデータをMediaWikiサーバーから取得
             XmlDocument xml = new XmlDocument();
             using (Stream reader = this.GetStream(
-                new Uri(new Uri(this.Location), String.Format(this.ExportPath, title))))
+                new Uri(new Uri(this.Location), String.Format(this.ExportPath, escapeTitle))))
             {
                 xml.Load(reader);
             }
