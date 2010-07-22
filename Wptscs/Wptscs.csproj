@@ -125,6 +125,7 @@
     <Compile Include="Utilities\FormUtils.cs" />
     <Compile Include="Utilities\ObjectUtils.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
+    <Compile Include="Utilities\Validate.cs" />
     <Compile Include="Utilities\XmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +134,7 @@
     <Content Include="Readme.txt" />
     <Content Include="config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -30,6 +30,11 @@ namespace Honememo.Wptscs
         #region private変数
 
         /// <summary>
+        /// 現在設定中のアプリケーションの設定。
+        /// </summary>
+        private Config config;
+
+        /// <summary>
         /// <seealso cref="comboBoxLanguage"/>で選択していたアイテムのバックアップ。
         /// </summary>
         private string comboBoxLanguageSelectedText;
@@ -47,7 +52,7 @@ namespace Honememo.Wptscs
         }
 
         #endregion
-
+        
         #region フォームの各イベントのメソッド
 
         /// <summary>
@@ -58,13 +63,13 @@ namespace Honememo.Wptscs
         private void ConfigForm_Load(object sender, EventArgs e)
         {
             // 各タブの内容を初期化する
-            Config config = Config.GetInstance();
+            this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
 
             // 記事の置き換えタブの初期化
-            this.ImportTranslationTableView(this.dataGridViewItems, config.GetModeConfig(Config.RunMode.Wikipedia).ItemTables);
+            this.ImportTranslationTableView(this.dataGridViewItems, this.config.ItemTables);
 
             // サーバー／言語タブの初期化
-            foreach (Website site in config.GetModeConfig(Config.RunMode.Wikipedia).Websites)
+            foreach (Website site in this.config.Websites)
             {
                 this.comboBoxLanguage.Items.Add(site.Language);
             }
@@ -91,14 +96,9 @@ namespace Honememo.Wptscs
         private void ButtonOk_Click(object sender, EventArgs e)
         {
             // 各タブの内容を設定ファイルに保存する
-            Config config = Config.GetInstance();
-
-            // Wikipediaに関する設定
-            // ※ 無かったら新規作成
-            Config.ModeConfig wikipedia = config.GetModeConfig(Config.RunMode.Wikipedia);
 
             // 記事の置き換えタブの保存
-            wikipedia.ItemTables = this.ExportTranslationTableView(this.dataGridViewItems);
+            this.config.ItemTables = this.ExportTranslationTableView(this.dataGridViewItems);
 
             // その他タブの保存
             Settings.Default.CacheExpire = new TimeSpan(int.Parse(this.textBoxCacheExpire.Text), 0, 0, 0);
@@ -109,7 +109,7 @@ namespace Honememo.Wptscs
             Settings.Default.Save();
             try
             {
-                config.Save();
+                this.config.Save(Settings.Default.ConfigurationFile);
             }
             catch (Exception ex)
             {
@@ -177,7 +177,7 @@ namespace Honememo.Wptscs
 
                 // 表から呼称の情報も保存
                 this.dataGridViewLanguageName.Sort(this.dataGridViewLanguageName.Columns["ColumnLanguageNameCode"], ListSortDirection.Ascending);
-                Language lang = Config.GetInstance().GetLanguage(this.comboBoxLanguageSelectedText);
+                Language lang = this.config.GetLanguage(this.comboBoxLanguageSelectedText);
                 lang.Bracket = StringUtils.DefaultString(this.textBoxBracket.Text).Trim();
                 lang.Names.Clear();
                 for (int y = 0; y < this.dataGridViewLanguageName.RowCount - 1; y++)
@@ -199,7 +199,7 @@ namespace Honememo.Wptscs
             {
                 // 設定が存在しなければ基本的に自動生成されるのでそのまま使用
                 // TODO: nullの場合の初期化が不十分（今のところnullは無いけど）
-                Website site = Config.GetInstance().GetWebsite(this.comboBoxLanguage.SelectedItem.ToString());
+                Website site = this.config.GetWebsite(this.comboBoxLanguage.SelectedItem.ToString());
                 this.textBoxLocation.Text = site.Location;
                 MediaWiki wiki = site as MediaWiki;
                 if (wiki != null)
@@ -215,7 +215,7 @@ namespace Honememo.Wptscs
 
                 // 呼称の情報を表に設定
                 this.dataGridViewLanguageName.Rows.Clear();
-                Language lang = Config.GetInstance().GetLanguage(this.comboBoxLanguage.SelectedItem.ToString());
+                Language lang = this.config.GetLanguage(this.comboBoxLanguage.SelectedItem.ToString());
                 this.textBoxBracket.Text = lang.Bracket;
                 foreach (KeyValuePair<string, Language.LanguageName> name in lang.Names)
                 {

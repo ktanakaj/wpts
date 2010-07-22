@@ -14,6 +14,7 @@ namespace Honememo.Wptscs.Logics
     using System.IO;
     using System.Net;
     using System.Net.NetworkInformation;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
 
@@ -132,7 +133,7 @@ namespace Honememo.Wptscs.Logics
 
             protected set
             {
-                this.text = (value != null) ? value : String.Empty;
+                this.text = StringUtils.DefaultString(value);
             }
         }
 
@@ -170,7 +171,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 翻訳支援処理のインスタンスを作成。
         /// </summary>
-        /// <param name="mode">処理モード。</param>
+        /// <param name="config">アプリケーション設定。</param>
         /// <param name="from">翻訳元言語。</param>
         /// <param name="to">翻訳先言語。</param>
         /// <returns>生成したインスタンス。</returns>
@@ -178,26 +179,26 @@ namespace Honememo.Wptscs.Logics
         /// 設定は設定クラスより取得、無ければ一部自動生成する。
         /// インスタンス生成失敗時は例外を投げる。
         /// </remarks>
-        public static Translate Create(Config.RunMode mode, string from, string to)
+        public static Translate Create(Config config, string from, string to)
         {
             // 処理対象に応じてTranslateを継承したオブジェクトを生成
             Translate translate = null;
-            Config config = Config.GetInstance();
 
             // Webサイトの設定
-            Website source = config.GetWebsite(mode, from);
-            Website target = config.GetWebsite(mode, to);
+            Website source = config.GetWebsite(from);
+            Website target = config.GetWebsite(to);
 
-            // モードがWikipediaの場合
-            if (mode == Config.RunMode.Wikipedia)
+            // 設定に指定されたクラスを生成する
+            //TODO: どうせなら動的にリフレクションでnewするようにしたい気も・・・
+            if (config.Engine == typeof(TranslateMediaWiki).FullName)
             {
                 // MediaWiki用インスタンスを生成
                 translate = new TranslateMediaWiki(source as MediaWiki, target as MediaWiki);
             }
             else
             {
-                // それ以外は将来の拡張用
-                throw new NotImplementedException(mode + " is not implemented");
+                // いずれにも該当しない場合
+                throw new NotImplementedException(config.Engine + " is not implemented");
             }
 
             // 対訳表（項目）の設定

@@ -31,6 +31,11 @@ namespace Honememo.Wptscs
         #region private変数
 
         /// <summary>
+        /// 現在読み込んでいるアプリケーションの設定。
+        /// </summary>
+        private Config config;
+
+        /// <summary>
         /// 検索支援処理クラスのオブジェクト。
         /// </summary>
         private Translate translate;
@@ -64,10 +69,10 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // 設定ファイルの読み込みが行えるか確認
+            // 設定ファイルの読み込み
             try
             {
-                Config.GetInstance();
+                this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
             }
             catch (FileNotFoundException ex)
             {
@@ -122,7 +127,7 @@ namespace Honememo.Wptscs
 
             // 設定ファイルの内容も保存
             // TODO: 二重起動とかを考えるともうちょいちゃんとやるべき
-            Config.GetInstance().Save();
+            this.config.Save(Settings.Default.ConfigurationFile);
         }
 
         /// <summary>
@@ -143,7 +148,7 @@ namespace Honememo.Wptscs
                 // （日本語環境だったら日本語を、英語だったら英語を）
                 Language.LanguageName name;
                 this.labelSource.Text = String.Empty;
-                if (Config.GetInstance().GetLanguage(this.comboBoxSource.Text).Names.TryGetValue(
+                if (this.config.GetLanguage(this.comboBoxSource.Text).Names.TryGetValue(
                     System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
                     out name))
                 {
@@ -151,7 +156,7 @@ namespace Honememo.Wptscs
                 }
 
                 // サーバーURLの表示
-                this.linkLabelSourceURL.Text = Config.GetInstance().GetWebsite(
+                this.linkLabelSourceURL.Text = this.config.GetWebsite(
                     this.comboBoxSource.Text).Location;
             }
         }
@@ -193,7 +198,7 @@ namespace Honememo.Wptscs
 
                 // その言語の、ユーザーが使用している言語での表示名を表示
                 // （日本語環境だったら日本語を、英語だったら英語を）
-                this.labelTarget.Text = Config.GetInstance().GetLanguage(
+                this.labelTarget.Text = this.config.GetLanguage(
                     this.comboBoxTarget.Text).Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
             }
         }
@@ -357,7 +362,7 @@ namespace Honememo.Wptscs
                 // 翻訳支援処理を実行し、結果とログをファイルに出力
                 try
                 {
-                    this.translate = Translate.Create(Config.GetInstance().Mode, this.comboBoxSource.Text, this.comboBoxTarget.Text);
+                    this.translate = Translate.Create(this.config, this.comboBoxSource.Text, this.comboBoxTarget.Text);
                 }
                 catch (NotImplementedException)
                 {
@@ -460,7 +465,7 @@ namespace Honememo.Wptscs
             this.comboBoxTarget.Items.Clear();
 
             // 設定ファイルに存在する全言語を選択肢として登録する
-            foreach (Website site in Config.GetInstance().GetModeConfig().Websites)
+            foreach (Website site in this.config.Websites)
             {
                 this.comboBoxSource.Items.Add(site.Language);
                 this.comboBoxTarget.Items.Add(site.Language);

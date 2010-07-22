@@ -13,6 +13,7 @@ namespace Honememo.Wptscs.Models
     using System;
     using System.IO;
     using System.Net;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
@@ -67,13 +68,8 @@ namespace Honememo.Wptscs.Models
 
             protected set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("location");
-                }
-
-                this.location = value;
+                // ※必須な情報が設定されていない場合、例外を返す
+                this.location = Validate.NotBlank(value, "location");
             }
         }
 
@@ -89,13 +85,8 @@ namespace Honememo.Wptscs.Models
 
             protected set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (value == null)
-                {
-                    throw new ArgumentNullException("language");
-                }
-
-                this.language = value;
+                // ※必須な情報が設定されていない場合、例外を返す
+                this.language = Validate.NotBlank(value, "language");
             }
         }
 

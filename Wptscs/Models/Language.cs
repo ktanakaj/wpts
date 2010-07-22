@@ -76,13 +76,8 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("code");
-                }
-
-                this.code = value.ToLower();
+                // ※必須な情報が設定されていない場合、例外を返す
+                this.code = Validate.NotBlank(value, "code").ToLower();
             }
         }
 
@@ -99,13 +94,8 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (value == null)
-                {
-                    throw new ArgumentNullException("names");
-                }
-
-                this.names = value;
+                // ※必須な情報が設定されていない場合、例外を返す
+                this.names = Validate.NotNull(value, "names");
             }
         }
 
@@ -117,7 +107,7 @@ namespace Honememo.Wptscs.Models
         {
             get
             {
-                if (String.IsNullOrEmpty(this.bracket))
+                if (String.IsNullOrWhiteSpace(this.bracket))
                 {
                     return Settings.Default.Bracket;
                 }

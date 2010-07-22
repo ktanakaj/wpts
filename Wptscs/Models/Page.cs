@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Models
 {
     using System;
+    using Honememo.Utilities;
 
     /// <summary>
     /// ページ（Wikipediaの記事など）をあらわすモデルクラスです。
@@ -28,16 +29,6 @@ namespace Honememo.Wptscs.Models
         /// ページタイトル。
         /// </summary>
         private string title;
-
-        /// <summary>
-        /// ページの本文。
-        /// </summary>
-        private string text;
-
-        /// <summary>
-        /// ページのタイムスタンプ。
-        /// </summary>
-        private DateTime? timestamp;
 
         #endregion
 
@@ -99,12 +90,7 @@ namespace Honememo.Wptscs.Models
             protected set
             {
                 // ウェブサイトは必須
-                if (value == null)
-                {
-                    throw new ArgumentNullException("website");
-                }
-
-                this.website = value;
+                this.website = Validate.NotNull(value, "website");
             }
         }
 
@@ -121,12 +107,7 @@ namespace Honememo.Wptscs.Models
             protected set
             {
                 // ページタイトルは必須
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("title");
-                }
-
-                this.title = value;
+                this.title = Validate.NotBlank(value, "title");
             }
         }
         
@@ -135,15 +116,8 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         public string Text
         {
-            get
-            {
-                return this.text;
-            }
-
-            protected set
-            {
-                this.text = value;
-            }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -151,15 +125,8 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         public DateTime? Timestamp
         {
-            get
-            {
-                return this.timestamp;
-            }
-
-            protected set
-            {
-                this.timestamp = value;
-            }
+            get;
+            protected set;
         }
         
         #endregion

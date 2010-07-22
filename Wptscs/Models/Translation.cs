@@ -14,6 +14,7 @@ namespace Honememo.Wptscs.Models
     using System.Collections.Generic;
     using System.Xml;
     using System.Xml.Serialization;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
@@ -72,13 +73,8 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("from");
-                }
-
-                this.from = value;
+                // ※必須な情報が設定されていない場合、例外を返す
+                this.from = Validate.NotBlank(value, "from");
             }
         }
 
@@ -94,13 +90,8 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("to");
-                }
-
-                this.to = value;
+                // ※必須な情報が設定されていない場合、例外を返す
+                this.to = Validate.NotBlank(value, "to");
             }
         }
 
