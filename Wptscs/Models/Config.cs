@@ -81,24 +81,6 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// 言語に関する情報。
-        /// </summary>
-        /// <remarks>空でもオブジェクトは存在。</remarks>
-        public IList<Language> Languages
-        {
-            get
-            {
-                return this.languages;
-            }
-
-            set
-            {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.languages = Validate.NotNull(value, "languages");
-            }
-        }
-
-        /// <summary>
         /// ウェブサイトの情報。
         /// </summary>
         /// <remarks>空でもオブジェクトは存在。</remarks>
@@ -246,55 +228,23 @@ namespace Honememo.Wptscs.Models
         #region 設定値取得用インスタンスメソッド
 
         /// <summary>
-        /// 設定から、指定された言語の情報を取得する。
-        /// </summary>
-        /// <param name="code">言語コード。</param>
-        /// <returns>言語の情報。存在しない場合は自動生成した情報を返す。</returns>
-        public Language GetLanguage(string code)
-        {
-            // 設定が存在すれば取得した値を返す
-            foreach (Language l in this.Languages)
-            {
-                if (l.Code == code)
-                {
-                    return l;
-                }
-            }
-
-            // 存在しない場合自動生成した値を返す
-            Language lang = new Language(code);
-            this.Languages.Add(lang);
-            return lang;
-        }
-        
-        /// <summary>
         /// 設定から、現在の処理対象・指定された言語のウェブサイトを取得する。
         /// </summary>
         /// <param name="lang">言語コード。</param>
-        /// <returns>ウェブサイトの情報。存在しない場合は可能であれば自動生成した情報を、できなければ<c>null</c>返す。</returns>
+        /// <returns>ウェブサイトの情報。存在しない場合は<c>null</c>返す。</returns>
         public Website GetWebsite(string lang)
         {
             // 設定が存在すれば取得した値を返す
             foreach (Website s in this.Websites)
             {
-                if (s.Language == lang)
+                if (s.Language.Code == lang)
                 {
                     return s;
                 }
             }
 
-            // 存在しない場合自動生成した値を返す
-            // （自動生成できない場合はnull）
-            //TODO: 設定ファイルにクラス名も入れる
-            Website site = null;
-            if (mode == RunMode.Wikipedia)
-            {
-                // 現時点ではMediaWikiのみ対応
-                site = new MediaWiki(lang);
-                this.Websites.Add(site);
-            }
-
-            return site;
+            // 存在しない場合、nullを返す
+            return null;
         }
         
         /// <summary>
@@ -302,7 +252,7 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="from">翻訳元言語。</param>
         /// <param name="to">翻訳先言語。</param>
-        /// <returns>対訳表の情報。存在しない場合は自動生成した情報を返す。</returns>
+        /// <returns>対訳表の情報。存在しない場合は<c>null</c>返す。</returns>
         public Translation GetItemTable(string from, string to)
         {
             // 設定が存在すれば取得した値を返す
@@ -314,11 +264,8 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // 存在しない場合自動生成した値を返す
-            // （自動生成できない場合はnull）
-            Translation table = new Translation(from, to);
-            this.ItemTables.Add(table);
-            return table;
+            // 存在しない場合、nullを返す
+            return null;
         }
 
         /// <summary>
@@ -326,7 +273,7 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="from">翻訳元言語。</param>
         /// <param name="to">翻訳先言語。</param>
-        /// <returns>対訳表の情報。存在しない場合は自動生成した情報を返す。</returns>
+        /// <returns>対訳表の情報。存在しない場合は<c>null</c>返す。</returns>
         public Translation GetHeadingTable(string from, string to)
         {
             // 設定が存在すれば取得した値を返す
@@ -338,11 +285,8 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // 存在しない場合自動生成した値を返す
-            // （自動生成できない場合はnull）
-            Translation table = new Translation(from, to);
-            this.HeadingTables.Add(table);
-            return table;
+            // 存在しない場合、nullを返す
+            return null;
         }
 
         #endregion
@@ -367,92 +311,58 @@ namespace Honememo.Wptscs.Models
             XmlDocument xml = new XmlDocument();
             xml.Load(reader);
 
-            //TODO: 要修正
             // ルートエレメントを取得
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement rootElement = xml.SelectSingleNode("/Config") as XmlElement;
 
-            // 言語情報
-            foreach (XmlNode langNode in rootElement.SelectNodes("Languages/Language"))
+            // クラス情報
+            this.Engine = rootElement.SelectSingleNode("Engine").InnerText;
+
+            // Webサイト
+            XmlSerializer serializer = null;
+            XmlNode sitesNode = rootElement.SelectSingleNode("Websites");
+            foreach (XmlNode siteNode in sitesNode.ChildNodes)
             {
-                using (XmlReader r = XmlReader.Create(
-                    new StringReader(langNode.OuterXml), reader.Settings))
+                // Webサイト
+                switch (siteNode.Name)
                 {
-                    this.Languages.Add(new XmlSerializer(typeof(Language)).Deserialize(r) as Language);
+                    // 現時点ではMediaWikiのみ対応
+                    case "MediaWiki":
+                        serializer = new XmlSerializer(typeof(MediaWiki));
+                        break;
+                }
+
+                if (serializer == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Config.ReadXml > 未対応のWebサイト : " + siteNode.Name);
+                    continue;
+                }
+
+                using (XmlReader r = XmlReader.Create(new StringReader(siteNode.OuterXml), reader.Settings))
+                {
+                    this.Websites.Add(serializer.Deserialize(r) as Website);
                 }
             }
-            
-            // 処理モードごとにループ
-            foreach (XmlNode modeNode in rootElement.ChildNodes)
+
+            // 対訳表
+            serializer = new XmlSerializer(typeof(Translation));
+            XmlNode itemsNode = rootElement.SelectSingleNode("ItemTables");
+            foreach (XmlNode itemNode in itemsNode.ChildNodes)
             {
-                XmlElement modeElement = modeNode as XmlElement;
-                if (modeElement == null || modeElement.Name == "Languages")
+                using (XmlReader r = XmlReader.Create(new StringReader(itemNode.OuterXml), reader.Settings))
                 {
-                    // エレメント以外や処理済の言語情報は除外
-                    continue;
+                    this.ItemTables.Add(serializer.Deserialize(r) as Translation);
                 }
+            }
 
-                // 処理モード
-                XmlSerializer serializer = null;
-                RunMode runMode;
-                try
+            // 対訳表
+            XmlNode headingsNode = rootElement.SelectSingleNode("HeadingTables");
+            foreach (XmlNode headingNode in headingsNode.ChildNodes)
+            {
+                using (XmlReader r = XmlReader.Create(new StringReader(headingNode.OuterXml), reader.Settings))
                 {
-                    runMode = (RunMode)Enum.Parse(typeof(RunMode), modeElement.Name);
+                    this.HeadingTables.Add(serializer.Deserialize(r) as Translation);
                 }
-                catch (ArgumentException)
-                {
-                    System.Diagnostics.Debug.WriteLine("Config.ReadXml > 未対応の処理モード : " + modeElement.Name);
-                    continue;
-                }
-
-                // 各処理モードのWebサイト
-                ModeConfig config = new ModeConfig();
-                XmlNode sitesNode = modeElement.SelectSingleNode("Websites");
-                foreach (XmlNode siteNode in sitesNode.ChildNodes)
-                {
-                    // Webサイト
-                    switch (siteNode.Name)
-                    {
-                        // 現時点ではMediaWikiのみ対応
-                        case "MediaWiki":
-                            serializer = new XmlSerializer(typeof(MediaWiki));
-                            break;
-                    }
-
-                    if (serializer == null)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Config.ReadXml > 未対応のWebサイト : " + siteNode.Name);
-                        continue;
-                    }
-
-                    using (XmlReader r = XmlReader.Create(new StringReader(siteNode.OuterXml), reader.Settings))
-                    {
-                        config.Websites.Add(serializer.Deserialize(r) as Website);
-                    }
-                }
-
-                // 各処理モードの項目の対訳表
-                serializer = new XmlSerializer(typeof(Translation));
-                XmlNode itemsNode = modeElement.SelectSingleNode("ItemTables");
-                foreach (XmlNode itemNode in itemsNode.ChildNodes)
-                {
-                    using (XmlReader r = XmlReader.Create(new StringReader(itemNode.OuterXml), reader.Settings))
-                    {
-                        config.ItemTables.Add(serializer.Deserialize(r) as Translation);
-                    }
-                }
-
-                // 各処理モードの見出しの対訳表
-                XmlNode headingsNode = modeElement.SelectSingleNode("HeadingTables");
-                foreach (XmlNode headingNode in headingsNode.ChildNodes)
-                {
-                    using (XmlReader r = XmlReader.Create(new StringReader(headingNode.OuterXml), reader.Settings))
-                    {
-                        config.HeadingTables.Add(serializer.Deserialize(r) as Translation);
-                    }
-                }
-
-                this.Configs[runMode] = config;
             }
         }
 
@@ -462,54 +372,37 @@ namespace Honememo.Wptscs.Models
         /// <param name="writer">出力先のXmlWriter</param>
         public void WriteXml(XmlWriter writer)
         {
-            // 言語情報ごとにループ
-            writer.WriteStartElement("Languages");
-            foreach (Language lang in this.Languages)
+            // 各処理モードのWebサイト
+            writer.WriteStartElement("Websites");
+            foreach (Website site in this.Websites)
             {
-                new XmlSerializer(typeof(Language)).Serialize(writer, lang);
+                // 現時点ではMediaWikiのみ対応
+                if (site as MediaWiki != null)
+                {
+                    new XmlSerializer(typeof(MediaWiki)).Serialize(writer, site);
+                }
             }
 
             writer.WriteEndElement();
 
-            // 処理モードごとにループ
-            foreach (KeyValuePair<RunMode, ModeConfig> config in this.Configs)
+            // 項目の対訳表
+            writer.WriteStartElement("ItemTables");
+            foreach (Translation trans in this.ItemTables)
             {
-                // 処理モード
-                writer.WriteStartElement(config.Key.ToString());
-
-                // 各処理モードのWebサイト
-                writer.WriteStartElement("Websites");
-                foreach (Website site in config.Value.Websites)
-                {
-                    // 現時点ではMediaWikiのみ対応
-                    if (site as MediaWiki != null)
-                    {
-                        new XmlSerializer(typeof(MediaWiki)).Serialize(writer, site);
-                    }
-                }
-
-                writer.WriteEndElement();
-
-                // 各処理モードの項目の対訳表
-                writer.WriteStartElement("ItemTables");
-                foreach (Translation trans in config.Value.ItemTables)
-                {
-                    new XmlSerializer(typeof(Translation)).Serialize(writer, trans);
-                }
-
-                writer.WriteEndElement();
-
-                // 各処理モードの見出しの対訳表
-                writer.WriteStartElement("HeadingTables");
-                foreach (Translation trans in config.Value.HeadingTables)
-                {
-                    new XmlSerializer(typeof(Translation)).Serialize(writer, trans);
-                }
-
-                writer.WriteEndElement();
-
-                writer.WriteEndElement();
+                new XmlSerializer(typeof(Translation)).Serialize(writer, trans);
             }
+
+            writer.WriteEndElement();
+
+            // 見出しの対訳表
+            writer.WriteStartElement("HeadingTables");
+            foreach (Translation trans in this.HeadingTables)
+            {
+                new XmlSerializer(typeof(Translation)).Serialize(writer, trans);
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndElement();
         }
 
         #endregion

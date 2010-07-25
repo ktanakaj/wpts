@@ -1,285 +1,55 @@
 <?xml version="1.0"?>
 <Config>
   <Engine>Honememo.Wptscs.Logics.TranslateMediaWiki</Engine>
-  <DefaultSite>Honememo.Wptscs.Models.MediaWiki</DefaultSite>
-  <Languages>
-    <Language Code="ar">
-      <Names>
-        <LanguageName Code="ar">
-          <Name>لغة عربية</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="en">
-          <Name>Arabic language</Name>
-          <ShortName>Arabic</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>アラビア語</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="de">
-      <Names>
-        <LanguageName Code="de">
-          <Name>Deutsche Sprache</Name>
-          <ShortName>Deutsch</ShortName>
-        </LanguageName>
-        <LanguageName Code="en">
-          <Name>German language</Name>
-          <ShortName>German</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>ドイツ語</Name>
-          <ShortName>独</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>독일어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>德语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="en">
-      <Names>
-        <LanguageName Code="de">
-          <Name>Englische Sprache</Name>
-          <ShortName>Englisch</ShortName>
-        </LanguageName>
-        <LanguageName Code="en">
-          <Name>English language</Name>
-          <ShortName>English</ShortName>
-        </LanguageName>
-        <LanguageName Code="es">
-          <Name>Idioma inglés</Name>
-          <ShortName>Inglés</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>英語</Name>
-          <ShortName>英</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>영어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="pt">
-          <Name>Língua inglesa</Name>
-          <ShortName>Inglês</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>英语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="es">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Spanish language</Name>
-          <ShortName>Spanish</ShortName>
-        </LanguageName>
-        <LanguageName Code="es">
-          <Name>Idioma español</Name>
-          <ShortName>Español</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>スペイン語</Name>
-          <ShortName>西</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>에스파냐어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>西班牙语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="fr">
-      <Names>
-        <LanguageName Code="en">
-          <Name>French language</Name>
-          <ShortName>French</ShortName>
-        </LanguageName>
-        <LanguageName Code="fr">
-          <Name>Français</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>フランス語</Name>
-          <ShortName>仏</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>프랑스어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>法语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="it">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Italian language</Name>
-          <ShortName>Italian</ShortName>
-        </LanguageName>
-        <LanguageName Code="it">
-          <Name>Lingua italiana</Name>
-          <ShortName>Italiano</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>イタリア語</Name>
-          <ShortName>伊</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>이탈리아어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>意大利语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="ja">
-      <Names>
-        <LanguageName Code="de">
-          <Name>Japanische Sprache</Name>
-          <ShortName>Japanisch</ShortName>
-        </LanguageName>
-        <LanguageName Code="en">
-          <Name>Japanese language</Name>
-          <ShortName>Japanese</ShortName>
-        </LanguageName>
-        <LanguageName Code="es">
-          <Name>Idioma japonés</Name>
-          <ShortName>Japonés</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>日本語</Name>
-          <ShortName>日</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>일본어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="pt">
-          <Name>Língua japonesa</Name>
-          <ShortName>Japonês</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>日语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-      <Bracket>（{0}）</Bracket>
-    </Language>
-    <Language Code="ko">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Korean language</Name>
-          <ShortName>Korean</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>朝鮮語</Name>
-          <ShortName>ハングル</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>한국어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>朝鮮語</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="pt">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Portuguese language</Name>
-          <ShortName>Portuguese</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>ポルトガル語</Name>
-          <ShortName>葡</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>포르투갈어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="pt">
-          <Name>Língua portuguesa</Name>
-          <ShortName>Português</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>葡萄牙語</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="ru">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Russian language</Name>
-          <ShortName>Russian</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>ロシア語</Name>
-          <ShortName>露</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>러시아어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="ru">
-          <Name>Русский язык</Name>
-          <ShortName>Русский</ShortName>
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>俄语</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-    <Language Code="zh">
-      <Names>
-        <LanguageName Code="en">
-          <Name>Chinese language</Name>
-          <ShortName>Chinese</ShortName>
-        </LanguageName>
-        <LanguageName Code="ja">
-          <Name>中国語</Name>
-          <ShortName>中</ShortName>
-        </LanguageName>
-        <LanguageName Code="ko">
-          <Name>중국어</Name>
-          <ShortName />
-        </LanguageName>
-        <LanguageName Code="zh">
-          <Name>中文</Name>
-          <ShortName />
-        </LanguageName>
-      </Names>
-    </Language>
-  </Languages>
   <Websites>
     <MediaWiki>
       <Location>http://ar.wikipedia.org</Location>
-      <Language>ar</Language>
+      <Language Code="ar">
+        <Names>
+          <LanguageName Code="ar">
+            <Name>لغة عربية</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Arabic language</Name>
+            <ShortName>Arabic</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>アラビア語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <ExportPath>wiki/خاص:Export/{0}</ExportPath>
       <MagicWords />
       <Headings />
     </MediaWiki>
     <MediaWiki>
       <Location>http://de.wikipedia.org</Location>
-      <Language>de</Language>
+      <Language Code="de">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Deutsche Sprache</Name>
+            <ShortName>Deutsch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>German language</Name>
+            <ShortName>German</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ドイツ語</Name>
+            <ShortName>独</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>독일어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>德语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
       <MagicWords />
       <Headings>
@@ -291,7 +61,38 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://en.wikipedia.org</Location>
-      <Language>en</Language>
+      <Language Code="en">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Englische Sprache</Name>
+            <ShortName>Englisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>English language</Name>
+            <ShortName>English</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma inglés</Name>
+            <ShortName>Inglés</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>英語</Name>
+            <ShortName>英</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>영어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua inglesa</Name>
+            <ShortName>Inglês</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>英语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <MagicWords />
       <Headings>
         <Heading no="0">Advantages</Heading>
@@ -310,7 +111,30 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://es.wikipedia.org</Location>
-      <Language>es</Language>
+      <Language Code="es">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Spanish language</Name>
+            <ShortName>Spanish</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma español</Name>
+            <ShortName>Español</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>スペイン語</Name>
+            <ShortName>西</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>에스파냐어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>西班牙语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
       <Headings>
@@ -323,7 +147,30 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://fr.wikipedia.org</Location>
-      <Language>fr</Language>
+      <Language Code="fr">
+        <Names>
+          <LanguageName Code="en">
+            <Name>French language</Name>
+            <ShortName>French</ShortName>
+          </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Français</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>フランス語</Name>
+            <ShortName>仏</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>프랑스어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>法语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <MagicWords />
       <Headings>
         <Heading no="6">Liens externes</Heading>
@@ -335,7 +182,30 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://it.wikipedia.org</Location>
-      <Language>it</Language>
+      <Language Code="it">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Italian language</Name>
+            <ShortName>Italian</ShortName>
+          </LanguageName>
+          <LanguageName Code="it">
+            <Name>Lingua italiana</Name>
+            <ShortName>Italiano</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>イタリア語</Name>
+            <ShortName>伊</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>이탈리아어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>意大利语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
       <MagicWords />
       <Headings>
@@ -346,7 +216,39 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://ja.wikipedia.org</Location>
-      <Language>ja</Language>
+      <Language Code="ja">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Japanische Sprache</Name>
+            <ShortName>Japanisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Japanese language</Name>
+            <ShortName>Japanese</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma japonés</Name>
+            <ShortName>Japonés</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>日本語</Name>
+            <ShortName>日</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>일본어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua japonesa</Name>
+            <ShortName>Japonês</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>日语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+        <Bracket>（{0}）</Bracket>
+      </Language>
       <ExportPath>wiki/特別:Export/{0}</ExportPath>
       <Redirect>#転送</Redirect>
       <MagicWords />
@@ -367,7 +269,26 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://ko.wikipedia.org</Location>
-      <Language>ko</Language>
+      <Language Code="ko">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Korean language</Name>
+            <ShortName>Korean</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>朝鮮語</Name>
+            <ShortName>ハングル</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>한국어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>朝鮮語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
       <MagicWords />
       <Headings>
@@ -378,7 +299,30 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://pt.wikipedia.org</Location>
-      <Language>pt</Language>
+      <Language Code="pt">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Portuguese language</Name>
+            <ShortName>Portuguese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ポルトガル語</Name>
+            <ShortName>葡</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>포르투갈어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua portuguesa</Name>
+            <ShortName>Português</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>葡萄牙語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
       <Headings>
@@ -388,7 +332,30 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://ru.wikipedia.org</Location>
-      <Language>ru</Language>
+      <Language Code="ru">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Russian language</Name>
+            <ShortName>Russian</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ロシア語</Name>
+            <ShortName>露</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>러시아어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Русский язык</Name>
+            <ShortName>Русский</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>俄语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
       <MagicWords />
       <Headings>
@@ -399,7 +366,26 @@
     </MediaWiki>
     <MediaWiki>
       <Location>http://zh.wikipedia.org</Location>
-      <Language>zh</Language>
+      <Language Code="zh">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Chinese language</Name>
+            <ShortName>Chinese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>中国語</Name>
+            <ShortName>中</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>중국어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>中文</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
       <MagicWords />
       <Headings>
         <Heading no="6">外部連結</Heading>

@@ -34,7 +34,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ウェブサイトの言語。
         /// </summary>
-        private string language;
+        private Language language;
 
         #endregion
 
@@ -76,7 +76,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ウェブサイトの言語。
         /// </summary>
-        public string Language
+        public Language Language
         {
             get
             {
@@ -86,7 +86,7 @@ namespace Honememo.Wptscs.Models
             protected set
             {
                 // ※必須な情報が設定されていない場合、例外を返す
-                this.language = Validate.NotBlank(value, "language");
+                this.language = Validate.NotNull(value, "language");
             }
         }
 

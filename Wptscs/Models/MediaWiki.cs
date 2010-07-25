@@ -80,7 +80,7 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="language">ウェブサイトの言語。</param>
         /// <param name="location">ウェブサイトの場所。</param>
-        public MediaWiki(string language, string location)
+        public MediaWiki(Language language, string location)
         {
             // メンバ変数の初期設定
             this.Language = language;
@@ -91,7 +91,7 @@ namespace Honememo.Wptscs.Models
         /// コンストラクタ（Wikipedia用）。
         /// </summary>
         /// <param name="language">ウェブサイトの言語。</param>
-        public MediaWiki(string language)
+        public MediaWiki(Language language)
             : this(language, String.Format(Settings.Default.WikipediaLocation, language))
         {
         }
@@ -486,7 +486,13 @@ namespace Honememo.Wptscs.Models
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement siteElement = xml.SelectSingleNode("MediaWiki") as XmlElement;
             this.Location = siteElement.SelectSingleNode("Location").InnerText;
-            this.Language = siteElement.SelectSingleNode("Language").InnerText;
+
+            using (XmlReader r = XmlReader.Create(
+                new StringReader(siteElement.SelectSingleNode("Language").OuterXml), reader.Settings))
+            {
+                this.Language = new XmlSerializer(typeof(Language)).Deserialize(r) as Language;
+            }
+
             this.Xmlns = XmlUtils.InnerText(siteElement.SelectSingleNode("Xmlns"));
             this.NamespacePath = XmlUtils.InnerText(siteElement.SelectSingleNode("NamespacePath"));
             this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
@@ -527,7 +533,7 @@ namespace Honememo.Wptscs.Models
         public void WriteXml(XmlWriter writer)
         {
             writer.WriteElementString("Location", this.Location);
-            writer.WriteElementString("Language", this.Language);
+            new XmlSerializer(typeof(Language)).Serialize(writer, this.Language);
 
             // MediaWiki固有の情報
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力

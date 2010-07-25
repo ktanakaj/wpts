@@ -44,7 +44,7 @@ namespace Honememo.Wptscs.Logics
             //    あるため、それについては随時期待値を調整して対処。
             UriBuilder b = new UriBuilder("file", "");
             b.Path = Path.GetFullPath(testDir) + "\\";
-            MediaWiki server = new MediaWiki(language, new Uri(b.Uri, language + "/").ToString());
+            MediaWiki server = new MediaWiki(new Language(language), new Uri(b.Uri, language + "/").ToString());
             server.ExportPath = "{0}.xml";
             server.NamespacePath = "_api.xml";
             return server;
@@ -116,7 +116,7 @@ namespace Honememo.Wptscs.Logics
         {
             MediaWiki from = this.GetTestServer("en");
             Translate translate = new TranslateMediaWiki(from, this.GetTestServer("ja"));
-            translate.HeadingTable = Config.GetInstance().GetHeadingTable("en", "ja");
+            translate.HeadingTable = new Translation("en", "ja"); ;
 
             Assert.IsTrue(translate.Run("example"));
 

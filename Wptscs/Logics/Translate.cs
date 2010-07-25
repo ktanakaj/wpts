@@ -189,7 +189,7 @@ namespace Honememo.Wptscs.Logics
             Website target = config.GetWebsite(to);
 
             // 設定に指定されたクラスを生成する
-            //TODO: どうせなら動的にリフレクションでnewするようにしたい気も・・・
+            // TODO: どうせなら動的にリフレクションでnewするようにしたい気も・・・
             if (config.Engine == typeof(TranslateMediaWiki).FullName)
             {
                 // MediaWiki用インスタンスを生成

@@ -85,7 +85,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 対象記事に言語間リンクが存在する場合、処理を継続するか確認
-            string interWiki = article.GetInterWiki(this.To.Language);
+            string interWiki = article.GetInterWiki(this.To.Language.Code);
             if (interWiki != String.Empty)
             {
                 if (MessageBox.Show(
@@ -106,11 +106,11 @@ namespace Honememo.Wptscs.Logics
 
             // 冒頭部を作成
             this.Text += "'''xxx'''";
-            string bracket = Config.GetInstance().GetLanguage(this.To.Language).Bracket;
+            string bracket = this.To.Language.Bracket;
             if (bracket.Contains("{0}"))
             {
                 string originalName = String.Empty;
-                string langTitle = this.GetFullName(this.From, this.To.Language);
+                string langTitle = this.GetFullName(this.From, this.To.Language.Code);
                 if (langTitle != String.Empty)
                 {
                     originalName = "[[" + langTitle + "]]: ";
@@ -213,7 +213,7 @@ namespace Honememo.Wptscs.Logics
             string interWiki = null;
             if (page != null)
             {
-                interWiki = page.GetInterWiki(this.To.Language);
+                interWiki = page.GetInterWiki(this.To.Language.Code);
                 if (!String.IsNullOrEmpty(interWiki))
                 {
                     Log += "[[" + interWiki + "]]";
@@ -285,7 +285,7 @@ namespace Honememo.Wptscs.Logics
                 // 記事があればその言語間リンクを取得
                 if (page != null)
                 {
-                    interWiki = page.GetInterWiki(this.To.Language);
+                    interWiki = page.GetInterWiki(this.To.Language.Code);
                     if (!String.IsNullOrEmpty(interWiki))
                     {
                         Log += "[[" + interWiki + "]]";
@@ -323,7 +323,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
-            string interWiki = this.GetInterWikiUseTable(title, this.To.Language);
+            string interWiki = this.GetInterWikiUseTable(title, this.To.Language.Code);
 
             // 改行が出力されていない場合（正常時）、改行
             if (!Log.EndsWith(ENTER))
@@ -582,7 +582,7 @@ namespace Honememo.Wptscs.Logics
                     result = String.Empty;
 
                     // 先頭が : でない、翻訳先言語への言語間リンクの場合
-                    if (!link.StartColonFlag && link.Code == this.To.Language)
+                    if (!link.StartColonFlag && link.Code == this.To.Language.Code)
                     {
                         // 削除する。正常終了で、置換後文字列なしを返す
                         System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > " + link.Text + " を削除");
@@ -963,9 +963,9 @@ namespace Honememo.Wptscs.Logics
         /// <returns>ページ名|略称形式の言語名称。</returns>
         protected string GetFullName(Website site, string code)
         {
-            if (Config.GetInstance().GetLanguage(site.Language).Names.ContainsKey(code))
+            if (site.Language.Names.ContainsKey(code))
             {
-                Language.LanguageName name = Config.GetInstance().GetLanguage(site.Language).Names[code];
+                Language.LanguageName name = site.Language.Names[code];
                 if (!String.IsNullOrEmpty(name.ShortName))
                 {
                     return name.Name + "|" + name.ShortName;

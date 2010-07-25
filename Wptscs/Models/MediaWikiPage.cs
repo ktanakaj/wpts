@@ -297,12 +297,12 @@ namespace Honememo.Wptscs.Models
                 string redirect = this.Website.Redirect.Clone() as string;
                 if (i == 1)
                 {
-                    if (this.Website.Language == "en")
+                    if (this.Website.Language.Code == "en")
                     {
                         continue;
                     }
 
-                    MediaWiki en = new MediaWiki("en");
+                    MediaWiki en = new MediaWiki(new Language("en"));
                     redirect = en.Redirect;
                 }
 

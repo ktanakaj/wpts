@@ -27,6 +27,7 @@ namespace Honememo.Utilities
         /// <returns>渡されたオブジェクト。</returns>
         /// <remarks>オブジェクトが<c>null</c>の場合に例外に渡されるパラメータ名は "value"。</remarks>
         /// <exception cref="ArgumentNullException">オブジェクトが<c>null</c>。</exception>
+        /// <typeparam name="T">オブジェクトの型。</typeparam>
         public static T NotNull<T>(T obj)
         {
             return NotNull(obj, "value");
@@ -39,6 +40,7 @@ namespace Honememo.Utilities
         /// <param name="paramName">オブジェクトが<c>null</c>の場合に例外に渡されるパラメータ名。</param>
         /// <returns>渡されたオブジェクト。</returns>
         /// <exception cref="ArgumentNullException">オブジェクトが<c>null</c>。</exception>
+        /// <typeparam name="T">オブジェクトの型。</typeparam>
         public static T NotNull<T>(T obj, string paramName)
         {
             if (obj == null)
@@ -89,8 +91,6 @@ namespace Honememo.Utilities
         }
 
         #endregion
-
-    
 
         #region NotBlankメソッド
 

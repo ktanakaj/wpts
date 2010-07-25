@@ -55,6 +55,7 @@
   <ItemGroup>
     <Content Include="Data\config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\MediaWiki\en\.example.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

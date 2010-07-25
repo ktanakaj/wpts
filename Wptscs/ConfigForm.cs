@@ -164,7 +164,9 @@ namespace Honememo.Wptscs
             {
                 // 設定が存在しなければ基本的に自動生成されるのでそのまま格納
                 // TODO: 値の保管先
-                MediaWiki wiki = new MediaWiki(this.comboBoxLanguageSelectedText, StringUtils.DefaultString(this.textBoxLocation.Text).Trim());
+                MediaWiki wiki = new MediaWiki(
+                    new Language(this.comboBoxLanguageSelectedText),
+                    StringUtils.DefaultString(this.textBoxLocation.Text).Trim());
                 wiki.ExportPath = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
                 wiki.Xmlns = StringUtils.DefaultString(this.textBoxXmlns.Text).Trim();
                 wiki.NamespacePath = StringUtils.DefaultString(this.textBoxNamespacePath.Text).Trim();
@@ -177,7 +179,7 @@ namespace Honememo.Wptscs
 
                 // 表から呼称の情報も保存
                 this.dataGridViewLanguageName.Sort(this.dataGridViewLanguageName.Columns["ColumnLanguageNameCode"], ListSortDirection.Ascending);
-                Language lang = this.config.GetLanguage(this.comboBoxLanguageSelectedText);
+                Language lang = wiki.Language;
                 lang.Bracket = StringUtils.DefaultString(this.textBoxBracket.Text).Trim();
                 lang.Names.Clear();
                 for (int y = 0; y < this.dataGridViewLanguageName.RowCount - 1; y++)
@@ -215,7 +217,7 @@ namespace Honememo.Wptscs
 
                 // 呼称の情報を表に設定
                 this.dataGridViewLanguageName.Rows.Clear();
-                Language lang = this.config.GetLanguage(this.comboBoxLanguage.SelectedItem.ToString());
+                Language lang = site.Language;
                 this.textBoxBracket.Text = lang.Bracket;
                 foreach (KeyValuePair<string, Language.LanguageName> name in lang.Names)
                 {

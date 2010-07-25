@@ -148,7 +148,8 @@ namespace Honememo.Wptscs
                 // （日本語環境だったら日本語を、英語だったら英語を）
                 Language.LanguageName name;
                 this.labelSource.Text = String.Empty;
-                if (this.config.GetLanguage(this.comboBoxSource.Text).Names.TryGetValue(
+                if (this.config.GetWebsite(this.comboBoxSource.Text) != null &&
+                    this.config.GetWebsite(this.comboBoxSource.Text).Language.Names.TryGetValue(
                     System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
                     out name))
                 {
@@ -198,8 +199,12 @@ namespace Honememo.Wptscs
 
                 // その言語の、ユーザーが使用している言語での表示名を表示
                 // （日本語環境だったら日本語を、英語だったら英語を）
-                this.labelTarget.Text = this.config.GetLanguage(
-                    this.comboBoxTarget.Text).Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                if (this.config.GetWebsite(
+                    this.comboBoxTarget.Text) != null)
+                {
+                    this.labelTarget.Text = this.config.GetWebsite(
+                        this.comboBoxTarget.Text).Language.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                }
             }
         }
 
