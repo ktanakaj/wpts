@@ -39,6 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logics\TranslateMediaWikiTest.cs" />
+    <Compile Include="Models\LanguageTest.cs" />
+    <Compile Include="Models\WebsiteTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\StringUtilsTest.cs" />
   </ItemGroup>
@@ -50,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\MediaWiki\ja\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\config.xml">
