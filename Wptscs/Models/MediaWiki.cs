@@ -92,8 +92,11 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="language">ウェブサイトの言語。</param>
         public MediaWiki(Language language)
-            : this(language, String.Format(Settings.Default.WikipediaLocation, language))
         {
+            // メンバ変数の初期設定
+            // ※ オーバーロードメソッドを呼んでいないのは、languageがnullのときに先にエラーになるから
+            this.Language = language;
+            this.Location = String.Format(Settings.Default.WikipediaLocation, language.Code);
         }
 
         /// <summary>
@@ -286,6 +289,8 @@ namespace Honememo.Wptscs.Models
                 {
                     // 値が設定されていない場合、サーバーから取得して初期化する
                     // ※ コンストラクタ等で初期化していないのは、通信の準備が整うまで行えないため
+                    // ※ MagicWordsがnullでこちらが空で若干条件が違うのは、あちらは設定ファイルに
+                    //    保存する設定だが、こちらは設定ファイルに保存しない基本的に読み込み用の設定だから。
                     if (this.namespaces.Count > 0)
                     {
                         return this.namespaces;

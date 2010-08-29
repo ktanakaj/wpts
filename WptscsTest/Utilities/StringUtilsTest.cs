@@ -19,7 +19,7 @@ namespace Honememo.Utilities
     [TestFixture]
     public class StringUtilsTest
     {
-        #region テストケース
+        #region 初期化メソッドテストケース
 
         /// <summary>
         /// DefaultStringメソッドテストケース。
@@ -39,6 +39,10 @@ namespace Honememo.Utilities
             Assert.AreEqual(" ", StringUtils.DefaultString(" ", "初期値"));
             Assert.AreEqual("null以外の文字列", StringUtils.DefaultString("null以外の文字列", "初期値"));
         }
+
+        #endregion
+
+        #region 文字列チェックテストケース
 
         /// <summary>
         /// StartsWithメソッドテストケース。

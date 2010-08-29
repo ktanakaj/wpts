@@ -25,6 +25,8 @@ namespace Honememo.Wptscs.Models
     [TestFixture]
     public class LanguageTest
     {
+        #region プロパティテストケース
+
         /// <summary>
         /// Codeプロパティテストケース。
         /// </summary>
@@ -108,6 +110,10 @@ namespace Honememo.Wptscs.Models
             Assert.AreEqual(" ({0}) ", lang.Bracket);
         }
 
+        #endregion
+
+        #region XMLシリアライズ用メソッドテストケース
+
         /// <summary>
         /// XMLデシリアライズテストケース。
         /// </summary>
@@ -171,5 +177,7 @@ namespace Honememo.Wptscs.Models
                     + "<LanguageName Code=\"zh\"><Name>日语</Name><ShortName /></LanguageName>"
                     + "</Names><Bracket>（{0}）</Bracket></Language>", b2.ToString());
         }
+
+        #endregion
     }
 }

@@ -127,6 +127,8 @@ namespace Honememo.Wptscs.Models
     [TestFixture]
     public class WebsiteTest
     {
+        #region プロパティテストケース
+
         /// <summary>
         /// Locationプロパティテストケース。
         /// </summary>
@@ -139,7 +141,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// Locationプロパティテストケース（コードがnull）。
+        /// Locationプロパティテストケース（null）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -149,7 +151,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// Locationプロパティテストケース（コードが空）。
+        /// Locationプロパティテストケース（空）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentException))]
@@ -170,7 +172,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// Languageプロパティテストケース（コードがnull）。
+        /// Languageプロパティテストケース（null）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -178,6 +180,10 @@ namespace Honememo.Wptscs.Models
         {
             new DummySite().Language = null;
         }
+
+        #endregion
+
+        #region メソッドテストケース
 
         /// <summary>
         /// XMLデシリアライズテストケース。
@@ -219,5 +225,7 @@ namespace Honememo.Wptscs.Models
 
             Assert.AreEqual("<DummySite><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language></DummySite>", b.ToString());
         }
+
+        #endregion
     }
 }
