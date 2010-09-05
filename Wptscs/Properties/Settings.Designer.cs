@@ -267,5 +267,17 @@ namespace Honememo.Wptscs.Properties {
                 this["IsUpgraded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IgnoreError {
+            get {
+                return ((bool)(this["IgnoreError"]));
+            }
+            set {
+                this["IgnoreError"] = value;
+            }
+        }
     }
 }

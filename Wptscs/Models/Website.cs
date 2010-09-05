@@ -66,7 +66,7 @@ namespace Honememo.Wptscs.Models
                 return this.location;
             }
 
-            protected set
+            set
             {
                 // ※必須な情報が設定されていない場合、例外を返す
                 this.location = Validate.NotBlank(value, "location");

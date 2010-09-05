@@ -42,15 +42,12 @@ namespace Honememo.Wptscs.Logics
             // ※ 下記URL生成時は、きちんとパス区切り文字を入れてやら無いとフォルダが認識されない。
             //    また、httpで取得した場合とfileで取得した場合では先頭の大文字小文字が異なることが
             //    あるため、それについては随時期待値を調整して対処。
+            MediaWiki server = ObjectUtils.DefaultIfNull<MediaWiki>(
+                TestingConfig.GetInstance("Data\\config.xml").GetWebsite(language) as MediaWiki,
+                new MediaWiki(new Language(language)));
             UriBuilder b = new UriBuilder("file", "");
             b.Path = Path.GetFullPath(testDir) + "\\";
-            Config config = TestingConfig.GetInstance("Data\\config.xml");
-            Language lang = new Language(language);
-            if (config.GetWebsite(language) != null)
-            {
-                lang = config.GetWebsite(language).Language;
-            }
-            MediaWiki server = new MediaWiki(lang, new Uri(b.Uri, language + "/").ToString());
+            server.Location = new Uri(b.Uri, language + "/").ToString();
             server.ExportPath = "{0}.xml";
             server.NamespacePath = "_api.xml";
             return server;

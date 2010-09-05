@@ -225,14 +225,14 @@ namespace Honememo.Wptscs.Logics
             this.Initialize();
 
             // サーバー接続チェック
-            //string host = new Uri(this.From.Location).Host;
-            //if (!String.IsNullOrEmpty(host))
-            //{
-            //    if (!this.Ping(host))
-            //    {
-            //        return false;
-            //    }
-            //}
+            string host = new Uri(this.From.Location).Host;
+            if (!String.IsNullOrEmpty(host) && !Settings.Default.IgnoreError)
+            {
+                if (!this.Ping(host))
+                {
+                    return false;
+                }
+            }
 
             // 翻訳支援処理実行部の本体を実行
             // ※以降の処理は、継承クラスにて定義
