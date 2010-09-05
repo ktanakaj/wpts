@@ -132,11 +132,11 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 新しい言語間リンクと、コメントを追記
-            this.Text += "\n\n[[" + this.From.Language + ":" + i_Name + "]]\n";
+            this.Text += "\n\n[[" + this.From.Language.Code + ":" + i_Name + "]]\n";
             this.Text += String.Format(
                 Resources.ArticleFooter,
                 FormUtils.ApplicationName(),
-                this.From.Language,
+                this.From.Language.Code,
                 i_Name,
                 article.Timestamp.HasValue ? article.Timestamp.Value.ToString("U") : String.Empty) + "\n";
 
@@ -605,7 +605,7 @@ namespace Honememo.Wptscs.Logics
                 else if (interWiki == String.Empty)
                 {
                     // 言語間リンクが存在しない場合、[[:en:xxx]]みたいな形式に置換
-                    result += ":" + this.From.Language + ":" + link.Article;
+                    result += ":" + this.From.Language.Code + ":" + link.Article;
                 }
                 else
                 {
@@ -767,7 +767,7 @@ namespace Honememo.Wptscs.Logics
             {
                 // 言語間リンクが存在しない場合、[[:en:Template:xxx]]みたいな普通のリンクに置換
                 // おまけで、元のテンプレートの状態をコメントでつける
-                result += "[[:" + this.From.Language + ":" + link.Article + "]]" + MediaWikiPage.CommentStart + " " + link.Text + " " + MediaWikiPage.CommentEnd;
+                result += "[[:" + this.From.Language.Code + ":" + link.Article + "]]" + MediaWikiPage.CommentStart + " " + link.Text + " " + MediaWikiPage.CommentEnd;
             }
             else
             {

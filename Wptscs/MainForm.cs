@@ -124,10 +124,6 @@ namespace Honememo.Wptscs
             Settings.Default.LastSelectedSource = this.comboBoxSource.Text;
             Settings.Default.LastSelectedTarget = this.comboBoxTarget.Text;
             Settings.Default.Save();
-
-            // 設定ファイルの内容も保存
-            // TODO: 二重起動とかを考えるともうちょいちゃんとやるべき
-            this.config.Save(Settings.Default.ConfigurationFile);
         }
 
         /// <summary>
@@ -472,8 +468,8 @@ namespace Honememo.Wptscs
             // 設定ファイルに存在する全言語を選択肢として登録する
             foreach (Website site in this.config.Websites)
             {
-                this.comboBoxSource.Items.Add(site.Language);
-                this.comboBoxTarget.Items.Add(site.Language);
+                this.comboBoxSource.Items.Add(site.Language.Code);
+                this.comboBoxTarget.Items.Add(site.Language.Code);
             }
         }
 

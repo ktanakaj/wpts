@@ -538,7 +538,7 @@ namespace Honememo.Wptscs.Models
         public void WriteXml(XmlWriter writer)
         {
             writer.WriteElementString("Location", this.Location);
-            new XmlSerializer(typeof(Language)).Serialize(writer, this.Language);
+            new XmlSerializer(this.Language.GetType()).Serialize(writer, this.Language);
 
             // MediaWiki固有の情報
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力

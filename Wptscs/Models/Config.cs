@@ -17,6 +17,7 @@ namespace Honememo.Wptscs.Models
     using System.Xml;
     using System.Xml.Serialization;
     using Honememo.Utilities;
+    using Honememo.Wptscs.Logics;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
@@ -63,7 +64,7 @@ namespace Honememo.Wptscs.Models
         /// コンストラクタ。
         /// </summary>
         /// <remarks>通常は<see cref="GetInstance(string)"/>を使用する。</remarks>
-        private Config()
+        protected Config()
         {
         }
 
@@ -74,10 +75,10 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 翻訳支援処理で使用するロジッククラス名。
         /// </summary>
-        public string Engine
+        public Type Engine
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -176,21 +177,6 @@ namespace Honememo.Wptscs.Models
             }
 
             return Config.configs[file];
-        }
-
-        /// <summary>
-        /// 指定された設定ファイルからアプリケーションの設定を読み込む。
-        /// </summary>
-        /// <param name="path">設定ファイルパス。</param>
-        /// <remarks>主にテスト用。</remarks>
-        public static void SetInstance(string path)
-        {
-            // 設定ファイルを読み込み
-            System.Diagnostics.Debug.WriteLine("Config.SetInstance > " + path + " を読み込み");
-            using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                Config.configs[Path.GetFileName(path)] = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
-            }
         }
 
         #endregion
@@ -315,33 +301,16 @@ namespace Honememo.Wptscs.Models
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
             XmlElement rootElement = xml.SelectSingleNode("/Config") as XmlElement;
 
-            // クラス情報
-            this.Engine = rootElement.SelectSingleNode("Engine").InnerText;
+            // ロジッククラス
+            this.Engine = this.ParseEngine(rootElement.SelectSingleNode("Engine").InnerText);
 
             // Webサイト
             XmlSerializer serializer = null;
             XmlNode sitesNode = rootElement.SelectSingleNode("Websites");
             foreach (XmlNode siteNode in sitesNode.ChildNodes)
             {
-                // Webサイト
-                switch (siteNode.Name)
-                {
-                    // 現時点ではMediaWikiのみ対応
-                    case "MediaWiki":
-                        serializer = new XmlSerializer(typeof(MediaWiki));
-                        break;
-                }
-
-                if (serializer == null)
-                {
-                    System.Diagnostics.Debug.WriteLine("Config.ReadXml > 未対応のWebサイト : " + siteNode.Name);
-                    continue;
-                }
-
-                using (XmlReader r = XmlReader.Create(new StringReader(siteNode.OuterXml), reader.Settings))
-                {
-                    this.Websites.Add(serializer.Deserialize(r) as Website);
-                }
+                // ノードに指定された内容に応じたインスタンスを取得する
+                this.Websites.Add(this.ParseWebsite(siteNode, reader.Settings));
             }
 
             // 対訳表
@@ -372,15 +341,22 @@ namespace Honememo.Wptscs.Models
         /// <param name="writer">出力先のXmlWriter</param>
         public void WriteXml(XmlWriter writer)
         {
+            // ロジッククラス
+            string engine = this.Engine.FullName;
+            if (engine.StartsWith(typeof(Translate).Namespace))
+            {
+                // 自前のエンジンの場合、クラス名だけを出力
+                engine = this.Engine.Name;
+            }
+
+            writer.WriteElementString("Engine", engine);
+
             // 各処理モードのWebサイト
             writer.WriteStartElement("Websites");
             foreach (Website site in this.Websites)
             {
-                // 現時点ではMediaWikiのみ対応
-                if (site as MediaWiki != null)
-                {
-                    new XmlSerializer(typeof(MediaWiki)).Serialize(writer, site);
-                }
+                // TODO: 自分のパッケージ以外の場合、パッケージ名も含めて出すようにしたい
+                new XmlSerializer(site.GetType()).Serialize(writer, site);
             }
 
             writer.WriteEndElement();
@@ -389,7 +365,7 @@ namespace Honememo.Wptscs.Models
             writer.WriteStartElement("ItemTables");
             foreach (Translation trans in this.ItemTables)
             {
-                new XmlSerializer(typeof(Translation)).Serialize(writer, trans);
+                new XmlSerializer(trans.GetType()).Serialize(writer, trans);
             }
 
             writer.WriteEndElement();
@@ -398,11 +374,52 @@ namespace Honememo.Wptscs.Models
             writer.WriteStartElement("HeadingTables");
             foreach (Translation trans in this.HeadingTables)
             {
-                new XmlSerializer(typeof(Translation)).Serialize(writer, trans);
+                new XmlSerializer(trans.GetType()).Serialize(writer, trans);
             }
 
             writer.WriteEndElement();
-            writer.WriteEndElement();
+        }
+
+        /// <summary>
+        /// 指定されたXML値からEngineのクラスを取得するる。
+        /// </summary>
+        /// <param name="name">XMLのクラス名情報。</param>
+        /// <returns>Engineクラス。</returns>
+        /// <remarks>クラスは動的に判定する。クラスが存在しない場合などは随時状況に応じた例外を投げる。</remarks>
+        private Type ParseEngine(string name)
+        {
+            // Translateと同じパッケージに指定された名前のクラスがあるかを探す
+            Type type = Type.GetType(typeof(Translate).Namespace + "." + name, false, true);
+            if (type == null)
+            {
+                // 存在しない場合、そのままの名前でクラスを探索、無ければ例外スロー
+                type = Type.GetType(name, true, true);
+            }
+
+            return type;
+        }
+
+        /// <summary>
+        /// XMLノードからWebSiteインスタンスをデシリアライズする。
+        /// </summary>
+        /// <param name="node">WebSiteをシリアライズしたノード。</param>
+        /// <param name="setting">XML読み込み時の設定。</param>
+        /// <returns>デシリアライズしたインスタンス。</returns>
+        /// <remarks>クラスはノード名から動的に判定する。クラスが存在しない場合などは随時状況に応じた例外を投げる。</remarks>
+        private Website ParseWebsite(XmlNode node, XmlReaderSettings setting)
+        {
+            // WebSiteと同じパッケージに指定された名前のクラスがあるかを探す
+            Type type = Type.GetType(typeof(Website).Namespace + "." + node.Name, false, true);
+            if (type == null)
+            {
+                // 存在しない場合、そのままの名前でクラスを探索、無ければ例外スロー
+                type = Type.GetType(node.Name, true, true);
+            }
+
+            using (XmlReader r = XmlReader.Create(new StringReader(node.OuterXml), setting))
+            {
+                return new XmlSerializer(type).Deserialize(r) as Website;
+            }
         }
 
         #endregion

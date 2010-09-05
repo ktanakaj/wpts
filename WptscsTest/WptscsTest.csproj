@@ -39,6 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logics\TranslateMediaWikiTest.cs" />
+    <Compile Include="Models\ConfigTest.cs" />
+    <Compile Include="Models\TestingConfig.cs" />
     <Compile Include="Models\LanguageTest.cs" />
     <Compile Include="Models\MediaWikiTest.cs" />
     <Compile Include="Models\WebsiteTest.cs" />

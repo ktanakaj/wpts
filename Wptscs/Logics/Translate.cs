@@ -189,8 +189,8 @@ namespace Honememo.Wptscs.Logics
             Website target = config.GetWebsite(to);
 
             // 設定に指定されたクラスを生成する
-            // TODO: どうせなら動的にリフレクションでnewするようにしたい気も・・・
-            if (config.Engine == typeof(TranslateMediaWiki).FullName)
+            // TODO: コンストラクタをなくして、動的に変更可能とする
+            if (config.Engine == typeof(TranslateMediaWiki))
             {
                 // MediaWiki用インスタンスを生成
                 translate = new TranslateMediaWiki(source as MediaWiki, target as MediaWiki);
@@ -225,14 +225,14 @@ namespace Honememo.Wptscs.Logics
             this.Initialize();
 
             // サーバー接続チェック
-            string host = new Uri(this.From.Location).Host;
-            if (!String.IsNullOrEmpty(host))
-            {
-                if (!this.Ping(host))
-                {
-                    return false;
-                }
-            }
+            //string host = new Uri(this.From.Location).Host;
+            //if (!String.IsNullOrEmpty(host))
+            //{
+            //    if (!this.Ping(host))
+            //    {
+            //        return false;
+            //    }
+            //}
 
             // 翻訳支援処理実行部の本体を実行
             // ※以降の処理は、継承クラスにて定義

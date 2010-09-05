@@ -44,29 +44,20 @@ namespace Honememo.Wptscs.Logics
             //    あるため、それについては随時期待値を調整して対処。
             UriBuilder b = new UriBuilder("file", "");
             b.Path = Path.GetFullPath(testDir) + "\\";
-            MediaWiki server = new MediaWiki(new Language(language), new Uri(b.Uri, language + "/").ToString());
+            Config config = TestingConfig.GetInstance("Data\\config.xml");
+            Language lang = new Language(language);
+            if (config.GetWebsite(language) != null)
+            {
+                lang = config.GetWebsite(language).Language;
+            }
+            MediaWiki server = new MediaWiki(lang, new Uri(b.Uri, language + "/").ToString());
             server.ExportPath = "{0}.xml";
             server.NamespacePath = "_api.xml";
             return server;
         }
 
         #endregion
-
-        #region 初期化
-
-        /// <summary>
-        /// テストケース共通の初期化を行う。
-        /// </summary>
-        [SetUp]
-        public void SetUp()
-        {
-            // 設定ファイルのConfigクラスがシングルトンで変更できないため、
-            // テスト用の設定ファイルを持たせ、そちらを指定する。
-            Config.SetInstance("Data/config.xml");
-        }
-
-        #endregion
-
+        
         #region テストケース
 
         /// <summary>

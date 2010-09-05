@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Config>
-  <Engine>Honememo.Wptscs.Logics.TranslateMediaWiki</Engine>
+  <Engine>TranslateMediaWiki</Engine>
   <Websites>
     <MediaWiki>
       <Location>http://ar.wikipedia.org</Location>
