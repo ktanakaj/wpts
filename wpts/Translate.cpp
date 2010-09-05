@@ -62,9 +62,9 @@ bool TranslateNetworkObject::Run(String ^i_Name)
 	// 変数を初期化
 	runInitialize();
 	// サーバー接続チェック
-	if(ping(static_cast<LanguageWithServerInformation^>(source)->Server) == false){
-		return false;
-	}
+	//if(ping(static_cast<LanguageWithServerInformation^>(source)->Server) == false){
+	//	return false;
+	//}
 	// 翻訳支援処理実行部の本体を実行
 	// ※以降の処理は、継承クラスにて定義
 	return runBody(i_Name);

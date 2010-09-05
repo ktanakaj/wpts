@@ -16,7 +16,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("-")];
 [assembly:AssemblyProductAttribute("Wikipedia –|–óx‰‡ƒc[ƒ‹")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) Honeplus 2009")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) Honeplus 2010")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
