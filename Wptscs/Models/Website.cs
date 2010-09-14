@@ -138,8 +138,6 @@ namespace Honememo.Wptscs.Models
                 string referer = Settings.Default.Referer;
                 if (String.IsNullOrEmpty(referer))
                 {
-                    // 空の場合は、遷移元のURLを自動設定
-                    // TODO: 実装したらサーバーにやさしいかなと思う。
                     referer = String.Empty;
                 }
 

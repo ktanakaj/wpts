@@ -2,7 +2,7 @@
 // <summary>
 //      Wikipedia用の翻訳支援処理実装クラスソース</summary>
 //
-// <copyright file="TranslateMediaWiki.cs" company="honeplusのメモ帳">
+// <copyright file="MediaWikiTranslator.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -22,7 +22,7 @@ namespace Honememo.Wptscs.Logics
     /// <summary>
     /// Wikipedia用の翻訳支援処理実装クラスです。
     /// </summary>
-    public class TranslateMediaWiki : Translate
+    public class MediaWikiTranslator : Translator
     {
         #region コンストラクタ
 
@@ -31,7 +31,7 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         /// <param name="from">翻訳元サイト。</param>
         /// <param name="to">翻訳先サイト。</param>
-        public TranslateMediaWiki(
+        public MediaWikiTranslator(
             MediaWiki from, MediaWiki to)
             : base(from, to)
         {
@@ -270,7 +270,7 @@ namespace Honememo.Wptscs.Logics
 
                 // 対訳表に存在しない場合は、普通に取得し表に記録
                 // ※ nullも存在しないことの記録として格納
-                Translation.Goal goal = new Translation.Goal();
+                TranslationDictionary.Item goal = new TranslationDictionary.Item();
                 goal.Timestamp = DateTime.UtcNow;
                 MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
 
@@ -940,19 +940,7 @@ namespace Honememo.Wptscs.Logics
         /// <returns>翻訳先言語での見出し。値が存在しない場合は<c>null</c>。</returns>
         protected string GetHeading(string heading)
         {
-            if (!String.IsNullOrEmpty(heading) && this.HeadingTable != null)
-            {
-                // そのまま返してしまうと大文字小文字違いを判定できないので回す
-                foreach (KeyValuePair<string, Translation.Goal> p in this.HeadingTable)
-                {
-                    if (p.Key.ToLower() == heading.ToLower())
-                    {
-                        return p.Value.Word;
-                    }
-                }
-            }
-
-            return null;
+            return this.HeadingTable.GetWord(heading);
         }
 
         /// <summary>

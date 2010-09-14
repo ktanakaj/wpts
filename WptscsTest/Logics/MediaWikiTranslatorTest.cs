@@ -1,8 +1,8 @@
 ﻿// ================================================================================================
 // <summary>
-//      TranslateMediaWikiのテストクラスソース。</summary>
+//      MediaWikiTranslatorのテストクラスソース。</summary>
 //
-// <copyright file="TranslateMediaWikiTest.cs" company="honeplusのメモ帳">
+// <copyright file="MediaWikiTranslatorTest.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Logics
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
     using NUnit.Framework;
@@ -18,10 +19,10 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Wptscs.Models;
 
     /// <summary>
-    /// TranslateMediaWikiのテストクラスです。
+    /// MediaWikiTranslatorのテストクラスです。
     /// </summary>
     [TestFixture]
-    public class TranslateMediaWikiTest
+    public class MediaWikiTranslatorTest
     {
         #region 定数
 
@@ -64,7 +65,10 @@ namespace Honememo.Wptscs.Logics
         public void TestExampleIgnoreHeading()
         {
             MediaWiki from = this.GetTestServer("en");
-            Translate translate = new TranslateMediaWiki(from, this.GetTestServer("ja"));
+            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+            translate.HeadingTable = new TranslationTable();
+            translate.HeadingTable.From = "en";
+            translate.HeadingTable.To = "ja";
 
             Assert.IsTrue(translate.Run("example"));
 
@@ -103,8 +107,16 @@ namespace Honememo.Wptscs.Logics
         public void TestExample()
         {
             MediaWiki from = this.GetTestServer("en");
-            Translate translate = new TranslateMediaWiki(from, this.GetTestServer("ja"));
-            translate.HeadingTable = new Translation("en", "ja"); ;
+            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+
+            // 見出しの変換パターンを設定
+            translate.HeadingTable = new TranslationTable();
+            IDictionary<string, string> dic = new Dictionary<string, string>();
+            dic["en"] = "See also";
+            dic["ja"] = "関連項目";
+            translate.HeadingTable.Add(dic);
+            translate.HeadingTable.From = "en";
+            translate.HeadingTable.To = "ja";
 
             Assert.IsTrue(translate.Run("example"));
 
@@ -136,28 +148,29 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// テストデータを用い、Runを通しで実行するテストケース。キャッシュ使用。。
+        /// テストデータを用い、Runを通しで実行するテストケース。キャッシュ使用。
         /// </summary>
         [Test]
         public void TestExampleWithCache()
         {
             MediaWiki from = this.GetTestServer("en");
-            Translate translate = new TranslateMediaWiki(from, this.GetTestServer("ja"));
+            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+
+            // 見出しの変換パターンを設定
+            translate.HeadingTable = new TranslationTable();
+            IDictionary<string, string> dic = new Dictionary<string, string>();
+            dic["en"] = "See also";
+            dic["ja"] = "関連項目";
+            translate.HeadingTable.Add(dic);
+            translate.HeadingTable.From = "en";
+            translate.HeadingTable.To = "ja";
 
             // 以下のキャッシュパターンを指定して実行
-            Translation table = new Translation("en", "ja");
-            Translation.Goal goal1 = new Translation.Goal();
-            goal1.Word = "Template:Wiktionary";
-            table.Add("Template:Wiktionary", goal1);
-            Translation.Goal goal2 = new Translation.Goal();
-            table.Add("example.org", goal2);
-            Translation.Goal goal3 = new Translation.Goal();
-            goal3.Word = "。さんぷる";
-            goal3.Redirect = ".dummy";
-            table.Add(".example", goal3);
-            Translation.Goal goal4 = new Translation.Goal();
-            goal4.Word = "Template:曖昧さ回避";
-            table.Add("Template:Disambig", goal4);
+            TranslationDictionary table = new TranslationDictionary("en", "ja");
+            table.Add("Template:Wiktionary", new TranslationDictionary.Item { Word = "Template:Wiktionary" });
+            table.Add("example.org", new TranslationDictionary.Item());
+            table.Add(".example", new TranslationDictionary.Item { Word = "。さんぷる", Redirect = ".dummy" });
+            table.Add("Template:Disambig", new TranslationDictionary.Item { Word = "Template:曖昧さ回避" });
             translate.ItemTable = table;
 
             Assert.IsTrue(translate.Run("example"));

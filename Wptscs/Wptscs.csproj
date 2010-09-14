@@ -59,8 +59,8 @@
       <DependentUpon>InputLanguageCodeDialog.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Logics\Translate.cs" />
-    <Compile Include="Logics\TranslateMediaWiki.cs" />
+    <Compile Include="Logics\Translator.cs" />
+    <Compile Include="Logics\MediaWikiTranslator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,7 +73,8 @@
     <Compile Include="Models\MediaWiki.cs" />
     <Compile Include="Models\MediaWikiPage.cs" />
     <Compile Include="Models\Page.cs" />
-    <Compile Include="Models\Translation.cs" />
+    <Compile Include="Models\TranslationDictionary.cs" />
+    <Compile Include="Models\TranslationTable.cs" />
     <Compile Include="Models\Website.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

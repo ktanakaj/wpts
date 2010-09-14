@@ -489,7 +489,7 @@ namespace Honememo.Wptscs.Models
 
             // Webサイト
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
-            XmlElement siteElement = xml.SelectSingleNode("MediaWiki") as XmlElement;
+            XmlElement siteElement = xml.DocumentElement;
             this.Location = siteElement.SelectSingleNode("Location").InnerText;
 
             using (XmlReader r = XmlReader.Create(

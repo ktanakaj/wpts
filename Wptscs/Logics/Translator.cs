@@ -2,7 +2,7 @@
 // <summary>
 //      翻訳支援処理を実装するための共通クラスソース</summary>
 //
-// <copyright file="Translate.cs" company="honeplusのメモ帳">
+// <copyright file="Translator.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -21,7 +21,7 @@ namespace Honememo.Wptscs.Logics
     /// <summary>
     /// 翻訳支援処理を実装するための共通クラスです。
     /// </summary>
-    public abstract class Translate
+    public abstract class Translator
     {
         #region private変数
 
@@ -49,7 +49,7 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         /// <param name="from">翻訳元サイト。</param>
         /// <param name="to">翻訳先サイト。</param>
-        public Translate(Website from, Website to)
+        public Translator(Website from, Website to)
         {
             // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
             if (from == null)
@@ -83,7 +83,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 言語間の項目の対訳表。
         /// </summary>
-        public Translation ItemTable
+        public TranslationDictionary ItemTable
         {
             get;
             set;
@@ -92,7 +92,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 言語間の見出しの対訳表。
         /// </summary>
-        public Translation HeadingTable
+        public TranslationTable HeadingTable
         {
             get;
             set;
@@ -179,10 +179,10 @@ namespace Honememo.Wptscs.Logics
         /// 設定は設定クラスより取得、無ければ一部自動生成する。
         /// インスタンス生成失敗時は例外を投げる。
         /// </remarks>
-        public static Translate Create(Config config, string from, string to)
+        public static Translator Create(Config config, string from, string to)
         {
-            // 処理対象に応じてTranslateを継承したオブジェクトを生成
-            Translate translate = null;
+            // 処理対象に応じてTranslatorを継承したオブジェクトを生成
+            Translator translator = null;
 
             // Webサイトの設定
             Website source = config.GetWebsite(from);
@@ -190,24 +190,26 @@ namespace Honememo.Wptscs.Logics
 
             // 設定に指定されたクラスを生成する
             // TODO: コンストラクタをなくして、動的に変更可能とする
-            if (config.Engine == typeof(TranslateMediaWiki))
+            if (config.Translator == typeof(MediaWikiTranslator))
             {
                 // MediaWiki用インスタンスを生成
-                translate = new TranslateMediaWiki(source as MediaWiki, target as MediaWiki);
+                translator = new MediaWikiTranslator(source as MediaWiki, target as MediaWiki);
             }
             else
             {
                 // いずれにも該当しない場合
-                throw new NotImplementedException(config.Engine + " is not implemented");
+                throw new NotImplementedException(config.Translator + " is not implemented");
             }
 
             // 対訳表（項目）の設定
-            translate.ItemTable = config.GetItemTable(from, to);
+            translator.ItemTable = config.GetItemTable(from, to);
 
-            // 対訳表（見出し）の設定
-            translate.HeadingTable = config.GetHeadingTable(from, to);
+            // 対訳表（見出し）の設定、使用する言語は決まっているので組み合わせを設定
+            translator.HeadingTable = config.HeadingTable;
+            translator.HeadingTable.From = from;
+            translator.HeadingTable.To = to;
 
-            return translate;
+            return translator;
         }
 
         #endregion

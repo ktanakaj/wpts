@@ -38,7 +38,7 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 検索支援処理クラスのオブジェクト。
         /// </summary>
-        private Translate translate;
+        private Translator translate;
 
         /// <summary>
         /// 表示済みログ文字列長。
@@ -363,7 +363,7 @@ namespace Honememo.Wptscs
                 // 翻訳支援処理を実行し、結果とログをファイルに出力
                 try
                 {
-                    this.translate = Translate.Create(this.config, this.comboBoxSource.Text, this.comboBoxTarget.Text);
+                    this.translate = Translator.Create(this.config, this.comboBoxSource.Text, this.comboBoxTarget.Text);
                 }
                 catch (NotImplementedException)
                 {
@@ -448,6 +448,18 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void BackgroundWorkerRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            // 設定ファイルのキャッシュ情報を更新
+            try
+            {
+                this.config.Save(Settings.Default.ConfigurationFile);
+            }
+            catch (Exception ex)
+            {
+                FormUtils.WarningDialog(
+                    Resources.WarningMessageCacheSaveFailed,
+                    ex.Message);
+            }
+
             // 画面をロック中から解放
             this.Release();
         }

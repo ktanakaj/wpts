@@ -69,9 +69,7 @@ namespace Honememo.Wptscs.Models
             Assert.NotNull(lang.Names);
             Assert.AreEqual(0, lang.Names.Count);
 
-            Language.LanguageName name = new Language.LanguageName();
-            name.Name = "テスト";
-            name.ShortName = "テ";
+            Language.LanguageName name = new Language.LanguageName { Name = "テスト", ShortName = "テ" };
             lang.Names.Add("ja", name);
             Assert.IsTrue(lang.Names.ContainsKey("ja"));
             Assert.AreEqual(name, lang.Names["ja"]);
@@ -157,13 +155,8 @@ namespace Honememo.Wptscs.Models
 
             Assert.AreEqual("<Language Code=\"ja\"><Names /><Bracket /></Language>", b.ToString());
 
-            Language.LanguageName name = new Language.LanguageName();
-            name.Name = "Japanese language";
-            name.ShortName = "Japanese";
-            lang.Names.Add("en", name);
-            Language.LanguageName name2 = new Language.LanguageName();
-            name2.Name = "日语";
-            lang.Names.Add("zh", name2);
+            lang.Names.Add("en", new Language.LanguageName { Name = "Japanese language", ShortName = "Japanese" });
+            lang.Names.Add("zh", new Language.LanguageName { Name = "日语" });
             lang.Bracket = "（{0}）";
 
             StringBuilder b2 = new StringBuilder();

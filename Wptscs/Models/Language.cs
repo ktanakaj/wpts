@@ -145,7 +145,7 @@ namespace Honememo.Wptscs.Models
 
             // Webサイトの言語情報
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
-            XmlElement langElement = xml.SelectSingleNode("Language") as XmlElement;
+            XmlElement langElement = xml.DocumentElement;
             this.Code = langElement.GetAttribute("Code");
             this.Bracket = XmlUtils.InnerText(langElement.SelectSingleNode("Bracket"));
 
@@ -153,10 +153,11 @@ namespace Honememo.Wptscs.Models
             foreach (XmlNode nameNode in langElement.SelectNodes("Names/LanguageName"))
             {
                 XmlElement nameElement = nameNode as XmlElement;
-                Language.LanguageName name = new Language.LanguageName();
-                name.Name = XmlUtils.InnerText(nameElement.SelectSingleNode("Name"));
-                name.ShortName = XmlUtils.InnerText(nameElement.SelectSingleNode("ShortName"));
-                this.Names[nameElement.GetAttribute("Code")] = name;
+                this.Names[nameElement.GetAttribute("Code")] = new LanguageName
+                {
+                    Name = XmlUtils.InnerText(nameElement.SelectSingleNode("Name")),
+                    ShortName = XmlUtils.InnerText(nameElement.SelectSingleNode("ShortName"))
+                };
             }
         }
 
@@ -171,7 +172,7 @@ namespace Honememo.Wptscs.Models
 
             // 言語の呼称情報
             writer.WriteStartElement("Names");
-            foreach (KeyValuePair<string, Language.LanguageName> name in this.Names)
+            foreach (KeyValuePair<string, LanguageName> name in this.Names)
             {
                 writer.WriteStartElement("LanguageName");
                 writer.WriteAttributeString("Code", name.Key);

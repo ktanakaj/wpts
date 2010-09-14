@@ -421,6 +421,17 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   キャッシュの保存に失敗しました。今回参照したページの情報は、アプリケーション終了まで有効です。
+        ///
+        ///{0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageCacheSaveFailed {
+            get {
+                return ResourceManager.GetString("WarningMessageCacheSaveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   名前空間のIDには数値を指定してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageNamespaceNumberValue {

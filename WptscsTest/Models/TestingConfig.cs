@@ -28,7 +28,7 @@ namespace Honememo.Wptscs.Models
         /// <param name="file">設定ファイル名。</param>
         /// <returns>作成したインスタンス。</returns>
         /// <remarks>テスト用のため、特に親クラスのようなシングルトンといった制御はせず。</remarks>
-        public static Config GetInstance(string file)
+        public static new Config GetInstance(string file)
         {
             // 設定ファイルを読み込み
             using (Stream stream = new FileStream(file, FileMode.Open, FileAccess.Read))

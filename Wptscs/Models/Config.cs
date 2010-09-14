@@ -49,12 +49,12 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 言語間の項目の対訳表。
         /// </summary>
-        private IList<Translation> itemTables = new List<Translation>();
+        private IList<TranslationDictionary> itemTables = new List<TranslationDictionary>();
 
         /// <summary>
         /// 言語間の見出しの対訳表。
         /// </summary>
-        private IList<Translation> headingTables = new List<Translation>();
+        private TranslationTable headingTable = new TranslationTable();
 
         #endregion
 
@@ -75,7 +75,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 翻訳支援処理で使用するロジッククラス名。
         /// </summary>
-        public Type Engine
+        public Type Translator
         {
             get;
             set;
@@ -103,7 +103,7 @@ namespace Honememo.Wptscs.Models
         /// 言語間の項目の対訳表。
         /// </summary>
         /// <remarks>空でもオブジェクトは存在。</remarks>
-        public IList<Translation> ItemTables
+        public IList<TranslationDictionary> ItemTables
         {
             get
             {
@@ -121,17 +121,17 @@ namespace Honememo.Wptscs.Models
         /// 言語間の見出しの対訳表。
         /// </summary>
         /// <remarks>空でもオブジェクトは存在。</remarks>
-        public IList<Translation> HeadingTables
+        public TranslationTable HeadingTable
         {
             get
             {
-                return this.headingTables;
+                return this.headingTable;
             }
 
             set
             {
                 // ※必須な情報が設定されていない場合、例外を返す
-                this.headingTables = Validate.NotNull(value, "headingTables");
+                this.headingTable = Validate.NotNull(value, "headingTable");
             }
         }
 
@@ -238,11 +238,11 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="from">翻訳元言語。</param>
         /// <param name="to">翻訳先言語。</param>
-        /// <returns>対訳表の情報。存在しない場合は<c>null</c>返す。</returns>
-        public Translation GetItemTable(string from, string to)
+        /// <returns>対訳表の情報。存在しない場合は新たに作成した対訳表を返す。</returns>
+        public TranslationDictionary GetItemTable(string from, string to)
         {
             // 設定が存在すれば取得した値を返す
-            foreach (Translation t in this.ItemTables)
+            foreach (TranslationDictionary t in this.ItemTables)
             {
                 if (t.From == from && t.To == to)
                 {
@@ -250,29 +250,10 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // 存在しない場合、nullを返す
-            return null;
-        }
-
-        /// <summary>
-        /// 設定から、現在の処理対象・指定された言語の対訳表（見出し）を取得する。
-        /// </summary>
-        /// <param name="from">翻訳元言語。</param>
-        /// <param name="to">翻訳先言語。</param>
-        /// <returns>対訳表の情報。存在しない場合は<c>null</c>返す。</returns>
-        public Translation GetHeadingTable(string from, string to)
-        {
-            // 設定が存在すれば取得した値を返す
-            foreach (Translation t in this.HeadingTables)
-            {
-                if (t.From == from && t.To == to)
-                {
-                    return t;
-                }
-            }
-
-            // 存在しない場合、nullを返す
-            return null;
+            // 存在しない場合、作成した対訳表を返す
+            TranslationDictionary dic = new TranslationDictionary(from, to);
+            this.itemTables.Add(dic);
+            return dic;
         }
 
         #endregion
@@ -299,13 +280,12 @@ namespace Honememo.Wptscs.Models
 
             // ルートエレメントを取得
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
-            XmlElement rootElement = xml.SelectSingleNode("/Config") as XmlElement;
+            XmlElement rootElement = xml.DocumentElement;
 
             // ロジッククラス
-            this.Engine = this.ParseEngine(rootElement.SelectSingleNode("Engine").InnerText);
+            this.Translator = this.ParseTranslator(rootElement.SelectSingleNode("Translator").InnerText);
 
             // Webサイト
-            XmlSerializer serializer = null;
             XmlNode sitesNode = rootElement.SelectSingleNode("Websites");
             foreach (XmlNode siteNode in sitesNode.ChildNodes)
             {
@@ -313,25 +293,26 @@ namespace Honememo.Wptscs.Models
                 this.Websites.Add(this.ParseWebsite(siteNode, reader.Settings));
             }
 
-            // 対訳表
-            serializer = new XmlSerializer(typeof(Translation));
+            // 項目の対訳表
+            XmlRootAttribute itemRoot = new XmlRootAttribute();
+            itemRoot.ElementName = "ItemTable";
+            XmlSerializer serializer = new XmlSerializer(typeof(TranslationDictionary), itemRoot);
             XmlNode itemsNode = rootElement.SelectSingleNode("ItemTables");
             foreach (XmlNode itemNode in itemsNode.ChildNodes)
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(itemNode.OuterXml), reader.Settings))
                 {
-                    this.ItemTables.Add(serializer.Deserialize(r) as Translation);
+                    this.ItemTables.Add(serializer.Deserialize(r) as TranslationDictionary);
                 }
             }
 
-            // 対訳表
-            XmlNode headingsNode = rootElement.SelectSingleNode("HeadingTables");
-            foreach (XmlNode headingNode in headingsNode.ChildNodes)
+            // 見出しの対訳表
+            XmlRootAttribute headingRoot = new XmlRootAttribute();
+            headingRoot.ElementName = "HeadingTable";
+            XmlNode headingNode = rootElement.SelectSingleNode("HeadingTable");
+            using (XmlReader r = XmlReader.Create(new StringReader(headingNode.OuterXml), reader.Settings))
             {
-                using (XmlReader r = XmlReader.Create(new StringReader(headingNode.OuterXml), reader.Settings))
-                {
-                    this.HeadingTables.Add(serializer.Deserialize(r) as Translation);
-                }
+                this.HeadingTable = new XmlSerializer(typeof(TranslationTable), headingRoot).Deserialize(r) as TranslationTable;
             }
         }
 
@@ -342,14 +323,14 @@ namespace Honememo.Wptscs.Models
         public void WriteXml(XmlWriter writer)
         {
             // ロジッククラス
-            string engine = this.Engine.FullName;
-            if (engine.StartsWith(typeof(Translate).Namespace))
+            string translator = this.Translator.FullName;
+            if (translator.StartsWith(typeof(Translator).Namespace))
             {
                 // 自前のエンジンの場合、クラス名だけを出力
-                engine = this.Engine.Name;
+                translator = this.Translator.Name;
             }
 
-            writer.WriteElementString("Engine", engine);
+            writer.WriteElementString("Translator", translator);
 
             // 各処理モードのWebサイト
             writer.WriteStartElement("Websites");
@@ -362,34 +343,32 @@ namespace Honememo.Wptscs.Models
             writer.WriteEndElement();
 
             // 項目の対訳表
+            XmlRootAttribute itemRoot = new XmlRootAttribute();
+            itemRoot.ElementName = "ItemTable";
             writer.WriteStartElement("ItemTables");
-            foreach (Translation trans in this.ItemTables)
+            foreach (TranslationDictionary trans in this.ItemTables)
             {
-                new XmlSerializer(trans.GetType()).Serialize(writer, trans);
+                new XmlSerializer(trans.GetType(), itemRoot).Serialize(writer, trans);
             }
 
             writer.WriteEndElement();
 
             // 見出しの対訳表
-            writer.WriteStartElement("HeadingTables");
-            foreach (Translation trans in this.HeadingTables)
-            {
-                new XmlSerializer(trans.GetType()).Serialize(writer, trans);
-            }
-
-            writer.WriteEndElement();
+            XmlRootAttribute headingRoot = new XmlRootAttribute();
+            headingRoot.ElementName = "HeadingTable";
+            new XmlSerializer(this.HeadingTable.GetType(), headingRoot).Serialize(writer, this.HeadingTable);
         }
 
         /// <summary>
-        /// 指定されたXML値からEngineのクラスを取得するる。
+        /// 指定されたXML値からTranslatorのクラスを取得するる。
         /// </summary>
         /// <param name="name">XMLのクラス名情報。</param>
-        /// <returns>Engineクラス。</returns>
+        /// <returns>Translatorクラス。</returns>
         /// <remarks>クラスは動的に判定する。クラスが存在しない場合などは随時状況に応じた例外を投げる。</remarks>
-        private Type ParseEngine(string name)
+        private Type ParseTranslator(string name)
         {
             // Translateと同じパッケージに指定された名前のクラスがあるかを探す
-            Type type = Type.GetType(typeof(Translate).Namespace + "." + name, false, true);
+            Type type = Type.GetType(typeof(Translator).Namespace + "." + name, false, true);
             if (type == null)
             {
                 // 存在しない場合、そのままの名前でクラスを探索、無ければ例外スロー

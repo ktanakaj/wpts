@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Config>
-  <Engine>TranslateMediaWiki</Engine>
+  <Translator>MediaWikiTranslator</Translator>
   <Websites>
     <MediaWiki>
       <Location>http://ar.wikipedia.org</Location>
@@ -22,7 +22,6 @@
       </Language>
       <ExportPath>wiki/خاص:Export/{0}</ExportPath>
       <MagicWords />
-      <Headings />
     </MediaWiki>
     <MediaWiki>
       <Location>http://de.wikipedia.org</Location>
@@ -52,12 +51,6 @@
       </Language>
       <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
       <MagicWords />
-      <Headings>
-        <Heading no="6">Weblinks</Heading>
-        <Heading no="8">Quellen</Heading>
-        <Heading no="9">Literatur</Heading>
-        <Heading no="10">Siehe auch</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://en.wikipedia.org</Location>
@@ -94,20 +87,6 @@
         </Names>
       </Language>
       <MagicWords />
-      <Headings>
-        <Heading no="0">Advantages</Heading>
-        <Heading no="1">Background</Heading>
-        <Heading no="2">Costs</Heading>
-        <Heading no="3">Criticism</Heading>
-        <Heading no="4">Disadvantages</Heading>
-        <Heading no="5">Example</Heading>
-        <Heading no="6">External links</Heading>
-        <Heading no="7">History</Heading>
-        <Heading no="8">Notes</Heading>
-        <Heading no="9">References</Heading>
-        <Heading no="10">See Also</Heading>
-        <Heading no="11">Theory</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://es.wikipedia.org</Location>
@@ -137,13 +116,6 @@
       </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
-      <Headings>
-        <Heading no="6">Enlaces externos</Heading>
-        <Heading no="7">Historia</Heading>
-        <Heading no="8">Notas</Heading>
-        <Heading no="9">Referencias</Heading>
-        <Heading no="10">Véase también</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://fr.wikipedia.org</Location>
@@ -172,13 +144,6 @@
         </Names>
       </Language>
       <MagicWords />
-      <Headings>
-        <Heading no="6">Liens externes</Heading>
-        <Heading no="7">Histoire</Heading>
-        <Heading no="8">Notes</Heading>
-        <Heading no="9">Bibliographie</Heading>
-        <Heading no="10">Voir aussi</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://it.wikipedia.org</Location>
@@ -208,11 +173,6 @@
       </Language>
       <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
       <MagicWords />
-      <Headings>
-        <Heading no="6">Collegamenti esterni</Heading>
-        <Heading no="9">Bibliografia</Heading>
-        <Heading no="10">Voci correlate</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ja.wikipedia.org</Location>
@@ -252,20 +212,6 @@
       <ExportPath>wiki/特別:Export/{0}</ExportPath>
       <Redirect>#転送</Redirect>
       <MagicWords />
-      <Headings>
-        <Heading no="0">利点</Heading>
-        <Heading no="1">背景</Heading>
-        <Heading no="2">費用</Heading>
-        <Heading no="3">批判</Heading>
-        <Heading no="4">欠点</Heading>
-        <Heading no="5">例</Heading>
-        <Heading no="6">外部リンク</Heading>
-        <Heading no="7">歴史</Heading>
-        <Heading no="8">脚注</Heading>
-        <Heading no="9">参考文献</Heading>
-        <Heading no="10">関連項目</Heading>
-        <Heading no="11">理論</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ko.wikipedia.org</Location>
@@ -291,11 +237,6 @@
       </Language>
       <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
       <MagicWords />
-      <Headings>
-        <Heading no="6">바깥 고리</Heading>
-        <Heading no="9">참고 자료</Heading>
-        <Heading no="10">관련항목</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://pt.wikipedia.org</Location>
@@ -325,10 +266,6 @@
       </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
-      <Headings>
-        <Heading no="6">Links Externos</Heading>
-        <Heading no="10">Ver também</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ru.wikipedia.org</Location>
@@ -358,11 +295,6 @@
       </Language>
       <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
       <MagicWords />
-      <Headings>
-        <Heading no="8">Примечания</Heading>
-        <Heading no="9">Ссылки</Heading>
-        <Heading no="10">См. также</Heading>
-      </Headings>
     </MediaWiki>
     <MediaWiki>
       <Location>http://zh.wikipedia.org</Location>
@@ -387,15 +319,87 @@
         </Names>
       </Language>
       <MagicWords />
-      <Headings>
-        <Heading no="6">外部連結</Heading>
-        <Heading no="7">歷史</Heading>
-        <Heading no="8">注釋</Heading>
-        <Heading no="9">参考文献</Heading>
-        <Heading no="10">參見</Heading>
-      </Headings>
     </MediaWiki>
   </Websites>
   <ItemTables />
-  <HeadingTables />
+  <HeadingTable>
+    <Group>
+      <Word Lang="en">Advantages</Word>
+      <Word Lang="ja">利点</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Background</Word>
+      <Word Lang="ja">背景</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Costs</Word>
+      <Word Lang="ja">費用</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Criticism</Word>
+      <Word Lang="ja">批判</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Disadvantages</Word>
+      <Word Lang="ja">欠点</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Example</Word>
+      <Word Lang="ja">例</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Weblinks</Word>
+      <Word Lang="en">External links</Word>
+      <Word Lang="es">Enlaces externos</Word>
+      <Word Lang="fr">Liens externes</Word>
+      <Word Lang="it">Collegamenti esterni</Word>
+      <Word Lang="ja">外部リンク</Word>
+      <Word Lang="kr">바깥 고리</Word>
+      <Word Lang="pt">Links Externos</Word>
+      <Word Lang="zh">外部連結</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">History</Word>
+      <Word Lang="es">Historia</Word>
+      <Word Lang="fr">Histoire</Word>
+      <Word Lang="ja">歴史</Word>
+      <Word Lang="zh">歷史</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Quellen</Word>
+      <Word Lang="en">Notes</Word>
+      <Word Lang="es">Notas</Word>
+      <Word Lang="fr">Notes</Word>
+      <Word Lang="ja">脚注</Word>
+      <Word Lang="ru">Примечания</Word>
+      <Word Lang="zh">注釋</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Literatur</Word>
+      <Word Lang="en">References</Word>
+      <Word Lang="es">Referencias</Word>
+      <Word Lang="fr">Bibliographie</Word>
+      <Word Lang="it">Bibliografia</Word>
+      <Word Lang="ja">参考文献</Word>
+      <Word Lang="kr">참고 자료</Word>
+      <Word Lang="ru">Ссылки</Word>
+      <Word Lang="zh">参考文献</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Siehe auch</Word>
+      <Word Lang="en">See Also</Word>
+      <Word Lang="es">Véase también</Word>
+      <Word Lang="fr">Voir aussi</Word>
+      <Word Lang="it">Voci correlate</Word>
+      <Word Lang="ja">関連項目</Word>
+      <Word Lang="kr">관련항목</Word>
+      <Word Lang="pt">Ver também</Word>
+      <Word Lang="ru">См. также</Word>
+      <Word Lang="zh">參見</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Theory</Word>
+      <Word Lang="ja">理論</Word>
+    </Group>
+  </HeadingTable>
 </Config>

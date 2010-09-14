@@ -1,8 +1,8 @@
 // ================================================================================================
 // <summary>
-//      言語間の対訳表をあらわすモデルクラスソース</summary>
+//      言語間の翻訳パターンをあらわすモデルクラスソース</summary>
 //
-// <copyright file="Translation.cs" company="honeplusのメモ帳">
+// <copyright file="TranslationDictionary.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -18,9 +18,9 @@ namespace Honememo.Wptscs.Models
     using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// 言語間の対訳表をあらわすモデルクラスです。
+    /// 言語間の翻訳パターンをあらわすモデルクラスです。
     /// </summary>
-    public class Translation : Dictionary<string, Translation.Goal>, IXmlSerializable
+    public class TranslationDictionary : Dictionary<string, TranslationDictionary.Item>, IXmlSerializable
     {
         #region private変数
 
@@ -43,7 +43,7 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="from">翻訳元言語コード。</param>
         /// <param name="to">翻訳先言語コード。</param>
-        public Translation(string from, string to)
+        public TranslationDictionary(string from, string to)
         {
             // メンバ変数の初期設定
             this.From = from;
@@ -53,14 +53,14 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// コンストラクタ（シリアライズ or 拡張用）。
         /// </summary>
-        protected Translation()
+        protected TranslationDictionary()
         {
         }
 
         #endregion
 
         #region プロパティ
-
+        
         /// <summary>
         /// 翻訳元言語コード。
         /// </summary>
@@ -118,7 +118,7 @@ namespace Honememo.Wptscs.Models
             xml.Load(reader);
 
             // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
-            XmlElement tableElement = xml.SelectSingleNode("Translation") as XmlElement;
+            XmlElement tableElement = xml.DocumentElement;
             this.From = tableElement.GetAttribute("From");
             this.To = tableElement.GetAttribute("To");
 
@@ -126,22 +126,22 @@ namespace Honememo.Wptscs.Models
             foreach (XmlNode itemNode in tableElement.SelectNodes("Item"))
             {
                 XmlElement itemElement = itemNode as XmlElement;
-                Goal goal = new Goal();
-                goal.Word = itemElement.GetAttribute("To");
-                goal.Redirect = itemElement.GetAttribute("Redirect");
+                Item item = new Item();
+                item.Word = itemElement.GetAttribute("To");
+                item.Redirect = itemElement.GetAttribute("Redirect");
                 string timestamp = itemElement.GetAttribute("Timestamp");
                 if (!String.IsNullOrEmpty(timestamp))
                 {
-                    goal.Timestamp = DateTime.Parse(timestamp);
+                    item.Timestamp = DateTime.Parse(timestamp);
 
                     // 登録日時が有効期限より古い場合は破棄する
-                    if (DateTime.Now - Settings.Default.CacheExpire > goal.Timestamp.Value)
+                    if (DateTime.Now - Settings.Default.CacheExpire > item.Timestamp.Value)
                     {
                         continue;
                     }
                 }
 
-                this[itemElement.GetAttribute("From")] = goal;
+                this[itemElement.GetAttribute("From")] = item;
             }
         }
 
@@ -155,7 +155,7 @@ namespace Honememo.Wptscs.Models
             writer.WriteAttributeString("To", this.To);
 
             // 各対訳の出力
-            foreach (KeyValuePair<string, Goal> item in this)
+            foreach (KeyValuePair<string, Item> item in this)
             {
                 writer.WriteStartElement("Item");
                 writer.WriteAttributeString("From", item.Key);
@@ -181,7 +181,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 対訳表の翻訳先をあらわす構造体です。
         /// </summary>
-        public struct Goal
+        public struct Item
         {
             /// <summary>
             /// 翻訳先語句。

@@ -334,13 +334,13 @@ namespace Honememo.Wptscs
         /// <param name="view">対訳表を表示するビュー</param>
         /// <param name="tables">対訳表データ</param>
         /// <remarks><c>DataGridView</c>の1～2, 3～5列にはFrom, To, TablesのKey, Goal.Word, Timestampに対応する値を持つこと。</remarks>
-        private void ImportTranslationTableView(DataGridView view, IList<Translation> tables)
+        private void ImportTranslationTableView(DataGridView view, IList<TranslationDictionary> tables)
         {
             // 初期設定以外の場合も想定して最初にクリア
             view.Rows.Clear();
-            foreach (Translation table in tables)
+            foreach (TranslationDictionary table in tables)
             {
-                foreach (KeyValuePair<string, Translation.Goal> item in table)
+                foreach (KeyValuePair<string, TranslationDictionary.Item> item in table)
                 {
                     // 1行分の初期値を設定。右矢印は別途イベントで追加すること
                     DataGridViewRow row = new DataGridViewRow();
@@ -365,9 +365,9 @@ namespace Honememo.Wptscs
         /// Goal.Word, Timestamp以外の値は必須。
         /// またTimestampは<see cref="DateTime.Parse(string)"/>できること。
         /// </remarks>
-        private IList<Translation> ExportTranslationTableView(DataGridView view)
+        private IList<TranslationDictionary> ExportTranslationTableView(DataGridView view)
         {
-            IList<Translation> tables = new List<Translation>();
+            IList<TranslationDictionary> tables = new List<TranslationDictionary>();
             foreach (DataGridViewRow row in view.Rows)
             {
                 string from = ObjectUtils.ToString(row.Cells[0].Value);
@@ -380,8 +380,8 @@ namespace Honememo.Wptscs
                 }
 
                 // その行で対象とする言語を探索
-                Translation table = null;
-                foreach (Translation t in tables)
+                TranslationDictionary table = null;
+                foreach (TranslationDictionary t in tables)
                 {
                     if (t.From == from && t.To == to)
                     {
@@ -393,12 +393,12 @@ namespace Honememo.Wptscs
                 if (table == null)
                 {
                     // 無かったら新規作成
-                    table = new Translation(from, to);
+                    table = new TranslationDictionary(from, to);
                     tables.Add(table);
                 }
 
                 // 値を格納
-                Translation.Goal goal = new Translation.Goal();
+                TranslationDictionary.Item goal = new TranslationDictionary.Item();
                 goal.Word = ObjectUtils.ToString(row.Cells[4].Value);
                 string timestamp = ObjectUtils.ToString(row.Cells[5].Value);
                 if (!String.IsNullOrEmpty(timestamp))
