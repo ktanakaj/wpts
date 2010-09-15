@@ -169,7 +169,7 @@ namespace Honememo.Wptscs.Logics
             TranslationDictionary table = new TranslationDictionary("en", "ja");
             table.Add("Template:Wiktionary", new TranslationDictionary.Item { Word = "Template:Wiktionary" });
             table.Add("example.org", new TranslationDictionary.Item());
-            table.Add(".example", new TranslationDictionary.Item { Word = "。さんぷる", Redirect = ".dummy" });
+            table.Add(".example", new TranslationDictionary.Item { Word = "。さんぷる", Alias = ".dummy" });
             table.Add("Template:Disambig", new TranslationDictionary.Item { Word = "Template:曖昧さ回避" });
             translate.ItemTable = table;
 
@@ -178,15 +178,15 @@ namespace Honememo.Wptscs.Logics
             // キャッシュに今回の処理で取得した内容が更新されているかを確認
             Assert.IsTrue(table.ContainsKey("example.com"));
             Assert.AreEqual("Example.com", table["example.com"].Word);
-            Assert.IsNull(table["example.com"].Redirect);
+            Assert.IsNull(table["example.com"].Alias);
             Assert.IsNotNull(table["example.com"].Timestamp);
             Assert.IsTrue(table.ContainsKey("Exemplum"));
             Assert.IsEmpty(table["Exemplum"].Word);
-            Assert.IsNull(table["Exemplum"].Redirect);
+            Assert.IsNull(table["Exemplum"].Alias);
             Assert.IsNotNull(table["Exemplum"].Timestamp);
             Assert.IsTrue(table.ContainsKey("example.net"));
             Assert.AreEqual("Example.com", table["example.net"].Word);
-            Assert.AreEqual("Example.com", table["example.net"].Redirect);
+            Assert.AreEqual("Example.com", table["example.net"].Alias);
             Assert.IsNotNull(table["example.net"].Timestamp);
 
             // テストデータの変換結果を期待される結果と比較する

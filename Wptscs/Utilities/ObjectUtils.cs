@@ -42,6 +42,26 @@ namespace Honememo.Utilities
         #region null値許容メソッド
 
         /// <summary>
+        /// 二つのオブジェクトが同じかを比較する。両方がまたは片方が<c>null</c>の場合も許容する。
+        /// </summary>
+        /// <param name="object1">比較する一つ目のオブジェクト。<c>null</c>も可。</param>
+        /// <param name="object2">比較する二つ目のオブジェクト。<c>null</c>も可。</param>
+        /// <returns>渡されたオブジェクトを<c>Equals</c>した結果。両方が<c>null</c>の場合は<c>true</c>を返す。</returns>
+        public static bool Equals(object object1, object object2)
+        {
+            if (object1 == null && object2 == null)
+            {
+                return true;
+            }
+            else if (object1 == null || object2 == null)
+            {
+                return false;
+            }
+
+            return object1.Equals(object2);
+        }
+
+        /// <summary>
         /// オブジェクトが<c>null</c>の場合に空の文字列を返す<c>ToString</c>。
         /// </summary>
         /// <param name="obj"><c>ToString</c>するオブジェクト。<c>null</c>も可。</param>

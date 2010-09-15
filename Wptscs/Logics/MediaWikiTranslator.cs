@@ -196,8 +196,7 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         /// <param name="title">記事名。</param>
         /// <param name="code">言語コード。</param>
-        /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
-        /// <remarks>対訳表が指定されている場合、その内容を使用する。また取得結果を対訳表に追加する。</remarks>
+        /// <returns>言語間リンク先の記事名。見つからない場合は空。ページ自体が存在しない場合は<c>null</c>。</returns>
         protected string GetInterWiki(string title, string code)
         {
             MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
@@ -232,7 +231,7 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         /// <param name="title">記事名。</param>
         /// <param name="code">言語コード。</param>
-        /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
+        /// <returns>言語間リンク先の記事名。見つからない場合は空。ページ自体が存在しない場合は<c>null</c>。</returns>
         /// <remarks>対訳表が指定されている場合、その内容を使用する。また取得結果を対訳表に追加する。</remarks>
         protected string GetInterWikiUseTable(string title, string code)
         {
@@ -245,22 +244,24 @@ namespace Honememo.Wptscs.Logics
             string interWiki = null;
             lock (this.ItemTable)
             {
-                if (this.ItemTable.ContainsKey(title))
+                TranslationDictionary.Item item;
+                if (this.ItemTable.TryGetValue(title, out item))
                 {
                     // 対訳表に存在する場合はその値を使用
                     // リダイレクトがあれば、そのメッセージも表示
-                    if (!String.IsNullOrWhiteSpace(this.ItemTable[title].Redirect))
+                    if (!String.IsNullOrWhiteSpace(item.Alias))
                     {
-                        this.Log += Resources.LogMessage_Redirect + " [[" + this.ItemTable[title].Redirect + "]] " + Resources.RightArrow + " ";
+                        this.Log += Resources.LogMessage_Redirect + " [[" + item.Alias + "]] " + Resources.RightArrow + " ";
                     }
 
-                    if (!String.IsNullOrEmpty(this.ItemTable[title].Word))
+                    if (!String.IsNullOrEmpty(item.Word))
                     {
-                        interWiki = this.ItemTable[title].Word;
+                        interWiki = item.Word;
                         Log += "[[" + interWiki + "]]";
                     }
                     else
                     {
+                        interWiki = String.Empty;
                         Log += Resources.LogMessage_InterWikiNothing;
                     }
 
@@ -270,14 +271,13 @@ namespace Honememo.Wptscs.Logics
 
                 // 対訳表に存在しない場合は、普通に取得し表に記録
                 // ※ nullも存在しないことの記録として格納
-                TranslationDictionary.Item goal = new TranslationDictionary.Item();
-                goal.Timestamp = DateTime.UtcNow;
+                item = new TranslationDictionary.Item { Timestamp = DateTime.UtcNow };
                 MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
 
                 // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
                 if (page != null && page.IsRedirect())
                 {
-                    goal.Redirect = page.Redirect;
+                    item.Alias = page.Redirect;
                     this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
                     page = this.GetPage(page.Redirect, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
                 }
@@ -294,10 +294,10 @@ namespace Honememo.Wptscs.Logics
                     {
                         Log += Resources.LogMessage_InterWikiNothing;
                     }
-                }
 
-                goal.Word = interWiki;
-                this.ItemTable[title] = goal;
+                    item.Word = interWiki;
+                    this.ItemTable[title] = item;
+                }
             }
 
             return interWiki;

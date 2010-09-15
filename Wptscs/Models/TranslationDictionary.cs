@@ -14,13 +14,15 @@ namespace Honememo.Wptscs.Models
     using System.Collections.Generic;
     using System.Xml;
     using System.Xml.Serialization;
+    using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// 言語間の翻訳パターンをあらわすモデルクラスです。
     /// </summary>
-    public class TranslationDictionary : Dictionary<string, TranslationDictionary.Item>, IXmlSerializable
+    /// <remarks>用途上、大文字小文字の違いは無視する。</remarks>
+    public class TranslationDictionary : IgnoreCaseDictionary<TranslationDictionary.Item>, IXmlSerializable
     {
         #region private変数
 
@@ -128,7 +130,7 @@ namespace Honememo.Wptscs.Models
                 XmlElement itemElement = itemNode as XmlElement;
                 Item item = new Item();
                 item.Word = itemElement.GetAttribute("To");
-                item.Redirect = itemElement.GetAttribute("Redirect");
+                item.Alias = itemElement.GetAttribute("Redirect");
                 string timestamp = itemElement.GetAttribute("Timestamp");
                 if (!String.IsNullOrEmpty(timestamp))
                 {
@@ -160,9 +162,9 @@ namespace Honememo.Wptscs.Models
                 writer.WriteStartElement("Item");
                 writer.WriteAttributeString("From", item.Key);
                 writer.WriteAttributeString("To", item.Value.Word);
-                if (!String.IsNullOrWhiteSpace(item.Value.Redirect))
+                if (!String.IsNullOrWhiteSpace(item.Value.Alias))
                 {
-                    writer.WriteAttributeString("Redirect", item.Value.Redirect);
+                    writer.WriteAttributeString("Redirect", item.Value.Alias);
                 }
 
                 if (item.Value.Timestamp.HasValue)
@@ -199,7 +201,7 @@ namespace Honememo.Wptscs.Models
             /// 翻訳先別名。
             /// </summary>
             /// <remarks>Wikipediaのリダイレクト等を意図。別名が無い場合<c>null</c>または空。</remarks>
-            public string Redirect;
+            public string Alias;
         }
 
         #endregion

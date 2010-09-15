@@ -216,7 +216,7 @@
     <value>{{{{0}}}} の識別に失敗しました。{{{{0}}}} は {{1}}名前空間の記事して処理します。（{{2}}）</value>
   </data>
   <data name="LogMessageTranslation" xml:space="preserve">
-    <value> （対訳表より）</value>
+    <value> ※</value>
     <comment>対訳表使用時の注釈</comment>
   </data>
   <data name="QuestionMessage_ArticleExist" xml:space="preserve">

@@ -1,0 +1,15 @@
+file:///xxx/Data/MediaWiki/en/ より [[example]] を取得。
+
+→ 言語間リンクの探索、定型句の変換を行います
+{{Template:wiktionary}} → [[Template:Wiktionary]] ※
+{{Template:wikiquote}} → 言語間リンク無し
+[[Example (rapper)]] → 言語間リンク無し
+[[example.com]] → [[Example.com]]
+[[example.net]] → リダイレクト [[Example.com]] → [[Example.com]]
+[[example.org]] → 言語間リンク無し ※
+[[.example]] → リダイレクト [[.dummy]] → [[。さんぷる]] ※
+
+==See also== → ==関連項目==
+[[Exemplum]] → 言語間リンク無し
+[[Exemplar]] → 言語間リンク無し
+{{Template:disambig}} → [[Template:曖昧さ回避]] ※
