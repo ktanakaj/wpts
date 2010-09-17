@@ -99,6 +99,35 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
+        #region 静的メソッド
+
+        /// <summary>
+        /// コレクションから指定された言語の翻訳パターンを取得する。
+        /// 存在しない場合は空のインスタンスを生成、コレクションに追加して返す。
+        /// </summary>
+        /// <param name="from">翻訳元言語。</param>
+        /// <param name="to">翻訳先言語。</param>
+        /// <returns>翻訳パターン。存在しない場合は新たに作成した翻訳パターンを返す。</returns>
+        public static TranslationDictionary GetDictionaryNeedCreate(
+            ICollection<TranslationDictionary> collection, string from, string to)
+        {
+            // 設定が存在すれば取得した値を返す
+            foreach (TranslationDictionary d in collection)
+            {
+                if (d.From == from && d.To == to)
+                {
+                    return d;
+                }
+            }
+
+            // 存在しない場合、作成した翻訳パターンをコレクションに追加し、返す
+            TranslationDictionary dic = new TranslationDictionary(from, to);
+            collection.Add(dic);
+            return dic;
+        }
+
+        #endregion
+
         #region XMLシリアライズ用メソッド
 
         /// <summary>

@@ -241,19 +241,8 @@ namespace Honememo.Wptscs.Models
         /// <returns>対訳表の情報。存在しない場合は新たに作成した対訳表を返す。</returns>
         public TranslationDictionary GetItemTable(string from, string to)
         {
-            // 設定が存在すれば取得した値を返す
-            foreach (TranslationDictionary t in this.ItemTables)
-            {
-                if (t.From == from && t.To == to)
-                {
-                    return t;
-                }
-            }
-
-            // 存在しない場合、作成した対訳表を返す
-            TranslationDictionary dic = new TranslationDictionary(from, to);
-            this.itemTables.Add(dic);
-            return dic;
+            // オブジェクトに用意されている共通メソッドをコール
+            return TranslationDictionary.GetDictionaryNeedCreate(this.ItemTables, from, to);
         }
 
         #endregion
@@ -292,6 +281,8 @@ namespace Honememo.Wptscs.Models
                 // ノードに指定された内容に応じたインスタンスを取得する
                 this.Websites.Add(this.ParseWebsite(siteNode, reader.Settings));
             }
+
+            // TODO: Websitesはソートが必要
 
             // 項目の対訳表
             XmlRootAttribute itemRoot = new XmlRootAttribute();

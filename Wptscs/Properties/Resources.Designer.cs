@@ -152,6 +152,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   {0} ({1}) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string HeadingViewHeaderText {
+            get {
+                return ResourceManager.GetString("HeadingViewHeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   現在、{0}には未対応ですm(__)m に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InformationMessage_DevelopingMethod {

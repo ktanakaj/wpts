@@ -177,6 +177,81 @@
   <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
+    <value>翻訳元</value>
+  </data>
+  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnAlias.HeaderText" xml:space="preserve">
+    <value>リダイレクト</value>
+  </data>
+  <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnArrow.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToCode.HeaderText" xml:space="preserve">
+    <value>翻訳先</value>
+  </data>
+  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
+    <value>取得日時</value>
+  </data>
+  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 352</value>
+  </data>
+  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
     <value>dataGridViewItems</value>
   </data>
@@ -401,102 +476,6 @@
   </data>
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 352</value>
-  </data>
-  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
-    <value>dataGridViewItems</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Parent" xml:space="preserve">
-    <value>tabPageItems</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
-    <value>翻訳元</value>
-  </data>
-  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnArrow.HeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToCode.HeaderText" xml:space="preserve">
-    <value>翻訳先</value>
-  </data>
-  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
-    <value>取得日時</value>
-  </data>
-  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
-    <value>78</value>
   </data>
   <data name="dataGridViewHeading.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1620,6 +1599,18 @@
   <data name="groupBoxApplicationConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Name" xml:space="preserve">
+    <value>checkBoxIgnoreError</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
     <value>labelRefererNote</value>
   </data>
@@ -1630,7 +1621,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;labelUserAgentNote.Name" xml:space="preserve">
     <value>labelUserAgentNote</value>
@@ -1642,7 +1633,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;labelChaceNote.Name" xml:space="preserve">
     <value>labelChaceNote</value>
@@ -1654,7 +1645,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;textBoxCacheExpire.Name" xml:space="preserve">
     <value>textBoxCacheExpire</value>
@@ -1666,7 +1657,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;textBoxReferer.Name" xml:space="preserve">
     <value>textBoxReferer</value>
@@ -1678,7 +1669,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;labelReferer.Name" xml:space="preserve">
     <value>labelReferer</value>
@@ -1690,7 +1681,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;labelCacheExpire.Name" xml:space="preserve">
     <value>labelCacheExpire</value>
@@ -1702,7 +1693,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;textBoxUserAgent.Name" xml:space="preserve">
     <value>textBoxUserAgent</value>
@@ -1714,7 +1705,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;labelUserAgent.Name" xml:space="preserve">
     <value>labelUserAgent</value>
@@ -1726,7 +1717,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="groupBoxApplicationConfig.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -1752,6 +1743,33 @@
   <data name="&gt;&gt;groupBoxApplicationConfig.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="checkBoxIgnoreError.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxIgnoreError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 99</value>
+  </data>
+  <data name="checkBoxIgnoreError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 16</value>
+  </data>
+  <data name="checkBoxIgnoreError.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="checkBoxIgnoreError.Text" xml:space="preserve">
+    <value>エラーを可能な限り無視する（※現在はほとんど機能していません）</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Name" xml:space="preserve">
+    <value>checkBoxIgnoreError</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="labelRefererNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1762,13 +1780,13 @@
     <value>289, 71</value>
   </data>
   <data name="labelRefererNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 12</value>
+    <value>189, 12</value>
   </data>
   <data name="labelRefererNote.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="labelRefererNote.Text" xml:space="preserve">
-    <value>（空欄:自動※現在のバージョンでは空）</value>
+    <value>（空欄:なし ※現在のバージョンでは空）</value>
   </data>
   <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
     <value>labelRefererNote</value>
@@ -1780,7 +1798,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="labelUserAgentNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1810,7 +1828,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="labelChaceNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1837,7 +1855,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="textBoxCacheExpire.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
@@ -1864,7 +1882,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="textBoxReferer.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 68</value>
@@ -1888,7 +1906,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="labelReferer.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1915,7 +1933,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="labelCacheExpire.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1942,7 +1960,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="textBoxUserAgent.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 43</value>
@@ -1966,7 +1984,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="labelUserAgent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1993,7 +2011,7 @@
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2032,6 +2050,24 @@
   <data name="$this.Text" xml:space="preserve">
     <value>設定</value>
   </data>
+  <data name="&gt;&gt;ColumnLanguageNameCode.Name" xml:space="preserve">
+    <value>ColumnLanguageNameCode</value>
+  </data>
+  <data name="&gt;&gt;ColumnLanguageNameCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnLanguageNameName.Name" xml:space="preserve">
+    <value>ColumnLanguageNameName</value>
+  </data>
+  <data name="&gt;&gt;ColumnLanguageNameName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnLanguageNameShortName.Name" xml:space="preserve">
+    <value>ColumnLanguageNameShortName</value>
+  </data>
+  <data name="&gt;&gt;ColumnLanguageNameShortName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ColumnFromCode.Name" xml:space="preserve">
     <value>ColumnFromCode</value>
   </data>
@@ -2042,6 +2078,12 @@
     <value>ColumnFromTitle</value>
   </data>
   <data name="&gt;&gt;ColumnFromTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnAlias.Name" xml:space="preserve">
+    <value>ColumnAlias</value>
+  </data>
+  <data name="&gt;&gt;ColumnAlias.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnArrow.Name" xml:space="preserve">
@@ -2066,24 +2108,6 @@
     <value>ColumnTimestamp</value>
   </data>
   <data name="&gt;&gt;ColumnTimestamp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameCode.Name" xml:space="preserve">
-    <value>ColumnLanguageNameCode</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameCode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameName.Name" xml:space="preserve">
-    <value>ColumnLanguageNameName</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameShortName.Name" xml:space="preserve">
-    <value>ColumnLanguageNameShortName</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameShortName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

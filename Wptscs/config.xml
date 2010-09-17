@@ -354,7 +354,7 @@
       <Word Lang="fr">Liens externes</Word>
       <Word Lang="it">Collegamenti esterni</Word>
       <Word Lang="ja">外部リンク</Word>
-      <Word Lang="kr">바깥 고리</Word>
+      <Word Lang="ko">바깥 고리</Word>
       <Word Lang="pt">Links Externos</Word>
       <Word Lang="zh">外部連結</Word>
     </Group>
@@ -381,7 +381,7 @@
       <Word Lang="fr">Bibliographie</Word>
       <Word Lang="it">Bibliografia</Word>
       <Word Lang="ja">参考文献</Word>
-      <Word Lang="kr">참고 자료</Word>
+      <Word Lang="ko">참고 자료</Word>
       <Word Lang="ru">Ссылки</Word>
       <Word Lang="zh">参考文献</Word>
     </Group>
@@ -392,7 +392,7 @@
       <Word Lang="fr">Voir aussi</Word>
       <Word Lang="it">Voci correlate</Word>
       <Word Lang="ja">関連項目</Word>
-      <Word Lang="kr">관련항목</Word>
+      <Word Lang="ko">관련항목</Word>
       <Word Lang="pt">Ver também</Word>
       <Word Lang="ru">См. также</Word>
       <Word Lang="zh">參見</Word>

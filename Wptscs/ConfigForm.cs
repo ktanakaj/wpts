@@ -62,29 +62,42 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ConfigForm_Load(object sender, EventArgs e)
         {
-            // 各タブの内容を初期化する
-            this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
-
-            // 記事の置き換えタブの初期化
-            this.ImportTranslationTableView(this.dataGridViewItems, this.config.ItemTables);
-
-            // サーバー／言語タブの初期化
-            foreach (Website site in this.config.Websites)
+            try
             {
-                this.comboBoxLanguage.Items.Add(site.Language);
+                // 各タブの内容を初期化する
+                this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
+
+                // 記事の置き換えタブの初期化
+                this.ImportTranslationDictionaryView(this.dataGridViewItems, this.config.ItemTables);
+
+                // 見出しの置き換えタブの初期化
+                this.ImportTranslationTableView(this.dataGridViewHeading, this.config.HeadingTable);
+
+                // サーバー／言語タブの初期化
+                //TODO: 書きかけ
+                foreach (Website site in this.config.Websites)
+                {
+                    this.comboBoxLanguage.Items.Add(site.Language);
+                }
+
+                // その他タブの初期化
+                this.textBoxCacheExpire.Text = Settings.Default.CacheExpire.Days.ToString();
+                this.textBoxUserAgent.Text = Settings.Default.UserAgent;
+                this.textBoxReferer.Text = Settings.Default.Referer;
+                this.checkBoxIgnoreError.Checked = Settings.Default.IgnoreError;
+                this.labelApplicationName.Text = FormUtils.ApplicationName();
+                AssemblyCopyrightAttribute copyright = Attribute.GetCustomAttribute(
+                    Assembly.GetExecutingAssembly(),
+                    typeof(AssemblyCopyrightAttribute)) as AssemblyCopyrightAttribute;
+                if (copyright != null)
+                {
+                    this.labelCopyright.Text = copyright.Copyright;
+                }
             }
-
-            // その他タブの初期化
-            this.textBoxCacheExpire.Text = Settings.Default.CacheExpire.Days.ToString();
-            this.textBoxUserAgent.Text = Settings.Default.UserAgent;
-            this.textBoxReferer.Text = Settings.Default.Referer;
-            this.labelApplicationName.Text = FormUtils.ApplicationName();
-            AssemblyCopyrightAttribute copyright = Attribute.GetCustomAttribute(
-                Assembly.GetExecutingAssembly(),
-                typeof(AssemblyCopyrightAttribute)) as AssemblyCopyrightAttribute;
-            if (copyright != null)
+            catch (Exception ex)
             {
-                this.labelCopyright.Text = copyright.Copyright;
+                // 通常この処理では例外は発生しないはず（Configに読めているので）。想定外のエラー用
+                FormUtils.ErrorDialog(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace);
             }
         }
 
@@ -95,28 +108,43 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ButtonOk_Click(object sender, EventArgs e)
         {
-            // 各タブの内容を設定ファイルに保存する
-
-            // 記事の置き換えタブの保存
-            this.config.ItemTables = this.ExportTranslationTableView(this.dataGridViewItems);
-
-            // その他タブの保存
-            Settings.Default.CacheExpire = new TimeSpan(int.Parse(this.textBoxCacheExpire.Text), 0, 0, 0);
-            Settings.Default.UserAgent = this.textBoxUserAgent.Text;
-            Settings.Default.Referer = this.textBoxReferer.Text;
-
-            // 設定をファイルに保存
-            Settings.Default.Save();
             try
             {
-                this.config.Save(Settings.Default.ConfigurationFile);
+                // 各タブの内容を設定ファイルに保存する
+
+                // 記事の置き換えタブの保存
+                this.config.ItemTables = this.ExportTranslationDictionaryView(this.dataGridViewItems);
+
+                // 見出しの置き換えタブの保存
+                this.config.HeadingTable = this.ExportTranslationTableView(this.dataGridViewHeading);
+
+                // サーバー／言語タブの初期化
+                //TODO: 書きかけ
+
+                // その他タブの保存
+                Settings.Default.CacheExpire = new TimeSpan(int.Parse(this.textBoxCacheExpire.Text), 0, 0, 0);
+                Settings.Default.UserAgent = this.textBoxUserAgent.Text;
+                Settings.Default.Referer = this.textBoxReferer.Text;
+                Settings.Default.IgnoreError = this.checkBoxIgnoreError.Checked;
+
+                // 設定をファイルに保存
+                Settings.Default.Save();
+                try
+                {
+                    this.config.Save(Settings.Default.ConfigurationFile);
+                }
+                catch (Exception ex)
+                {
+                    // 異常時はエラーメッセージを表示
+                    // ※ この場合でもConfigオブジェクトは更新済みのため設定は一時的に有効
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    FormUtils.ErrorDialog(Resources.ErrorMessageConfigSaveFailed, ex.Message);
+                }
             }
             catch (Exception ex)
             {
-                // 異常時はエラーメッセージを表示
-                // ※ この場合でもConfigオブジェクトは更新済みのため設定は一時的に有効
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
-                FormUtils.ErrorDialog(Resources.ErrorMessageConfigSaveFailed, ex.Message);
+                // 通常ファイル保存以外では例外は発生しないはず。想定外のエラー用
+                FormUtils.ErrorDialog(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace);
             }
 
             // 画面を閉じる
@@ -142,6 +170,177 @@ namespace Honememo.Wptscs
                     this.dataGridViewItems.Rows[i].Cells["ColumnArrow"].Value = Resources.RightArrow;
                 }
             }
+        }
+
+        /// <summary>
+        /// 記事の置き換え対訳表を使用する<see cref="DataGridView"/>の値設定を行う。
+        /// </summary>
+        /// <param name="view">対訳表を表示するビュー。</param>
+        /// <param name="dictionaries">対訳表データ。</param>
+        private void ImportTranslationDictionaryView(DataGridView view, IList<TranslationDictionary> dictionaries)
+        {
+            // 初期設定以外の場合も想定して最初にクリア
+            view.Rows.Clear();
+            foreach (TranslationDictionary dic in dictionaries)
+            {
+                foreach (KeyValuePair<string, TranslationDictionary.Item> item in dic)
+                {
+                    // 行を追加しその行を取得
+                    DataGridViewRow row = view.Rows[view.Rows.Add()];
+
+                    // 1行分の初期値を設定。右矢印は別途イベントで追加すること
+                    row.Cells["ColumnFromCode"].Value = dic.From;
+                    row.Cells["ColumnFromTitle"].Value = item.Key;
+                    row.Cells["ColumnAlias"].Value = item.Value.Alias;
+                    row.Cells["ColumnToCode"].Value = dic.To;
+                    row.Cells["ColumnToTitle"].Value = item.Value.Word;
+                    row.Cells["ColumnTimestamp"].Value = item.Value.Timestamp;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 記事の置き換え対訳表を使用する<see cref="DataGridView"/>からデータを抽出する。
+        /// </summary>
+        /// <param name="view">対訳表を表示するビュー。</param>
+        /// <returns>対訳表データ。</returns>
+        private IList<TranslationDictionary> ExportTranslationDictionaryView(DataGridView view)
+        {
+            IList<TranslationDictionary> dictionaries = new List<TranslationDictionary>();
+            foreach (DataGridViewRow row in view.Rows)
+            {
+                string from = ObjectUtils.ToString(row.Cells["ColumnFromCode"].Value);
+                string to = ObjectUtils.ToString(row.Cells["ColumnToCode"].Value);
+
+                // 画面での追加用の最終行が空で渡されてくるので無視
+                if (String.IsNullOrEmpty(from))
+                {
+                    continue;
+                }
+
+                // その行で対象とする言語を探索、無ければ新規作成
+                TranslationDictionary dic
+                    = TranslationDictionary.GetDictionaryNeedCreate(dictionaries, from, to);
+
+                // 値を格納
+                TranslationDictionary.Item item = new TranslationDictionary.Item
+                {
+                    Word = ObjectUtils.ToString(row.Cells["ColumnToTitle"].Value),
+                    Alias = ObjectUtils.ToString(row.Cells["ColumnAlias"].Value)
+                };
+
+                string timestamp = ObjectUtils.ToString(row.Cells["ColumnTimestamp"].Value);
+                if (!String.IsNullOrEmpty(timestamp))
+                {
+                    item.Timestamp = DateTime.Parse(timestamp);
+                }
+
+                dic[ObjectUtils.ToString(row.Cells["ColumnFromTitle"].Value)] = item;
+            }
+
+            return dictionaries;
+        }
+        
+        #endregion
+
+        #region 見出しの置き換えタブのイベントのメソッド
+
+        /// <summary>
+        /// 見出しの置き換え対訳表を使用する<see cref="DataGridView"/>の値設定を行う。
+        /// </summary>
+        /// <param name="view">対訳表を表示するビュー。</param>
+        /// <param name="table">対訳表データ。</param>
+        private void ImportTranslationTableView(DataGridView view, TranslationTable table)
+        {
+            // 初期設定以外の場合も想定して最初にクリア
+            view.Columns.Clear();
+
+            // 言語コードを列、語句を行とする。登録されている全言語分の列を作成する
+            foreach (Website site in this.config.Websites)
+            {
+                this.AddTranslationTableColumn(view.Columns, site.Language.Code, this.GetHeaderLanguage(site.Language));
+            }
+
+            // 各行にデータを取り込み
+            foreach (IDictionary<string, string> record in table)
+            {
+                // 行を追加しその行を取得
+                DataGridViewRow row = view.Rows[view.Rows.Add()];
+
+                foreach (KeyValuePair<string, string> cell in record)
+                {
+                    // 上で登録した列では足りなかった場合、その都度生成する
+                    if (!view.Columns.Contains(cell.Key))
+                    {
+                        this.AddTranslationTableColumn(view.Columns, cell.Key, cell.Key);
+                    }
+
+                    row.Cells[cell.Key].Value = cell.Value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 見出しの置き換え対訳表を使用する<see cref="DataGridView"/>からデータを抽出する。
+        /// </summary>
+        /// <param name="view">対訳表を表示するビュー。</param>
+        /// <returns>対訳表データ。</returns>
+        private TranslationTable ExportTranslationTableView(DataGridView view)
+        {
+            TranslationTable table = new TranslationTable();
+            foreach (DataGridViewRow row in view.Rows)
+            {
+                IDictionary<string, string> record = new SortedDictionary<string, string>();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    // 空のセルは格納しない、該当の組み合わせは消える
+                    string value = ObjectUtils.ToString(cell.Value);
+                    if (!String.IsNullOrWhiteSpace(value))
+                    {
+                        record[cell.OwningColumn.Name] = value;
+                    }
+                }
+
+                // 1件もデータが無い行は丸々カットする
+                if (record.Count > 0)
+                {
+                    table.Add(record);
+                }
+            }
+
+            return table;
+        }
+
+        /// <summary>
+        /// 指定された情報を元に見出しの置き換え対訳表の列を追加する。
+        /// </summary>
+        /// <param name="columns">列コレクション。</param>
+        /// <param name="columnName">列名。</param>
+        /// <param name="headerText">列見出し。</param>
+        public void AddTranslationTableColumn(DataGridViewColumnCollection columns, string columnName, string headerText)
+        {
+            columns.Add(columnName, headerText);
+            columns[columnName].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
+        /// <summary>
+        /// 指定された言語用の表示名を返す。
+        /// </summary>
+        /// <param name="code">表示言語コード。</param>
+        /// <returns>表示名、無ければ言語コード。</returns>
+        public string GetHeaderLanguage(Language lang)
+        {
+            Language.LanguageName name;
+            if (lang.Names.TryGetValue(
+                System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName, out name))
+            {
+                if (!String.IsNullOrEmpty(name.Name))
+                {
+                    return String.Format(Resources.HeadingViewHeaderText, name.Name, lang.Code);
+                }
+            }
+
+            return lang.Code;
         }
 
         #endregion
@@ -324,94 +523,6 @@ namespace Honememo.Wptscs
             System.Diagnostics.Process.Start(this.linkLabelWebsite.Text);
         }
 
-        #endregion
-
-        #region 対訳表処理メソッド
-
-        /// <summary>
-        /// 対訳表を使用する<see cref="DataGridView"/>の値設定を行う。
-        /// </summary>
-        /// <param name="view">対訳表を表示するビュー</param>
-        /// <param name="tables">対訳表データ</param>
-        /// <remarks><c>DataGridView</c>の1～2, 3～5列にはFrom, To, TablesのKey, Goal.Word, Timestampに対応する値を持つこと。</remarks>
-        private void ImportTranslationTableView(DataGridView view, IList<TranslationDictionary> tables)
-        {
-            // 初期設定以外の場合も想定して最初にクリア
-            view.Rows.Clear();
-            foreach (TranslationDictionary table in tables)
-            {
-                foreach (KeyValuePair<string, TranslationDictionary.Item> item in table)
-                {
-                    // 1行分の初期値を設定。右矢印は別途イベントで追加すること
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.CreateCells(view);
-                    row.Cells[0].Value = table.From;
-                    row.Cells[1].Value = item.Key;
-                    row.Cells[3].Value = table.To;
-                    row.Cells[4].Value = item.Value.Word;
-                    row.Cells[5].Value = item.Value.Timestamp;
-                    view.Rows.Add(row);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 対訳表を使用する<see cref="DataGridView"/>からデータを抽出する。
-        /// </summary>
-        /// <param name="view">対訳表を表示するビュー</param>
-        /// <returns>対訳表データ</returns>
-        /// <remarks>
-        /// <c>DataGridView</c>の1～2, 3～5列にはFrom, To, TablesのKey, Goal.Word, Timestampに対応する値を持つこと。
-        /// Goal.Word, Timestamp以外の値は必須。
-        /// またTimestampは<see cref="DateTime.Parse(string)"/>できること。
-        /// </remarks>
-        private IList<TranslationDictionary> ExportTranslationTableView(DataGridView view)
-        {
-            IList<TranslationDictionary> tables = new List<TranslationDictionary>();
-            foreach (DataGridViewRow row in view.Rows)
-            {
-                string from = ObjectUtils.ToString(row.Cells[0].Value);
-                string to = ObjectUtils.ToString(row.Cells[3].Value);
-
-                // 画面での追加用の最終行が空で渡されてくるので無視
-                if (String.IsNullOrEmpty(from))
-                {
-                    continue;
-                }
-
-                // その行で対象とする言語を探索
-                TranslationDictionary table = null;
-                foreach (TranslationDictionary t in tables)
-                {
-                    if (t.From == from && t.To == to)
-                    {
-                        table = t;
-                        break;
-                    }
-                }
-
-                if (table == null)
-                {
-                    // 無かったら新規作成
-                    table = new TranslationDictionary(from, to);
-                    tables.Add(table);
-                }
-
-                // 値を格納
-                TranslationDictionary.Item goal = new TranslationDictionary.Item();
-                goal.Word = ObjectUtils.ToString(row.Cells[4].Value);
-                string timestamp = ObjectUtils.ToString(row.Cells[5].Value);
-                if (!String.IsNullOrEmpty(timestamp))
-                {
-                    goal.Timestamp = DateTime.Parse(timestamp);
-                }
-
-                table[ObjectUtils.ToString(row.Cells[1].Value)] = goal;
-            }
-
-            return tables;
-        }
-        
         #endregion
     }
 }
