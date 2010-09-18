@@ -259,9 +259,9 @@ namespace Honememo.Wptscs.Models
             {
                 if (this.magicWords == null)
                 {
-                    string[] magicWords = new string[Settings.Default.MediaWikiMagicWords.Count];
-                    Settings.Default.MediaWikiMagicWords.CopyTo(magicWords, 0);
-                    return magicWords;
+                    string[] w = new string[Settings.Default.MediaWikiMagicWords.Count];
+                    Settings.Default.MediaWikiMagicWords.CopyTo(w, 0);
+                    return w;
                 }
 
                 return this.magicWords;
@@ -528,7 +528,11 @@ namespace Honememo.Wptscs.Models
                 variables.Add(variableNode.InnerText);
             }
 
-            this.MagicWords = variables;
+            if (variables.Count > 0)
+            {
+                // 初期値の都合上、値がある場合のみ
+                this.MagicWords = variables;
+            }
         }
 
         /// <summary>

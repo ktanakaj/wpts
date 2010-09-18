@@ -138,7 +138,7 @@
     <comment>プログラム付属の設定ファイルが存在しない場合のメッセージ</comment>
   </data>
   <data name="ErrorMessageConfigSaveFailed" xml:space="preserve">
-    <value>設定ファイル保存時にエラーが発生しました。現在の設定は保存されていません。設定はアプリケーション終了まで有効です。
+    <value>設定ファイル保存時にエラーが発生しました。現在の設定は保存されていません。
 
 {0}</value>
     <comment>設定ファイルの保存時にエラーが発生した場合のメッセージ</comment>

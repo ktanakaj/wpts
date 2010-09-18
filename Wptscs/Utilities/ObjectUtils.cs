@@ -47,7 +47,7 @@ namespace Honememo.Utilities
         /// <param name="object1">比較する一つ目のオブジェクト。<c>null</c>も可。</param>
         /// <param name="object2">比較する二つ目のオブジェクト。<c>null</c>も可。</param>
         /// <returns>渡されたオブジェクトを<c>Equals</c>した結果。両方が<c>null</c>の場合は<c>true</c>を返す。</returns>
-        public static bool Equals(object object1, object object2)
+        public static new bool Equals(object object1, object object2)
         {
             if (object1 == null && object2 == null)
             {

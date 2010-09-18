@@ -23,15 +23,6 @@ namespace Honememo.Wptscs
     /// </summary>
     public partial class InputLanguageCodeDialog : Form
     {
-        #region private変数
-
-        /// <summary>
-        /// 言語コード（データやり取り用）。
-        /// </summary>
-        public string LanguageCode;
-
-        #endregion
-        
         #region コンストラクタ
 
         /// <summary>
@@ -45,6 +36,19 @@ namespace Honememo.Wptscs
         
         #endregion
 
+        #region プロパティ
+
+        /// <summary>
+        /// 言語コード（データやり取り用）。
+        /// </summary>
+        public string LanguageCode
+        {
+            get;
+            set;
+        }
+
+        #endregion
+        
         #region 各イベントのメソッド
 
         /// <summary>

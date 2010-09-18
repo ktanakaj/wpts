@@ -177,81 +177,6 @@
   <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
-    <value>翻訳元</value>
-  </data>
-  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnAlias.HeaderText" xml:space="preserve">
-    <value>リダイレクト</value>
-  </data>
-  <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnArrow.HeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToCode.HeaderText" xml:space="preserve">
-    <value>翻訳先</value>
-  </data>
-  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
-    <value>取得日時</value>
-  </data>
-  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
-    <value>78</value>
-  </data>
-  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 352</value>
-  </data>
-  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
     <value>dataGridViewItems</value>
   </data>
@@ -330,245 +255,50 @@
   <data name="&gt;&gt;tabPageHeadings.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;groupBoxLanguage.Name" xml:space="preserve">
-    <value>groupBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguage.Parent" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;groupBoxServer.Name" xml:space="preserve">
-    <value>groupBoxServer</value>
-  </data>
-  <data name="&gt;&gt;groupBoxServer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxServer.Parent" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;groupBoxServer.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
-    <value>comboBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Parent" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Name" xml:space="preserve">
-    <value>labelLanguage</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Parent" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tabPageServer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageServer.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 364</value>
-  </data>
-  <data name="tabPageServer.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPageServer.Text" xml:space="preserve">
-    <value>サーバー／言語</value>
-  </data>
-  <data name="&gt;&gt;tabPageServer.Name" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;tabPageServer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageServer.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;tabPageServer.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;groupBoxInformation.Name" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;groupBoxInformation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxInformation.Parent" xml:space="preserve">
-    <value>tabPageApplication</value>
-  </data>
-  <data name="&gt;&gt;groupBoxInformation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;groupBoxApplicationConfig.Name" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;groupBoxApplicationConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxApplicationConfig.Parent" xml:space="preserve">
-    <value>tabPageApplication</value>
-  </data>
-  <data name="&gt;&gt;groupBoxApplicationConfig.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabPageApplication.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageApplication.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageApplication.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 364</value>
-  </data>
-  <data name="tabPageApplication.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tabPageApplication.Text" xml:space="preserve">
-    <value>その他</value>
-  </data>
-  <data name="&gt;&gt;tabPageApplication.Name" xml:space="preserve">
-    <value>tabPageApplication</value>
-  </data>
-  <data name="&gt;&gt;tabPageApplication.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageApplication.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;tabPageApplication.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 390</value>
-  </data>
-  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="dataGridViewHeading.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewHeading.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="dataGridViewHeading.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 352</value>
-  </data>
-  <data name="dataGridViewHeading.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewHeading.Name" xml:space="preserve">
-    <value>dataGridViewHeading</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewHeading.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewHeading.Parent" xml:space="preserve">
-    <value>tabPageHeadings</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewHeading.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="groupBoxLanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;groupBoxLanguageName.Name" xml:space="preserve">
-    <value>groupBoxLanguageName</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguageName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguageName.Parent" xml:space="preserve">
-    <value>groupBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguageName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;textBoxBracket.Name" xml:space="preserve">
-    <value>textBoxBracket</value>
-  </data>
-  <data name="&gt;&gt;textBoxBracket.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxBracket.Parent" xml:space="preserve">
-    <value>groupBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;textBoxBracket.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;labelBracket.Name" xml:space="preserve">
-    <value>labelBracket</value>
-  </data>
-  <data name="&gt;&gt;labelBracket.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelBracket.Parent" xml:space="preserve">
-    <value>groupBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;labelBracket.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="groupBoxLanguage.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="groupBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 39</value>
-  </data>
-  <data name="groupBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 319</value>
-  </data>
-  <data name="groupBoxLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="groupBoxLanguage.Text" xml:space="preserve">
-    <value>言語の設定</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguage.Name" xml:space="preserve">
-    <value>groupBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguage.Parent" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;groupBoxLanguage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="groupBoxLanguageName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="dataGridViewLanguageName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="ColumnCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnCode.HeaderText" xml:space="preserve">
+    <value>コード</value>
+  </data>
+  <data name="ColumnCode.Width" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnName.HeaderText" xml:space="preserve">
+    <value>名称（記事名）</value>
+  </data>
+  <data name="ColumnName.Width" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <metadata name="ColumnShortName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnShortName.HeaderText" xml:space="preserve">
+    <value>略称</value>
+  </data>
+  <data name="ColumnShortName.Width" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dataGridViewLanguageName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="dataGridViewLanguageName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 246</value>
+  </data>
+  <data name="dataGridViewLanguageName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;dataGridViewLanguageName.Name" xml:space="preserve">
     <value>dataGridViewLanguageName</value>
@@ -605,66 +335,6 @@
   </data>
   <data name="&gt;&gt;groupBoxLanguageName.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <metadata name="ColumnLanguageNameCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnLanguageNameName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnLanguageNameShortName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewLanguageName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewLanguageName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
-  </data>
-  <data name="dataGridViewLanguageName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 246</value>
-  </data>
-  <data name="dataGridViewLanguageName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewLanguageName.Name" xml:space="preserve">
-    <value>dataGridViewLanguageName</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewLanguageName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewLanguageName.Parent" xml:space="preserve">
-    <value>groupBoxLanguageName</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewLanguageName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ColumnLanguageNameCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnLanguageNameCode.HeaderText" xml:space="preserve">
-    <value>コード</value>
-  </data>
-  <data name="ColumnLanguageNameCode.Width" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <metadata name="ColumnLanguageNameName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnLanguageNameName.HeaderText" xml:space="preserve">
-    <value>名称（記事名）</value>
-  </data>
-  <data name="ColumnLanguageNameName.Width" type="System.Int32, mscorlib">
-    <value>78</value>
-  </data>
-  <metadata name="ColumnLanguageNameShortName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnLanguageNameShortName.HeaderText" xml:space="preserve">
-    <value>略称</value>
-  </data>
-  <data name="ColumnLanguageNameShortName.Width" type="System.Int32, mscorlib">
-    <value>51</value>
   </data>
   <data name="textBoxBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 18</value>
@@ -716,6 +386,33 @@
   </data>
   <data name="&gt;&gt;labelBracket.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="groupBoxLanguage.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="groupBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 39</value>
+  </data>
+  <data name="groupBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 319</value>
+  </data>
+  <data name="groupBoxLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="groupBoxLanguage.Text" xml:space="preserve">
+    <value>言語の設定</value>
+  </data>
+  <data name="&gt;&gt;groupBoxLanguage.Name" xml:space="preserve">
+    <value>groupBoxLanguage</value>
+  </data>
+  <data name="&gt;&gt;groupBoxLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxLanguage.Parent" xml:space="preserve">
+    <value>tabPageServer</value>
+  </data>
+  <data name="&gt;&gt;groupBoxLanguage.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="groupBoxServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -938,6 +635,291 @@
   </data>
   <data name="&gt;&gt;groupBoxServer.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="comboBoxLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="comboBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="comboBoxLanguage.MaxLength" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="comboBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="comboBoxLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
+    <value>comboBoxLanguage</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.Parent" xml:space="preserve">
+    <value>tabPageServer</value>
+  </data>
+  <data name="&gt;&gt;comboBoxLanguage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 16</value>
+  </data>
+  <data name="labelLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 12</value>
+  </data>
+  <data name="labelLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelLanguage.Text" xml:space="preserve">
+    <value>言語:</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.Name" xml:space="preserve">
+    <value>labelLanguage</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.Parent" xml:space="preserve">
+    <value>tabPageServer</value>
+  </data>
+  <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabPageServer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageServer.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageServer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 364</value>
+  </data>
+  <data name="tabPageServer.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPageServer.Text" xml:space="preserve">
+    <value>サーバー／言語</value>
+  </data>
+  <data name="&gt;&gt;tabPageServer.Name" xml:space="preserve">
+    <value>tabPageServer</value>
+  </data>
+  <data name="&gt;&gt;tabPageServer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageServer.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPageServer.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Name" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Parent" xml:space="preserve">
+    <value>tabPageApplication</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Name" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Parent" xml:space="preserve">
+    <value>tabPageApplication</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabPageApplication.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageApplication.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageApplication.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 364</value>
+  </data>
+  <data name="tabPageApplication.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tabPageApplication.Text" xml:space="preserve">
+    <value>その他</value>
+  </data>
+  <data name="&gt;&gt;tabPageApplication.Name" xml:space="preserve">
+    <value>tabPageApplication</value>
+  </data>
+  <data name="&gt;&gt;tabPageApplication.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageApplication.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPageApplication.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 390</value>
+  </data>
+  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 352</value>
+  </data>
+  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
+    <value>dataGridViewItems</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewItems.Parent" xml:space="preserve">
+    <value>tabPageItems</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewItems.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
+    <value>翻訳元</value>
+  </data>
+  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnAlias.HeaderText" xml:space="preserve">
+    <value>リダイレクト</value>
+  </data>
+  <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnArrow.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToCode.HeaderText" xml:space="preserve">
+    <value>翻訳先</value>
+  </data>
+  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
+    <value>取得日時</value>
+  </data>
+  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="dataGridViewHeading.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="dataGridViewHeading.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="dataGridViewHeading.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 352</value>
+  </data>
+  <data name="dataGridViewHeading.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewHeading.Name" xml:space="preserve">
+    <value>dataGridViewHeading</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewHeading.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewHeading.Parent" xml:space="preserve">
+    <value>tabPageHeadings</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewHeading.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="textBoxFileNamespace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
@@ -1355,60 +1337,6 @@
   </data>
   <data name="&gt;&gt;labelLocation.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="comboBoxLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
-  </data>
-  <data name="comboBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="comboBoxLanguage.MaxLength" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="comboBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 20</value>
-  </data>
-  <data name="comboBoxLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
-    <value>comboBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.Parent" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;comboBoxLanguage.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="labelLanguage.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 16</value>
-  </data>
-  <data name="labelLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 12</value>
-  </data>
-  <data name="labelLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="labelLanguage.Text" xml:space="preserve">
-    <value>言語:</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Name" xml:space="preserve">
-    <value>labelLanguage</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.Parent" xml:space="preserve">
-    <value>tabPageServer</value>
-  </data>
-  <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="groupBoxInformation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2050,24 +1978,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="&gt;&gt;ColumnLanguageNameCode.Name" xml:space="preserve">
-    <value>ColumnLanguageNameCode</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameCode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameName.Name" xml:space="preserve">
-    <value>ColumnLanguageNameName</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameShortName.Name" xml:space="preserve">
-    <value>ColumnLanguageNameShortName</value>
-  </data>
-  <data name="&gt;&gt;ColumnLanguageNameShortName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ColumnFromCode.Name" xml:space="preserve">
     <value>ColumnFromCode</value>
   </data>
@@ -2108,6 +2018,24 @@
     <value>ColumnTimestamp</value>
   </data>
   <data name="&gt;&gt;ColumnTimestamp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnCode.Name" xml:space="preserve">
+    <value>ColumnCode</value>
+  </data>
+  <data name="&gt;&gt;ColumnCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+    <value>ColumnName</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnShortName.Name" xml:space="preserve">
+    <value>ColumnShortName</value>
+  </data>
+  <data name="&gt;&gt;ColumnShortName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

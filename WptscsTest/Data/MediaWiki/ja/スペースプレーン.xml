@@ -1,0 +1,107 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>スペースプレーン</title>
+    <id>514976</id>
+    <revision>
+      <id>33343356</id>
+      <timestamp>2010-08-03T13:18:57Z</timestamp>
+      <contributor>
+        <ip>114.186.131.179</ip>
+      </contributor>
+      <comment>/* 関連項目 */</comment>
+      <text xml:space="preserve">[[Image:X-30 futuristic nasa.jpg|thumb|300px|スペースプレーン (NASP) の想像図&lt;br/&gt;（画像は[[X-30 (航空機)|X-30]]（[[1986年]]））]]
+[[画像:X-30 NASP 3.jpg|thumb|right|300px|X-30の想像図]]
+
+'''スペースプレーン''' ('''Spaceplane''') とは、[[航空機]]と同様に特別な打ち上げ設備を必要とせず、自力で滑走し離着陸および大気圏離脱・突入を行うことができる[[宇宙船]]。広義の意味として、[[スペースシャトル]]のように[[翼]]を持ち、飛行機のように滑空して着陸する機体全てを指すこともある。
+
+== 概要 ==
+宇宙空間までの輸送・移動手段としては、[[使い捨て型ロケット]]が使用される事が多いが、これは煩雑な打ち上げ設備を必要とし、発進箇所が限られるという制約がある。例外は[[スペースシャトル]]であるが、着陸については通常の滑走路を使用するものの、打ち上げについては使い捨て型ロケットと同様の設備を必要としている。
+
+スペースプレーンにおいては、通常の航空機と同じように滑走路から離陸し、そのまま大気圏を離脱、そして大気圏再突入後は再び滑走路に着陸することが考えられている。このため、煩雑な打ち上げ設備を必要とせず、滑走路と若干の支援設備のみで運用が可能となり、打ち上げコストの減少や運用可能地点の増加が見込まれる。また、飛行機のような運用を行う発想から、一般的に翼を有するデザインをしている。かつ、ほとんどの場合、[[再使用型宇宙往還機]]でもある。
+
+構想としては、1930年代に[[ドイツ]]において[[ゼンガー (航空機)|ゼンガー]]計画として構想されていた。1980年代には[[アメリカ合衆国]]で極超音速旅客機の[[X-30 (航空機)|X-30]]が国家構想として発表されたが、構想のみに終わっている。
+
+技術的特徴として、大気圏内においては[[エアブリージング]]（空気吸い込み型）[[エンジン]]を利用することが挙げられる。通常の[[ロケット]]では燃料となる[[液体水素]]以外に酸化剤として[[液体酸素]]等を自重に含むため、[[ツィオルコフスキーの公式]]により一層の性能向上は難しい。そこで、酸化剤を全て搭載せず、ジェットエンジンのように空気中の[[酸素]]を酸化剤として使用することが考えられている。また、大気圏内飛行のために[[主翼]]もしくは[[リフティングボディ]]などの[[揚力]]発生機構を有する。
+
+かつては、実現すれば宇宙飛行の大幅なコスト減に繋がるとして期待されていたものの、[[スクラムジェットエンジン]]の開発が難航しており、[[2009年]]現在の技術では、飛行速度・高度に応じて何種類ものエンジンを搭載しなければならないこと、また大気圏外においてはロケットエンジンを使わざるを得ない。さらに現用のスペースシャトルですら使い捨て型ロケットより高コストになってしまったという事実により、懐疑的な見方がされている。
+
+スペースシャトルの後継の有人宇宙船は、使い捨て型ロケットを用いるカプセル型宇宙船の[[オリオン (宇宙船)|オリオン]]となった。[[ソユーズ]]の後継機として構想されている[[クリーペル]]は再使用型宇宙往還機ではあるものの、打ち上げ自体は使い捨て型ロケットを用いて行われる予定である。スペースプレーンの実用化の目処は全く立っていないというのが現状である。
+
+== 開発中および開発が中止されたスペースプレーン ==
+* [[日本]]
+: [[スペースプレーン#JAXAのスペースプレーン|JAXAのスペースプレーン]] - 研究中
+* [[アメリカ合衆国|アメリカ]]
+: [[X-30 (航空機)|X-30 NASP]] - 開発中止（[[1986年]]～[[1994年]]）
+: [[X-37 (航空機)|X-37]]（1996年から） -無人研究機。 [[アメリカ航空宇宙局]]が手を引いたため、2006年以降は[[アメリカ空軍]]専属プロジェクトとなる。
+* [[イギリス]]
+: [[HOTOL]] - 研究中止（[[1985年]]～[[1988年]]）
+* [[ドイツ]]
+: [[ゼンガー (航空機)|ゼンガー]] - [[ナチス・ドイツ]]敗戦と共に研究中止（[[1930年代]]）
+: [[ゼンガー]] - 将来型欧州宇宙輸送調査計画 (FESTIP) に移行（1988年～1994年）
+
+== JAXAのスペースプレーン ==
+旧[[航空宇宙技術研究所|NAL]]はスペースプレーンの研究を行っており、[[2003年]]の[[宇宙航空研究開発機構|JAXA]]への統合後も研究は続けられている。このスペースプレーンには2006年現在も特別な名称が無く、単に「スペースプレーン」と呼ばれている。アメリカの[[X-30 (航空機)|NASP]]に似た形状の[http://web.archive.org/web/20060508064303/http://spaceinfo.jaxa.jp/note/rocket/j/roc13_j.html 想像図]や、スペースシャトルのような宇宙船を背負った二段式の[http://spaceinfo.jaxa.jp/ja/space_plane.html 想像図]が公開されている。
+また、旧[[宇宙科学研究所|ISAS]]で基礎研究が行われ、統合後も研究が続けられている[[ATREX]]においても、応用例として2段式スペースプレーンの想像図を示している。
+
+（詳細は、[[HOPE]]計画を参照）
+
+== フィクション ==
+映画[[2001年宇宙の旅]]の冒頭で登場する宇宙機オリオン号は、映画では宇宙空間からのシーンで始まるが、[[アーサー・C・クラーク]]の小説版ではブースターの母機に背負われてカタパルトで射出される描写が緻密に描かれている。
+
+== 関連項目 ==
+* [[ロケット]]
+* [[再使用型宇宙往還機]]
+* [[SSTO]]
+
+== 参考文献 ==
+* [[松浦晋也]]、『われらの有人宇宙船-日本独自の宇宙輸送システム「ふじ」-』、[[裳華房]]、[[2003年]]。
+: ISBN 4-7853-8758-0
+
+== 外部リンク ==
+* {{Wayback|url=spaceinfo.jaxa.jp/note/rocket/j/roc13_j.html|title=JAXA オンライン・スペースノート ロケット - スペースプレーン|date=20060508064303}} 
+
+[[Category:宇宙船|すへえすふれえん]]
+[[Category:スペースプレーン|*]]
+
+[[ca:Avió espacial]]
+[[cs:Kosmický raketoplán]]
+[[de:Raumflugzeug]]
+[[en:Spaceplane]]
+[[fr:Avion spatial]]
+[[lv:Kosmoplāns]]
+[[ru:Орбитальный самолёт]]
+[[sk:Kozmický raketoplán]]
+[[zh:太空飛機]]</text>
+    </revision>
+  </page>
+</mediawiki>

@@ -286,7 +286,7 @@ namespace Honememo.Wptscs.Models
             if (String.IsNullOrEmpty(Text))
             {
                 // ページ本文が設定されていない場合実行不可
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Text is unset");
             }
 
             // 指定されたページがリダイレクトページ（#REDIRECT等）かをチェック

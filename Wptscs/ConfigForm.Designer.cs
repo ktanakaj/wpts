@@ -34,15 +34,19 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageItems = new System.Windows.Forms.TabPage();
             this.dataGridViewItems = new System.Windows.Forms.DataGridView();
+            this.ColumnFromCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnFromTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAlias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnArrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnToCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnToTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageHeadings = new System.Windows.Forms.TabPage();
             this.dataGridViewHeading = new System.Windows.Forms.DataGridView();
             this.tabPageServer = new System.Windows.Forms.TabPage();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.groupBoxLanguageName = new System.Windows.Forms.GroupBox();
             this.dataGridViewLanguageName = new System.Windows.Forms.DataGridView();
-            this.ColumnLanguageNameCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLanguageNameName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnLanguageNameShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
@@ -81,13 +85,9 @@
             this.labelCacheExpire = new System.Windows.Forms.Label();
             this.textBoxUserAgent = new System.Windows.Forms.TextBox();
             this.labelUserAgent = new System.Windows.Forms.Label();
-            this.ColumnFromCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnFromTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnAlias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnArrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnToCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnToTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
@@ -150,6 +150,56 @@
             this.dataGridViewItems.RowTemplate.Height = 21;
             this.dataGridViewItems.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGridViewItems_RowsAdded);
             // 
+            // ColumnFromCode
+            // 
+            this.ColumnFromCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnFromCode, "ColumnFromCode");
+            this.ColumnFromCode.MaxInputLength = 16;
+            this.ColumnFromCode.Name = "ColumnFromCode";
+            // 
+            // ColumnFromTitle
+            // 
+            this.ColumnFromTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnFromTitle, "ColumnFromTitle");
+            this.ColumnFromTitle.MaxInputLength = 255;
+            this.ColumnFromTitle.Name = "ColumnFromTitle";
+            // 
+            // ColumnAlias
+            // 
+            this.ColumnAlias.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnAlias, "ColumnAlias");
+            this.ColumnAlias.MaxInputLength = 255;
+            this.ColumnAlias.Name = "ColumnAlias";
+            // 
+            // ColumnArrow
+            // 
+            this.ColumnArrow.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
+            this.ColumnArrow.Name = "ColumnArrow";
+            this.ColumnArrow.ReadOnly = true;
+            this.ColumnArrow.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnArrow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnToCode
+            // 
+            this.ColumnToCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnToCode, "ColumnToCode");
+            this.ColumnToCode.MaxInputLength = 16;
+            this.ColumnToCode.Name = "ColumnToCode";
+            // 
+            // ColumnToTitle
+            // 
+            this.ColumnToTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnToTitle, "ColumnToTitle");
+            this.ColumnToTitle.MaxInputLength = 255;
+            this.ColumnToTitle.Name = "ColumnToTitle";
+            // 
+            // ColumnTimestamp
+            // 
+            this.ColumnTimestamp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnTimestamp, "ColumnTimestamp");
+            this.ColumnTimestamp.Name = "ColumnTimestamp";
+            // 
             // tabPageHeadings
             // 
             this.tabPageHeadings.Controls.Add(this.dataGridViewHeading);
@@ -195,32 +245,12 @@
             resources.ApplyResources(this.dataGridViewLanguageName, "dataGridViewLanguageName");
             this.dataGridViewLanguageName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLanguageName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnLanguageNameCode,
-            this.ColumnLanguageNameName,
-            this.ColumnLanguageNameShortName});
+            this.ColumnCode,
+            this.ColumnName,
+            this.ColumnShortName});
             this.dataGridViewLanguageName.Name = "dataGridViewLanguageName";
             this.dataGridViewLanguageName.RowTemplate.Height = 21;
-            // 
-            // ColumnLanguageNameCode
-            // 
-            this.ColumnLanguageNameCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnLanguageNameCode, "ColumnLanguageNameCode");
-            this.ColumnLanguageNameCode.MaxInputLength = 10;
-            this.ColumnLanguageNameCode.Name = "ColumnLanguageNameCode";
-            // 
-            // ColumnLanguageNameName
-            // 
-            this.ColumnLanguageNameName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnLanguageNameName, "ColumnLanguageNameName");
-            this.ColumnLanguageNameName.MaxInputLength = 255;
-            this.ColumnLanguageNameName.Name = "ColumnLanguageNameName";
-            // 
-            // ColumnLanguageNameShortName
-            // 
-            this.ColumnLanguageNameShortName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnLanguageNameShortName, "ColumnLanguageNameShortName");
-            this.ColumnLanguageNameShortName.MaxInputLength = 20;
-            this.ColumnLanguageNameShortName.Name = "ColumnLanguageNameShortName";
+            this.dataGridViewLanguageName.Leave += new System.EventHandler(this.DataGridViewLanguageName_Leave);
             // 
             // textBoxBracket
             // 
@@ -343,6 +373,8 @@
             resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
             this.comboBoxLanguage.Name = "comboBoxLanguage";
             this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLanguuage_SelectedIndexChanged);
+            this.comboBoxLanguage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ComboBoxLanguage_KeyDown);
+            this.comboBoxLanguage.Leave += new System.EventHandler(this.ComboBoxLanguage_Leave);
             // 
             // labelLanguage
             // 
@@ -457,55 +489,26 @@
             resources.ApplyResources(this.labelUserAgent, "labelUserAgent");
             this.labelUserAgent.Name = "labelUserAgent";
             // 
-            // ColumnFromCode
+            // ColumnCode
             // 
-            this.ColumnFromCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnFromCode, "ColumnFromCode");
-            this.ColumnFromCode.MaxInputLength = 16;
-            this.ColumnFromCode.Name = "ColumnFromCode";
+            this.ColumnCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnCode, "ColumnCode");
+            this.ColumnCode.MaxInputLength = 10;
+            this.ColumnCode.Name = "ColumnCode";
             // 
-            // ColumnFromTitle
+            // ColumnName
             // 
-            this.ColumnFromTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnFromTitle, "ColumnFromTitle");
-            this.ColumnFromTitle.MaxInputLength = 255;
-            this.ColumnFromTitle.Name = "ColumnFromTitle";
+            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.MaxInputLength = 255;
+            this.ColumnName.Name = "ColumnName";
             // 
-            // ColumnAlias
+            // ColumnShortName
             // 
-            this.ColumnAlias.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnAlias, "ColumnAlias");
-            this.ColumnAlias.MaxInputLength = 255;
-            this.ColumnAlias.Name = "ColumnAlias";
-            // 
-            // ColumnArrow
-            // 
-            this.ColumnArrow.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
-            this.ColumnArrow.Name = "ColumnArrow";
-            this.ColumnArrow.ReadOnly = true;
-            this.ColumnArrow.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnArrow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ColumnToCode
-            // 
-            this.ColumnToCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnToCode, "ColumnToCode");
-            this.ColumnToCode.MaxInputLength = 16;
-            this.ColumnToCode.Name = "ColumnToCode";
-            // 
-            // ColumnToTitle
-            // 
-            this.ColumnToTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnToTitle, "ColumnToTitle");
-            this.ColumnToTitle.MaxInputLength = 255;
-            this.ColumnToTitle.Name = "ColumnToTitle";
-            // 
-            // ColumnTimestamp
-            // 
-            this.ColumnTimestamp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            resources.ApplyResources(this.ColumnTimestamp, "ColumnTimestamp");
-            this.ColumnTimestamp.Name = "ColumnTimestamp";
+            this.ColumnShortName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.ColumnShortName, "ColumnShortName");
+            this.ColumnShortName.MaxInputLength = 20;
+            this.ColumnShortName.Name = "ColumnShortName";
             // 
             // ConfigForm
             // 
@@ -593,9 +596,6 @@
         private System.Windows.Forms.TextBox textBoxBracket;
         private System.Windows.Forms.GroupBox groupBoxLanguageName;
         private System.Windows.Forms.DataGridView dataGridViewLanguageName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLanguageNameCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLanguageNameName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnLanguageNameShortName;
         private System.Windows.Forms.CheckBox checkBoxIgnoreError;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromTitle;
@@ -604,5 +604,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
     }
 }

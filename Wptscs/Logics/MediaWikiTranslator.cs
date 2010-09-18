@@ -199,13 +199,13 @@ namespace Honememo.Wptscs.Logics
         /// <returns>言語間リンク先の記事名。見つからない場合は空。ページ自体が存在しない場合は<c>null</c>。</returns>
         protected string GetInterWiki(string title, string code)
         {
-            MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
+            MediaWikiPage page = this.GetPage(title, Resources.LogMessage_LinkArticleNothing);
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
                 this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
-                page = this.GetPage(page.Redirect, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
+                page = this.GetPage(page.Redirect, Resources.LogMessage_LinkArticleNothing);
             }
 
             // 記事があればその言語間リンクを取得
@@ -272,14 +272,14 @@ namespace Honememo.Wptscs.Logics
                 // 対訳表に存在しない場合は、普通に取得し表に記録
                 // ※ nullも存在しないことの記録として格納
                 item = new TranslationDictionary.Item { Timestamp = DateTime.UtcNow };
-                MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
+                MediaWikiPage page = this.GetPage(title, Resources.LogMessage_LinkArticleNothing);
 
                 // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
                 if (page != null && page.IsRedirect())
                 {
                     item.Alias = page.Redirect;
                     this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect + "]] " + Resources.RightArrow + " ";
-                    page = this.GetPage(page.Redirect, Resources.RightArrow + " " + Resources.LogMessage_LinkArticleNothing);
+                    page = this.GetPage(page.Redirect, Resources.LogMessage_LinkArticleNothing);
                 }
 
                 // 記事があればその言語間リンクを取得

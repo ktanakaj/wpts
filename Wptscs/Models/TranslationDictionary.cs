@@ -105,6 +105,7 @@ namespace Honememo.Wptscs.Models
         /// コレクションから指定された言語の翻訳パターンを取得する。
         /// 存在しない場合は空のインスタンスを生成、コレクションに追加して返す。
         /// </summary>
+        /// <param name="collection">翻訳パターンを含んだコレクション。</param>
         /// <param name="from">翻訳元言語。</param>
         /// <param name="to">翻訳先言語。</param>
         /// <returns>翻訳パターン。存在しない場合は新たに作成した翻訳パターンを返す。</returns>

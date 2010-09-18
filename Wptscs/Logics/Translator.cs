@@ -302,7 +302,7 @@ namespace Honememo.Wptscs.Logics
                     && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
                 {
                     // 404
-                    this.LogLine(notFoundMsg);
+                    this.Log += notFoundMsg;
                 }
                 else
                 {
@@ -317,7 +317,7 @@ namespace Honememo.Wptscs.Logics
             catch (FileNotFoundException)
             {
                 // ファイル無し
-                this.LogLine(notFoundMsg);
+                this.Log += notFoundMsg;
             }
             catch (Exception e)
             {

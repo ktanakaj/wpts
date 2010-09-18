@@ -216,6 +216,82 @@ namespace Honememo.Wptscs.Logics
                 translate.Log);
         }
 
+        /// <summary>
+        /// テストデータを用い、Runを通しで実行するテストケース（日本語版→英語版）。
+        /// </summary>
+        /// <remarks>C++/CLI版の0.73までと同等の動作。</remarks>
+        [Test]
+        public void TestSpaceShipTwo()
+        {
+            MediaWiki from = this.GetTestServer("ja");
+            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("en"));
+            translate.ItemTable = new TranslationDictionary("ja", "en");
+
+            // 見出しの変換パターンを設定
+            translate.HeadingTable = new TranslationTable();
+            IDictionary<string, string> dic = new Dictionary<string, string>();
+            dic["en"] = "See Also";
+            dic["ja"] = "関連項目";
+            translate.HeadingTable.Add(dic);
+            dic = new Dictionary<string, string>();
+            dic["en"] = "External links";
+            dic["ja"] = "外部リンク";
+            translate.HeadingTable.Add(dic);
+            dic = new Dictionary<string, string>();
+            dic["en"] = "Notes";
+            dic["ja"] = "脚注";
+            translate.HeadingTable.Add(dic);
+            translate.HeadingTable.From = "ja";
+            translate.HeadingTable.To = "en";
+
+            Assert.IsTrue(translate.Run("スペースシップツー"));
+
+            // テストデータの変換結果を期待される結果と比較する
+            string expectedText;
+            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\スペースシップツー.txt")))
+            {
+                expectedText = sr.ReadToEnd();
+            }
+
+            // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
+            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Text > " + translate.Text);
+            Assert.AreEqual(
+                expectedText.Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
+                translate.Text);
+
+            // テストデータの変換ログを期待されるログと比較する
+            string expectedLog;
+            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\スペースシップツー.log")))
+            {
+                expectedLog = sr.ReadToEnd();
+            }
+
+            // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
+            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Log > " + translate.Log);
+            Assert.AreEqual(
+                expectedLog.Replace("http://ja.wikipedia.org", from.Location),
+                translate.Log);
+        }
+
+        /// <summary>
+        /// Runを通しで実行するテストケース（対象記事なし）。
+        /// </summary>
+        [Test]
+        public void TestPageNothing()
+        {
+            MediaWiki from = this.GetTestServer("en");
+            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+
+            Assert.IsFalse(translate.Run("Nothing Page"));
+
+            // 実行ログを期待されるログと比較する
+            Assert.AreEqual(
+                ("http://en.wikipedia.org より [[Nothing Page]] を取得。\r\n"
+                + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。")
+                .Replace("http://en.wikipedia.org", from.Location),
+                translate.Log);
+        }
+
         #endregion
     }
 }

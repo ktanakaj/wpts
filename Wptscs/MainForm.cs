@@ -70,29 +70,9 @@ namespace Honememo.Wptscs
         private void MainForm_Load(object sender, EventArgs e)
         {
             // 設定ファイルの読み込み
-            try
+            if (!this.LoadConfig())
             {
-                this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
-            }
-            catch (FileNotFoundException ex)
-            {
-                // 設定ファイルが見つからない場合
-                System.Diagnostics.Debug.WriteLine("MainForm._Load > 初期化中に例外 : " + ex.Message);
-                FormUtils.ErrorDialog(
-                    Resources.ErrorMessageConfigNotFound,
-                    Settings.Default.ConfigurationFile);
-
-                // どうしようもないのでそのまま終了
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
-                FormUtils.ErrorDialog(
-                    Resources.ErrorMessageConfigLordFailed,
-                    ex.Message);
-
-                // どうしようもないのでそのまま終了
+                // 読み込み失敗時はどうしようもないのでそのまま終了
                 this.Close();
             }
 
@@ -223,8 +203,12 @@ namespace Honememo.Wptscs
         private void ButtonConfig_Click(object sender, EventArgs e)
         {
             // 設定画面を開く
-            ConfigForm form = new ConfigForm();
+            ConfigForm form = new ConfigForm(this.config);
             form.ShowDialog();
+
+            // 戻ってきたら設定ファイルを再読み込み
+            // ※ 万が一エラーでもとりあえず続行
+            this.LoadConfig();
 
             // コンボボックス設定
             string backupSourceSelected = this.comboBoxSource.SelectedText;
@@ -483,6 +467,42 @@ namespace Honememo.Wptscs
                 this.comboBoxSource.Items.Add(site.Language.Code);
                 this.comboBoxTarget.Items.Add(site.Language.Code);
             }
+        }
+
+        /// <summary>
+        /// 設定ファイル読み込み。
+        /// </summary>
+        /// <returns>読み込み成功時は<c>true</c>。</returns>
+        private bool LoadConfig()
+        {
+            // 設定ファイルの読み込み
+            try
+            {
+                this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
+            }
+            catch (FileNotFoundException ex)
+            {
+                // 設定ファイルが見つからない場合
+                System.Diagnostics.Debug.WriteLine(
+                    "MainForm.LoadConfig > 設定ファイル読み込み失敗 : " + ex.Message);
+                FormUtils.ErrorDialog(
+                    Resources.ErrorMessageConfigNotFound,
+                    Settings.Default.ConfigurationFile);
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    "MainForm.LoadConfig > 設定ファイル読み込み時エラー : " + ex.StackTrace);
+                FormUtils.ErrorDialog(
+                    Resources.ErrorMessageConfigLordFailed,
+                    ex.Message);
+
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
