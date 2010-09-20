@@ -340,9 +340,9 @@ namespace Honememo.Wptscs
                         DateTime.Now.ToString("F")));
 
                 // 処理結果とログのための出力ファイル名を作成
-                string fileName = String.Empty;
-                string logName = String.Empty;
-                this.MakeFileName(ref fileName, ref logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
+                string fileName;
+                string logName;
+                this.MakeFileName(out fileName, out logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
 
                 // 翻訳支援処理を実行し、結果とログをファイルに出力
                 try
@@ -370,7 +370,7 @@ namespace Honememo.Wptscs
                     bool successFlag = this.translate.Run(this.textBoxArticle.Text.Trim());
 
                     // 処理に時間がかかるため、出力ファイル名を再確認
-                    this.MakeFileName(ref fileName, ref logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
+                    this.MakeFileName(out fileName, out logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
                     if (successFlag)
                     {
                         // 処理結果を出力
@@ -543,7 +543,7 @@ namespace Honememo.Wptscs
         /// <param name="text">出力する結果テキスト。</param>
         /// <param name="dir">出力先ディレクトリ。</param>
         /// <returns><c>true</c> 出力成功</returns>
-        private bool MakeFileName(ref string fileName, ref string logName, string text, string dir)
+        private bool MakeFileName(out string fileName, out string logName, string text, string dir)
         {
             // 出力先フォルダに存在しないファイル名（の拡張子より前）を作成
             // ※渡されたWikipedia等の記事名にファイル名に使えない文字が含まれている場合、_ に置き換える
