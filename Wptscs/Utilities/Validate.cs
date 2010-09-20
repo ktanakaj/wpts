@@ -30,7 +30,7 @@ namespace Honememo.Utilities
         /// <typeparam name="T">オブジェクトの型。</typeparam>
         public static T NotNull<T>(T obj)
         {
-            return NotNull(obj, "value");
+            return Validate.NotNull(obj, "value");
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Honememo.Utilities
         /// <exception cref="ArgumentException">文字列が長さ0。</exception>
         public static string NotEmpty(string str)
         {
-            return NotEmpty(str, "value");
+            return Validate.NotEmpty(str, "value");
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Honememo.Utilities
         /// <exception cref="ArgumentException">文字列が空か空白のみ。</exception>
         public static string NotBlank(string str)
         {
-            return NotBlank(str, "value");
+            return Validate.NotBlank(str, "value");
         }
 
         /// <summary>

@@ -2,7 +2,7 @@
 // <summary>
 //      MediaWikiのテストクラスソース。</summary>
 //
-// <copyright file="MediaWikiTest.cs.cs" company="honeplusのメモ帳">
+// <copyright file="MediaWikiTest.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>

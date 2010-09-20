@@ -19,7 +19,21 @@ namespace Honememo.Utilities
     [TestFixture]
     public class ObjectUtilsTest
     {
-        // TODO: メソッド全てをカバーしていない
+        #region 初期化メソッドテストケース
+
+        /// <summary>
+        /// Equalsメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestDefaultIfNull()
+        {
+            Assert.IsNull(ObjectUtils.DefaultIfNull<object>(null, null));
+            Assert.AreEqual(String.Empty, ObjectUtils.DefaultIfNull(String.Empty, "null"));
+            Assert.AreEqual("not null", ObjectUtils.DefaultIfNull("not null", "null"));
+            Assert.AreEqual("null", ObjectUtils.DefaultIfNull(null, "null"));
+        }
+
+        #endregion
 
         #region null値許容メソッドテストケース
 
@@ -37,6 +51,25 @@ namespace Honememo.Utilities
             Assert.IsFalse(ObjectUtils.Equals(true, "true"));
             Assert.IsTrue(ObjectUtils.Equals(true, true));
             Assert.IsFalse(ObjectUtils.Equals(true, false));
+        }
+
+        /// <summary>
+        /// ToStringメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestToString()
+        {
+            // 引数二つ
+            Assert.IsNull(ObjectUtils.ToString(null, null));
+            Assert.AreEqual(String.Empty, ObjectUtils.ToString(String.Empty, "null"));
+            Assert.AreEqual("not null", ObjectUtils.ToString("not null", "null"));
+            Assert.AreEqual("null", ObjectUtils.ToString(null, "null"));
+            Assert.IsNotEmpty(ObjectUtils.ToString(new object(), null));
+
+            // 引数一つ
+            Assert.AreEqual(String.Empty, ObjectUtils.ToString(null));
+            Assert.AreEqual("not null", ObjectUtils.ToString("not null"));
+            Assert.IsNotEmpty(ObjectUtils.ToString(new object()));
         }
 
         #endregion

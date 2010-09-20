@@ -113,7 +113,7 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// 文字列中のファイル名に使用できない文字を置換。
+        /// 文字列中のファイル名に使用できない文字を「_」に置換。
         /// </summary>
         /// <param name="fileName">ファイル名。</param>
         /// <returns>置換後のファイル名。</returns>
@@ -141,7 +141,7 @@ namespace Honememo.Utilities
         /// <returns>渡されたオブジェクトの<c>Value</c>を<c>ToString</c>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string ToString(DataGridViewCell obj)
         {
-            return ToString(obj, String.Empty);
+            return FormUtils.ToString(obj, String.Empty);
         }
 
         /// <summary>

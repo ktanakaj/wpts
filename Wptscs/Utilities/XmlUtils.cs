@@ -11,7 +11,6 @@
 namespace Honememo.Utilities
 {
     using System;
-    using System.Collections.Generic;
     using System.Xml;
 
     /// <summary>
@@ -28,7 +27,7 @@ namespace Honememo.Utilities
         /// <returns>渡されたノードを<c>InnerText</c>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string InnerText(XmlNode node)
         {
-            return InnerText(node, String.Empty);
+            return XmlUtils.InnerText(node, String.Empty);
         }
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace Honememo.Utilities
         /// <returns>渡されたノードを<c>InnerXml</c>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string InnerXml(XmlNode node)
         {
-            return InnerXml(node, String.Empty);
+            return XmlUtils.InnerXml(node, String.Empty);
         }
 
         /// <summary>
@@ -80,7 +79,7 @@ namespace Honememo.Utilities
         /// <returns>渡されたノードを<c>OuterXml</c>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string OuterXml(XmlNode node)
         {
-            return OuterXml(node, String.Empty);
+            return XmlUtils.OuterXml(node, String.Empty);
         }
 
         /// <summary>

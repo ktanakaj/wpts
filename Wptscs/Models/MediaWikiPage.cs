@@ -69,11 +69,6 @@ namespace Honememo.Wptscs.Models
         public MediaWikiPage(MediaWiki website, string title, string text, DateTime? timestamp)
             : base(website, title, text, timestamp)
         {
-            // 本文の指定がある場合は、リダイレクトのチェックを行い属性値を更新する
-            if (String.IsNullOrEmpty(text))
-            {
-                this.IsRedirect();
-            }
         }
 
         /// <summary>
@@ -86,11 +81,6 @@ namespace Honememo.Wptscs.Models
         public MediaWikiPage(MediaWiki website, string title, string text)
             : base(website, title, text)
         {
-            // 本文の指定がある場合は、リダイレクトのチェックを行い属性値を更新する
-            if (!String.IsNullOrEmpty(text))
-            {
-                this.IsRedirect();
-            }
         }
         
         /// <summary>
@@ -125,12 +115,37 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
+        /// ページの本文。
+        /// </summary>
+        public override string Text
+        {
+            get
+            {
+                return base.Text;
+            }
+
+            protected set
+            {
+                // 本文は普通に格納
+                base.Text = value;
+
+                // 本文格納のタイミングでリダイレクトページ（#REDIRECT等）かを判定
+                if (!String.IsNullOrEmpty(base.Text))
+                {
+                    this.ParseRedirect();
+                }
+            }
+        }
+
+        /// <summary>
         /// リダイレクト先のページ名。
         /// </summary>
         public string Redirect
         {
             get
             {
+                // Textが設定されている場合のみ有効
+                this.ValidateIncomplete();
                 return this.redirect;
             }
 
@@ -147,27 +162,27 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// nowiki区間のチェック。
         /// </summary>
-        /// <param name="o_Text"></param>
-        /// <param name="i_Text"></param>
-        /// <param name="i_Index"></param>
-        /// <returns></returns>
-        public static int ChkNowiki(ref string o_Text, string i_Text, int i_Index)
+        /// <param name="nowiki">解析したnowikiブロック。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <returns>nowiki区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
+        public static int ChkNowiki(ref string nowiki, string text, int index)
         {
             // 出力値初期化
             int lastIndex = -1;
-            o_Text = String.Empty;
+            nowiki = String.Empty;
 
             // 入力値確認
-            if (!StringUtils.StartsWith(i_Text.ToLower(), NowikiStart.ToLower(), i_Index))
+            if (!StringUtils.StartsWith(text.ToLower(), NowikiStart.ToLower(), index))
             {
                 return lastIndex;
             }
 
             // ブロック終了まで取得
-            for (int i = i_Index + NowikiStart.Length; i < i_Text.Length; i++)
+            for (int i = index + NowikiStart.Length; i < text.Length; i++)
             {
                 // 終了条件のチェック
-                if (StringUtils.StartsWith(i_Text, NowikiEnd, i))
+                if (StringUtils.StartsWith(text, NowikiEnd, i))
                 {
                     lastIndex = i + NowikiEnd.Length - 1;
                     break;
@@ -175,10 +190,10 @@ namespace Honememo.Wptscs.Models
 
                 // コメント（<!--）のチェック
                 string dummy = String.Empty;
-                int index = ChkComment(ref dummy, i_Text, i);
-                if (index != -1)
+                int subindex = ChkComment(ref dummy, text, i);
+                if (subindex != -1)
                 {
-                    i = index;
+                    i = subindex;
                     continue;
                 }
             }
@@ -186,36 +201,36 @@ namespace Honememo.Wptscs.Models
             // 終わりが見つからない場合は、全てnowikiブロックと判断
             if (lastIndex == -1)
             {
-                lastIndex = i_Text.Length - 1;
+                lastIndex = text.Length - 1;
             }
 
-            o_Text = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
+            nowiki = text.Substring(index, lastIndex - index + 1);
             return lastIndex;
         }
 
         /// <summary>
         /// コメント区間のチェック。
         /// </summary>
-        /// <param name="o_Text"></param>
-        /// <param name="i_Text"></param>
-        /// <param name="i_Index"></param>
-        /// <returns></returns>
-        public static int ChkComment(ref string o_Text, string i_Text, int i_Index)
+        /// <param name="comment">解析したコメント。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <returns>コメント区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
+        public static int ChkComment(ref string comment, string text, int index)
         {
             // 出力値初期化
             int lastIndex = -1;
-            o_Text = String.Empty;
+            comment = String.Empty;
 
             // 入力値確認
-            if (!StringUtils.StartsWith(i_Text, CommentStart, i_Index))
+            if (!StringUtils.StartsWith(text, CommentStart, index))
             {
                 return lastIndex;
             }
 
             // コメント終了まで取得
-            for (int i = i_Index + CommentStart.Length; i < i_Text.Length; i++)
+            for (int i = index + CommentStart.Length; i < text.Length; i++)
             {
-                if (StringUtils.StartsWith(i_Text, CommentEnd, i))
+                if (StringUtils.StartsWith(text, CommentEnd, i))
                 {
                     lastIndex = i + CommentEnd.Length - 1;
                     break;
@@ -225,10 +240,10 @@ namespace Honememo.Wptscs.Models
             // 終わりが見つからない場合は、全てコメントと判断
             if (lastIndex == -1)
             {
-                lastIndex = i_Text.Length - 1;
+                lastIndex = text.Length - 1;
             }
 
-            o_Text = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
+            comment = text.Substring(index, lastIndex - index + 1);
             return lastIndex;
         }
 
@@ -243,16 +258,14 @@ namespace Honememo.Wptscs.Models
         /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
         public string GetInterWiki(string code)
         {
+            // Textが設定されている場合のみ有効
+            this.ValidateIncomplete();
+
             // 初期化と値チェック
             string interWiki = String.Empty;
-            if (String.IsNullOrEmpty(Text))
-            {
-                // ページ本文が設定されていない場合実行不可
-                throw new InvalidOperationException();
-            }
 
             // 記事に存在する指定言語への言語間リンクを取得
-            for (int i = 0; i < Text.Length; i++)
+            for (int i = 0; i < this.Text.Length; i++)
             {
                 // コメント（<!--）のチェック
                 string comment = String.Empty;
@@ -261,10 +274,10 @@ namespace Honememo.Wptscs.Models
                 {
                     i = index;
                 }
-                else if (StringUtils.StartsWith(Text, "[[" + code + ":", i))
+                else if (StringUtils.StartsWith(this.Text, "[[" + code + ":", i))
                 {
                     // 指定言語への言語間リンクの場合、内容を取得し、処理終了
-                    Link link = this.ParseInnerLink(Text.Substring(i));
+                    Link link = this.ParseInnerLink(this.Text.Substring(i));
                     if (!String.IsNullOrEmpty(link.Text))
                     {
                         interWiki = link.Article;
@@ -282,45 +295,8 @@ namespace Honememo.Wptscs.Models
         /// <returns><c>true</c> リダイレクト。</returns>
         public bool IsRedirect()
         {
-            // 値チェック
-            if (String.IsNullOrEmpty(Text))
-            {
-                // ページ本文が設定されていない場合実行不可
-                throw new InvalidOperationException("Text is unset");
-            }
-
-            // 指定されたページがリダイレクトページ（#REDIRECT等）かをチェック
-            // ※日本語版みたいに、#REDIRECTと言語固有の#転送みたいなのがあると思われるので、
-            //   翻訳元言語と英語版の設定でチェック
-            for (int i = 0; i < 2; i++)
-            {
-                string redirect = this.Website.Redirect.Clone() as string;
-                if (i == 1)
-                {
-                    if (this.Website.Language.Code == "en")
-                    {
-                        continue;
-                    }
-
-                    MediaWiki en = new MediaWiki(new Language("en"));
-                    redirect = en.Redirect;
-                }
-
-                if (!String.IsNullOrEmpty(redirect))
-                {
-                    if (Text.ToLower().StartsWith(redirect.ToLower()))
-                    {
-                        Link link = this.ParseInnerLink(Text.Substring(redirect.Length).TrimStart());
-                        if (!String.IsNullOrEmpty(link.Text))
-                        {
-                            this.Redirect = link.Article;
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
+            // Textが設定されている場合のみ有効
+            return this.Redirect != null;
         }
 
         /// <summary>
@@ -365,19 +341,22 @@ namespace Honememo.Wptscs.Models
             return true;
         }
 
+        // TODO: 以下の各メソッドのうち、リンクに関するものはLinkクラスに移したい。
+        //       また、余計な依存関係を持っているものを整理したい。
+
         /// <summary>
         /// 渡されたWikipediaの内部リンクを解析。
         /// </summary>
-        /// <param name="i_Text">[[で始まる文字列</param>
+        /// <param name="text">[[で始まる文字列。</param>
         /// <returns>リンク。</returns>
-        public Link ParseInnerLink(string i_Text)
+        public Link ParseInnerLink(string text)
         {
             // 出力値初期化
             Link result = new Link();
             result.Initialize();
 
             // 入力値確認
-            if (i_Text.StartsWith("[[") == false)
+            if (!text.StartsWith("[["))
             {
                 return result;
             }
@@ -390,12 +369,12 @@ namespace Honememo.Wptscs.Models
             int lastIndex = -1;
             int pipeCounter = 0;
             bool sharpFlag = false;
-            for (int i = 2; i < i_Text.Length; i++)
+            for (int i = 2; i < text.Length; i++)
             {
-                char c = i_Text[i];
+                char c = text[i];
 
                 // ]]が見つかったら、処理正常終了
-                if (StringUtils.StartsWith(i_Text, "]]", i))
+                if (StringUtils.StartsWith(text, "]]", i))
                 {
                     lastIndex = ++i;
                     break;
@@ -412,7 +391,7 @@ namespace Honememo.Wptscs.Models
                 // 変数（[[{{{1}}}]]とか）の再帰チェック
                 string dummy = String.Empty;
                 string variable = String.Empty;
-                int index = this.ChkVariable(ref variable, ref dummy, i_Text, i);
+                int index = this.ChkVariable(ref variable, ref dummy, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -464,14 +443,14 @@ namespace Honememo.Wptscs.Models
                 {
                     // | の後のとき
                     // コメント（<!--）が含まれている場合、リンクは無効
-                    if (StringUtils.StartsWith(i_Text, CommentStart, i))
+                    if (StringUtils.StartsWith(text, CommentStart, i))
                     {
                         break;
                     }
 
                     // nowikiのチェック
                     string nowiki = String.Empty;
-                    index = ChkNowiki(ref nowiki, i_Text, i);
+                    index = ChkNowiki(ref nowiki, text, i);
                     if (index != -1)
                     {
                         i = index;
@@ -481,7 +460,7 @@ namespace Honememo.Wptscs.Models
 
                     // リンク [[ {{ （[[image:xx|[[test]]の画像]]とか）の再帰チェック
                     Link link = new Link();
-                    index = this.ChkLinkText(ref link, i_Text, i);
+                    index = this.ChkLinkText(ref link, text, i);
                     if (index != -1)
                     {
                         i = index;
@@ -497,7 +476,7 @@ namespace Honememo.Wptscs.Models
             if (lastIndex != -1)
             {
                 // 変数ブロックの文字列をリンクのテキストに設定
-                result.Text = i_Text.Substring(0, lastIndex + 1);
+                result.Text = text.Substring(0, lastIndex + 1);
 
                 // 前後のスペースは削除（見出しは後ろのみ）
                 result.Article = article.Trim();
@@ -535,9 +514,9 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 渡されたWikipediaのテンプレートを解析。
         /// </summary>
-        /// <param name="i_Text">{{で始まる文字列</param>
+        /// <param name="text">{{で始まる文字列。</param>
         /// <returns>テンプレートのリンク。</returns>
-        public Link ParseTemplate(string i_Text)
+        public Link ParseTemplate(string text)
         {
             // 出力値初期化
             Link result = new Link();
@@ -545,7 +524,7 @@ namespace Honememo.Wptscs.Models
             result.TemplateFlag = true;
 
             // 入力値確認
-            if (i_Text.StartsWith("{{") == false)
+            if (!text.StartsWith("{{"))
             {
                 return result;
             }
@@ -556,12 +535,12 @@ namespace Honememo.Wptscs.Models
             IList<string> pipeTexts = new List<string>();
             int lastIndex = -1;
             int pipeCounter = 0;
-            for (int i = 2; i < i_Text.Length; i++)
+            for (int i = 2; i < text.Length; i++)
             {
-                char c = i_Text[i];
+                char c = text[i];
 
                 // }}が見つかったら、処理正常終了
-                if (StringUtils.StartsWith(i_Text, "}}", i))
+                if (StringUtils.StartsWith(text, "}}", i))
                 {
                     lastIndex = ++i;
                     break;
@@ -578,7 +557,7 @@ namespace Honememo.Wptscs.Models
                 // 変数（[[{{{1}}}]]とか）の再帰チェック
                 string dummy = String.Empty;
                 string variable = String.Empty;
-                int index = this.ChkVariable(ref variable, ref dummy, i_Text, i);
+                int index = this.ChkVariable(ref variable, ref dummy, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -609,14 +588,14 @@ namespace Honememo.Wptscs.Models
                 {
                     // | の後のとき
                     // コメント（<!--）が含まれている場合、リンクは無効
-                    if (StringUtils.StartsWith(i_Text, CommentStart, i))
+                    if (StringUtils.StartsWith(text, CommentStart, i))
                     {
                         break;
                     }
 
                     // nowikiのチェック
                     string nowiki = String.Empty;
-                    index = ChkNowiki(ref nowiki, i_Text, i);
+                    index = ChkNowiki(ref nowiki, text, i);
                     if (index != -1)
                     {
                         i = index;
@@ -626,7 +605,7 @@ namespace Honememo.Wptscs.Models
 
                     // リンク [[ {{ （{{test|[[例]]}}とか）の再帰チェック
                     Link link = new Link();
-                    index = this.ChkLinkText(ref link, i_Text, i);
+                    index = this.ChkLinkText(ref link, text, i);
                     if (index != -1)
                     {
                         i = index;
@@ -642,7 +621,7 @@ namespace Honememo.Wptscs.Models
             if (lastIndex != -1)
             {
                 // 変数ブロックの文字列をリンクのテキストに設定
-                result.Text = i_Text.Substring(0, lastIndex + 1);
+                result.Text = text.Substring(0, lastIndex + 1);
 
                 // 前後のスペース・改行は削除（見出しは後ろのみ）
                 result.Article = article.Trim();
@@ -683,32 +662,32 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 渡されたテキストの指定された位置に存在するWikipediaの内部リンク・テンプレートをチェック。
         /// </summary>
-        /// <param name="o_Link"></param>
-        /// <param name="i_Text"></param>
-        /// <param name="i_Index"></param>
-        /// <returns>正常時の戻り値には、]]の後ろの]の位置のインデックスを返す。異常時は-1</returns>
-        public int ChkLinkText(ref Link o_Link, string i_Text, int i_Index)
+        /// <param name="link">解析したリンク。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <returns>正常時の戻り値には、]]の後ろの]の位置のインデックスを返す。異常時は-1。</returns>
+        public int ChkLinkText(ref Link link, string text, int index)
         {
             // 出力値初期化
             int lastIndex = -1;
-            o_Link.Initialize();
+            link.Initialize();
 
             // 入力値に応じて、処理を振り分け
-            if (StringUtils.StartsWith(i_Text, "[[", i_Index))
+            if (StringUtils.StartsWith(text, "[[", index))
             {
                 // 内部リンク
-                o_Link = this.ParseInnerLink(i_Text.Substring(i_Index));
+                link = this.ParseInnerLink(text.Substring(index));
             }
-            else if (StringUtils.StartsWith(i_Text, "{{", i_Index))
+            else if (StringUtils.StartsWith(text, "{{", index))
             {
                 // テンプレート
-                o_Link = this.ParseTemplate(i_Text.Substring(i_Index));
+                link = this.ParseTemplate(text.Substring(index));
             }
 
             // 処理結果確認
-            if (!String.IsNullOrEmpty(o_Link.Text))
+            if (!String.IsNullOrEmpty(link.Text))
             {
-                lastIndex = i_Index + o_Link.Text.Length - 1;
+                lastIndex = index + link.Text.Length - 1;
             }
 
             return lastIndex;
@@ -717,30 +696,30 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 渡されたテキストの指定された位置に存在する変数を解析。
         /// </summary>
-        /// <param name="o_Variable"></param>
-        /// <param name="o_Value"></param>
-        /// <param name="i_Text"></param>
-        /// <param name="i_Index"></param>
-        /// <returns></returns>
-        public int ChkVariable(ref string o_Variable, ref string o_Value, string i_Text, int i_Index)
+        /// <param name="variable">解析した変数。</param>
+        /// <param name="value">変数のパラメータ値。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <returns>正常時の戻り値には、変数の終了位置のインデックスを返す。異常時は-1。</returns>
+        public int ChkVariable(ref string variable, ref string value, string text, int index)
         {
             // 出力値初期化
             int lastIndex = -1;
-            o_Variable = String.Empty;
-            o_Value = String.Empty;
+            variable = String.Empty;
+            value = String.Empty;
 
             // 入力値確認
-            if (!StringUtils.StartsWith(i_Text.ToLower(), "{{{", i_Index))
+            if (!StringUtils.StartsWith(text.ToLower(), "{{{", index))
             {
                 return lastIndex;
             }
 
             // ブロック終了まで取得
             bool pipeFlag = false;
-            for (int i = i_Index + 3; i < i_Text.Length; i++)
+            for (int i = index + 3; i < text.Length; i++)
             {
                 // 終了条件のチェック
-                if (StringUtils.StartsWith(i_Text, "}}}", i))
+                if (StringUtils.StartsWith(text, "}}}", i))
                 {
                     lastIndex = i + 2;
                     break;
@@ -748,15 +727,15 @@ namespace Honememo.Wptscs.Models
 
                 // コメント（<!--）のチェック
                 string dummy = String.Empty;
-                int index = ChkComment(ref dummy, i_Text, i);
-                if (index != -1)
+                int subindex = ChkComment(ref dummy, text, i);
+                if (subindex != -1)
                 {
-                    i = index;
+                    i = subindex;
                     continue;
                 }
 
                 // | が含まれている場合、以降の文字列は代入された値として扱う
-                if (i_Text[i] == '|')
+                if (text[i] == '|')
                 {
                     pipeFlag = true;
                 }
@@ -766,7 +745,7 @@ namespace Honememo.Wptscs.Models
                     // ※Wikipediaの仕様上は、{{{1{|表示}}} のように変数名の欄に { を
                     //   含めることができるようだが、判別しきれないので、エラーとする
                     //   （どうせ意図してそんなことする人は居ないだろうし・・・）
-                    if (i_Text[i] == '{')
+                    if (text[i] == '{')
                     {
                         break;
                     }
@@ -776,48 +755,48 @@ namespace Honememo.Wptscs.Models
                     // | の後のとき
                     // nowikiのチェック
                     string nowiki = String.Empty;
-                    index = ChkNowiki(ref nowiki, i_Text, i);
-                    if (index != -1)
+                    subindex = ChkNowiki(ref nowiki, text, i);
+                    if (subindex != -1)
                     {
-                        i = index;
-                        o_Value += nowiki;
+                        i = subindex;
+                        value += nowiki;
                         continue;
                     }
 
                     // 変数（{{{1|{{{2}}}}}}とか）の再帰チェック
-                    string variable = String.Empty;
-                    index = this.ChkVariable(ref variable, ref dummy, i_Text, i);
-                    if (index != -1)
+                    string var = String.Empty;
+                    subindex = this.ChkVariable(ref var, ref dummy, text, i);
+                    if (subindex != -1)
                     {
-                        i = index;
-                        o_Value += variable;
+                        i = subindex;
+                        value += var;
                         continue;
                     }
 
                     // リンク [[ {{ （{{{1|[[test]]}}}とか）の再帰チェック
                     Link link = new Link();
-                    index = this.ChkLinkText(ref link, i_Text, i);
-                    if (index != -1)
+                    subindex = this.ChkLinkText(ref link, text, i);
+                    if (subindex != -1)
                     {
-                        i = index;
-                        o_Value += link.Text;
+                        i = subindex;
+                        value += link.Text;
                         continue;
                     }
 
-                    o_Value += i_Text[i];
+                    value += text[i];
                 }
             }
 
             // 変数ブロックの文字列を出力値に設定
             if (lastIndex != -1)
             {
-                o_Variable = i_Text.Substring(i_Index, lastIndex - i_Index + 1);
+                variable = text.Substring(index, lastIndex - index + 1);
             }
             else
             {
                 // 正常な構文ではなかった場合、出力値をクリア
-                o_Variable = String.Empty;
-                o_Value = String.Empty;
+                variable = String.Empty;
+                value = String.Empty;
             }
 
             return lastIndex;
@@ -852,21 +831,65 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="link">リンク。</param>
         /// <param name="index">本文の解析開始位置のインデックス。</param>
-        /// <returns></returns>
+        /// <returns>正常時の戻り値には、]]の後ろの]の位置のインデックスを返す。異常時は-1。</returns>
         protected int ChkLinkText(ref Link link, int index)
         {
-            return this.ChkLinkText(ref link, Text, index);
+            return this.ChkLinkText(ref link, this.Text, index);
         }
 
         /// <summary>
         /// コメント区間のチェック。
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="comment">解析したコメント。</param>
         /// <param name="index">本文の解析開始位置のインデックス。</param>
-        /// <returns></returns>
-        protected int ChkComment(ref string text, int index)
+        /// <returns>コメント区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
+        protected int ChkComment(ref string comment, int index)
         {
-            return MediaWikiPage.ChkComment(ref text, Text, index);
+            return MediaWikiPage.ChkComment(ref comment, this.Text, index);
+        }
+
+        /// <summary>
+        /// オブジェクトがメソッドの実行に不完全な状態でないか検証する。
+        /// 不完全な場合、例外をスローする。
+        /// </summary>
+        /// <exception cref="InvalidOperationException">オブジェクトは不完全。</exception>
+        protected void ValidateIncomplete()
+        {
+            if (String.IsNullOrEmpty(this.Text))
+            {
+                // ページ本文が設定されていない場合不完全と判定
+                throw new InvalidOperationException("Text is unset");
+            }
+        }
+
+        /// <summary>
+        /// 渡されたページがリダイレクトかを解析する。
+        /// </summary>
+        /// <remarks>リダイレクトの場合、転送先ページ名をプロパティに格納。</remarks>
+        private void ParseRedirect()
+        {
+            // 日本語版みたいに、#REDIRECTと言語固有の#転送みたいなのがあると思われるので、
+            // 翻訳元言語とデフォルトの設定でチェック
+            this.Redirect = null;
+            for (int i = 0; i < 2; i++)
+            {
+                string format = this.Website.Redirect;
+                if (i == 1)
+                {
+                    format = Properties.Settings.Default.MediaWikiRedirect;
+                }
+
+                if (!String.IsNullOrEmpty(format)
+                    && this.Text.ToLower().StartsWith(format.ToLower()))
+                {
+                    Link link = this.ParseInnerLink(this.Text.Substring(format.Length).TrimStart());
+                    if (!String.IsNullOrEmpty(link.Text))
+                    {
+                        this.Redirect = link.Article;
+                        break;
+                    }
+                }
+            }
         }
 
         #endregion

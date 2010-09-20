@@ -28,7 +28,7 @@ namespace Honememo.Utilities
         /// <returns>渡された文字列、<c>null</c>の場合には空の文字列。</returns>
         public static string DefaultString(string str)
         {
-            return DefaultString(str, String.Empty);
+            return StringUtils.DefaultString(str, String.Empty);
         }
 
         /// <summary>

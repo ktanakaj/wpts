@@ -71,14 +71,14 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行部の本体。
         /// ※継承クラスでは、この関数に処理を実装すること
         /// </summary>
-        /// <param name="i_Name">記事名。</param>
+        /// <param name="name">記事名。</param>
         /// <returns><c>true</c> 処理成功。</returns>
-        protected override bool RunBody(string i_Name)
+        protected override bool RunBody(string name)
         {
-            System.Diagnostics.Debug.WriteLine("\nTranslateMediaWiki.runBody > " + i_Name);
+            System.Diagnostics.Debug.WriteLine("\nTranslateMediaWiki.runBody > " + name);
 
             // 対象記事を取得
-            MediaWikiPage article = this.ChkTargetArticle(i_Name);
+            MediaWikiPage article = this.ChkTargetArticle(name);
             if (article == null)
             {
                 return false;
@@ -116,7 +116,7 @@ namespace Honememo.Wptscs.Logics
                     originalName = "[[" + langTitle + "]]: ";
                 }
 
-                this.Text += String.Format(bracket, originalName + "'''" + i_Name + "'''");
+                this.Text += String.Format(bracket, originalName + "'''" + name + "'''");
             }
 
             this.Text += "\n\n";
@@ -132,12 +132,12 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 新しい言語間リンクと、コメントを追記
-            this.Text += "\n\n[[" + this.From.Language.Code + ":" + i_Name + "]]\n";
+            this.Text += "\n\n[[" + this.From.Language.Code + ":" + name + "]]\n";
             this.Text += String.Format(
                 Resources.ArticleFooter,
                 FormUtils.ApplicationName(),
                 this.From.Language.Code,
-                i_Name,
+                name,
                 article.Timestamp.HasValue ? article.Timestamp.Value.ToString("U") : String.Empty) + "\n";
 
             // ダウンロードされるテキストがLFなので、ここで全てCRLFに変換
@@ -347,17 +347,17 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 渡されたテキストを解析し、言語間リンク・見出し等の変換を行う。
         /// </summary>
-        /// <param name="i_Text">記事テキスト。</param>
-        /// <param name="i_Parent"></param>
-        /// <param name="i_TitleFlag"></param>
+        /// <param name="text">記事テキスト。</param>
+        /// <param name="parent">元記事タイトル。</param>
+        /// <param name="headingEnable">見出しのチェックを行うか？</param>
         /// <returns>変換後の記事テキスト。</returns>
-        protected string ReplaceText(string i_Text, string i_Parent, bool i_TitleFlag)
+        protected string ReplaceText(string text, string parent, bool headingEnable)
         {
             // 指定された記事の言語間リンク・見出しを探索し、翻訳先言語での名称に変換し、それに置換した文字列を返す
             string result = String.Empty;
             bool enterFlag = true;
             MediaWikiPage wikiAP = new MediaWikiPage(this.From, "dummy", null);
-            for (int i = 0; i < i_Text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 // ユーザーからの中止要求をチェック
                 if (CancellationPending == true)
@@ -365,10 +365,10 @@ namespace Honememo.Wptscs.Logics
                     break;
                 }
 
-                char c = i_Text[i];
+                char c = text[i];
 
                 // 見出しも処理対象の場合
-                if (i_TitleFlag)
+                if (headingEnable)
                 {
                     // 改行の場合、次のループで見出し行チェックを行う
                     if (c == '\n')
@@ -382,7 +382,7 @@ namespace Honememo.Wptscs.Logics
                     if (enterFlag)
                     {
                         string newTitleLine = String.Empty;
-                        int index2 = this.ChkTitleLine(ref newTitleLine, i_Text, i);
+                        int index2 = this.ChkTitleLine(ref newTitleLine, text, i);
                         if (index2 != -1)
                         {
                             // 行の終わりまでインデックスを移動
@@ -401,7 +401,7 @@ namespace Honememo.Wptscs.Logics
 
                 // コメント（<!--）のチェック
                 string comment = String.Empty;
-                int index = MediaWikiPage.ChkComment(ref comment, i_Text, i);
+                int index = MediaWikiPage.ChkComment(ref comment, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -416,7 +416,7 @@ namespace Honememo.Wptscs.Logics
 
                 // nowikiのチェック
                 string nowiki = String.Empty;
-                index = MediaWikiPage.ChkNowiki(ref nowiki, i_Text, i);
+                index = MediaWikiPage.ChkNowiki(ref nowiki, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -427,7 +427,7 @@ namespace Honememo.Wptscs.Logics
                 // 変数（{{{1}}}とか）のチェック
                 string variable = String.Empty;
                 string value = String.Empty;
-                index = wikiAP.ChkVariable(ref variable, ref value, i_Text, i);
+                index = wikiAP.ChkVariable(ref variable, ref value, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -436,7 +436,7 @@ namespace Honememo.Wptscs.Logics
                     int valueIndex = variable.IndexOf('|');
                     if (valueIndex != -1 && !String.IsNullOrEmpty(value))
                     {
-                        variable = variable.Substring(0, valueIndex + 1) + this.ReplaceText(value, i_Parent) + "}}}";
+                        variable = variable.Substring(0, valueIndex + 1) + this.ReplaceText(value, parent) + "}}}";
                     }
 
                     result += variable;
@@ -444,17 +444,17 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 // 内部リンク・テンプレートのチェック＆変換、言語間リンクを取得し出力する
-                string text = String.Empty;
-                index = this.ReplaceLink(ref text, i_Text, i, i_Parent);
+                string subtext = String.Empty;
+                index = this.ReplaceLink(ref subtext, text, i, parent);
                 if (index != -1)
                 {
                     i = index;
-                    result += text;
+                    result += subtext;
                     continue;
                 }
 
                 // 通常はそのままコピー
-                result += i_Text[i];
+                result += text[i];
             }
 
             return result;
@@ -464,55 +464,55 @@ namespace Honememo.Wptscs.Logics
         /// 渡されたテキストを解析し、言語間リンク・見出し等の変換を行う。
         /// </summary>
         /// <param name="text">記事テキスト。</param>
-        /// <param name="parent"></param>
+        /// <param name="parent">元記事タイトル。</param>
         /// <returns>変換後の記事テキスト。</returns>
         protected string ReplaceText(string text, string parent)
         {
-            return ReplaceText(text, parent, true);
+            return this.ReplaceText(text, parent, true);
         }
 
         /// <summary>
         /// リンクの解析・置換を行う。
         /// </summary>
-        /// <param name="o_Link"></param>
-        /// <param name="i_Text"></param>
-        /// <param name="i_Index"></param>
-        /// <param name="i_Parent"></param>
-        /// <returns></returns>
-        protected int ReplaceLink(ref string o_Link, string i_Text, int i_Index, string i_Parent)
+        /// <param name="link">解析したリンク。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <param name="parent">元記事タイトル。</param>
+        /// <returns>リンクの場合、終了位置のインデックスを返す。それ以外は-1。</returns>
+        protected int ReplaceLink(ref string link, string text, int index, string parent)
         {
             // 出力値初期化
             int lastIndex = -1;
-            o_Link = String.Empty;
-            MediaWikiPage.Link link = new MediaWikiPage.Link();
+            link = String.Empty;
+            MediaWikiPage.Link l = new MediaWikiPage.Link();
 
             // 内部リンク・テンプレートの確認と解析
             MediaWikiPage wikiAP = new MediaWikiPage(this.From, "dummy", null);
-            lastIndex = wikiAP.ChkLinkText(ref link, i_Text, i_Index);
+            lastIndex = wikiAP.ChkLinkText(ref l, text, index);
             if (lastIndex != -1)
             {
                 // 記事名に変数が使われている場合があるので、そのチェックと展開
-                int index = link.Article.IndexOf("{{{");
-                if (index != -1)
+                int subindex = l.Article.IndexOf("{{{");
+                if (subindex != -1)
                 {
                     string variable = String.Empty;
                     string value = String.Empty;
-                    int lastIndex2 = wikiAP.ChkVariable(ref variable, ref value, link.Article, index);
+                    int lastIndex2 = wikiAP.ChkVariable(ref variable, ref value, l.Article, subindex);
                     if (lastIndex2 != -1 && !String.IsNullOrEmpty(value))
                     {
                         // 変数の | 以降に値が記述されている場合、それに置き換える
-                        string newArticle = link.Article.Substring(0, index) + value;
-                        if (lastIndex2 + 1 < link.Article.Length)
+                        string newArticle = l.Article.Substring(0, subindex) + value;
+                        if (lastIndex2 + 1 < l.Article.Length)
                         {
-                            newArticle += link.Article.Substring(lastIndex2 + 1);
+                            newArticle += l.Article.Substring(lastIndex2 + 1);
                         }
 
-                        link.Article = newArticle;
+                        l.Article = newArticle;
                     }
                     else
                     {
                         // 値が設定されていない場合、処理してもしょうがないので、除外
-                        System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceLink > 対象外 : " + link.Text);
+                        System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceLink > 対象外 : " + l.Text);
                         return -1;
                     }
                 }
@@ -520,27 +520,27 @@ namespace Honememo.Wptscs.Logics
                 string newText = null;
 
                 // 内部リンクの場合
-                if (i_Text[i_Index] == '[')
+                if (text[index] == '[')
                 {
                     // 内部リンクの変換後文字列を取得
-                    newText = this.ReplaceInnerLink(link, i_Parent);
+                    newText = this.ReplaceInnerLink(l, parent);
                 }
-                else if (i_Text[i_Index] == '{')
+                else if (text[index] == '{')
                 {
                     // テンプレートの場合
                     // テンプレートの変換後文字列を取得
-                    newText = this.ReplaceTemplate(link, i_Parent);
+                    newText = this.ReplaceTemplate(l, parent);
                 }
                 else
                 {
                     // 上記以外の場合は、対象外
-                    System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceLink > プログラムミス : " + link.Text);
+                    System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceLink > プログラムミス : " + l.Text);
                 }
 
                 // 変換後文字列がNULL以外
                 if (newText != null)
                 {
-                    o_Link = newText;
+                    link = newText;
                 }
                 else
                 {
@@ -554,64 +554,64 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 内部リンクの文字列を変換する。
         /// </summary>
-        /// <param name="i_Link"></param>
-        /// <param name="i_Parent"></param>
-        /// <returns></returns>
-        protected string ReplaceInnerLink(MediaWikiPage.Link i_Link, string i_Parent)
+        /// <param name="link">変換元リンク文字列。</param>
+        /// <param name="parent">元記事タイトル。</param>
+        /// <returns>変換済みリンク文字列。</returns>
+        protected string ReplaceInnerLink(MediaWikiPage.Link link, string parent)
         {
             // 変数初期設定
             string result = "[[";
             string comment = String.Empty;
-            MediaWikiPage.Link link = i_Link;
+            MediaWikiPage.Link l = link;
 
             // 記事内を指している場合（[[#関連項目]]だけとか）以外
-            if (!String.IsNullOrEmpty(link.Article) &&
-               !(link.Article == i_Parent && String.IsNullOrEmpty(link.Code) && !String.IsNullOrEmpty(link.Section)))
+            if (!String.IsNullOrEmpty(l.Article) &&
+               !(l.Article == parent && String.IsNullOrEmpty(l.Code) && !String.IsNullOrEmpty(l.Section)))
             {
                 // 変換の対象外とするリンクかをチェック
-                MediaWikiPage article = new MediaWikiPage(this.From, link.Article);
+                MediaWikiPage article = new MediaWikiPage(this.From, l.Article);
 
                 // サブページの場合、記事名を補填
-                if (link.SubPageFlag)
+                if (l.SubPageFlag)
                 {
-                    link.Article = i_Parent + link.Article;
+                    l.Article = parent + l.Article;
                 }
-                else if (!String.IsNullOrEmpty(link.Code) || article.IsFile())
+                else if (!String.IsNullOrEmpty(l.Code) || article.IsFile())
                 {
                     // 言語間リンク・姉妹プロジェクトへのリンク・画像は対象外
                     result = String.Empty;
 
                     // 先頭が : でない、翻訳先言語への言語間リンクの場合
-                    if (!link.StartColonFlag && link.Code == this.To.Language.Code)
+                    if (!l.StartColonFlag && l.Code == this.To.Language.Code)
                     {
                         // 削除する。正常終了で、置換後文字列なしを返す
-                        System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > " + link.Text + " を削除");
+                        System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > " + l.Text + " を削除");
                         return String.Empty;
                     }
 
                     // それ以外は対象外
-                    System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > 対象外 : " + link.Text);
+                    System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > 対象外 : " + l.Text);
                     return null;
                 }
 
                 // リンクを辿り、対象記事の言語間リンクを取得
-                string interWiki = this.GetInterWiki(link.Article);
+                string interWiki = this.GetInterWiki(l.Article);
 
                 // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
                 if (interWiki == null)
                 {
-                    result += link.Article;
+                    result += l.Article;
                 }
                 else if (interWiki == String.Empty)
                 {
                     // 言語間リンクが存在しない場合、[[:en:xxx]]みたいな形式に置換
-                    result += ":" + this.From.Language.Code + ":" + link.Article;
+                    result += ":" + this.From.Language.Code + ":" + l.Article;
                 }
                 else
                 {
                     // 言語間リンクが存在する場合、そちらを指すように置換
                     // 前の文字列を復元
-                    if (link.SubPageFlag)
+                    if (l.SubPageFlag)
                     {
                         int index = interWiki.IndexOf('/');
                         if (index == -1)
@@ -621,7 +621,7 @@ namespace Honememo.Wptscs.Logics
 
                         result += interWiki.Substring(index);
                     }
-                    else if (link.StartColonFlag)
+                    else if (l.StartColonFlag)
                     {
                         result += ":" + interWiki;
                     }
@@ -632,33 +632,33 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 // カテゴリーの場合は、コメントで元の文字列を追加する
-                if (article.IsCategory() && !link.StartColonFlag)
+                if (article.IsCategory() && !l.StartColonFlag)
                 {
-                    comment = MediaWikiPage.CommentStart + " " + link.Text + " " + MediaWikiPage.CommentEnd;
+                    comment = MediaWikiPage.CommentStart + " " + l.Text + " " + MediaWikiPage.CommentEnd;
 
                     // カテゴリーで[[:en:xxx]]みたいな形式にした場合、| 以降は不要なので削除
                     if (interWiki == String.Empty)
                     {
-                        link.PipeTexts = new List<string>();
+                        l.PipeTexts = new List<string>();
                     }
                 }
-                else if (link.PipeTexts.Count == 0 && interWiki != null)
+                else if (l.PipeTexts.Count == 0 && interWiki != null)
                 {
                     // 表示名が存在しない場合、元の名前を表示名に設定
-                    link.PipeTexts.Add(article.Title);
+                    l.PipeTexts.Add(article.Title);
                 }
             }
 
             // 見出し（[[#関連項目]]とか）を出力
-            if (!String.IsNullOrEmpty(link.Section))
+            if (!String.IsNullOrEmpty(l.Section))
             {
                 // 見出しは、定型句変換を通す
-                string heading = this.GetHeading(link.Section);
-                result += "#" + (heading != null ? heading : link.Section);
+                string heading = this.GetHeading(l.Section);
+                result += "#" + (heading != null ? heading : l.Section);
             }
 
             // 表示名を出力
-            foreach (string text in link.PipeTexts)
+            foreach (string text in l.PipeTexts)
             {
                 result += "|";
                 if (!String.IsNullOrEmpty(text))
@@ -678,38 +678,38 @@ namespace Honememo.Wptscs.Logics
                 result += comment;
             }
 
-            System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > " + link.Text);
+            System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceInnerLink > " + l.Text);
             return result;
         }
 
         /// <summary>
         /// テンプレートの文字列を変換する。
         /// </summary>
-        /// <param name="i_Link"></param>
-        /// <param name="i_Parent"></param>
-        /// <returns></returns>
-        protected string ReplaceTemplate(MediaWikiPage.Link i_Link, string i_Parent)
+        /// <param name="link">変換元テンプレート文字列。</param>
+        /// <param name="parent">元記事タイトル。</param>
+        /// <returns>変換済みテンプレート文字列。</returns>
+        protected string ReplaceTemplate(MediaWikiPage.Link link, string parent)
         {
             // 変数初期設定
             string result = String.Empty;
-            MediaWikiPage.Link link = i_Link;
+            MediaWikiPage.Link l = link;
 
             // テンプレートは記事名が必須
-            if (String.IsNullOrEmpty(link.Article))
+            if (String.IsNullOrEmpty(l.Article))
             {
-                System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > 対象外 : " + link.Text);
+                System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > 対象外 : " + l.Text);
                 return null;
             }
 
             // システム変数の場合は対象外
-            if (this.From.IsMagicWord(link.Article))
+            if (this.From.IsMagicWord(l.Article))
             {
-                System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > システム変数 : " + link.Text);
+                System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > システム変数 : " + l.Text);
                 return null;
             }
 
             // テンプレート名前空間か、普通の記事かを判定
-            if (!link.StartColonFlag && !link.SubPageFlag)
+            if (!l.StartColonFlag && !l.SubPageFlag)
             {
                 string prefix = null;
                 IList<string> prefixes = this.From.Namespaces[this.From.TemplateNamespace];
@@ -718,10 +718,10 @@ namespace Honememo.Wptscs.Logics
                     prefix = prefixes[0];
                 }
 
-                if (!String.IsNullOrEmpty(prefix) && !link.Article.StartsWith(prefix + ":"))
+                if (!String.IsNullOrEmpty(prefix) && !l.Article.StartsWith(prefix + ":"))
                 {
                     // 頭にTemplate:を付けた記事名でアクセスし、テンプレートが存在するかをチェック
-                    string title = prefix + ":" + link.Article;
+                    string title = prefix + ":" + l.Article;
                     MediaWikiPage page = null;
                     try
                     {
@@ -733,8 +733,8 @@ namespace Honememo.Wptscs.Logics
                             && (e.Response as HttpWebResponse).StatusCode != HttpStatusCode.NotFound)
                         {
                             // 記事が取得できない場合も、404でない場合は存在するとして処理
-                            this.LogLine(String.Format(Resources.LogMessage_TemplateUnknown, link.Article, prefix, e.Message));
-                            link.Article = title;
+                            this.LogLine(String.Format(Resources.LogMessage_TemplateUnknown, l.Article, prefix, e.Message));
+                            l.Article = title;
                         }
                     }
                     catch (Exception e)
@@ -745,29 +745,29 @@ namespace Honememo.Wptscs.Logics
                     if (page != null)
                     {
                         // 記事が存在する場合、テンプレートをつけた名前を使用
-                        link.Article = title;
+                        l.Article = title;
                     }
                 }
             }
-            else if (link.SubPageFlag)
+            else if (l.SubPageFlag)
             {
                 // サブページの場合、記事名を補填
-                link.Article = i_Parent + link.Article;
+                l.Article = parent + l.Article;
             }
 
             // リンクを辿り、対象記事の言語間リンクを取得
-            string interWiki = this.GetInterWiki(link.Article, true);
+            string interWiki = this.GetInterWiki(l.Article, true);
 
             // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
             if (interWiki == null)
             {
-                result += link.Text;
+                result += l.Text;
             }
             else if (interWiki == String.Empty)
             {
                 // 言語間リンクが存在しない場合、[[:en:Template:xxx]]みたいな普通のリンクに置換
                 // おまけで、元のテンプレートの状態をコメントでつける
-                result += "[[:" + this.From.Language.Code + ":" + link.Article + "]]" + MediaWikiPage.CommentStart + " " + link.Text + " " + MediaWikiPage.CommentEnd;
+                result += "[[:" + this.From.Language.Code + ":" + l.Article + "]]" + MediaWikiPage.CommentStart + " " + l.Text + " " + MediaWikiPage.CommentEnd;
             }
             else
             {
@@ -775,12 +775,12 @@ namespace Honememo.Wptscs.Logics
                 result += "{{";
 
                 // 前の文字列を復元
-                if (link.StartColonFlag)
+                if (l.StartColonFlag)
                 {
                     result += ":";
                 }
 
-                if (link.MsgnwFlag)
+                if (l.MsgnwFlag)
                 {
                     result += MediaWikiPage.Msgnw;
                 }
@@ -789,19 +789,19 @@ namespace Honememo.Wptscs.Logics
                 result += interWiki.Substring(interWiki.IndexOf(':') + 1);
 
                 // 改行を復元
-                if (link.EnterFlag)
+                if (l.EnterFlag)
                 {
                     result += "\n";
                 }
 
                 // | の後を付加
-                foreach (string text in link.PipeTexts)
+                foreach (string text in l.PipeTexts)
                 {
                     result += "|";
                     if (!String.IsNullOrEmpty(text))
                     {
                         // | の後に内部リンクやテンプレートが書かれている場合があるので、再帰的に処理する
-                        result += this.ReplaceText(text, i_Parent);
+                        result += this.ReplaceText(text, parent);
                     }
                 }
 
@@ -809,23 +809,23 @@ namespace Honememo.Wptscs.Logics
                 result += "}}";
             }
 
-            System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > " + link.Text);
+            System.Diagnostics.Debug.WriteLine("TranslateMediaWiki.replaceTemplate > " + l.Text);
             return result;
         }
 
         /// <summary>
         /// 指定されたインデックスの位置に存在する見出し(==関連項目==みたいなの)を解析し、可能であれば変換して返す。
         /// </summary>
-        /// <param name="o_Title"></param>
-        /// <param name="i_Text"></param>
-        /// <param name="i_Index"></param>
-        /// <returns></returns>
-        protected virtual int ChkTitleLine(ref string o_Title, string i_Text, int i_Index)
+        /// <param name="heading">変換後の見出し。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <returns>見出しの場合、見出し終了位置のインデックスを返す。それ以外は-1。</returns>
+        protected virtual int ChkTitleLine(ref string heading, string text, int index)
         {
             // 初期化
             // ※見出しではない、構文がおかしいなどの場合、-1を返す
             int lastIndex = -1;
-            o_Title = String.Empty;
+            heading = String.Empty;
             
             // 構文を解析して、1行の文字列と、=の個数を取得
             // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
@@ -835,9 +835,9 @@ namespace Honememo.Wptscs.Logics
             bool startFlag = true;
             int startSignCounter = 0;
             string nonCommentLine = String.Empty;
-            for (lastIndex = i_Index; lastIndex < i_Text.Length; lastIndex++)
+            for (lastIndex = index; lastIndex < text.Length; lastIndex++)
             {
-                char c = i_Text[lastIndex];
+                char c = text[lastIndex];
 
                 // 改行まで
                 if (c == '\n')
@@ -847,11 +847,11 @@ namespace Honememo.Wptscs.Logics
 
                 // コメントは無視する
                 string comment = String.Empty;
-                int index = MediaWikiPage.ChkComment(ref comment, i_Text, lastIndex);
-                if (index != -1)
+                int subindex = MediaWikiPage.ChkComment(ref comment, text, lastIndex);
+                if (subindex != -1)
                 {
-                    o_Title += comment;
-                    lastIndex = index;
+                    heading += comment;
+                    lastIndex = subindex;
                     continue;
                 }
                 else if (startFlag)
@@ -868,7 +868,7 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 nonCommentLine += c;
-                o_Title += c;
+                heading += c;
             }
 
             // 改行文字、または文章の最後+1になっているはずなので、1文字戻す
@@ -877,7 +877,7 @@ namespace Honememo.Wptscs.Logics
             // = で始まる行ではない場合、処理対象外
             if (startSignCounter < 1)
             {
-                o_Title = String.Empty;
+                heading = String.Empty;
                 return -1;
             }
 
@@ -899,7 +899,7 @@ namespace Honememo.Wptscs.Logics
             // = で終わる行ではない場合、処理対象外
             if (endSignCounter < 1)
             {
-                o_Title = String.Empty;
+                heading = String.Empty;
                 return -1;
             }
 
@@ -921,13 +921,13 @@ namespace Honememo.Wptscs.Logics
                     sign += "=";
                 }
 
-                string newTitle = sign + newText + sign;
-                this.LogLine(ENTER + o_Title + " " + Resources.RightArrow + " " + newTitle);
-                o_Title = newTitle;
+                string newHeading = sign + newText + sign;
+                this.LogLine(ENTER + heading + " " + Resources.RightArrow + " " + newHeading);
+                heading = newHeading;
             }
             else
             {
-                this.LogLine(ENTER + o_Title);
+                this.LogLine(ENTER + heading);
             }
 
             return lastIndex;

@@ -80,7 +80,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ページが所属するウェブサイト。
         /// </summary>
-        public Website Website
+        public virtual Website Website
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ページタイトル。
         /// </summary>
-        public string Title
+        public virtual string Title
         {
             get
             {
@@ -114,7 +114,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ページの本文。
         /// </summary>
-        public string Text
+        public virtual string Text
         {
             get;
             protected set;
@@ -123,7 +123,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ページのタイムスタンプ。
         /// </summary>
-        public DateTime? Timestamp
+        public virtual DateTime? Timestamp
         {
             get;
             protected set;
