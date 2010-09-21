@@ -52,24 +52,6 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// ChkCommentメソッドテストケース。
-        /// </summary>
-        [Test]
-        public void TestChkComment()
-        {
-            // TryParseComment互換用の旧メソッド
-            string comment;
-            Assert.AreEqual(14, MediaWikiPage.ChkComment(out comment, "ab<!-- test -->cd", 2));
-            Assert.AreEqual("<!-- test -->", comment);
-            Assert.AreEqual(15, MediaWikiPage.ChkComment(out comment, "ab<!-- test --cd", 2));
-            Assert.AreEqual("<!-- test --cd", comment);
-            Assert.AreEqual(-1, MediaWikiPage.ChkComment(out comment, "ab<!-- test -->cd", 1));
-            Assert.IsEmpty(comment);
-            Assert.AreEqual(-1, MediaWikiPage.ChkComment(out comment, "ab<!-- test -->cd", 3));
-            Assert.IsEmpty(comment);
-        }
-
-        /// <summary>
         /// TryParseNowikiメソッドテストケース。
         /// </summary>
         [Test]
@@ -98,24 +80,6 @@ namespace Honememo.Wptscs.Models
             Assert.IsNull(nowiki);
             Assert.IsFalse(MediaWikiPage.TryParseNowiki("<nowiki[[test]]</nowiki>", out nowiki));
             Assert.IsNull(nowiki);
-        }
-
-        /// <summary>
-        /// ChkNowikiメソッドテストケース。
-        /// </summary>
-        [Test]
-        public void TestChkNowiki()
-        {
-            // TryParseNowiki互換用の旧メソッド
-            string nowiki;
-            Assert.AreEqual(26, MediaWikiPage.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 2));
-            Assert.AreEqual("<nowiki>[[test]]</nowiki>", nowiki);
-            Assert.AreEqual(27, MediaWikiPage.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowikicd", 2));
-            Assert.AreEqual("<nowiki>[[test]]</nowikicd", nowiki);
-            Assert.AreEqual(-1, MediaWikiPage.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 1));
-            Assert.IsEmpty(nowiki);
-            Assert.AreEqual(-1, MediaWikiPage.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 3));
-            Assert.IsEmpty(nowiki);
         }
 
         #endregion

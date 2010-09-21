@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Logics
     using System.IO;
     using System.Reflection;
     using NUnit.Framework;
+    using Honememo.Tests;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
 
@@ -56,7 +57,7 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
         
-        #region テストケース
+        #region 全体テストケース
 
         /// <summary>
         /// テストデータを用い、Runを通しで実行するテストケース。基本動作。
@@ -290,6 +291,46 @@ namespace Honememo.Wptscs.Logics
                 + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。")
                 .Replace("http://en.wikipedia.org", from.Location),
                 translate.Log);
+        }
+
+        #endregion
+
+        #region 整理予定の静的メソッドテストケース
+
+        /// <summary>
+        /// ChkCommentメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestChkComment()
+        {
+            // TryParseComment互換用の旧メソッド
+            string comment;
+            Assert.AreEqual(14, MediaWikiTranslator.ChkComment(out comment, "ab<!-- test -->cd", 2));
+            Assert.AreEqual("<!-- test -->", comment);
+            Assert.AreEqual(15, MediaWikiTranslator.ChkComment(out comment, "ab<!-- test --cd", 2));
+            Assert.AreEqual("<!-- test --cd", comment);
+            Assert.AreEqual(-1, MediaWikiTranslator.ChkComment(out comment, "ab<!-- test -->cd", 1));
+            Assert.IsEmpty(comment);
+            Assert.AreEqual(-1, MediaWikiTranslator.ChkComment(out comment, "ab<!-- test -->cd", 3));
+            Assert.IsEmpty(comment);
+        }
+        
+        /// <summary>
+        /// ChkNowikiメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestChkNowiki()
+        {
+            // TryParseNowiki互換用の旧メソッド
+            string nowiki;
+            Assert.AreEqual(26, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 2));
+            Assert.AreEqual("<nowiki>[[test]]</nowiki>", nowiki);
+            Assert.AreEqual(27, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowikicd", 2));
+            Assert.AreEqual("<nowiki>[[test]]</nowikicd", nowiki);
+            Assert.AreEqual(-1, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 1));
+            Assert.IsEmpty(nowiki);
+            Assert.AreEqual(-1, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 3));
+            Assert.IsEmpty(nowiki);
         }
 
         #endregion

@@ -205,58 +205,6 @@ namespace Honememo.Wptscs.Models
             return MediaWikiPage.TryParseTag(text, MediaWikiPage.NowikiTag, out nowiki);
         }
 
-        /// <summary>
-        /// コメント区間のチェック。
-        /// </summary>
-        /// <param name="comment">解析したコメント。</param>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="index">解析開始インデックス。</param>
-        /// <returns>コメント区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
-        public static int ChkComment(out string comment, string text, int index)
-        {
-            // 入力値確認
-            if (String.IsNullOrEmpty(text))
-            {
-                comment = String.Empty;
-                return -1;
-            }
-
-            // 改良版メソッドをコール
-            if (!MediaWikiPage.TryParseComment(text.Substring(index), out comment))
-            {
-                comment = String.Empty;
-                return -1;
-            }
-
-            return index + comment.Length - 1;
-        }
-
-        /// <summary>
-        /// nowiki区間のチェック。
-        /// </summary>
-        /// <param name="nowiki">解析したnowikiブロック。</param>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="index">解析開始インデックス。</param>
-        /// <returns>nowiki区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
-        public static int ChkNowiki(out string nowiki, string text, int index)
-        {
-            // 入力値確認
-            if (String.IsNullOrEmpty(text))
-            {
-                nowiki = String.Empty;
-                return -1;
-            }
-
-            // 改良版メソッドをコール
-            if (!MediaWikiPage.TryParseNowiki(text.Substring(index), out nowiki))
-            {
-                nowiki = String.Empty;
-                return -1;
-            }
-
-            return index + nowiki.Length - 1;
-        }
-
         #endregion
 
         #region 公開インスタンスメソッド
@@ -280,7 +228,7 @@ namespace Honememo.Wptscs.Models
                 char c = this.Text[i];
                 if (c != '<' && c != '[')
                 {
-                    // チェックしても無駄な文字は探索しない
+                    // チェックしても無駄なため探索しない
                     // ※ 性能改善のため。そもそもアルゴリズムが良くないのだけど・・・
                     continue;
                 }
@@ -467,19 +415,18 @@ namespace Honememo.Wptscs.Models
                 else
                 {
                     // | の後のとき
-                    // コメント（<!--）が含まれている場合、リンクは無効
-                    if (StringUtils.StartsWith(text, CommentStart, i))
+                    string subtext = text.Substring(i);
+                    string value;
+                    if (MediaWikiPage.TryParseComment(subtext, out value))
                     {
+                        // コメント（<!--）が含まれている場合、リンクは無効
                         break;
                     }
-
-                    // nowikiのチェック
-                    string nowiki;
-                    index = ChkNowiki(out nowiki, text, i);
-                    if (index != -1)
+                    else if (MediaWikiPage.TryParseNowiki(subtext, out value))
                     {
-                        i = index;
-                        pipeTexts[pipeCounter - 1] += nowiki;
+                        // nowikiブロック
+                        i += value.Length - 1;
+                        pipeTexts[pipeCounter - 1] += value;
                         continue;
                     }
 
@@ -616,19 +563,18 @@ namespace Honememo.Wptscs.Models
                 else
                 {
                     // | の後のとき
-                    // コメント（<!--）が含まれている場合、リンクは無効
-                    if (StringUtils.StartsWith(text, CommentStart, i))
+                    string subtext = text.Substring(i);
+                    string value;
+                    if (MediaWikiPage.TryParseComment(subtext, out value))
                     {
+                        // コメント（<!--）が含まれている場合、リンクは無効
                         break;
                     }
-
-                    // nowikiのチェック
-                    string nowiki;
-                    index = ChkNowiki(out nowiki, text, i);
-                    if (index != -1)
+                    else if (MediaWikiPage.TryParseNowiki(subtext, out value))
                     {
-                        i = index;
-                        pipeTexts[pipeCounter - 1] += nowiki;
+                        // nowikiブロック
+                        i += value.Length - 1;
+                        pipeTexts[pipeCounter - 1] += value;
                         continue;
                     }
 
@@ -761,12 +707,12 @@ namespace Honememo.Wptscs.Models
                     break;
                 }
 
-                // コメント（<!--）のチェック
-                string dummy;
-                int subindex = MediaWikiPage.ChkComment(out dummy, text, i);
-                if (subindex != -1)
+                string subtext = text.Substring(i);
+                string comment;
+                if (MediaWikiPage.TryParseComment(subtext, out comment))
                 {
-                    i = subindex;
+                    // コメント（<!--）ブロック
+                    i += comment.Length - 1;
                     continue;
                 }
 
@@ -789,19 +735,19 @@ namespace Honememo.Wptscs.Models
                 else
                 {
                     // | の後のとき
-                    // nowikiのチェック
                     string nowiki;
-                    subindex = MediaWikiPage.ChkNowiki(out nowiki, text, i);
-                    if (subindex != -1)
+                    if (MediaWikiPage.TryParseNowiki(subtext, out nowiki))
                     {
-                        i = subindex;
+                        // nowikiブロック
+                        i += nowiki.Length - 1;
                         value += nowiki;
                         continue;
                     }
 
                     // 変数（{{{1|{{{2}}}}}}とか）の再帰チェック
                     string var;
-                    subindex = this.ChkVariable(out var, out dummy, text, i);
+                    string dummy;
+                    int subindex = this.ChkVariable(out var, out dummy, text, i);
                     if (subindex != -1)
                     {
                         i = subindex;

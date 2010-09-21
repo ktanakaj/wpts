@@ -11,6 +11,7 @@
 namespace Honememo.Utilities
 {
     using System;
+    using System.Text;
     using NUnit.Framework;
 
     /// <summary>
@@ -67,6 +68,28 @@ namespace Honememo.Utilities
             Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", "ab", 1));
             Assert.IsTrue(StringUtils.StartsWith("abcedf0123あいうえお", "あいうえお", 10));
             Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", "あいうえおか", 10));
+        }
+
+        /// <summary>
+        /// StartsWithメソッドテストケース（性能試験）。
+        /// </summary>
+        [Test, Timeout(1500)]
+        public void TestStartsWithResponse()
+        {
+            // テストデータとして適当な、ただしある文字が定期的に出現する長い文字列を生成
+            StringBuilder b = new StringBuilder();
+            int span = 0x7D - 0x20;
+            for (int i = 0; i < 100000; i++)
+            {
+                b.Append(Char.ConvertFromUtf32(i % span + 0x20));
+            }
+
+            // 先頭から最後までひたすら実行して時間がかかりすぎないかをチェック
+            string s = b.ToString();
+            for (int i = 0; i < s.Length; i++)
+            {
+                StringUtils.StartsWith(s, "a", i);
+            }
         }
 
         #endregion

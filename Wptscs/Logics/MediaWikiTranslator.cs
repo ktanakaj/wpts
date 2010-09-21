@@ -66,6 +66,62 @@ namespace Honememo.Wptscs.Logics
         
         #endregion
 
+        #region 整理予定の静的メソッド
+
+        /// <summary>
+        /// コメント区間のチェック。
+        /// </summary>
+        /// <param name="comment">解析したコメント。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <returns>コメント区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
+        public static int ChkComment(out string comment, string text, int index)
+        {
+            // 入力値確認
+            if (String.IsNullOrEmpty(text))
+            {
+                comment = String.Empty;
+                return -1;
+            }
+
+            // 改良版メソッドをコール
+            if (!MediaWikiPage.TryParseComment(text.Substring(index), out comment))
+            {
+                comment = String.Empty;
+                return -1;
+            }
+
+            return index + comment.Length - 1;
+        }
+
+        /// <summary>
+        /// nowiki区間のチェック。
+        /// </summary>
+        /// <param name="nowiki">解析したnowikiブロック。</param>
+        /// <param name="text">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <returns>nowiki区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
+        public static int ChkNowiki(out string nowiki, string text, int index)
+        {
+            // 入力値確認
+            if (String.IsNullOrEmpty(text))
+            {
+                nowiki = String.Empty;
+                return -1;
+            }
+
+            // 改良版メソッドをコール
+            if (!MediaWikiPage.TryParseNowiki(text.Substring(index), out nowiki))
+            {
+                nowiki = String.Empty;
+                return -1;
+            }
+
+            return index + nowiki.Length - 1;
+        }
+
+        #endregion
+
         #region メイン処理メソッド
 
         /// <summary>
@@ -170,7 +226,7 @@ namespace Honememo.Wptscs.Logics
         #endregion
 
         #region 各処理のメソッド
-
+        
         /// <summary>
         /// 翻訳支援対象のページを取得。
         /// </summary>
@@ -402,7 +458,7 @@ namespace Honememo.Wptscs.Logics
 
                 // コメント（<!--）のチェック
                 string comment;
-                int index = MediaWikiPage.ChkComment(out comment, text, i);
+                int index = MediaWikiTranslator.ChkComment(out comment, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -417,7 +473,7 @@ namespace Honememo.Wptscs.Logics
 
                 // nowikiのチェック
                 string nowiki;
-                index = MediaWikiPage.ChkNowiki(out nowiki, text, i);
+                index = MediaWikiTranslator.ChkNowiki(out nowiki, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -860,7 +916,7 @@ namespace Honememo.Wptscs.Logics
 
                 // コメントは無視する
                 string comment;
-                int subindex = MediaWikiPage.ChkComment(out comment, text, lastIndex);
+                int subindex = MediaWikiTranslator.ChkComment(out comment, text, lastIndex);
                 if (subindex != -1)
                 {
                     b.Append(comment);

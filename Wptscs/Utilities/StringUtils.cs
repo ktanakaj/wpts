@@ -78,6 +78,18 @@ namespace Honememo.Utilities
                 return false;
             }
 
+            // 長さチェック
+            if (prefix.Length == 0)
+            {
+                return true;
+            }
+
+            // substringしてしまうと遅いので、先頭1文字だけは自前でチェック
+            if (str[toffset] != prefix[0])
+            {
+                return false;
+            }
+
             // 後は普通のStartWithで処理
             return str.Substring(toffset).StartsWith(prefix);
         }
