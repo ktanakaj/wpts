@@ -25,32 +25,7 @@ namespace Honememo.Wptscs.Models
         // TODO: いっぱい足らない
 
         #region 公開静的メソッドテストケース
-
-        /// <summary>
-        /// TryParseCommentメソッドテストケース。
-        /// </summary>
-        [Test]
-        public void TestTryParseComment()
-        {
-            string comment;
-            Assert.IsTrue(MediaWikiPage.TryParseComment("<!--test-->", out comment));
-            Assert.AreEqual("<!--test-->", comment);
-            Assert.IsTrue(MediaWikiPage.TryParseComment("<!-- test -->", out comment));
-            Assert.AreEqual("<!-- test -->", comment);
-            Assert.IsTrue(MediaWikiPage.TryParseComment("<!--test-->-->", out comment));
-            Assert.AreEqual("<!--test-->", comment);
-            Assert.IsTrue(MediaWikiPage.TryParseComment("<!--test--", out comment));
-            Assert.AreEqual("<!--test--", comment);
-            Assert.IsTrue(MediaWikiPage.TryParseComment("<!--\n\ntest\r\n-->", out comment));
-            Assert.AreEqual("<!--\n\ntest\r\n-->", comment);
-            Assert.IsFalse(MediaWikiPage.TryParseComment("<--test-->", out comment));
-            Assert.IsNull(comment);
-            Assert.IsFalse(MediaWikiPage.TryParseComment("<%--test--%>", out comment));
-            Assert.IsNull(comment);
-            Assert.IsFalse(MediaWikiPage.TryParseComment("<! --test-->", out comment));
-            Assert.IsNull(comment);
-        }
-
+        
         /// <summary>
         /// TryParseNowikiメソッドテストケース。
         /// </summary>

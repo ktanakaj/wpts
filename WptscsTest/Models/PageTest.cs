@@ -196,5 +196,37 @@ namespace Honememo.Wptscs.Models
         }
 
         #endregion
+
+        #region 公開静的メソッドテストケース
+
+        /// <summary>
+        /// TryParseCommentメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestTryParseComment()
+        {
+            string comment;
+            Assert.IsTrue(Page.TryParseComment("<!--test-->", out comment));
+            Assert.AreEqual("<!--test-->", comment);
+            Assert.IsTrue(Page.TryParseComment("<!-- test -->", out comment));
+            Assert.AreEqual("<!-- test -->", comment);
+            Assert.IsTrue(Page.TryParseComment("<!--test-->-->", out comment));
+            Assert.AreEqual("<!--test-->", comment);
+            Assert.IsTrue(Page.TryParseComment("<!--test--", out comment));
+            Assert.AreEqual("<!--test--", comment);
+            Assert.IsTrue(Page.TryParseComment("<!--->", out comment));
+            Assert.AreEqual("<!--->", comment);
+            Assert.IsTrue(Page.TryParseComment("<!--\n\ntest\r\n-->", out comment));
+            Assert.AreEqual("<!--\n\ntest\r\n-->", comment);
+            Assert.IsFalse(Page.TryParseComment("<--test-->", out comment));
+            Assert.IsNull(comment);
+            Assert.IsFalse(Page.TryParseComment("<%--test--%>", out comment));
+            Assert.IsNull(comment);
+            Assert.IsFalse(Page.TryParseComment("<! --test-->", out comment));
+            Assert.IsNull(comment);
+        }
+
+        #endregion
+
     }
 }

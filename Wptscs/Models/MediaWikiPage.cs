@@ -12,6 +12,7 @@ namespace Honememo.Wptscs.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using Honememo.Utilities;
 
@@ -21,16 +22,6 @@ namespace Honememo.Wptscs.Models
     public class MediaWikiPage : Page
     {
         #region 定数宣言
-
-        /// <summary>
-        /// コメントの開始。
-        /// </summary>
-        public static readonly string CommentStart = "<!--";
-
-        /// <summary>
-        /// コメントの終了。
-        /// </summary>
-        public static readonly string CommentEnd = "-->";
 
         /// <summary>
         /// nowikiタグ。
@@ -154,38 +145,23 @@ namespace Honememo.Wptscs.Models
         #endregion
 
         #region 公開静的メソッド
-
+        
         /// <summary>
-        /// 渡されたHTMLテキストがコメントかを解析する。
+        /// 渡されたテキストがnowikiブロックかを指定された位置から解析する。
         /// </summary>
         /// <param name="text">解析するテキスト。</param>
-        /// <param name="comment">解析したコメント。</param>
-        /// <returns>コメントの場合<c>true</c>。</returns>
+        /// <param name="startIndex">解析開始インデックス。</param>
+        /// <param name="nowiki">解析したnowikiブロック。</param>
+        /// <returns>nowikiブロックの場合<c>true</c>。</returns>
         /// <remarks>
-        /// コメントと判定するには、1文字目が開始タグである必要がある。
+        /// nowikiブロックと判定するには、1文字目が開始タグである必要がある。
         /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
+        /// また、入れ子は考慮しない。
         /// </remarks>
-        public static bool TryParseComment(string text, out string comment)
+        public static bool TryParseNowiki(string text, int startIndex, out string nowiki)
         {
-            // 入力値確認
-            comment = null;
-            if (String.IsNullOrEmpty(text) || !text.StartsWith(MediaWikiPage.CommentStart))
-            {
-                return false;
-            }
-
-            // コメント終了まで取得
-            int index = text.IndexOf(MediaWikiPage.CommentEnd);
-            if (index < 0)
-            {
-                // 閉じタグが存在しない場合、最後までコメントと判定
-                comment = text;
-                return true;
-            }
-
-            // 閉じタグがあった場合、閉じタグの終わりまでを返す
-            comment = text.Substring(0, index + CommentEnd.Length);
-            return true;
+            // 汎用タグ用のメソッドをコール
+            return MediaWikiPage.TryParseTag(text, startIndex, MediaWikiPage.NowikiTag, out nowiki);
         }
 
         /// <summary>
@@ -201,8 +177,8 @@ namespace Honememo.Wptscs.Models
         /// </remarks>
         public static bool TryParseNowiki(string text, out string nowiki)
         {
-            // 汎用タグ用のメソッドをコール
-            return MediaWikiPage.TryParseTag(text, MediaWikiPage.NowikiTag, out nowiki);
+            // オーバーロードメソッドをコール
+            return MediaWikiPage.TryParseNowiki(text, 0, out nowiki);
         }
 
         #endregion
@@ -223,29 +199,21 @@ namespace Honememo.Wptscs.Models
             string interWiki = String.Empty;
 
             // 記事に存在する指定言語への言語間リンクを取得
+            string start = "[[" + code + ":";
             for (int i = 0; i < this.Text.Length; i++)
             {
-                char c = this.Text[i];
-                if (c != '<' && c != '[')
-                {
-                    // チェックしても無駄なため探索しない
-                    // ※ 性能改善のため。そもそもアルゴリズムが良くないのだけど・・・
-                    continue;
-                }
-
-                string subtext = this.Text.Substring(i);
                 string value;
-                if (MediaWikiPage.TryParseComment(subtext, out value))
+                if (Page.TryParseComment(this.Text, i, out value))
                 {
                     // コメント（<!--）
                     i += value.Length - 1;
                 }
-                else if (MediaWikiPage.TryParseNowiki(subtext, out value))
+                else if (MediaWikiPage.TryParseNowiki(this.Text, i, out value))
                 {
                     // nowiki区間
                     i += value.Length - 1;
                 }
-                else if (subtext.StartsWith("[[" + code + ":"))
+                else if (StringUtils.StartsWith(this.Text, start, i))
                 {
                     // 指定言語への言語間リンクの場合、内容を取得し、処理終了
                     Link link;
@@ -782,69 +750,6 @@ namespace Honememo.Wptscs.Models
             }
 
             return lastIndex;
-        }
-
-        #endregion
-
-        #region 内部処理用静的メソッド
-
-        /// <summary>
-        /// 渡されたテキストが指定されたタグブロックかを解析する。
-        /// </summary>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="tag">解析するタグ。</param>
-        /// <param name="value">解析したタグブロック。</param>
-        /// <returns>タグブロックの場合<c>true</c>。</returns>
-        /// <exception cref="ArgumentNullException">タグが<c>null</c>。</exception>
-        /// <exception cref="ArgumentException">タグが空か空白のみ。</exception>
-        /// <remarks>
-        /// タグブロックと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
-        /// また、本メソッドはあくまでMediaWikiの簡易的な構文用であり、入れ子は考慮しない。
-        /// </remarks>
-        protected static bool TryParseTag(string text, string tag, out string value)
-        {
-            // 開始タグ終了タグを生成、タグだけは必須
-            // TODO: タグには属性がないとも限らないので、この判定は明らかに不足
-            StringBuilder b = new StringBuilder("<");
-            string startTag = b.Append(Validate.NotBlank(tag).ToLower()).Append('>').ToString();
-            string endTag = b.Insert(1, '/').ToString();
-
-            // 入力値確認
-            value = null;
-            if (String.IsNullOrEmpty(text))
-            {
-                return false;
-            }
-
-            string s = text.ToLower();
-            if (!s.StartsWith(startTag))
-            {
-                return false;
-            }
-
-            // ブロック終了まで取得
-            // 終わりが見つからない場合は、全てタグブロックと判断
-            value = text;
-            for (int i = startTag.Length; i < s.Length; i++)
-            {
-                // 終了条件のチェック
-                if (StringUtils.StartsWith(s, endTag, i))
-                {
-                    value = text.Substring(0, i + endTag.Length);
-                    break;
-                }
-
-                // コメント（<!--）のチェック
-                string comment;
-                if (MediaWikiPage.TryParseComment(text.Substring(i), out comment))
-                {
-                    i += comment.Length - 1;
-                    break;
-                }
-            }
-
-            return true;
         }
 
         #endregion
