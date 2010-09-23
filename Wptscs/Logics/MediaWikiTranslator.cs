@@ -85,7 +85,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 改良版メソッドをコール
-            if (!MediaWikiPage.TryParseComment(text.Substring(index), out comment))
+            if (!LazyXmlParser.TryParseComment(text.Substring(index), out comment))
             {
                 comment = String.Empty;
                 return -1;
@@ -693,7 +693,7 @@ namespace Honememo.Wptscs.Logics
                 // カテゴリーの場合は、コメントで元の文字列を追加する
                 if (article.IsCategory() && !l.StartColon)
                 {
-                    comment = MediaWikiPage.CommentStart + " " + l.OriginalText + " " + MediaWikiPage.CommentEnd;
+                    comment = "<!-- " + l.OriginalText + " -->";
 
                     // カテゴリーで[[:en:xxx]]みたいな形式にした場合、| 以降は不要なので削除
                     if (interWiki == String.Empty)
@@ -831,12 +831,9 @@ namespace Honememo.Wptscs.Logics
                 b.Append(this.From.Language.Code);
                 b.Append(":");
                 b.Append(l.Title);
-                b.Append("]]");
-                b.Append(MediaWikiPage.CommentStart);
-                b.Append(" ");
+                b.Append("]]<!-- ");
                 b.Append(l.OriginalText);
-                b.Append(" ");
-                b.Append(MediaWikiPage.CommentEnd);
+                b.Append(" -->");
             }
             else
             {

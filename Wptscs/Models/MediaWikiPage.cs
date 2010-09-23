@@ -147,24 +147,6 @@ namespace Honememo.Wptscs.Models
         #region 公開静的メソッド
         
         /// <summary>
-        /// 渡されたテキストがnowikiブロックかを指定された位置から解析する。
-        /// </summary>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="startIndex">解析開始インデックス。</param>
-        /// <param name="nowiki">解析したnowikiブロック。</param>
-        /// <returns>nowikiブロックの場合<c>true</c>。</returns>
-        /// <remarks>
-        /// nowikiブロックと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
-        /// また、入れ子は考慮しない。
-        /// </remarks>
-        public static bool TryParseNowiki(string text, int startIndex, out string nowiki)
-        {
-            // 汎用タグ用のメソッドをコール
-            return MediaWikiPage.TryParseTag(text, startIndex, MediaWikiPage.NowikiTag, out nowiki);
-        }
-
-        /// <summary>
         /// 渡されたテキストがnowikiブロックかを解析する。
         /// </summary>
         /// <param name="text">解析するテキスト。</param>
@@ -177,8 +159,19 @@ namespace Honememo.Wptscs.Models
         /// </remarks>
         public static bool TryParseNowiki(string text, out string nowiki)
         {
-            // オーバーロードメソッドをコール
-            return MediaWikiPage.TryParseNowiki(text, 0, out nowiki);
+            nowiki = null;
+            LazyXmlParser parser = new LazyXmlParser();
+            LazyXmlParser.SimpleElement element;
+            if (parser.TryParse(text, out element))
+            {
+                if (element.Name.ToLower() == MediaWikiPage.NowikiTag)
+                {
+                    nowiki = element.OuterXml;
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         #endregion
@@ -202,22 +195,31 @@ namespace Honememo.Wptscs.Models
             string start = "[[" + code + ":";
             for (int i = 0; i < this.Text.Length; i++)
             {
+                char c = this.Text[i];
+                if (c != '<' && c != '[')
+                {
+                    // チェックしても無駄なため探索しない
+                    // ※ 性能改善のため。そもそもアルゴリズムが良くないのだけど・・・
+                    continue;
+                }
+
+                string subtext = this.Text.Substring(i);
                 string value;
-                if (Page.TryParseComment(this.Text, i, out value))
+                if (LazyXmlParser.TryParseComment(subtext, out value))
                 {
                     // コメント（<!--）
                     i += value.Length - 1;
                 }
-                else if (MediaWikiPage.TryParseNowiki(this.Text, i, out value))
+                else if (MediaWikiPage.TryParseNowiki(subtext, out value))
                 {
                     // nowiki区間
                     i += value.Length - 1;
                 }
-                else if (StringUtils.StartsWith(this.Text, start, i))
+                else if (subtext.StartsWith(start))
                 {
                     // 指定言語への言語間リンクの場合、内容を取得し、処理終了
                     Link link;
-                    if (this.TryParseLink(this.Text.Substring(i), out link))
+                    if (this.TryParseLink(subtext, out link))
                     {
                         interWiki = link.Title;
                         break;
@@ -385,7 +387,7 @@ namespace Honememo.Wptscs.Models
                     // | の後のとき
                     string subtext = text.Substring(i);
                     string value;
-                    if (MediaWikiPage.TryParseComment(subtext, out value))
+                    if (LazyXmlParser.TryParseComment(subtext, out value))
                     {
                         // コメント（<!--）が含まれている場合、リンクは無効
                         break;
@@ -533,7 +535,7 @@ namespace Honememo.Wptscs.Models
                     // | の後のとき
                     string subtext = text.Substring(i);
                     string value;
-                    if (MediaWikiPage.TryParseComment(subtext, out value))
+                    if (LazyXmlParser.TryParseComment(subtext, out value))
                     {
                         // コメント（<!--）が含まれている場合、リンクは無効
                         break;
@@ -677,7 +679,7 @@ namespace Honememo.Wptscs.Models
 
                 string subtext = text.Substring(i);
                 string comment;
-                if (MediaWikiPage.TryParseComment(subtext, out comment))
+                if (LazyXmlParser.TryParseComment(subtext, out comment))
                 {
                     // コメント（<!--）ブロック
                     i += comment.Length - 1;
@@ -1029,7 +1031,7 @@ namespace Honememo.Wptscs.Models
             public override string ToString()
             {
                 // リンクを表すテキスト、ならびに元テキストを返す
-                return this.Text + MediaWikiPage.CommentStart + this.OriginalText + MediaWikiPage.CommentEnd;
+                return this.Text + "<!-- " + this.OriginalText + " -->";
             }
 
             #endregion

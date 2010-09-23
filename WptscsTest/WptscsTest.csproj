@@ -53,6 +53,7 @@
     <Compile Include="PrivateAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\FormUtilsTest.cs" />
+    <Compile Include="Utilities\LazyXmlParserTest.cs" />
     <Compile Include="Utilities\ObjectUtilsTest.cs" />
     <Compile Include="Utilities\StringUtilsTest.cs" />
     <Compile Include="Utilities\ValidateTest.cs" />

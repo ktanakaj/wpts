@@ -40,6 +40,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -68,6 +69,7 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Utilities\LazyXmlParser.cs" />
     <Compile Include="Models\IgnoreCaseDictionary.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\MediaWiki.cs" />
