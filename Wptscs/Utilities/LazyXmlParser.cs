@@ -127,9 +127,10 @@ namespace Honememo.Utilities
         /// </remarks>
         public bool TryParse(string text, out SimpleElement element)
         {
-            // 入力値確認
+            // 入力値確認。最低3文字あるか、先頭2文字目までが使用可能な文字かをチェック
             element = null;
-            if (String.IsNullOrEmpty(text) || text[0] != '<')
+            if (StringUtils.DefaultString(text).Length < 3 || text[0] != '<'
+                || (!Char.IsLetter(text[1]) && text[1] != '_' && text[1] != ':'))
             {
                 return false;
             }
@@ -144,6 +145,7 @@ namespace Honememo.Utilities
             string name = text.Substring(1, index - 1);
 
             // 開始タグの終端に到達するまで属性を探索
+            //// TODO: ここから先とりあえず動けばいいや的に書いて凄く汚いので直す
             IDictionary<string, string> attribute = new Dictionary<string, string>();
             StringBuilder attrKey = new StringBuilder();
             StringBuilder attrValue = new StringBuilder();
@@ -170,9 +172,14 @@ namespace Honememo.Utilities
                     }
                     else if (c == '>' || c == '/')
                     {
-                        // ループ終了、キーだけで値が無いパターン
-                        attribute[this.Decode(attrKey.ToString())] = String.Empty;
-                        attrKey.Clear();
+                        // ループ終了
+                        if (attrKey.Length > 0)
+                        {
+                            // キーだけで値が無いパターン
+                            attribute[this.Decode(attrKey.ToString())] = String.Empty;
+                            attrKey.Clear();
+                        }
+
                         break;
                     }
                     else if (c == ' ')
@@ -221,6 +228,7 @@ namespace Honememo.Utilities
                         attribute[this.Decode(attrKey.ToString())] = this.Decode(attrValue.ToString());
                         attrKey.Clear();
                         attrValue.Clear();
+                        separators = null;
                         if (c == '>' || c == '/')
                         {
                             // ループ終了
@@ -236,21 +244,28 @@ namespace Honememo.Utilities
                 }
             }
 
-            // 値が残っている場合、閉じていないのでNG
-            if (attrKey.Length > 0)
+            // 最後までループしてしまった場合、閉じていないのでNG
+            if (index == text.Length)
             {
                 return false;
             }
 
-            // '/'で終わった場合は、インデックスを次の文字まで移動させる
+            // '/'で終わった場合は、ちゃんと閉じることを確認して判定終了
             if (text[index] == '/')
             {
-                ++index;
+                if (index + 1 == text.Length)
+                {
+                    return false;
+                }
+
+                element = new SimpleElement(name, attribute, String.Empty, text.Substring(0, index + 2));
+                return true;
             }
 
             // 閉じタグまでを取得
             // 終わりが見つからない場合は、全てタグブロックと判断
             string outerXml = text;
+            string innerXml = text.Substring(index + 1);
             //// TODO: これだと後ろにスペースがあった場合検知されないので要習性
             string endTag = "</" + name + ">";
 
@@ -261,25 +276,37 @@ namespace Honememo.Utilities
                 diff = text.ToLower();
             }
 
-            for (; index < diff.Length; index++)
+            bool ended = false;
+            for (int i = index + 1; i < diff.Length; i++)
             {
                 // 終了条件のチェック
-                if (StringUtils.StartsWith(diff, endTag, index))
+                if (StringUtils.StartsWith(diff, endTag, i))
                 {
-                    outerXml = text.Substring(0, index + endTag.Length);
+                    outerXml = text.Substring(0, i + endTag.Length);
+                    innerXml = text.Substring(index + 1, i - index - 1);
+                    ended = true;
                     break;
                 }
 
                 // コメント（<!--）のチェック
                 string comment;
-                if (LazyXmlParser.TryParseComment(text.Substring(index), out comment))
+                if (LazyXmlParser.TryParseComment(text.Substring(i), out comment))
                 {
-                    index += comment.Length - 1;
-                    break;
+                    i += comment.Length - 1;
+                    continue;
                 }
             }
 
-            element = new SimpleElement(name, null, attribute, outerXml);
+            // HTMLの場合、閉じタグが無いのは開始タグだけのパターンと判定
+            if (!ended && this.IsHtml)
+            {
+                element = new SimpleElement(name, attribute, String.Empty, text.Substring(0, index + 1));
+            }
+            else
+            {
+                element = new SimpleElement(name, attribute, innerXml, outerXml);
+            }
+
             return true;
         }
 
@@ -328,15 +355,15 @@ namespace Honememo.Utilities
             /// 指定された情報を持つタグを作成する。
             /// </summary>
             /// <param name="name">タグ名。</param>
-            /// <param name="value">このタグに含まれる値。</param>
             /// <param name="attributes">属性情報。</param>
+            /// <param name="innerXml">このタグに含まれる値。</param>
             /// <param name="outerXml">このタグの開始／終了タグを含む文字列。</param>
-            public SimpleElement(string name, string value, IDictionary<string, string> attributes, string outerXml)
+            public SimpleElement(string name, IDictionary<string, string> attributes, string innerXml, string outerXml)
             {
                 this.Name = name;
-                this.Value = value;
-                this.OuterXml = outerXml;
                 this.Attributes = attributes;
+                this.InnerXml = innerXml;
+                this.OuterXml = outerXml;
             }
 
             #endregion
@@ -353,9 +380,9 @@ namespace Honememo.Utilities
             }
 
             /// <summary>
-            /// このタグに含まれる値。
+            /// このタグに含まれる文字列。
             /// </summary>
-            public string Value
+            public string InnerXml
             {
                 get;
                 private set;

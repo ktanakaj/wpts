@@ -43,7 +43,7 @@ namespace Honememo.Utilities
                 return nullStr;
             }
 
-            return node.InnerText;
+            return StringUtils.DefaultString(node.InnerText, nullStr);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Honememo.Utilities
                 return nullStr;
             }
 
-            return node.InnerXml;
+            return StringUtils.DefaultString(node.InnerXml, nullStr);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Honememo.Utilities
                 return nullStr;
             }
 
-            return node.OuterXml;
+            return StringUtils.DefaultString(node.OuterXml, nullStr);
         }
 
         #endregion
