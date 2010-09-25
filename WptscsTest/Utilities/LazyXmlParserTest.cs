@@ -19,8 +19,6 @@ namespace Honememo.Utilities
     [TestFixture]
     public class LazyXmlParserTest
     {
-        // TODO:いっぱい足りない
-
         #region 静的メソッドテストケース
 
         /// <summary>
@@ -204,6 +202,12 @@ namespace Honememo.Utilities
         {
             LazyXmlParser.SimpleElement element;
             LazyXmlParser parser = new LazyXmlParser();
+            Assert.IsTrue(parser.TryParse("<p>", out element));
+            Assert.AreEqual("<p>", element.OuterXml);
+            Assert.AreEqual("p", element.Name);
+            Assert.IsEmpty(element.InnerXml);
+            Assert.AreEqual(0, element.Attributes.Count);
+
             Assert.IsTrue(parser.TryParse("<testtag>test value", out element));
             Assert.AreEqual("<testtag>test value", element.OuterXml);
             Assert.AreEqual("testtag", element.Name);
@@ -259,6 +263,12 @@ namespace Honememo.Utilities
             Assert.IsTrue(parser.TryParse("<testtag />", out element));
             Assert.AreEqual("<testtag />", element.OuterXml);
             Assert.AreEqual("testtag", element.Name);
+            Assert.IsEmpty(element.InnerXml);
+            Assert.AreEqual(0, element.Attributes.Count);
+
+            Assert.IsTrue(parser.TryParse("<p>", out element));
+            Assert.AreEqual("<p>", element.OuterXml);
+            Assert.AreEqual("p", element.Name);
             Assert.IsEmpty(element.InnerXml);
             Assert.AreEqual(0, element.Attributes.Count);
 

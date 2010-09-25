@@ -783,17 +783,6 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// 渡された内部リンク・テンプレートを解析。
-        /// </summary>
-        /// <param name="link">リンク。</param>
-        /// <param name="index">本文の解析開始位置のインデックス。</param>
-        /// <returns>正常時の戻り値には、]]の後ろの]の位置のインデックスを返す。異常時は-1。</returns>
-        protected int ChkLinkText(out Link link, int index)
-        {
-            return this.ChkLinkText(out link, this.Text, index);
-        }
-
-        /// <summary>
         /// オブジェクトがメソッドの実行に不完全な状態でないか検証する。
         /// 不完全な場合、例外をスローする。
         /// </summary>
