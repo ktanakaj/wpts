@@ -381,6 +381,8 @@ namespace Honememo.Wptscs
                     wiki.Xmlns = StringUtils.DefaultString(this.textBoxXmlns.Text).Trim();
                     wiki.NamespacePath = StringUtils.DefaultString(this.textBoxNamespacePath.Text).Trim();
                     wiki.Redirect = StringUtils.DefaultString(this.textBoxRedirect.Text).Trim();
+                    wiki.DocumentationTemplate = StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Trim();
+                    wiki.DocumentationTemplateDefaultPage = StringUtils.DefaultString(this.textBoxDocumentationTemplateDefaultPage.Text).Trim();
 
                     // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
                     if (!String.IsNullOrWhiteSpace(this.textBoxTemplateNamespace.Text))
@@ -430,6 +432,8 @@ namespace Honememo.Wptscs
                     this.textBoxCategoryNamespace.Text = wiki.CategoryNamespace.ToString();
                     this.textBoxFileNamespace.Text = wiki.FileNamespace.ToString();
                     this.textBoxRedirect.Text = wiki.Redirect;
+                    this.textBoxDocumentationTemplate.Text = StringUtils.DefaultString(wiki.DocumentationTemplate);
+                    this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(wiki.DocumentationTemplateDefaultPage);
 
                     // 呼称の情報を表に設定
                     this.dataGridViewLanguageName.Rows.Clear();

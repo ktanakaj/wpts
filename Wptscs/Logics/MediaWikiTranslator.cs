@@ -629,7 +629,7 @@ namespace Honememo.Wptscs.Logics
                 MediaWikiPage article = new MediaWikiPage(this.From, l.Title);
 
                 // サブページの場合、記事名を補填
-                if (l.SubPage)
+                if (l.IsSubpage)
                 {
                     l.Title = parent + l.Title;
                 }
@@ -637,7 +637,7 @@ namespace Honememo.Wptscs.Logics
                 {
                     // 言語間リンク・姉妹プロジェクトへのリンク・画像は対象外
                     // 先頭が : でない、翻訳先言語への言語間リンクの場合
-                    if (!l.StartColon && l.Code == this.To.Language.Code)
+                    if (!l.IsColon && l.Code == this.To.Language.Code)
                     {
                         // 削除する。正常終了で、置換後文字列なしを返す
                         System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.replaceInnerLink > " + l.OriginalText + " を削除");
@@ -669,7 +669,7 @@ namespace Honememo.Wptscs.Logics
                 {
                     // 言語間リンクが存在する場合、そちらを指すように置換
                     // 前の文字列を復元
-                    if (l.SubPage)
+                    if (l.IsSubpage)
                     {
                         int index = interWiki.IndexOf('/');
                         if (index == -1)
@@ -679,7 +679,7 @@ namespace Honememo.Wptscs.Logics
 
                         b.Append(interWiki.Substring(index));
                     }
-                    else if (l.StartColon)
+                    else if (l.IsColon)
                     {
                         b.Append(":");
                         b.Append(interWiki);
@@ -691,7 +691,7 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 // カテゴリーの場合は、コメントで元の文字列を追加する
-                if (article.IsCategory() && !l.StartColon)
+                if (article.IsCategory() && !l.IsColon)
                 {
                     comment = "<!-- " + l.OriginalText + " -->";
 
@@ -768,7 +768,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // テンプレート名前空間か、普通の記事かを判定
-            if (!l.StartColon && !l.SubPage)
+            if (!l.IsColon && !l.IsSubpage)
             {
                 string prefix = null;
                 IList<string> prefixes = this.From.Namespaces[this.From.TemplateNamespace];
@@ -808,7 +808,7 @@ namespace Honememo.Wptscs.Logics
                     }
                 }
             }
-            else if (l.SubPage)
+            else if (l.IsSubpage)
             {
                 // サブページの場合、記事名を補填
                 l.Title = parent + l.Title;
@@ -841,12 +841,12 @@ namespace Honememo.Wptscs.Logics
                 b.Append("{{");
 
                 // 前の文字列を復元
-                if (l.StartColon)
+                if (l.IsColon)
                 {
                     b.Append(":");
                 }
 
-                if (l.Msgnw)
+                if (l.IsMsgnw)
                 {
                     b.Append(MediaWikiPage.Msgnw);
                 }

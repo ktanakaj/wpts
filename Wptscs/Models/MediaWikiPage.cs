@@ -183,28 +183,26 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="code">言語コード。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
+        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
         public string GetInterWiki(string code)
         {
             // Textが設定されている場合のみ有効
             this.ValidateIncomplete();
 
-            // 初期化と値チェック
-            string interWiki = String.Empty;
-
             // 記事に存在する指定言語への言語間リンクを取得
-            string start = "[[" + code + ":";
             for (int i = 0; i < this.Text.Length; i++)
             {
                 char c = this.Text[i];
-                if (c != '<' && c != '[')
+                if (c != '<' && c != '[' && c != '{')
                 {
                     // チェックしても無駄なため探索しない
-                    // ※ 性能改善のため。そもそもアルゴリズムが良くないのだけど・・・
+                    // ※ 性能改善のため。そもそもアルゴリズムが良くないと思われるが・・・
                     continue;
                 }
 
                 string subtext = this.Text.Substring(i);
                 string value;
+                Link link;
                 if (LazyXmlParser.TryParseComment(subtext, out value))
                 {
                     // コメント（<!--）
@@ -215,19 +213,27 @@ namespace Honememo.Wptscs.Models
                     // nowiki区間
                     i += value.Length - 1;
                 }
-                else if (subtext.StartsWith(start))
+                else if (this.TryParseTemplate(subtext, out link))
+                {
+                    // Documentationテンプレートがある場合は、その中を探索
+                    string interWiki = this.GetDocumentationInterWiki(link, code);
+                    if (!String.IsNullOrEmpty(interWiki))
+                    {
+                        return interWiki;
+                    }
+                }
+                else if (this.TryParseLink(subtext, out link))
                 {
                     // 指定言語への言語間リンクの場合、内容を取得し、処理終了
-                    Link link;
-                    if (this.TryParseLink(subtext, out link))
+                    if (link.Code == code && !link.IsColon)
                     {
-                        interWiki = link.Title;
-                        break;
+                        return link.Title;
                     }
                 }
             }
 
-            return interWiki;
+            // 未発見の場合、空文字列
+            return String.Empty;
         }
 
         /// <summary>
@@ -238,6 +244,16 @@ namespace Honememo.Wptscs.Models
         {
             // Textが設定されている場合のみ有効
             return this.Redirect != null;
+        }
+
+        /// <summary>
+        /// ページがテンプレートかをチェック。
+        /// </summary>
+        /// <returns><c>true</c> テンプレート。</returns>
+        public bool IsTemplate()
+        {
+            // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
+            return this.IsNamespacePage(this.Website.TemplateNamespace);
         }
 
         /// <summary>
@@ -437,12 +453,12 @@ namespace Honememo.Wptscs.Models
             // サブページ
             if (link.Title.StartsWith("/"))
             {
-                link.SubPage = true;
+                link.IsSubpage = true;
             }
             else if (link.Title.StartsWith(":"))
             {
                 // 先頭が :
-                link.StartColon = true;
+                link.IsColon = true;
                 link.Title = link.Title.TrimStart(':').TrimStart();
             }
 
@@ -570,7 +586,7 @@ namespace Honememo.Wptscs.Models
 
             // 解析に成功した場合、結果を出力値に設定
             link = new Link();
-            link.Template = true;
+            link.IsTemplateTag = true;
 
             // 変数ブロックの文字列をリンクのテキストに設定
             link.OriginalText = text.Substring(0, lastIndex + 1);
@@ -585,18 +601,18 @@ namespace Honememo.Wptscs.Models
             // サブページ
             if (link.Title.StartsWith("/") == true)
             {
-                link.SubPage = true;
+                link.IsSubpage = true;
             }
             else if (link.Title.StartsWith(":"))
             {
                 // 先頭が :
-                link.StartColon = true;
+                link.IsColon = true;
                 link.Title = link.Title.TrimStart(':').TrimStart();
             }
 
             // 先頭が msgnw:
-            link.Msgnw = link.Title.ToLower().StartsWith(Msgnw.ToLower());
-            if (link.Msgnw)
+            link.IsMsgnw = link.Title.ToLower().StartsWith(Msgnw.ToLower());
+            if (link.IsMsgnw)
             {
                 link.Title = link.Title.Substring(Msgnw.Length);
             }
@@ -829,6 +845,86 @@ namespace Honememo.Wptscs.Models
             return false;
         }
 
+        /// <summary>
+        /// 渡されたTemplate:Documentationの呼び出しから、指定された言語コードへの言語間リンクを返す。
+        /// </summary>
+        /// <param name="link">テンプレート呼び出しのリンク。</param>
+        /// <param name="code">言語コード。</param>
+        /// <returns>言語間リンク先の記事名。見つからない場合またはパラメータが対象外の場合は空。</returns>
+        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
+        private string GetDocumentationInterWiki(Link link, string code)
+        {
+            // テンプレートタグか、この言語にTemplate:Documentationの設定がされているかを確認
+            string docTitle = this.Website.DocumentationTemplate;
+            if (!link.IsTemplateTag || String.IsNullOrEmpty(docTitle))
+            {
+                return String.Empty;
+            }
+
+            // Documentationテンプレートのリンクかを確認
+            if (link.Title.ToLower() != docTitle.ToLower())
+            {
+                // 名前空間で一致していない可能性があるので、名前空間を取ってもう一度判定
+                int index = docTitle.IndexOf(':');
+                if (new MediaWikiPage(this.Website, docTitle).IsTemplate()
+                    && index >= 0 && index + 1 < docTitle.Length)
+                {
+                    docTitle = docTitle.Substring(docTitle.IndexOf(':') + 1);
+                }
+
+                if (link.Title.ToLower() != docTitle.ToLower())
+                {
+                    // どちらでも一致しない場合は別のテンプレートなりなので無視
+                    return String.Empty;
+                }
+            }
+
+            // 解説記事名を確認
+            string subtitle = link.PipeTexts.ElementAtOrDefault(0);
+            if (String.IsNullOrWhiteSpace(subtitle) || subtitle.Contains('='))
+            {
+                // 指定されていない場合はデフォルトのページを探索
+                subtitle = this.Website.DocumentationTemplateDefaultPage;
+            }
+
+            if (String.IsNullOrEmpty(subtitle))
+            {
+                return String.Empty;
+            }
+
+            // サブページの場合、親ページのページ名を付加
+            // TODO: サブページの仕組みについては要再検討
+            if (subtitle.StartsWith("/"))
+            {
+                subtitle = this.Title + subtitle;
+            }
+
+            // 解説ページから言語間リンクを取得
+            MediaWikiPage subpage = null;
+            try
+            {
+                // ※ 本当はここでの取得状況も画面に見せたいが、今のつくりで
+                //    そうするとややこしくなるので隠蔽する。
+                subpage = this.Website.GetPage(subtitle) as MediaWikiPage;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+            }
+
+            if (subpage != null)
+            {
+                string interWiki = subpage.GetInterWiki(code);
+                if (!String.IsNullOrEmpty(interWiki))
+                {
+                    return interWiki;
+                }
+            }
+
+            // 未発見の場合、空文字列
+            return String.Empty;
+        }
+
         #endregion
 
         #region 内部クラス
@@ -853,6 +949,7 @@ namespace Honememo.Wptscs.Models
             /// <summary>
             /// リンクの記事名。
             /// </summary>
+            /// <remarks>リンクに記載されていた記事名であり、名前空間の情報などは含まない可能性があるため注意。</remarks>
             public string Title
             {
                 get;
@@ -887,19 +984,26 @@ namespace Honememo.Wptscs.Models
             }
 
             /// <summary>
-            /// テンプレート呼び出し（{{～}}）かを示すフラグ。
+            /// テンプレートタグで書かれたリンク（{{～}}）か？
             /// </summary>
-            public bool Template
+            /// <remarks>
+            /// 必ずしもリンク先がテンプレートであることを意味しない。
+            /// 普通のページをこの書式でテンプレートのように使用することも可能である。
+            /// </remarks>
+            public bool IsTemplateTag
             {
                 get;
                 set;
             }
 
             /// <summary>
-            /// 記事名の先頭が / で始まるかを示すフラグ。
+            /// 記事名の先頭がサブページを示す / で始まるか？
             /// </summary>
-            public bool SubPage
+            /// <remarks>※ 2010年9月現在、この処理には不足あり。</remarks>
+            public bool IsSubpage
             {
+                // TODO: サブページには相対パスで[[../～]]や[[../../～]]というような書き方もある模様。
+                //       この辺りの処理は[[Help:サブページ]]を元に全面的に見直す必要あり
                 get;
                 set;
             }
@@ -907,23 +1011,23 @@ namespace Honememo.Wptscs.Models
             /// <summary>
             /// リンクの先頭が : で始まるかを示すフラグ。
             /// </summary>
-            public bool StartColon
+            public bool IsColon
             {
                 get;
                 set;
             }
 
             /// <summary>
-            /// テンプレートの場合、msgnw: が付加されているかを示すフラグ。
+            /// テンプレートの場合に、テンプレートのソースをそのまま出力することを示す msgnw: が付加されているか？
             /// </summary>
-            public bool Msgnw
+            public bool IsMsgnw
             {
                 get;
                 set;
             }
 
             /// <summary>
-            /// テンプレートの場合、記事名の後で改行されるかを示すフラグ。
+            /// テンプレートの場合に、記事名の後で改行が入るか？
             /// </summary>
             public bool Enter
             {
@@ -944,7 +1048,7 @@ namespace Honememo.Wptscs.Models
                     // 枠の設定
                     string startSign = "[[";
                     string endSign = "]]";
-                    if (this.Template)
+                    if (this.IsTemplateTag)
                     {
                         startSign = "{{";
                         endSign = "}}";
@@ -954,13 +1058,13 @@ namespace Honememo.Wptscs.Models
                     b.Append(startSign);
 
                     // 先頭の : の付加
-                    if (this.StartColon)
+                    if (this.IsColon)
                     {
                         b.Append(':');
                     }
 
                     // msgnw: （テンプレートを<nowiki>タグで挟む）の付加
-                    if (this.Template && this.Msgnw)
+                    if (this.IsTemplateTag && this.IsMsgnw)
                     {
                         b.Append(MediaWikiPage.Msgnw);
                     }

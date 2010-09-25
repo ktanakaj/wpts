@@ -384,6 +384,29 @@ namespace Honememo.Wptscs.Models
             }
         }
 
+        /// <summary>
+        /// Template:Documentation（言語間リンク等を別ページに記述するためのテンプレート）に相当するページ名。
+        /// </summary>
+        /// <remarks>空の場合、その言語版にはこれに相当する機能は無いものとして扱う。</remarks>
+        public string DocumentationTemplate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Template:Documentationで指定が無い場合に参照するページ名。
+        /// </summary>
+        /// <remarks>
+        /// ほとんどの言語では[[/Doc]]の模様。
+        /// 空の場合、明示的な指定が無い場合は参照不能として扱う。
+        /// </remarks>
+        public string DocumentationTemplateDefaultPage
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region 公開メソッド
@@ -533,6 +556,14 @@ namespace Honememo.Wptscs.Models
                 // 初期値の都合上、値がある場合のみ
                 this.MagicWords = variables;
             }
+
+            // Template:Documentationの設定
+            XmlElement docElement = siteElement.SelectSingleNode("DocumentationTemplate") as XmlElement;
+            if (docElement != null)
+            {
+                this.DocumentationTemplate = docElement.InnerText;
+                this.DocumentationTemplateDefaultPage = docElement.GetAttribute("DefaultPage");
+            }
         }
 
         /// <summary>
@@ -571,6 +602,15 @@ namespace Honememo.Wptscs.Models
             }
 
             writer.WriteEndElement();
+
+            // Template:Documentationの設定は一塊で出力
+            if (!String.IsNullOrEmpty(this.DocumentationTemplate))
+            {
+                writer.WriteStartElement("DocumentationTemplate");
+                writer.WriteAttributeString("DefaultPage", this.DocumentationTemplateDefaultPage);
+                writer.WriteValue(this.DocumentationTemplate);
+                writer.WriteEndElement();
+            }
         }
 
         #endregion

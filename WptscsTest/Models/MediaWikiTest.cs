@@ -285,6 +285,34 @@ namespace Honememo.Wptscs.Models
             site.Namespaces = null;
         }
 
+        /// <summary>
+        /// DocumentationTemplateプロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestDocumentationTemplate()
+        {
+            MediaWiki site = new MediaWiki(new Language("ja"));
+            // デフォルトでは空
+            Assert.IsNullOrEmpty(site.DocumentationTemplate);
+            // その値が返る
+            site.DocumentationTemplate = "Template:Documentation";
+            Assert.AreEqual("Template:Documentation", site.DocumentationTemplate);
+        }
+
+        /// <summary>
+        /// DocumentationTemplateDefaultPageプロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestDocumentationTemplateDefaultPage()
+        {
+            MediaWiki site = new MediaWiki(new Language("ja"));
+            // デフォルトでは空
+            Assert.IsNullOrEmpty(site.DocumentationTemplateDefaultPage);
+            // その値が返る
+            site.DocumentationTemplateDefaultPage = "/doc";
+            Assert.AreEqual("/doc", site.DocumentationTemplateDefaultPage);
+        }
+
         #endregion
 
         #region 公開メソッドテストケース

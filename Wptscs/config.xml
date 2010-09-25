@@ -87,6 +87,7 @@
         </Names>
       </Language>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://es.wikipedia.org</Location>
@@ -212,6 +213,7 @@
       <ExportPath>wiki/特別:Export/{0}</ExportPath>
       <Redirect>#転送</Redirect>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ko.wikipedia.org</Location>

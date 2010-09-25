@@ -22,6 +22,53 @@ namespace Honememo.Wptscs.Models
     [TestFixture]
     public class MediaWikiPageTest
     {
+        #region モッククラス
+
+        /// <summary>
+        /// Websiteテスト用のモッククラスです。
+        /// </summary>
+        public class DummySite : MediaWiki
+        {
+            #region コンストラクタ
+
+            /// <summary>
+            /// コンストラクタ。
+            /// </summary>
+            /// <param name="lang">ウェブサイトの言語。</param>
+            public DummySite(Language lang)
+                : base(lang)
+            {
+            }
+
+            #endregion
+
+            #region ダミーメソッド
+
+            /// <summary>
+            /// ページを取得。
+            /// </summary>
+            /// <param name="title">ページタイトル。</param>
+            /// <returns>取得したページ。</returns>
+            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+            public override Page GetPage(string title)
+            {
+                System.Diagnostics.Debug.WriteLine(title);
+                if (title == "Template:Test/doc")
+                {
+                    return new MediaWikiPage(
+                        this,
+                        title,
+                        "[[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
+                }
+
+                return base.GetPage(title);
+            }
+
+            #endregion
+        }
+
+        #endregion
+
         // TODO: いっぱい足らない
 
         #region 公開静的メソッドテストケース
@@ -84,10 +131,10 @@ namespace Honememo.Wptscs.Models
         public void TestGetInterWikiDocumentation()
         {
             // Template:Documentation を使ってるページ
-            MediaWiki site = new MediaWiki(new Language("en"));
+            MediaWiki site = new DummySite(new Language("en"));
+            site.DocumentationTemplate = "Template:Documentation";
+            site.DocumentationTemplateDefaultPage = "/doc";
             MediaWikiPage page = new MediaWikiPage(site, "Template:Test", "TestText{{Documentation}}");
-
-            // TODO: 作成中
 
             Assert.AreEqual("テストページ", page.GetInterWiki("ja"));
             Assert.AreEqual("Test_Fr", page.GetInterWiki("fr"));
