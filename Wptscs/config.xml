@@ -22,6 +22,7 @@
       </Language>
       <ExportPath>wiki/خاص:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="">قالب:توثيق</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://de.wikipedia.org</Location>
@@ -51,6 +52,7 @@
       </Language>
       <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://en.wikipedia.org</Location>
@@ -117,6 +119,7 @@
       </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://fr.wikipedia.org</Location>
@@ -145,6 +148,7 @@
         </Names>
       </Language>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="">Modèle:Documentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://it.wikipedia.org</Location>
@@ -174,6 +178,7 @@
       </Language>
       <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ja.wikipedia.org</Location>
@@ -239,6 +244,7 @@
       </Language>
       <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="">틀:틀 설명문서</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://pt.wikipedia.org</Location>
@@ -268,6 +274,7 @@
       </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ru.wikipedia.org</Location>
@@ -297,6 +304,7 @@
       </Language>
       <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://zh.wikipedia.org</Location>
@@ -321,6 +329,7 @@
         </Names>
       </Language>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
     </MediaWiki>
   </Websites>
   <ItemTables />

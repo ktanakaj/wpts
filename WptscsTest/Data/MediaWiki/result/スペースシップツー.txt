@@ -22,7 +22,7 @@
 スペースシップツーは、8人の乗員（6人の乗客と2人のパイロット）を乗せることができる。飛行軌道の[[Apsis|遠地点]]はおよそ高度110&nbsp;km （68マイル）の[[Thermosphere|熱圏]]内である。これはスペースシップワンの目標高度である[[Kármán line|カーマン・ライン]]よりも10&nbsp;km （6マイル）高い（もっとも、スペースシップワンの最後のフライトは112&nbsp;kmに達している）。スペースシップツーは母機である[[Scaled Composites White Knight Two|ホワイトナイトツー]]から、高度15,200&nbsp;m （50,000フィート）で発射され、1基の[[Hybrid rocket|ハイブリッドロケット]]により4,200&nbsp;km/h (2,600 mph) の速度に達する。客室は長さ3.66&nbsp;m（12フィート）、直径2.28&nbsp;m（7.5フィート）である。<ref name="flightglobal-unveil">[[:ja:Template:cite web]]<!-- {{cite web |url=http://www.flightglobal.com/articles/2008/01/23/221031/pictures-virgin-galactic-unveils-dyna-soar-style-spaceshiptwo-design-and-twin-fuselage-white-knight.html|title=PICTURES: Virgin Galactic unveils Dyna-Soar style SpaceShipTwo design and twin-fuselage White Knight II configuration |accessdate=2008-01-23 |author=Rob Coppinger|publisher=flightglobal.com }} --></ref> 翼長は8.23&nbsp;m（27フィート）、全長は18.29&nbsp;m （60フィート）、尾翼の高さは4.57&nbsp;m（15フィート）である。
 
 ==Notes==
-[[:ja:Template:Reflist]]<!-- {{Reflist}} -->
+{{Reflist}}
 
 ==External links==
 [[:ja:Template:commonscat]]<!-- {{commonscat|SpaceShipTwo}} -->

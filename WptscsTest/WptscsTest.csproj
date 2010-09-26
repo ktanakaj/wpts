@@ -134,6 +134,9 @@
     <Content Include="Data\MediaWiki\ja\Template_Reflist.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\MediaWiki\ja\Template_Reflist_doc.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\MediaWiki\ja\Template_Reusable launch systems.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

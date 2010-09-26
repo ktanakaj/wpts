@@ -603,7 +603,7 @@ namespace Honememo.Wptscs.Models
 
             writer.WriteEndElement();
 
-            // Template:Documentationの設定は一塊で出力
+            // Template:Documentationの設定は一項目で出力
             if (!String.IsNullOrEmpty(this.DocumentationTemplate))
             {
                 writer.WriteStartElement("DocumentationTemplate");

@@ -22,6 +22,7 @@
       </Language>
       <ExportPath>wiki/خاص:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="">قالب:توثيق</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://de.wikipedia.org</Location>
@@ -51,6 +52,7 @@
       </Language>
       <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://en.wikipedia.org</Location>
@@ -87,6 +89,7 @@
         </Names>
       </Language>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://es.wikipedia.org</Location>
@@ -116,6 +119,7 @@
       </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://fr.wikipedia.org</Location>
@@ -144,6 +148,7 @@
         </Names>
       </Language>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="">Modèle:Documentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://it.wikipedia.org</Location>
@@ -173,6 +178,7 @@
       </Language>
       <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ja.wikipedia.org</Location>
@@ -212,6 +218,7 @@
       <ExportPath>wiki/特別:Export/{0}</ExportPath>
       <Redirect>#転送</Redirect>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ko.wikipedia.org</Location>
@@ -237,6 +244,7 @@
       </Language>
       <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="">틀:틀 설명문서</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://pt.wikipedia.org</Location>
@@ -266,6 +274,7 @@
       </Language>
       <ExportPath>wiki/Especial:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ru.wikipedia.org</Location>
@@ -295,6 +304,7 @@
       </Language>
       <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://zh.wikipedia.org</Location>
@@ -319,6 +329,7 @@
         </Names>
       </Language>
       <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
     </MediaWiki>
   </Websites>
   <ItemTables />
@@ -354,7 +365,7 @@
       <Word Lang="fr">Liens externes</Word>
       <Word Lang="it">Collegamenti esterni</Word>
       <Word Lang="ja">外部リンク</Word>
-      <Word Lang="kr">바깥 고리</Word>
+      <Word Lang="ko">바깥 고리</Word>
       <Word Lang="pt">Links Externos</Word>
       <Word Lang="zh">外部連結</Word>
     </Group>
@@ -381,7 +392,7 @@
       <Word Lang="fr">Bibliographie</Word>
       <Word Lang="it">Bibliografia</Word>
       <Word Lang="ja">参考文献</Word>
-      <Word Lang="kr">참고 자료</Word>
+      <Word Lang="ko">참고 자료</Word>
       <Word Lang="ru">Ссылки</Word>
       <Word Lang="zh">参考文献</Word>
     </Group>
@@ -392,7 +403,7 @@
       <Word Lang="fr">Voir aussi</Word>
       <Word Lang="it">Voci correlate</Word>
       <Word Lang="ja">関連項目</Word>
-      <Word Lang="kr">관련항목</Word>
+      <Word Lang="ko">관련항목</Word>
       <Word Lang="pt">Ver também</Word>
       <Word Lang="ru">См. также</Word>
       <Word Lang="zh">參見</Word>

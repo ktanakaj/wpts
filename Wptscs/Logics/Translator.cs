@@ -202,7 +202,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 対訳表（項目）の設定
-            translator.ItemTable = config.GetItemTable(from, to);
+            translator.ItemTable = config.GetItemTableNeedCreate(from, to);
 
             // 対訳表（見出し）の設定、使用する言語は決まっているので組み合わせを設定
             translator.HeadingTable = config.HeadingTable;

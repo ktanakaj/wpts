@@ -366,93 +366,26 @@ namespace Honememo.Wptscs
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine("ConfigForm._SelectedIndexChanged > "
-                    + this.comboBoxLanguageSelectedText + " -> "
-                    + ObjectUtils.ToString(this.comboBoxLanguage.SelectedItem));
-
-                // TODO: 初期値を読み込まないような対策か読み込んでも保存しないような対策が必要
                 // 変更前の設定を保存
                 if (!String.IsNullOrEmpty(this.comboBoxLanguageSelectedText))
                 {
-                    // 設定が存在しなければ基本的に自動生成されるのでそのまま格納
-                    MediaWiki wiki = this.GetMediaWiki(this.config.Websites, this.comboBoxLanguageSelectedText);
-                    wiki.Location = StringUtils.DefaultString(this.textBoxLocation.Text).Trim();
-                    wiki.ExportPath = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
-                    wiki.Xmlns = StringUtils.DefaultString(this.textBoxXmlns.Text).Trim();
-                    wiki.NamespacePath = StringUtils.DefaultString(this.textBoxNamespacePath.Text).Trim();
-                    wiki.Redirect = StringUtils.DefaultString(this.textBoxRedirect.Text).Trim();
-                    wiki.DocumentationTemplate = StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Trim();
-                    wiki.DocumentationTemplateDefaultPage = StringUtils.DefaultString(this.textBoxDocumentationTemplateDefaultPage.Text).Trim();
-
-                    // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
-                    if (!String.IsNullOrWhiteSpace(this.textBoxTemplateNamespace.Text))
-                    {
-                        wiki.TemplateNamespace = int.Parse(this.textBoxTemplateNamespace.Text);
-                    }
-
-                    if (!String.IsNullOrWhiteSpace(this.textBoxCategoryNamespace.Text))
-                    {
-                        wiki.CategoryNamespace = int.Parse(this.textBoxCategoryNamespace.Text);
-                    }
-
-                    if (!String.IsNullOrWhiteSpace(this.textBoxFileNamespace.Text))
-                    {
-                        wiki.FileNamespace = int.Parse(this.textBoxFileNamespace.Text);
-                    }
-
-                    // 表から呼称の情報も保存
-                    this.dataGridViewLanguageName.Sort(this.dataGridViewLanguageName.Columns["ColumnCode"], ListSortDirection.Ascending);
-                    Language lang = wiki.Language;
-                    lang.Bracket = StringUtils.DefaultString(this.textBoxBracket.Text).Trim();
-                    lang.Names.Clear();
-                    for (int y = 0; y < this.dataGridViewLanguageName.RowCount - 1; y++)
-                    {
-                        // 値が入ってないとかはガードしているはずだが、一応チェック
-                        string code = FormUtils.ToString(this.dataGridViewLanguageName["ColumnCode", y]).Trim();
-                        if (!String.IsNullOrEmpty(code))
-                        {
-                            Language.LanguageName name = new Language.LanguageName();
-                            name.Name = FormUtils.ToString(this.dataGridViewLanguageName["ColumnName", y]).Trim();
-                            name.ShortName = FormUtils.ToString(this.dataGridViewLanguageName["ColumnShortName", y]).Trim();
-                            lang.Names[code] = name;
-                        }
-                    }
+                    // 設定が存在しなければ自動生成される
+                    this.SaveChangedValue(this.GetMediaWikiNeedCreate(this.config.Websites, this.comboBoxLanguageSelectedText));
                 }
 
                 // 変更後の値に応じて、画面表示を更新
-                if (this.comboBoxLanguage.SelectedItem != null)
+                string code = ObjectUtils.ToString(this.comboBoxLanguage.SelectedItem).Trim();
+                if (!String.IsNullOrEmpty(code))
                 {
                     // 設定が存在しなければ基本的に自動生成されるのでそのまま使用
-                    MediaWiki wiki = this.GetMediaWiki(this.config.Websites, this.comboBoxLanguage.SelectedItem.ToString());
-                    this.textBoxLocation.Text = wiki.Location;
-                    this.textBoxExportPath.Text = wiki.ExportPath;
-                    this.textBoxXmlns.Text = wiki.Xmlns;
-                    this.textBoxNamespacePath.Text = wiki.NamespacePath;
-                    this.textBoxTemplateNamespace.Text = wiki.TemplateNamespace.ToString();
-                    this.textBoxCategoryNamespace.Text = wiki.CategoryNamespace.ToString();
-                    this.textBoxFileNamespace.Text = wiki.FileNamespace.ToString();
-                    this.textBoxRedirect.Text = wiki.Redirect;
-                    this.textBoxDocumentationTemplate.Text = StringUtils.DefaultString(wiki.DocumentationTemplate);
-                    this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(wiki.DocumentationTemplateDefaultPage);
-
-                    // 呼称の情報を表に設定
-                    this.dataGridViewLanguageName.Rows.Clear();
-                    Language lang = wiki.Language;
-                    this.textBoxBracket.Text = lang.Bracket;
-                    foreach (KeyValuePair<string, Language.LanguageName> name in lang.Names)
-                    {
-                        int index = this.dataGridViewLanguageName.Rows.Add();
-                        this.dataGridViewLanguageName["ColumnCode", index].Value = name.Key;
-                        this.dataGridViewLanguageName["ColumnName", index].Value = name.Value.Name;
-                        this.dataGridViewLanguageName["ColumnShortName", index].Value = name.Value.ShortName;
-                    }
+                    this.LoadCurrentValue(this.GetMediaWikiNeedCreate(this.config.Websites, code));
 
                     // 各入力欄を有効に
                     this.groupBoxServer.Enabled = true;
                     this.groupBoxLanguage.Enabled = true;
 
                     // 現在の選択値を更新
-                    this.comboBoxLanguageSelectedText = this.comboBoxLanguage.SelectedItem.ToString();
+                    this.comboBoxLanguageSelectedText = code;
                 }
                 else
                 {
@@ -656,6 +589,8 @@ namespace Honememo.Wptscs
             }
         }
 
+        #region イベント実装支援用メソッド
+
         /// <summary>
         /// コレクションから指定された言語のMediaWikiを取得する。
         /// 存在しない場合は空のインスタンスを生成、コレクションに追加して返す。
@@ -663,8 +598,7 @@ namespace Honememo.Wptscs
         /// <param name="collection">翻訳元言語。</param>
         /// <param name="lang">言語コード。</param>
         /// <returns>翻訳パターン。存在しない場合は新たに作成した翻訳パターンを返す。</returns>
-        private MediaWiki GetMediaWiki(
-            ICollection<Website> collection, string lang)
+        private MediaWiki GetMediaWikiNeedCreate(ICollection<Website> collection, string lang)
         {
             // 設定が存在すれば取得した値を返す
             foreach (Website s in collection)
@@ -687,6 +621,190 @@ namespace Honememo.Wptscs
             collection.Add(site);
             return site;
         }
+
+        /// <summary>
+        /// 指定されたLanguage設定を画面表示／編集用に読み込む。
+        /// </summary>
+        /// <param name="lang">読込元Language設定。</param>
+        /// <remarks>一部パラメータには初期値が存在するが、格納時に対処するため全て読み込む。</remarks>
+        private void LoadCurrentValue(Language lang)
+        {
+            // 言語情報を読み込み
+            // ※ Bracketは初期値があるパラメータのため、必ず値が返る
+            this.textBoxBracket.Text = lang.Bracket;
+
+            // 呼称の情報を表に設定
+            this.dataGridViewLanguageName.Rows.Clear();
+            foreach (KeyValuePair<string, Language.LanguageName> name in lang.Names)
+            {
+                int index = this.dataGridViewLanguageName.Rows.Add();
+                this.dataGridViewLanguageName["ColumnCode", index].Value = name.Key;
+                this.dataGridViewLanguageName["ColumnName", index].Value = name.Value.Name;
+                this.dataGridViewLanguageName["ColumnShortName", index].Value = name.Value.ShortName;
+            }
+        }
+
+        /// <summary>
+        /// 指定されたWebsite設定を画面表示／編集用に読み込む。
+        /// </summary>
+        /// <param name="site">読込元Website設定。</param>
+        private void LoadCurrentValue(Website site)
+        {
+            // Languageクラス分の読み込みを行う
+            this.LoadCurrentValue(site.Language);
+
+            // サイト情報を読み込み
+            this.textBoxLocation.Text = site.Location;
+        }
+
+        /// <summary>
+        /// 指定されたMediaWiki設定を画面表示／編集用に読み込む。
+        /// </summary>
+        /// <param name="site">読込元MediaWiki設定。</param>
+        /// <remarks>一部パラメータには初期値が存在するが、格納時に対処するため全て読み込む。</remarks>
+        private void LoadCurrentValue(MediaWiki site)
+        {
+            // Websiteクラス分の読み込みを行う
+            this.LoadCurrentValue((Website)site);
+
+            // MediaWikiクラス分の読み込み
+            this.textBoxExportPath.Text = StringUtils.DefaultString(site.ExportPath);
+            this.textBoxXmlns.Text = StringUtils.DefaultString(site.Xmlns);
+            this.textBoxNamespacePath.Text = StringUtils.DefaultString(site.NamespacePath);
+            this.textBoxTemplateNamespace.Text = site.TemplateNamespace.ToString();
+            this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
+            this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
+            this.textBoxRedirect.Text = StringUtils.DefaultString(site.Redirect);
+            this.textBoxDocumentationTemplate.Text = StringUtils.DefaultString(site.DocumentationTemplate);
+            this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
+        }
+
+        /// <summary>
+        /// 指定されたLanguage設定に画面上で変更された値の格納を行う。
+        /// </summary>
+        /// <param name="lang">格納先Language設定。</param>
+        /// <remarks>一部パラメータには初期値が存在するため、変更がある場合のみ格納する。</remarks>
+        private void SaveChangedValue(Language lang)
+        {
+            // Bracketは初期値を持つパラメータのため、変更された場合のみ格納する。
+            // ※ この値は前後の空白に意味があるため、Trimしてはいけない
+            string str = StringUtils.DefaultString(this.textBoxBracket.Text);
+            if (str != lang.Bracket)
+            {
+                lang.Bracket = str;
+            }
+
+            // 表から呼称の情報も保存
+            this.dataGridViewLanguageName.Sort(this.dataGridViewLanguageName.Columns["ColumnCode"], ListSortDirection.Ascending);
+            lang.Names.Clear();
+            for (int y = 0; y < this.dataGridViewLanguageName.RowCount - 1; y++)
+            {
+                // 値が入ってないとかはガードしているはずだが、一応チェック
+                string code = FormUtils.ToString(this.dataGridViewLanguageName["ColumnCode", y]).Trim();
+                if (!String.IsNullOrEmpty(code))
+                {
+                    Language.LanguageName name = new Language.LanguageName();
+                    name.Name = FormUtils.ToString(this.dataGridViewLanguageName["ColumnName", y]).Trim();
+                    name.ShortName = FormUtils.ToString(this.dataGridViewLanguageName["ColumnShortName", y]).Trim();
+                    lang.Names[code] = name;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 指定されたWebsite設定に画面上で変更された値の格納を行う。
+        /// </summary>
+        /// <param name="site">格納先Website設定。</param>
+        /// <remarks>Websiteについては特に特殊な処理は無いため全て上書きする。</remarks>
+        private void SaveChangedValue(Website site)
+        {
+            // Languageクラス分の設定を行う
+            this.SaveChangedValue(site.Language);
+
+            // サイト情報を格納
+            site.Location = StringUtils.DefaultString(this.textBoxLocation.Text).Trim();
+        }
+
+        /// <summary>
+        /// 指定されたMediaWiki設定に画面上で変更された値の格納を行う。
+        /// </summary>
+        /// <param name="site">格納先MediaWiki設定。</param>
+        /// <remarks>一部パラメータには初期値が存在するため、変更がある場合のみ格納する。</remarks>
+        private void SaveChangedValue(MediaWiki site)
+        {
+            // Websiteクラス分の設定を行う
+            this.SaveChangedValue((Website)site);
+
+            // 初期値を持つパラメータがあるため、全て変更された場合のみ格納する。
+            // ※ もうちょっと綺麗に書きたかったが、リフレクションを使わないと共通化できなさそうだったので力技
+            //    MediaWikiクラス側で行わないのは、場合によっては意図的に初期値と同じ値を設定すること
+            //    もありえるから（初期値が変わる可能性がある場合など）。
+            string str = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
+            if (str != site.ExportPath)
+            {
+                site.ExportPath = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxXmlns.Text).Trim();
+            if (str != site.Xmlns)
+            {
+                site.Xmlns = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxNamespacePath.Text).Trim();
+            if (str != site.NamespacePath)
+            {
+                site.NamespacePath = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxRedirect.Text).Trim();
+            if (str != site.Redirect)
+            {
+                site.Redirect = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Trim();
+            if (str != site.DocumentationTemplate)
+            {
+                site.DocumentationTemplate = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxDocumentationTemplateDefaultPage.Text).Trim();
+            if (str != site.DocumentationTemplateDefaultPage)
+            {
+                site.DocumentationTemplateDefaultPage = str;
+            }
+
+            // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
+            if (!String.IsNullOrWhiteSpace(this.textBoxTemplateNamespace.Text))
+            {
+                int num = int.Parse(this.textBoxTemplateNamespace.Text);
+                if (site.TemplateNamespace != num)
+                {
+                    site.TemplateNamespace = num;
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(this.textBoxCategoryNamespace.Text))
+            {
+                int num = int.Parse(this.textBoxCategoryNamespace.Text);
+                if (site.CategoryNamespace != num)
+                {
+                    site.CategoryNamespace = num;
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(this.textBoxFileNamespace.Text))
+            {
+                int num = int.Parse(this.textBoxFileNamespace.Text);
+                if (site.FileNamespace != num)
+                {
+                    site.FileNamespace = num;
+                }
+            }
+        }
+
+        #endregion
 
         #endregion
 

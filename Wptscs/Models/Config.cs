@@ -230,6 +230,7 @@ namespace Honememo.Wptscs.Models
             }
 
             // 存在しない場合、nullを返す
+            // ※ こっちがNeedCreateじゃないのは、何をnewすればいいのか判らないため
             return null;
         }
         
@@ -239,7 +240,7 @@ namespace Honememo.Wptscs.Models
         /// <param name="from">翻訳元言語。</param>
         /// <param name="to">翻訳先言語。</param>
         /// <returns>対訳表の情報。存在しない場合は新たに作成した対訳表を返す。</returns>
-        public TranslationDictionary GetItemTable(string from, string to)
+        public TranslationDictionary GetItemTableNeedCreate(string from, string to)
         {
             // オブジェクトに用意されている共通メソッドをコール
             return TranslationDictionary.GetDictionaryNeedCreate(this.ItemTables, from, to);
@@ -275,21 +276,15 @@ namespace Honememo.Wptscs.Models
             this.Translator = this.ParseTranslator(rootElement.SelectSingleNode("Translator").InnerText);
 
             // Webサイト
-            XmlNode sitesNode = rootElement.SelectSingleNode("Websites");
-            foreach (XmlNode siteNode in sitesNode.ChildNodes)
+            foreach (XmlNode siteNode in rootElement.SelectSingleNode("Websites").ChildNodes)
             {
                 // ノードに指定された内容に応じたインスタンスを取得する
                 this.Websites.Add(this.ParseWebsite(siteNode, reader.Settings));
             }
 
-            // TODO: Websitesはソートが必要
-
             // 項目の対訳表
-            XmlRootAttribute itemRoot = new XmlRootAttribute();
-            itemRoot.ElementName = "ItemTable";
-            XmlSerializer serializer = new XmlSerializer(typeof(TranslationDictionary), itemRoot);
-            XmlNode itemsNode = rootElement.SelectSingleNode("ItemTables");
-            foreach (XmlNode itemNode in itemsNode.ChildNodes)
+            XmlSerializer serializer = new XmlSerializer(typeof(TranslationDictionary), new XmlRootAttribute("ItemTable"));
+            foreach (XmlNode itemNode in rootElement.SelectSingleNode("ItemTables").ChildNodes)
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(itemNode.OuterXml), reader.Settings))
                 {
@@ -298,12 +293,12 @@ namespace Honememo.Wptscs.Models
             }
 
             // 見出しの対訳表
-            XmlRootAttribute headingRoot = new XmlRootAttribute();
-            headingRoot.ElementName = "HeadingTable";
-            XmlNode headingNode = rootElement.SelectSingleNode("HeadingTable");
-            using (XmlReader r = XmlReader.Create(new StringReader(headingNode.OuterXml), reader.Settings))
+            using (XmlReader r = XmlReader.Create(
+                new StringReader(rootElement.SelectSingleNode("HeadingTable").OuterXml),
+                reader.Settings))
             {
-                this.HeadingTable = new XmlSerializer(typeof(TranslationTable), headingRoot).Deserialize(r) as TranslationTable;
+                this.HeadingTable = new XmlSerializer(typeof(TranslationTable), new XmlRootAttribute("HeadingTable"))
+                    .Deserialize(r) as TranslationTable;
             }
         }
 
@@ -327,27 +322,32 @@ namespace Honememo.Wptscs.Models
             writer.WriteStartElement("Websites");
             foreach (Website site in this.Websites)
             {
-                // TODO: 自分のパッケージ以外の場合、パッケージ名も含めて出すようにしたい
-                new XmlSerializer(site.GetType()).Serialize(writer, site);
+                // 通常はサイトのパッケージ名も含めたフル名を要素名とする
+                string siteName = site.GetType().FullName;
+                if (siteName.StartsWith(typeof(Website).Namespace))
+                {
+                    // 自前のサイトの場合、クラス名だけを出力
+                    siteName = site.GetType().Name;
+                }
+
+                new XmlSerializer(site.GetType(), new XmlRootAttribute(siteName)).Serialize(writer, site);
             }
 
             writer.WriteEndElement();
 
             // 項目の対訳表
-            XmlRootAttribute itemRoot = new XmlRootAttribute();
-            itemRoot.ElementName = "ItemTable";
+            XmlSerializer serializer = new XmlSerializer(typeof(TranslationDictionary), new XmlRootAttribute("ItemTable"));
             writer.WriteStartElement("ItemTables");
             foreach (TranslationDictionary trans in this.ItemTables)
             {
-                new XmlSerializer(trans.GetType(), itemRoot).Serialize(writer, trans);
+                serializer.Serialize(writer, trans);
             }
 
             writer.WriteEndElement();
 
             // 見出しの対訳表
-            XmlRootAttribute headingRoot = new XmlRootAttribute();
-            headingRoot.ElementName = "HeadingTable";
-            new XmlSerializer(this.HeadingTable.GetType(), headingRoot).Serialize(writer, this.HeadingTable);
+            new XmlSerializer(this.HeadingTable.GetType(), new XmlRootAttribute("HeadingTable"))
+                .Serialize(writer, this.HeadingTable);
         }
 
         /// <summary>
