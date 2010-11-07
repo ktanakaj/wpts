@@ -66,7 +66,9 @@ namespace Honememo.Wptscs.Logics
         public void TestExampleIgnoreHeading()
         {
             MediaWiki from = this.GetTestServer("en");
-            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+            Translator translate = new MediaWikiTranslator();
+            translate.From = from;
+            translate.To = this.GetTestServer("ja");
             translate.HeadingTable = new TranslationTable();
             translate.HeadingTable.From = "en";
             translate.HeadingTable.To = "ja";
@@ -108,7 +110,9 @@ namespace Honememo.Wptscs.Logics
         public void TestExample()
         {
             MediaWiki from = this.GetTestServer("en");
-            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+            Translator translate = new MediaWikiTranslator();
+            translate.From = from;
+            translate.To = this.GetTestServer("ja");
 
             // 見出しの変換パターンを設定
             translate.HeadingTable = new TranslationTable();
@@ -155,7 +159,9 @@ namespace Honememo.Wptscs.Logics
         public void TestExampleWithCache()
         {
             MediaWiki from = this.GetTestServer("en");
-            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+            Translator translate = new MediaWikiTranslator();
+            translate.From = from;
+            translate.To = this.GetTestServer("ja");
 
             // 見出しの変換パターンを設定
             translate.HeadingTable = new TranslationTable();
@@ -225,7 +231,9 @@ namespace Honememo.Wptscs.Logics
         public void TestSpaceShipTwo()
         {
             MediaWiki from = this.GetTestServer("ja");
-            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("en"));
+            Translator translate = new MediaWikiTranslator();
+            translate.From = from;
+            translate.To = this.GetTestServer("en");
             translate.ItemTable = new TranslationDictionary("ja", "en");
 
             // 見出しの変換パターンを設定
@@ -281,7 +289,9 @@ namespace Honememo.Wptscs.Logics
         public void TestPageNothing()
         {
             MediaWiki from = this.GetTestServer("en");
-            Translator translate = new MediaWikiTranslator(from, this.GetTestServer("ja"));
+            Translator translate = new MediaWikiTranslator();
+            translate.From = from;
+            translate.To = this.GetTestServer("ja");
 
             Assert.IsFalse(translate.Run("Nothing Page"));
 

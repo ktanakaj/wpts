@@ -52,13 +52,6 @@
       <DependentUpon>ConfigForm.cs</DependentUpon>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="InputLanguageCodeDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InputLanguageCodeDialog.Designer.cs">
-      <DependentUpon>InputLanguageCodeDialog.cs</DependentUpon>
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="Logics\Translator.cs" />
     <Compile Include="Logics\MediaWikiTranslator.cs" />
     <Compile Include="MainForm.cs">
@@ -83,10 +76,6 @@
     <EmbeddedResource Include="ConfigForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConfigForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InputLanguageCodeDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>InputLanguageCodeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>

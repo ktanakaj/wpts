@@ -25,42 +25,37 @@ namespace Honememo.Wptscs.Logics
     /// </summary>
     public class MediaWikiTranslator : Translator
     {
-        #region コンストラクタ
-
-        /// <summary>
-        /// コンストラクタ。
-        /// </summary>
-        /// <param name="from">翻訳元サイト。</param>
-        /// <param name="to">翻訳先サイト。</param>
-        public MediaWikiTranslator(
-            MediaWiki from, MediaWiki to)
-            : base(from, to)
-        {
-        }
-
-        #endregion
-
         #region プロパティ
 
         /// <summary>
         /// 翻訳元言語のサイト。
         /// </summary>
-        protected new MediaWiki From
+        public new MediaWiki From
         {
             get
             {
                 return base.From as MediaWiki;
+            }
+
+            set
+            {
+                base.From = value;
             }
         }
 
         /// <summary>
         /// 翻訳先言語のサイト。
         /// </summary>
-        protected new MediaWiki To
+        public new MediaWiki To
         {
             get
             {
                 return base.To as MediaWiki;
+            }
+
+            set
+            {
+                base.To = value;
             }
         }
         

@@ -14,6 +14,7 @@ namespace Honememo.Wptscs.Logics
     using System.IO;
     using System.Net;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
@@ -41,34 +42,7 @@ namespace Honememo.Wptscs.Logics
         private string text;
 
         #endregion
-
-        #region コンストラクタ
-
-        /// <summary>
-        /// コンストラクタ。
-        /// </summary>
-        /// <param name="from">翻訳元サイト。</param>
-        /// <param name="to">翻訳先サイト。</param>
-        public Translator(Website from, Website to)
-        {
-            // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-            if (from == null)
-            {
-                throw new ArgumentNullException("from");
-            }
-            else if (to == null)
-            {
-                throw new ArgumentNullException("to");
-            }
-
-            // メンバ変数の初期化
-            this.From = from;
-            this.To = to;
-            this.Initialize();
-        }
-
-        #endregion
-
+        
         #region イベント
 
         /// <summary>
@@ -149,19 +123,19 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 翻訳元言語のサイト。
         /// </summary>
-        protected Website From
+        public Website From
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
         /// 翻訳先言語のサイト。
         /// </summary>
-        protected Website To
+        public Website To
         {
             get;
-            private set;
+            set;
         }
 
         #endregion
@@ -182,24 +156,18 @@ namespace Honememo.Wptscs.Logics
         public static Translator Create(Config config, string from, string to)
         {
             // 処理対象に応じてTranslatorを継承したオブジェクトを生成
-            Translator translator = null;
-
-            // Webサイトの設定
-            Website source = config.GetWebsite(from);
-            Website target = config.GetWebsite(to);
-
-            // 設定に指定されたクラスを生成する
-            // TODO: コンストラクタをなくして、動的に変更可能とする
-            if (config.Translator == typeof(MediaWikiTranslator))
+            ConstructorInfo constructor = config.Translator.GetConstructor(Type.EmptyTypes);
+            if (constructor == null)
             {
-                // MediaWiki用インスタンスを生成
-                translator = new MediaWikiTranslator(source as MediaWiki, target as MediaWiki);
-            }
-            else
-            {
-                // いずれにも該当しない場合
                 throw new NotImplementedException(config.Translator + " is not implemented");
             }
+
+            // 設定に指定されたクラスを、引数無しのコンストラクタを用いて生成する
+            Translator translator = (Translator)constructor.Invoke(null);
+
+            // Webサイトの設定
+            translator.From = config.GetWebsite(from);
+            translator.To = config.GetWebsite(to);
 
             // 対訳表（項目）の設定
             translator.ItemTable = config.GetItemTableNeedCreate(from, to);
@@ -223,6 +191,12 @@ namespace Honememo.Wptscs.Logics
         /// <returns><c>true</c> 処理成功</returns>
         public virtual bool Run(string name)
         {
+            // ※必須な情報が設定されていない場合、InvalidOperationExceptionを返す
+            if (this.From == null || this.To == null)
+            {
+                throw new InvalidOperationException("From or To is null");
+            }
+
             // 変数を初期化
             this.Initialize();
 

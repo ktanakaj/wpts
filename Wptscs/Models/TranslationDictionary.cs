@@ -199,7 +199,7 @@ namespace Honememo.Wptscs.Models
 
                 if (item.Value.Timestamp.HasValue)
                 {
-                    writer.WriteAttributeString("Timestamp", item.Value.Timestamp.Value.ToString("U"));
+                    writer.WriteAttributeString("Timestamp", item.Value.Timestamp.Value.ToString("u"));
                 }
 
                 writer.WriteEndElement();
