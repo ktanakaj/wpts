@@ -191,7 +191,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.mediawiki.org/xml/export-0.4/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.mediawiki.org/xml/export-0.5/")]
         public string MediaWikiXmlns {
             get {
                 return ((string)(this["MediaWikiXmlns"]));

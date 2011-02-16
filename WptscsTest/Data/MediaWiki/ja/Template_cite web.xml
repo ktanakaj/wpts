@@ -1,8 +1,8 @@
-<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd" version="0.5" xml:lang="ja">
   <siteinfo>
     <sitename>Wikipedia</sitename>
     <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
-    <generator>MediaWiki 1.16wmf4</generator>
+    <generator>MediaWiki 1.17wmf1</generator>
     <case>first-letter</case>
     <namespaces>
       <namespace key="-2" case="first-letter">メディア</namespace>
@@ -39,15 +39,15 @@
         <username>Wdpp</username>
         <id>24109</id>
       </contributor>
-      <minor />
+      <minor/>
       <comment>ダブルクォーテーションをU+201C / U+201Dのペアに変更</comment>
-      <text xml:space="preserve">&lt;includeonly&gt;&lt;onlyinclude&gt;&lt;cite style="font-style:normal"&gt;{{
+      <text xml:space="preserve" bytes="3636">&lt;includeonly&gt;&lt;onlyinclude&gt;&lt;cite style=&quot;font-style:normal&quot;&gt;{{
 #if: {{#if: {{{url|}}} | {{#if: {{{title|}}} |1}}}}
-  || &amp;#32;&lt;strong class="error"&gt;[[Template:Cite web]]の呼び出しエラー：引数 '''url''' と '''title''' は必須です。&lt;/strong&gt;{{#if: {{NAMESPACE}}|| [[Category:テンプレート呼び出しエラーのあるページ/Template:Cite web]]}}
+  || &amp;#32;&lt;strong class=&quot;error&quot;&gt;[[Template:Cite web]]の呼び出しエラー：引数 '''url''' と '''title''' は必須です。&lt;/strong&gt;{{#if: {{NAMESPACE}}|| [[Category:テンプレート呼び出しエラーのあるページ/Template:Cite web]]}}
 }}{{
 #if: {{{archiveurl|}}}{{{archivedate|}}} 
   | {{#if: {{#if: {{{archiveurl|}}}| {{#if: {{{archivedate|}}} |1}}}}
-    || &amp;#32;&lt;strong class="error"&gt;[[Template:Cite web]]の呼び出しエラー：引数 '''archiveurl''' と '''archivedate''' は両方を指定してください。&lt;/strong&gt;{{#if: {{NAMESPACE}}|| [[Category:テンプレート呼び出しエラーのあるページ/Template:Cite web]]}}
+    || &amp;#32;&lt;strong class=&quot;error&quot;&gt;[[Template:Cite web]]の呼び出しエラー：引数 '''archiveurl''' と '''archivedate''' は両方を指定してください。&lt;/strong&gt;{{#if: {{NAMESPACE}}|| [[Category:テンプレート呼び出しエラーのあるページ/Template:Cite web]]}}
   }}
 }}{{#if: {{{author|{{{last|}}}}}}
   | {{#if: {{{authorlink|}}}
@@ -128,7 +128,7 @@
   | &amp;#32;{{ISOdate|{{{archivedate|}}}}}時点の[{{{url}}} オリジナル]よりアーカイブ。
 }}{{#if: {{{accessdate|}}}
   | {{#if:{{{archivedate|}}}||&amp;#32;|}}{{#if: {{{accessyear|}}} | {{年月日|year={{{accessyear|}}}}}{{{accessdate|}}} | {{ISOdate|{{{accessdate|}}}}}}}閲覧。
-  | &amp;#32;&lt;strong class="error"&gt;[[Template:Cite web]]の呼び出しエラー：引数 '''accessdate''' は必須です。&lt;/strong&gt;{{#if: {{NAMESPACE}}|| [[Category:テンプレート呼び出しエラーのあるページ/Template:Cite web]]}}
+  | &amp;#32;&lt;strong class=&quot;error&quot;&gt;[[Template:Cite web]]の呼び出しエラー：引数 '''accessdate''' は必須です。&lt;/strong&gt;{{#if: {{NAMESPACE}}|| [[Category:テンプレート呼び出しエラーのあるページ/Template:Cite web]]}}
 }}{{#if: {{{quote|}}} 
   | &amp;nbsp;“{{{quote}}}”
 }}&lt;/cite&gt;&lt;/onlyinclude&gt;&lt;/includeonly&gt;

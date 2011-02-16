@@ -121,15 +121,15 @@ namespace Honememo.Wptscs.Models
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
             // デフォルトでは設定ファイルの値が返される
-            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.4/", site.Xmlns);
+            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.5/", site.Xmlns);
             // 値を設定するとその値が返る
             site.Xmlns = "test";
             Assert.AreEqual("test", site.Xmlns);
             // 空またはnullの場合、再び設定ファイルの値が入る
             site.Xmlns = null;
-            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.4/", site.Xmlns);
+            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.5/", site.Xmlns);
             site.Xmlns = String.Empty;
-            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.4/", site.Xmlns);
+            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.5/", site.Xmlns);
         }
 
         /// <summary>

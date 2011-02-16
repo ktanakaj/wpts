@@ -1,8 +1,8 @@
-<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="en">
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd" version="0.5" xml:lang="en">
   <siteinfo>
     <sitename>Wikipedia</sitename>
     <base>http://en.wikipedia.org/wiki/Main_Page</base>
-    <generator>MediaWiki 1.16wmf4</generator>
+    <generator>MediaWiki 1.17wmf1</generator>
     <case>first-letter</case>
     <namespaces>
       <namespace key="-2" case="first-letter">Media</namespace>
@@ -40,9 +40,9 @@
         <username>Plastikspork</username>
         <id>5075409</id>
       </contributor>
-      <minor />
+      <minor/>
       <comment>Per edit request</comment>
-      <text xml:space="preserve">{{sister
+      <text xml:space="preserve" bytes="661">{{sister
 |project=wiktionary
 |text=Look up '''''{{sec link auto|wiktionary|{{{1|Special:Search/{{lc:{{SUBPAGENAME}}}}}}}|{{{1|{{lc:{{SUBPAGENAME}}}}}}}}}'''''{{#if:{{{2|}}}
   |{{#if:{{{3|}}}

@@ -1,8 +1,8 @@
-<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd" version="0.5" xml:lang="ja">
   <siteinfo>
     <sitename>Wikipedia</sitename>
     <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
-    <generator>MediaWiki 1.16wmf4</generator>
+    <generator>MediaWiki 1.17wmf1</generator>
     <case>first-letter</case>
     <namespaces>
       <namespace key="-2" case="first-letter">メディア</namespace>
@@ -38,7 +38,7 @@
       <contributor>
         <ip>59.84.93.2</ip>
       </contributor>
-      <text xml:space="preserve">{{Infobox 航空機
+      <text xml:space="preserve" bytes="4801">{{Infobox 航空機
   |名称 = スペースシップツー
   |画像 = ファイル:SS2 and VMS Eve.jpg
   |キャプション = 
@@ -57,7 +57,7 @@
 [[ファイル:Trajectoire-White-Knight.png|thumb|300px]]
 世界初の民間宇宙船[[スペースシップワン]]は、[[ポール・アレン]]が出資し、スケールド・コンポジッツが実施したTier Oneプログラムの一部として開発された。スペースシップツーはその技術の一部を基に作られている。スペースシップ・カンパニーはポール・アレンの[[モハーヴェ・エアロスペース・ベンチャーズ]]からライセンスを受けている。
 
-スペースシップツーは、8人の乗員（6人の乗客と2人のパイロット）を乗せることができる。飛行軌道の[[遠地点]]はおよそ高度110&amp;nbsp;km （68マイル）の[[熱圏]]内である。これはスペースシップワンの目標高度である[[カーマン・ライン]]よりも10&amp;nbsp;km （6マイル）高い（もっとも、スペースシップワンの最後のフライトは112&amp;nbsp;kmに達している）。スペースシップツーは母機である[[ホワイトナイトツー]]から、高度15,200&amp;nbsp;m （50,000フィート）で発射され、1基の[[ハイブリッドロケット]]により4,200&amp;nbsp;km/h (2,600 mph) の速度に達する。客室は長さ3.66&amp;nbsp;m（12フィート）、直径2.28&amp;nbsp;m（7.5フィート）である。&lt;ref name="flightglobal-unveil"&gt;{{cite web |url=http://www.flightglobal.com/articles/2008/01/23/221031/pictures-virgin-galactic-unveils-dyna-soar-style-spaceshiptwo-design-and-twin-fuselage-white-knight.html|title=PICTURES: Virgin Galactic unveils Dyna-Soar style SpaceShipTwo design and twin-fuselage White Knight II configuration |accessdate=2008-01-23 |author=Rob Coppinger|publisher=flightglobal.com }}&lt;/ref&gt; 翼長は8.23&amp;nbsp;m（27フィート）、全長は18.29&amp;nbsp;m （60フィート）、尾翼の高さは4.57&amp;nbsp;m（15フィート）である。
+スペースシップツーは、8人の乗員（6人の乗客と2人のパイロット）を乗せることができる。飛行軌道の[[遠地点]]はおよそ高度110&amp;nbsp;km （68マイル）の[[熱圏]]内である。これはスペースシップワンの目標高度である[[カーマン・ライン]]よりも10&amp;nbsp;km （6マイル）高い（もっとも、スペースシップワンの最後のフライトは112&amp;nbsp;kmに達している）。スペースシップツーは母機である[[ホワイトナイトツー]]から、高度15,200&amp;nbsp;m （50,000フィート）で発射され、1基の[[ハイブリッドロケット]]により4,200&amp;nbsp;km/h (2,600 mph) の速度に達する。客室は長さ3.66&amp;nbsp;m（12フィート）、直径2.28&amp;nbsp;m（7.5フィート）である。&lt;ref name=&quot;flightglobal-unveil&quot;&gt;{{cite web |url=http://www.flightglobal.com/articles/2008/01/23/221031/pictures-virgin-galactic-unveils-dyna-soar-style-spaceshiptwo-design-and-twin-fuselage-white-knight.html|title=PICTURES: Virgin Galactic unveils Dyna-Soar style SpaceShipTwo design and twin-fuselage White Knight II configuration |accessdate=2008-01-23 |author=Rob Coppinger|publisher=flightglobal.com }}&lt;/ref&gt; 翼長は8.23&amp;nbsp;m（27フィート）、全長は18.29&amp;nbsp;m （60フィート）、尾翼の高さは4.57&amp;nbsp;m（15フィート）である。
 
 == 脚注 ==
 {{Reflist}}
