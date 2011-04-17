@@ -114,25 +114,6 @@ namespace Honememo.Wptscs.Models
         #region 設定ファイルに初期値を持つプロパティテストケース
 
         /// <summary>
-        /// Xmlnsプロパティテストケース。
-        /// </summary>
-        [Test]
-        public void TestXmlns()
-        {
-            MediaWiki site = new MediaWiki(new Language("ja"));
-            // デフォルトでは設定ファイルの値が返される
-            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.5/", site.Xmlns);
-            // 値を設定するとその値が返る
-            site.Xmlns = "test";
-            Assert.AreEqual("test", site.Xmlns);
-            // 空またはnullの場合、再び設定ファイルの値が入る
-            site.Xmlns = null;
-            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.5/", site.Xmlns);
-            site.Xmlns = String.Empty;
-            Assert.AreEqual("http://www.mediawiki.org/xml/export-0.5/", site.Xmlns);
-        }
-
-        /// <summary>
         /// NamespacePathプロパティテストケース。
         /// </summary>
         [Test]
@@ -375,7 +356,7 @@ namespace Honememo.Wptscs.Models
             }
 
             // プロパティはデフォルト値の場合出力しないという動作あり
-            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><Xmlns /><NamespacePath /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /></MediaWiki>", b.ToString());
+            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><NamespacePath /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /></MediaWiki>", b.ToString());
             // TODO: プロパティに値が設定されたパターンを追加すべき
         }
 

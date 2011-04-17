@@ -109,31 +109,9 @@ namespace Honememo.Wptscs.Models
         #endregion
 
         #region 設定ファイルに初期値を持つプロパティ
-
+        
         /// <summary>
-        /// WikipediaのXMLの固定値の書式。
-        /// </summary>
-        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
-        public string Xmlns
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(this.xmlns))
-                {
-                    return Settings.Default.MediaWikiXmlns;
-                }
-
-                return this.xmlns;
-            }
-
-            set
-            {
-                this.xmlns = value;
-            }
-        }
-
-        /// <summary>
-        /// 名前空間情報取得用にアクセスするAPI。
+        /// MediaWiki名前空間情報取得用にアクセスするAPI。
         /// </summary>
         /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
         public string NamespacePath
@@ -436,9 +414,7 @@ namespace Honememo.Wptscs.Models
             }
 
             // ルートエレメントまで取得し、フォーマットをチェック
-            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
-            nsmgr.AddNamespace("ns", this.Xmlns);
-            XmlElement rootElement = xml.SelectSingleNode("/ns:mediawiki", nsmgr) as XmlElement;
+            XmlElement rootElement = xml["mediawiki"];
             if (rootElement == null)
             {
                 // XMLは取得できたが空 or フォーマットが想定外
@@ -446,7 +422,7 @@ namespace Honememo.Wptscs.Models
             }
 
             // ページの解析
-            XmlElement pageElement = rootElement.SelectSingleNode("ns:page", nsmgr) as XmlElement;
+            XmlElement pageElement = rootElement["page"];
             if (pageElement == null)
             {
                 // ページ無し
@@ -454,17 +430,23 @@ namespace Honememo.Wptscs.Models
             }
 
             // ページ名、ページ本文、最終更新日時
-            XmlElement titleElement = pageElement.SelectSingleNode("ns:title", nsmgr) as XmlElement;
-            XmlElement textElement = pageElement.SelectSingleNode("ns:revision/ns:text", nsmgr) as XmlElement;
-            XmlElement timeElement = pageElement.SelectSingleNode("ns:revision/ns:timestamp", nsmgr) as XmlElement;
+            // ※ 一応、各項目が無くても動作するようにする
+            string pageTitle = XmlUtils.InnerText(pageElement["title"], title);
+            string text = null;
+            DateTime? time = null;
+            XmlElement revisionElement = pageElement["revision"];
+            if (revisionElement != null)
+            {
+                text = XmlUtils.InnerText(revisionElement["text"], null);
+                XmlElement timeElement = revisionElement["timestamp"];
+                if (timeElement != null)
+                {
+                    time = new DateTime?(DateTime.Parse(timeElement.InnerText));
+                }
+            }
 
             // ページ情報を作成して返す
-            // ※ 一応、各項目が無くても動作するようにする
-            return new MediaWikiPage(
-                this,
-                titleElement != null ? titleElement.InnerText : title,
-                textElement != null ? textElement.InnerText : null,
-                timeElement != null ? new DateTime?(DateTime.Parse(timeElement.InnerText)) : null);
+            return new MediaWikiPage(this, pageTitle, text, time);
         }
 
         /// <summary>
@@ -521,7 +503,6 @@ namespace Honememo.Wptscs.Models
                 this.Language = new XmlSerializer(typeof(Language)).Deserialize(r) as Language;
             }
 
-            this.Xmlns = XmlUtils.InnerText(siteElement.SelectSingleNode("Xmlns"));
             this.NamespacePath = XmlUtils.InnerText(siteElement.SelectSingleNode("NamespacePath"));
             this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
             this.Redirect = XmlUtils.InnerText(siteElement.SelectSingleNode("Redirect"));
@@ -577,7 +558,6 @@ namespace Honememo.Wptscs.Models
 
             // MediaWiki固有の情報
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力
-            writer.WriteElementString("Xmlns", this.xmlns);
             writer.WriteElementString("NamespacePath", this.namespacePath);
             writer.WriteElementString("ExportPath", this.exportPath);
             writer.WriteElementString("Redirect", this.redirect);

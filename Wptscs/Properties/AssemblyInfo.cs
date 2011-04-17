@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツールのアセンブリソース</summary>
 //
 // <copyright file="AssemblyInfo.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Wikipedia 翻訳支援ツール")]
-[assembly: AssemblyCopyright("Copyright (C) Honeplus 2010")]
+[assembly: AssemblyCopyright("Copyright (C) Honeplus 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -37,4 +37,4 @@ using System.Runtime.InteropServices;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("0.91.*")]
+[assembly: AssemblyVersion("1.00.*")]

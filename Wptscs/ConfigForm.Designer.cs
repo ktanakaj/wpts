@@ -69,8 +69,6 @@
             this.labelExportPath = new System.Windows.Forms.Label();
             this.textBoxNamespacePath = new System.Windows.Forms.TextBox();
             this.labelNamespacePath = new System.Windows.Forms.Label();
-            this.textBoxXmlns = new System.Windows.Forms.TextBox();
-            this.labelXmlns = new System.Windows.Forms.Label();
             this.textBoxLocation = new System.Windows.Forms.TextBox();
             this.labelLocation = new System.Windows.Forms.Label();
             this.comboBoxLanguage = new System.Windows.Forms.ComboBox();
@@ -306,8 +304,6 @@
             this.groupBoxServer.Controls.Add(this.labelExportPath);
             this.groupBoxServer.Controls.Add(this.textBoxNamespacePath);
             this.groupBoxServer.Controls.Add(this.labelNamespacePath);
-            this.groupBoxServer.Controls.Add(this.textBoxXmlns);
-            this.groupBoxServer.Controls.Add(this.labelXmlns);
             this.groupBoxServer.Controls.Add(this.textBoxLocation);
             this.groupBoxServer.Controls.Add(this.labelLocation);
             this.groupBoxServer.Name = "groupBoxServer";
@@ -395,16 +391,6 @@
             // 
             resources.ApplyResources(this.labelNamespacePath, "labelNamespacePath");
             this.labelNamespacePath.Name = "labelNamespacePath";
-            // 
-            // textBoxXmlns
-            // 
-            resources.ApplyResources(this.textBoxXmlns, "textBoxXmlns");
-            this.textBoxXmlns.Name = "textBoxXmlns";
-            // 
-            // labelXmlns
-            // 
-            resources.ApplyResources(this.labelXmlns, "labelXmlns");
-            this.labelXmlns.Name = "labelXmlns";
             // 
             // textBoxLocation
             // 
@@ -605,8 +591,6 @@
         private System.Windows.Forms.GroupBox groupBoxServer;
         private System.Windows.Forms.TextBox textBoxLocation;
         private System.Windows.Forms.Label labelLocation;
-        private System.Windows.Forms.TextBox textBoxXmlns;
-        private System.Windows.Forms.Label labelXmlns;
         private System.Windows.Forms.TextBox textBoxNamespacePath;
         private System.Windows.Forms.Label labelNamespacePath;
         private System.Windows.Forms.TextBox textBoxExportPath;

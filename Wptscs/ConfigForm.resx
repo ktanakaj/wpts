@@ -505,7 +505,7 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="textBoxDocumentationTemplateDefaultPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 295</value>
+    <value>115, 266</value>
   </data>
   <data name="textBoxDocumentationTemplateDefaultPage.MaxLength" type="System.Int32, mscorlib">
     <value>255</value>
@@ -532,7 +532,7 @@
     <value>True</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 298</value>
+    <value>6, 269</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 12</value>
@@ -556,7 +556,7 @@
     <value>1</value>
   </data>
   <data name="textBoxDocumentationTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 270</value>
+    <value>115, 241</value>
   </data>
   <data name="textBoxDocumentationTemplate.MaxLength" type="System.Int32, mscorlib">
     <value>255</value>
@@ -583,7 +583,7 @@
     <value>True</value>
   </data>
   <data name="labelDocumentationTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 273</value>
+    <value>6, 244</value>
   </data>
   <data name="labelDocumentationTemplate.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 12</value>
@@ -610,7 +610,7 @@
     <value>Disable</value>
   </data>
   <data name="textBoxFileNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 213</value>
+    <value>143, 184</value>
   </data>
   <data name="textBoxFileNamespace.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
@@ -637,7 +637,7 @@
     <value>True</value>
   </data>
   <data name="labelFileNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 216</value>
+    <value>6, 187</value>
   </data>
   <data name="labelFileNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 12</value>
@@ -664,7 +664,7 @@
     <value>Disable</value>
   </data>
   <data name="textBoxCategoryNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 188</value>
+    <value>143, 159</value>
   </data>
   <data name="textBoxCategoryNamespace.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
@@ -691,7 +691,7 @@
     <value>True</value>
   </data>
   <data name="labelCategoryNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 191</value>
+    <value>6, 162</value>
   </data>
   <data name="labelCategoryNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 12</value>
@@ -718,7 +718,7 @@
     <value>Disable</value>
   </data>
   <data name="textBoxTemplateNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 163</value>
+    <value>143, 134</value>
   </data>
   <data name="textBoxTemplateNamespace.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
@@ -745,7 +745,7 @@
     <value>True</value>
   </data>
   <data name="labelTemplateNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 166</value>
+    <value>6, 137</value>
   </data>
   <data name="labelTemplateNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 12</value>
@@ -769,7 +769,7 @@
     <value>9</value>
   </data>
   <data name="textBoxRedirect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 243</value>
+    <value>115, 214</value>
   </data>
   <data name="textBoxRedirect.MaxLength" type="System.Int32, mscorlib">
     <value>100</value>
@@ -796,7 +796,7 @@
     <value>True</value>
   </data>
   <data name="labelRedirect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 246</value>
+    <value>6, 217</value>
   </data>
   <data name="labelRedirect.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 12</value>
@@ -871,7 +871,7 @@
     <value>13</value>
   </data>
   <data name="textBoxNamespacePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 138</value>
+    <value>81, 109</value>
   </data>
   <data name="textBoxNamespacePath.MaxLength" type="System.Int32, mscorlib">
     <value>2083</value>
@@ -898,7 +898,7 @@
     <value>True</value>
   </data>
   <data name="labelNamespacePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 123</value>
+    <value>6, 94</value>
   </data>
   <data name="labelNamespacePath.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 12</value>
@@ -920,57 +920,6 @@
   </data>
   <data name="&gt;&gt;labelNamespacePath.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="textBoxXmlns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 91</value>
-  </data>
-  <data name="textBoxXmlns.MaxLength" type="System.Int32, mscorlib">
-    <value>2083</value>
-  </data>
-  <data name="textBoxXmlns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 19</value>
-  </data>
-  <data name="textBoxXmlns.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;textBoxXmlns.Name" xml:space="preserve">
-    <value>textBoxXmlns</value>
-  </data>
-  <data name="&gt;&gt;textBoxXmlns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxXmlns.Parent" xml:space="preserve">
-    <value>groupBoxServer</value>
-  </data>
-  <data name="&gt;&gt;textBoxXmlns.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="labelXmlns.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelXmlns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 94</value>
-  </data>
-  <data name="labelXmlns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 12</value>
-  </data>
-  <data name="labelXmlns.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="labelXmlns.Text" xml:space="preserve">
-    <value>XMLのxmlns:</value>
-  </data>
-  <data name="&gt;&gt;labelXmlns.Name" xml:space="preserve">
-    <value>labelXmlns</value>
-  </data>
-  <data name="&gt;&gt;labelXmlns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelXmlns.Parent" xml:space="preserve">
-    <value>groupBoxServer</value>
-  </data>
-  <data name="&gt;&gt;labelXmlns.ZOrder" xml:space="preserve">
-    <value>17</value>
   </data>
   <data name="textBoxLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 18</value>
@@ -994,7 +943,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxLocation.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="labelLocation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1021,7 +970,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelLocation.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>17</value>
   </data>
   <data name="groupBoxServer.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
