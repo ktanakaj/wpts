@@ -200,7 +200,7 @@ namespace Honememo.Wptscs
                     row.Cells["ColumnAlias"].Value = item.Value.Alias;
                     row.Cells["ColumnToCode"].Value = dic.To;
                     row.Cells["ColumnToTitle"].Value = item.Value.Word;
-                    row.Cells["ColumnTimestamp"].Value = item.Value.Timestamp;
+                    row.Cells["ColumnTimestamp"].Value = item.Value.Timestamp.HasValue ? item.Value.Timestamp.Value.ToLocalTime().ToString("G") : String.Empty;
                 }
             }
 
@@ -243,6 +243,12 @@ namespace Honememo.Wptscs
                 if (!String.IsNullOrEmpty(timestamp))
                 {
                     item.Timestamp = DateTime.Parse(timestamp);
+
+                    // UTCでもなくタイムゾーンでも無い場合、ローカル時刻として設定する
+                    if (item.Timestamp.Value.Kind == DateTimeKind.Unspecified)
+                    {
+                        item.Timestamp = DateTime.SpecifyKind(item.Timestamp.Value, DateTimeKind.Local);
+                    }
                 }
 
                 dic[FormUtils.ToString(row.Cells["ColumnFromTitle"])] = item;

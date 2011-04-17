@@ -159,7 +159,7 @@ namespace Honememo.Wptscs.Logics
             ConstructorInfo constructor = config.Translator.GetConstructor(Type.EmptyTypes);
             if (constructor == null)
             {
-                throw new NotImplementedException(config.Translator + " is not implemented");
+                throw new NotImplementedException(config.Translator.FullName + " default constructor is not found");
             }
 
             // 設定に指定されたクラスを、引数無しのコンストラクタを用いて生成する
