@@ -24,12 +24,7 @@ namespace Honememo.Wptscs.Models
     public class MediaWiki : Website, IXmlSerializable
     {
         #region private変数
-
-        /// <summary>
-        /// WikipediaのXMLの固定値の書式。
-        /// </summary>
-        private string xmlns;
-
+        
         /// <summary>
         /// 名前空間情報取得用にアクセスするAPI。
         /// </summary>
