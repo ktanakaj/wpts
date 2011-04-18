@@ -200,13 +200,20 @@ namespace Honememo.Wptscs
                     row.Cells["ColumnAlias"].Value = item.Value.Alias;
                     row.Cells["ColumnToCode"].Value = dic.To;
                     row.Cells["ColumnToTitle"].Value = item.Value.Word;
-                    row.Cells["ColumnTimestamp"].Value = item.Value.Timestamp.HasValue ? item.Value.Timestamp.Value.ToLocalTime().ToString("G") : String.Empty;
+                    if (item.Value.Timestamp.HasValue)
+                    {
+                        row.Cells["ColumnTimestamp"].Value = item.Value.Timestamp.Value.ToLocalTime().ToString("G");
+                    }
+                    else
+                    {
+                        // 有効期限が無限の場合、背景色を変更
+                        row.DefaultCellStyle.BackColor = Color.Bisque;
+                    }
                 }
             }
 
-            // 取得日時の降順でソート
-            // TODO: 空の列は先頭にする
-            this.dataGridViewItems.Sort(this.dataGridViewItems.Columns["ColumnTimestamp"], ListSortDirection.Descending);
+            // 取得日時の降順でソート、空の列は先頭にする
+            this.dataGridViewItems.Sort(new TranslationDictionaryViewComparer());
         }
 
         /// <summary>
@@ -834,6 +841,43 @@ namespace Honememo.Wptscs
         {
             // リンクを開く
             System.Diagnostics.Process.Start(this.linkLabelWebsite.Text);
+        }
+
+        #endregion
+
+        #region "内部クラス"
+        
+        /// <summary>
+        /// 記事の置き換え対訳表の日付並び替え用クラスです。
+        /// </summary>
+        /// <remarks>取得日時の降順でソート、空の列は先頭にします。</remarks>
+        public class TranslationDictionaryViewComparer : System.Collections.IComparer
+        {
+            /// <summary>
+            /// 2行を比較し、一方が他方より小さいか、等しいか、大きいかを示す値を返します。
+            /// </summary>
+            /// <param name="y">比較する最初の行です。</param>
+            /// <param name="x">比較する 2 番目の行。</param>
+            /// <returns>1以下:xはyより小さい, 0:等しい, 1以上:xはyより大きい</returns>
+            public int Compare(object y, object x)
+            {
+                string xstr = ObjectUtils.ToString(((DataGridViewRow)x).Cells["ColumnTimestamp"].Value);
+                string ystr = ObjectUtils.ToString(((DataGridViewRow)y).Cells["ColumnTimestamp"].Value);
+                if (String.IsNullOrWhiteSpace(xstr) && String.IsNullOrWhiteSpace(ystr))
+                {
+                    return 0;
+                }
+                else if (String.IsNullOrWhiteSpace(xstr))
+                {
+                    return 1;
+                }
+                else if (String.IsNullOrWhiteSpace(ystr))
+                {
+                    return -1;
+                }
+
+                return xstr.CompareTo(ystr);
+            }
         }
 
         #endregion
