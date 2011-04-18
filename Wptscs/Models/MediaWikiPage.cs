@@ -69,7 +69,7 @@ namespace Honememo.Wptscs.Models
             : base(website, title, text)
         {
         }
-        
+
         /// <summary>
         /// コンストラクタ。
         /// ページの本文, タイムスタンプには<c>null</c>を設定。
@@ -145,7 +145,7 @@ namespace Honememo.Wptscs.Models
         #endregion
 
         #region 公開静的メソッド
-        
+
         /// <summary>
         /// 渡されたテキストがnowikiブロックかを解析する。
         /// </summary>
@@ -193,42 +193,54 @@ namespace Honememo.Wptscs.Models
             for (int i = 0; i < this.Text.Length; i++)
             {
                 char c = this.Text[i];
-                if (c != '<' && c != '[' && c != '{')
-                {
-                    // チェックしても無駄なため探索しない
-                    // ※ 性能改善のため。そもそもアルゴリズムが良くないと思われるが・・・
-                    continue;
-                }
-
-                string subtext = this.Text.Substring(i);
-                string value;
                 Link link;
-                if (LazyXmlParser.TryParseComment(subtext, out value))
+                switch (c)
                 {
-                    // コメント（<!--）
-                    i += value.Length - 1;
-                }
-                else if (MediaWikiPage.TryParseNowiki(subtext, out value))
-                {
-                    // nowiki区間
-                    i += value.Length - 1;
-                }
-                else if (this.TryParseTemplate(subtext, out link))
-                {
-                    // Documentationテンプレートがある場合は、その中を探索
-                    string interWiki = this.GetDocumentationInterWiki(link, code);
-                    if (!String.IsNullOrEmpty(interWiki))
-                    {
-                        return interWiki;
-                    }
-                }
-                else if (this.TryParseLink(subtext, out link))
-                {
-                    // 指定言語への言語間リンクの場合、内容を取得し、処理終了
-                    if (link.Code == code && !link.IsColon)
-                    {
-                        return link.Title;
-                    }
+                    case '<':
+                        // コメント（<!--）またはnowiki区間の場合飛ばす
+                        string subtext = this.Text.Substring(i);
+                        string value;
+                        if (LazyXmlParser.TryParseComment(subtext, out value))
+                        {
+                            i += value.Length - 1;
+                        }
+                        else if (MediaWikiPage.TryParseNowiki(subtext, out value))
+                        {
+                            i += value.Length - 1;
+                        }
+
+                        break;
+
+                    case '{':
+                        // テンプレート
+                        if (this.TryParseTemplate(this.Text.Substring(i), out link))
+                        {
+                            i += link.OriginalText.Length - 1;
+
+                            // Documentationテンプレートがある場合は、その中を探索
+                            string interWiki = this.GetDocumentationInterWiki(link, code);
+                            if (!String.IsNullOrEmpty(interWiki))
+                            {
+                                return interWiki;
+                            }
+                        }
+
+                        break;
+
+                    case '[':
+                        // リンク
+                        if (this.TryParseLink(this.Text.Substring(i), out link))
+                        {
+                            i += link.OriginalText.Length - 1;
+
+                            // 指定言語への言語間リンクの場合、内容を取得し、処理終了
+                            if (link.Code == code && !link.IsColon)
+                            {
+                                return link.Title;
+                            }
+                        }
+
+                        break;
                 }
             }
 
@@ -401,19 +413,22 @@ namespace Honememo.Wptscs.Models
                 else
                 {
                     // | の後のとき
-                    string subtext = text.Substring(i);
-                    string value;
-                    if (LazyXmlParser.TryParseComment(subtext, out value))
+                    if (c == '<')
                     {
-                        // コメント（<!--）が含まれている場合、リンクは無効
-                        break;
-                    }
-                    else if (MediaWikiPage.TryParseNowiki(subtext, out value))
-                    {
-                        // nowikiブロック
-                        i += value.Length - 1;
-                        pipeTexts[pipeCounter - 1] += value;
-                        continue;
+                        string subtext = text.Substring(i);
+                        string value;
+                        if (LazyXmlParser.TryParseComment(subtext, out value))
+                        {
+                            // コメント（<!--）が含まれている場合、リンクは無効
+                            break;
+                        }
+                        else if (MediaWikiPage.TryParseNowiki(subtext, out value))
+                        {
+                            // nowikiブロック
+                            i += value.Length - 1;
+                            pipeTexts[pipeCounter - 1] += value;
+                            continue;
+                        }
                     }
 
                     // リンク [[ {{ （[[image:xx|[[test]]の画像]]とか）の再帰チェック
@@ -549,19 +564,22 @@ namespace Honememo.Wptscs.Models
                 else
                 {
                     // | の後のとき
-                    string subtext = text.Substring(i);
-                    string value;
-                    if (LazyXmlParser.TryParseComment(subtext, out value))
+                    if (c == '<')
                     {
-                        // コメント（<!--）が含まれている場合、リンクは無効
-                        break;
-                    }
-                    else if (MediaWikiPage.TryParseNowiki(subtext, out value))
-                    {
-                        // nowikiブロック
-                        i += value.Length - 1;
-                        pipeTexts[pipeCounter - 1] += value;
-                        continue;
+                        string subtext = text.Substring(i);
+                        string value;
+                        if (LazyXmlParser.TryParseComment(subtext, out value))
+                        {
+                            // コメント（<!--）が含まれている場合、リンクは無効
+                            break;
+                        }
+                        else if (MediaWikiPage.TryParseNowiki(subtext, out value))
+                        {
+                            // nowikiブロック
+                            i += value.Length - 1;
+                            pipeTexts[pipeCounter - 1] += value;
+                            continue;
+                        }
                     }
 
                     // リンク [[ {{ （{{test|[[例]]}}とか）の再帰チェック
@@ -655,9 +673,8 @@ namespace Honememo.Wptscs.Models
                 }
             }
 
-            // 出力値初期化。リンク以外の場合、空のオブジェクトを返す
-            // （昔構造体を返していた名残。）
-            link = new Link();
+            // 出力値初期化。リンク以外の場合、nullを返す
+            link = null;
             return -1;
         }
 
@@ -677,7 +694,7 @@ namespace Honememo.Wptscs.Models
             value = String.Empty;
 
             // 入力値確認
-            if (!StringUtils.StartsWith(text.ToLower(), "{{{", index))
+            if (!StringUtils.StartsWith(text, "{{{", index))
             {
                 return lastIndex;
             }
@@ -693,13 +710,15 @@ namespace Honememo.Wptscs.Models
                     break;
                 }
 
-                string subtext = text.Substring(i);
-                string comment;
-                if (LazyXmlParser.TryParseComment(subtext, out comment))
+                if (text[i] == '<')
                 {
-                    // コメント（<!--）ブロック
-                    i += comment.Length - 1;
-                    continue;
+                    string comment;
+                    if (LazyXmlParser.TryParseComment(text.Substring(i), out comment))
+                    {
+                        // コメント（<!--）ブロック
+                        i += comment.Length - 1;
+                        continue;
+                    }
                 }
 
                 // | が含まれている場合、以降の文字列は代入された値として扱う
@@ -721,13 +740,16 @@ namespace Honememo.Wptscs.Models
                 else
                 {
                     // | の後のとき
-                    string nowiki;
-                    if (MediaWikiPage.TryParseNowiki(subtext, out nowiki))
+                    if (text[i] == '<')
                     {
-                        // nowikiブロック
-                        i += nowiki.Length - 1;
-                        value += nowiki;
-                        continue;
+                        string nowiki;
+                        if (MediaWikiPage.TryParseNowiki(text.Substring(i), out nowiki))
+                        {
+                            // nowikiブロック
+                            i += nowiki.Length - 1;
+                            value += nowiki;
+                            continue;
+                        }
                     }
 
                     // 変数（{{{1|{{{2}}}}}}とか）の再帰チェック
