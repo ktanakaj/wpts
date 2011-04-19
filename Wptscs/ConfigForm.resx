@@ -177,6 +177,81 @@
   <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
+    <value>翻訳元</value>
+  </data>
+  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnAlias.HeaderText" xml:space="preserve">
+    <value>リダイレクト</value>
+  </data>
+  <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnArrow.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToCode.HeaderText" xml:space="preserve">
+    <value>翻訳先</value>
+  </data>
+  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
+    <value>取得日時</value>
+  </data>
+  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 355</value>
+  </data>
+  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
     <value>dataGridViewItems</value>
   </data>
@@ -330,132 +405,6 @@
   <data name="&gt;&gt;tabPageServer.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBoxInformation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="labelWebsite.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelWebsite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 67</value>
-  </data>
-  <data name="labelWebsite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 12</value>
-  </data>
-  <data name="labelWebsite.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="labelWebsite.Text" xml:space="preserve">
-    <value>配布元:</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.Name" xml:space="preserve">
-    <value>labelWebsite</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="linkLabelWebsite.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="linkLabelWebsite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 67</value>
-  </data>
-  <data name="linkLabelWebsite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 12</value>
-  </data>
-  <data name="linkLabelWebsite.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="linkLabelWebsite.Text" xml:space="preserve">
-    <value>http://honeplus.blog50.fc2.com/</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.Name" xml:space="preserve">
-    <value>linkLabelWebsite</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="labelCopyright.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelCopyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 45</value>
-  </data>
-  <data name="labelCopyright.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 12</value>
-  </data>
-  <data name="labelCopyright.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="labelCopyright.Text" xml:space="preserve">
-    <value>Copyright (C) Honeplus 2011 ※AssemblyInfo.cs</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
-    <value>labelCopyright</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="labelApplicationName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelApplicationName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 9pt, style=Bold</value>
-  </data>
-  <data name="labelApplicationName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
-  </data>
-  <data name="labelApplicationName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 12</value>
-  </data>
-  <data name="labelApplicationName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="labelApplicationName.Text" xml:space="preserve">
-    <value>Wikipdia翻訳支援ツール Ver1.00 ※FormUtil.ApplicationName()</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.Name" xml:space="preserve">
-    <value>labelApplicationName</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBoxInformation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 189</value>
-  </data>
-  <data name="groupBoxInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>577, 169</value>
-  </data>
-  <data name="groupBoxInformation.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="groupBoxInformation.Text" xml:space="preserve">
-    <value>バージョン情報</value>
-  </data>
   <data name="&gt;&gt;groupBoxInformation.Name" xml:space="preserve">
     <value>groupBoxInformation</value>
   </data>
@@ -467,141 +416,6 @@
   </data>
   <data name="&gt;&gt;groupBoxInformation.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.Name" xml:space="preserve">
-    <value>checkBoxIgnoreError</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
-    <value>labelRefererNote</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.Name" xml:space="preserve">
-    <value>labelUserAgentNote</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.Name" xml:space="preserve">
-    <value>labelChaceNote</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.Name" xml:space="preserve">
-    <value>textBoxCacheExpire</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.Name" xml:space="preserve">
-    <value>textBoxReferer</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.Name" xml:space="preserve">
-    <value>labelReferer</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.Name" xml:space="preserve">
-    <value>labelCacheExpire</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.Name" xml:space="preserve">
-    <value>textBoxUserAgent</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.Name" xml:space="preserve">
-    <value>labelUserAgent</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 177</value>
-  </data>
-  <data name="groupBoxApplicationConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Text" xml:space="preserve">
-    <value>アプリケーションの設定</value>
   </data>
   <data name="&gt;&gt;groupBoxApplicationConfig.Name" xml:space="preserve">
     <value>groupBoxApplicationConfig</value>
@@ -662,111 +476,6 @@
   </data>
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 355</value>
-  </data>
-  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
-    <value>dataGridViewItems</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Parent" xml:space="preserve">
-    <value>tabPageItems</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
-    <value>翻訳元</value>
-  </data>
-  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnAlias.HeaderText" xml:space="preserve">
-    <value>リダイレクト</value>
-  </data>
-  <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToCode.HeaderText" xml:space="preserve">
-    <value>翻訳先</value>
-  </data>
-  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
-    <value>取得日時</value>
-  </data>
-  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
-    <value>78</value>
   </data>
   <data name="dataGridViewHeading.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1776,6 +1485,339 @@
   <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="groupBoxInformation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Name" xml:space="preserve">
+    <value>labelWebsite</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Name" xml:space="preserve">
+    <value>linkLabelWebsite</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
+    <value>labelCopyright</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Name" xml:space="preserve">
+    <value>labelApplicationName</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupBoxInformation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 189</value>
+  </data>
+  <data name="groupBoxInformation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>577, 169</value>
+  </data>
+  <data name="groupBoxInformation.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBoxInformation.Text" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Name" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Parent" xml:space="preserve">
+    <value>tabPageApplication</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelWebsite.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelWebsite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 67</value>
+  </data>
+  <data name="labelWebsite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 12</value>
+  </data>
+  <data name="labelWebsite.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelWebsite.Text" xml:space="preserve">
+    <value>配布元:</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Name" xml:space="preserve">
+    <value>labelWebsite</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="linkLabelWebsite.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="linkLabelWebsite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 67</value>
+  </data>
+  <data name="linkLabelWebsite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 12</value>
+  </data>
+  <data name="linkLabelWebsite.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="linkLabelWebsite.Text" xml:space="preserve">
+    <value>http://honeplus.blog50.fc2.com/</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Name" xml:space="preserve">
+    <value>linkLabelWebsite</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelCopyright.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCopyright.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 45</value>
+  </data>
+  <data name="labelCopyright.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 12</value>
+  </data>
+  <data name="labelCopyright.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelCopyright.Text" xml:space="preserve">
+    <value>Copyright (C) Honeplus 2011 ※AssemblyInfo.cs</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
+    <value>labelCopyright</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelApplicationName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelApplicationName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 9pt, style=Bold</value>
+  </data>
+  <data name="labelApplicationName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
+  </data>
+  <data name="labelApplicationName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 12</value>
+  </data>
+  <data name="labelApplicationName.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelApplicationName.Text" xml:space="preserve">
+    <value>Wikipdia翻訳支援ツール Ver1.00 ※FormUtil.ApplicationName()</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Name" xml:space="preserve">
+    <value>labelApplicationName</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Name" xml:space="preserve">
+    <value>checkBoxIgnoreError</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
+    <value>labelRefererNote</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Name" xml:space="preserve">
+    <value>labelUserAgentNote</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Name" xml:space="preserve">
+    <value>labelChaceNote</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Name" xml:space="preserve">
+    <value>textBoxCacheExpire</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Name" xml:space="preserve">
+    <value>textBoxReferer</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Name" xml:space="preserve">
+    <value>labelReferer</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Name" xml:space="preserve">
+    <value>labelCacheExpire</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Name" xml:space="preserve">
+    <value>textBoxUserAgent</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Name" xml:space="preserve">
+    <value>labelUserAgent</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 177</value>
+  </data>
+  <data name="groupBoxApplicationConfig.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Text" xml:space="preserve">
+    <value>アプリケーションの設定</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Name" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Parent" xml:space="preserve">
+    <value>tabPageApplication</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="checkBoxIgnoreError.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2083,6 +2125,24 @@
   <data name="$this.Text" xml:space="preserve">
     <value>設定</value>
   </data>
+  <data name="&gt;&gt;ColumnCode.Name" xml:space="preserve">
+    <value>ColumnCode</value>
+  </data>
+  <data name="&gt;&gt;ColumnCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+    <value>ColumnName</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnShortName.Name" xml:space="preserve">
+    <value>ColumnShortName</value>
+  </data>
+  <data name="&gt;&gt;ColumnShortName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ColumnFromCode.Name" xml:space="preserve">
     <value>ColumnFromCode</value>
   </data>
@@ -2123,24 +2183,6 @@
     <value>ColumnTimestamp</value>
   </data>
   <data name="&gt;&gt;ColumnTimestamp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnCode.Name" xml:space="preserve">
-    <value>ColumnCode</value>
-  </data>
-  <data name="&gt;&gt;ColumnCode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
-    <value>ColumnName</value>
-  </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnShortName.Name" xml:space="preserve">
-    <value>ColumnShortName</value>
-  </data>
-  <data name="&gt;&gt;ColumnShortName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
