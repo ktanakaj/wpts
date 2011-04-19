@@ -179,6 +179,101 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
+        /// 記事の置き換え対訳表のセル編集時のバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void DataGridViewItems_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // 取得日時列のみチェック
+            if (this.dataGridViewItems.Columns[e.ColumnIndex].Name != "ColumnTimestamp")
+            {
+                return;
+            }
+
+            // 空または日付として認識可能な値の場合OK
+            string value = e.FormattedValue.ToString();
+            DateTime dummy;
+            if (String.IsNullOrWhiteSpace(value) || DateTime.TryParse(value, out dummy))
+            {
+                return;
+            }
+
+            // 不許可値の場合、NGメッセージを表示
+            this.dataGridViewItems.Rows[e.RowIndex].ErrorText = Resources.WarningMessageUnformatedTimestamp;
+            e.Cancel = true;
+        }
+
+        /// <summary>
+        /// 記事の置き換え対訳表のセル編集時のバリデート終了時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void DataGridViewItems_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            // 取得日時列の場合、バリデートNGメッセージを消す
+            if (this.dataGridViewItems.Columns[e.ColumnIndex].Name == "ColumnTimestamp")
+            {
+                this.dataGridViewItems.Rows[e.RowIndex].ErrorText = String.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 記事の置き換え対訳表のセル変更時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void DataGridViewItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // 取得日時列が空の場合、有効期限が無期限として背景色を変更
+            // ※ ただし全列が空（新規行など）の場合は無視
+            if (e.RowIndex >= 0)
+            {
+                string value = FormUtils.ToString(this.dataGridViewItems["ColumnTimestamp", e.RowIndex]);
+                if (String.IsNullOrWhiteSpace(value)
+                    && !this.IsEmptyDataGridViewItemsRow(this.dataGridViewItems.Rows[e.RowIndex]))
+                {
+                    this.dataGridViewItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Bisque;
+                }
+                else
+                {
+                    this.dataGridViewItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = this.dataGridViewItems.DefaultCellStyle.BackColor;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 記事の置き換え対訳表の行編集時のバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void DataGridViewItems_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            // 翻訳元、記事名、翻訳先が未入力の場合、バリデートNGメッセージを表示
+            // ※ ただし全列が空（新規行など）の場合は無視
+            DataGridViewRow row = this.dataGridViewItems.Rows[e.RowIndex];
+            if ((String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromCode"]))
+                || String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToCode"]))
+                || String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromTitle"])))
+                && !this.IsEmptyDataGridViewItemsRow(row))
+            {
+                row.ErrorText = Resources.WarningMessageEmptyTranslationDictionary;
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// 記事の置き換え対訳表の行編集時のバリデート終了時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void DataGridViewItems_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            // バリデートNGメッセージを消す
+            this.dataGridViewItems.Rows[e.RowIndex].ErrorText = String.Empty;
+        }
+
+        /// <summary>
         /// 記事の置き換え対訳表を使用する<see cref="DataGridView"/>の値設定を行う。
         /// </summary>
         /// <param name="view">対訳表を表示するビュー。</param>
@@ -204,11 +299,6 @@ namespace Honememo.Wptscs
                     {
                         row.Cells["ColumnTimestamp"].Value = item.Value.Timestamp.Value.ToLocalTime().ToString("G");
                     }
-                    else
-                    {
-                        // 有効期限が無限の場合、背景色を変更
-                        row.DefaultCellStyle.BackColor = Color.Bisque;
-                    }
                 }
             }
 
@@ -226,16 +316,15 @@ namespace Honememo.Wptscs
             IList<TranslationDictionary> dictionaries = new List<TranslationDictionary>();
             foreach (DataGridViewRow row in view.Rows)
             {
-                string from = FormUtils.ToString(row.Cells["ColumnFromCode"]);
-                string to = FormUtils.ToString(row.Cells["ColumnToCode"]);
-
                 // 画面での追加用の最終行が空で渡されてくるので無視
-                if (String.IsNullOrEmpty(from))
+                if (this.IsEmptyDataGridViewItemsRow(row))
                 {
                     continue;
                 }
 
                 // その行で対象とする言語を探索、無ければ新規作成
+                string from = FormUtils.ToString(row.Cells["ColumnFromCode"]);
+                string to = FormUtils.ToString(row.Cells["ColumnToCode"]);
                 TranslationDictionary dic
                     = TranslationDictionary.GetDictionaryNeedCreate(dictionaries, from, to);
 
@@ -247,7 +336,7 @@ namespace Honememo.Wptscs
                 };
 
                 string timestamp = FormUtils.ToString(row.Cells["ColumnTimestamp"]);
-                if (!String.IsNullOrEmpty(timestamp))
+                if (!String.IsNullOrWhiteSpace(timestamp))
                 {
                     item.Timestamp = DateTime.Parse(timestamp);
 
@@ -264,6 +353,21 @@ namespace Honememo.Wptscs
             return dictionaries;
         }
         
+        /// <summary>
+        /// 記事の置き換え対訳表の行が空かを判定する。
+        /// </summary>
+        /// <param name="row">対訳表の1行。</param>
+        /// <returns>空の場合 true。</returns>
+        private bool IsEmptyDataGridViewItemsRow(DataGridViewRow row)
+        {
+            return String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromCode"]))
+                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromTitle"]))
+                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnAlias"]))
+                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToCode"]))
+                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToTitle"]))
+                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnTimestamp"]));
+        }
+
         #endregion
 
         #region 見出しの置き換えタブのイベントのメソッド

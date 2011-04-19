@@ -150,7 +150,12 @@
             this.ColumnTimestamp});
             this.dataGridViewItems.Name = "dataGridViewItems";
             this.dataGridViewItems.RowTemplate.Height = 21;
+            this.dataGridViewItems.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewItems_CellValidated);
+            this.dataGridViewItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridViewItems_CellValidating);
+            this.dataGridViewItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewItems_CellValueChanged);
             this.dataGridViewItems.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGridViewItems_RowsAdded);
+            this.dataGridViewItems.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewItems_RowValidated);
+            this.dataGridViewItems.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridViewItems_RowValidating);
             // 
             // ColumnFromCode
             // 
@@ -609,13 +614,6 @@
         private System.Windows.Forms.GroupBox groupBoxLanguageName;
         private System.Windows.Forms.DataGridView dataGridViewLanguageName;
         private System.Windows.Forms.CheckBox checkBoxIgnoreError;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAlias;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnArrow;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
@@ -623,5 +621,12 @@
         private System.Windows.Forms.TextBox textBoxDocumentationTemplateDefaultPage;
         private System.Windows.Forms.Label labelDocumentationTemplateDefaultPage;
         private System.Windows.Forms.TextBox textBoxDocumentationTemplate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAlias;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnArrow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
     }
 }

@@ -216,7 +216,7 @@
     <value>{{{{0}}}} の識別に失敗しました。{{{{0}}}} は {{1}}名前空間の記事して処理します。（{{2}}）</value>
   </data>
   <data name="LogMessageTranslation" xml:space="preserve">
-    <value> ※</value>
+    <value> ※キャッシュ</value>
     <comment>対訳表使用時の注釈</comment>
   </data>
   <data name="QuestionMessage_ArticleExist" xml:space="preserve">
@@ -277,5 +277,14 @@
   <data name="HeadingViewHeaderText" xml:space="preserve">
     <value>{0} ({1})</value>
     <comment>見出しの対訳表の表ヘッダー書式</comment>
+  </data>
+  <data name="WarningMessageUnformatedTimestamp" xml:space="preserve">
+    <value>取得日時には日付または空欄を指定してください。
+空欄の場合、この置き換えは無期限で有効になります。</value>
+    <comment>対訳表 取得日時のバリデートNGメッセージ</comment>
+  </data>
+  <data name="WarningMessageEmptyTranslationDictionary" xml:space="preserve">
+    <value>翻訳元言語、記事名、翻訳先言語は必須です。</value>
+    <comment>対訳表 翻訳元、記事名、翻訳先のバリデートNGメッセージ</comment>
   </data>
 </root>
