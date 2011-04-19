@@ -376,38 +376,11 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語コードが重複しています。（{0}行） に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_RedundantCodeColumn {
-            get {
-                return ResourceManager.GetString("WarningMessage_RedundantCodeColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   翻訳元／先に同じ言語コードが指定されています。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessage_SourceEqualTarget {
             get {
                 return ResourceManager.GetString("WarningMessage_SourceEqualTarget", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   呼称を設定せずに略称を設定することはできません。（{0}行） に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_UnsetArticleNameColumn {
-            get {
-                return ResourceManager.GetString("WarningMessage_UnsetArticleNameColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   言語コードは必須です。（{0}行） に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_UnsetCodeColumn {
-            get {
-                return ResourceManager.GetString("WarningMessage_UnsetCodeColumn", resourceCulture);
             }
         }
         
@@ -459,12 +432,39 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   言語コードが重複しています。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageRedundantCodeColumn {
+            get {
+                return ResourceManager.GetString("WarningMessageRedundantCodeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   取得日時には日付または空欄を指定してください。
         ///空欄の場合、この置き換えは無期限で有効になります。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageUnformatedTimestamp {
             get {
                 return ResourceManager.GetString("WarningMessageUnformatedTimestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   略称を指定する場合、呼称も入力してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageUnsetArticleNameColumn {
+            get {
+                return ResourceManager.GetString("WarningMessageUnsetArticleNameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   言語コードは必須です。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageUnsetCodeColumn {
+            get {
+                return ResourceManager.GetString("WarningMessageUnsetCodeColumn", resourceCulture);
             }
         }
         

@@ -243,17 +243,17 @@
   <data name="WarningMessage_NotSelectedTarget" xml:space="preserve">
     <value>翻訳先の言語が指定されていません。</value>
   </data>
-  <data name="WarningMessage_RedundantCodeColumn" xml:space="preserve">
-    <value>言語コードが重複しています。（{0}行）</value>
+  <data name="WarningMessageRedundantCodeColumn" xml:space="preserve">
+    <value>言語コードが重複しています。</value>
   </data>
   <data name="WarningMessage_SourceEqualTarget" xml:space="preserve">
     <value>翻訳元／先に同じ言語コードが指定されています。</value>
   </data>
-  <data name="WarningMessage_UnsetArticleNameColumn" xml:space="preserve">
-    <value>呼称を設定せずに略称を設定することはできません。（{0}行）</value>
+  <data name="WarningMessageUnsetArticleNameColumn" xml:space="preserve">
+    <value>略称を指定する場合、呼称も入力してください。</value>
   </data>
-  <data name="WarningMessage_UnsetCodeColumn" xml:space="preserve">
-    <value>言語コードは必須です。（{0}行）</value>
+  <data name="WarningMessageUnsetCodeColumn" xml:space="preserve">
+    <value>言語コードは必須です。</value>
   </data>
   <data name="WarningMessage_UnuseSaveDirectory" xml:space="preserve">
     <value>出力先フォルダに無効なパスが指定されています。出力先を確認してください。</value>

@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール設定画面クラスソース</summary>
 //
 // <copyright file="ConfigForm.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -205,13 +205,14 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
-        /// 記事の置き換え対訳表のセル編集時のバリデート終了時の処理。
+        /// 記事の置き換え対訳表のセル編集時のバリデート成功時の処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
         private void DataGridViewItems_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             // 取得日時列の場合、バリデートNGメッセージを消す
+            // ※ 他の列で消さないのは、エラーを出しているのがRowValidatingの場合もあるから
             if (this.dataGridViewItems.Columns[e.ColumnIndex].Name == "ColumnTimestamp")
             {
                 this.dataGridViewItems.Rows[e.RowIndex].ErrorText = String.Empty;
@@ -260,17 +261,6 @@ namespace Honememo.Wptscs
                 row.ErrorText = Resources.WarningMessageEmptyTranslationDictionary;
                 e.Cancel = true;
             }
-        }
-
-        /// <summary>
-        /// 記事の置き換え対訳表の行編集時のバリデート終了時の処理。
-        /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void DataGridViewItems_RowValidated(object sender, DataGridViewCellEventArgs e)
-        {
-            // バリデートNGメッセージを消す
-            this.dataGridViewItems.Rows[e.RowIndex].ErrorText = String.Empty;
         }
 
         /// <summary>
@@ -357,7 +347,7 @@ namespace Honememo.Wptscs
         /// 記事の置き換え対訳表の行が空かを判定する。
         /// </summary>
         /// <param name="row">対訳表の1行。</param>
-        /// <returns>空の場合 true。</returns>
+        /// <returns>空の場合<c>true</c>。</returns>
         private bool IsEmptyDataGridViewItemsRow(DataGridViewRow row)
         {
             return String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromCode"]))
@@ -545,10 +535,15 @@ namespace Honememo.Wptscs
         {
             System.Diagnostics.Debug.WriteLine("ComboBoxLanguage::_Leave > " + this.comboBoxLanguage.Text);
 
-            // 現在の値が一覧に無ければ登録する
             this.comboBoxLanguage.Text = this.comboBoxLanguage.Text.Trim().ToLower();
             if (String.IsNullOrEmpty(this.comboBoxLanguage.Text))
             {
+                // 空にしたとき、変更でイベントが起こらないようなので、強制的に呼ぶ
+                this.ComboBoxLanguuage_SelectedIndexChanged(sender, e);
+            }
+            else if (!this.comboBoxLanguage.Items.Contains(this.comboBoxLanguage.Text))
+            {
+                // 現在の値が一覧に無ければ登録する
                 this.comboBoxLanguage.Items.Add(this.comboBoxLanguage.Text);
 
                 // 登録した場合、見出しの対訳表にも列を追加
@@ -557,152 +552,85 @@ namespace Honememo.Wptscs
                 // 登録した値を選択状態に変更
                 this.comboBoxLanguage.SelectedItem = this.comboBoxLanguage.Text;
             }
-            else
-            {
-                // 空にしたとき、変更でイベントが起こらないようなので、強制的に呼ぶ
-                this.ComboBoxLanguuage_SelectedIndexChanged(sender, e);
-            }
         }
 
         /// <summary>
-        /// テンプレート名前空間のIDボックスフォーカス喪失時の処理。
+        /// 各名前空間のIDボックスバリデート処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void TextBoxTemplateNamespace_Leave(object sender, EventArgs e)
+        private void TextBoxNamespace_Validating(object sender, CancelEventArgs e)
         {
             // 空か数値のみ許可
-            this.textBoxTemplateNamespace.Text = StringUtils.DefaultString(this.textBoxTemplateNamespace.Text).Trim();
+            TextBox box = (TextBox)sender;
+            box.Text = StringUtils.DefaultString(box.Text).Trim();
             int value;
-            if (!String.IsNullOrEmpty(textBoxTemplateNamespace.Text) && !int.TryParse(this.textBoxTemplateNamespace.Text, out value))
+            if (!String.IsNullOrEmpty(box.Text) && !int.TryParse(box.Text, out value))
             {
-                FormUtils.WarningDialog(Resources.WarningMessageNamespaceNumberValue);
-                this.textBoxTemplateNamespace.Focus();
+                this.errorProvider.SetError(box, Resources.WarningMessageNamespaceNumberValue);
+                e.Cancel = true;
             }
         }
 
         /// <summary>
-        /// カテゴリ名前空間のIDボックスフォーカス喪失時の処理。
+        /// 言語の設定表の行編集時のバリデート処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void TextBoxCategoryNamespace_Leave(object sender, EventArgs e)
+        private void DataGridViewLanguageName_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
-            this.textBoxCategoryNamespace.Text = StringUtils.DefaultString(this.textBoxCategoryNamespace.Text).Trim();
-            int value;
-            if (!String.IsNullOrEmpty(textBoxCategoryNamespace.Text) && !int.TryParse(this.textBoxCategoryNamespace.Text, out value))
+            DataGridViewRow row = this.dataGridViewLanguageName.Rows[e.RowIndex];
+
+            // 空行（新規行など）の場合無視
+            if (FormUtils.IsEmptyRow(row))
             {
-                FormUtils.WarningDialog(Resources.WarningMessageNamespaceNumberValue);
-                this.textBoxCategoryNamespace.Focus();
+                return;
+            }
+
+            // 言語コードは必須、またトリムして小文字に変換
+            string code = FormUtils.ToString(row.Cells["ColumnCode"]).Trim().ToLower();
+            row.Cells["ColumnCode"].Value = code;
+            if (String.IsNullOrEmpty(code))
+            {
+                row.ErrorText = Resources.WarningMessageUnsetCodeColumn;
+                e.Cancel = true;
+                return;
+            }
+
+            // 略称を設定する場合、呼称を必須とする
+            if (!String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnShortName"]))
+                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnName"])))
+            {
+                row.ErrorText = Resources.WarningMessageUnsetArticleNameColumn;
+                e.Cancel = true;
             }
         }
 
         /// <summary>
-        /// ファイル名前空間のIDボックスフォーカス喪失時の処理。
+        /// 言語の設定表バリデート処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void TextBoxFileNamespace_Leave(object sender, EventArgs e)
+        private void DataGridViewLanguageName_Validating(object sender, CancelEventArgs e)
         {
-            this.textBoxFileNamespace.Text = StringUtils.DefaultString(this.textBoxFileNamespace.Text).Trim();
-            int value;
-            if (!String.IsNullOrEmpty(textBoxFileNamespace.Text) && !int.TryParse(this.textBoxFileNamespace.Text, out value))
+            // 言語コードの重複チェック
+            IDictionary<string, int> codeMap = new Dictionary<string, int>();
+            for (int i = 0; i < this.dataGridViewLanguageName.RowCount - 1; i++)
             {
-                FormUtils.WarningDialog(Resources.WarningMessageNamespaceNumberValue);
-                this.textBoxFileNamespace.Focus();
-            }
-        }
-
-        /// <summary>
-        /// 言語の設定表フォーカス喪失時の処理。
-        /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void DataGridViewLanguageName_Leave(object sender, EventArgs e)
-        {
-            // 値チェック
-            string codeUnsetRows = String.Empty;
-            string nameUnsetRows = String.Empty;
-            string redundantCodeRows = String.Empty;
-            for (int y = 0; y < this.dataGridViewLanguageName.RowCount - 1; y++)
-            {
-                string code = FormUtils.ToString(this.dataGridViewLanguageName["ColumnCode", y]).Trim().ToLower();
-
-                // 言語コードが設定されていない行があるか？
-                if (String.IsNullOrEmpty(code))
+                string code = FormUtils.ToString(this.dataGridViewLanguageName["ColumnCode", i]);
+                int y;
+                if (codeMap.TryGetValue(code, out y))
                 {
-                    if (!String.IsNullOrEmpty(codeUnsetRows))
-                    {
-                        codeUnsetRows += ",";
-                    }
-
-                    codeUnsetRows += y + 1;
+                    // 重複の場合、両方の行にエラーを設定
+                    this.dataGridViewLanguageName.Rows[i].ErrorText = Resources.WarningMessageRedundantCodeColumn;
+                    this.dataGridViewLanguageName.Rows[y].ErrorText = Resources.WarningMessageRedundantCodeColumn;
+                    e.Cancel = true;
                 }
                 else
                 {
-                    // 言語コード列は、小文字のデータに変換
-                    this.dataGridViewLanguageName["ColumnCode", y].Value = code;
-
-                    // チェック済みの行に言語コードが重複したものがないか？
-                    for (int i = 0; i < y; i++)
-                    {
-                        if (FormUtils.ToString(this.dataGridViewLanguageName["ColumnCode", i]) == code)
-                        {
-                            if (!String.IsNullOrEmpty(redundantCodeRows))
-                            {
-                                redundantCodeRows += ",";
-                            }
-
-                            redundantCodeRows += y + 1;
-                            break;
-                        }
-                    }
-
-                    // 呼称が設定されていないのに略称が設定されていないか？
-                    if (String.IsNullOrWhiteSpace(FormUtils.ToString(this.dataGridViewLanguageName["ColumnShortName", y]))
-                        && String.IsNullOrWhiteSpace(FormUtils.ToString(this.dataGridViewLanguageName["ColumnName", y])))
-                    {
-                        if (!String.IsNullOrEmpty(nameUnsetRows))
-                        {
-                            nameUnsetRows += ",";
-                        }
-
-                        nameUnsetRows += y + 1;
-                    }
+                    // それ以外はマップに出現行とともに追加
+                    codeMap[code] = i;
                 }
-            }
-
-            // 結果の表示
-            string errorMessage = String.Empty;
-            if (!String.IsNullOrEmpty(codeUnsetRows))
-            {
-                errorMessage += String.Format(Resources.WarningMessage_UnsetCodeColumn, codeUnsetRows);
-            }
-
-            if (!String.IsNullOrEmpty(redundantCodeRows))
-            {
-                if (!String.IsNullOrEmpty(errorMessage))
-                {
-                    errorMessage += "\n";
-                }
-
-                errorMessage += String.Format(Resources.WarningMessage_RedundantCodeColumn, redundantCodeRows);
-            }
-
-            if (!String.IsNullOrEmpty(nameUnsetRows))
-            {
-                if (!String.IsNullOrEmpty(errorMessage))
-                {
-                    errorMessage += "\n";
-                }
-
-                errorMessage += String.Format(Resources.WarningMessage_UnsetArticleNameColumn, nameUnsetRows);
-            }
-
-            if (!String.IsNullOrEmpty(errorMessage))
-            {
-                FormUtils.WarningDialog(errorMessage);
-                this.dataGridViewLanguageName.Focus();
             }
         }
 
@@ -919,20 +847,21 @@ namespace Honememo.Wptscs
         #endregion
 
         #region その他タブのイベントのメソッド
-
+        
         /// <summary>
-        /// キャッシュ有効期限ボックスフォーカス喪失時の処理。
+        /// キャッシュ有効期限ボックスバリデート処理。。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void TextBoxCacheExpire_Leave(object sender, EventArgs e)
+        private void TextBoxCacheExpire_Validating(object sender, CancelEventArgs e)
         {
-            this.textBoxCacheExpire.Text = StringUtils.DefaultString(this.textBoxCacheExpire.Text).Trim();
+            TextBox box = (TextBox)sender;
+            box.Text = StringUtils.DefaultString(box.Text).Trim();
             int expire;
-            if (!int.TryParse(this.textBoxCacheExpire.Text, out expire) || expire < 0)
+            if (!int.TryParse(box.Text, out expire) || expire < 0)
             {
-                FormUtils.WarningDialog(Resources.WarningMessageCacheExpireValue);
-                this.textBoxCacheExpire.Focus();
+                this.errorProvider.SetError(box, Resources.WarningMessageCacheExpireValue);
+                e.Cancel = true;
             }
         }
 
@@ -949,8 +878,46 @@ namespace Honememo.Wptscs
 
         #endregion
 
-        #region "内部クラス"
+        #region 共通のイベントメソッド
         
+        /// <summary>
+        /// 汎用のエラープロバイダ初期化処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ResetErrorProvider_Validated(object sender, EventArgs e)
+        {
+            this.errorProvider.SetError((Control)sender, null);
+        }
+
+        /// <summary>
+        /// 汎用の行編集時のエラーテキスト初期化処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ResetErrorText_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            ((DataGridView)sender).Rows[e.RowIndex].ErrorText = String.Empty;
+        }
+
+        /// <summary>
+        /// 汎用のテーブルエラーテキスト初期化処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ResetErrorText_Validated(object sender, EventArgs e)
+        {
+            // 全行のエラーメッセージを解除
+            foreach (DataGridViewRow row in ((DataGridView)sender).Rows)
+            {
+                row.ErrorText = String.Empty;
+            }
+        }
+
+        #endregion
+
+        #region 内部クラス
+
         /// <summary>
         /// 記事の置き換え対訳表の日付並び替え用クラスです。
         /// </summary>

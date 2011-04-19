@@ -244,5 +244,27 @@ namespace Honememo.Utilities
         }
 
         #endregion
+
+        #region テーブル処理
+
+        /// <summary>
+        /// <seealso cref="DataGridViewRow"/>が空行かを判定する。
+        /// </summary>
+        /// <param name="row">1行。</param>
+        /// <returns>空行の場合<c>true</c>。</returns>
+        public static bool IsEmptyRow(DataGridViewRow row)
+        {
+            foreach (DataGridViewCell cell in row.Cells)
+            {
+                if (!String.IsNullOrEmpty(FormUtils.ToString(cell)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        #endregion
     }
 }
