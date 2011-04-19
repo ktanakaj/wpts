@@ -567,7 +567,7 @@ namespace Honememo.Wptscs
             int value;
             if (!String.IsNullOrEmpty(box.Text) && !int.TryParse(box.Text, out value))
             {
-                this.errorProvider.SetError(box, Resources.WarningMessageNamespaceNumberValue);
+                this.errorProvider.SetError(box, Resources.WarningMessageIgnoreNumericNamespace);
                 e.Cancel = true;
             }
         }
@@ -592,7 +592,7 @@ namespace Honememo.Wptscs
             row.Cells["ColumnCode"].Value = code;
             if (String.IsNullOrEmpty(code))
             {
-                row.ErrorText = Resources.WarningMessageUnsetCodeColumn;
+                row.ErrorText = Resources.WarningMessageEmptyCodeColumn;
                 e.Cancel = true;
                 return;
             }
@@ -601,7 +601,7 @@ namespace Honememo.Wptscs
             if (!String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnShortName"]))
                 && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnName"])))
             {
-                row.ErrorText = Resources.WarningMessageUnsetArticleNameColumn;
+                row.ErrorText = Resources.WarningMessageShortNameColumnOnly;
                 e.Cancel = true;
             }
         }
@@ -622,8 +622,8 @@ namespace Honememo.Wptscs
                 if (codeMap.TryGetValue(code, out y))
                 {
                     // 重複の場合、両方の行にエラーを設定
-                    this.dataGridViewLanguageName.Rows[i].ErrorText = Resources.WarningMessageRedundantCodeColumn;
-                    this.dataGridViewLanguageName.Rows[y].ErrorText = Resources.WarningMessageRedundantCodeColumn;
+                    this.dataGridViewLanguageName.Rows[i].ErrorText = Resources.WarningMessageDuplicateCodeColumn;
+                    this.dataGridViewLanguageName.Rows[y].ErrorText = Resources.WarningMessageDuplicateCodeColumn;
                     e.Cancel = true;
                 }
                 else
@@ -860,7 +860,7 @@ namespace Honememo.Wptscs
             int expire;
             if (!int.TryParse(box.Text, out expire) || expire < 0)
             {
-                this.errorProvider.SetError(box, Resources.WarningMessageCacheExpireValue);
+                this.errorProvider.SetError(box, Resources.WarningMessageIgnoreCacheExpire);
                 e.Cancel = true;
             }
         }

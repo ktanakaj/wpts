@@ -349,60 +349,6 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_FormatUncompleateBracket {
-            get {
-                return ResourceManager.GetString("WarningMessage_FormatUncompleateBracket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   翻訳元の言語が指定されていません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_NotSelectedSource {
-            get {
-                return ResourceManager.GetString("WarningMessage_NotSelectedSource", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   翻訳先の言語が指定されていません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_NotSelectedTarget {
-            get {
-                return ResourceManager.GetString("WarningMessage_NotSelectedTarget", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   翻訳元／先に同じ言語コードが指定されています。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_SourceEqualTarget {
-            get {
-                return ResourceManager.GetString("WarningMessage_SourceEqualTarget", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   出力先フォルダに無効なパスが指定されています。出力先を確認してください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessage_UnuseSaveDirectory {
-            get {
-                return ResourceManager.GetString("WarningMessage_UnuseSaveDirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   キャッシュ有効期限には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessageCacheExpireValue {
-            get {
-                return ResourceManager.GetString("WarningMessageCacheExpireValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   キャッシュの保存に失敗しました。今回参照したページの情報は、アプリケーション終了まで有効です。
         ///
         ///{0} に類似しているローカライズされた文字列を検索します。
@@ -410,6 +356,42 @@ namespace Honememo.Wptscs.Properties {
         internal static string WarningMessageCacheSaveFailed {
             get {
                 return ResourceManager.GetString("WarningMessageCacheSaveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   言語コードが重複しています。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageDuplicateCodeColumn {
+            get {
+                return ResourceManager.GetString("WarningMessageDuplicateCodeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   記事名を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageEmptyArticle {
+            get {
+                return ResourceManager.GetString("WarningMessageEmptyArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   言語コードは必須です。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageEmptyCodeColumn {
+            get {
+                return ResourceManager.GetString("WarningMessageEmptyCodeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   出力先フォルダを指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageEmptySaveDirectory {
+            get {
+                return ResourceManager.GetString("WarningMessageEmptySaveDirectory", resourceCulture);
             }
         }
         
@@ -423,20 +405,74 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   名前空間のIDには数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   翻訳元／先に同じ言語コードが指定されています。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string WarningMessageNamespaceNumberValue {
+        internal static string WarningMessageEqualsSourceAndTarget {
             get {
-                return ResourceManager.GetString("WarningMessageNamespaceNumberValue", resourceCulture);
+                return ResourceManager.GetString("WarningMessageEqualsSourceAndTarget", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   言語コードが重複しています。 に類似しているローカライズされた文字列を検索します。
+        ///   キャッシュ有効期限には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string WarningMessageRedundantCodeColumn {
+        internal static string WarningMessageIgnoreCacheExpire {
             get {
-                return ResourceManager.GetString("WarningMessageRedundantCodeColumn", resourceCulture);
+                return ResourceManager.GetString("WarningMessageIgnoreCacheExpire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   名前空間のIDには数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageIgnoreNumericNamespace {
+            get {
+                return ResourceManager.GetString("WarningMessageIgnoreNumericNamespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   出力先フォルダが存在しないか無効なパスです。出力先を確認してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageIgnoreSaveDirectory {
+            get {
+                return ResourceManager.GetString("WarningMessageIgnoreSaveDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   翻訳元の言語を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageNotSelectedSource {
+            get {
+                return ResourceManager.GetString("WarningMessageNotSelectedSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   翻訳先の言語を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageNotSelectedTarget {
+            get {
+                return ResourceManager.GetString("WarningMessageNotSelectedTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   略称を指定する場合、呼称も入力してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageShortNameColumnOnly {
+            get {
+                return ResourceManager.GetString("WarningMessageShortNameColumnOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageUnformatedBracket {
+            get {
+                return ResourceManager.GetString("WarningMessageUnformatedBracket", resourceCulture);
             }
         }
         
@@ -447,24 +483,6 @@ namespace Honememo.Wptscs.Properties {
         internal static string WarningMessageUnformatedTimestamp {
             get {
                 return ResourceManager.GetString("WarningMessageUnformatedTimestamp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   略称を指定する場合、呼称も入力してください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessageUnsetArticleNameColumn {
-            get {
-                return ResourceManager.GetString("WarningMessageUnsetArticleNameColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   言語コードは必須です。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string WarningMessageUnsetCodeColumn {
-            get {
-                return ResourceManager.GetString("WarningMessageUnsetCodeColumn", resourceCulture);
             }
         }
         

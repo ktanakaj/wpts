@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール主画面クラスソース</summary>
 //
 // <copyright file="MainForm.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -116,7 +116,7 @@ namespace Honememo.Wptscs
             // ラベルに言語名を表示する
             this.labelSource.Text = String.Empty;
             this.linkLabelSourceURL.Text = "http://";
-            if (!String.IsNullOrEmpty(this.comboBoxSource.Text))
+            if (!String.IsNullOrWhiteSpace(this.comboBoxSource.Text))
             {
                 this.comboBoxSource.Text = this.comboBoxSource.Text.Trim().ToLower();
 
@@ -145,7 +145,7 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ComboBoxSource_Leave(object sender, EventArgs e)
         {
-            // 直接入力された場合の対策、変更字の処理をコール
+            // 直接入力された場合の対策、変更時の処理をコール
             this.ComboBoxSource_SelectedIndexChanged(sender, e);
         }
 
@@ -157,7 +157,7 @@ namespace Honememo.Wptscs
         private void LinkLabelSourceURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // リンクを開く
-            System.Diagnostics.Process.Start(this.linkLabelSourceURL.Text);
+            System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Honememo.Wptscs
         {
             // ラベルに言語名を表示する
             this.labelTarget.Text = String.Empty;
-            if (!String.IsNullOrEmpty(this.comboBoxTarget.Text))
+            if (!String.IsNullOrWhiteSpace(this.comboBoxTarget.Text))
             {
                 this.comboBoxTarget.Text = this.comboBoxTarget.Text.Trim().ToLower();
 
@@ -191,7 +191,7 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ComboBoxTarget_Leave(object sender, EventArgs e)
         {
-            // 直接入力された場合の対策、変更字の処理をコール
+            // 直接入力された場合の対策、変更時の処理をコール
             this.ComboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
@@ -261,36 +261,42 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ButtonRun_Click(object sender, EventArgs e)
         {
-            // 入力値チェック
-            if (this.textBoxArticle.Text.Trim() == String.Empty)
+            // フォーム入力値をチェック
+            if (String.IsNullOrWhiteSpace(this.comboBoxSource.Text))
             {
-                // 値が設定されていないときは処理無し
-                return;
-            }
-
-            // 必要な情報が設定されていない場合は処理不可
-            if (Directory.Exists(this.textBoxSaveDirectory.Text) == false)
-            {
-                FormUtils.WarningDialog(Resources.WarningMessage_UnuseSaveDirectory);
-                this.buttonSaveDirectory.Focus();
-                return;
-            }
-            else if (this.comboBoxSource.Text == String.Empty)
-            {
-                FormUtils.WarningDialog(Resources.WarningMessage_NotSelectedSource);
+                FormUtils.WarningDialog(Resources.WarningMessageNotSelectedSource);
                 this.comboBoxSource.Focus();
                 return;
             }
-            else if (this.comboBoxTarget.Text == String.Empty)
+            else if (String.IsNullOrWhiteSpace(this.comboBoxTarget.Text))
             {
-                FormUtils.WarningDialog(Resources.WarningMessage_NotSelectedTarget);
+                FormUtils.WarningDialog(Resources.WarningMessageNotSelectedTarget);
                 this.comboBoxTarget.Focus();
                 return;
             }
-            else if (this.comboBoxSource.Text == this.comboBoxTarget.Text)
+            else if (!String.IsNullOrWhiteSpace(this.comboBoxSource.Text)
+                && this.comboBoxSource.Text == this.comboBoxTarget.Text)
             {
-                FormUtils.WarningDialog(Resources.WarningMessage_SourceEqualTarget);
+                FormUtils.WarningDialog(Resources.WarningMessageEqualsSourceAndTarget);
                 this.comboBoxTarget.Focus();
+                return;
+            }
+            else if (String.IsNullOrWhiteSpace(this.textBoxSaveDirectory.Text))
+            {
+                FormUtils.WarningDialog(Resources.WarningMessageEmptySaveDirectory);
+                this.textBoxSaveDirectory.Focus();
+                return;
+            }
+            else if (!Directory.Exists(this.textBoxSaveDirectory.Text))
+            {
+                FormUtils.WarningDialog(Resources.WarningMessageIgnoreSaveDirectory);
+                this.textBoxSaveDirectory.Focus();
+                return;
+            }
+            else if (String.IsNullOrWhiteSpace(this.textBoxArticle.Text))
+            {
+                FormUtils.WarningDialog(Resources.WarningMessageEmptyArticle);
+                this.textBoxArticle.Focus();
                 return;
             }
 

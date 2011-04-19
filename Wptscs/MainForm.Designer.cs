@@ -236,8 +236,8 @@ namespace Honememo.Wptscs
             this.Controls.Add(this.groupBoxSaveDirectory);
             this.Controls.Add(this.groupBoxTransfer);
             this.Name = "MainForm";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBoxTransfer.ResumeLayout(false);
             this.groupBoxTransfer.PerformLayout();
             this.groupBoxSaveDirectory.ResumeLayout(false);

@@ -233,36 +233,36 @@
     <value>→</value>
     <comment>右矢印</comment>
   </data>
-  <data name="WarningMessage_FormatUncompleateBracket" xml:space="preserve">
+  <data name="WarningMessageUnformatedBracket" xml:space="preserve">
     <value>括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。</value>
     <comment>この{0}はそのまま表示する。</comment>
   </data>
-  <data name="WarningMessage_NotSelectedSource" xml:space="preserve">
-    <value>翻訳元の言語が指定されていません。</value>
+  <data name="WarningMessageNotSelectedSource" xml:space="preserve">
+    <value>翻訳元の言語を指定してください。</value>
   </data>
-  <data name="WarningMessage_NotSelectedTarget" xml:space="preserve">
-    <value>翻訳先の言語が指定されていません。</value>
+  <data name="WarningMessageNotSelectedTarget" xml:space="preserve">
+    <value>翻訳先の言語を指定してください。</value>
   </data>
-  <data name="WarningMessageRedundantCodeColumn" xml:space="preserve">
+  <data name="WarningMessageDuplicateCodeColumn" xml:space="preserve">
     <value>言語コードが重複しています。</value>
   </data>
-  <data name="WarningMessage_SourceEqualTarget" xml:space="preserve">
+  <data name="WarningMessageEqualsSourceAndTarget" xml:space="preserve">
     <value>翻訳元／先に同じ言語コードが指定されています。</value>
   </data>
-  <data name="WarningMessageUnsetArticleNameColumn" xml:space="preserve">
+  <data name="WarningMessageShortNameColumnOnly" xml:space="preserve">
     <value>略称を指定する場合、呼称も入力してください。</value>
   </data>
-  <data name="WarningMessageUnsetCodeColumn" xml:space="preserve">
+  <data name="WarningMessageEmptyCodeColumn" xml:space="preserve">
     <value>言語コードは必須です。</value>
   </data>
-  <data name="WarningMessage_UnuseSaveDirectory" xml:space="preserve">
-    <value>出力先フォルダに無効なパスが指定されています。出力先を確認してください。</value>
+  <data name="WarningMessageIgnoreSaveDirectory" xml:space="preserve">
+    <value>出力先フォルダが存在しないか無効なパスです。出力先を確認してください。</value>
   </data>
-  <data name="WarningMessageCacheExpireValue" xml:space="preserve">
+  <data name="WarningMessageIgnoreCacheExpire" xml:space="preserve">
     <value>キャッシュ有効期限には0以上の数値を指定してください。</value>
     <comment>キャッシュ有効期限に不正な値を入れられた場合のメッセージ</comment>
   </data>
-  <data name="WarningMessageNamespaceNumberValue" xml:space="preserve">
+  <data name="WarningMessageIgnoreNumericNamespace" xml:space="preserve">
     <value>名前空間のIDには数値を指定してください。</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
@@ -286,5 +286,11 @@
   <data name="WarningMessageEmptyTranslationDictionary" xml:space="preserve">
     <value>翻訳元言語、記事名、翻訳先言語は必須です。</value>
     <comment>対訳表 翻訳元、記事名、翻訳先のバリデートNGメッセージ</comment>
+  </data>
+  <data name="WarningMessageEmptyArticle" xml:space="preserve">
+    <value>記事名を指定してください。</value>
+  </data>
+  <data name="WarningMessageEmptySaveDirectory" xml:space="preserve">
+    <value>出力先フォルダを指定してください。</value>
   </data>
 </root>
