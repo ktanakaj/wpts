@@ -20,9 +20,10 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>wiki/خاص:Export/{0}</ExportPath>
+      <ExportPath>/wiki/%D8%AE%D8%A7%D8%B5:%D8%AA%D8%B5%D8%AF%D9%8A%D8%B1/{0}</ExportPath>
+      <Redirect>#تحويل</Redirect>
       <MagicWords />
-      <DocumentationTemplate DefaultPage="">قالب:توثيق</DocumentationTemplate>
+      <DocumentationTemplate DefaultPage="/شرح">قالب:توثيق</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://de.wikipedia.org</Location>
@@ -50,7 +51,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>wiki/Spezial:Export/{0}</ExportPath>
+      <ExportPath>/wiki/Spezial:Exportieren/{0}</ExportPath>
+      <Redirect>#WEITERLEITUNG</Redirect>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
     </MediaWiki>
@@ -117,7 +119,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>wiki/Especial:Export/{0}</ExportPath>
+      <ExportPath>/wiki/Especial:Exportar/{0}</ExportPath>
+      <Redirect>#REDIRECCIÓN</Redirect>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
     </MediaWiki>
@@ -147,8 +150,10 @@
           </LanguageName>
         </Names>
       </Language>
+      <ExportPath>/wiki/Sp%C3%A9cial:Exporter/{0}</ExportPath>
+      <Redirect>#REDIRECTION</Redirect>
       <MagicWords />
-      <DocumentationTemplate DefaultPage="">Modèle:Documentation</DocumentationTemplate>
+      <DocumentationTemplate DefaultPage="/doc">Modèle:Documentation</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://it.wikipedia.org</Location>
@@ -176,7 +181,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>wiki/Speciale:Export/{0}</ExportPath>
+      <ExportPath>/wiki/Speciale:Esporta/{0}</ExportPath>
+      <Redirect>#RINVIA</Redirect>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
     </MediaWiki>
@@ -215,7 +221,7 @@
         </Names>
         <Bracket>（{0}）</Bracket>
       </Language>
-      <ExportPath>wiki/特別:Export/{0}</ExportPath>
+      <ExportPath>/wiki/%E7%89%B9%E5%88%A5:%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97/{0}</ExportPath>
       <Redirect>#転送</Redirect>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
@@ -242,9 +248,59 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>wiki/특수기능:Export/{0}</ExportPath>
+      <ExportPath>/wiki/%ED%8A%B9%EC%88%98%EA%B8%B0%EB%8A%A5:%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0/{0}</ExportPath>
+      <Redirect>#넘겨주기</Redirect>
       <MagicWords />
-      <DocumentationTemplate DefaultPage="">틀:틀 설명문서</DocumentationTemplate>
+      <DocumentationTemplate DefaultPage="/설명문서">틀:틀 설명문서</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://nl.wikipedia.org</Location>
+      <Language Code="nl">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Niederländisch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Dutch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>オランダ語</Name>
+            <ShortName>蘭</ShortName>
+          </LanguageName>
+          <LanguageName Code="nl">
+            <Name>Nederlands</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Speciaal:Exporteren/{0}</ExportPath>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Sjabloon:Sjabdoc</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://pl.wikipedia.org</Location>
+      <Language Code="pl">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Polish_language</Name>
+            <ShortName>Polish</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ポーランド語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pl">
+            <Name>Język polski</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/Specjalna:Eksport/{0}</ExportPath>
+      <Redirect>#PATRZ</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/opis">Szablon:Dokumentacja</DocumentationTemplate>
     </MediaWiki>
     <MediaWiki>
       <Location>http://pt.wikipedia.org</Location>
@@ -272,7 +328,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>wiki/Especial:Export/{0}</ExportPath>
+      <ExportPath>/wiki/Especial:Exportar/{0}</ExportPath>
+      <Redirect>#REDIRECIONAMENTO</Redirect>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
     </MediaWiki>
@@ -302,7 +359,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>wiki/Служебная:Export/{0}</ExportPath>
+      <ExportPath>/wiki/Служебная:Export/{0}</ExportPath>
+      <Redirect>#перенаправление</Redirect>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
     </MediaWiki>
@@ -328,6 +386,7 @@
           </LanguageName>
         </Names>
       </Language>
+      <ExportPath>/wiki/Special:%E5%AF%BC%E5%87%BA%E9%A1%B5%E9%9D%A2/{0}</ExportPath>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
     </MediaWiki>
@@ -366,6 +425,8 @@
       <Word Lang="it">Collegamenti esterni</Word>
       <Word Lang="ja">外部リンク</Word>
       <Word Lang="ko">바깥 고리</Word>
+      <Word Lang="nl">Externe links</Word>
+      <Word Lang="pl">Linki zewnętrzne</Word>
       <Word Lang="pt">Links Externos</Word>
       <Word Lang="zh">外部連結</Word>
     </Group>
@@ -374,6 +435,8 @@
       <Word Lang="es">Historia</Word>
       <Word Lang="fr">Histoire</Word>
       <Word Lang="ja">歴史</Word>
+      <Word Lang="nl">Geschiedenis</Word>
+      <Word Lang="pl">Historia</Word>
       <Word Lang="zh">歷史</Word>
     </Group>
     <Group>
@@ -382,6 +445,7 @@
       <Word Lang="es">Notas</Word>
       <Word Lang="fr">Notes</Word>
       <Word Lang="ja">脚注</Word>
+      <Word Lang="pl">Przypisy</Word>
       <Word Lang="ru">Примечания</Word>
       <Word Lang="zh">注釋</Word>
     </Group>
@@ -393,6 +457,7 @@
       <Word Lang="it">Bibliografia</Word>
       <Word Lang="ja">参考文献</Word>
       <Word Lang="ko">참고 자료</Word>
+      <Word Lang="pl">Bibliografia</Word>
       <Word Lang="ru">Ссылки</Word>
       <Word Lang="zh">参考文献</Word>
     </Group>
@@ -404,6 +469,7 @@
       <Word Lang="it">Voci correlate</Word>
       <Word Lang="ja">関連項目</Word>
       <Word Lang="ko">관련항목</Word>
+      <Word Lang="nl">Zie ook</Word>
       <Word Lang="pt">Ver também</Word>
       <Word Lang="ru">См. также</Word>
       <Word Lang="zh">參見</Word>
