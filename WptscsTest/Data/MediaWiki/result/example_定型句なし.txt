@@ -1,6 +1,6 @@
 ﻿'''xxx'''（[[英語|英]]: '''example'''）
 
-[[File:Example.png|thumb|Wikipedia's example image. (Example.png)]]
+[[ファイル:Example.png|thumb|Wikipedia's example image. (Example.png)]]
 [[:en:Template:wiktionary]]<!-- {{wiktionary}} -->
 [[:en:Template:wikiquote]]<!-- {{wikiquote}} -->
 '''Example''' may refer to:

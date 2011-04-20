@@ -628,9 +628,9 @@ namespace Honememo.Wptscs.Logics
                 {
                     l.Title = parent + l.Title;
                 }
-                else if (!String.IsNullOrEmpty(l.Code) || article.IsFile())
+                else if (!String.IsNullOrEmpty(l.Code))
                 {
-                    // 言語間リンク・姉妹プロジェクトへのリンク・画像は対象外
+                    // 言語間リンク・姉妹プロジェクトへのリンクは対象外
                     // 先頭が : でない、翻訳先言語への言語間リンクの場合
                     if (!l.IsColon && l.Code == this.To.Language.Code)
                     {
@@ -642,6 +642,11 @@ namespace Honememo.Wptscs.Logics
                     // それ以外は対象外
                     System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.replaceInnerLink > 対象外 : " + l.OriginalText);
                     return null;
+                }
+                else if (article.IsFile())
+                {
+                    // 画像も対象外だが、名前空間だけ翻訳先言語の書式に変換
+                    return this.ReplaceFileLink(l);
                 }
 
                 // リンクを辿り、対象記事の言語間リンクを取得
@@ -1028,6 +1033,26 @@ namespace Honememo.Wptscs.Logics
             }
 
             return String.Empty;
+        }
+
+        /// <summary>
+        /// 画像などのファイルへの内部リンクの置き換えを行う。
+        /// </summary>
+        /// <param name="link">内部リンク。</param>
+        /// <returns>置き換え後のリンク文字列、置き換えを行わない場合<c>null</c>。</returns>
+        private string ReplaceFileLink(MediaWikiPage.Link link)
+        {
+            // 名前空間だけ翻訳先言語の書式に変換
+            IList<string> names;
+            if (!this.To.Namespaces.TryGetValue(this.To.FileNamespace, out names))
+            {
+                // 翻訳先言語に相当する名前空間が無い場合、何もしない
+                return null;
+            }
+
+            // 記事名の名前空間部分を置き換えて返す
+            link.Title = names[0] + link.Title.Substring(link.Title.IndexOf(':'));
+            return link.Text;
         }
 
         #endregion
