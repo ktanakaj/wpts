@@ -361,7 +361,7 @@
     <value>1</value>
   </data>
   <data name="textBoxSaveDirectory.ToolTip" xml:space="preserve">
-    <value>処理結果の出力先フォルダは、「参照」ボタンから選択する以外に、こちらに直接指定することもできます。</value>
+    <value>出力先フォルダはこちらに直接入力することもできます。</value>
   </data>
   <data name="&gt;&gt;textBoxSaveDirectory.Name" xml:space="preserve">
     <value>textBoxSaveDirectory</value>

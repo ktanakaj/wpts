@@ -92,6 +92,7 @@
             this.textBoxUserAgent = new System.Windows.Forms.TextBox();
             this.labelUserAgent = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
@@ -132,6 +133,7 @@
             this.tabControl.Controls.Add(this.tabPageApplication);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
+            this.toolTip.SetToolTip(this.tabControl, resources.GetString("tabControl.ToolTip"));
             // 
             // tabPageItems
             // 
@@ -250,6 +252,7 @@
             this.groupBoxLanguageName.Controls.Add(this.dataGridViewLanguageName);
             this.groupBoxLanguageName.Name = "groupBoxLanguageName";
             this.groupBoxLanguageName.TabStop = false;
+            this.toolTip.SetToolTip(this.groupBoxLanguageName, resources.GetString("groupBoxLanguageName.ToolTip"));
             // 
             // dataGridViewLanguageName
             // 
@@ -291,11 +294,13 @@
             // 
             resources.ApplyResources(this.textBoxBracket, "textBoxBracket");
             this.textBoxBracket.Name = "textBoxBracket";
+            this.toolTip.SetToolTip(this.textBoxBracket, resources.GetString("textBoxBracket.ToolTip"));
             // 
             // labelBracket
             // 
             resources.ApplyResources(this.labelBracket, "labelBracket");
             this.labelBracket.Name = "labelBracket";
+            this.toolTip.SetToolTip(this.labelBracket, resources.GetString("labelBracket.ToolTip"));
             // 
             // groupBoxServer
             // 
@@ -325,26 +330,31 @@
             // 
             resources.ApplyResources(this.textBoxDocumentationTemplateDefaultPage, "textBoxDocumentationTemplateDefaultPage");
             this.textBoxDocumentationTemplateDefaultPage.Name = "textBoxDocumentationTemplateDefaultPage";
+            this.toolTip.SetToolTip(this.textBoxDocumentationTemplateDefaultPage, resources.GetString("textBoxDocumentationTemplateDefaultPage.ToolTip"));
             // 
             // labelDocumentationTemplateDefaultPage
             // 
             resources.ApplyResources(this.labelDocumentationTemplateDefaultPage, "labelDocumentationTemplateDefaultPage");
             this.labelDocumentationTemplateDefaultPage.Name = "labelDocumentationTemplateDefaultPage";
+            this.toolTip.SetToolTip(this.labelDocumentationTemplateDefaultPage, resources.GetString("labelDocumentationTemplateDefaultPage.ToolTip"));
             // 
             // textBoxDocumentationTemplate
             // 
             resources.ApplyResources(this.textBoxDocumentationTemplate, "textBoxDocumentationTemplate");
             this.textBoxDocumentationTemplate.Name = "textBoxDocumentationTemplate";
+            this.toolTip.SetToolTip(this.textBoxDocumentationTemplate, resources.GetString("textBoxDocumentationTemplate.ToolTip"));
             // 
             // labelDocumentationTemplate
             // 
             resources.ApplyResources(this.labelDocumentationTemplate, "labelDocumentationTemplate");
             this.labelDocumentationTemplate.Name = "labelDocumentationTemplate";
+            this.toolTip.SetToolTip(this.labelDocumentationTemplate, resources.GetString("labelDocumentationTemplate.ToolTip"));
             // 
             // textBoxFileNamespace
             // 
             resources.ApplyResources(this.textBoxFileNamespace, "textBoxFileNamespace");
             this.textBoxFileNamespace.Name = "textBoxFileNamespace";
+            this.toolTip.SetToolTip(this.textBoxFileNamespace, resources.GetString("textBoxFileNamespace.ToolTip"));
             this.textBoxFileNamespace.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxNamespace_Validating);
             this.textBoxFileNamespace.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
             // 
@@ -352,11 +362,13 @@
             // 
             resources.ApplyResources(this.labelFileNamespace, "labelFileNamespace");
             this.labelFileNamespace.Name = "labelFileNamespace";
+            this.toolTip.SetToolTip(this.labelFileNamespace, resources.GetString("labelFileNamespace.ToolTip"));
             // 
             // textBoxCategoryNamespace
             // 
             resources.ApplyResources(this.textBoxCategoryNamespace, "textBoxCategoryNamespace");
             this.textBoxCategoryNamespace.Name = "textBoxCategoryNamespace";
+            this.toolTip.SetToolTip(this.textBoxCategoryNamespace, resources.GetString("textBoxCategoryNamespace.ToolTip"));
             this.textBoxCategoryNamespace.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxNamespace_Validating);
             this.textBoxCategoryNamespace.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
             // 
@@ -364,11 +376,13 @@
             // 
             resources.ApplyResources(this.labelCategoryNamespace, "labelCategoryNamespace");
             this.labelCategoryNamespace.Name = "labelCategoryNamespace";
+            this.toolTip.SetToolTip(this.labelCategoryNamespace, resources.GetString("labelCategoryNamespace.ToolTip"));
             // 
             // textBoxTemplateNamespace
             // 
             resources.ApplyResources(this.textBoxTemplateNamespace, "textBoxTemplateNamespace");
             this.textBoxTemplateNamespace.Name = "textBoxTemplateNamespace";
+            this.toolTip.SetToolTip(this.textBoxTemplateNamespace, resources.GetString("textBoxTemplateNamespace.ToolTip"));
             this.textBoxTemplateNamespace.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxNamespace_Validating);
             this.textBoxTemplateNamespace.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
             // 
@@ -376,52 +390,62 @@
             // 
             resources.ApplyResources(this.labelTemplateNamespace, "labelTemplateNamespace");
             this.labelTemplateNamespace.Name = "labelTemplateNamespace";
+            this.toolTip.SetToolTip(this.labelTemplateNamespace, resources.GetString("labelTemplateNamespace.ToolTip"));
             // 
             // textBoxRedirect
             // 
             resources.ApplyResources(this.textBoxRedirect, "textBoxRedirect");
             this.textBoxRedirect.Name = "textBoxRedirect";
+            this.toolTip.SetToolTip(this.textBoxRedirect, resources.GetString("textBoxRedirect.ToolTip"));
             // 
             // labelRedirect
             // 
             resources.ApplyResources(this.labelRedirect, "labelRedirect");
             this.labelRedirect.Name = "labelRedirect";
+            this.toolTip.SetToolTip(this.labelRedirect, resources.GetString("labelRedirect.ToolTip"));
             // 
             // textBoxExportPath
             // 
             resources.ApplyResources(this.textBoxExportPath, "textBoxExportPath");
             this.textBoxExportPath.Name = "textBoxExportPath";
+            this.toolTip.SetToolTip(this.textBoxExportPath, resources.GetString("textBoxExportPath.ToolTip"));
             // 
             // labelExportPath
             // 
             resources.ApplyResources(this.labelExportPath, "labelExportPath");
             this.labelExportPath.Name = "labelExportPath";
+            this.toolTip.SetToolTip(this.labelExportPath, resources.GetString("labelExportPath.ToolTip"));
             // 
             // textBoxNamespacePath
             // 
             resources.ApplyResources(this.textBoxNamespacePath, "textBoxNamespacePath");
             this.textBoxNamespacePath.Name = "textBoxNamespacePath";
+            this.toolTip.SetToolTip(this.textBoxNamespacePath, resources.GetString("textBoxNamespacePath.ToolTip"));
             // 
             // labelNamespacePath
             // 
             resources.ApplyResources(this.labelNamespacePath, "labelNamespacePath");
             this.labelNamespacePath.Name = "labelNamespacePath";
+            this.toolTip.SetToolTip(this.labelNamespacePath, resources.GetString("labelNamespacePath.ToolTip"));
             // 
             // textBoxLocation
             // 
             resources.ApplyResources(this.textBoxLocation, "textBoxLocation");
             this.textBoxLocation.Name = "textBoxLocation";
+            this.toolTip.SetToolTip(this.textBoxLocation, resources.GetString("textBoxLocation.ToolTip"));
             // 
             // labelLocation
             // 
             resources.ApplyResources(this.labelLocation, "labelLocation");
             this.labelLocation.Name = "labelLocation";
+            this.toolTip.SetToolTip(this.labelLocation, resources.GetString("labelLocation.ToolTip"));
             // 
             // comboBoxLanguage
             // 
             this.comboBoxLanguage.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
             this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.toolTip.SetToolTip(this.comboBoxLanguage, resources.GetString("comboBoxLanguage.ToolTip"));
             this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLanguuage_SelectedIndexChanged);
             this.comboBoxLanguage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ComboBoxLanguage_KeyDown);
             this.comboBoxLanguage.Leave += new System.EventHandler(this.ComboBoxLanguage_Leave);
@@ -430,6 +454,7 @@
             // 
             resources.ApplyResources(this.labelLanguage, "labelLanguage");
             this.labelLanguage.Name = "labelLanguage";
+            this.toolTip.SetToolTip(this.labelLanguage, resources.GetString("labelLanguage.ToolTip"));
             // 
             // tabPageApplication
             // 
@@ -491,6 +516,7 @@
             // 
             resources.ApplyResources(this.checkBoxIgnoreError, "checkBoxIgnoreError");
             this.checkBoxIgnoreError.Name = "checkBoxIgnoreError";
+            this.toolTip.SetToolTip(this.checkBoxIgnoreError, resources.GetString("checkBoxIgnoreError.ToolTip"));
             this.checkBoxIgnoreError.UseVisualStyleBackColor = true;
             // 
             // labelRefererNote
@@ -512,6 +538,7 @@
             // 
             resources.ApplyResources(this.textBoxCacheExpire, "textBoxCacheExpire");
             this.textBoxCacheExpire.Name = "textBoxCacheExpire";
+            this.toolTip.SetToolTip(this.textBoxCacheExpire, resources.GetString("textBoxCacheExpire.ToolTip"));
             this.textBoxCacheExpire.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxCacheExpire_Validating);
             this.textBoxCacheExpire.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
             // 
@@ -519,31 +546,42 @@
             // 
             resources.ApplyResources(this.textBoxReferer, "textBoxReferer");
             this.textBoxReferer.Name = "textBoxReferer";
+            this.toolTip.SetToolTip(this.textBoxReferer, resources.GetString("textBoxReferer.ToolTip"));
             // 
             // labelReferer
             // 
             resources.ApplyResources(this.labelReferer, "labelReferer");
             this.labelReferer.Name = "labelReferer";
+            this.toolTip.SetToolTip(this.labelReferer, resources.GetString("labelReferer.ToolTip"));
             // 
             // labelCacheExpire
             // 
             resources.ApplyResources(this.labelCacheExpire, "labelCacheExpire");
             this.labelCacheExpire.Name = "labelCacheExpire";
+            this.toolTip.SetToolTip(this.labelCacheExpire, resources.GetString("labelCacheExpire.ToolTip"));
             // 
             // textBoxUserAgent
             // 
             resources.ApplyResources(this.textBoxUserAgent, "textBoxUserAgent");
             this.textBoxUserAgent.Name = "textBoxUserAgent";
+            this.toolTip.SetToolTip(this.textBoxUserAgent, resources.GetString("textBoxUserAgent.ToolTip"));
             // 
             // labelUserAgent
             // 
             resources.ApplyResources(this.labelUserAgent, "labelUserAgent");
             this.labelUserAgent.Name = "labelUserAgent";
+            this.toolTip.SetToolTip(this.labelUserAgent, resources.GetString("labelUserAgent.ToolTip"));
             // 
             // errorProvider
             // 
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
+            // 
+            // toolTip
+            // 
+            this.toolTip.AutoPopDelay = 10000;
+            this.toolTip.InitialDelay = 500;
+            this.toolTip.ReshowDelay = 100;
             // 
             // ConfigForm
             // 
@@ -631,13 +669,12 @@
         private System.Windows.Forms.GroupBox groupBoxLanguageName;
         private System.Windows.Forms.DataGridView dataGridViewLanguageName;
         private System.Windows.Forms.CheckBox checkBoxIgnoreError;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
         private System.Windows.Forms.Label labelDocumentationTemplate;
         private System.Windows.Forms.TextBox textBoxDocumentationTemplateDefaultPage;
         private System.Windows.Forms.Label labelDocumentationTemplateDefaultPage;
         private System.Windows.Forms.TextBox textBoxDocumentationTemplate;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAlias;
@@ -645,6 +682,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
     }
 }

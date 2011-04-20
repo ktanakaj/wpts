@@ -873,7 +873,7 @@ namespace Honememo.Wptscs
         private void LinkLabelWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // リンクを開く
-            System.Diagnostics.Process.Start(this.linkLabelWebsite.Text);
+            System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
         }
 
         #endregion
