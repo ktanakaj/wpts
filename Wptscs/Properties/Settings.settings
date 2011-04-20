@@ -32,6 +32,8 @@
   &lt;string&gt;CURRENTYEAR&lt;/string&gt;
   &lt;string&gt;CURRENTMONTH&lt;/string&gt;
   &lt;string&gt;CURRENTMONTHNAME&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTHNAMEGEN&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTHABBREV&lt;/string&gt;
   &lt;string&gt;CURRENTDAY&lt;/string&gt;
   &lt;string&gt;CURRENTDAY2&lt;/string&gt;
   &lt;string&gt;CURRENTDOW&lt;/string&gt;
@@ -156,7 +158,7 @@
       <Value Profile="(Default)">15.00:00:00</Value>
     </Setting>
     <Setting Name="ConfigurationCompatible" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">0.91.0.0</Value>
+      <Value Profile="(Default)">1.0.0.0</Value>
     </Setting>
     <Setting Name="MediaWikiNamespacePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases</Value>

@@ -115,47 +115,48 @@ namespace Honememo.Wptscs.Properties {
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
             "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
             "tring>CURRENTYEAR</string>\r\n  <string>CURRENTMONTH</string>\r\n  <string>CURRENTMO" +
-            "NTHNAME</string>\r\n  <string>CURRENTDAY</string>\r\n  <string>CURRENTDAY2</string>\r" +
-            "\n  <string>CURRENTDOW</string>\r\n  <string>CURRENTDAYNAME</string>\r\n  <string>CUR" +
-            "RENTTIME</string>\r\n  <string>CURRENTHOUR</string>\r\n  <string>CURRENTWEEK</string" +
-            ">\r\n  <string>CURRENTTIMESTAMP</string>\r\n  <string>LOCALYEAR</string>\r\n  <string>" +
-            "LOCALMONTH</string>\r\n  <string>LOCALMONTHNAME</string>\r\n  <string>LOCALMONTHNAME" +
-            "GEN</string>\r\n  <string>LOCALMONTHABBREV</string>\r\n  <string>LOCALDAY</string>\r\n" +
-            "  <string>LOCALDAY2</string>\r\n  <string>LOCALDOW</string>\r\n  <string>LOCALDAYNAM" +
-            "E</string>\r\n  <string>LOCALTIME</string>\r\n  <string>LOCALHOUR</string>\r\n  <strin" +
-            "g>LOCALWEEK</string>\r\n  <string>LOCALTIMESTAMP</string>\r\n  <string>SITENAME</str" +
-            "ing>\r\n  <string>SERVER</string>\r\n  <string>SERVERNAME</string>\r\n  <string>DIRMAR" +
-            "K</string>\r\n  <string>DIRECTIONMARK</string>\r\n  <string>SCRIPTPATH</string>\r\n  <" +
-            "string>STYLEPATH</string>\r\n  <string>CURRENTVERSION</string>\r\n  <string>CONTENTL" +
-            "ANGUAGE</string>\r\n  <string>CONTENTLANG</string>\r\n  <string>REVISIONID</string>\r" +
-            "\n  <string>REVISIONDAY</string>\r\n  <string>REVISIONDAY2</string>\r\n  <string>REVI" +
-            "SIONMONTH</string>\r\n  <string>REVISIONYEAR</string>\r\n  <string>REVISIONTIMESTAMP" +
-            "</string>\r\n  <string>REVISIONUSER</string>\r\n  <string>PAGESIZE</string>\r\n  <stri" +
-            "ng>PROTECTIONLEVEL</string>\r\n  <string>DISPLAYTITLE</string>\r\n  <string>DEFAULTS" +
-            "ORT</string>\r\n  <string>DEFAULTSORTKEY</string>\r\n  <string>DEFAULTCATEGORYSORT</" +
-            "string>\r\n  <string>NUMBEROFPAGES</string>\r\n  <string>NUMBEROFARTICLES</string>\r\n" +
-            "  <string>NUMBEROFFILES</string>\r\n  <string>NUMBEROFEDITS</string>\r\n  <string>NU" +
-            "MBEROFVIEWS</string>\r\n  <string>NUMBEROFUSERS</string>\r\n  <string>NUMBEROFADMINS" +
-            "</string>\r\n  <string>NUMBEROFACTIVEUSERS</string>\r\n  <string>PAGESINCATEGORY</st" +
-            "ring>\r\n  <string>PAGESINCAT</string>\r\n  <string>NUMBERINGROUP</string>\r\n  <strin" +
-            "g>NUMINGROUP</string>\r\n  <string>PAGESINNS</string>\r\n  <string>PAGESINNAMESPACE<" +
-            "/string>\r\n  <string>FULLPAGENAME</string>\r\n  <string>PAGENAME</string>\r\n  <strin" +
-            "g>BASEPAGENAME</string>\r\n  <string>SUBPAGENAME</string>\r\n  <string>SUBJECTPAGENA" +
-            "ME</string>\r\n  <string>TALKPAGENAME</string>\r\n  <string>FULLPAGENAMEE</string>\r\n" +
-            "  <string>PAGENAMEE</string>\r\n  <string>BASEPAGENAMEE</string>\r\n  <string>SUBPAG" +
-            "ENAMEE</string>\r\n  <string>SUBJECTPAGENAMEE</string>\r\n  <string>TALKPAGENAMEE</s" +
-            "tring>\r\n  <string>NAMESPACE</string>\r\n  <string>SUBJECTSPACE</string>\r\n  <string" +
-            ">ARTICLESPACE</string>\r\n  <string>TALKSPACE</string>\r\n  <string>NAMESPACEE</stri" +
-            "ng>\r\n  <string>SUBJECTSPACEE</string>\r\n  <string>TALKSPACEE</string>\r\n  <string>" +
-            "localurl</string>\r\n  <string>fullurl</string>\r\n  <string>filepath</string>\r\n  <s" +
-            "tring>urlencode</string>\r\n  <string>anchorencode</string>\r\n  <string>ns</string>" +
-            "\r\n  <string>lc</string>\r\n  <string>lcfirst</string>\r\n  <string>uc</string>\r\n  <s" +
-            "tring>ucfirst</string>\r\n  <string>formatnum</string>\r\n  <string>#dateformat</str" +
-            "ing>\r\n  <string>#formatdate</string>\r\n  <string>padleft</string>\r\n  <string>padr" +
-            "ight</string>\r\n  <string>plural</string>\r\n  <string>grammar</string>\r\n  <string>" +
-            "int</string>\r\n  <string>#language</string>\r\n  <string>#special</string>\r\n  <stri" +
-            "ng>#tag</string>\r\n  <string>gender</string>\r\n  <string>groupconvert</string>\r\n</" +
-            "ArrayOfString>")]
+            "NTHNAME</string>\r\n  <string>CURRENTMONTHNAMEGEN</string>\r\n  <string>CURRENTMONTH" +
+            "ABBREV</string>\r\n  <string>CURRENTDAY</string>\r\n  <string>CURRENTDAY2</string>\r\n" +
+            "  <string>CURRENTDOW</string>\r\n  <string>CURRENTDAYNAME</string>\r\n  <string>CURR" +
+            "ENTTIME</string>\r\n  <string>CURRENTHOUR</string>\r\n  <string>CURRENTWEEK</string>" +
+            "\r\n  <string>CURRENTTIMESTAMP</string>\r\n  <string>LOCALYEAR</string>\r\n  <string>L" +
+            "OCALMONTH</string>\r\n  <string>LOCALMONTHNAME</string>\r\n  <string>LOCALMONTHNAMEG" +
+            "EN</string>\r\n  <string>LOCALMONTHABBREV</string>\r\n  <string>LOCALDAY</string>\r\n " +
+            " <string>LOCALDAY2</string>\r\n  <string>LOCALDOW</string>\r\n  <string>LOCALDAYNAME" +
+            "</string>\r\n  <string>LOCALTIME</string>\r\n  <string>LOCALHOUR</string>\r\n  <string" +
+            ">LOCALWEEK</string>\r\n  <string>LOCALTIMESTAMP</string>\r\n  <string>SITENAME</stri" +
+            "ng>\r\n  <string>SERVER</string>\r\n  <string>SERVERNAME</string>\r\n  <string>DIRMARK" +
+            "</string>\r\n  <string>DIRECTIONMARK</string>\r\n  <string>SCRIPTPATH</string>\r\n  <s" +
+            "tring>STYLEPATH</string>\r\n  <string>CURRENTVERSION</string>\r\n  <string>CONTENTLA" +
+            "NGUAGE</string>\r\n  <string>CONTENTLANG</string>\r\n  <string>REVISIONID</string>\r\n" +
+            "  <string>REVISIONDAY</string>\r\n  <string>REVISIONDAY2</string>\r\n  <string>REVIS" +
+            "IONMONTH</string>\r\n  <string>REVISIONYEAR</string>\r\n  <string>REVISIONTIMESTAMP<" +
+            "/string>\r\n  <string>REVISIONUSER</string>\r\n  <string>PAGESIZE</string>\r\n  <strin" +
+            "g>PROTECTIONLEVEL</string>\r\n  <string>DISPLAYTITLE</string>\r\n  <string>DEFAULTSO" +
+            "RT</string>\r\n  <string>DEFAULTSORTKEY</string>\r\n  <string>DEFAULTCATEGORYSORT</s" +
+            "tring>\r\n  <string>NUMBEROFPAGES</string>\r\n  <string>NUMBEROFARTICLES</string>\r\n " +
+            " <string>NUMBEROFFILES</string>\r\n  <string>NUMBEROFEDITS</string>\r\n  <string>NUM" +
+            "BEROFVIEWS</string>\r\n  <string>NUMBEROFUSERS</string>\r\n  <string>NUMBEROFADMINS<" +
+            "/string>\r\n  <string>NUMBEROFACTIVEUSERS</string>\r\n  <string>PAGESINCATEGORY</str" +
+            "ing>\r\n  <string>PAGESINCAT</string>\r\n  <string>NUMBERINGROUP</string>\r\n  <string" +
+            ">NUMINGROUP</string>\r\n  <string>PAGESINNS</string>\r\n  <string>PAGESINNAMESPACE</" +
+            "string>\r\n  <string>FULLPAGENAME</string>\r\n  <string>PAGENAME</string>\r\n  <string" +
+            ">BASEPAGENAME</string>\r\n  <string>SUBPAGENAME</string>\r\n  <string>SUBJECTPAGENAM" +
+            "E</string>\r\n  <string>TALKPAGENAME</string>\r\n  <string>FULLPAGENAMEE</string>\r\n " +
+            " <string>PAGENAMEE</string>\r\n  <string>BASEPAGENAMEE</string>\r\n  <string>SUBPAGE" +
+            "NAMEE</string>\r\n  <string>SUBJECTPAGENAMEE</string>\r\n  <string>TALKPAGENAMEE</st" +
+            "ring>\r\n  <string>NAMESPACE</string>\r\n  <string>SUBJECTSPACE</string>\r\n  <string>" +
+            "ARTICLESPACE</string>\r\n  <string>TALKSPACE</string>\r\n  <string>NAMESPACEE</strin" +
+            "g>\r\n  <string>SUBJECTSPACEE</string>\r\n  <string>TALKSPACEE</string>\r\n  <string>l" +
+            "ocalurl</string>\r\n  <string>fullurl</string>\r\n  <string>filepath</string>\r\n  <st" +
+            "ring>urlencode</string>\r\n  <string>anchorencode</string>\r\n  <string>ns</string>\r" +
+            "\n  <string>lc</string>\r\n  <string>lcfirst</string>\r\n  <string>uc</string>\r\n  <st" +
+            "ring>ucfirst</string>\r\n  <string>formatnum</string>\r\n  <string>#dateformat</stri" +
+            "ng>\r\n  <string>#formatdate</string>\r\n  <string>padleft</string>\r\n  <string>padri" +
+            "ght</string>\r\n  <string>plural</string>\r\n  <string>grammar</string>\r\n  <string>i" +
+            "nt</string>\r\n  <string>#language</string>\r\n  <string>#special</string>\r\n  <strin" +
+            "g>#tag</string>\r\n  <string>gender</string>\r\n  <string>groupconvert</string>\r\n</A" +
+            "rrayOfString>")]
         public global::System.Collections.Specialized.StringCollection MediaWikiMagicWords {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWords"]));
@@ -230,7 +231,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.91.0.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0.0")]
         public string ConfigurationCompatible {
             get {
                 return ((string)(this["ConfigurationCompatible"]));
