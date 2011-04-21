@@ -297,7 +297,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/Specjalna:Eksport/{0}</ExportPath>
+      <ExportPath>/wiki/Specjalna:Eksport/{0}</ExportPath>
       <Redirect>#PATRZ</Redirect>
       <MagicWords />
       <DocumentationTemplate DefaultPage="/opis">Szablon:Dokumentacja</DocumentationTemplate>
