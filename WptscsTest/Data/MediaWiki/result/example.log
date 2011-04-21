@@ -1,6 +1,6 @@
 http://en.wikipedia.org より [[example]] を取得。
 
-→ 言語間リンクの探索、定型句の変換を行います
+→ 言語間リンクの探索、見出しの変換を行います
 {{Template:wiktionary}} → 言語間リンク無し
 {{Template:wikiquote}} → 言語間リンク無し
 [[Example (rapper)]] → 言語間リンク無し

@@ -1,6 +1,6 @@
 http://ja.wikipedia.org より [[スペースシップツー]] を取得。
 
-→ 言語間リンクの探索、定型句の変換を行います
+→ 言語間リンクの探索、見出しの変換を行います
 {{Template:Infobox 航空機}} → 言語間リンク無し
 [[宇宙旅行]] → [[Space tourism]]
 [[弾道飛行]] → [[Sub-orbital spaceflight]]
