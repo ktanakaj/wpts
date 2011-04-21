@@ -175,7 +175,7 @@
     <value>翻訳元として指定された記事は存在しません。記事名を確認してください。</value>
   </data>
   <data name="LogMessage_CheckAndReplaceStart" xml:space="preserve">
-    <value>言語間リンクの探索、定型句の変換を行います</value>
+    <value>言語間リンクの探索、見出しの変換を行います</value>
   </data>
   <data name="LogMessage_End" xml:space="preserve">
     <value>

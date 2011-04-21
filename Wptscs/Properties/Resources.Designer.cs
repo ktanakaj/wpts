@@ -197,7 +197,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語間リンクの探索、定型句の変換を行います に類似しているローカライズされた文字列を検索します。
+        ///   言語間リンクの探索、見出しの変換を行います に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessage_CheckAndReplaceStart {
             get {

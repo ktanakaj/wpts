@@ -294,6 +294,10 @@ namespace Honememo.Wptscs
 
             // 取得日時の降順でソート、空の列は先頭にする
             this.dataGridViewItems.Sort(new TranslationDictionaryViewComparer());
+
+            // 列幅をデータ長に応じて自動調整
+            // ※ 常に行ってしまうと、読み込みに非常に時間がかかるため
+            view.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         /// <summary>
@@ -395,6 +399,10 @@ namespace Honememo.Wptscs
                     row.Cells[cell.Key].Value = cell.Value;
                 }
             }
+
+            // 列幅をデータ長に応じて自動調整
+            // ※ 常に行ってしまうと、読み込みに時間がかかるため
+            view.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         /// <summary>
@@ -437,7 +445,6 @@ namespace Honememo.Wptscs
         private void AddTranslationTableColumn(DataGridViewColumnCollection columns, string columnName, string headerText)
         {
             columns.Add(columnName, headerText);
-            columns[columnName].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         /// <summary>
