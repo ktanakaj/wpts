@@ -283,7 +283,7 @@ namespace Honememo.Utilities
             // ※ 厳密な判定が大変で、Lazyクラスでそこまでやる必要も感じないので、
             //    処理的に困る制御文字や記号類を除きみんな許可する。
             return this.IsNameFirstCharacter(c) || c == '-' || c == '.'
-                || (!Char.IsControl(c) && !Char.IsWhiteSpace(c) && !Char.IsSymbol(c));
+                || (!Char.IsControl(c) && !Char.IsWhiteSpace(c) && !Char.IsSymbol(c) && !Char.IsPunctuation(c));
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace Honememo.Utilities
                 options = options | RegexOptions.IgnoreCase;
             }
 
-            Regex endRegex = new Regex("^</" + tag + "\\s*>", options);
+            Regex endRegex = new Regex("^</" + Regex.Escape(tag) + "\\s*>", options);
 
             for (int i = 0; i < text.Length; i++)
             {

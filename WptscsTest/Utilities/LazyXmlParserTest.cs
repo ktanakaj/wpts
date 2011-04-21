@@ -250,6 +250,8 @@ namespace Honememo.Utilities
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse("<testtag testattr=\"testvalue'></testtag>", out element));
             Assert.IsNull(element);
+            Assert.IsFalse(parser.TryParse("<sub((>4</sub>", out element));
+            Assert.IsNull(element);
         }
 
         /// <summary>
