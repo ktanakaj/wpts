@@ -3,7 +3,7 @@
 //      MediaWikiのウェブサイト（システム）をあらわすモデルクラスソース</summary>
 //
 // <copyright file="MediaWiki.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Models
     using System.IO;
     using System.Xml;
     using System.Xml.Serialization;
+    using System.Web;
     using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
 
@@ -392,9 +393,13 @@ namespace Honememo.Wptscs.Models
         /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
         public override Page GetPage(string title)
         {
+            // &amp; &nbsp; 等の特殊文字をデコード
+            // ※ 本当は呼び元側ですべき処理の気がするが、現状手ごろな場所が無いので
+            string decodeTitle = HttpUtility.HtmlDecode(title);
+
             // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
             // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
-            string escapeTitle = title;
+            string escapeTitle = decodeTitle;
             if (new Uri(this.Location).Scheme == "file")
             {
                 escapeTitle = FormUtils.ReplaceInvalidFileNameChars(title);
