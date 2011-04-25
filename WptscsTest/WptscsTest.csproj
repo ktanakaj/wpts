@@ -49,6 +49,7 @@
     <Compile Include="Models\MediaWikiTest.cs" />
     <Compile Include="Models\TranslationDictionaryTest.cs" />
     <Compile Include="Models\TranslationTableTest.cs" />
+    <Compile Include="Models\TreeNodeTest.cs" />
     <Compile Include="Models\WebsiteTest.cs" />
     <Compile Include="PrivateAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

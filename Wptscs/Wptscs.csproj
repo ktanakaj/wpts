@@ -62,6 +62,7 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\TreeNode.cs" />
     <Compile Include="Utilities\LazyXmlParser.cs" />
     <Compile Include="Models\IgnoreCaseDictionary.cs" />
     <Compile Include="Models\Language.cs" />
