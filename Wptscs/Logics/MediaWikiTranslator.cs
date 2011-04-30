@@ -3,7 +3,7 @@
 //      Wikipedia用の翻訳支援処理実装クラスソース</summary>
 //
 // <copyright file="MediaWikiTranslator.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -19,6 +19,8 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Utilities;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// Wikipedia用の翻訳支援処理実装クラスです。

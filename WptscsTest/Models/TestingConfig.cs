@@ -3,18 +3,18 @@
 //      テスト用に拡張したConfigクラスソース。</summary>
 //
 // <copyright file="TestingConfig.cs.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-
 namespace Honememo.Wptscs.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+
     /// <summary>
     /// テスト用に拡張したConfigクラスです。
     /// </summary>

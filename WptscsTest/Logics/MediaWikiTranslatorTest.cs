@@ -3,7 +3,7 @@
 //      MediaWikiTranslatorのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiTranslatorTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -18,6 +18,8 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Tests;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
+    using Honememo.Wptscs.Utilities;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// MediaWikiTranslatorのテストクラスです。

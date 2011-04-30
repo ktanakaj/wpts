@@ -62,18 +62,20 @@
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\Config.cs" />
-    <Compile Include="Models\TreeNode.cs" />
-    <Compile Include="Utilities\LazyXmlParser.cs" />
-    <Compile Include="Models\IgnoreCaseDictionary.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\MediaWiki.cs" />
-    <Compile Include="Models\MediaWikiPage.cs" />
-    <Compile Include="Models\Page.cs" />
+    <Compile Include="Websites\IPageElement.cs" />
+    <Compile Include="Websites\MediaWiki.cs" />
+    <Compile Include="Websites\MediaWikiLink.cs" />
+    <Compile Include="Websites\MediaWikiPage.cs" />
+    <Compile Include="Websites\Page.cs" />
     <Compile Include="Models\TranslationDictionary.cs" />
     <Compile Include="Models\TranslationTable.cs" />
-    <Compile Include="Models\Website.cs" />
+    <Compile Include="Websites\TextElement.cs" />
+    <Compile Include="Websites\Website.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AppDefaultWebProxy.cs" />
+    <Compile Include="Utilities\IWebProxy.cs" />
     <EmbeddedResource Include="ConfigForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConfigForm.cs</DependentUpon>
@@ -106,10 +108,6 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Utilities\FormUtils.cs" />
-    <Compile Include="Utilities\ObjectUtils.cs" />
-    <Compile Include="Utilities\StringUtils.cs" />
-    <Compile Include="Utilities\Validate.cs" />
-    <Compile Include="Utilities\XmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
@@ -119,6 +117,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyLib\MyLib.csproj">
+      <Project>{CC7F6106-0C00-427B-9BF2-1EE65448907B}</Project>
+      <Name>MyLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.4\Microsoft.StyleCop.Targets" />

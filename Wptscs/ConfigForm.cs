@@ -21,6 +21,8 @@ namespace Honememo.Wptscs
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Utilities;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// Wikipedia翻訳支援ツール設定画面のクラスです。
@@ -54,7 +56,7 @@ namespace Honememo.Wptscs
             this.InitializeComponent();
 
             // 設定対象のConfigを受け取る
-            this.config = Utilities.Validate.NotNull(config, "config");
+            this.config = Honememo.Utilities.Validate.NotNull(config, "config");
         }
 
         #endregion

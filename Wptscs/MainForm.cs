@@ -22,6 +22,8 @@ namespace Honememo.Wptscs
     using Honememo.Wptscs.Logics;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Utilities;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// Wikipedia翻訳支援ツール主画面のクラスです。

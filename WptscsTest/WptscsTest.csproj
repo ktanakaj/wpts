@@ -41,26 +41,26 @@
   <ItemGroup>
     <Compile Include="Logics\MediaWikiTranslatorTest.cs" />
     <Compile Include="Models\ConfigTest.cs" />
-    <Compile Include="Models\IgnoreCaseDictionaryTest.cs" />
-    <Compile Include="Models\MediaWikiPageTest.cs" />
-    <Compile Include="Models\PageTest.cs" />
+    <Compile Include="Websites\MediaWikiLinkTest.cs" />
+    <Compile Include="Websites\MediaWikiPageTest.cs" />
+    <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\TestingConfig.cs" />
     <Compile Include="Models\LanguageTest.cs" />
-    <Compile Include="Models\MediaWikiTest.cs" />
+    <Compile Include="Websites\MediaWikiTest.cs" />
     <Compile Include="Models\TranslationDictionaryTest.cs" />
     <Compile Include="Models\TranslationTableTest.cs" />
-    <Compile Include="Models\TreeNodeTest.cs" />
-    <Compile Include="Models\WebsiteTest.cs" />
+    <Compile Include="Websites\TextElementTest.cs" />
+    <Compile Include="Websites\WebsiteTest.cs" />
     <Compile Include="PrivateAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AppDefaultWebProxyTest.cs" />
     <Compile Include="Utilities\FormUtilsTest.cs" />
-    <Compile Include="Utilities\LazyXmlParserTest.cs" />
-    <Compile Include="Utilities\ObjectUtilsTest.cs" />
-    <Compile Include="Utilities\StringUtilsTest.cs" />
-    <Compile Include="Utilities\ValidateTest.cs" />
-    <Compile Include="Utilities\XmlUtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyLib\MyLib.csproj">
+      <Project>{CC7F6106-0C00-427B-9BF2-1EE65448907B}</Project>
+      <Name>MyLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\wptscs\Wptscs.csproj">
       <Project>{4E20E523-0230-474C-B8F1-1E991360F5F5}</Project>
       <Name>Wptscs</Name>

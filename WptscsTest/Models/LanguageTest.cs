@@ -3,7 +3,7 @@
 //      Languageのテストクラスソース。</summary>
 //
 // <copyright file="LanguageTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================

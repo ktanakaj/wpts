@@ -3,15 +3,16 @@
 //      FormUtilsのテストクラスソース。</summary>
 //
 // <copyright file="FormUtilsTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-namespace Honememo.Utilities
+namespace Honememo.Wptscs.Utilities
 {
     using System;
     using System.Windows.Forms;
+    using Honememo.Wptscs.Utilities;
     using NUnit.Framework;
 
     /// <summary>
