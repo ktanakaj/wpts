@@ -14,6 +14,7 @@ namespace Honememo.Wptscs.Websites
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Honememo.Parsers;
     using Honememo.Utilities;
 
     /// <summary>
@@ -161,12 +162,12 @@ namespace Honememo.Wptscs.Websites
         {
             nowiki = null;
             LazyXmlParser parser = new LazyXmlParser();
-            LazyXmlParser.SimpleElement element;
-            if (parser.TryParse(text, out element))
+            XmlElement element;
+            if (parser.TryParseTag(text, out element))
             {
                 if (element.Name.ToLower() == MediaWikiPage.NowikiTag)
                 {
-                    nowiki = element.OuterXml;
+                    nowiki = element.ToString();
                     return true;
                 }
             }
@@ -199,10 +200,11 @@ namespace Honememo.Wptscs.Websites
                     case '<':
                         // コメント（<!--）またはnowiki区間の場合飛ばす
                         string subtext = this.Text.Substring(i);
+                        CommentElement comment;
                         string value;
-                        if (LazyXmlParser.TryParseComment(subtext, out value))
+                        if (CommentElement.TryParseLazy(subtext, out comment))
                         {
-                            i += value.Length - 1;
+                            i += comment.ToString().Length - 1;
                         }
                         else if (MediaWikiPage.TryParseNowiki(subtext, out value))
                         {
@@ -416,8 +418,9 @@ namespace Honememo.Wptscs.Websites
                     if (c == '<')
                     {
                         string subtext = text.Substring(i);
+                        CommentElement comment;
                         string value;
-                        if (LazyXmlParser.TryParseComment(subtext, out value))
+                        if (CommentElement.TryParseLazy(subtext, out comment))
                         {
                             // コメント（<!--）が含まれている場合、リンクは無効
                             break;
@@ -567,8 +570,9 @@ namespace Honememo.Wptscs.Websites
                     if (c == '<')
                     {
                         string subtext = text.Substring(i);
+                        CommentElement comment;
                         string value;
-                        if (LazyXmlParser.TryParseComment(subtext, out value))
+                        if (CommentElement.TryParseLazy(subtext, out comment))
                         {
                             // コメント（<!--）が含まれている場合、リンクは無効
                             break;
@@ -712,11 +716,11 @@ namespace Honememo.Wptscs.Websites
 
                 if (text[i] == '<')
                 {
-                    string comment;
-                    if (LazyXmlParser.TryParseComment(text.Substring(i), out comment))
+                    CommentElement comment;
+                    if (CommentElement.TryParseLazy(text.Substring(i), out comment))
                     {
                         // コメント（<!--）ブロック
-                        i += comment.Length - 1;
+                        i += comment.ToString().Length - 1;
                         continue;
                     }
                 }
@@ -954,7 +958,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// Wikipediaのリンクの要素を格納するための構造体。
         /// </summary>
-        public class Link : IPageElement
+        public class Link : IElement
         {
             #region プロパティ
 

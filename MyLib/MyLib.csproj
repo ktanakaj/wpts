@@ -40,13 +40,21 @@
   <ItemGroup>
     <Compile Include="Models\IgnoreCaseDictionary.cs" />
     <Compile Include="Models\TreeNode.cs" />
+    <Compile Include="Parsers\IElement.cs" />
+    <Compile Include="Parsers\IParser.cs" />
+    <Compile Include="Parsers\ListElement.cs" />
+    <Compile Include="Parsers\TextElement.cs" />
+    <Compile Include="Parsers\XmlElement.cs" />
+    <Compile Include="Parsers\CommentElement.cs" />
+    <Compile Include="Parsers\AbstractParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\LazyXmlParser.cs" />
+    <Compile Include="Parsers\LazyXmlParser.cs" />
     <Compile Include="Utilities\ObjectUtils.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
     <Compile Include="Utilities\Validate.cs" />
     <Compile Include="Utilities\XmlUtils.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

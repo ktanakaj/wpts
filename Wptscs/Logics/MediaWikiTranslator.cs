@@ -16,6 +16,7 @@ namespace Honememo.Wptscs.Logics
     using System.Net;
     using System.Text;
     using System.Windows.Forms;
+    using Honememo.Parsers;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
@@ -82,13 +83,15 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 改良版メソッドをコール
-            if (!LazyXmlParser.TryParseComment(text.Substring(index), out comment))
+            CommentElement commentElement;
+            if (!CommentElement.TryParseLazy(text.Substring(index), out commentElement))
             {
                 comment = String.Empty;
                 return -1;
             }
 
-            return index + comment.Length - 1;
+            comment = commentElement.ToString();
+            return index + commentElement.ToString().Length - 1;
         }
 
         /// <summary>

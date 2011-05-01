@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="Logics\MediaWikiTranslatorTest.cs" />
     <Compile Include="Models\ConfigTest.cs" />
-    <Compile Include="Websites\MediaWikiLinkTest.cs" />
+    <Compile Include="Parsers\MediaWikiLinkTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\TestingConfig.cs" />
@@ -49,7 +49,6 @@
     <Compile Include="Websites\MediaWikiTest.cs" />
     <Compile Include="Models\TranslationDictionaryTest.cs" />
     <Compile Include="Models\TranslationTableTest.cs" />
-    <Compile Include="Websites\TextElementTest.cs" />
     <Compile Include="Websites\WebsiteTest.cs" />
     <Compile Include="PrivateAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

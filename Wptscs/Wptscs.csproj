@@ -63,19 +63,18 @@
     </Compile>
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Websites\IPageElement.cs" />
     <Compile Include="Websites\MediaWiki.cs" />
-    <Compile Include="Websites\MediaWikiLink.cs" />
+    <Compile Include="Parsers\MediaWikiLink.cs" />
     <Compile Include="Websites\MediaWikiPage.cs" />
     <Compile Include="Websites\Page.cs" />
     <Compile Include="Models\TranslationDictionary.cs" />
     <Compile Include="Models\TranslationTable.cs" />
-    <Compile Include="Websites\TextElement.cs" />
     <Compile Include="Websites\Website.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AppDefaultWebProxy.cs" />
     <Compile Include="Utilities\IWebProxy.cs" />
+    <Compile Include="Parsers\MediaWikiParser.cs" />
     <EmbeddedResource Include="ConfigForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConfigForm.cs</DependentUpon>
