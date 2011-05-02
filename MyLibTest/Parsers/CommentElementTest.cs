@@ -39,6 +39,26 @@ namespace Honememo.Parsers
         #region 静的メソッドテストケース
 
         /// <summary>
+        /// ParseLazyメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestParseLazy()
+        {
+            // ※ 構文についてはTryParseLazyのテストケースで確認
+            Assert.AreEqual("<!--test-->", CommentElement.ParseLazy("<!--test-->").ToString());
+        }
+
+        /// <summary>
+        /// ParseLazyメソッドテストケース。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(FormatException))]
+        public void TestParseLazyNg()
+        {
+            CommentElement.ParseLazy("<--test-->");
+        }
+
+        /// <summary>
         /// TryParseLazyメソッドテストケース。
         /// </summary>
         [Test]
@@ -65,6 +85,19 @@ namespace Honememo.Parsers
             Assert.IsNull(comment);
             Assert.IsFalse(CommentElement.TryParseLazy("<! --test-->", out comment));
             Assert.IsNull(comment);
+        }
+
+        /// <summary>
+        /// IsElementPossibleメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestIsElementPossible()
+        {
+            Assert.IsTrue(CommentElement.IsElementPossible('<'));
+            Assert.IsFalse(CommentElement.IsElementPossible('['));
+            Assert.IsFalse(CommentElement.IsElementPossible('-'));
+            Assert.IsFalse(CommentElement.IsElementPossible('/'));
+            Assert.IsFalse(CommentElement.IsElementPossible('#'));
         }
 
         #endregion

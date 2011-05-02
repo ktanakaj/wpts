@@ -19,19 +19,19 @@ namespace Honememo.Wptscs.Parsers
     /// <summary>
     /// MediaWikiページの内部リンク要素をあらわすモデルクラスです。
     /// </summary>
-    public class MediaWikiLink : IElement
+    public class MediaWikiLink : AbstractElement
     {
         #region 定数
 
         /// <summary>
         /// 内部リンクの開始タグ。
         /// </summary>
-        private static readonly string startSign = "[[";
+        private static readonly string delimiterStart = "[[";
 
         /// <summary>
         /// 内部リンクの閉じタグ。
         /// </summary>
-        private static readonly string endSign = "]]";
+        private static readonly string delimiterEnd = "]]";
 
         #endregion
 
@@ -43,21 +43,6 @@ namespace Honememo.Wptscs.Parsers
         public MediaWikiLink()
         {
             this.PipeTexts = new List<IElement>();
-        }
-
-        #endregion
-
-        #region インタフェース実装プロパティ
-
-        /// <summary>
-        /// この要素の文字数。
-        /// </summary>
-        public virtual int Length
-        {
-            get
-            {
-                return this.Original != null ? this.Original.Length : this.ToString().Length;
-            }
         }
 
         #endregion
@@ -122,18 +107,6 @@ namespace Honememo.Wptscs.Parsers
             set;
         }
 
-        /// <summary>
-        /// Parse等によりインスタンスを生成した場合の元文字列。
-        /// </summary>
-        protected virtual string Original
-        {
-            // ※ 本当はParseしてから値が変更されていない場合、
-            //    ToStringでこの値を返すとしたいが、
-            //    子要素があるのでこのクラスでは実現困難。
-            get;
-            set;
-        }
-
         #endregion
 
         #region 静的メソッド
@@ -151,7 +124,7 @@ namespace Honememo.Wptscs.Parsers
             result = null;
 
             // 入力値確認
-            if (!s.StartsWith(MediaWikiLink.startSign))
+            if (!s.StartsWith(MediaWikiLink.delimiterStart))
             {
                 return false;
             }
@@ -169,7 +142,7 @@ namespace Honememo.Wptscs.Parsers
                 char c = s[i];
 
                 // ]]が見つかったら、処理正常終了
-                if (StringUtils.StartsWith(s, MediaWikiLink.endSign, i))
+                if (StringUtils.StartsWith(s, MediaWikiLink.delimiterEnd, i))
                 {
                     lastIndex = ++i;
                     break;
@@ -262,7 +235,7 @@ namespace Honememo.Wptscs.Parsers
                     if (index != -1)
                     {
                         i = index;
-                        //pipeTexts[pipeCounter - 1] += l.OriginalText;
+                        ((TextElement)pipeTexts[pipeCounter - 1]).Text += l.ToString();
                         continue;
                     }
 
@@ -280,7 +253,7 @@ namespace Honememo.Wptscs.Parsers
             result = new MediaWikiLink();
 
             // 変数ブロックの文字列をリンクのテキストに設定
-            //link.OriginalText = text.Substring(0, lastIndex + 1);
+            result.ParsedString = s.Substring(0, lastIndex + 1);
 
             // 前後のスペースは削除（見出しは後ろのみ）
             result.Title = article.Trim();
@@ -302,14 +275,15 @@ namespace Honememo.Wptscs.Parsers
                 result.Title = result.Title.TrimStart(':').TrimStart();
             }
 
+            // TODO: MediaWikiPageをどうするか考え中
             // 標準名前空間以外で[[xxx:yyy]]のようになっている場合、言語コード
-            //if (link.Title.Contains(":") && new MediaWikiPage(this.Website, link.Title).IsMain())
-            //{
+            // if (result.Title.Contains(":") && new MediaWikiPage(this.Website, result.Title).IsMain())
+            // {
             //    // ※本当は、言語コード等の一覧を作り、其処と一致するものを・・・とすべきだろうが、
             //    //   メンテしきれないので : を含む名前空間以外を全て言語コード等と判定
-            //    link.Code = link.Title.Substring(0, link.Title.IndexOf(':')).TrimEnd();
-            //    link.Title = link.Title.Substring(link.Title.IndexOf(':') + 1).TrimStart();
-            //}
+            //    result.Code = result.Title.Substring(0, result.Title.IndexOf(':')).TrimEnd();
+            //    result.Title = result.Title.Substring(result.Title.IndexOf(':') + 1).TrimStart();
+            // }
 
             return true;
         }
@@ -317,8 +291,8 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
         /// </summary>
-        /// <param name="text">[[で始まる文字列。</param>
-        /// <param name="link">解析したリンク。</param>
+        /// <param name="s">[[で始まる文字列。</param>
+        /// <param name="result">解析したリンク。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         public static bool TryParse(string s, out MediaWikiLink result)
         {
@@ -326,21 +300,32 @@ namespace Honememo.Wptscs.Parsers
             return MediaWikiLink.TryParse(s, new MediaWikiParser(), out result);
         }
 
+        /// <summary>
+        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public static bool IsElementPossible(char c)
+        {
+            return MediaWikiLink.delimiterStart[0] == c;
+        }
+
         #endregion
 
-        #region インタフェース実装メソッド
+        #region 内部実装メソッド
 
         /// <summary>
         /// この要素を書式化した内部リンクテキストを返す。
         /// </summary>
         /// <returns>内部リンクテキスト。</returns>
-        public override string ToString()
+        protected override string ToStringImpl()
         {
             // 戻り値初期化
             StringBuilder b = new StringBuilder();
             
             // 開始タグの付加
-            b.Append(MediaWikiLink.startSign);
+            b.Append(MediaWikiLink.delimiterStart);
 
             // 先頭の : の付加
             if (this.IsColon)
@@ -378,7 +363,7 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 閉じタグの付加
-            b.Append(MediaWikiLink.endSign);
+            b.Append(MediaWikiLink.delimiterEnd);
             return b.ToString();
         }
 

@@ -23,6 +23,15 @@ namespace Honememo.Wptscs.Parsers
     /// </summary>
     public class MediaWikiParser : XmlParser
     {
+        #region 定数宣言
+
+        /// <summary>
+        /// nowikiタグ。
+        /// </summary>
+        public static readonly string NowikiTag = "nowiki";
+
+        #endregion
+
         #region 公開静的メソッド
 
         /// <summary>
@@ -43,7 +52,7 @@ namespace Honememo.Wptscs.Parsers
             XmlElement element;
             if (parser.TryParseXmlElement(text, out element))
             {
-                if (element.Name.ToLower() == MediaWikiPage.NowikiTag)
+                if (element.Name.ToLower() == MediaWikiParser.NowikiTag)
                 {
                     nowiki = element.ToString();
                     return true;
@@ -67,24 +76,24 @@ namespace Honememo.Wptscs.Parsers
         public int ChkLinkText(out IElement element, string text, int index)
         {
             // 入力値に応じて、処理を振り分け
-            if (StringUtils.StartsWith(text, "[[", index))
+            if (MediaWikiLink.IsElementPossible(text[index]))
             {
                 // 内部リンク
                 MediaWikiLink linkElement;
                 if (MediaWikiLink.TryParse(text.Substring(index), this, out linkElement))
                 {
                     element = linkElement;
-                    return index + element.Length - 1;
+                    return index + element.ToString().Length - 1;
                 }
             }
-            else if (StringUtils.StartsWith(text, "{{", index))
+            else if (MediaWikiTemplate.IsElementPossible(text[index]))
             {
                 // テンプレート
                 MediaWikiTemplate templateElement;
                 if (MediaWikiTemplate.TryParse(text.Substring(index), this, out templateElement))
                 {
                     element = templateElement;
-                    return index + element.Length - 1;
+                    return index + element.ToString().Length - 1;
                 }
             }
 
@@ -158,7 +167,7 @@ namespace Honememo.Wptscs.Parsers
                     if (text[i] == '<')
                     {
                         string nowiki;
-                        if (MediaWikiPage.TryParseNowiki(text.Substring(i), out nowiki))
+                        if (MediaWikiParser.TryParseNowiki(text.Substring(i), out nowiki))
                         {
                             // nowikiブロック
                             i += nowiki.Length - 1;
@@ -184,7 +193,7 @@ namespace Honememo.Wptscs.Parsers
                     if (subindex != -1)
                     {
                         i = subindex;
-                        //value += link.OriginalText;
+                        value += link.ToString();
                         continue;
                     }
 

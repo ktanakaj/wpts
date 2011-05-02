@@ -19,57 +19,29 @@ namespace Honememo.Wptscs.Parsers
     /// <summary>
     /// MediaWikiページの見出し要素をあらわすモデルクラスです。
     /// </summary>
-    public class MediaWikiHeading : IElement
+    public class MediaWikiHeading : ListElement
     {
         #region 定数
 
         /// <summary>
         /// 見出しの開始文字。
         /// </summary>
-        private static readonly string startSign = "=";
+        private static readonly string delimiterStart = "=";
 
         /// <summary>
         /// 見出しの閉じ文字。
         /// </summary>
-        private static readonly string endSign = "=";
-
-        #endregion
-        
-        #region インタフェース実装プロパティ
-
-        /// <summary>
-        /// この要素の文字数。
-        /// </summary>
-        public virtual int Length
-        {
-            get
-            {
-                return this.Original != null ? this.Original.Length : this.ToString().Length;
-            }
-        }
+        private static readonly string delimiterEnd = "=";
 
         #endregion
 
         #region プロパティ
 
         /// <summary>
-        /// リンクの記事名。
+        /// 見出し階層。
         /// </summary>
-        /// <remarks>リンクに記載されていた記事名であり、名前空間の情報などは含まない可能性があるため注意。</remarks>
-        public string Title
+        public int Level
         {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Parse等によりインスタンスを生成した場合の元文字列。
-        /// </summary>
-        protected virtual string Original
-        {
-            // ※ 本当はParseしてから値が変更されていない場合、
-            //    ToStringでこの値を返すとしたいが、
-            //    子要素があるのでこのクラスでは実現困難。
             get;
             set;
         }
@@ -79,11 +51,11 @@ namespace Honememo.Wptscs.Parsers
         #region 静的メソッド
 
         /// <summary>
-        /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
+        /// 渡されたテキストをMediaWikiの見出しとして解析する。
         /// </summary>
-        /// <param name="text">[[で始まる文字列。</param>
+        /// <param name="text">=で始まる文字列。</param>
         /// <param name="parser">解析に使用するパーサー。</param>
-        /// <param name="link">解析したリンク。</param>
+        /// <param name="link">解析した見出し。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         public static bool TryParse(string text, IParser parser, out MediaWikiHeading link)
         {
@@ -91,7 +63,7 @@ namespace Honememo.Wptscs.Parsers
             link = null;
 
             // 入力値確認
-            if (!text.StartsWith(MediaWikiHeading.startSign))
+            if (!text.StartsWith(MediaWikiHeading.delimiterStart))
             {
                 return false;
             }
@@ -101,10 +73,10 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
+        /// 渡されたテキストをMediaWikiの見出しとして解析する。
         /// </summary>
-        /// <param name="text">[[で始まる文字列。</param>
-        /// <param name="link">解析したリンク。</param>
+        /// <param name="s">=で始まる文字列。</param>
+        /// <param name="result">解析した見出し。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         public static bool TryParse(string s, out MediaWikiHeading result)
         {
@@ -112,25 +84,45 @@ namespace Honememo.Wptscs.Parsers
             return MediaWikiHeading.TryParse(s, new MediaWikiParser(), out result);
         }
 
+        /// <summary>
+        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public static bool IsElementPossible(char c)
+        {
+            return MediaWikiHeading.delimiterStart[0] == c;
+        }
+
         #endregion
 
-        #region インタフェース実装メソッド
+        #region 内部実装メソッド
 
         /// <summary>
-        /// この要素を書式化した内部リンクテキストを返す。
+        /// この要素を書式化した見出し文字列を返す。
         /// </summary>
-        /// <returns>内部リンクテキスト。</returns>
-        public override string ToString()
+        /// <returns>見出し文字列。</returns>
+        protected override string ToStringImpl()
         {
             // 戻り値初期化
             StringBuilder b = new StringBuilder();
-            
-            // 開始タグの付加
-            b.Append(MediaWikiHeading.startSign);
 
+            // 開始文字の付加
+            for (int i = 0; i < this.Level; i++)
+            {
+                b.Append(MediaWikiHeading.delimiterStart);
+            }
 
-            // 閉じタグの付加
-            b.Append(MediaWikiHeading.endSign);
+            // 見出し文字列の設定
+            b.Append(base.ToStringImpl());
+
+            // 閉じ文字の付加
+            for (int i = 0; i < this.Level; i++)
+            {
+                b.Append(MediaWikiHeading.delimiterEnd);
+            }
+
             return b.ToString();
         }
 

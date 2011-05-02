@@ -71,42 +71,7 @@ namespace Honememo.Wptscs.Websites
         #endregion
 
         // TODO: いっぱい足らない
-
-        #region 公開静的メソッドテストケース
         
-        /// <summary>
-        /// TryParseNowikiメソッドテストケース。
-        /// </summary>
-        [Test]
-        public void TestTryParseNowiki()
-        {
-            string nowiki;
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<nowiki>[[test]]</nowiki>", out nowiki));
-            Assert.AreEqual("<nowiki>[[test]]</nowiki>", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<NOWIKI>[[test]]</NOWIKI>", out nowiki));
-            Assert.AreEqual("<NOWIKI>[[test]]</NOWIKI>", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<Nowiki>[[test]]</noWiki>", out nowiki));
-            Assert.AreEqual("<Nowiki>[[test]]</noWiki>", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<nowiki>[[test]]</nowiki></nowiki>", out nowiki));
-            Assert.AreEqual("<nowiki>[[test]]</nowiki>", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<nowiki>[[test]]nowiki", out nowiki));
-            Assert.AreEqual("<nowiki>[[test]]nowiki", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<nowiki>\n\n[[test]]\r\n</nowiki>", out nowiki));
-            Assert.AreEqual("<nowiki>\n\n[[test]]\r\n</nowiki>", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<nowiki><!--[[test]]--></nowiki>", out nowiki));
-            Assert.AreEqual("<nowiki><!--[[test]]--></nowiki>", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<nowiki><!--<nowiki>[[test]]</nowiki>--></nowiki>", out nowiki));
-            Assert.AreEqual("<nowiki><!--<nowiki>[[test]]</nowiki>--></nowiki>", nowiki);
-            Assert.IsTrue(MediaWikiPage.TryParseNowiki("<nowiki><!--[[test]]", out nowiki));
-            Assert.AreEqual("<nowiki><!--[[test]]", nowiki);
-            Assert.IsFalse(MediaWikiPage.TryParseNowiki("<nowik>[[test]]</nowik>", out nowiki));
-            Assert.IsNull(nowiki);
-            Assert.IsFalse(MediaWikiPage.TryParseNowiki("<nowiki[[test]]</nowiki>", out nowiki));
-            Assert.IsNull(nowiki);
-        }
-
-        #endregion
-
         #region 公開インスタンスメソッドテストケース
 
         /// <summary>

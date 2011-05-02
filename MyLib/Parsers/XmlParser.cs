@@ -175,7 +175,9 @@ namespace Honememo.Parsers
         /// <returns>候補となる場合<c>true</c>。</returns>
         protected override bool IsElementPossible(string s, int index)
         {
-            return s[index] == '<';
+            char c = s[index];
+            return CommentElement.IsElementPossible(c)
+                || XmlElement.IsElementPossible(c);
         }
 
         /// <summary>

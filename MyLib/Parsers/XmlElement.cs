@@ -19,10 +19,6 @@ namespace Honememo.Parsers
     /// <summary>
     /// ページのXML要素をあらわすモデルクラスです。
     /// </summary>
-    /// <remarks>
-    /// ※ この要素はその性質上Parse元と完全に同じ文字列を生成できない。
-    ///    内容を厳密に保持する必要がある場合は代替手段を用いるなど注意を。
-    /// </remarks>
     public class XmlElement : ListElement
     {
         #region private変数
@@ -42,11 +38,12 @@ namespace Honememo.Parsers
         /// <param name="name">タグ名。</param>
         /// <param name="attributes">属性。</param>
         /// <param name="innerElements">値。</param>
-        /// <param name="original">Parse解析時の元の文字列。</param>
-        public XmlElement(string name, IDictionary<string, string> attributes, ICollection<IElement> innerElements, string original = null)
+        /// <param name="parsedString">Parse解析時の元の文字列。</param>
+        public XmlElement(string name, IDictionary<string, string> attributes,
+            ICollection<IElement> innerElements, string parsedString = null)
         {
             this.Name = name;
-            this.Original = original;
+            this.ParsedString = parsedString;
             if (attributes != null)
             {
                 this.Attributes = new Dictionary<string, string>(attributes);
@@ -78,22 +75,7 @@ namespace Honememo.Parsers
         }
 
         #endregion
-
-        #region インタフェース実装プロパティ
-
-        /// <summary>
-        /// この要素の文字数。
-        /// </summary>
-        public override int Length
-        {
-            get
-            {
-                return this.Original != null ? this.Original.Length : this.ToString().Length;
-            }
-        }
-
-        #endregion
-
+        
         #region プロパティ
 
         /// <summary>
@@ -123,22 +105,30 @@ namespace Honememo.Parsers
             protected set;
         }
 
-        /// <summary>
-        /// Parse等によりインスタンスを生成した場合の元文字列。
-        /// </summary>
-        protected virtual string Original
-        {
-            // ※ 本当はParseしてから値が変更されていない場合、
-            //    ToStringでこの値を返すとしたいが、
-            //    子要素があるのでこのクラスでは実現困難。
-            //    継承クラスのために、Parseした結果を入れておく。
-            get;
-            set;
-        }
-
         #endregion
 
         #region 静的メソッド
+
+        /// <summary>
+        /// 渡されたテキストをXML/HTMLタグとして解析する。
+        /// </summary>
+        /// <param name="s">解析するテキスト。</param>
+        /// <returns>解析したタグ。</returns>
+        /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
+        /// <remarks>
+        /// XML/HTMLタグと判定するには、1文字目が開始タグである必要がある。
+        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
+        /// </remarks>
+        public static XmlElement ParseLazy(string s)
+        {
+            XmlElement result;
+            if (XmlElement.TryParseLazy(s, out result))
+            {
+                return result;
+            }
+
+            throw new FormatException("Invalid String : " + s);
+        }
 
         /// <summary>
         /// 渡されたテキストをXML/HTMLタグとして解析する。
@@ -172,15 +162,26 @@ namespace Honememo.Parsers
             return XmlElement.TryParse(s, new XmlParser(), out result);
         }
 
+        /// <summary>
+        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public static bool IsElementPossible(char c)
+        {
+            return '<' == c;
+        }
+
         #endregion
 
-        #region インタフェース実装メソッド
+        #region 内部実装メソッド
 
         /// <summary>
         /// このXML要素を表す文字列を返す。
         /// </summary>
         /// <returns>このXML要素を表す文字列。</returns>
-        public override string ToString()
+        protected override string ToStringImpl()
         {
             StringBuilder b = new StringBuilder();
             XmlWriterSettings s = new XmlWriterSettings();

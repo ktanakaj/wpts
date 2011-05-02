@@ -22,16 +22,12 @@ namespace Honememo.Parsers
         #region インタフェース実装メソッド
 
         /// <summary>
-        /// 渡されたテキストをXML/HTMLタグとして解析する。
+        /// 渡された文字列の解析を行う。
         /// </summary>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="element">解析したタグ。</param>
-        /// <returns>タグの場合<c>true</c>。</returns>
-        /// <remarks>
-        /// XML/HTMLタグと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
-        /// また、本メソッドはあくまで簡易的な構文用であり、入れ子は考慮しない。
-        /// </remarks>
+        /// <param name="s">解析対象の文字列。</param>
+        /// <returns>解析結果。</returns>
+        /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
+        /// <remarks><see cref="TryParse"/>を呼び出し。解析に失敗した場合は、各種例外を投げる。</remarks>
         public virtual IElement Parse(string s)
         {
             IElement result;
@@ -44,15 +40,13 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// 渡されたテキストをXML/HTMLタグとして解析する。
+        /// 渡された文字列の解析を行う。
         /// </summary>
-        /// <param name="s">解析するテキスト。</param>
-        /// <param name="result">解析したタグ。</param>
-        /// <returns>タグの場合<c>true</c>。</returns>
+        /// <param name="s">解析対象の文字列。</param>
+        /// <param name="result">解析結果。</param>
+        /// <returns>解析に成功した場合<c>true</c>。</returns>
         /// <remarks>
-        /// XML/HTMLタグと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
-        /// また、本メソッドはあくまで簡易的な構文用であり、入れ子は考慮しない。
+        /// 実装として <see cref="IsElementPossible"/>, <see cref="TryParseElements"/> を呼び出し。
         /// </remarks>
         public virtual bool TryParse(string s, out IElement result)
         {
@@ -72,7 +66,7 @@ namespace Honememo.Parsers
                         // その後に解析した要素を追加
                         this.FlashText(ref list, ref b);
                         list.Add(innerElement);
-                        i += innerElement.Length - 1;
+                        i += innerElement.ToString().Length - 1;
                         continue;
                     }
                 }

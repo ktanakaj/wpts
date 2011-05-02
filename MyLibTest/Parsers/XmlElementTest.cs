@@ -111,6 +111,26 @@ namespace Honememo.Parsers
         #region 静的メソッドテストケース
 
         /// <summary>
+        /// ParseLazyメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestParseLazy()
+        {
+            // 解析処理の詳細はXmlParser側のテストケースで試験
+            Assert.AreEqual("<h1>test</H1>", XmlElement.ParseLazy("<h1>test</H1>").ToString());
+        }
+
+        /// <summary>
+        /// ParseLazyメソッドテストケース。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(FormatException))]
+        public void TestParseLazyNg()
+        {
+            XmlElement.ParseLazy("test");
+        }
+
+        /// <summary>
         /// TryParseメソッドテストケース。
         /// </summary>
         [Test]
@@ -128,7 +148,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース。
+        /// TryParseLazyメソッドテストケース。
         /// </summary>
         [Test]
         public void TestTryParseLazy()
@@ -138,6 +158,19 @@ namespace Honememo.Parsers
             Assert.IsTrue(XmlElement.TryParseLazy("<h1>test</H1>", out element));
             Assert.AreEqual("h1", element.Name);
             Assert.AreEqual("test", element[0].ToString());
+        }
+
+        /// <summary>
+        /// IsElementPossibleメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestIsElementPossible()
+        {
+            Assert.IsTrue(CommentElement.IsElementPossible('<'));
+            Assert.IsFalse(CommentElement.IsElementPossible('['));
+            Assert.IsFalse(CommentElement.IsElementPossible('-'));
+            Assert.IsFalse(CommentElement.IsElementPossible('/'));
+            Assert.IsFalse(CommentElement.IsElementPossible('#'));
         }
 
         #endregion

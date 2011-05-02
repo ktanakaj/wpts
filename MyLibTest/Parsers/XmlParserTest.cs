@@ -101,15 +101,14 @@ namespace Honememo.Parsers
             Assert.AreEqual("testid", element.Attributes["id"]);
             Assert.AreEqual("testname", element.Attributes["name"]);
 
-            // ※ 現状はHTMLとして解析してもXMLとしてしか出力できない
             parser.IsHtml = true;
             Assert.IsTrue(parser.TryParseXmlElement("<p>段落1<p>段落2", out element));
-            Assert.AreEqual("<p />", element.ToString());
+            Assert.AreEqual("<p>", element.ToString());
             Assert.AreEqual("p", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<input type=\"checkbox\" name=\"param\" value=\"test\" checked><label for=\"param\">チェック</label>", out element));
-            Assert.AreEqual("<input type=\"checkbox\" name=\"param\" value=\"test\" checked=\"\" />", element.ToString());
+            Assert.AreEqual("<input type=\"checkbox\" name=\"param\" value=\"test\" checked>", element.ToString());
             Assert.AreEqual("input", element.Name);
             Assert.AreEqual(4, element.Attributes.Count);
             Assert.AreEqual("checkbox", element.Attributes["type"]);
@@ -127,7 +126,7 @@ namespace Honememo.Parsers
             XmlElement element;
             XmlParser parser = new XmlParser();
             Assert.IsTrue(parser.TryParseXmlElement("<testtag></testtag>", out element));
-            Assert.AreEqual("<testtag />", element.ToString());
+            Assert.AreEqual("<testtag></testtag>", element.ToString());
             Assert.AreEqual("testtag", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
@@ -149,7 +148,7 @@ namespace Honememo.Parsers
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag5 testattr2='testvalue2'><testbody></testtag5 >testend", out element));
             Assert.IsInstanceOf(typeof(XmlElement), element[0]);
-            Assert.AreEqual("<testtag5 testattr2=\"testvalue2\"><testbody /></testtag5>", element.ToString());
+            Assert.AreEqual("<testtag5 testattr2='testvalue2'><testbody></testtag5 >", element.ToString());
             Assert.AreEqual("testtag5", element.Name);
             Assert.AreEqual(1, element.Attributes.Count);
             Assert.AreEqual("testvalue2", element.Attributes["testattr2"]);
@@ -183,12 +182,12 @@ namespace Honememo.Parsers
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag2/>", out element));
-            Assert.AreEqual("<testtag2 />", element.ToString());
+            Assert.AreEqual("<testtag2/>", element.ToString());
             Assert.AreEqual("testtag2", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag3   />testtag4 />", out element));
-            Assert.AreEqual("<testtag3 />", element.ToString());
+            Assert.AreEqual("<testtag3   />", element.ToString());
             Assert.AreEqual("testtag3", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
@@ -199,7 +198,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("testvalue", element.Attributes["testattr"]);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag6 testattr1=\"testvalue1\" testattr2=\"testvalue2\"/>/>", out element));
-            Assert.AreEqual("<testtag6 testattr1=\"testvalue1\" testattr2=\"testvalue2\" />", element.ToString());
+            Assert.AreEqual("<testtag6 testattr1=\"testvalue1\" testattr2=\"testvalue2\"/>", element.ToString());
             Assert.AreEqual("testtag6", element.Name);
             Assert.AreEqual(2, element.Attributes.Count);
             Assert.AreEqual("testvalue1", element.Attributes["testattr1"]);
@@ -215,24 +214,24 @@ namespace Honememo.Parsers
             XmlElement element;
             XmlParser parser = new XmlParser();
             Assert.IsTrue(parser.TryParseXmlElement("<p>", out element));
-            Assert.AreEqual("<p />", element.ToString());
+            Assert.AreEqual("<p>", element.ToString());
             Assert.AreEqual("p", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag>test value", out element));
-            Assert.AreEqual("<testtag>test value</testtag>", element.ToString());
+            Assert.AreEqual("<testtag>test value", element.ToString());
             Assert.AreEqual("testtag", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag2 testattr=test value>test value</testtag2>", out element));
-            Assert.AreEqual("<testtag2 testattr=\"test\" value=\"\">test value</testtag2>", element.ToString());
+            Assert.AreEqual("<testtag2 testattr=test value>test value</testtag2>", element.ToString());
             Assert.AreEqual("testtag2", element.Name);
             Assert.AreEqual(2, element.Attributes.Count);
             Assert.AreEqual("test", element.Attributes["testattr"]);
             Assert.IsEmpty(element.Attributes["value"]);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag3>test value2</ testtag3>testend", out element));
-            Assert.AreEqual("<testtag3>test value2</ testtag3>testend</testtag3>", element.ToString());
+            Assert.AreEqual("<testtag3>test value2</ testtag3>testend", element.ToString());
             Assert.AreEqual("testtag3", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
         }
@@ -276,7 +275,7 @@ namespace Honememo.Parsers
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<p>", out element));
-            Assert.AreEqual("<p />", element.ToString());
+            Assert.AreEqual("<p>", element.ToString());
             Assert.AreEqual("p", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
@@ -286,12 +285,12 @@ namespace Honememo.Parsers
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag4></testtag5>", out element));
-            Assert.AreEqual("<testtag4 />", element.ToString());
+            Assert.AreEqual("<testtag4>", element.ToString());
             Assert.AreEqual("testtag4", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
             Assert.IsTrue(parser.TryParseXmlElement("<testtag6 testattr=\"testvalue\">>", out element));
-            Assert.AreEqual("<testtag6 testattr=\"testvalue\" />", element.ToString());
+            Assert.AreEqual("<testtag6 testattr=\"testvalue\">", element.ToString());
             Assert.AreEqual("testtag6", element.Name);
             Assert.AreEqual(1, element.Attributes.Count);
             Assert.AreEqual("testvalue", element.Attributes["testattr"]);
@@ -313,7 +312,7 @@ namespace Honememo.Parsers
             XmlElement element;
             XmlParser parser = new XmlParser { IgnoreCase = false };
             Assert.IsTrue(parser.TryParseXmlElement("<testtag></testtag></Testtag>", out element));
-            Assert.AreEqual("<testtag />", element.ToString());
+            Assert.AreEqual("<testtag></testtag>", element.ToString());
             Assert.AreEqual("testtag", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
 
@@ -324,7 +323,7 @@ namespace Honememo.Parsers
 
             parser.IgnoreCase = true;
             Assert.IsTrue(parser.TryParseXmlElement("<testtag></Testtag></testtag>", out element));
-            Assert.AreEqual("<testtag />", element.ToString());
+            Assert.AreEqual("<testtag></Testtag>", element.ToString());
             Assert.AreEqual("testtag", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
         }

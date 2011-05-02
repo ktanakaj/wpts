@@ -42,6 +42,7 @@
     <Compile Include="Logics\MediaWikiTranslatorTest.cs" />
     <Compile Include="Models\ConfigTest.cs" />
     <Compile Include="Parsers\MediaWikiLinkTest.cs" />
+    <Compile Include="Parsers\MediaWikiParserTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\TestingConfig.cs" />

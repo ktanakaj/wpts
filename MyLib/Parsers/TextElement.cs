@@ -16,7 +16,7 @@ namespace Honememo.Parsers
     /// ページや文字列のテキスト要素をあらわすモデルクラスです。
     /// </summary>
     /// <remarks>テキストを扱うだけの単純な要素。</remarks>
-    public class TextElement : IElement
+    public class TextElement : AbstractElement
     {
         #region コンストラクタ
 
@@ -27,21 +27,6 @@ namespace Honememo.Parsers
         public TextElement(string text = null)
         {
             this.Text = text;
-        }
-
-        #endregion
-        
-        #region インタフェース実装プロパティ
-
-        /// <summary>
-        /// この要素の文字数。
-        /// </summary>
-        public virtual int Length
-        {
-            get
-            {
-                return this.ToString().Length;
-            }
         }
 
         #endregion
@@ -59,15 +44,15 @@ namespace Honememo.Parsers
 
         #endregion
 
-        #region インタフェース実装メソッド
+        #region 実装支援用抽象メソッド実装
 
         /// <summary>
         /// このテキスト要素のテキストを返す。
         /// </summary>
         /// <returns>このテキスト要素のテキスト。</returns>
-        public override string ToString()
+        protected override string ToStringImpl()
         {
-            return this.Text != null ? this.Text : String.Empty;
+            return this.Text;
         }
 
         #endregion

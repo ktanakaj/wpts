@@ -26,12 +26,26 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テンプレートの開始タグ。
         /// </summary>
-        private static readonly string startSign = "{{";
+        private static readonly string delimiterStart = "{{";
 
         /// <summary>
         /// テンプレートの閉じタグ。
         /// </summary>
-        private static readonly string endSign = "}}";
+        private static readonly string delimiterEnd = "}}";
+
+        /// <summary>
+        /// msgnwの書式。
+        /// </summary>
+        private static readonly string msgnw = "msgnw:";
+
+        #endregion
+
+        #region private変数
+
+        /// <summary>
+        /// テンプレートの記事名。
+        /// </summary>
+        private string title;
 
         #endregion
 
@@ -40,6 +54,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 指定されたタイトルのテンプレート要素をあらわすインスタンスを生成する。
         /// </summary>
+        /// <param name="title">テンプレート名。</param>
         public MediaWikiTemplate(string title)
         {
             this.Title = title;
@@ -51,10 +66,37 @@ namespace Honememo.Wptscs.Parsers
         #region プロパティ
 
         /// <summary>
-        /// リンクの記事名。
+        /// テンプレートの記事名。
         /// </summary>
-        /// <remarks>リンクに記載されていた記事名であり、名前空間の情報などは含まない可能性があるため注意。</remarks>
+        /// <exception cref="ArgumentNullException">記事名がnullの場合。</exception>
+        /// <exception cref="ArgumentException">記事名が空の場合。</exception>
+        /// <remarks>テンプレートに記載されていた記事名であり、名前空間の情報などは含まない可能性があるため注意。</remarks>
         public override string Title
+        {
+            get
+            {
+                return this.title;
+            }
+
+            set
+            {
+                this.title = Validate.NotBlank(value);
+            }
+        }
+
+        /// <summary>
+        /// テンプレートのソースをそのまま出力することを示す msgnw: が付加されているか？
+        /// </summary>
+        public virtual bool IsMsgnw
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 記事名の後で改行が入るか？
+        /// </summary>
+        public virtual bool NewLine
         {
             get;
             set;
@@ -65,11 +107,11 @@ namespace Honememo.Wptscs.Parsers
         #region 静的メソッド
 
         /// <summary>
-        /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
+        /// 渡されたテキストをMediaWikiのテンプレートとして解析する。
         /// </summary>
-        /// <param name="s">[[で始まる文字列。</param>
+        /// <param name="s">{{で始まる文字列。</param>
         /// <param name="parser">解析に使用するパーサー。</param>
-        /// <param name="result">解析したリンク。</param>
+        /// <param name="result">解析したテンプレート。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         public static bool TryParse(string s, MediaWikiParser parser, out MediaWikiTemplate result)
         {
@@ -77,7 +119,7 @@ namespace Honememo.Wptscs.Parsers
             result = null;
 
             // 入力値確認
-            if (!s.StartsWith(MediaWikiTemplate.startSign))
+            if (!s.StartsWith(MediaWikiTemplate.delimiterStart))
             {
                 return false;
             }
@@ -93,7 +135,7 @@ namespace Honememo.Wptscs.Parsers
                 char c = s[i];
 
                 // }}が見つかったら、処理正常終了
-                if (StringUtils.StartsWith(s, MediaWikiTemplate.endSign, i))
+                if (StringUtils.StartsWith(s, MediaWikiTemplate.delimiterEnd, i))
                 {
                     lastIndex = ++i;
                     break;
@@ -165,7 +207,7 @@ namespace Honememo.Wptscs.Parsers
                     if (index != -1)
                     {
                         i = index;
-                        //                       pipeTexts[pipeCounter - 1] += l.OriginalText;
+                        ((TextElement)pipeTexts[pipeCounter - 1]).Text += l.ToString();
                         continue;
                     }
 
@@ -200,26 +242,26 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 先頭が msgnw:
-            //link.IsMsgnw = link.Title.ToLower().StartsWith(Msgnw.ToLower());
-            //if (link.IsMsgnw)
-            //{
-            //    link.Title = link.Title.Substring(Msgnw.Length);
-            //}
+            result.IsMsgnw = result.Title.ToLower().StartsWith(MediaWikiTemplate.msgnw.ToLower());
+            if (result.IsMsgnw)
+            {
+                result.Title = result.Title.Substring(MediaWikiTemplate.msgnw.Length);
+            }
 
-            //// 記事名直後の改行の有無
-            //if (article.TrimEnd(' ').EndsWith("\n"))
-            //{
-            //    link.Enter = true;
-            //}
+            // 記事名直後の改行の有無
+            if (article.TrimEnd(' ').EndsWith("\n"))
+            {
+                result.NewLine = true;
+            }
 
             return true;
         }
 
         /// <summary>
-        /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
+        /// 渡されたテキストをMediaWikiのテンプレートとして解析する。
         /// </summary>
-        /// <param name="text">[[で始まる文字列。</param>
-        /// <param name="link">解析したリンク。</param>
+        /// <param name="s">{{で始まる文字列。</param>
+        /// <param name="result">解析したテンプレート。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         public static bool TryParse(string s, out MediaWikiTemplate result)
         {
@@ -227,26 +269,43 @@ namespace Honememo.Wptscs.Parsers
             return MediaWikiTemplate.TryParse(s, new MediaWikiParser(), out result);
         }
 
+        /// <summary>
+        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public static new bool IsElementPossible(char c)
+        {
+            return MediaWikiTemplate.delimiterStart[0] == c;
+        }
+
         #endregion
 
-        #region インタフェース実装メソッド
+        #region 内部実装メソッド
 
         /// <summary>
-        /// この要素を書式化した内部リンクテキストを返す。
+        /// この要素を書式化したテンプレートテキストを返す。
         /// </summary>
-        /// <returns>内部リンクテキスト。</returns>
-        public override string ToString()
+        /// <returns>テンプレートテキスト。</returns>
+        protected override string ToStringImpl()
         {
             // 戻り値初期化
             StringBuilder b = new StringBuilder();
             
             // 開始タグの付加
-            b.Append(MediaWikiTemplate.startSign);
+            b.Append(MediaWikiTemplate.delimiterStart);
 
             // 先頭の : の付加
             if (this.IsColon)
             {
                 b.Append(':');
+            }
+
+            // msgnw: （テンプレートを<nowiki>タグで挟む）の付加
+            if (this.IsMsgnw)
+            {
+                b.Append(MediaWikiTemplate.msgnw);
             }
 
             // 言語コード・他プロジェクトコードの付加
@@ -268,6 +327,12 @@ namespace Honememo.Wptscs.Parsers
                 b.Append(this.Section);
             }
 
+            // 改行の付加
+            if (this.NewLine)
+            {
+                b.Append('\n');
+            }
+
             // パイプ後の文字列の付加
             if (this.PipeTexts != null)
             {
@@ -279,7 +344,7 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 閉じタグの付加
-            b.Append(MediaWikiTemplate.endSign);
+            b.Append(MediaWikiTemplate.delimiterEnd);
             return b.ToString();
         }
 

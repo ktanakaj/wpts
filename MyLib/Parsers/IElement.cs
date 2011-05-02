@@ -18,12 +18,16 @@ namespace Honememo.Parsers
         #region プロパティ
 
         /// <summary>
-        /// この要素の文字数。
+        /// 要素がParse等により生成された場合の解析元文字列。
         /// </summary>
-        /// <remarks>Parseで生成した場合、解析結果の文字数と一致する必要がある。</remarks>
-        int Length
+        /// <remarks>
+        /// <see cref="ToString"/>に生成した値を返して欲しい場合、この値を明示的に<c>null</c>にすべき。
+        /// 元の文字列と完全に同じ文字列を生成できるクラスであれば、常に未設定でも問題ない。
+        /// </remarks>
+        string ParsedString
         {
             get;
+            set;
         }
 
         #endregion
@@ -34,6 +38,10 @@ namespace Honememo.Parsers
         /// 各要素を書式化したテキスト形式で返す。
         /// </summary>
         /// <returns>書式化したテキスト。<c>null</c>は返さないこと。</returns>
+        /// <remarks>
+        /// Parse系の処理を実装する上で元の文字列が必要なため、
+        /// <see cref="ParsedString"/>が設定されている場合は、その値を返すべき。
+        /// </remarks>
         string ToString();
 
         #endregion

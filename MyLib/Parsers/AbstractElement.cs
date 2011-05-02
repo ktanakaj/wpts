@@ -1,8 +1,8 @@
 ﻿// ================================================================================================
 // <summary>
-//      ページ要素を複数格納する要素をあらわすモデルクラスソース</summary>
+//      IElementを実装するための実装支援用抽象クラスソース</summary>
 //
-// <copyright file="ListElement.cs" company="honeplusのメモ帳">
+// <copyright file="AbstractElement.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -11,17 +11,15 @@
 namespace Honememo.Parsers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using Honememo.Utilities;
 
     /// <summary>
-    /// ページ要素を複数格納する要素をあらわすモデルクラスです。
+    /// IElementを実装するための実装支援用抽象クラスです。
     /// </summary>
-    public class ListElement : List<IElement>, IElement
-    {
+    public abstract class AbstractElement : IElement
+    {        
         #region インタフェース実装プロパティ
-        
+
         /// <summary>
         /// 要素がParse等により生成された場合の解析元文字列。
         /// </summary>
@@ -36,7 +34,7 @@ namespace Honememo.Parsers
         }
 
         #endregion
-
+        
         #region インタフェース実装メソッド
 
         /// <summary>
@@ -53,22 +51,13 @@ namespace Honememo.Parsers
 
         #endregion
 
-        #region 内部実装メソッド
+        #region 実装支援用抽象メソッド
 
         /// <summary>
-        /// この要素に格納されている要素のToStringを連結して返す。
+        /// 各要素を書式化したテキスト形式で返す。
         /// </summary>
-        /// <returns>この要素に格納されている要素のテキスト。</returns>
-        protected virtual string ToStringImpl()
-        {
-            StringBuilder b = new StringBuilder();
-            foreach (IElement element in this)
-            {
-                b.Append(element.ToString());
-            }
-
-            return b.ToString();
-        }
+        /// <returns>書式化したテキスト。</returns>
+        protected abstract string ToStringImpl();
 
         #endregion
     }

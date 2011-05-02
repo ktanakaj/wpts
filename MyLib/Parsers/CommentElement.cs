@@ -11,6 +11,7 @@
 namespace Honememo.Parsers
 {
     using System;
+    using Honememo.Utilities;
 
     /// <summary>
     /// XML/HTMLのコメント要素をあらわすモデルクラスです。
@@ -22,12 +23,12 @@ namespace Honememo.Parsers
         /// <summary>
         /// コメントの開始タグ。
         /// </summary>
-        private static readonly string startSign = "<!--";
+        private static readonly string delimiterStart = "<!--";
 
         /// <summary>
         /// コメントの閉じタグ。
         /// </summary>
-        private static readonly string endSign = "-->";
+        private static readonly string delimiterEnd = "-->";
 
         #endregion
 
@@ -49,6 +50,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// このコメント要素のテキスト。
         /// </summary>
+        /// <remarks>プロパティ更新時は<see cref="ParsedString"/>を破棄する。</remarks>
         public override string Text
         {
             get
@@ -58,24 +60,35 @@ namespace Honememo.Parsers
 
             set
             {
-                // プロパティ更新時は元文字列は破棄する
                 base.Text = value;
-                this.Original = null;
+                this.ParsedString = null;
             }
-        }
-
-        /// <summary>
-        /// Parse等によりインスタンスを生成した場合の元文字列。
-        /// </summary>
-        protected virtual string Original
-        {
-            get;
-            set;
         }
 
         #endregion
 
         #region 静的メソッド
+
+        /// <summary>
+        /// 渡されたHTMLテキストがコメントかを解析する。
+        /// </summary>
+        /// <param name="s">解析するテキスト。</param>
+        /// <returns>解析したコメント。</returns>
+        /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
+        /// <remarks>
+        /// コメントと判定するには、1文字目が開始タグである必要がある。
+        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
+        /// </remarks>
+        public static CommentElement ParseLazy(string s)
+        {
+            CommentElement result;
+            if (CommentElement.TryParseLazy(s, out result))
+            {
+                return result;
+            }
+
+            throw new FormatException("Invalid String : " + s);
+        }
 
         /// <summary>
         /// 渡されたHTMLテキストがコメントかを解析する。
@@ -91,47 +104,53 @@ namespace Honememo.Parsers
         {
             // 入力値確認
             result = null;
-            if (String.IsNullOrEmpty(s) || !s.StartsWith(CommentElement.startSign))
+            if (String.IsNullOrEmpty(s) || !s.StartsWith(CommentElement.delimiterStart))
             {
                 return false;
             }
 
             // コメント終了まで取得
-            int index = s.IndexOf(CommentElement.endSign, CommentElement.startSign.Length);
+            int index = s.IndexOf(CommentElement.delimiterEnd, CommentElement.delimiterStart.Length);
             if (index < 0)
             {
                 // 閉じタグが存在しない場合、最後までコメントと判定
-                result = new CommentElement(s.Substring(CommentElement.startSign.Length));
+                result = new CommentElement(s.Substring(CommentElement.delimiterStart.Length));
 
                 // 不正な構文を保持するため、元の文字列を保持する
-                result.Original = s;
+                result.ParsedString = s;
                 return true;
             }
 
             // 閉じタグがあった場合、閉じタグまでを返す
+            // ※ この場合元文字列は要らない
             result = new CommentElement(s.Substring(
-                CommentElement.startSign.Length,
-                index - CommentElement.startSign.Length));
+                CommentElement.delimiterStart.Length,
+                index - CommentElement.delimiterStart.Length));
             return true;
         }
 
-        #endregion
+        /// <summary>
+        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public static bool IsElementPossible(char c)
+        {
+            return CommentElement.delimiterStart[0] == c;
+        }
 
-        #region インタフェース実装メソッド
+        #endregion
+        
+        #region 実装支援用抽象メソッド実装
 
         /// <summary>
         /// このコメント要素の書式化して返す。
         /// </summary>
         /// <returns>このコメント要素のテキスト。</returns>
-        public override string ToString()
+        protected override string ToStringImpl()
         {
-            // 元文字列があればそのまま返す
-            if (this.Original != null)
-            {
-                return this.Original;
-            }
-
-            return CommentElement.startSign + base.ToString() + CommentElement.endSign;
+            return CommentElement.delimiterStart + StringUtils.DefaultString(this.Text) + CommentElement.delimiterEnd;
         }
 
         #endregion

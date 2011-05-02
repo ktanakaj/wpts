@@ -23,20 +23,6 @@ namespace Honememo.Wptscs.Websites
     /// </summary>
     public class MediaWikiPage : Page
     {
-        #region 定数宣言
-
-        /// <summary>
-        /// nowikiタグ。
-        /// </summary>
-        public static readonly string NowikiTag = "nowiki";
-
-        /// <summary>
-        /// msgnwの書式。
-        /// </summary>
-        public static readonly string Msgnw = "msgnw:";
-
-        #endregion
-
         #region private変数
 
         /// <summary>
@@ -145,39 +131,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         #endregion
-
-        #region 公開静的メソッド
-
-        /// <summary>
-        /// 渡されたテキストがnowikiブロックかを解析する。
-        /// </summary>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="nowiki">解析したnowikiブロック。</param>
-        /// <returns>nowikiブロックの場合<c>true</c>。</returns>
-        /// <remarks>
-        /// nowikiブロックと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
-        /// また、入れ子は考慮しない。
-        /// </remarks>
-        public static bool TryParseNowiki(string text, out string nowiki)
-        {
-            nowiki = null;
-            XmlParser parser = new XmlParser();
-            XmlElement element;
-            if (parser.TryParseXmlElement(text, out element))
-            {
-                if (element.Name.ToLower() == MediaWikiPage.NowikiTag)
-                {
-                    nowiki = element.ToString();
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        #endregion
-
+        
         #region 公開インスタンスメソッド
 
         /// <summary>
@@ -207,7 +161,7 @@ namespace Honememo.Wptscs.Websites
                         {
                             i += comment.ToString().Length - 1;
                         }
-                        else if (MediaWikiPage.TryParseNowiki(subtext, out value))
+                        else if (MediaWikiParser.TryParseNowiki(subtext, out value))
                         {
                             i += value.Length - 1;
                         }
@@ -218,7 +172,7 @@ namespace Honememo.Wptscs.Websites
                         // テンプレート
                         if (MediaWikiTemplate.TryParse(this.Text.Substring(i), out link))
                         {
-                            i += link.Length - 1;
+                            i += link.ToString().Length - 1;
 
                             // Documentationテンプレートがある場合は、その中を探索
                             string interWiki = this.GetDocumentationInterWiki(link, code);
@@ -234,7 +188,7 @@ namespace Honememo.Wptscs.Websites
                         // リンク
                         if (MediaWikiLink.TryParse(this.Text.Substring(i), out link))
                         {
-                            i += link.Length - 1;
+                            i += link.ToString().Length - 1;
 
                             // 指定言語への言語間リンクの場合、内容を取得し、処理終了
                             if (link.Code == code && !link.IsColon)
