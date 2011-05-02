@@ -15,6 +15,19 @@ namespace Honememo.Parsers
     /// </summary>
     public interface IElement
     {
+        #region プロパティ
+
+        /// <summary>
+        /// この要素の文字数。
+        /// </summary>
+        /// <remarks>Parseで生成した場合、解析結果の文字数と一致する必要がある。</remarks>
+        int Length
+        {
+            get;
+        }
+
+        #endregion
+
         #region メソッド
 
         /// <summary>

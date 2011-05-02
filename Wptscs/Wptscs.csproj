@@ -63,6 +63,8 @@
     </Compile>
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Parsers\MediaWikiHeading.cs" />
+    <Compile Include="Parsers\MediaWikiTemplate.cs" />
     <Compile Include="Websites\MediaWiki.cs" />
     <Compile Include="Parsers\MediaWikiLink.cs" />
     <Compile Include="Websites\MediaWikiPage.cs" />

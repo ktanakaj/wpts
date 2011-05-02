@@ -19,6 +19,23 @@ namespace Honememo.Parsers
     [TestFixture]
     public class TextElementTest
     {
+        #region コンストラクタテストケース
+
+        /// <summary>
+        /// コンストラクタテストケース。
+        /// </summary>
+        [Test]
+        public void TestConstructor()
+        {
+            TextElement element = new TextElement();
+            Assert.IsNull(element.Text);
+
+            element = new TextElement("test");
+            Assert.AreEqual("test", element.Text);
+        }
+
+        #endregion
+
         #region プロパティテストケース
 
         /// <summary>

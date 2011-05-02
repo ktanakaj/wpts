@@ -30,6 +30,21 @@ namespace Honememo.Parsers
         }
 
         #endregion
+        
+        #region インタフェース実装プロパティ
+
+        /// <summary>
+        /// この要素の文字数。
+        /// </summary>
+        public virtual int Length
+        {
+            get
+            {
+                return this.ToString().Length;
+            }
+        }
+
+        #endregion
 
         #region プロパティ
 

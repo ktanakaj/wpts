@@ -31,15 +31,6 @@ namespace Honememo.Parsers
 
         #endregion
 
-        #region private変数
-
-        /// <summary>
-        /// Parse等によりインスタンスを生成した場合の元文字列。
-        /// </summary>
-        private string original;
-
-        #endregion
-
         #region コンストラクタ
 
         /// <summary>
@@ -47,8 +38,8 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="comment">コメント文字列、未指定時は<c>null</c>。</param>
         public CommentElement(string comment = null)
+            : base(comment)
         {
-            this.Text = comment;
         }
 
         #endregion
@@ -69,8 +60,17 @@ namespace Honememo.Parsers
             {
                 // プロパティ更新時は元文字列は破棄する
                 base.Text = value;
-                this.original = null;
+                this.Original = null;
             }
+        }
+
+        /// <summary>
+        /// Parse等によりインスタンスを生成した場合の元文字列。
+        /// </summary>
+        protected virtual string Original
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -104,7 +104,7 @@ namespace Honememo.Parsers
                 result = new CommentElement(s.Substring(CommentElement.startSign.Length));
 
                 // 不正な構文を保持するため、元の文字列を保持する
-                result.original = s;
+                result.Original = s;
                 return true;
             }
 
@@ -126,9 +126,9 @@ namespace Honememo.Parsers
         public override string ToString()
         {
             // 元文字列があればそのまま返す
-            if (this.original != null)
+            if (this.Original != null)
             {
-                return this.original;
+                return this.Original;
             }
 
             return CommentElement.startSign + base.ToString() + CommentElement.endSign;

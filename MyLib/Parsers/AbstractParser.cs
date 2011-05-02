@@ -72,6 +72,7 @@ namespace Honememo.Parsers
                         // その後に解析した要素を追加
                         this.FlashText(ref list, ref b);
                         list.Add(innerElement);
+                        i += innerElement.Length - 1;
                         continue;
                     }
                 }

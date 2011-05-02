@@ -13,6 +13,7 @@ namespace Honememo.Wptscs.Parsers
     using System;
     using System.Collections.Generic;
     using NUnit.Framework;
+    using Honememo.Parsers;
 
     /// <summary>
     /// MediaWikiLinkのテストクラスです。
@@ -57,8 +58,8 @@ namespace Honememo.Wptscs.Parsers
             MediaWikiLink element = new MediaWikiLink();
 
             Assert.AreEqual(0, element.PipeTexts.Count);
-            IList<string> list = new List<string>();
-            list.Add("test");
+            IList<IElement> list = new List<IElement>();
+            list.Add(new TextElement("test"));
             element.PipeTexts = list;
             Assert.AreEqual(1, element.PipeTexts.Count);
         }
@@ -112,8 +113,8 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("[[testtitle#testsection]]", element.ToString());
 
             // タイトルとセクションとパイプ後の文字列
-            element.PipeTexts.Add("testpipe1");
-            element.PipeTexts.Add("testpipe2");
+            element.PipeTexts.Add(new TextElement("testpipe1"));
+            element.PipeTexts.Add(new TextElement("testpipe2"));
             Assert.AreEqual("[[testtitle#testsection|testpipe1|testpipe2]]", element.ToString());
 
             // タイトルとセクションとパイプ後の文字列とコード

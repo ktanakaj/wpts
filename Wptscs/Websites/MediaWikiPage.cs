@@ -16,6 +16,7 @@ namespace Honememo.Wptscs.Websites
     using System.Text;
     using Honememo.Parsers;
     using Honememo.Utilities;
+    using Honememo.Wptscs.Parsers;
 
     /// <summary>
     /// MediaWikiのページをあらわすモデルクラスです。
@@ -41,7 +42,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// リダイレクト先のページ名。
         /// </summary>
-        private Link redirect;
+        private MediaWikiLink redirect;
 
         #endregion
 
@@ -128,7 +129,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// リダイレクト先へのリンク。
         /// </summary>
-        public Link Redirect
+        public MediaWikiLink Redirect
         {
             get
             {
@@ -161,9 +162,9 @@ namespace Honememo.Wptscs.Websites
         public static bool TryParseNowiki(string text, out string nowiki)
         {
             nowiki = null;
-            LazyXmlParser parser = new LazyXmlParser();
+            XmlParser parser = new XmlParser();
             XmlElement element;
-            if (parser.TryParseTag(text, out element))
+            if (parser.TryParseXmlElement(text, out element))
             {
                 if (element.Name.ToLower() == MediaWikiPage.NowikiTag)
                 {
@@ -194,7 +195,7 @@ namespace Honememo.Wptscs.Websites
             for (int i = 0; i < this.Text.Length; i++)
             {
                 char c = this.Text[i];
-                Link link;
+                MediaWikiLink link;
                 switch (c)
                 {
                     case '<':
@@ -215,9 +216,9 @@ namespace Honememo.Wptscs.Websites
 
                     case '{':
                         // テンプレート
-                        if (this.TryParseTemplate(this.Text.Substring(i), out link))
+                        if (MediaWikiTemplate.TryParse(this.Text.Substring(i), out link))
                         {
-                            i += link.OriginalText.Length - 1;
+                            i += link.Length - 1;
 
                             // Documentationテンプレートがある場合は、その中を探索
                             string interWiki = this.GetDocumentationInterWiki(link, code);
@@ -231,9 +232,9 @@ namespace Honememo.Wptscs.Websites
 
                     case '[':
                         // リンク
-                        if (this.TryParseLink(this.Text.Substring(i), out link))
+                        if (MediaWikiLink.TryParse(this.Text.Substring(i), out link))
                         {
-                            i += link.OriginalText.Length - 1;
+                            i += link.Length - 1;
 
                             // 指定言語への言語間リンクの場合、内容を取得し、処理終了
                             if (link.Code == code && !link.IsColon)
@@ -312,490 +313,6 @@ namespace Honememo.Wptscs.Websites
             return true;
         }
 
-        #region Linkクラスに移動したいメソッド
-
-        // TODO: 以下の各メソッドのうち、リンクに関するものはLinkクラスに移したい。
-        //       また、余計な依存関係を持っているものを整理したい。
-
-        /// <summary>
-        /// 渡されたWikipediaの内部リンクを解析。
-        /// </summary>
-        /// <param name="text">[[で始まる文字列。</param>
-        /// <param name="link">解析したリンク。</param>
-        /// <returns>解析に成功した場合<c>true</c>。</returns>
-        public bool TryParseLink(string text, out Link link)
-        {
-            // 出力値初期化
-            link = null;
-
-            // 入力値確認
-            if (!text.StartsWith("[["))
-            {
-                return false;
-            }
-
-            // 構文を解析して、[[]]内部の文字列を取得
-            // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
-            string article = String.Empty;
-            string section = String.Empty;
-            IList<string> pipeTexts = new List<string>();
-            int lastIndex = -1;
-            int pipeCounter = 0;
-            bool sharpFlag = false;
-            for (int i = 2; i < text.Length; i++)
-            {
-                char c = text[i];
-
-                // ]]が見つかったら、処理正常終了
-                if (StringUtils.StartsWith(text, "]]", i))
-                {
-                    lastIndex = ++i;
-                    break;
-                }
-
-                // | が含まれている場合、以降の文字列は表示名などとして扱う
-                if (c == '|')
-                {
-                    ++pipeCounter;
-                    pipeTexts.Add(String.Empty);
-                    continue;
-                }
-
-                // 変数（[[{{{1}}}]]とか）の再帰チェック
-                string dummy;
-                string variable;
-                int index = this.ChkVariable(out variable, out dummy, text, i);
-                if (index != -1)
-                {
-                    i = index;
-                    if (pipeCounter > 0)
-                    {
-                        pipeTexts[pipeCounter - 1] += variable;
-                    }
-                    else if (sharpFlag)
-                    {
-                        section += variable;
-                    }
-                    else
-                    {
-                        article += variable;
-                    }
-
-                    continue;
-                }
-
-                // | の前のとき
-                if (pipeCounter <= 0)
-                {
-                    // 変数以外で { } または < > [ ] \n が含まれている場合、リンクは無効
-                    if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n'))
-                    {
-                        break;
-                    }
-
-                    // # の前のとき
-                    if (!sharpFlag)
-                    {
-                        // #が含まれている場合、以降の文字列は見出しへのリンクとして扱う（1つめの#のみ有効）
-                        if (c == '#')
-                        {
-                            sharpFlag = true;
-                        }
-                        else
-                        {
-                            article += c;
-                        }
-                    }
-                    else
-                    {
-                        // # の後のとき
-                        section += c;
-                    }
-                }
-                else
-                {
-                    // | の後のとき
-                    if (c == '<')
-                    {
-                        string subtext = text.Substring(i);
-                        CommentElement comment;
-                        string value;
-                        if (CommentElement.TryParseLazy(subtext, out comment))
-                        {
-                            // コメント（<!--）が含まれている場合、リンクは無効
-                            break;
-                        }
-                        else if (MediaWikiPage.TryParseNowiki(subtext, out value))
-                        {
-                            // nowikiブロック
-                            i += value.Length - 1;
-                            pipeTexts[pipeCounter - 1] += value;
-                            continue;
-                        }
-                    }
-
-                    // リンク [[ {{ （[[image:xx|[[test]]の画像]]とか）の再帰チェック
-                    Link l;
-                    index = this.ChkLinkText(out l, text, i);
-                    if (index != -1)
-                    {
-                        i = index;
-                        pipeTexts[pipeCounter - 1] += l.OriginalText;
-                        continue;
-                    }
-
-                    pipeTexts[pipeCounter - 1] += c;
-                }
-            }
-
-            // 解析失敗
-            if (lastIndex < 0)
-            {
-                return false;
-            }
-
-            // 解析に成功した場合、結果を出力値に設定
-            link = new Link();
-
-            // 変数ブロックの文字列をリンクのテキストに設定
-            link.OriginalText = text.Substring(0, lastIndex + 1);
-
-            // 前後のスペースは削除（見出しは後ろのみ）
-            link.Title = article.Trim();
-            link.Section = section.TrimEnd();
-
-            // | 以降はそのまま設定
-            link.PipeTexts = pipeTexts;
-
-            // 記事名から情報を抽出
-            // サブページ
-            if (link.Title.StartsWith("/"))
-            {
-                link.IsSubpage = true;
-            }
-            else if (link.Title.StartsWith(":"))
-            {
-                // 先頭が :
-                link.IsColon = true;
-                link.Title = link.Title.TrimStart(':').TrimStart();
-            }
-
-            // 標準名前空間以外で[[xxx:yyy]]のようになっている場合、言語コード
-            if (link.Title.Contains(":") && new MediaWikiPage(this.Website, link.Title).IsMain())
-            {
-                // ※本当は、言語コード等の一覧を作り、其処と一致するものを・・・とすべきだろうが、
-                //   メンテしきれないので : を含む名前空間以外を全て言語コード等と判定
-                link.Code = link.Title.Substring(0, link.Title.IndexOf(':')).TrimEnd();
-                link.Title = link.Title.Substring(link.Title.IndexOf(':') + 1).TrimStart();
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// 渡されたWikipediaのテンプレートを解析。
-        /// </summary>
-        /// <param name="text">{{で始まる文字列。</param>
-        /// <param name="link">解析したテンプレートのリンク。</param>
-        /// <returns>解析に成功した場合<c>true</c>。</returns>
-        public bool TryParseTemplate(string text, out Link link)
-        {
-            // 出力値初期化
-            link = null;
-
-            // 入力値確認
-            if (!text.StartsWith("{{"))
-            {
-                return false;
-            }
-
-            // 構文を解析して、{{}}内部の文字列を取得
-            // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
-            string article = String.Empty;
-            IList<string> pipeTexts = new List<string>();
-            int lastIndex = -1;
-            int pipeCounter = 0;
-            for (int i = 2; i < text.Length; i++)
-            {
-                char c = text[i];
-
-                // }}が見つかったら、処理正常終了
-                if (StringUtils.StartsWith(text, "}}", i))
-                {
-                    lastIndex = ++i;
-                    break;
-                }
-
-                // | が含まれている場合、以降の文字列は引数などとして扱う
-                if (c == '|')
-                {
-                    ++pipeCounter;
-                    pipeTexts.Add(String.Empty);
-                    continue;
-                }
-
-                // 変数（[[{{{1}}}]]とか）の再帰チェック
-                string dummy;
-                string variable;
-                int index = this.ChkVariable(out variable, out dummy, text, i);
-                if (index != -1)
-                {
-                    i = index;
-                    if (pipeCounter > 0)
-                    {
-                        pipeTexts[pipeCounter - 1] += variable;
-                    }
-                    else
-                    {
-                        article += variable;
-                    }
-
-                    continue;
-                }
-
-                // | の前のとき
-                if (pipeCounter <= 0)
-                {
-                    // 変数以外で < > [ ] { } が含まれている場合、リンクは無効
-                    if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}'))
-                    {
-                        break;
-                    }
-
-                    article += c;
-                }
-                else
-                {
-                    // | の後のとき
-                    if (c == '<')
-                    {
-                        string subtext = text.Substring(i);
-                        CommentElement comment;
-                        string value;
-                        if (CommentElement.TryParseLazy(subtext, out comment))
-                        {
-                            // コメント（<!--）が含まれている場合、リンクは無効
-                            break;
-                        }
-                        else if (MediaWikiPage.TryParseNowiki(subtext, out value))
-                        {
-                            // nowikiブロック
-                            i += value.Length - 1;
-                            pipeTexts[pipeCounter - 1] += value;
-                            continue;
-                        }
-                    }
-
-                    // リンク [[ {{ （{{test|[[例]]}}とか）の再帰チェック
-                    Link l;
-                    index = this.ChkLinkText(out l, text, i);
-                    if (index != -1)
-                    {
-                        i = index;
-                        pipeTexts[pipeCounter - 1] += l.OriginalText;
-                        continue;
-                    }
-
-                    pipeTexts[pipeCounter - 1] += c;
-                }
-            }
-
-            // 解析失敗
-            if (lastIndex < 0)
-            {
-                return false;
-            }
-
-            // 解析に成功した場合、結果を出力値に設定
-            link = new Link();
-            link.IsTemplateTag = true;
-
-            // 変数ブロックの文字列をリンクのテキストに設定
-            link.OriginalText = text.Substring(0, lastIndex + 1);
-
-            // 前後のスペース・改行は削除（見出しは後ろのみ）
-            link.Title = article.Trim();
-
-            // | 以降はそのまま設定
-            link.PipeTexts = pipeTexts;
-
-            // 記事名から情報を抽出
-            // サブページ
-            if (link.Title.StartsWith("/") == true)
-            {
-                link.IsSubpage = true;
-            }
-            else if (link.Title.StartsWith(":"))
-            {
-                // 先頭が :
-                link.IsColon = true;
-                link.Title = link.Title.TrimStart(':').TrimStart();
-            }
-
-            // 先頭が msgnw:
-            link.IsMsgnw = link.Title.ToLower().StartsWith(Msgnw.ToLower());
-            if (link.IsMsgnw)
-            {
-                link.Title = link.Title.Substring(Msgnw.Length);
-            }
-
-            // 記事名直後の改行の有無
-            if (article.TrimEnd(' ').EndsWith("\n"))
-            {
-                link.Enter = true;
-            }
-
-            return true;
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 渡されたテキストの指定された位置に存在するWikipediaの内部リンク・テンプレートをチェック。
-        /// </summary>
-        /// <param name="link">解析したリンク。</param>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="index">解析開始インデックス。</param>
-        /// <returns>正常時の戻り値には、]]の後ろの]の位置のインデックスを返す。異常時は-1。</returns>
-        public int ChkLinkText(out Link link, string text, int index)
-        {
-            // 入力値に応じて、処理を振り分け
-            if (StringUtils.StartsWith(text, "[[", index))
-            {
-                // 内部リンク
-                if (this.TryParseLink(text.Substring(index), out link))
-                {
-                    return index + link.OriginalText.Length - 1;
-                }
-            }
-            else if (StringUtils.StartsWith(text, "{{", index))
-            {
-                // テンプレート
-                if (this.TryParseTemplate(text.Substring(index), out link))
-                {
-                    return index + link.OriginalText.Length - 1;
-                }
-            }
-
-            // 出力値初期化。リンク以外の場合、nullを返す
-            link = null;
-            return -1;
-        }
-
-        /// <summary>
-        /// 渡されたテキストの指定された位置に存在する変数を解析。
-        /// </summary>
-        /// <param name="variable">解析した変数。</param>
-        /// <param name="value">変数のパラメータ値。</param>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="index">解析開始インデックス。</param>
-        /// <returns>正常時の戻り値には、変数の終了位置のインデックスを返す。異常時は-1。</returns>
-        public int ChkVariable(out string variable, out string value, string text, int index)
-        {
-            // 出力値初期化
-            int lastIndex = -1;
-            variable = String.Empty;
-            value = String.Empty;
-
-            // 入力値確認
-            if (!StringUtils.StartsWith(text, "{{{", index))
-            {
-                return lastIndex;
-            }
-
-            // ブロック終了まで取得
-            bool pipeFlag = false;
-            for (int i = index + 3; i < text.Length; i++)
-            {
-                // 終了条件のチェック
-                if (StringUtils.StartsWith(text, "}}}", i))
-                {
-                    lastIndex = i + 2;
-                    break;
-                }
-
-                if (text[i] == '<')
-                {
-                    CommentElement comment;
-                    if (CommentElement.TryParseLazy(text.Substring(i), out comment))
-                    {
-                        // コメント（<!--）ブロック
-                        i += comment.ToString().Length - 1;
-                        continue;
-                    }
-                }
-
-                // | が含まれている場合、以降の文字列は代入された値として扱う
-                if (text[i] == '|')
-                {
-                    pipeFlag = true;
-                }
-                else if (!pipeFlag)
-                {
-                    // | の前のとき
-                    // ※Wikipediaの仕様上は、{{{1{|表示}}} のように変数名の欄に { を
-                    //   含めることができるようだが、判別しきれないので、エラーとする
-                    //   （どうせ意図してそんなことする人は居ないだろうし・・・）
-                    if (text[i] == '{')
-                    {
-                        break;
-                    }
-                }
-                else
-                {
-                    // | の後のとき
-                    if (text[i] == '<')
-                    {
-                        string nowiki;
-                        if (MediaWikiPage.TryParseNowiki(text.Substring(i), out nowiki))
-                        {
-                            // nowikiブロック
-                            i += nowiki.Length - 1;
-                            value += nowiki;
-                            continue;
-                        }
-                    }
-
-                    // 変数（{{{1|{{{2}}}}}}とか）の再帰チェック
-                    string var;
-                    string dummy;
-                    int subindex = this.ChkVariable(out var, out dummy, text, i);
-                    if (subindex != -1)
-                    {
-                        i = subindex;
-                        value += var;
-                        continue;
-                    }
-
-                    // リンク [[ {{ （{{{1|[[test]]}}}とか）の再帰チェック
-                    Link link;
-                    subindex = this.ChkLinkText(out link, text, i);
-                    if (subindex != -1)
-                    {
-                        i = subindex;
-                        value += link.OriginalText;
-                        continue;
-                    }
-
-                    value += text[i];
-                }
-            }
-
-            // 変数ブロックの文字列を出力値に設定
-            if (lastIndex != -1)
-            {
-                variable = text.Substring(index, lastIndex - index + 1);
-            }
-            else
-            {
-                // 正常な構文ではなかった場合、出力値をクリア
-                variable = String.Empty;
-                value = String.Empty;
-            }
-
-            return lastIndex;
-        }
-
         #endregion
 
         #region 内部処理用インスタンスメソッド
@@ -859,8 +376,8 @@ namespace Honememo.Wptscs.Websites
                 if (!String.IsNullOrEmpty(format)
                     && this.Text.ToLower().StartsWith(format.ToLower()))
                 {
-                    Link link;
-                    if (this.TryParseLink(this.Text.Substring(format.Length).TrimStart(), out link))
+                    MediaWikiLink link;
+                    if (MediaWikiLink.TryParse(this.Text.Substring(format.Length).TrimStart(), out link))
                     {
                         this.Redirect = link;
                         return true;
@@ -878,11 +395,11 @@ namespace Honememo.Wptscs.Websites
         /// <param name="code">言語コード。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合またはパラメータが対象外の場合は空。</returns>
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        private string GetDocumentationInterWiki(Link link, string code)
+        private string GetDocumentationInterWiki(MediaWikiLink link, string code)
         {
             // テンプレートタグか、この言語にTemplate:Documentationの設定がされているかを確認
             string docTitle = this.Website.DocumentationTemplate;
-            if (!link.IsTemplateTag || String.IsNullOrEmpty(docTitle))
+            if (link is MediaWikiTemplate || String.IsNullOrEmpty(docTitle))
             {
                 return String.Empty;
             }
@@ -906,7 +423,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             // 解説記事名を確認
-            string subtitle = link.PipeTexts.ElementAtOrDefault(0);
+            string subtitle = link.PipeTexts.ElementAtOrDefault(0).ToString();
             if (String.IsNullOrWhiteSpace(subtitle) || subtitle.Contains('='))
             {
                 // 指定されていない場合はデフォルトのページを探索
@@ -949,211 +466,6 @@ namespace Honememo.Wptscs.Websites
 
             // 未発見の場合、空文字列
             return String.Empty;
-        }
-
-        #endregion
-
-        #region 内部クラス
-
-        /// <summary>
-        /// Wikipediaのリンクの要素を格納するための構造体。
-        /// </summary>
-        public class Link : IElement
-        {
-            #region プロパティ
-
-            /// <summary>
-            /// リンクのオブジェクト作成時の元テキスト（[[～]]）。
-            /// </summary>
-            public string OriginalText
-            {
-                get;
-                //// TODO: このクラスにParseを移動完了したら、protectedにする
-                set;
-            }
-
-            /// <summary>
-            /// リンクの記事名。
-            /// </summary>
-            /// <remarks>リンクに記載されていた記事名であり、名前空間の情報などは含まない可能性があるため注意。</remarks>
-            public string Title
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// リンクのセクション名（#）。
-            /// </summary>
-            public string Section
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// リンクのパイプ後の文字列（|）。
-            /// </summary>
-            public IList<string> PipeTexts
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// 言語間または他プロジェクトへのリンクの場合、コード。
-            /// </summary>
-            public string Code
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// テンプレートタグで書かれたリンク（{{～}}）か？
-            /// </summary>
-            /// <remarks>
-            /// 必ずしもリンク先がテンプレートであることを意味しない。
-            /// 普通のページをこの書式でテンプレートのように使用することも可能である。
-            /// </remarks>
-            public bool IsTemplateTag
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// 記事名の先頭がサブページを示す / で始まるか？
-            /// </summary>
-            /// <remarks>※ 2010年9月現在、この処理には不足あり。</remarks>
-            public bool IsSubpage
-            {
-                // TODO: サブページには相対パスで[[../～]]や[[../../～]]というような書き方もある模様。
-                //       この辺りの処理は[[Help:サブページ]]を元に全面的に見直す必要あり
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// リンクの先頭が : で始まるかを示すフラグ。
-            /// </summary>
-            public bool IsColon
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// テンプレートの場合に、テンプレートのソースをそのまま出力することを示す msgnw: が付加されているか？
-            /// </summary>
-            public bool IsMsgnw
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// テンプレートの場合に、記事名の後で改行が入るか？
-            /// </summary>
-            public bool Enter
-            {
-                get;
-                set;
-            }
-
-            /// <summary>
-            /// リンクが表すテキスト（[[～]]）。
-            /// </summary>
-            public string Text
-            {
-                get
-                {
-                    // 戻り値初期化
-                    StringBuilder b = new StringBuilder();
-
-                    // 枠の設定
-                    string startSign = "[[";
-                    string endSign = "]]";
-                    if (this.IsTemplateTag)
-                    {
-                        startSign = "{{";
-                        endSign = "}}";
-                    }
-
-                    // 先頭の枠の付加
-                    b.Append(startSign);
-
-                    // 先頭の : の付加
-                    if (this.IsColon)
-                    {
-                        b.Append(':');
-                    }
-
-                    // msgnw: （テンプレートを<nowiki>タグで挟む）の付加
-                    if (this.IsTemplateTag && this.IsMsgnw)
-                    {
-                        b.Append(MediaWikiPage.Msgnw);
-                    }
-
-                    // 言語コード・他プロジェクトコードの付加
-                    if (!String.IsNullOrEmpty(this.Code))
-                    {
-                        b.Append(this.Code);
-                    }
-
-                    // リンクの付加
-                    if (!String.IsNullOrEmpty(this.Title))
-                    {
-                        b.Append(this.Title);
-                    }
-
-                    // セクション名の付加
-                    if (!String.IsNullOrEmpty(this.Section))
-                    {
-                        b.Append('#');
-                        b.Append(this.Section);
-                    }
-
-                    // 改行の付加
-                    if (this.Enter)
-                    {
-                        b.Append('\n');
-                    }
-
-                    // パイプ後の文字列の付加
-                    if (this.PipeTexts != null)
-                    {
-                        foreach (string s in this.PipeTexts)
-                        {
-                            b.Append('|');
-                            if (!String.IsNullOrEmpty(s))
-                            {
-                                b.Append(s);
-                            }
-                        }
-                    }
-
-                    // 終わりの枠の付加
-                    b.Append(endSign);
-                    return b.ToString();
-                }
-            }
-
-            #endregion
-
-            #region 公開メソッド
-
-            /// <summary>
-            /// このオブジェクトを表すリンク文字列を返す。
-            /// </summary>
-            /// <returns>オブジェクトを表すリンク文字列。</returns>
-            public override string ToString()
-            {
-                // リンクを表すテキスト、ならびに元テキストを返す
-                return this.Text + "<!-- " + this.OriginalText + " -->";
-            }
-
-            #endregion
         }
 
         #endregion

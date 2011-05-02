@@ -20,6 +20,27 @@ namespace Honememo.Parsers
     /// <remarks>テキストを扱うだけの単純なページ要素。</remarks>
     public class ListElement : List<IElement>, IElement
     {
+        #region インタフェース実装プロパティ
+
+        /// <summary>
+        /// この要素の文字数。
+        /// </summary>
+        public virtual int Length
+        {
+            get
+            {
+                int length = 0;
+                foreach (IElement element in this)
+                {
+                    length += element.Length;
+                }
+
+                return length;
+            }
+        }
+
+        #endregion
+
         #region インタフェース実装メソッド
 
         /// <summary>

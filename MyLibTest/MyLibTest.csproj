@@ -43,8 +43,9 @@
     <Compile Include="Parsers\CommentElementTest.cs" />
     <Compile Include="Parsers\ListElementTest.cs" />
     <Compile Include="Parsers\TextElementTest.cs" />
+    <Compile Include="Parsers\XmlElementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Parsers\LazyXmlParserTest.cs" />
+    <Compile Include="Parsers\XmlParserTest.cs" />
     <Compile Include="Utilities\ObjectUtilsTest.cs" />
     <Compile Include="Utilities\StringUtilsTest.cs" />
     <Compile Include="Utilities\ValidateTest.cs" />

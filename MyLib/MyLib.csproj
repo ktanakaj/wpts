@@ -48,7 +48,7 @@
     <Compile Include="Parsers\CommentElement.cs" />
     <Compile Include="Parsers\AbstractParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Parsers\LazyXmlParser.cs" />
+    <Compile Include="Parsers\XmlParser.cs" />
     <Compile Include="Utilities\ObjectUtils.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
     <Compile Include="Utilities\Validate.cs" />
