@@ -224,7 +224,10 @@ namespace Honememo.Wptscs.Parsers
             // 解析に成功した場合、結果を出力値に設定
             // 前後のスペース・改行は削除（見出しは後ろのみ）
             result = new MediaWikiTemplate(article.Trim());
-            
+
+            // 変数ブロックの文字列をリンクのテキストに設定
+            result.ParsedString = s.Substring(0, lastIndex + 1);
+
             // | 以降はそのまま設定
             result.PipeTexts = pipeTexts;
 
@@ -258,18 +261,6 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// 渡されたテキストをMediaWikiのテンプレートとして解析する。
-        /// </summary>
-        /// <param name="s">{{で始まる文字列。</param>
-        /// <param name="result">解析したテンプレート。</param>
-        /// <returns>解析に成功した場合<c>true</c>。</returns>
-        public static bool TryParse(string s, out MediaWikiTemplate result)
-        {
-            // パーサーにMediaWikiParserの標準設定を指定して解析
-            return MediaWikiTemplate.TryParse(s, new MediaWikiParser(), out result);
-        }
-
-        /// <summary>
         /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
         /// </summary>
         /// <param name="c">解析文字列の先頭文字。</param>
@@ -282,7 +273,7 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region 内部実装メソッド
+        #region 実装支援用抽象メソッド実装
 
         /// <summary>
         /// この要素を書式化したテンプレートテキストを返す。
@@ -312,6 +303,7 @@ namespace Honememo.Wptscs.Parsers
             if (!String.IsNullOrEmpty(this.Code))
             {
                 b.Append(this.Code);
+                b.Append(':');
             }
 
             // リンクの付加

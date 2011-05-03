@@ -149,7 +149,6 @@ namespace Honememo.Wptscs.Websites
             for (int i = 0; i < this.Text.Length; i++)
             {
                 char c = this.Text[i];
-                MediaWikiLink link;
                 switch (c)
                 {
                     case '<':
@@ -170,12 +169,13 @@ namespace Honememo.Wptscs.Websites
 
                     case '{':
                         // テンプレート
-                        if (MediaWikiTemplate.TryParse(this.Text.Substring(i), out link))
+                        MediaWikiTemplate template;
+                        if (MediaWikiTemplate.TryParse(this.Text.Substring(i), new MediaWikiParser(this.Website), out template))
                         {
-                            i += link.ToString().Length - 1;
+                            i += template.ToString().Length - 1;
 
                             // Documentationテンプレートがある場合は、その中を探索
-                            string interWiki = this.GetDocumentationInterWiki(link, code);
+                            string interWiki = this.GetDocumentationInterWiki(template, code);
                             if (!String.IsNullOrEmpty(interWiki))
                             {
                                 return interWiki;
@@ -186,7 +186,8 @@ namespace Honememo.Wptscs.Websites
 
                     case '[':
                         // リンク
-                        if (MediaWikiLink.TryParse(this.Text.Substring(i), out link))
+                        MediaWikiLink link;
+                        if (MediaWikiLink.TryParse(this.Text.Substring(i), new MediaWikiParser(this.Website), out link))
                         {
                             i += link.ToString().Length - 1;
 
@@ -331,7 +332,7 @@ namespace Honememo.Wptscs.Websites
                     && this.Text.ToLower().StartsWith(format.ToLower()))
                 {
                     MediaWikiLink link;
-                    if (MediaWikiLink.TryParse(this.Text.Substring(format.Length).TrimStart(), out link))
+                    if (MediaWikiLink.TryParse(this.Text.Substring(format.Length).TrimStart(), new MediaWikiParser(this.Website), out link))
                     {
                         this.Redirect = link;
                         return true;
@@ -349,11 +350,11 @@ namespace Honememo.Wptscs.Websites
         /// <param name="code">言語コード。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合またはパラメータが対象外の場合は空。</returns>
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        private string GetDocumentationInterWiki(MediaWikiLink link, string code)
+        private string GetDocumentationInterWiki(MediaWikiTemplate link, string code)
         {
             // テンプレートタグか、この言語にTemplate:Documentationの設定がされているかを確認
             string docTitle = this.Website.DocumentationTemplate;
-            if (link is MediaWikiTemplate || String.IsNullOrEmpty(docTitle))
+            if (String.IsNullOrEmpty(docTitle))
             {
                 return String.Empty;
             }
@@ -377,7 +378,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             // 解説記事名を確認
-            string subtitle = link.PipeTexts.ElementAtOrDefault(0).ToString();
+            string subtitle = ObjectUtils.ToString(link.PipeTexts.ElementAtOrDefault(0));
             if (String.IsNullOrWhiteSpace(subtitle) || subtitle.Contains('='))
             {
                 // 指定されていない場合はデフォルトのページを探索

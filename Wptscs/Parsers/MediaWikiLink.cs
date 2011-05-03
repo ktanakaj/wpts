@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Parsers
     using System.Text;
     using Honememo.Parsers;
     using Honememo.Utilities;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// MediaWikiページの内部リンク要素をあらわすモデルクラスです。
@@ -132,7 +133,7 @@ namespace Honememo.Wptscs.Parsers
             // 構文を解析して、[[]]内部の文字列を取得
             // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
             string article = String.Empty;
-            string section = String.Empty;
+            string section = null;
             IList<IElement> pipeTexts = new List<IElement>();
             int lastIndex = -1;
             int pipeCounter = 0;
@@ -195,6 +196,7 @@ namespace Honememo.Wptscs.Parsers
                         if (c == '#')
                         {
                             sharpFlag = true;
+                            section = String.Empty;
                         }
                         else
                         {
@@ -257,7 +259,7 @@ namespace Honememo.Wptscs.Parsers
 
             // 前後のスペースは削除（見出しは後ろのみ）
             result.Title = article.Trim();
-            result.Section = section.TrimEnd();
+            result.Section = section != null ? section.TrimEnd() : section;
 
             // | 以降はそのまま設定
             result.PipeTexts = pipeTexts;
@@ -275,29 +277,16 @@ namespace Honememo.Wptscs.Parsers
                 result.Title = result.Title.TrimStart(':').TrimStart();
             }
 
-            // TODO: MediaWikiPageをどうするか考え中
             // 標準名前空間以外で[[xxx:yyy]]のようになっている場合、言語コード
-            // if (result.Title.Contains(":") && new MediaWikiPage(this.Website, result.Title).IsMain())
-            // {
-            //    // ※本当は、言語コード等の一覧を作り、其処と一致するものを・・・とすべきだろうが、
-            //    //   メンテしきれないので : を含む名前空間以外を全て言語コード等と判定
-            //    result.Code = result.Title.Substring(0, result.Title.IndexOf(':')).TrimEnd();
-            //    result.Title = result.Title.Substring(result.Title.IndexOf(':') + 1).TrimStart();
-            // }
+            if (result.Title.Contains(":") && new MediaWikiPage(parser.Website, result.Title).IsMain())
+            {
+                // ※本当は、言語コード等の一覧を作り、其処と一致するものを・・・とすべきだろうが、
+                //   メンテしきれないので : を含む名前空間以外を全て言語コード等と判定
+                result.Code = result.Title.Substring(0, result.Title.IndexOf(':')).TrimEnd();
+                result.Title = result.Title.Substring(result.Title.IndexOf(':') + 1).TrimStart();
+            }
 
             return true;
-        }
-
-        /// <summary>
-        /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
-        /// </summary>
-        /// <param name="s">[[で始まる文字列。</param>
-        /// <param name="result">解析したリンク。</param>
-        /// <returns>解析に成功した場合<c>true</c>。</returns>
-        public static bool TryParse(string s, out MediaWikiLink result)
-        {
-            // パーサーにMediaWikiParserの標準設定を指定して解析
-            return MediaWikiLink.TryParse(s, new MediaWikiParser(), out result);
         }
 
         /// <summary>
@@ -313,7 +302,7 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region 内部実装メソッド
+        #region 実装支援用抽象メソッド実装
 
         /// <summary>
         /// この要素を書式化した内部リンクテキストを返す。
@@ -337,6 +326,7 @@ namespace Honememo.Wptscs.Parsers
             if (!String.IsNullOrEmpty(this.Code))
             {
                 b.Append(this.Code);
+                b.Append(':');
             }
 
             // リンクの付加

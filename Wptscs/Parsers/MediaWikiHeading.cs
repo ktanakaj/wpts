@@ -69,19 +69,7 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // TODO: 未実装
-            return true;
-        }
-
-        /// <summary>
-        /// 渡されたテキストをMediaWikiの見出しとして解析する。
-        /// </summary>
-        /// <param name="s">=で始まる文字列。</param>
-        /// <param name="result">解析した見出し。</param>
-        /// <returns>解析に成功した場合<c>true</c>。</returns>
-        public static bool TryParse(string s, out MediaWikiHeading result)
-        {
-            // パーサーにMediaWikiParserの標準設定を指定して解析
-            return MediaWikiHeading.TryParse(s, new MediaWikiParser(), out result);
+            return false;
         }
 
         /// <summary>
@@ -97,7 +85,7 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region 内部実装メソッド
+        #region 実装支援用抽象メソッド実装
 
         /// <summary>
         /// この要素を書式化した見出し文字列を返す。

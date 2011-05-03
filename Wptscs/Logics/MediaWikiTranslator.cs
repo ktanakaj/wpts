@@ -414,7 +414,7 @@ namespace Honememo.Wptscs.Logics
             // 指定された記事の言語間リンク・見出しを探索し、翻訳先言語での名称に変換し、それに置換した文字列を返す
             StringBuilder b = new StringBuilder();
             bool enterFlag = true;
-            MediaWikiParser parser = new MediaWikiParser();
+            MediaWikiParser parser = new MediaWikiParser(this.From);
             for (int i = 0; i < text.Length; i++)
             {
                 // ユーザーからの中止要求をチェック
@@ -545,7 +545,7 @@ namespace Honememo.Wptscs.Logics
             MediaWikiLink l;
 
             // 内部リンク・テンプレートの確認と解析
-            MediaWikiParser parser = new MediaWikiParser();
+            MediaWikiParser parser = new MediaWikiParser(this.From);
             IElement element;
             lastIndex = parser.ChkLinkText(out element, text, index);
             if (lastIndex != -1)
@@ -579,13 +579,7 @@ namespace Honememo.Wptscs.Logics
 
                 string newText = null;
 
-                // 内部リンクの場合
-                if (element is MediaWikiLink)
-                {
-                    // 内部リンクの変換後文字列を取得
-                    newText = this.ReplaceInnerLink(l, parent);
-                }
-                else if (element is MediaWikiTemplate)
+                if (element is MediaWikiTemplate)
                 {
                     // テンプレートの場合
                     // テンプレートの変換後文字列を取得
@@ -593,8 +587,9 @@ namespace Honememo.Wptscs.Logics
                 }
                 else
                 {
-                    // 上記以外の場合は、対象外
-                    System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.replaceLink > プログラムミス : " + l.ToString());
+                    // 内部リンクの場合
+                    // 内部リンクの変換後文字列を取得
+                    newText = this.ReplaceInnerLink(l, parent);
                 }
 
                 // 変換後文字列がNULL以外
@@ -733,7 +728,7 @@ namespace Honememo.Wptscs.Logics
                 {
                     // 画像の場合、| の後に内部リンクやテンプレートが書かれている場合があるが、
                     // 画像は処理対象外でありその中のリンクは個別に再度処理されるため、ここでは特に何もしない
-                    b.Append(text);
+                    b.Append(text.ToString());
                 }
             }
 
@@ -1061,6 +1056,7 @@ namespace Honememo.Wptscs.Logics
 
             // 記事名の名前空間部分を置き換えて返す
             link.Title = names[0] + link.Title.Substring(link.Title.IndexOf(':'));
+            link.ParsedString = null;
             return link.ToString();
         }
 

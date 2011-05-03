@@ -32,6 +32,49 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
+        #region private変数
+
+        /// <summary>
+        /// このパーサーが対応するMediaWiki。
+        /// </summary>
+        private MediaWiki website;
+
+        #endregion
+        
+        #region コンストラクタ
+
+        /// <summary>
+        /// 指定されたMediaWikiサーバーのページを解析するためのパーサーを作成する。
+        /// </summary>
+        /// <param name="site">このパーサーが対応するMediaWiki</param>
+        public MediaWikiParser(MediaWiki site)
+        {
+            this.Website = site;
+        }
+
+        #endregion
+
+        #region プロパティ
+
+        /// <summary>
+        /// このパーサーが対応するMediaWiki。
+        /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        public MediaWiki Website
+        {
+            get
+            {
+                return this.website;
+            }
+
+            set
+            {
+                this.website = Validate.NotNull(value);
+            }
+        }
+
+        #endregion
+
         #region 公開静的メソッド
 
         /// <summary>
