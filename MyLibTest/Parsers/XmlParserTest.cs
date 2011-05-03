@@ -41,7 +41,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("testbefore", collection.ElementAt(0).ToString());
             Assert.IsInstanceOf(typeof(XmlElement), collection.ElementAt(1));
             Assert.AreEqual("<p>testinner</p>", collection.ElementAt(1).ToString());
-            Assert.IsInstanceOf(typeof(CommentElement), collection.ElementAt(2));
+            Assert.IsInstanceOf(typeof(XmlCommentElement), collection.ElementAt(2));
             Assert.AreEqual("<!--comment-->", collection.ElementAt(2).ToString());
             Assert.AreEqual("testafter", collection.ElementAt(3).ToString());
         }
@@ -67,9 +67,27 @@ namespace Honememo.Parsers
             Assert.AreEqual("testbefore", collection.ElementAt(0).ToString());
             Assert.IsInstanceOf(typeof(XmlElement), collection.ElementAt(1));
             Assert.AreEqual("<p>testinner</p>", collection.ElementAt(1).ToString());
-            Assert.IsInstanceOf(typeof(CommentElement), collection.ElementAt(2));
+            Assert.IsInstanceOf(typeof(XmlCommentElement), collection.ElementAt(2));
             Assert.AreEqual("<!--comment-->", collection.ElementAt(2).ToString());
             Assert.AreEqual("testafter", collection.ElementAt(3).ToString());
+        }
+
+        #endregion
+
+        #region 静的メソッドテストケース
+
+        /// <summary>
+        /// IsXmlElementPossibleメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestIsXmlElementPossible()
+        {
+            XmlParser parser = new XmlParser();
+            Assert.IsTrue(parser.IsXmlElementPossible('<'));
+            Assert.IsFalse(parser.IsXmlElementPossible('['));
+            Assert.IsFalse(parser.IsXmlElementPossible('-'));
+            Assert.IsFalse(parser.IsXmlElementPossible('/'));
+            Assert.IsFalse(parser.IsXmlElementPossible('#'));
         }
 
         #endregion

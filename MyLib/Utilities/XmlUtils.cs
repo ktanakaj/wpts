@@ -11,6 +11,7 @@
 namespace Honememo.Utilities
 {
     using System;
+    using System.Text;
     using System.Xml;
 
     /// <summary>
@@ -96,6 +97,43 @@ namespace Honememo.Utilities
             }
 
             return StringUtils.DefaultString(node.OuterXml, nullStr);
+        }
+
+        #endregion
+
+        #region エンコード／デコード
+
+        /// <summary>
+        /// 指定された文字列をXMLエンコードする。
+        /// </summary>
+        /// <param name="s">エンコードする文字列。</param>
+        /// <returns>エンコードした文字列。</returns>
+        /// <exception cref="ArgumentNullException">文字列が<c>null</c>。</exception>
+        /// <remarks>
+        /// 使う場所によってはエンコードが必要ない文字もあるが、汎用のため常時
+        /// &lt;, &gt;, &quot;, &apos;, &amp; の5文字を変換する。
+        /// </remarks>
+        public static string XmlEncode(string s)
+        {
+            Validate.NotNull(s);
+            return s.Replace("&", "&amp;").Replace("<", "&lt;")
+                .Replace(">", "&gt;").Replace("\"", "&quot;").Replace("\'", "&apos;");
+        }
+
+        /// <summary>
+        /// 指定された文字列をXMLデコードする。
+        /// </summary>
+        /// <param name="s">エンコードされた文字列。</param>
+        /// <returns>エンコードを解除した文字列。</returns>
+        /// <exception cref="ArgumentNullException">文字列が<c>null</c>。</exception>
+        /// <remarks>
+        /// &lt;, &gt;, &quot;, &apos;, &amp; の5文字を変換する。
+        /// </remarks>
+        public static string XmlDecode(string s)
+        {
+            Validate.NotNull(s);
+            return s.Replace("&lt;", "<").Replace("&gt;", ">")
+                .Replace("&quot;", "\"").Replace("&apos;", "\'").Replace("&amp;", "&");
         }
 
         #endregion

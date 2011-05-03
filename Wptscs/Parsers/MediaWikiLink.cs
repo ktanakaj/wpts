@@ -14,8 +14,6 @@ namespace Honememo.Wptscs.Parsers
     using System.Collections.Generic;
     using System.Text;
     using Honememo.Parsers;
-    using Honememo.Utilities;
-    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// MediaWikiページの内部リンク要素をあらわすモデルクラスです。
@@ -27,12 +25,12 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 内部リンクの開始タグ。
         /// </summary>
-        private static readonly string delimiterStart = "[[";
+        public static readonly string DelimiterStart = "[[";
 
         /// <summary>
         /// 内部リンクの閉じタグ。
         /// </summary>
-        private static readonly string delimiterEnd = "]]";
+        public static readonly string DelimiterEnd = "]]";
 
         #endregion
 
@@ -110,198 +108,6 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region 静的メソッド
-
-        /// <summary>
-        /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
-        /// </summary>
-        /// <param name="s">[[で始まる文字列。</param>
-        /// <param name="parser">解析に使用するパーサー。</param>
-        /// <param name="result">解析したリンク。</param>
-        /// <returns>解析に成功した場合<c>true</c>。</returns>
-        public static bool TryParse(string s, MediaWikiParser parser, out MediaWikiLink result)
-        {
-            // 出力値初期化
-            result = null;
-
-            // 入力値確認
-            if (!s.StartsWith(MediaWikiLink.delimiterStart))
-            {
-                return false;
-            }
-
-            // 構文を解析して、[[]]内部の文字列を取得
-            // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
-            string article = String.Empty;
-            string section = null;
-            IList<IElement> pipeTexts = new List<IElement>();
-            int lastIndex = -1;
-            int pipeCounter = 0;
-            bool sharpFlag = false;
-            for (int i = 2; i < s.Length; i++)
-            {
-                char c = s[i];
-
-                // ]]が見つかったら、処理正常終了
-                if (StringUtils.StartsWith(s, MediaWikiLink.delimiterEnd, i))
-                {
-                    lastIndex = ++i;
-                    break;
-                }
-
-                // | が含まれている場合、以降の文字列は表示名などとして扱う
-                if (c == '|')
-                {
-                    ++pipeCounter;
-                    pipeTexts.Add(new TextElement(String.Empty));
-                    continue;
-                }
-
-                // 変数（[[{{{1}}}]]とか）の再帰チェック
-                string dummy;
-                string variable;
-                int index = parser.ChkVariable(out variable, out dummy, s, i);
-                if (index != -1)
-                {
-                    i = index;
-                    if (pipeCounter > 0)
-                    {
-                        ((TextElement)pipeTexts[pipeCounter - 1]).Text += variable;
-                    }
-                    else if (sharpFlag)
-                    {
-                        section += variable;
-                    }
-                    else
-                    {
-                        article += variable;
-                    }
-
-                    continue;
-                }
-
-                // | の前のとき
-                if (pipeCounter <= 0)
-                {
-                    // 変数以外で { } または < > [ ] \n が含まれている場合、リンクは無効
-                    if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n'))
-                    {
-                        break;
-                    }
-
-                    // # の前のとき
-                    if (!sharpFlag)
-                    {
-                        // #が含まれている場合、以降の文字列は見出しへのリンクとして扱う（1つめの#のみ有効）
-                        if (c == '#')
-                        {
-                            sharpFlag = true;
-                            section = String.Empty;
-                        }
-                        else
-                        {
-                            article += c;
-                        }
-                    }
-                    else
-                    {
-                        // # の後のとき
-                        section += c;
-                    }
-                }
-                else
-                {
-                    // | の後のとき
-                    if (c == '<')
-                    {
-                        string subtext = s.Substring(i);
-                        CommentElement comment;
-                        string value;
-                        if (CommentElement.TryParseLazy(subtext, out comment))
-                        {
-                            // コメント（<!--）が含まれている場合、リンクは無効
-                            break;
-                        }
-                        else if (MediaWikiParser.TryParseNowiki(subtext, out value))
-                        {
-                            // nowikiブロック
-                            i += value.Length - 1;
-                            ((TextElement)pipeTexts[pipeCounter - 1]).Text += value;
-                            continue;
-                        }
-                    }
-
-                    // リンク [[ {{ （[[image:xx|[[test]]の画像]]とか）の再帰チェック
-                    IElement l;
-                    index = parser.ChkLinkText(out l, s, i);
-                    if (index != -1)
-                    {
-                        i = index;
-                        ((TextElement)pipeTexts[pipeCounter - 1]).Text += l.ToString();
-                        continue;
-                    }
-
-                    ((TextElement)pipeTexts[pipeCounter - 1]).Text += c;
-                }
-            }
-
-            // 解析失敗
-            if (lastIndex < 0)
-            {
-                return false;
-            }
-
-            // 解析に成功した場合、結果を出力値に設定
-            result = new MediaWikiLink();
-
-            // 変数ブロックの文字列をリンクのテキストに設定
-            result.ParsedString = s.Substring(0, lastIndex + 1);
-
-            // 前後のスペースは削除（見出しは後ろのみ）
-            result.Title = article.Trim();
-            result.Section = section != null ? section.TrimEnd() : section;
-
-            // | 以降はそのまま設定
-            result.PipeTexts = pipeTexts;
-
-            // 記事名から情報を抽出
-            // サブページ
-            if (result.Title.StartsWith("/"))
-            {
-                result.IsSubpage = true;
-            }
-            else if (result.Title.StartsWith(":"))
-            {
-                // 先頭が :
-                result.IsColon = true;
-                result.Title = result.Title.TrimStart(':').TrimStart();
-            }
-
-            // 標準名前空間以外で[[xxx:yyy]]のようになっている場合、言語コード
-            if (result.Title.Contains(":") && new MediaWikiPage(parser.Website, result.Title).IsMain())
-            {
-                // ※本当は、言語コード等の一覧を作り、其処と一致するものを・・・とすべきだろうが、
-                //   メンテしきれないので : を含む名前空間以外を全て言語コード等と判定
-                result.Code = result.Title.Substring(0, result.Title.IndexOf(':')).TrimEnd();
-                result.Title = result.Title.Substring(result.Title.IndexOf(':') + 1).TrimStart();
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
-        /// </summary>
-        /// <param name="c">解析文字列の先頭文字。</param>
-        /// <returns>候補となる場合<c>true</c>。</returns>
-        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
-        public static bool IsElementPossible(char c)
-        {
-            return MediaWikiLink.delimiterStart[0] == c;
-        }
-
-        #endregion
-
         #region 実装支援用抽象メソッド実装
 
         /// <summary>
@@ -314,7 +120,7 @@ namespace Honememo.Wptscs.Parsers
             StringBuilder b = new StringBuilder();
             
             // 開始タグの付加
-            b.Append(MediaWikiLink.delimiterStart);
+            b.Append(MediaWikiLink.DelimiterStart);
 
             // 先頭の : の付加
             if (this.IsColon)
@@ -353,7 +159,7 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 閉じタグの付加
-            b.Append(MediaWikiLink.delimiterEnd);
+            b.Append(MediaWikiLink.DelimiterEnd);
             return b.ToString();
         }
 

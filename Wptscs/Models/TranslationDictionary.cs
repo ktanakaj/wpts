@@ -201,7 +201,7 @@ namespace Honememo.Wptscs.Models
                 {
                     writer.WriteAttributeString(
                         "Timestamp",
-                        item.Value.Timestamp.Value.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"));
+                        XmlConvert.ToString(item.Value.Timestamp.Value, XmlDateTimeSerializationMode.Utc));
                 }
 
                 writer.WriteEndElement();

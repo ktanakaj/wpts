@@ -71,5 +71,57 @@ namespace Honememo.Utilities
         }
 
         #endregion
+
+        #region エンコード／デコードテストケース
+
+        /// <summary>
+        /// XmlEncodeメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestXmlEncode()
+        {
+            Assert.AreEqual("test", XmlUtils.XmlEncode("test"));
+            Assert.AreEqual("&lt;", XmlUtils.XmlEncode("<"));
+            Assert.AreEqual("&gt;", XmlUtils.XmlEncode(">"));
+            Assert.AreEqual("&amp;", XmlUtils.XmlEncode("&"));
+            Assert.AreEqual("&quot;", XmlUtils.XmlEncode("\""));
+            Assert.AreEqual("&apos;", XmlUtils.XmlEncode("'"));
+        }
+
+        /// <summary>
+        /// XmlEncodeメソッドテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestXmlEncodeNull()
+        {
+            XmlUtils.XmlEncode(null);
+        }
+
+        /// <summary>
+        /// XmlDecodeメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestXmlDecode()
+        {
+            Assert.AreEqual("test", XmlUtils.XmlDecode("test"));
+            Assert.AreEqual("<", XmlUtils.XmlDecode("&lt;"));
+            Assert.AreEqual(">", XmlUtils.XmlDecode("&gt;"));
+            Assert.AreEqual("&", XmlUtils.XmlDecode("&amp;"));
+            Assert.AreEqual("\"", XmlUtils.XmlDecode("&quot;"));
+            Assert.AreEqual("'", XmlUtils.XmlDecode("&apos;"));
+        }
+
+        /// <summary>
+        /// XmlDecodeメソッドテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestXmlDecodeNull()
+        {
+            XmlUtils.XmlDecode(null);
+        }
+
+        #endregion
     }
 }

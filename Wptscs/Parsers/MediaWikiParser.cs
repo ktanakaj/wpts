@@ -28,7 +28,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// nowikiタグ。
         /// </summary>
-        public static readonly string NowikiTag = "nowiki";
+        private static readonly string nowikiTag = "nowiki";
 
         #endregion
 
@@ -74,30 +74,410 @@ namespace Honememo.Wptscs.Parsers
         }
 
         #endregion
+        
+        #region 公開インスタンスメソッド
 
-        #region 公開静的メソッド
+        #region MediaWikiLink関連
+
+        /// <summary>
+        /// 渡されたテキストをMediaWikiの内部リンクとして解析する。
+        /// </summary>
+        /// <param name="s">[[で始まる文字列。</param>
+        /// <param name="result">解析したリンク。</param>
+        /// <returns>解析に成功した場合<c>true</c>。</returns>
+        public bool TryParseMediaWikiLink(string s, out MediaWikiLink result)
+        {
+            // 出力値初期化
+            result = null;
+
+            // 入力値確認
+            if (!s.StartsWith(MediaWikiLink.DelimiterStart))
+            {
+                return false;
+            }
+
+            // 構文を解析して、[[]]内部の文字列を取得
+            // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
+            string article = String.Empty;
+            string section = null;
+            IList<StringBuilder> pipeTexts = new List<StringBuilder>();
+            int lastIndex = -1;
+            int pipeCounter = 0;
+            bool sharpFlag = false;
+            for (int i = 2; i < s.Length; i++)
+            {
+                char c = s[i];
+
+                // ]]が見つかったら、処理正常終了
+                if (StringUtils.StartsWith(s, MediaWikiLink.DelimiterEnd, i))
+                {
+                    lastIndex = ++i;
+                    break;
+                }
+
+                // | が含まれている場合、以降の文字列は表示名などとして扱う
+                if (c == '|')
+                {
+                    ++pipeCounter;
+                    pipeTexts.Add(new StringBuilder());
+                    continue;
+                }
+
+                // 変数（[[{{{1}}}]]とか）の再帰チェック
+                string dummy;
+                string variable;
+                int index = this.ChkVariable(out variable, out dummy, s, i);
+                if (index != -1)
+                {
+                    i = index;
+                    if (pipeCounter > 0)
+                    {
+                        pipeTexts[pipeCounter - 1].Append(variable);
+                    }
+                    else if (sharpFlag)
+                    {
+                        section += variable;
+                    }
+                    else
+                    {
+                        article += variable;
+                    }
+
+                    continue;
+                }
+
+                // | の前のとき
+                if (pipeCounter <= 0)
+                {
+                    // 変数以外で { } または < > [ ] \n が含まれている場合、リンクは無効
+                    if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n'))
+                    {
+                        break;
+                    }
+
+                    // # の前のとき
+                    if (!sharpFlag)
+                    {
+                        // #が含まれている場合、以降の文字列は見出しへのリンクとして扱う（1つめの#のみ有効）
+                        if (c == '#')
+                        {
+                            sharpFlag = true;
+                            section = String.Empty;
+                        }
+                        else
+                        {
+                            article += c;
+                        }
+                    }
+                    else
+                    {
+                        // # の後のとき
+                        section += c;
+                    }
+                }
+                else
+                {
+                    // | の後のとき
+                    if (c == '<')
+                    {
+                        string subtext = s.Substring(i);
+                        XmlCommentElement comment;
+                        XmlElement nowiki;
+                        if (XmlCommentElement.TryParseLazy(subtext, out comment))
+                        {
+                            // コメント（<!--）が含まれている場合、リンクは無効
+                            break;
+                        }
+                        else if (this.TryParseNowiki(subtext, out nowiki))
+                        {
+                            // nowikiブロック
+                            i += nowiki.ToString().Length - 1;
+                            pipeTexts[pipeCounter - 1].Append(nowiki.ToString());
+                            continue;
+                        }
+                    }
+
+                    // リンク [[ {{ （[[image:xx|[[test]]の画像]]とか）の再帰チェック
+                    IElement l;
+                    index = this.ChkLinkText(out l, s, i);
+                    if (index != -1)
+                    {
+                        i = index;
+                        pipeTexts[pipeCounter - 1].Append(l.ToString());
+                        continue;
+                    }
+
+                    pipeTexts[pipeCounter - 1].Append(c);
+                }
+            }
+
+            // 解析失敗
+            if (lastIndex < 0)
+            {
+                return false;
+            }
+
+            // 解析に成功した場合、結果を出力値に設定
+            result = new MediaWikiLink();
+
+            // 変数ブロックの文字列をリンクのテキストに設定
+            result.ParsedString = s.Substring(0, lastIndex + 1);
+
+            // 前後のスペースは削除（見出しは後ろのみ）
+            result.Title = article.Trim();
+            result.Section = section != null ? section.TrimEnd() : section;
+
+            // | 以降は再帰的に解析して設定
+            result.PipeTexts = new List<IElement>();
+            foreach (StringBuilder b in pipeTexts)
+            {
+                result.PipeTexts.Add(this.Parse(b.ToString()));
+            }
+
+            // 記事名から情報を抽出
+            // サブページ
+            if (result.Title.StartsWith("/"))
+            {
+                result.IsSubpage = true;
+            }
+            else if (result.Title.StartsWith(":"))
+            {
+                // 先頭が :
+                result.IsColon = true;
+                result.Title = result.Title.TrimStart(':').TrimStart();
+            }
+
+            // 標準名前空間以外で[[xxx:yyy]]のようになっている場合、言語コード
+            if (result.Title.Contains(":") && new MediaWikiPage(this.Website, result.Title).IsMain())
+            {
+                // ※本当は、言語コード等の一覧を作り、其処と一致するものを・・・とすべきだろうが、
+                //   メンテしきれないので : を含む名前空間以外を全て言語コード等と判定
+                result.Code = result.Title.Substring(0, result.Title.IndexOf(':')).TrimEnd();
+                result.Title = result.Title.Substring(result.Title.IndexOf(':') + 1).TrimStart();
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public bool IsMediaWikiLinkPossible(char c)
+        {
+            return MediaWikiLink.DelimiterStart[0] == c;
+        }
+
+        #endregion
+
+        #region MediaWikiTemplate関連
+
+        /// <summary>
+        /// 渡されたテキストをMediaWikiのテンプレートとして解析する。
+        /// </summary>
+        /// <param name="s">{{で始まる文字列。</param>
+        /// <param name="result">解析したテンプレート。</param>
+        /// <returns>解析に成功した場合<c>true</c>。</returns>
+        public bool TryParseMediaWikiTemplate(string s, out MediaWikiTemplate result)
+        {
+            // 出力値初期化
+            result = null;
+
+            // 入力値確認
+            if (!s.StartsWith(MediaWikiTemplate.DelimiterStart))
+            {
+                return false;
+            }
+
+            // 構文を解析して、{{}}内部の文字列を取得
+            // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
+            string article = String.Empty;
+            IList<StringBuilder> pipeTexts = new List<StringBuilder>();
+            int lastIndex = -1;
+            int pipeCounter = 0;
+            for (int i = 2; i < s.Length; i++)
+            {
+                char c = s[i];
+
+                // }}が見つかったら、処理正常終了
+                if (StringUtils.StartsWith(s, MediaWikiTemplate.DelimiterEnd, i))
+                {
+                    lastIndex = ++i;
+                    break;
+                }
+
+                // | が含まれている場合、以降の文字列は引数などとして扱う
+                if (c == '|')
+                {
+                    ++pipeCounter;
+                    pipeTexts.Add(new StringBuilder());
+                    continue;
+                }
+
+                // 変数（[[{{{1}}}]]とか）の再帰チェック
+                string dummy;
+                string variable;
+                int index = this.ChkVariable(out variable, out dummy, s, i);
+                if (index != -1)
+                {
+                    i = index;
+                    if (pipeCounter > 0)
+                    {
+                        pipeTexts[pipeCounter - 1].Append(variable);
+                    }
+                    else
+                    {
+                        article += variable;
+                    }
+
+                    continue;
+                }
+
+                // | の前のとき
+                if (pipeCounter <= 0)
+                {
+                    // 変数以外で < > [ ] { } が含まれている場合、リンクは無効
+                    if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}'))
+                    {
+                        break;
+                    }
+
+                    article += c;
+                }
+                else
+                {
+                    // | の後のとき
+                    if (c == '<')
+                    {
+                        string subtext = s.Substring(i);
+                        XmlCommentElement comment;
+                        XmlElement nowiki;
+                        if (XmlCommentElement.TryParseLazy(subtext, out comment))
+                        {
+                            // コメント（<!--）が含まれている場合、リンクは無効
+                            break;
+                        }
+                        else if (this.TryParseNowiki(subtext, out nowiki))
+                        {
+                            // nowikiブロック
+                            i += nowiki.ToString().Length - 1;
+                            pipeTexts[pipeCounter - 1].Append(nowiki.ToString());
+                            continue;
+                        }
+                    }
+
+                    // リンク [[ {{ （{{test|[[例]]}}とか）の再帰チェック
+                    IElement l;
+                    index = this.ChkLinkText(out l, s, i);
+                    if (index != -1)
+                    {
+                        i = index;
+                        pipeTexts[pipeCounter - 1].Append(l.ToString());
+                        continue;
+                    }
+
+                    pipeTexts[pipeCounter - 1].Append(c);
+                }
+            }
+
+            // 解析失敗
+            if (lastIndex < 0)
+            {
+                return false;
+            }
+
+            // 解析に成功した場合、結果を出力値に設定
+            // 前後のスペース・改行は削除（見出しは後ろのみ）
+            result = new MediaWikiTemplate(article.Trim());
+
+            // 変数ブロックの文字列をリンクのテキストに設定
+            result.ParsedString = s.Substring(0, lastIndex + 1);
+
+            // | 以降は再帰的に解析して設定
+            result.PipeTexts = new List<IElement>();
+            foreach (StringBuilder b in pipeTexts)
+            {
+                result.PipeTexts.Add(this.Parse(b.ToString()));
+            }
+
+            // 記事名から情報を抽出
+            // サブページ
+            if (result.Title.StartsWith("/") == true)
+            {
+                result.IsSubpage = true;
+            }
+            else if (result.Title.StartsWith(":"))
+            {
+                // 先頭が :
+                result.IsColon = true;
+                result.Title = result.Title.TrimStart(':').TrimStart();
+            }
+
+            // 先頭が msgnw:
+            result.IsMsgnw = result.Title.ToLower().StartsWith(MediaWikiTemplate.Msgnw.ToLower());
+            if (result.IsMsgnw)
+            {
+                result.Title = result.Title.Substring(MediaWikiTemplate.Msgnw.Length);
+            }
+
+            // 記事名直後の改行の有無
+            if (article.TrimEnd(' ').EndsWith("\n"))
+            {
+                result.NewLine = true;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public bool IsMediaWikiTemplatePossible(char c)
+        {
+            return MediaWikiTemplate.DelimiterStart[0] == c;
+        }
+
+        #endregion
+
+        #region Nowiki関連
 
         /// <summary>
         /// 渡されたテキストがnowikiブロックかを解析する。
         /// </summary>
-        /// <param name="text">解析するテキスト。</param>
-        /// <param name="nowiki">解析したnowikiブロック。</param>
+        /// <param name="s">解析するテキスト。</param>
+        /// <param name="result">解析したnowikiブロック。</param>
         /// <returns>nowikiブロックの場合<c>true</c>。</returns>
         /// <remarks>
         /// nowikiブロックと判定するには、1文字目が開始タグである必要がある。
         /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
         /// また、入れ子は考慮しない。
         /// </remarks>
-        public static bool TryParseNowiki(string text, out string nowiki)
+        public bool TryParseNowiki(string s, out XmlElement result)
         {
-            nowiki = null;
-            XmlParser parser = new XmlParser();
+            result = null;
             XmlElement element;
-            if (parser.TryParseXmlElement(text, out element))
+            if (this.TryParseXmlElement(s, out element))
             {
-                if (element.Name.ToLower() == MediaWikiParser.NowikiTag)
+                if (element.Name.ToLower() == MediaWikiParser.nowikiTag)
                 {
-                    nowiki = element.ToString();
+                    // nowiki区間は内部要素を全てテキストとして扱う
+                    XmlTextElement innerElement = new XmlTextElement();
+                    StringBuilder b = new StringBuilder();
+                    foreach (IElement e in element)
+                    {
+                        b.Append(e.ToString());
+                    }
+
+                    innerElement.Raw = b.ToString();
+                    innerElement.ParsedString = b.ToString();
+                    element.Clear();
+                    element.Add(innerElement);
+                    result = element;
                     return true;
                 }
             }
@@ -105,9 +485,18 @@ namespace Honememo.Wptscs.Parsers
             return false;
         }
 
-        #endregion
+        /// <summary>
+        /// 渡された文字が<see cref="TryParseNowiki"/>の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public bool IsNowikiPossible(char c)
+        {
+            return '<' == c;
+        }
 
-        #region 公開インスタンスメソッド
+        #endregion
 
         /// <summary>
         /// 渡されたテキストの指定された位置に存在するWikipediaの内部リンク・テンプレートをチェック。
@@ -119,21 +508,21 @@ namespace Honememo.Wptscs.Parsers
         public int ChkLinkText(out IElement element, string text, int index)
         {
             // 入力値に応じて、処理を振り分け
-            if (MediaWikiLink.IsElementPossible(text[index]))
+            if (this.IsMediaWikiLinkPossible(text[index]))
             {
                 // 内部リンク
                 MediaWikiLink linkElement;
-                if (MediaWikiLink.TryParse(text.Substring(index), this, out linkElement))
+                if (this.TryParseMediaWikiLink(text.Substring(index), out linkElement))
                 {
                     element = linkElement;
                     return index + element.ToString().Length - 1;
                 }
             }
-            else if (MediaWikiTemplate.IsElementPossible(text[index]))
+            else if (this.IsMediaWikiTemplatePossible(text[index]))
             {
                 // テンプレート
                 MediaWikiTemplate templateElement;
-                if (MediaWikiTemplate.TryParse(text.Substring(index), this, out templateElement))
+                if (this.TryParseMediaWikiTemplate(text.Substring(index), out templateElement))
                 {
                     element = templateElement;
                     return index + element.ToString().Length - 1;
@@ -179,8 +568,8 @@ namespace Honememo.Wptscs.Parsers
 
                 if (text[i] == '<')
                 {
-                    CommentElement comment;
-                    if (CommentElement.TryParseLazy(text.Substring(i), out comment))
+                    XmlCommentElement comment;
+                    if (XmlCommentElement.TryParseLazy(text.Substring(i), out comment))
                     {
                         // コメント（<!--）ブロック
                         i += comment.ToString().Length - 1;
@@ -209,11 +598,11 @@ namespace Honememo.Wptscs.Parsers
                     // | の後のとき
                     if (text[i] == '<')
                     {
-                        string nowiki;
-                        if (MediaWikiParser.TryParseNowiki(text.Substring(i), out nowiki))
+                        XmlElement nowiki;
+                        if (this.TryParseNowiki(text.Substring(i), out nowiki))
                         {
                             // nowikiブロック
-                            i += nowiki.Length - 1;
+                            i += nowiki.ToString().Length - 1;
                             value += nowiki;
                             continue;
                         }
@@ -283,28 +672,31 @@ namespace Honememo.Wptscs.Parsers
         /// <returns>解析できた場合<c>true</c>。</returns>
         protected override bool TryParseElements(string s, out IElement result)
         {
-            CommentElement commentElement;
+            // ※ このアプリではMediaWikiのXMLタグは基本的に無視するため、
+            //    あえて解析の対象とはしない。
+            //    （入れ子とかがややこしい話になるので。）
+            //    <nowiki>だけ考慮する。
+            XmlCommentElement commentElement;
             XmlElement xmlElement;
             MediaWikiLink linkElement;
             MediaWikiTemplate templateElement;
             MediaWikiHeading headingElement;
-            if (CommentElement.TryParseLazy(s, out commentElement))
+            if (XmlCommentElement.TryParseLazy(s, out commentElement))
             {
                 result = commentElement;
                 return true;
             }
-            else if (XmlElement.TryParse(s, this, out xmlElement))
+            else if (this.TryParseNowiki(s, out xmlElement))
             {
-                // TODO: XmlElementは微妙な構文が保持されないのでそのままでは使えない
                 result = xmlElement;
                 return true;
             }
-            else if (MediaWikiLink.TryParse(s, this, out linkElement))
+            else if (this.TryParseMediaWikiLink(s, out linkElement))
             {
                 result = linkElement;
                 return true;
             }
-            else if (MediaWikiTemplate.TryParse(s, this, out templateElement))
+            else if (this.TryParseMediaWikiTemplate(s, out templateElement))
             {
                 result = templateElement;
                 return true;

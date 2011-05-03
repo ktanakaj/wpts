@@ -1,8 +1,8 @@
 ﻿// ================================================================================================
 // <summary>
-//      XML/HTMLのコメント要素をあらわすモデルクラスソース</summary>
+//      XMLのコメント要素をあらわすモデルクラスソース</summary>
 //
-// <copyright file="CommentElement.cs" company="honeplusのメモ帳">
+// <copyright file="XmlCommentElement.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -16,7 +16,7 @@ namespace Honememo.Parsers
     /// <summary>
     /// XML/HTMLのコメント要素をあらわすモデルクラスです。
     /// </summary>
-    public class CommentElement : TextElement
+    public class XmlCommentElement : XmlTextElement
     {
         #region 定数
 
@@ -38,31 +38,9 @@ namespace Honememo.Parsers
         /// 指定されたコメントを用いて要素を作成する。
         /// </summary>
         /// <param name="comment">コメント文字列、未指定時は<c>null</c>。</param>
-        public CommentElement(string comment = null)
+        public XmlCommentElement(string comment = null)
             : base(comment)
         {
-        }
-
-        #endregion
-
-        #region プロパティ
-
-        /// <summary>
-        /// このコメント要素のテキスト。
-        /// </summary>
-        /// <remarks>プロパティ更新時は<see cref="ParsedString"/>を破棄する。</remarks>
-        public override string Text
-        {
-            get
-            {
-                return base.Text;
-            }
-
-            set
-            {
-                base.Text = value;
-                this.ParsedString = null;
-            }
         }
 
         #endregion
@@ -70,19 +48,18 @@ namespace Honememo.Parsers
         #region 静的メソッド
 
         /// <summary>
-        /// 渡されたHTMLテキストがコメントかを解析する。
+        /// 渡されたXMLテキストがコメントかを解析する。
         /// </summary>
         /// <param name="s">解析するテキスト。</param>
         /// <returns>解析したコメント。</returns>
         /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
         /// <remarks>
         /// コメントと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
         /// </remarks>
-        public static CommentElement ParseLazy(string s)
+        public static XmlCommentElement Parse(string s)
         {
-            CommentElement result;
-            if (CommentElement.TryParseLazy(s, out result))
+            XmlCommentElement result;
+            if (XmlCommentElement.TryParse(s, out result))
             {
                 return result;
             }
@@ -91,7 +68,35 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// 渡されたHTMLテキストがコメントかを解析する。
+        /// 渡されたXMLテキストがコメントかを解析する。
+        /// </summary>
+        /// <param name="s">解析するテキスト。</param>
+        /// <param name="result">解析したコメント。</param>
+        /// <returns>コメントの場合<c>true</c>。</returns>
+        /// <remarks>
+        /// コメントと判定するには、1文字目が開始タグである必要がある。
+        /// </remarks>
+        public static bool TryParse(string s, out XmlCommentElement result)
+        {
+            // 処理の大半はLazyと同様
+            if (!XmlCommentElement.TryParseLazy(s, out result))
+            {
+                return false;
+            }
+
+            // 閉じタグで終わっていない場合NGとする
+            if (result.ParsedString.Length < XmlCommentElement.delimiterStart.Length + XmlCommentElement.delimiterEnd.Length
+                || !result.ParsedString.EndsWith(XmlCommentElement.delimiterEnd))
+            {
+                result = null;
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 渡されたXMLテキストがコメントかを解析する。
         /// </summary>
         /// <param name="s">解析するテキスト。</param>
         /// <param name="result">解析したコメント。</param>
@@ -100,32 +105,33 @@ namespace Honememo.Parsers
         /// コメントと判定するには、1文字目が開始タグである必要がある。
         /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
         /// </remarks>
-        public static bool TryParseLazy(string s, out CommentElement result)
+        public static bool TryParseLazy(string s, out XmlCommentElement result)
         {
             // 入力値確認
             result = null;
-            if (String.IsNullOrEmpty(s) || !s.StartsWith(CommentElement.delimiterStart))
+            if (String.IsNullOrEmpty(s) || !s.StartsWith(XmlCommentElement.delimiterStart))
             {
                 return false;
             }
 
             // コメント終了まで取得
-            int index = s.IndexOf(CommentElement.delimiterEnd, CommentElement.delimiterStart.Length);
+            result = new XmlCommentElement();
+            int index = s.IndexOf(XmlCommentElement.delimiterEnd, XmlCommentElement.delimiterStart.Length);
             if (index < 0)
             {
                 // 閉じタグが存在しない場合、最後までコメントと判定
-                result = new CommentElement(s.Substring(CommentElement.delimiterStart.Length));
-
-                // 不正な構文を保持するため、元の文字列を保持する
+                result.Raw = s.Substring(XmlCommentElement.delimiterStart.Length);
                 result.ParsedString = s;
-                return true;
+            }
+            else
+            {
+                // 閉じタグがあった場合、閉じタグまでを返す
+                result.Raw = s.Substring(
+                    XmlCommentElement.delimiterStart.Length,
+                    index - XmlCommentElement.delimiterStart.Length);
+                result.ParsedString = s.Substring(0, index + XmlCommentElement.delimiterEnd.Length);
             }
 
-            // 閉じタグがあった場合、閉じタグまでを返す
-            // ※ この場合元文字列は要らない
-            result = new CommentElement(s.Substring(
-                CommentElement.delimiterStart.Length,
-                index - CommentElement.delimiterStart.Length));
             return true;
         }
 
@@ -137,7 +143,7 @@ namespace Honememo.Parsers
         /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
         public static bool IsElementPossible(char c)
         {
-            return CommentElement.delimiterStart[0] == c;
+            return XmlCommentElement.delimiterStart[0] == c;
         }
 
         #endregion
@@ -150,7 +156,7 @@ namespace Honememo.Parsers
         /// <returns>このコメント要素のテキスト。</returns>
         protected override string ToStringImpl()
         {
-            return CommentElement.delimiterStart + StringUtils.DefaultString(this.Text) + CommentElement.delimiterEnd;
+            return XmlCommentElement.delimiterStart + base.ToStringImpl() + XmlCommentElement.delimiterEnd;
         }
 
         #endregion

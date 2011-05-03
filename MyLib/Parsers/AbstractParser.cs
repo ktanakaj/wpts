@@ -56,7 +56,7 @@ namespace Honememo.Parsers
             for (int i = 0; i < s.Length; i++)
             {
                 // 性能を考え、TryParseの前に処理対象になりそうかをチェック
-                if (IsElementPossible(s, i))
+                if (this.IsElementPossible(s, i))
                 {
                     // 各要素のTryParse処理を呼び出し
                     IElement innerElement;
@@ -123,16 +123,12 @@ namespace Honememo.Parsers
         /// </remarks>
         protected abstract bool TryParseElements(string s, out IElement result);
 
-        #endregion
-
-        #region 内部処理用メソッド
-        
         /// <summary>
         /// 文字列が空でない場合、リストにTextエレメントを追加して、文字列をリセットする。
         /// </summary>
         /// <param name="list">追加されるリスト。</param>
         /// <param name="b">追加する文字列。</param>
-        private void FlashText(ref ListElement list, ref StringBuilder b)
+        protected virtual void FlashText(ref ListElement list, ref StringBuilder b)
         {
             if (b.Length > 0)
             {

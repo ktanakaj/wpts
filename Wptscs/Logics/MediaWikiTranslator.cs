@@ -84,8 +84,8 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 改良版メソッドをコール
-            CommentElement commentElement;
-            if (!CommentElement.TryParseLazy(text.Substring(index), out commentElement))
+            XmlCommentElement commentElement;
+            if (!XmlCommentElement.TryParseLazy(text.Substring(index), out commentElement))
             {
                 comment = String.Empty;
                 return -1;
@@ -102,7 +102,7 @@ namespace Honememo.Wptscs.Logics
         /// <param name="text">解析するテキスト。</param>
         /// <param name="index">解析開始インデックス。</param>
         /// <returns>nowiki区間の場合、終了位置のインデックスを返す。それ以外は-1。</returns>
-        public static int ChkNowiki(out string nowiki, string text, int index)
+        public int ChkNowiki(out string nowiki, string text, int index)
         {
             // 入力値確認
             if (String.IsNullOrEmpty(text))
@@ -112,12 +112,14 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 改良版メソッドをコール
-            if (!MediaWikiParser.TryParseNowiki(text.Substring(index), out nowiki))
+            XmlElement result;
+            if (!new MediaWikiParser(this.From).TryParseNowiki(text.Substring(index), out result))
             {
                 nowiki = String.Empty;
                 return -1;
             }
 
+            nowiki = result.ToString();
             return index + nowiki.Length - 1;
         }
 
@@ -474,7 +476,7 @@ namespace Honememo.Wptscs.Logics
 
                 // nowikiのチェック
                 string nowiki;
-                index = MediaWikiTranslator.ChkNowiki(out nowiki, text, i);
+                index = this.ChkNowiki(out nowiki, text, i);
                 if (index != -1)
                 {
                     i = index;
@@ -851,8 +853,7 @@ namespace Honememo.Wptscs.Logics
 
                 if (l.IsMsgnw)
                 {
-                    // TODO: たぶんテンプレートクラスのToString()で出来るようになる
-                    // b.Append(MediaWikiTemplate.msgnw);
+                    b.Append(MediaWikiTemplate.Msgnw);
                 }
 
                 // : より前の部分を削除して出力（: が無いときは-1+1で0から）

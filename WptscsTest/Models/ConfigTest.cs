@@ -28,6 +28,18 @@ namespace Honememo.Wptscs.Models
     [TestFixture]
     public class ConfigTest
     {
+        #region モッククラス
+
+        /// <summary>
+        /// Configテスト用のモッククラスです。
+        /// </summary>
+        /// <remarks>そのままではnewすることができないため。</remarks>
+        public class DummyConfig : Config
+        {
+        }
+
+        #endregion
+
         // TODO: テストケース全然足りない
 
         #region XMLシリアライズ用メソッドケース
@@ -64,7 +76,7 @@ namespace Honememo.Wptscs.Models
         public void TestWriteXml()
         {
             // TODO: シリアライズでも細かい動作の差異があるので、もう少しテストケースが必要
-            Config config = new TestingConfig();
+            Config config = new DummyConfig();
             config.Translator = typeof(MediaWikiTranslator);
             TranslationDictionary dic = new TranslationDictionary("en", "ja");
             dic.Add("dicKey", new TranslationDictionary.Item { Word = "dicTest" });

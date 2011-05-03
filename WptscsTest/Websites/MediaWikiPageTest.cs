@@ -81,7 +81,7 @@ namespace Honememo.Wptscs.Websites
         public void TestGetInterWiki()
         {
             // 普通のページ
-            MediaWikiPage page = new MediaWikiPage(new MediaWiki(new Language("en")), "TestTitle", "TestText\n"
+            MediaWikiPage page = new MediaWikiPage(new DummySite(new Language("en")), "TestTitle", "TestText\n"
                 + " [[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
             Assert.AreEqual("テストページ", page.GetInterWiki("ja"));
             Assert.AreEqual("Test_Fr", page.GetInterWiki("fr"));
@@ -115,7 +115,7 @@ namespace Honememo.Wptscs.Websites
         [Test]
         public void TestIsRedirect()
         {
-            MediaWiki site = new MediaWiki(new Language("en"));
+            MediaWiki site = new DummySite(new Language("en"));
             MediaWikiPage page = new MediaWikiPage(site, "TestTitle", "#REDIRECT [[Test Redirect]]");
             Assert.IsTrue(page.IsRedirect());
             Assert.AreEqual("Test Redirect", page.Redirect.Title);

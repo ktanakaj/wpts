@@ -15,11 +15,13 @@ namespace Honememo.Parsers
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
+    using System.Xml;
     using Honememo.Utilities;
 
     /// <summary>
     /// XML/HTMLテキストを解析するためのクラスです。
     /// </summary>
+    /// <remarks>HTMLについては、解析はできるもののほぼXml用のElementで結果が返されます。</remarks>
     public class XmlParser : AbstractParser
     {
         #region private変数
@@ -59,7 +61,7 @@ namespace Honememo.Parsers
         }
 
         #endregion
-        
+
         #region 公開メソッド
 
         /// <summary>
@@ -109,7 +111,15 @@ namespace Honememo.Parsers
             // "/>" で終わった場合は、ここでタグ終了
             if (s[index - 1] == '/')
             {
-                result = new XmlElement(name, attribute, null, s.Substring(0, index + 1));
+                if (this.IsHtml)
+                {
+                    result = new HtmlElement(name, attribute, null, s.Substring(0, index + 1));
+                }
+                else
+                {
+                    result = new XmlElement(name, attribute, null, s.Substring(0, index + 1));
+                }
+
                 return true;
             }
 
@@ -126,8 +136,8 @@ namespace Honememo.Parsers
                 if (this.IsHtml)
                 {
                     // HTMLの場合、閉じタグが無いのは開始タグだけのパターンと判定
-                    // ※ indexは開始タグの末尾になっているのでそのまま
-                    innerXml = String.Empty;
+                    result = new HtmlElement(name, attribute, null, s.Substring(0, index + 1));
+                    return true;
                 }
                 else
                 {
@@ -147,7 +157,7 @@ namespace Honememo.Parsers
                 return false;
             }
 
-            // 結果がリストの場合そのまま、それ以外はリストに入れて親のXMLElementに代入
+            // 結果がリストの場合そのまま、それ以外はリストに入れて親のElementに代入
             ICollection<IElement> collection;
             if (innerElement.GetType() == typeof(ListElement))
             {
@@ -159,8 +169,27 @@ namespace Honememo.Parsers
                 collection.Add(innerElement);
             }
 
-            result = new XmlElement(name, attribute, collection, s.Substring(0, index + 1));
+            if (this.IsHtml)
+            {
+                result = new HtmlElement(name, attribute, collection, s.Substring(0, index + 1));
+            }
+            else
+            {
+                result = new XmlElement(name, attribute, collection, s.Substring(0, index + 1));
+            }
+
             return true;
+        }
+
+        /// <summary>
+        /// 渡された文字が<see cref="TryParseXmlElement"/>の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
+        public virtual bool IsXmlElementPossible(char c)
+        {
+            return '<' == c;
         }
 
         #endregion
@@ -176,8 +205,8 @@ namespace Honememo.Parsers
         protected override bool IsElementPossible(string s, int index)
         {
             char c = s[index];
-            return CommentElement.IsElementPossible(c)
-                || XmlElement.IsElementPossible(c);
+            return XmlCommentElement.IsElementPossible(c)
+                || this.IsXmlElementPossible(c);
         }
 
         /// <summary>
@@ -188,14 +217,14 @@ namespace Honememo.Parsers
         /// <returns>解析できた場合<c>true</c>。</returns>
         protected override bool TryParseElements(string s, out IElement result)
         {
-            CommentElement commentElement;
+            XmlCommentElement commentElement;
             XmlElement xmlElement;
-            if (CommentElement.TryParseLazy(s, out commentElement))
+            if (XmlCommentElement.TryParseLazy(s, out commentElement))
             {
                 result = commentElement;
                 return true;
             }
-            else if (XmlElement.TryParse(s, this, out xmlElement))
+            else if (this.TryParseXmlElement(s, out xmlElement))
             {
                 result = xmlElement;
                 return true;
@@ -203,6 +232,23 @@ namespace Honememo.Parsers
 
             result = null;
             return false;
+        }
+
+        /// <summary>
+        /// 文字列が空でない場合、リストにTextエレメントを追加して、文字列をリセットする。
+        /// </summary>
+        /// <param name="list">追加されるリスト。</param>
+        /// <param name="b">追加する文字列。</param>
+        protected override void FlashText(ref ListElement list, ref StringBuilder b)
+        {
+            if (b.Length > 0)
+            {
+                string s = b.ToString();
+                XmlTextElement e = new XmlTextElement(this.Decode(s));
+                e.ParsedString = s;
+                list.Add(e);
+                b.Clear();
+            }
         }
 
         #endregion
@@ -226,8 +272,7 @@ namespace Honememo.Parsers
             }
             else
             {
-                return str.Replace("&lt;", "<").Replace("&gt;", ">")
-                    .Replace("&quot;", "\"").Replace("&apos;", "\'").Replace("&amp;", "&");
+                return XmlUtils.XmlDecode(str);
             }
         }
 
@@ -242,56 +287,21 @@ namespace Honememo.Parsers
         /// </remarks>
         private bool ValidateName(string name)
         {
-            if (String.IsNullOrEmpty(name))
+            if (String.IsNullOrWhiteSpace(name))
             {
-                // 空は無条件でNG
                 return false;
             }
 
-            if (!this.IsNameFirstCharacter(name[0]))
+            try
             {
-                // 先頭1文字が許可されていない文字の場合NG
+                XmlConvert.VerifyName(name);
+            }
+            catch (XmlException)
+            {
                 return false;
             }
 
-            // 2文字目以降の調査
-            for (int i = 1; i < name.Length; i++)
-            {
-                if (!this.IsNameCharacter(name[i]))
-                {
-                    // 2文字目以降として使えない文字が出現したらNG
-                    return false;
-                }
-            }
-
-            // 全てOK
             return true;
-        }
-
-        /// <summary>
-        /// XMLタグ名／属性名の先頭文字として使用可能な文字かを判定する。
-        /// </summary>
-        /// <param name="c">文字。</param>
-        /// <returns>使用可能な場合 <c>true</c>。</returns>
-        private bool IsNameFirstCharacter(char c)
-        {
-            // 先頭一文字目はLetterクラスの文字と一部記号のみ許可
-            return Char.IsLetter(c) || c == '_' || c == ':';
-        }
-
-        /// <summary>
-        /// XMLタグ名／属性名の2文字目以降として使用可能な文字かを判定する。
-        /// </summary>
-        /// <param name="c">文字。</param>
-        /// <returns>使用可能な場合 <c>true</c>。</returns>
-        private bool IsNameCharacter(char c)
-        {
-            // 2文字目以降は、一文字目の文字に加えて
-            // Digitクラス、Combining Characterクラス、Extenderクラスの文字とハイフン・ピリオドが可能
-            // ※ 厳密な判定が大変で、Lazyクラスでそこまでやる必要も感じないので、
-            //    処理的に困る制御文字や記号類を除きみんな許可する。
-            return this.IsNameFirstCharacter(c) || c == '-' || c == '.'
-                || (!Char.IsControl(c) && !Char.IsWhiteSpace(c) && !Char.IsSymbol(c) && !Char.IsPunctuation(c));
         }
 
         /// <summary>
@@ -497,8 +507,8 @@ namespace Honememo.Parsers
                 }
 
                 // コメント（<!--）のチェック
-                CommentElement comment;
-                if (CommentElement.TryParseLazy(s, out comment))
+                XmlCommentElement comment;
+                if (XmlCommentElement.TryParseLazy(s, out comment))
                 {
                     i += comment.ToString().Length - 1;
                     continue;

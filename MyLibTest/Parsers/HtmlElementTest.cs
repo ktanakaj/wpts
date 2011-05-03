@@ -1,8 +1,8 @@
 ﻿// ================================================================================================
 // <summary>
-//      XmlElementのテストクラスソース。</summary>
+//      HtmlElementのテストクラスソース。</summary>
 //
-// <copyright file="XmlElementTest.cs" company="honeplusのメモ帳">
+// <copyright file="HtmlElementTest.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -15,10 +15,10 @@ namespace Honememo.Parsers
     using NUnit.Framework;
 
     /// <summary>
-    /// XmlElementのテストクラスです。
+    /// HtmlElementのテストクラスです。
     /// </summary>
     [TestFixture]
-    public class XmlElementTest
+    public class HtmlElementTest
     {
         #region コンストラクタテストケース
 
@@ -28,12 +28,12 @@ namespace Honememo.Parsers
         [Test]
         public void TestConstructor()
         {
-            XmlElement element = new XmlElement("testname1");
+            HtmlElement element = new HtmlElement("testname1");
             Assert.AreEqual("testname1", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
             Assert.AreEqual(0, element.Count);
 
-            element = new XmlElement("testname2", "testvalue");
+            element = new HtmlElement("testname2", "testvalue");
             Assert.AreEqual("testname2", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
             Assert.AreEqual(1, element.Count);
@@ -44,66 +44,10 @@ namespace Honememo.Parsers
             attribute.Add("testattr1", "testattrvalue1");
             ICollection<IElement> collection = new List<IElement>();
             collection.Add(new XmlCommentElement("testcomment"));
-            element = new XmlElement("testname3", attribute, collection);
+            element = new HtmlElement("testname3", attribute, collection);
             Assert.AreEqual("testname3", element.Name);
             Assert.AreEqual("testattrvalue1", element.Attributes["testattr1"]);
             Assert.AreEqual("testcomment", ((XmlCommentElement)element[0]).Text);
-        }
-
-        #endregion
-
-        #region プロパティテストケース
-
-        /// <summary>
-        /// Nameプロパティテストケース。
-        /// </summary>
-        [Test]
-        public void TestName()
-        {
-            XmlElement element = new XmlElement("testname1");
-            Assert.AreEqual("testname1", element.Name);
-            element.Name = "testname2";
-            Assert.AreEqual("testname2", element.Name);
-        }
-
-        /// <summary>
-        /// Nameプロパティテストケース（null）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestNameNull()
-        {
-            XmlElement element = new XmlElement(null);
-        }
-
-        /// <summary>
-        /// Nameプロパティテストケース（空文字列）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestNameEmpty()
-        {
-            XmlElement element = new XmlElement(String.Empty);
-        }
-
-        /// <summary>
-        /// Nameプロパティテストケース（空白文字列）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestNameBlank()
-        {
-            XmlElement element = new XmlElement(" ");
-        }
-
-        /// <summary>
-        /// Attributesプロパティテストケース。
-        /// </summary>
-        [Test]
-        public void TestAttributes()
-        {
-            XmlElement element = new XmlElement("testname");
-            Assert.IsNotNull(element.Attributes);
         }
 
         #endregion
@@ -116,12 +60,12 @@ namespace Honememo.Parsers
         [Test]
         public void TestToString()
         {
-            XmlElement element = new XmlElement("form");
-            Assert.AreEqual("<form />", element.ToString());
+            HtmlElement element = new HtmlElement("form");
+            Assert.AreEqual("<form>", element.ToString());
             element.Attributes.Add("action", "/test.html");
-            Assert.AreEqual("<form action=\"/test.html\" />", element.ToString());
+            Assert.AreEqual("<form action=\"/test.html\">", element.ToString());
             element.Attributes.Add("disabled", "");
-            Assert.AreEqual("<form action=\"/test.html\" disabled=\"\" />", element.ToString());
+            Assert.AreEqual("<form action=\"/test.html\" disabled=\"\">", element.ToString());
             element.Add(new TextElement("フォーム内のテキスト"));
             Assert.AreEqual("<form action=\"/test.html\" disabled=\"\">フォーム内のテキスト</form>", element.ToString());
             element.Add(new XmlCommentElement("コメント"));

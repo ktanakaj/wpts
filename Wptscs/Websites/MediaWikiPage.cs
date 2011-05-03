@@ -13,7 +13,6 @@ namespace Honememo.Wptscs.Websites
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using Honememo.Parsers;
     using Honememo.Utilities;
     using Honememo.Wptscs.Parsers;
@@ -145,65 +144,8 @@ namespace Honememo.Wptscs.Websites
             // Textが設定されている場合のみ有効
             this.ValidateIncomplete();
 
-            // 記事に存在する指定言語への言語間リンクを取得
-            for (int i = 0; i < this.Text.Length; i++)
-            {
-                char c = this.Text[i];
-                switch (c)
-                {
-                    case '<':
-                        // コメント（<!--）またはnowiki区間の場合飛ばす
-                        string subtext = this.Text.Substring(i);
-                        CommentElement comment;
-                        string value;
-                        if (CommentElement.TryParseLazy(subtext, out comment))
-                        {
-                            i += comment.ToString().Length - 1;
-                        }
-                        else if (MediaWikiParser.TryParseNowiki(subtext, out value))
-                        {
-                            i += value.Length - 1;
-                        }
-
-                        break;
-
-                    case '{':
-                        // テンプレート
-                        MediaWikiTemplate template;
-                        if (MediaWikiTemplate.TryParse(this.Text.Substring(i), new MediaWikiParser(this.Website), out template))
-                        {
-                            i += template.ToString().Length - 1;
-
-                            // Documentationテンプレートがある場合は、その中を探索
-                            string interWiki = this.GetDocumentationInterWiki(template, code);
-                            if (!String.IsNullOrEmpty(interWiki))
-                            {
-                                return interWiki;
-                            }
-                        }
-
-                        break;
-
-                    case '[':
-                        // リンク
-                        MediaWikiLink link;
-                        if (MediaWikiLink.TryParse(this.Text.Substring(i), new MediaWikiParser(this.Website), out link))
-                        {
-                            i += link.ToString().Length - 1;
-
-                            // 指定言語への言語間リンクの場合、内容を取得し、処理終了
-                            if (link.Code == code && !link.IsColon)
-                            {
-                                return link.Title;
-                            }
-                        }
-
-                        break;
-                }
-            }
-
-            // 未発見の場合、空文字列
-            return String.Empty;
+            // 記事を解析し、その結果から言語間リンクを探索
+            return this.GetInterWiki(code, new MediaWikiParser(this.Website).Parse(this.Text));
         }
 
         /// <summary>
@@ -332,7 +274,8 @@ namespace Honememo.Wptscs.Websites
                     && this.Text.ToLower().StartsWith(format.ToLower()))
                 {
                     MediaWikiLink link;
-                    if (MediaWikiLink.TryParse(this.Text.Substring(format.Length).TrimStart(), new MediaWikiParser(this.Website), out link))
+                    if (new MediaWikiParser(this.Website)
+                        .TryParseMediaWikiLink(this.Text.Substring(format.Length).TrimStart(), out link))
                     {
                         this.Redirect = link;
                         return true;
@@ -344,6 +287,50 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
+        /// 指定されたページ解析結果要素から言語間リンクを取得。
+        /// </summary>
+        /// <param name="code">言語コード。</param>
+        /// <param name="element">要素。</param>
+        /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
+        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
+        private string GetInterWiki(string code, IElement element)
+        {
+            if (element is MediaWikiTemplate)
+            {
+                // Documentationテンプレートがある場合は、その中を探索
+                string interWiki = this.GetDocumentationInterWiki((MediaWikiTemplate)element, code);
+                if (!String.IsNullOrEmpty(interWiki))
+                {
+                    return interWiki;
+                }
+            }
+            else if (element is MediaWikiLink)
+            {
+                // 指定言語への言語間リンクの場合、内容を取得し、処理終了
+                MediaWikiLink link = (MediaWikiLink)element;
+                if (link.Code == code && !link.IsColon)
+                {
+                    return link.Title;
+                }
+            }
+            else if (element is IEnumerable<IElement>)
+            {
+                // 子要素を持つ場合、再帰的に探索
+                foreach (IElement e in (IEnumerable<IElement>)element)
+                {
+                    string interWiki = this.GetInterWiki(code, e);
+                    if (!String.IsNullOrEmpty(interWiki))
+                    {
+                        return interWiki;
+                    }
+                }
+            }
+
+            // 未発見の場合、空文字列
+            return String.Empty;
+        }
+
+        /// <summary>
         /// 渡されたTemplate:Documentationの呼び出しから、指定された言語コードへの言語間リンクを返す。
         /// </summary>
         /// <param name="link">テンプレート呼び出しのリンク。</param>
@@ -352,7 +339,7 @@ namespace Honememo.Wptscs.Websites
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
         private string GetDocumentationInterWiki(MediaWikiTemplate link, string code)
         {
-            // テンプレートタグか、この言語にTemplate:Documentationの設定がされているかを確認
+            // この言語にTemplate:Documentationの設定がされているかを確認
             string docTitle = this.Website.DocumentationTemplate;
             if (String.IsNullOrEmpty(docTitle))
             {

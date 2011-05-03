@@ -40,10 +40,12 @@
   <ItemGroup>
     <Compile Include="Models\IgnoreCaseDictionaryTest.cs" />
     <Compile Include="Models\TreeNodeTest.cs" />
-    <Compile Include="Parsers\CommentElementTest.cs" />
+    <Compile Include="Parsers\XmlCommentElementTest.cs" />
     <Compile Include="Parsers\ListElementTest.cs" />
     <Compile Include="Parsers\TextElementTest.cs" />
     <Compile Include="Parsers\XmlElementTest.cs" />
+    <Compile Include="Parsers\HtmlElementTest.cs" />
+    <Compile Include="Parsers\XmlTextElementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\XmlParserTest.cs" />
     <Compile Include="Utilities\ObjectUtilsTest.cs" />

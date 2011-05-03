@@ -30,32 +30,9 @@ namespace Honememo.Wptscs.Logics
         #region 定数
 
         /// <summary>
-        /// テストデータが格納されているフォルダパス。
+        /// テスト結果が格納されているフォルダパス。
         /// </summary>
-        private static readonly string testDir = "Data\\MediaWiki";
-
-        #endregion
-
-        #region テスト支援メソッド
-
-        /// <summary>
-        /// テスト用の値を設定したMediaWikiオブジェクトを返す。
-        /// </summary>
-        public MediaWiki GetTestServer(string language)
-        {
-            // ※ 下記URL生成時は、きちんとパス区切り文字を入れてやら無いとフォルダが認識されない。
-            //    また、httpで取得した場合とfileで取得した場合では先頭の大文字小文字が異なることが
-            //    あるため、それについては随時期待値を調整して対処。
-            MediaWiki server = ObjectUtils.DefaultIfNull<MediaWiki>(
-                TestingConfig.GetInstance("Data\\config.xml").GetWebsite(language) as MediaWiki,
-                new MediaWiki(new Language(language)));
-            UriBuilder b = new UriBuilder("file", "");
-            b.Path = Path.GetFullPath(testDir) + "\\";
-            server.Location = new Uri(b.Uri, language + "/").ToString();
-            server.ExportPath = "{0}.xml";
-            server.NamespacePath = "_api.xml";
-            return server;
-        }
+        private static readonly string resultDir = Path.Combine(MockFactory.TestMediaWikiDir, "result");
 
         #endregion
         
@@ -67,10 +44,11 @@ namespace Honememo.Wptscs.Logics
         [Test]
         public void TestExampleIgnoreHeading()
         {
-            MediaWiki from = this.GetTestServer("en");
+            MockFactory mock = new MockFactory();
+            MediaWiki from = mock.GetMediaWiki("en");
             Translator translate = new MediaWikiTranslator();
             translate.From = from;
-            translate.To = this.GetTestServer("ja");
+            translate.To = mock.GetMediaWiki("ja");
             translate.HeadingTable = new TranslationTable();
             translate.HeadingTable.From = "en";
             translate.HeadingTable.To = "ja";
@@ -79,7 +57,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\example_定型句なし.txt"))) 
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_定型句なし.txt"))) 
             {
                 expectedText = sr.ReadToEnd();
             }
@@ -92,7 +70,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換ログを期待されるログと比較する
             string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\example_定型句なし.log")))
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_定型句なし.log")))
             {
                 expectedLog = sr.ReadToEnd();
             }
@@ -111,10 +89,11 @@ namespace Honememo.Wptscs.Logics
         [Test]
         public void TestExample()
         {
-            MediaWiki from = this.GetTestServer("en");
+            MockFactory mock = new MockFactory();
+            MediaWiki from = mock.GetMediaWiki("en");
             Translator translate = new MediaWikiTranslator();
             translate.From = from;
-            translate.To = this.GetTestServer("ja");
+            translate.To = mock.GetMediaWiki("ja");
 
             // 見出しの変換パターンを設定
             translate.HeadingTable = new TranslationTable();
@@ -129,7 +108,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\example.txt")))
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example.txt")))
             {
                 expectedText = sr.ReadToEnd();
             }
@@ -142,7 +121,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換ログを期待されるログと比較する
             string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\example.log")))
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example.log")))
             {
                 expectedLog = sr.ReadToEnd();
             }
@@ -160,10 +139,11 @@ namespace Honememo.Wptscs.Logics
         [Test]
         public void TestExampleWithCache()
         {
-            MediaWiki from = this.GetTestServer("en");
+            MockFactory mock = new MockFactory();
+            MediaWiki from = mock.GetMediaWiki("en");
             Translator translate = new MediaWikiTranslator();
             translate.From = from;
-            translate.To = this.GetTestServer("ja");
+            translate.To = mock.GetMediaWiki("ja");
 
             // 見出しの変換パターンを設定
             translate.HeadingTable = new TranslationTable();
@@ -200,7 +180,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\example_キャッシュ使用.txt")))
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_キャッシュ使用.txt")))
             {
                 expectedText = sr.ReadToEnd();
             }
@@ -213,7 +193,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換ログを期待されるログと比較する
             string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\example_キャッシュ使用.log")))
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_キャッシュ使用.log")))
             {
                 expectedLog = sr.ReadToEnd();
             }
@@ -232,10 +212,11 @@ namespace Honememo.Wptscs.Logics
         [Test]
         public void TestSpaceShipTwo()
         {
-            MediaWiki from = this.GetTestServer("ja");
+            MockFactory mock = new MockFactory();
+            MediaWiki from = mock.GetMediaWiki("ja");
             Translator translate = new MediaWikiTranslator();
             translate.From = from;
-            translate.To = this.GetTestServer("en");
+            translate.To = mock.GetMediaWiki("en");
             translate.ItemTable = new TranslationDictionary("ja", "en");
 
             // 見出しの変換パターンを設定
@@ -259,7 +240,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\スペースシップツー.txt")))
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "スペースシップツー.txt")))
             {
                 expectedText = sr.ReadToEnd();
             }
@@ -272,7 +253,7 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換ログを期待されるログと比較する
             string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(testDir, "result\\スペースシップツー.log")))
+            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "スペースシップツー.log")))
             {
                 expectedLog = sr.ReadToEnd();
             }
@@ -290,10 +271,11 @@ namespace Honememo.Wptscs.Logics
         [Test]
         public void TestPageNothing()
         {
-            MediaWiki from = this.GetTestServer("en");
+            MockFactory mock = new MockFactory();
+            MediaWiki from = mock.GetMediaWiki("en");
             Translator translate = new MediaWikiTranslator();
             translate.From = from;
-            translate.To = this.GetTestServer("ja");
+            translate.To = mock.GetMediaWiki("ja");
 
             Assert.IsFalse(translate.Run("Nothing Page"));
 
@@ -307,7 +289,7 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
-        #region 整理予定の静的メソッドテストケース
+        #region 整理予定のメソッドテストケース
 
         /// <summary>
         /// ChkCommentメソッドテストケース。
@@ -335,13 +317,15 @@ namespace Honememo.Wptscs.Logics
         {
             // TryParseNowiki互換用の旧メソッド
             string nowiki;
-            Assert.AreEqual(26, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 2));
+            MediaWikiTranslator translate = new MediaWikiTranslator();
+            translate.From = new MockFactory().GetMediaWiki("en");
+            Assert.AreEqual(26, translate.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 2));
             Assert.AreEqual("<nowiki>[[test]]</nowiki>", nowiki);
-            Assert.AreEqual(27, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowikicd", 2));
+            Assert.AreEqual(27, translate.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowikicd", 2));
             Assert.AreEqual("<nowiki>[[test]]</nowikicd", nowiki);
-            Assert.AreEqual(-1, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 1));
+            Assert.AreEqual(-1, translate.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 1));
             Assert.IsEmpty(nowiki);
-            Assert.AreEqual(-1, MediaWikiTranslator.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 3));
+            Assert.AreEqual(-1, translate.ChkNowiki(out nowiki, "ab<nowiki>[[test]]</nowiki>cd", 3));
             Assert.IsEmpty(nowiki);
         }
 

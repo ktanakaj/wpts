@@ -19,6 +19,7 @@ namespace Honememo.Parsers
     /// <summary>
     /// ページのXML要素をあらわすモデルクラスです。
     /// </summary>
+    /// <remarks>解析処理は複雑なため、<see cref="XmlParser"/>として別途実装。</remarks>
     public class XmlElement : ListElement
     {
         #region private変数
@@ -39,8 +40,11 @@ namespace Honememo.Parsers
         /// <param name="attributes">属性。</param>
         /// <param name="innerElements">値。</param>
         /// <param name="parsedString">Parse解析時の元の文字列。</param>
-        public XmlElement(string name, IDictionary<string, string> attributes,
-            ICollection<IElement> innerElements, string parsedString = null)
+        public XmlElement(
+            string name,
+            IDictionary<string, string> attributes,
+            ICollection<IElement> innerElements,
+            string parsedString = null)
         {
             this.Name = name;
             this.ParsedString = parsedString;
@@ -107,74 +111,6 @@ namespace Honememo.Parsers
 
         #endregion
 
-        #region 静的メソッド
-
-        /// <summary>
-        /// 渡されたテキストをXML/HTMLタグとして解析する。
-        /// </summary>
-        /// <param name="s">解析するテキスト。</param>
-        /// <returns>解析したタグ。</returns>
-        /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
-        /// <remarks>
-        /// XML/HTMLタグと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
-        /// </remarks>
-        public static XmlElement ParseLazy(string s)
-        {
-            XmlElement result;
-            if (XmlElement.TryParseLazy(s, out result))
-            {
-                return result;
-            }
-
-            throw new FormatException("Invalid String : " + s);
-        }
-
-        /// <summary>
-        /// 渡されたテキストをXML/HTMLタグとして解析する。
-        /// </summary>
-        /// <param name="s">解析するテキスト。</param>
-        /// <param name="parser">解析に使用するパーサー。</param>
-        /// <param name="result">解析したタグ。</param>
-        /// <returns>タグの場合<c>true</c>。</returns>
-        /// <remarks>
-        /// XML/HTMLタグと判定するには、1文字目が開始タグである必要がある。
-        /// </remarks>
-        public static bool TryParse(string s, XmlParser parser, out XmlElement result)
-        {
-            // XML/HTML要素の解析は複雑なため、こちらで行わず専用クラスに委譲する
-            return parser.TryParseXmlElement(s, out result);
-        }
-
-        /// <summary>
-        /// 渡されたテキストをXML/HTMLタグとして解析する。
-        /// </summary>
-        /// <param name="s">解析するテキスト。</param>
-        /// <param name="result">解析したタグ。</param>
-        /// <returns>タグの場合<c>true</c>。</returns>
-        /// <remarks>
-        /// XML/HTMLタグと判定するには、1文字目が開始タグである必要がある。
-        /// ただし、後ろについては閉じタグが無ければ全て、あればそれ以降は無視する。
-        /// </remarks>
-        public static bool TryParseLazy(string s, out XmlElement result)
-        {
-            // パーサーにXmlParserの標準設定（Lazyな設定）を指定して解析
-            return XmlElement.TryParse(s, new XmlParser(), out result);
-        }
-
-        /// <summary>
-        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
-        /// </summary>
-        /// <param name="c">解析文字列の先頭文字。</param>
-        /// <returns>候補となる場合<c>true</c>。</returns>
-        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
-        public static bool IsElementPossible(char c)
-        {
-            return '<' == c;
-        }
-
-        #endregion
-
         #region 内部実装メソッド
 
         /// <summary>
@@ -194,12 +130,14 @@ namespace Honememo.Parsers
                 {
                     w.WriteAttributeString(attr.Key, attr.Value);
                 }
+
                 foreach (IElement element in this)
                 {
                     // エンコードする／しないは中身の責任として、ここではエンコードしない
-                    // ※ エンコードするテキストを用意したい場合はXmlTextElementを作るなど・・・
+                    // ※ エンコードするテキストを用意したい場合はXmlTextElementを使うなど
                     w.WriteRaw(element.ToString());
                 }
+
                 w.WriteEndElement();
             }
 
