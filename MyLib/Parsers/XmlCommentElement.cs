@@ -50,7 +50,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// 渡されたXMLテキストがコメントかを解析する。
         /// </summary>
-        /// <param name="s">解析するテキスト。</param>
+        /// <param name="s">解析対象の文字列。</param>
         /// <returns>解析したコメント。</returns>
         /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
         /// <remarks>
@@ -70,7 +70,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// 渡されたXMLテキストがコメントかを解析する。
         /// </summary>
-        /// <param name="s">解析するテキスト。</param>
+        /// <param name="s">解析対象の文字列。</param>
         /// <param name="result">解析したコメント。</param>
         /// <returns>コメントの場合<c>true</c>。</returns>
         /// <remarks>
@@ -141,7 +141,7 @@ namespace Honememo.Parsers
         /// <param name="c">解析文字列の先頭文字。</param>
         /// <returns>候補となる場合<c>true</c>。</returns>
         /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
-        public static bool IsElementPossible(char c)
+        public static bool IsPossibleParse(char c)
         {
             return XmlCommentElement.delimiterStart[0] == c;
         }

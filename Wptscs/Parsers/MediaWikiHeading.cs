@@ -26,12 +26,12 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 見出しの開始文字。
         /// </summary>
-        private static readonly string delimiterStart = "=";
+        public static readonly char DelimiterStart = '=';
 
         /// <summary>
         /// 見出しの閉じ文字。
         /// </summary>
-        private static readonly string delimiterEnd = "=";
+        public static readonly char DelimiterEnd = '=';
 
         #endregion
 
@@ -44,43 +44,6 @@ namespace Honememo.Wptscs.Parsers
         {
             get;
             set;
-        }
-
-        #endregion
-
-        #region 静的メソッド
-
-        /// <summary>
-        /// 渡されたテキストをMediaWikiの見出しとして解析する。
-        /// </summary>
-        /// <param name="text">=で始まる文字列。</param>
-        /// <param name="parser">解析に使用するパーサー。</param>
-        /// <param name="link">解析した見出し。</param>
-        /// <returns>解析に成功した場合<c>true</c>。</returns>
-        public static bool TryParse(string text, IParser parser, out MediaWikiHeading link)
-        {
-            // 出力値初期化
-            link = null;
-
-            // 入力値確認
-            if (!text.StartsWith(MediaWikiHeading.delimiterStart))
-            {
-                return false;
-            }
-
-            // TODO: 未実装
-            return false;
-        }
-
-        /// <summary>
-        /// 渡された文字が<c>TryParse</c>等の候補となる先頭文字かを判定する。
-        /// </summary>
-        /// <param name="c">解析文字列の先頭文字。</param>
-        /// <returns>候補となる場合<c>true</c>。</returns>
-        /// <remarks>性能対策などで処理自体を呼ばせたく無い場合用。</remarks>
-        public static bool IsElementPossible(char c)
-        {
-            return MediaWikiHeading.delimiterStart[0] == c;
         }
 
         #endregion
@@ -99,7 +62,7 @@ namespace Honememo.Wptscs.Parsers
             // 開始文字の付加
             for (int i = 0; i < this.Level; i++)
             {
-                b.Append(MediaWikiHeading.delimiterStart);
+                b.Append(MediaWikiHeading.DelimiterStart);
             }
 
             // 見出し文字列の設定
@@ -108,7 +71,7 @@ namespace Honememo.Wptscs.Parsers
             // 閉じ文字の付加
             for (int i = 0; i < this.Level; i++)
             {
-                b.Append(MediaWikiHeading.delimiterEnd);
+                b.Append(MediaWikiHeading.DelimiterEnd);
             }
 
             return b.ToString();

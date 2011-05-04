@@ -93,6 +93,17 @@ namespace Honememo.Parsers
             return true;
         }
 
+        /// <summary>
+        /// 渡された文字が<see cref="Parse"/>, <see cref="TryParse"/>の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。このクラスでは常に<c>true</c>を返す。</returns>
+        /// <remarks>性能対策などで<see cref="TryParse"/>を呼ぶ前に目処を付けたい場合用。</remarks>
+        public virtual bool IsPossibleParse(char c)
+        {
+            return true;
+        }
+
         #endregion
 
         #region 実装支援用抽象メソッド
@@ -121,7 +132,10 @@ namespace Honememo.Parsers
         /// <remarks>
         /// ここでそのParserで必要な解析処理呼び出しを列挙する。
         /// </remarks>
-        protected abstract bool TryParseElements(string s, out IElement result);
+        protected virtual bool TryParseElements(string s, out IElement result)
+        {
+            throw new NotImplementedException(this.GetType() + " is not implemented");
+        }
 
         /// <summary>
         /// 文字列が空でない場合、リストにTextエレメントを追加して、文字列をリセットする。

@@ -36,6 +36,14 @@ namespace Honememo.Parsers
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         bool TryParse(string s, out IElement result);
 
+        /// <summary>
+        /// 渡された文字が<see cref="Parse"/>, <see cref="TryParse"/>の候補となる先頭文字かを判定する。
+        /// </summary>
+        /// <param name="c">解析文字列の先頭文字。</param>
+        /// <returns>候補となる場合<c>true</c>。</returns>
+        /// <remarks>性能対策などで<see cref="TryParse"/>を呼ぶ前に目処を付けたい場合用。</remarks>
+        bool IsPossibleParse(char c);
+
         #endregion
     }
 }

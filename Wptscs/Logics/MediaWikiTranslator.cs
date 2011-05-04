@@ -441,20 +441,17 @@ namespace Honememo.Wptscs.Logics
                     // 行の始めでは、その行が見出しの行かのチェックを行う
                     if (enterFlag)
                     {
+                        enterFlag = false;
                         string newTitleLine;
-                        int index2 = this.ChkTitleLine(out newTitleLine, text, i);
+                        int index2 = this.TryParseAndReplaceHeading(out newTitleLine, text, i);
                         if (index2 != -1)
                         {
                             // 行の終わりまでインデックスを移動
-                            i = index2;
+                            i = index2 - 1;
 
                             // 置き換えられた見出し行を出力
                             b.Append(newTitleLine);
                             continue;
-                        }
-                        else
-                        {
-                            enterFlag = false;
                         }
                     }
                 }
@@ -487,7 +484,7 @@ namespace Honememo.Wptscs.Logics
                 // 変数（{{{1}}}とか）のチェック
                 string variable;
                 string value;
-                index = parser.ChkVariable(out variable, out value, text, i);
+                index = parser.TryParseVariable(text, i, out variable, out value);
                 if (index != -1)
                 {
                     i = index;
@@ -549,7 +546,7 @@ namespace Honememo.Wptscs.Logics
             // 内部リンク・テンプレートの確認と解析
             MediaWikiParser parser = new MediaWikiParser(this.From);
             IElement element;
-            lastIndex = parser.ChkLinkText(out element, text, index);
+            lastIndex = parser.TryParseLinkOrTemplate(text, index, out element);
             if (lastIndex != -1)
             {
                 // 記事名に変数が使われている場合があるので、そのチェックと展開
@@ -559,7 +556,7 @@ namespace Honememo.Wptscs.Logics
                 {
                     string variable;
                     string value;
-                    int lastIndex2 = parser.ChkVariable(out variable, out value, l.Title, subindex);
+                    int lastIndex2 = parser.TryParseVariable(l.Title, subindex, out variable, out value);
                     if (lastIndex2 != -1 && !String.IsNullOrEmpty(value))
                     {
                         // 変数の | 以降に値が記述されている場合、それに置き換える
@@ -891,119 +888,42 @@ namespace Honememo.Wptscs.Logics
         /// <param name="text">解析するテキスト。</param>
         /// <param name="index">解析開始インデックス。</param>
         /// <returns>見出しの場合、見出し終了位置のインデックスを返す。それ以外は-1。</returns>
-        protected virtual int ChkTitleLine(out string heading, string text, int index)
+        protected virtual int TryParseAndReplaceHeading(out string heading, string text, int index)
         {
-            // 初期化
-            // ※見出しではない、構文がおかしいなどの場合、-1を返す
-            int lastIndex = -1;
-            
-            // 構文を解析して、1行の文字列と、=の個数を取得
-            // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
-            // ※Wikipediaでは <!--test-.=<!--test-.=関連項目<!--test-.==<!--test-. みたいなのでも
-            //   正常に認識するので、できるだけ対応する
-            // ※変換が正常に行われた場合、コメントは削除される
-            bool startFlag = true;
-            int startSignCounter = 0;
-            string nonCommentLine = String.Empty;
-            StringBuilder b = new StringBuilder();
-            for (lastIndex = index; lastIndex < text.Length; lastIndex++)
+            // 見出し解析
+            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(new MediaWikiParser(this.From));
+            IElement element;
+            if (!parser.TryParse(text.Substring(index), out element))
             {
-                char c = text[lastIndex];
-
-                // 改行まで
-                if (c == '\n')
-                {
-                    break;
-                }
-
-                // コメントは無視する
-                string comment;
-                int subindex = MediaWikiTranslator.ChkComment(out comment, text, lastIndex);
-                if (subindex != -1)
-                {
-                    b.Append(comment);
-                    lastIndex = subindex;
-                    continue;
-                }
-                else if (startFlag)
-                {
-                    // 先頭部の場合、=の数を数える
-                    if (c == '=')
-                    {
-                        ++startSignCounter;
-                    }
-                    else
-                    {
-                        startFlag = false;
-                    }
-                }
-
-                nonCommentLine += c;
-                b.Append(c);
-            }
-
-            heading = b.ToString();
-
-            // 改行文字、または文章の最後+1になっているはずなので、1文字戻す
-            --lastIndex;
-
-            // = で始まる行ではない場合、処理対象外
-            if (startSignCounter < 1)
-            {
-                heading = String.Empty;
+                heading = null;
                 return -1;
-            }
-
-            // 終わりの = の数を確認
-            // ※↓の処理だと中身の無い行（====とか）は弾かれてしまうが、どうせ処理できないので許容する
-            int endSignCounter = 0;
-            for (int i = nonCommentLine.Length - 1; i >= startSignCounter; i--)
-            {
-                if (nonCommentLine[i] == '=')
-                {
-                    ++endSignCounter;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            // = で終わる行ではない場合、処理対象外
-            if (endSignCounter < 1)
-            {
-                heading = String.Empty;
-                return -1;
-            }
-
-            // 始まりと終わり、=の少ないほうにあわせる（==test===とか用の処理）
-            int signCounter = startSignCounter;
-            if (startSignCounter > endSignCounter)
-            {
-                signCounter = endSignCounter;
             }
 
             // 定型句変換
-            string oldText = nonCommentLine.Substring(signCounter, nonCommentLine.Length - (signCounter * 2)).Trim();
-            string newText = this.GetHeading(oldText);
+            MediaWikiHeading headingElement = (MediaWikiHeading)element;
+            StringBuilder oldText = new StringBuilder();
+            foreach (IElement e in headingElement)
+            {
+                oldText.Append(e.ToString());
+            }
+
+            string oldHeading = headingElement.ToString();
+            string newText = this.GetHeading(oldText.ToString().Trim());
             if (newText != null)
             {
-                string sign = "=";
-                for (int i = 1; i < signCounter; i++)
-                {
-                    sign += "=";
-                }
-
-                string newHeading = sign + newText + sign;
-                this.LogLine(ENTER + heading + " " + Resources.RightArrow + " " + newHeading);
-                heading = newHeading;
+                headingElement.Clear();
+                headingElement.ParsedString = null;
+                headingElement.Add(new XmlTextElement(newText));
+                heading = headingElement.ToString();
+                this.LogLine(ENTER + oldHeading + " " + Resources.RightArrow + " " + heading);
             }
             else
             {
-                this.LogLine(ENTER + heading);
+                this.LogLine(ENTER + headingElement.ToString());
+                heading = headingElement.ToString();
             }
 
-            return lastIndex;
+            return index + oldHeading.Length;
         }
 
         /// <summary>

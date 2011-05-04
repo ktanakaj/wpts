@@ -46,6 +46,7 @@
     <Compile Include="Parsers\XmlElementTest.cs" />
     <Compile Include="Parsers\HtmlElementTest.cs" />
     <Compile Include="Parsers\XmlTextElementTest.cs" />
+    <Compile Include="Parsers\XmlElementParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\XmlParserTest.cs" />
     <Compile Include="Utilities\ObjectUtilsTest.cs" />

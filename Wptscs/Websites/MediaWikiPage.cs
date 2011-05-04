@@ -106,7 +106,7 @@ namespace Honememo.Wptscs.Websites
                 // 本文格納のタイミングでリダイレクトページ（#REDIRECT等）かを判定
                 if (!String.IsNullOrEmpty(base.Text))
                 {
-                    this.TryParseRedirect();
+                    new MediaWikiParser(this.Website).TryParseRedirect(base.Text, out this.redirect);
                 }
             }
         }
@@ -250,40 +250,6 @@ namespace Honememo.Wptscs.Websites
                 // ページ本文が設定されていない場合不完全と判定
                 throw new InvalidOperationException("Text is unset");
             }
-        }
-
-        /// <summary>
-        /// 現在のページをリダイレクトとして解析する。
-        /// </summary>
-        /// <returns>リダイレクトの場合<c>true</c>。</returns>
-        /// <remarks>リダイレクトの場合、転送先ページ名をプロパティに格納。</remarks>
-        private bool TryParseRedirect()
-        {
-            // 日本語版みたいに、#REDIRECTと言語固有の#転送みたいなのがあると思われるので、
-            // 翻訳元言語とデフォルトの設定でチェック
-            this.Redirect = null;
-            for (int i = 0; i < 2; i++)
-            {
-                string format = this.Website.Redirect;
-                if (i == 1)
-                {
-                    format = Properties.Settings.Default.MediaWikiRedirect;
-                }
-
-                if (!String.IsNullOrEmpty(format)
-                    && this.Text.ToLower().StartsWith(format.ToLower()))
-                {
-                    MediaWikiLink link;
-                    if (new MediaWikiParser(this.Website)
-                        .TryParseMediaWikiLink(this.Text.Substring(format.Length).TrimStart(), out link))
-                    {
-                        this.Redirect = link;
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
         /// <summary>

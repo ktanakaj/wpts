@@ -50,6 +50,7 @@
     <Compile Include="Parsers\AbstractElement.cs" />
     <Compile Include="Parsers\HtmlElement.cs" />
     <Compile Include="Parsers\XmlTextElement.cs" />
+    <Compile Include="Parsers\XmlElementParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\XmlParser.cs" />
     <Compile Include="Utilities\ObjectUtils.cs" />

@@ -65,6 +65,9 @@
     <Compile Include="Models\Language.cs" />
     <Compile Include="Parsers\MediaWikiHeading.cs" />
     <Compile Include="Parsers\MediaWikiTemplate.cs" />
+    <Compile Include="Parsers\MediaWikiHeadingParser.cs" />
+    <Compile Include="Parsers\MediaWikiLinkParser.cs" />
+    <Compile Include="Parsers\MediaWikiTemplateParser.cs" />
     <Compile Include="Websites\MediaWiki.cs" />
     <Compile Include="Parsers\MediaWikiLink.cs" />
     <Compile Include="Websites\MediaWikiPage.cs" />

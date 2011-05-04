@@ -117,16 +117,16 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// IsElementPossibleメソッドテストケース。
+        /// IsPossibleParseメソッドテストケース。
         /// </summary>
         [Test]
-        public void TestIsElementPossible()
+        public void TestIsPossibleParse()
         {
-            Assert.IsTrue(XmlCommentElement.IsElementPossible('<'));
-            Assert.IsFalse(XmlCommentElement.IsElementPossible('['));
-            Assert.IsFalse(XmlCommentElement.IsElementPossible('-'));
-            Assert.IsFalse(XmlCommentElement.IsElementPossible('/'));
-            Assert.IsFalse(XmlCommentElement.IsElementPossible('#'));
+            Assert.IsTrue(XmlCommentElement.IsPossibleParse('<'));
+            Assert.IsFalse(XmlCommentElement.IsPossibleParse('['));
+            Assert.IsFalse(XmlCommentElement.IsPossibleParse('-'));
+            Assert.IsFalse(XmlCommentElement.IsPossibleParse('/'));
+            Assert.IsFalse(XmlCommentElement.IsPossibleParse('#'));
         }
 
         #endregion
