@@ -209,11 +209,11 @@ namespace Honememo.Parsers
         /// <summary>
         /// タグの属性情報部分のテキストを受け取り、属性情報を解析する。
         /// </summary>
-        /// <param name="text">解析する属性情報文字列（" key1="value1" key2="value2"&gt;～" のような文字列）。</param>
+        /// <param name="s">解析する属性情報文字列（" key1="value1" key2="value2"&gt;～" のような文字列）。</param>
         /// <param name="attribute">解析した属性。</param>
         /// <param name="endIndex">タグ終了箇所（'&gt;'）のインデックス。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
-        private bool TryParseAttribute(string text, out IDictionary<string, string> attribute, out int endIndex)
+        private bool TryParseAttribute(string s, out IDictionary<string, string> attribute, out int endIndex)
         {
             // ※ 不正な構文も通すために、強引な汚いソースになってしまっている。
             //    このメソッドにその辺りの処理を隔離している。
@@ -229,9 +229,9 @@ namespace Honememo.Parsers
             bool existedSpace = false;
             char[] separators = null;
             int i;
-            for (i = 0; i < text.Length; i++)
+            for (i = 0; i < s.Length; i++)
             {
-                char c = text[i];
+                char c = s[i];
                 if (key == null)
                 {
                     // 属性名の解析
@@ -242,7 +242,7 @@ namespace Honememo.Parsers
                     }
 
                     // 属性名の次に出現しうる文字を探索
-                    int index = text.IndexOfAny(new char[] { '=', ' ', '>', '/' }, i);
+                    int index = s.IndexOfAny(new char[] { '=', ' ', '>', '/' }, i);
                     if (index < 0)
                     {
                         // どれも出現しない場合、構文エラー
@@ -251,7 +251,7 @@ namespace Honememo.Parsers
 
                     // 属性名を確認
                     // ※ 属性が無い場合0文字となる
-                    key = text.Substring(i, index - i);
+                    key = s.Substring(i, index - i);
                     if (!String.IsNullOrEmpty(key) && !this.ValidateName(key))
                     {
                         // 属性名の位置に出現し得ない記号が含まれているなど構文エラーも弾く
@@ -319,7 +319,7 @@ namespace Honememo.Parsers
                     }
 
                     // 属性値の終了文字を探索
-                    int index = text.IndexOfAny(separators, i);
+                    int index = s.IndexOfAny(separators, i);
                     if (index < 0)
                     {
                         // どれも出現しない場合、閉じてないということで構文エラー
@@ -327,12 +327,12 @@ namespace Honememo.Parsers
                     }
 
                     // 区切り文字に到達
-                    a[this.parser.Decode(key)] = this.parser.Decode(text.Substring(i, index - i));
+                    a[this.parser.Decode(key)] = this.parser.Decode(s.Substring(i, index - i));
                     key = null;
                     existedEqual = false;
                     separators = null;
 
-                    if (text[index] == '>' || text[index] == '/')
+                    if (s[index] == '>' || s[index] == '/')
                     {
                         // 区切り文字がループ終了の文字だったらここで終了
                         break;
@@ -344,14 +344,14 @@ namespace Honememo.Parsers
             }
 
             // '/' で抜けた場合は、閉じ括弧があるはず位置にインデックスを移動
-            if (text.ElementAtOrDefault(i) == '/')
+            if (s.ElementAtOrDefault(i) == '/')
             {
                 ++i;
             }
 
             // 最後が閉じ括弧で無い場合、閉じていないのでNG
             // ※ ループが閉じ括弧で終わらなかった場合もここに引っかかる
-            if (text.ElementAtOrDefault(i) != '>')
+            if (s.ElementAtOrDefault(i) != '>')
             {
                 return false;
             }
@@ -366,7 +366,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// タグの開始タグ以降の部分のテキストを受け取り、値と閉じタグを解析する。
         /// </summary>
-        /// <param name="text">解析する部分文字列（"～&lt;/tag&gt;" のような文字列）。</param>
+        /// <param name="s">解析する部分文字列（"～&lt;/tag&gt;" のような文字列）。</param>
         /// <param name="tag">解析するタグ名。</param>
         /// <param name="innerXml">解析したコンテンツ部分。</param>
         /// <param name="endIndex">閉じタグ終了箇所（'&gt;'）のインデックス。閉じていない場合は-1。</param>
@@ -374,10 +374,10 @@ namespace Honememo.Parsers
         /// 解析に成功した場合<c>true</c>。
         /// ※現状では常に<c>true</c>。単に他とパラメータをあわせただけ。
         /// </returns>
-        private bool TryParseContent(string text, string tag, out string innerXml, out int endIndex)
+        private bool TryParseContent(string s, string tag, out string innerXml, out int endIndex)
         {
             // 閉じタグまでを取得。終わりが見つからない場合は、全てタグブロックと判断
-            innerXml = text;
+            innerXml = s;
             endIndex = -1;
 
             // 検索条件作成
@@ -390,27 +390,28 @@ namespace Honememo.Parsers
 
             Regex endRegex = new Regex("^</" + Regex.Escape(tag) + "\\s*>", options);
 
-            for (int i = 0; i < text.Length; i++)
+            IParser commentParser = new XmlCommentElementParser();
+            for (int i = 0; i < s.Length; i++)
             {
                 // ※ 本当は全て正規表現一発で処理したいが、コメントが含まれている可能性があるのでループ
-                if (text[i] != '<')
+                if (s[i] != '<')
                 {
                     continue;
                 }
 
                 // 終了条件のチェック
-                string s = text.Substring(i);
-                Match match = endRegex.Match(s);
+                string substr = s.Substring(i);
+                Match match = endRegex.Match(substr);
                 if (match.Success)
                 {
-                    innerXml = text.Substring(0, i);
+                    innerXml = s.Substring(0, i);
                     endIndex = i + match.Length;
                     break;
                 }
 
                 // コメント（<!--）のチェック
-                XmlCommentElement comment;
-                if (XmlCommentElement.TryParseLazy(s, out comment))
+                IElement comment;
+                if (commentParser.TryParse(substr, out comment))
                 {
                     i += comment.ToString().Length - 1;
                     continue;

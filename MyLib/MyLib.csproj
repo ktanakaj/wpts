@@ -51,6 +51,7 @@
     <Compile Include="Parsers\HtmlElement.cs" />
     <Compile Include="Parsers\XmlTextElement.cs" />
     <Compile Include="Parsers\XmlElementParser.cs" />
+    <Compile Include="Parsers\XmlCommentElementParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\XmlParser.cs" />
     <Compile Include="Utilities\ObjectUtils.cs" />

@@ -68,6 +68,7 @@ namespace Honememo.Wptscs.Parsers
             int startSignCounter = 0;
             string nonCommentLine = String.Empty;
             StringBuilder b = new StringBuilder();
+            IParser commentParser = new XmlCommentElementParser();
             for (int i = 0; i < s.Length; i++)
             {
                 char c = s[i];
@@ -79,8 +80,8 @@ namespace Honememo.Wptscs.Parsers
                 }
 
                 // コメントは無視する
-                XmlCommentElement comment;
-                if (XmlCommentElement.TryParseLazy(s.Substring(i), out comment))
+                IElement comment;
+                if (commentParser.TryParse(s.Substring(i), out comment))
                 {
                     b.Append(comment.ToString());
                     i += comment.ToString().Length - 1;

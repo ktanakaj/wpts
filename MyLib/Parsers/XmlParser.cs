@@ -24,9 +24,26 @@ namespace Honememo.Parsers
         #region private変数
 
         /// <summary>
-        /// 大文字小文字を無視するか？
+        /// パーサー内で使用する各要素のパーサー。
         /// </summary>
-        private bool ignoreCase = true;
+        private IParser[] parsers;
+
+        #endregion
+
+        #region コンストラクタ
+
+        /// <summary>
+        /// XML/HTMLテキストを解析するためのパーサーを作成する。
+        /// </summary>
+        public XmlParser()
+        {
+            this.IgnoreCase = true;
+            this.parsers = new IParser[]
+            {
+                new XmlCommentElementParser(),
+                new XmlElementParser(this)
+            };
+        }
 
         #endregion
 
@@ -37,15 +54,8 @@ namespace Honememo.Parsers
         /// </summary>
         public bool IgnoreCase
         {
-            get
-            {
-                return this.ignoreCase;
-            }
-
-            set
-            {
-                this.ignoreCase = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -64,64 +74,38 @@ namespace Honememo.Parsers
         /// <summary>
         /// 文字列をXML/HTML読み込み用にデコードする。
         /// </summary>
-        /// <param name="str">デコードする文字列。</param>
+        /// <param name="s">デコードする文字列。</param>
         /// <returns>デコードされた文字列。<c>null</c>の場合、空文字列を返す。</returns>
-        internal string Decode(string str)
+        internal string Decode(string s)
         {
-            if (str == null)
+            if (s == null)
             {
                 return String.Empty;
             }
             else if (this.IsHtml)
             {
-                return System.Web.HttpUtility.HtmlDecode(str);
+                return System.Web.HttpUtility.HtmlDecode(s);
             }
             else
             {
-                return XmlUtils.XmlDecode(str);
+                return XmlUtils.XmlDecode(s);
             }
         }
 
         #endregion
 
-        #region 実装支援用抽象メソッド実装
-
-        /// <summary>
-        /// 渡された位置の文字列が<see cref="TryParseElements"/>の候補となるかを判定する。
-        /// </summary>
-        /// <param name="s">全体文字列。</param>
-        /// <param name="index">処理インデックス。</param>
-        /// <returns>候補となる場合<c>true</c>。</returns>
-        protected override bool IsElementPossible(string s, int index)
-        {
-            char c = s[index];
-            return XmlCommentElement.IsPossibleParse(c)
-                || new XmlElementParser(this).IsPossibleParse(c);
-        }
+        #region 実装支援用メソッド拡張
 
         /// <summary>
         /// 渡されたテキストを各種解析処理で解析する。
         /// </summary>
         /// <param name="s">解析するテキスト。</param>
+        /// <param name="index">処理インデックス。</param>
         /// <param name="result">解析した結果要素。</param>
         /// <returns>解析できた場合<c>true</c>。</returns>
-        protected override bool TryParseElements(string s, out IElement result)
+        protected override bool TryParseElement(string s, int index, out IElement result)
         {
-            XmlCommentElement commentElement;
-            IElement element;
-            if (XmlCommentElement.TryParseLazy(s, out commentElement))
-            {
-                result = commentElement;
-                return true;
-            }
-            else if (new XmlElementParser(this).TryParse(s, out element))
-            {
-                result = element;
-                return true;
-            }
-
-            result = null;
-            return false;
+            return this.TryParseElement(s, index, out result, this.parsers);
         }
 
         /// <summary>

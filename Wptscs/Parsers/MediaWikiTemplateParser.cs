@@ -88,19 +88,17 @@ namespace Honememo.Wptscs.Parsers
                 }
 
                 // 変数（[[{{{1}}}]]とか）の再帰チェック
-                string dummy;
-                string variable;
-                int index = this.parser.TryParseVariable(s, i, out variable, out dummy);
-                if (index != -1)
+                IElement variable;
+                if (this.TryParseElement(s, i, out variable, this.parser.VariableParser))
                 {
-                    i = index;
+                    i += variable.ToString().Length - 1;
                     if (pipeCounter > 0)
                     {
-                        pipeTexts[pipeCounter - 1].Append(variable);
+                        pipeTexts[pipeCounter - 1].Append(variable.ToString());
                     }
                     else
                     {
-                        article += variable;
+                        article += variable.ToString();
                     }
 
                     continue;
@@ -120,32 +118,17 @@ namespace Honememo.Wptscs.Parsers
                 else
                 {
                     // | の後のとき
-                    if (XmlCommentElement.IsPossibleParse(c) || this.parser.IsNowikiPossible(c))
+                    IElement element;
+                    if (this.TryParseElement(s, i, out element, this.parser.CommentParser))
                     {
-                        string subtext = s.Substring(i);
-                        XmlCommentElement comment;
-                        XmlElement nowiki;
-                        if (XmlCommentElement.TryParseLazy(subtext, out comment))
-                        {
-                            // コメント（<!--）が含まれている場合、リンクは無効
-                            break;
-                        }
-                        else if (this.parser.TryParseNowiki(subtext, out nowiki))
-                        {
-                            // nowikiブロック
-                            i += nowiki.ToString().Length - 1;
-                            pipeTexts[pipeCounter - 1].Append(nowiki.ToString());
-                            continue;
-                        }
+                        // ここにコメント（<!--）が含まれている場合、リンクは無効
+                        break;
                     }
-
-                    // リンク [[ {{ （{{test|[[例]]}}とか）の再帰チェック
-                    IElement l;
-                    index = this.parser.TryParseLinkOrTemplate(s, i, out l);
-                    if (index != -1)
+                    else if (this.TryParseElement(s, i, out element, this.parser.NowikiParser, this.parser.LinkParser, this))
                     {
-                        i = index;
-                        pipeTexts[pipeCounter - 1].Append(l.ToString());
+                        // nowikiまたはリンク [[ {{ （{{test|[[例]]}}とか）の再帰チェック
+                        i += element.ToString().Length - 1;
+                        pipeTexts[pipeCounter - 1].Append(element.ToString());
                         continue;
                     }
 

@@ -46,7 +46,8 @@ namespace Honememo.Parsers
         /// <param name="result">解析結果。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         /// <remarks>
-        /// 実装として <see cref="IsElementPossible"/>, <see cref="TryParseElements"/> を呼び出し。
+        /// このクラスの実装は、XMLを丸ごと解析するような大きな処理を想定。
+        /// 実装として <see cref="TryParseElement"/> を呼び出し。
         /// </remarks>
         public virtual bool TryParse(string s, out IElement result)
         {
@@ -55,20 +56,16 @@ namespace Honememo.Parsers
             StringBuilder b = new StringBuilder();
             for (int i = 0; i < s.Length; i++)
             {
-                // 性能を考え、TryParseの前に処理対象になりそうかをチェック
-                if (this.IsElementPossible(s, i))
+                // 各要素のTryParse処理を呼び出し
+                IElement innerElement;
+                if (this.TryParseElement(s, i, out innerElement))
                 {
-                    // 各要素のTryParse処理を呼び出し
-                    IElement innerElement;
-                    if (this.TryParseElements(s.Substring(i), out innerElement))
-                    {
-                        // それまでに解析済みのテキストを吐き出し、
-                        // その後に解析した要素を追加
-                        this.FlashText(ref list, ref b);
-                        list.Add(innerElement);
-                        i += innerElement.ToString().Length - 1;
-                        continue;
-                    }
+                    // それまでに解析済みのテキストを吐き出し、
+                    // その後に解析した要素を追加
+                    this.FlashText(ref list, ref b);
+                    list.Add(innerElement);
+                    i += innerElement.ToString().Length - 1;
+                    continue;
                 }
 
                 // 通常の文字列はテキスト要素として積み上げる
@@ -106,35 +103,58 @@ namespace Honememo.Parsers
 
         #endregion
 
-        #region 実装支援用抽象メソッド
+        #region 実装支援用メソッド
 
         /// <summary>
-        /// 渡された位置の文字列が<see cref="TryParseElements"/>の候補となるかを判定する。
+        /// 渡されたテキストの指定されたインデックス位置を各種解析処理で解析する。
         /// </summary>
-        /// <param name="s">全体文字列。</param>
+        /// <param name="s">解析するテキスト。</param>
         /// <param name="index">処理インデックス。</param>
-        /// <returns>候補となる場合<c>true</c>。このクラスでは常に<c>true</c>を返す。</returns>
+        /// <param name="result">解析した結果要素。</param>
+        /// <returns>解析できた場合<c>true</c>。</returns>
+        /// <exception cref="ArgumentOutOfRangeException">インデックスが文字列の範囲外の場合。</exception>
+        /// <exception cref="NotImplementedException">このクラスでは未実装。</exception>
         /// <remarks>
-        /// 通常<see cref="TryParseElements"/>でも判定するため、特に定義せずとも問題ないが、
-        /// 性能対策などで処理自体を呼ばせたく無い場合のために定義。
+        /// このクラスの<see cref="TryParse"/>実装を用いる場合、
+        /// ここでもう一つの<c>TryParseElement</c>等を用いてそのParserで必要な解析処理呼び出しを列挙する。
         /// </remarks>
-        protected virtual bool IsElementPossible(string s, int index)
+        protected virtual bool TryParseElement(string s, int index, out IElement result)
         {
-            return true;
+            throw new NotImplementedException(this.GetType() + " is not implemented");
         }
 
         /// <summary>
-        /// 渡されたテキストを各種解析処理で解析する。
+        /// 渡されたテキストの指定されたインデックス位置を各種解析処理で解析する。
         /// </summary>
         /// <param name="s">解析するテキスト。</param>
+        /// <param name="index">処理インデックス。</param>
         /// <param name="result">解析した結果要素。</param>
-        /// <returns>解析できた場合<c>true</c>。</returns>
-        /// <remarks>
-        /// ここでそのParserで必要な解析処理呼び出しを列挙する。
-        /// </remarks>
-        protected virtual bool TryParseElements(string s, out IElement result)
+        /// <param name="parsers">解析に用いるパーサー。指定された順に使用。</param>
+        /// <returns>いずれかのパーサーで解析できた場合<c>true</c>。</returns>
+        /// <exception cref="ArgumentOutOfRangeException">インデックスが文字列の範囲外の場合。</exception>
+        protected virtual bool TryParseElement(string s, int index, out IElement result, params IParser[] parsers)
         {
-            throw new NotImplementedException(this.GetType() + " is not implemented");
+            char c = s[index];
+            string substr = null;
+            foreach (IParser parser in parsers)
+            {
+                if (parser.IsPossibleParse(c))
+                {
+                    if (substr == null)
+                    {
+                        // Substringする負荷も気になるので、TryParseが必要な場合だけ
+                        substr = s.Substring(index);
+                    }
+
+                    if (parser.TryParse(substr, out result))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            result = null;
+            return false;
         }
 
         /// <summary>

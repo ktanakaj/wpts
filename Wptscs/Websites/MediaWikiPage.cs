@@ -102,11 +102,16 @@ namespace Honememo.Wptscs.Websites
             {
                 // 本文は普通に格納
                 base.Text = value;
+                this.redirect = null;
 
                 // 本文格納のタイミングでリダイレクトページ（#REDIRECT等）かを判定
                 if (!String.IsNullOrEmpty(base.Text))
                 {
-                    new MediaWikiParser(this.Website).TryParseRedirect(base.Text, out this.redirect);
+                    IElement element;
+                    if (new MediaWikiRedirectParser(this.Website).TryParse(base.Text, out element))
+                    {
+                        this.redirect = element as MediaWikiLink;
+                    }
                 }
             }
         }

@@ -84,8 +84,8 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 改良版メソッドをコール
-            XmlCommentElement commentElement;
-            if (!XmlCommentElement.TryParseLazy(text.Substring(index), out commentElement))
+            IElement commentElement;
+            if (!new XmlCommentElementParser().TryParse(text.Substring(index), out commentElement))
             {
                 comment = String.Empty;
                 return -1;
@@ -112,8 +112,8 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 改良版メソッドをコール
-            XmlElement result;
-            if (!new MediaWikiParser(this.From).TryParseNowiki(text.Substring(index), out result))
+            IElement result;
+            if (!new MediaWikiNowikiParser(new MediaWikiParser(this.From)).TryParse(text.Substring(index), out result))
             {
                 nowiki = String.Empty;
                 return -1;
@@ -482,21 +482,20 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 // 変数（{{{1}}}とか）のチェック
-                string variable;
-                string value;
-                index = parser.TryParseVariable(text, i, out variable, out value);
-                if (index != -1)
+                IElement element;
+                if (parser.VariableParser.TryParse(text.Substring(i), out element))
                 {
-                    i = index;
+                    i += element.ToString().Length - 1;
+                    MediaWikiVariable variable = (MediaWikiVariable)element;
 
                     // 変数の | 以降に値が記述されている場合、それに対して再帰的に処理を行う
-                    int valueIndex = variable.IndexOf('|');
-                    if (valueIndex != -1 && !String.IsNullOrEmpty(value))
+                    if (variable.Value != null && String.IsNullOrEmpty(variable.Value.ToString()))
                     {
-                        variable = variable.Substring(0, valueIndex + 1) + this.ReplaceText(value, parent) + "}}}";
+                        variable.Value = new TextElement(this.ReplaceText(variable.Value.ToString(), parent));
+                        variable.ParsedString = null;
                     }
 
-                    b.Append(variable);
+                    b.Append(variable.ToString());
                     continue;
                 }
 
@@ -546,7 +545,7 @@ namespace Honememo.Wptscs.Logics
             // 内部リンク・テンプレートの確認と解析
             MediaWikiParser parser = new MediaWikiParser(this.From);
             IElement element;
-            lastIndex = parser.TryParseLinkOrTemplate(text, index, out element);
+            lastIndex = this.TryParseLinkOrTemplate(text, index, out element);
             if (lastIndex != -1)
             {
                 // 記事名に変数が使われている場合があるので、そのチェックと展開
@@ -554,19 +553,29 @@ namespace Honememo.Wptscs.Logics
                 int subindex = l.Title.IndexOf("{{{");
                 if (subindex != -1)
                 {
-                    string variable;
-                    string value;
-                    int lastIndex2 = parser.TryParseVariable(l.Title, subindex, out variable, out value);
-                    if (lastIndex2 != -1 && !String.IsNullOrEmpty(value))
+                    IElement element2;
+                    if (parser.VariableParser.TryParse(l.Title.Substring(subindex), out element2))
                     {
-                        // 変数の | 以降に値が記述されている場合、それに置き換える
-                        string newArticle = l.Title.Substring(0, subindex) + value;
-                        if (lastIndex2 + 1 < l.Title.Length)
+                        MediaWikiVariable variable = (MediaWikiVariable)element2;
+                        if (variable.Value != null && !String.IsNullOrEmpty(variable.Value.ToString()))
                         {
-                            newArticle += l.Title.Substring(lastIndex2 + 1);
-                        }
+                            // 変数の | 以降に値が記述されている場合、それに置き換える
+                            string newArticle = l.Title.Substring(0, subindex) + variable.Value.ToString();
+                            subindex += variable.ToString().Length;
 
-                        l.Title = newArticle;
+                            if (subindex < l.Title.Length)
+                            {
+                                newArticle += l.Title.Substring(subindex);
+                            }
+
+                            l.Title = newArticle;
+                        }
+                        else
+                        {
+                            // 値が設定されていない場合、処理してもしょうがないので、除外
+                            System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.replaceLink > 対象外 : " + l.ToString());
+                            return -1;
+                        }
                     }
                     else
                     {
@@ -979,6 +988,41 @@ namespace Honememo.Wptscs.Logics
             link.Title = names[0] + link.Title.Substring(link.Title.IndexOf(':'));
             link.ParsedString = null;
             return link.ToString();
+        }
+
+        /// <summary>
+        /// 渡されたテキストの指定された位置に存在するWikipediaの内部リンク・テンプレートをチェック。
+        /// </summary>
+        /// <param name="s">解析するテキスト。</param>
+        /// <param name="index">解析開始インデックス。</param>
+        /// <param name="result">解析したリンク。</param>
+        /// <returns>正常時の戻り値には、]]の後ろの]の位置のインデックスを返す。異常時は-1。</returns>
+        private int TryParseLinkOrTemplate(string s, int index, out IElement result)
+        {
+            // 出力値初期化
+            result = null;
+
+            MediaWikiParser parser = new MediaWikiParser(this.From);
+            if (!parser.LinkParser.IsPossibleParse(s[index])
+                && !parser.TemplateParser.IsPossibleParse(s[index]))
+            {
+                // どちらにも該当しそうにない場合速やかに終了
+                return -1;
+            }
+
+            string sub = s.Substring(index);
+            if (parser.LinkParser.TryParse(sub, out result))
+            {
+                // 内部リンク
+                return index + result.ToString().Length - 1;
+            }
+            else if (parser.TemplateParser.TryParse(sub, out result))
+            {
+                // テンプレート
+                return index + result.ToString().Length - 1;
+            }
+
+            return -1;
         }
 
         #endregion
