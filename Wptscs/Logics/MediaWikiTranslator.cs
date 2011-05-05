@@ -128,12 +128,16 @@ namespace Honememo.Wptscs.Logics
                 // 指定された記事の言語間リンク・見出しを探索し、翻訳先言語での名称に変換し、それに置換した文字列を返す
                 this.Text += this.ReplaceElement(new MediaWikiParser(this.From).Parse(article.Text), article.Title).ToString();
             }
-            catch (ApplicationException)
+            catch (ApplicationException e)
             {
                 // ユーザーからの中止要求をチェック
                 if (CancellationPending)
                 {
                     return false;
+                }
+                else
+                {
+                    throw e;
                 }
             }
 
@@ -427,7 +431,7 @@ namespace Honememo.Wptscs.Logics
         protected IElement ReplaceInnerLink(MediaWikiLink link, string parent)
         {
             // 変数初期設定
-            string comment = String.Empty;
+            XmlCommentElement comment = null;
 
             // 記事内を指している場合（[[#関連項目]]だけとか）以外
             if (!String.IsNullOrEmpty(link.Title)
@@ -498,7 +502,8 @@ namespace Honememo.Wptscs.Logics
                 // カテゴリーの場合は、コメントで元の文字列を追加する
                 if (article.IsCategory() && !link.IsColon)
                 {
-                    comment = ' ' + link.ToString() + ' ';
+                    comment = new XmlCommentElement();
+                    comment.Raw = ' ' + link.ToString() + ' ';
 
                     // カテゴリーで[[:en:xxx]]みたいな形式にした場合、| 以降は不要なので削除
                     if (interWiki == String.Empty)
@@ -525,11 +530,11 @@ namespace Honememo.Wptscs.Logics
 
             // コメントを付加
             IElement result = link;
-            if (comment != String.Empty)
+            if (comment != null)
             {
                 ListElement list = new ListElement();
                 list.Add(link);
-                list.Add(new XmlCommentElement(comment));
+                list.Add(comment);
                 result = list;
             }
 
@@ -616,7 +621,9 @@ namespace Honememo.Wptscs.Logics
                 l.IsColon = true;
                 l.Title = this.From.Language.Code + ':' + link.Title;
                 list.Add(l);
-                list.Add(new XmlCommentElement(' ' + link.ToString() + ' '));
+                XmlCommentElement comment = new XmlCommentElement();
+                comment.Raw = ' ' + link.ToString() + ' ';
+                list.Add(comment);
                 result = list;
             }
             else

@@ -42,7 +42,6 @@ namespace Honememo.Wptscs.Logics
         /// テストデータを用い、Runを通しで実行するテストケース。基本動作。
         /// </summary>
         [Test]
-        [Ignore]
         public void TestExampleIgnoreHeading()
         {
             MockFactory mock = new MockFactory();
