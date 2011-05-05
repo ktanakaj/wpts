@@ -161,7 +161,7 @@ namespace Honememo.Wptscs.Parsers
                 {
                     // 見出しの解析
                     newLine = false;
-                    if (this.TryParseElement(s, i, out innerElement, this.HeadingParser))
+                    if (this.TryParseAt(s, i, out innerElement, this.HeadingParser))
                     {
                         // それまでに解析済みのテキストを吐き出し、
                         // その後に解析した要素を追加
@@ -173,7 +173,7 @@ namespace Honememo.Wptscs.Parsers
                 }
 
                 // コメントの解析
-                if (this.TryParseElement(s, i, out innerElement, this.CommentParser))
+                if (this.TryParseAt(s, i, out innerElement, this.CommentParser))
                 {
                     // それまでに解析済みのテキストを吐き出し、
                     // その後に解析した要素を追加
@@ -191,7 +191,7 @@ namespace Honememo.Wptscs.Parsers
                 }
 
                 // それ以外のnowiki, 変数, 内部リンク, テンプレートの各要素のTryParse処理を呼び出し
-                if (this.TryParseElement(
+                if (this.TryParseAt(
                     s,
                     i,
                     out innerElement,

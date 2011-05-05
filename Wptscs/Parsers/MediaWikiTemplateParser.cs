@@ -89,7 +89,7 @@ namespace Honememo.Wptscs.Parsers
 
                 // 変数（[[{{{1}}}]]とか）の再帰チェック
                 IElement variable;
-                if (this.TryParseElement(s, i, out variable, this.parser.VariableParser))
+                if (this.TryParseAt(s, i, out variable, this.parser.VariableParser))
                 {
                     i += variable.ToString().Length - 1;
                     if (pipeCounter > 0)
@@ -119,12 +119,12 @@ namespace Honememo.Wptscs.Parsers
                 {
                     // | の後のとき
                     IElement element;
-                    if (this.TryParseElement(s, i, out element, this.parser.CommentParser))
+                    if (this.TryParseAt(s, i, out element, this.parser.CommentParser))
                     {
                         // ここにコメント（<!--）が含まれている場合、リンクは無効
                         break;
                     }
-                    else if (this.TryParseElement(s, i, out element, this.parser.NowikiParser, this.parser.LinkParser, this))
+                    else if (this.TryParseAt(s, i, out element, this.parser.NowikiParser, this.parser.LinkParser, this))
                     {
                         // nowikiまたはリンク [[ {{ （{{test|[[例]]}}とか）の再帰チェック
                         i += element.ToString().Length - 1;

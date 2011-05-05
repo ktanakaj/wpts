@@ -103,9 +103,9 @@ namespace Honememo.Parsers
         /// <param name="index">処理インデックス。</param>
         /// <param name="result">解析した結果要素。</param>
         /// <returns>解析できた場合<c>true</c>。</returns>
-        protected override bool TryParseElement(string s, int index, out IElement result)
+        protected override bool TryParseElementAt(string s, int index, out IElement result)
         {
-            return this.TryParseElement(s, index, out result, this.parsers);
+            return this.TryParseAt(s, index, out result, this.parsers);
         }
 
         /// <summary>

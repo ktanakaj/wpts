@@ -47,7 +47,7 @@ namespace Honememo.Parsers
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         /// <remarks>
         /// このクラスの実装は、XMLを丸ごと解析するような大きな処理を想定。
-        /// 実装として <see cref="TryParseElement"/> を呼び出し。
+        /// 実装として <see cref="TryParseElementAt"/> を呼び出し。
         /// </remarks>
         public virtual bool TryParse(string s, out IElement result)
         {
@@ -58,7 +58,7 @@ namespace Honememo.Parsers
             {
                 // 各要素のTryParse処理を呼び出し
                 IElement innerElement;
-                if (this.TryParseElement(s, i, out innerElement))
+                if (this.TryParseElementAt(s, i, out innerElement))
                 {
                     // それまでに解析済みのテキストを吐き出し、
                     // その後に解析した要素を追加
@@ -116,9 +116,9 @@ namespace Honememo.Parsers
         /// <exception cref="NotImplementedException">このクラスでは未実装。</exception>
         /// <remarks>
         /// このクラスの<see cref="TryParse"/>実装を用いる場合、
-        /// ここでもう一つの<c>TryParseElement</c>等を用いてそのParserで必要な解析処理呼び出しを列挙する。
+        /// ここで<c>TryParseAt</c>等を用いてそのParserで必要な解析処理呼び出しを列挙する。
         /// </remarks>
-        protected virtual bool TryParseElement(string s, int index, out IElement result)
+        protected virtual bool TryParseElementAt(string s, int index, out IElement result)
         {
             throw new NotImplementedException(this.GetType() + " is not implemented");
         }
@@ -132,7 +132,7 @@ namespace Honememo.Parsers
         /// <param name="parsers">解析に用いるパーサー。指定された順に使用。</param>
         /// <returns>いずれかのパーサーで解析できた場合<c>true</c>。</returns>
         /// <exception cref="ArgumentOutOfRangeException">インデックスが文字列の範囲外の場合。</exception>
-        protected virtual bool TryParseElement(string s, int index, out IElement result, params IParser[] parsers)
+        protected virtual bool TryParseAt(string s, int index, out IElement result, params IParser[] parsers)
         {
             char c = s[index];
             string substr = null;

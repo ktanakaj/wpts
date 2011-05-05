@@ -77,7 +77,7 @@ namespace Honememo.Wptscs.Parsers
                 }
 
                 IElement comment;
-                if (this.TryParseElement(s, i, out comment, this.parser.CommentParser))
+                if (this.TryParseAt(s, i, out comment, this.parser.CommentParser))
                 {
                     // コメント（<!--）ブロック
                     i += comment.ToString().Length - 1;
@@ -107,7 +107,7 @@ namespace Honememo.Wptscs.Parsers
                 {
                     // | の後のとき
                     IElement element;
-                    if (this.TryParseElement(s, i, out element, this.parser.NowikiParser, this, this.parser.LinkParser, this.parser.TemplateParser))
+                    if (this.TryParseAt(s, i, out element, this.parser.NowikiParser, this, this.parser.LinkParser, this.parser.TemplateParser))
                     {
                         // nowiki、または変数（{{{1|{{{2}}}}}}とか）やリンク [[ {{ （{{{1|[[test]]}}}とか）の再帰チェック
                         i += element.ToString().Length - 1;
