@@ -282,16 +282,32 @@ namespace Honememo.Wptscs.Websites
                         xml.Load(reader);
                     }
 
-                    // ネームスペース情報を取得し、フォーマットをチェック
-                    XmlElement namespacesNode = xml.SelectSingleNode("/api/query/namespaces") as XmlElement;
-                    if (namespacesNode == null)
+                    // ルートエレメントまで取得し、フォーマットをチェック
+                    XmlElement rootElement = xml["api"];
+                    if (rootElement == null)
                     {
                         // XMLは取得できたが空 or フォーマットが想定外
                         throw new InvalidDataException("parse failed");
                     }
 
+                    // クエリーを取得
+                    XmlElement queryElement = rootElement["query"];
+                    if (queryElement == null)
+                    {
+                        // フォーマットが想定外
+                        throw new InvalidDataException("parse failed");
+                    }
+
+                    // ネームスペースブロックを取得、ネームスペースブロックまでは必須
+                    XmlElement namespacesElement = queryElement["namespaces"];
+                    if (namespacesElement == null)
+                    {
+                        // フォーマットが想定外
+                        throw new InvalidDataException("parse failed");
+                    }
+
                     // ネームスペースを取得
-                    foreach (XmlNode node in namespacesNode.SelectNodes("ns"))
+                    foreach (XmlNode node in namespacesElement.ChildNodes)
                     {
                         XmlElement namespaceElement = node as XmlElement;
                         if (namespaceElement != null)
@@ -318,11 +334,12 @@ namespace Honememo.Wptscs.Websites
                         }
                     }
 
-                    // ネームスペースエイリアスを取得
-                    XmlNodeList aliaseNodes = xml.SelectNodes("/api/query/namespacealiases/ns");
-                    if (aliaseNodes != null)
+                    // ネームスペースエイリアスブロックを取得、無い場合も想定
+                    XmlElement aliasesElement = queryElement["namespacealiases"];
+                    if (aliasesElement != null)
                     {
-                        foreach (XmlNode node in aliaseNodes)
+                        // ネームスペースエイリアスを取得
+                        foreach (XmlNode node in aliasesElement.ChildNodes)
                         {
                             XmlElement namespaceElement = node as XmlElement;
                             if (namespaceElement != null)

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<api>
+<api xmlns="http://www.mediawiki.org/xml/api/">
   <query>
     <namespaces>
       <ns id="-2" case="first-letter" canonical="Media" xml:space="preserve">Media</ns>
