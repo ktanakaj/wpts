@@ -3,7 +3,7 @@
 //      XML/HTML要素を解析するためのクラスソース</summary>
 //
 // <copyright file="XmlElementParser.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -38,9 +38,39 @@ namespace Honememo.Parsers
         /// 指定された<see cref="XmlParser"/>を元にXML/HTML要素を解析するためのパーサーを作成する。
         /// </summary>
         /// <param name="parser">このパーサーが参照する<see cref="XmlParser"/>。</param>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         public XmlElementParser(XmlParser parser)
         {
-            this.parser = parser;
+            this.Parser = parser;
+        }
+
+        /// <summary>
+        /// <see cref="XmlParser"/>を指定しないでXML/HTML要素を解析するためのパーサーを作成する。
+        /// </summary>
+        /// <remarks>拡張用。<see cref="XmlParser"/>は処理に必須なため、別途設定する必要がある。</remarks>
+        protected XmlElementParser()
+        {
+        }
+
+        #endregion
+
+        #region プロパティ
+
+        /// <summary>
+        /// このパーサーが参照する<see cref="XmlParser"/>。
+        /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        protected XmlParser Parser
+        {
+            get
+            {
+                return this.parser;
+            }
+
+            set
+            {
+                this.parser = Validate.NotNull(value);
+            }
         }
 
         #endregion
@@ -106,8 +136,8 @@ namespace Honememo.Parsers
             }
 
             // 閉じタグまでを解析
-            string innerXml;
-            if (!this.TryParseContent(s.Substring(index + 1), name, out innerXml, out endIndex))
+            IElement innerElement;
+            if (!this.TryParseContent(s.Substring(index + 1), name, out innerElement, out endIndex))
             {
                 return false;
             }
@@ -124,7 +154,7 @@ namespace Honememo.Parsers
                 else
                 {
                     // それ以外は不正な構文だが値の最終文字までを設定
-                    index += innerXml.Length;
+                    index += innerElement.ToString().Length;
                 }
             }
             else
@@ -132,14 +162,7 @@ namespace Honememo.Parsers
                 index += endIndex;
             }
 
-            // 内部要素を再帰的に探索
-            IElement innerElement;
-            if (!this.parser.TryParse(innerXml, out innerElement))
-            {
-                return false;
-            }
-
-            // 結果がリストの場合そのまま、それ以外はリストに入れて親のElementに代入
+            // 内部要素がリストの場合そのまま、それ以外はリストに入れて親のElementに代入
             ICollection<IElement> collection;
             if (innerElement.GetType() == typeof(ListElement))
             {
@@ -368,18 +391,14 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="s">解析する部分文字列（"～&lt;/tag&gt;" のような文字列）。</param>
         /// <param name="tag">解析するタグ名。</param>
-        /// <param name="innerXml">解析したコンテンツ部分。</param>
+        /// <param name="innerElement">解析したコンテンツ部分。</param>
         /// <param name="endIndex">閉じタグ終了箇所（'&gt;'）のインデックス。閉じていない場合は-1。</param>
         /// <returns>
         /// 解析に成功した場合<c>true</c>。
         /// ※現状では常に<c>true</c>。単に他とパラメータをあわせただけ。
         /// </returns>
-        private bool TryParseContent(string s, string tag, out string innerXml, out int endIndex)
+        private bool TryParseContent(string s, string tag, out IElement innerElement, out int endIndex)
         {
-            // 閉じタグまでを取得。終わりが見つからない場合は、全てタグブロックと判断
-            innerXml = s;
-            endIndex = -1;
-
             // 検索条件作成
             RegexOptions options = RegexOptions.Singleline;
             if (this.parser.IgnoreCase)
@@ -388,35 +407,9 @@ namespace Honememo.Parsers
                 options = options | RegexOptions.IgnoreCase;
             }
 
-            Regex endRegex = new Regex("^</" + Regex.Escape(tag) + "\\s*>", options);
-
-            IParser commentParser = new XmlCommentElementParser();
-            for (int i = 0; i < s.Length; i++)
-            {
-                // ※ 本当は全て正規表現一発で処理したいが、コメントが含まれている可能性があるのでループ
-                if (s[i] != '<')
-                {
-                    continue;
-                }
-
-                // 終了条件のチェック
-                string substr = s.Substring(i);
-                Match match = endRegex.Match(substr);
-                if (match.Success)
-                {
-                    innerXml = s.Substring(0, i);
-                    endIndex = i + match.Length;
-                    break;
-                }
-
-                // コメント（<!--）のチェック
-                IElement comment;
-                if (commentParser.TryParse(substr, out comment))
-                {
-                    i += comment.ToString().Length - 1;
-                    continue;
-                }
-            }
+            // 閉じタグに遭遇するまで、内部要素を再帰的に解析
+            // TODO: 閉じないタグ（<br>とか）だと延々無駄に処理をしてしまうので、可能であれば改善する
+            this.parser.TryParseToRegex(s, new Regex("^</" + Regex.Escape(tag) + "\\s*>", options), out innerElement, out endIndex);
 
             return true;
         }

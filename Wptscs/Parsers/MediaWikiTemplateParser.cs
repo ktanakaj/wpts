@@ -3,7 +3,7 @@
 //      MediaWikiのテンプレート要素を解析するパーサークラスソース</summary>
 //
 // <copyright file="MediaWikiTemplateParser.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -68,7 +68,7 @@ namespace Honememo.Wptscs.Parsers
             IList<StringBuilder> pipeTexts = new List<StringBuilder>();
             int lastIndex = -1;
             int pipeCounter = 0;
-            for (int i = 2; i < s.Length; i++)
+            for (int i = MediaWikiTemplate.DelimiterStart.Length; i < s.Length; i++)
             {
                 char c = s[i];
 

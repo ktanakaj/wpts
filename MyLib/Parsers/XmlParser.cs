@@ -3,7 +3,7 @@
 //      XML/HTMLテキストを解析するためのクラスソース</summary>
 //
 // <copyright file="XmlParser.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -19,7 +19,7 @@ namespace Honememo.Parsers
     /// XML/HTMLテキストを解析するためのクラスです。
     /// </summary>
     /// <remarks>HTMLについては、解析はできるもののほぼXml用のElementで結果が返されます。</remarks>
-    public class XmlParser : AbstractParser
+    public class XmlParser : AbstractTextParser
     {
         #region private変数
 
@@ -48,6 +48,23 @@ namespace Honememo.Parsers
         #endregion
 
         #region プロパティ
+
+        /// <summary>
+        /// パーサー内で使用する各要素のパーサー。
+        /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        public IParser[] Parsers
+        {
+            get
+            {
+                return this.parsers;
+            }
+
+            set
+            {
+                this.parsers = Validate.NotNull(value);
+            }
+        }
 
         /// <summary>
         /// 大文字小文字を無視するか？

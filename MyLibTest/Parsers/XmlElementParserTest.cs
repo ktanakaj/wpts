@@ -3,7 +3,7 @@
 //      XmlElementParserのテストクラスソース。</summary>
 //
 // <copyright file="XmlElementParserTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -75,7 +75,7 @@ namespace Honememo.Parsers
             xmlElement = (XmlElement)element;
             Assert.AreEqual("<div id=\"outer\">outertext<div id=\"inner\">innertext</div></div>", xmlElement.ToString());
             Assert.AreEqual("div", xmlElement.Name);
-            Assert.AreEqual(2, xmlElement.Attributes.Count);
+            Assert.AreEqual(1, xmlElement.Attributes.Count);
             Assert.AreEqual("outer", xmlElement.Attributes["id"]);
         }
 
@@ -114,10 +114,10 @@ namespace Honememo.Parsers
             Assert.AreEqual(1, xmlElement.Attributes.Count);
             Assert.AreEqual("testvalue", xmlElement.Attributes["testattr"]);
 
-            Assert.IsTrue(parser.TryParse("<testtag5 testattr2='testvalue2'><testbody></testtag5 >testend", out element));
+            Assert.IsTrue(parser.TryParse("<testtag5 testattr2='testvalue2'>testbody</testtag5 >testend", out element));
             xmlElement = (XmlElement)element;
-            Assert.IsInstanceOf(typeof(XmlElement), xmlElement[0]);
-            Assert.AreEqual("<testtag5 testattr2='testvalue2'><testbody></testtag5 >", xmlElement.ToString());
+            Assert.IsInstanceOf(typeof(XmlTextElement), xmlElement[0]);
+            Assert.AreEqual("<testtag5 testattr2='testvalue2'>testbody</testtag5 >", xmlElement.ToString());
             Assert.AreEqual("testtag5", xmlElement.Name);
             Assert.AreEqual(1, xmlElement.Attributes.Count);
             Assert.AreEqual("testvalue2", xmlElement.Attributes["testattr2"]);

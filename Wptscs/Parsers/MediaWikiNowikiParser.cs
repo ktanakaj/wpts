@@ -3,7 +3,7 @@
 //      MediaWikiのnowikiブロックを解析するパーサークラスソース</summary>
 //
 // <copyright file="MediaWikiNowikiParser.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -34,12 +34,18 @@ namespace Honememo.Wptscs.Parsers
         #region コンストラクタ
 
         /// <summary>
-        /// 指定された<see cref="MediaWikiParser"/>を元に見出しを解析するためのパーサーを作成する。
+        /// MediaWikiのnowikiブロックを解析するためのパーサーを作成する。
         /// </summary>
         /// <param name="parser">このパーサーが参照する<see cref="MediaWikiParser"/>。</param>
-        public MediaWikiNowikiParser(XmlParser parser)
-            : base(parser)
+        public MediaWikiNowikiParser(MediaWikiParser parser)
         {
+            // nowikiブロックではMediaWikiの各種構文やコメントも含むhtmlタグも全て無効なため、
+            // 親クラスにそうした処理を含まない空のXMLParserを指定する。
+            // ※ HTML/XMLの扱い等に関する設定はMediaWiki全体のものを引き継ぐ
+            this.Parser = new XmlParser();
+            this.Parser.Parsers = new IParser[0];
+            this.Parser.IgnoreCase = parser.IgnoreCase;
+            this.Parser.IsHtml = parser.IsHtml;
         }
 
         #endregion

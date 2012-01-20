@@ -54,9 +54,9 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("<nowiki><!--<nowiki>[[test]]</nowiki>", element.ToString());
             Assert.IsTrue(parser.TryParse("<nowiki><!--[[test]]", out element));
             Assert.AreEqual("<nowiki><!--[[test]]", element.ToString());
-            Assert.IsFalse(parser.TryParse("<nowik>[[test]]</nowik>", out element));
             Assert.IsTrue(parser.TryParse("<nowiki attr=\"Value\">[[test]]</nowiki>", out element));
             Assert.AreEqual("<nowiki attr=\"Value\">[[test]]</nowiki>", element.ToString());
+            Assert.IsFalse(parser.TryParse("<nowik>[[test]]</nowik>", out element));
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse("<nowiki[[test]]</nowiki>", out element));
             Assert.IsNull(element);

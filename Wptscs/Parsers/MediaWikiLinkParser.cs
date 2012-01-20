@@ -3,7 +3,7 @@
 //      MediaWikiの内部リンク要素を解析するパーサークラスソース</summary>
 //
 // <copyright file="MediaWikiLinkParser.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -71,7 +71,7 @@ namespace Honememo.Wptscs.Parsers
             int lastIndex = -1;
             int pipeCounter = 0;
             bool sharpFlag = false;
-            for (int i = 2; i < s.Length; i++)
+            for (int i = MediaWikiLink.DelimiterStart.Length; i < s.Length; i++)
             {
                 char c = s[i];
 
@@ -91,7 +91,7 @@ namespace Honememo.Wptscs.Parsers
                 }
 
                 // 変数（[[{{{1}}}]]とか）の再帰チェック
-                // TODO: これをこのまま返してよいかよう検討
+                // TODO: これをこのまま返してよいか要検討
                 IElement variable;
                 if (this.TryParseAt(s, i, out variable, this.parser.VariableParser))
                 {
