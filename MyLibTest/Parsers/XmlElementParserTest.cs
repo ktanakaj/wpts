@@ -70,6 +70,13 @@ namespace Honememo.Parsers
             Assert.AreEqual("param", xmlElement.Attributes["name"]);
             Assert.AreEqual("test", xmlElement.Attributes["value"]);
             Assert.IsEmpty(xmlElement.Attributes["checked"]);
+
+            Assert.IsTrue(parser.TryParse("<div id=\"outer\">outertext<div id=\"inner\">innertext</div></div>", out element));
+            xmlElement = (XmlElement)element;
+            Assert.AreEqual("<div id=\"outer\">outertext<div id=\"inner\">innertext</div></div>", xmlElement.ToString());
+            Assert.AreEqual("div", xmlElement.Name);
+            Assert.AreEqual(2, xmlElement.Attributes.Count);
+            Assert.AreEqual("outer", xmlElement.Attributes["id"]);
         }
 
         /// <summary>

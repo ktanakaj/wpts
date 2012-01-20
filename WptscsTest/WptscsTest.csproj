@@ -46,6 +46,7 @@
     <Compile Include="Parsers\MediaWikiHeadingParserTest.cs" />
     <Compile Include="Parsers\MediaWikiLinkParserTest.cs" />
     <Compile Include="Parsers\MediaWikiNowikiParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiTemplateParserTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\MockFoctory.cs" />
@@ -76,6 +77,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Data\MediaWiki\en\.example.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Discovery Channel.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\en\Nothing Page.xml">

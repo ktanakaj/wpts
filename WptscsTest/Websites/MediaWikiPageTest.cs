@@ -3,7 +3,7 @@
 //      MediaWikiPageのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiPageTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -88,6 +88,20 @@ namespace Honememo.Wptscs.Websites
             Assert.IsEmpty(page.GetInterWiki("de"));
             Assert.IsEmpty(page.GetInterWiki("ru"));
             Assert.IsEmpty(page.GetInterWiki("zh"));
+        }
+
+        /// <summary>
+        /// GetInterWikiメソッドテストケース（通常ページ実データ使用）。
+        /// </summary>
+        [Test, Timeout(20000)]
+        public void TestGetInterWikiDiscoveryChannel()
+        {
+            MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Discovery Channel");
+            Assert.AreEqual("ディスカバリーチャンネル", page.GetInterWiki("ja"));
+            Assert.AreEqual("Discovery Channel (Italia)", page.GetInterWiki("it"));
+            Assert.AreEqual("Discovery Channel", page.GetInterWiki("simple"));
+            Assert.AreEqual("Discovery (телеканал)", page.GetInterWiki("ru"));
+            Assert.IsEmpty(page.GetInterWiki("io"));
         }
 
         /// <summary>

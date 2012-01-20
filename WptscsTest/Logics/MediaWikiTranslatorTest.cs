@@ -3,7 +3,7 @@
 //      MediaWikiTranslatorのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiTranslatorTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -56,29 +56,17 @@ namespace Honememo.Wptscs.Logics
             Assert.IsTrue(translate.Run("example"));
 
             // テストデータの変換結果を期待される結果と比較する
-            string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_定型句なし.txt"))) 
-            {
-                expectedText = sr.ReadToEnd();
-            }
-
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleIgnoreHeading Text > " + translate.Text);
             Assert.AreEqual(
-                expectedText.Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(resultDir, "example_定型句なし.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translate.Text);
 
             // テストデータの変換ログを期待されるログと比較する
-            string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_定型句なし.log")))
-            {
-                expectedLog = sr.ReadToEnd();
-            }
-
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleIgnoreHeading Log > " + translate.Log);
             Assert.AreEqual(
-                expectedLog.Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
+                File.ReadAllText(Path.Combine(resultDir, "example_定型句なし.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translate.Log);
         }
 
@@ -107,29 +95,17 @@ namespace Honememo.Wptscs.Logics
             Assert.IsTrue(translate.Run("example"));
 
             // テストデータの変換結果を期待される結果と比較する
-            string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example.txt")))
-            {
-                expectedText = sr.ReadToEnd();
-            }
-
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Text > " + translate.Text);
             Assert.AreEqual(
-                expectedText.Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(resultDir, "example.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translate.Text);
 
             // テストデータの変換ログを期待されるログと比較する
-            string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example.log")))
-            {
-                expectedLog = sr.ReadToEnd();
-            }
-
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Log > " + translate.Log);
             Assert.AreEqual(
-                expectedLog.Replace("http://en.wikipedia.org", from.Location),
+                File.ReadAllText(Path.Combine(resultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
                 translate.Log);
         }
 
@@ -179,29 +155,17 @@ namespace Honememo.Wptscs.Logics
             Assert.IsNotNull(table["example.net"].Timestamp);
 
             // テストデータの変換結果を期待される結果と比較する
-            string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_キャッシュ使用.txt")))
-            {
-                expectedText = sr.ReadToEnd();
-            }
-
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleWithCache Text > " + translate.Text);
             Assert.AreEqual(
-                expectedText.Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(resultDir, "example_キャッシュ使用.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translate.Text);
 
             // テストデータの変換ログを期待されるログと比較する
-            string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "example_キャッシュ使用.log")))
-            {
-                expectedLog = sr.ReadToEnd();
-            }
-
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleWithCache Log > " + translate.Log);
             Assert.AreEqual(
-                expectedLog.Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
+                File.ReadAllText(Path.Combine(resultDir, "example_キャッシュ使用.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translate.Log);
         }
 
@@ -239,29 +203,17 @@ namespace Honememo.Wptscs.Logics
             Assert.IsTrue(translate.Run("スペースシップツー"));
 
             // テストデータの変換結果を期待される結果と比較する
-            string expectedText;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "スペースシップツー.txt")))
-            {
-                expectedText = sr.ReadToEnd();
-            }
-
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Text > " + translate.Text);
             Assert.AreEqual(
-                expectedText.Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(resultDir, "スペースシップツー.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translate.Text);
 
             // テストデータの変換ログを期待されるログと比較する
-            string expectedLog;
-            using (StreamReader sr = new StreamReader(Path.Combine(resultDir, "スペースシップツー.log")))
-            {
-                expectedLog = sr.ReadToEnd();
-            }
-
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Log > " + translate.Log);
             Assert.AreEqual(
-                expectedLog.Replace("http://ja.wikipedia.org", from.Location),
+                File.ReadAllText(Path.Combine(resultDir, "スペースシップツー.log")).Replace("http://ja.wikipedia.org", from.Location),
                 translate.Log);
         }
 

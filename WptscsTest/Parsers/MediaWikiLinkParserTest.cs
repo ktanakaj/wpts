@@ -3,7 +3,7 @@
 //      MediaWikiLinkParserのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiLinkParserTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -162,6 +162,36 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("テスト", list[0].ToString());
             Assert.AreEqual("[[画像]]", list[1].ToString());
             Assert.IsNull(link.Code);
+        }
+
+        /// <summary>
+        /// TryParseメソッドテストケース（サブページ）。
+        /// </summary>
+        [Test]
+        public void TestTryParseSubpage()
+        {
+            IElement element;
+            MediaWikiLink link;
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+
+            // 全て指定されているケースは通常の記事と同じ扱い
+            Assert.IsTrue(parser.TryParse("[[testtitle/subpage]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("testtitle/subpage", link.Title);
+            Assert.IsFalse(link.IsSubpage);
+
+            // 記事名が省略されているケース
+            Assert.IsTrue(parser.TryParse("[[/subpage]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("/subpage", link.Title);
+            Assert.IsTrue(link.IsSubpage);
+
+            // 記事名が省略されているケース2
+            // TODO: サブページの相対パスは2012年1月現在未対応、対応するなら方法から要検討
+            Assert.IsTrue(parser.TryParse("[[../../subpage]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("../../subpage", link.Title);
+            Assert.IsFalse(link.IsSubpage);
         }
 
         #endregion
