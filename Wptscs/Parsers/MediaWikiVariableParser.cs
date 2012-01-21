@@ -3,7 +3,7 @@
 //      MediaWikiの変数を解析するパーサークラスソース</summary>
 //
 // <copyright file="MediaWikiVariableParser.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -56,7 +56,7 @@ namespace Honememo.Wptscs.Parsers
             // 出力値初期化
             result = null;
 
-            // 入力値確認
+            // 開始条件 {{{ のチェック
             if (!s.StartsWith(MediaWikiVariable.DelimiterStart))
             {
                 return false;
@@ -64,78 +64,55 @@ namespace Honememo.Wptscs.Parsers
 
             // ブロック終了まで取得
             StringBuilder variable = new StringBuilder();
-            StringBuilder value = null;
-            bool pipeFlag = false;
+            IElement value = null;
             int lastIndex = -1;
-            for (int i = 0 + MediaWikiVariable.DelimiterStart.Length; i < s.Length; i++)
+            for (int i = MediaWikiVariable.DelimiterStart.Length; i < s.Length; i++)
             {
-                // 終了条件のチェック
+                // 終了条件 }}} のチェック
                 if (StringUtils.StartsWith(s, MediaWikiVariable.DelimiterEnd, i))
                 {
                     lastIndex = i + MediaWikiVariable.DelimiterEnd.Length - 1;
                     break;
                 }
 
-                IElement comment;
-                if (this.TryParseAt(s, i, out comment, this.parser.CommentParser))
-                {
-                    // コメント（<!--）ブロック
-                    i += comment.ToString().Length - 1;
-                    continue;
-                }
-
-                // | が含まれている場合、以降の文字列は代入された値として扱う
+                // {{{変数名|デフォルト値}}} といったフォーマットのため、| の前後で処理を変更
                 if (s[i] == '|')
                 {
-                    pipeFlag = true;
-                    value = new StringBuilder();
-                }
-                else if (!pipeFlag)
-                {
-                    // | の前のとき
-                    // ※Wikipediaの仕様上は、{{{1{|表示}}} のように変数名の欄に { を
-                    //   含めることができるようだが、判別しきれないので、エラーとする
-                    //   （どうせ意図してそんなことする人は居ないだろうし・・・）
-                    if (s[i] == '{')
+                    // | の後（変数のデフォルト値など）は何でもありえるので親のパーサーで再帰的に解析
+                    if (!this.parser.TryParseToDelimiter(StringUtils.Substring(s, i + 1), out value, MediaWikiVariable.DelimiterEnd))
                     {
+                        // 平文でも解析するメソッドのため、基本的に失敗することは無い
+                        // 万が一の場合は解析失敗とする
                         break;
                     }
 
-                    variable.Append(s[i]);
+                    i += value.ToString().Length;
                 }
                 else
                 {
-                    // | の後のとき
+                    // | の前（変数名の部分）のとき、変数・コメントの再帰チェック
                     IElement element;
-                    if (this.TryParseAt(s, i, out element, this.parser.NowikiParser, this, this.parser.LinkParser, this.parser.TemplateParser))
+                    if (this.TryParseAt(s, i, out element, this.parser.CommentParser, this.parser.VariableParser))
                     {
-                        // nowiki、または変数（{{{1|{{{2}}}}}}とか）やリンク [[ {{ （{{{1|[[test]]}}}とか）の再帰チェック
+                        // 変数・コメントなら、解析したブロック単位で変数名に追加
                         i += element.ToString().Length - 1;
-                        value.Append(element.ToString());
+                        variable.Append(element.ToString());
                         continue;
                     }
 
-                    value.Append(s[i]);
+                    // それ以外の普通の文字なら1文字ずつ変数名に追加
+                    variable.Append(s[i]);
                 }
             }
 
+            // 終了条件でループを抜けていない場合、解析失敗
             if (lastIndex < 0)
             {
                 return false;
             }
 
-            // 値については再帰的に探索
-            IElement innerElement = null;
-            if (value != null)
-            {
-                if (!this.parser.TryParse(value.ToString(), out innerElement))
-                {
-                    return false;
-                }
-            }
-
-            // 変数ブロックの文字列を出力値に設定
-            result = new MediaWikiVariable(variable.ToString(), innerElement);
+            // 変数名・値と、解析した素の文字列を結果に格納して終了
+            result = new MediaWikiVariable(variable.ToString(), value);
             result.ParsedString = s.Substring(0, lastIndex + 1);
 
             return true;

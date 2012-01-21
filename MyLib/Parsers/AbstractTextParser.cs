@@ -11,9 +11,8 @@
 namespace Honememo.Parsers
 {
     using System;
-    using System.Collections.Generic;
     using System.Text;
-    using System.Text.RegularExpressions;
+    using Honememo.Utilities;
 
     /// <summary>
     /// ITextParserを実装するための実装支援用抽象クラスです。
@@ -34,9 +33,8 @@ namespace Honememo.Parsers
         /// </remarks>
         public override bool TryParse(string s, out IElement result)
         {
-            // 正規表現のメソッドを終了条件なしで呼び出し
-            int dummy;
-            return this.TryParseToRegex(s, null, out result, out dummy);
+            // 終了条件を指定するメソッドを条件なしで呼び出し
+            return this.TryParseToEndCondition(s, (string str, int index) => false, out result);
         }
 
         /// <summary>
@@ -44,54 +42,49 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="s">解析対象の文字列。</param>
         /// <param name="result">解析結果。</param>
-        /// <param name="endIndex">終了文字列最終インデックス。指定された文字列で終了しなかった場合は-1。</param>
-        /// <param name="delimiters">解析を終了する文字列（複数指定可）。指定が無い場合最後まで解析する。</param>
+        /// <param name="delimiters">解析を終了する文字列（複数指定可）。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
-        /// <remarks>指定された正規表現が出現しない場合、最終位置まで解析を行う。</remarks>
-        public virtual bool TryParseToDelimiter(string s, out IElement result, out int endIndex, params string[] delimiters)
+        /// <remarks>指定された文字列が出現しない場合、最終位置まで解析を行う。</remarks>
+        public virtual bool TryParseToDelimiter(string s, out IElement result, params string[] delimiters)
         {
-            // 正規表現に変換し、そちらの処理にまとめる
-            // ※ 処理の都合上、正規表現では重いようなら要検討
-            if (delimiters == null || delimiters.Length == 0)
-            {
-                return this.TryParseToRegex(s, null, out result, out endIndex);
-            }
+            // 終了条件のデリゲートに置き換え、そちらの処理にまとめる
+            return this.TryParseToEndCondition(
+                s,
+                (string str, int index)
+                    =>
+                {
+                    foreach (string delimiter in delimiters)
+                    {
+                        if (StringUtils.StartsWith(str, delimiter, index))
+                        {
+                            return true;
+                        }
+                    }
 
-            string[] escaped = new string[delimiters.Length];
-            for (int i = 0; i < delimiters.Length; i++)
-            {
-                escaped[i] = Regex.Escape(delimiters[i]);
-            }
-
-            return this.TryParseToRegex(s, new Regex("^(" + String.Join("|", escaped) + ")"), out result, out endIndex);
+                    return false;
+                },
+                out result);
         }
 
         /// <summary>
-        /// 渡された文字列に対して、指定された正規表現にマッチする位置まで解析を行う。
+        /// 渡された文字列に対して、指定された終了条件を満たすまで解析を行う。
         /// </summary>
         /// <param name="s">解析対象の文字列。</param>
-        /// <param name="regex">解析を終了する正規表現。指定が無い場合最後まで解析する。</param>
+        /// <param name="condition">解析を終了するかの判定を行うデリゲート。</param>
         /// <param name="result">解析結果。</param>
-        /// <param name="endIndex">終了正規表現最終インデックス。指定された正規表現で終了しなかった場合は-1。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
-        /// <remarks>指定された正規表現が出現しない場合、最終位置まで解析を行う。</remarks>
-        public virtual bool TryParseToRegex(string s, Regex regex, out IElement result, out int endIndex)
+        /// <remarks>指定された終了条件を満たさない場合、最終位置まで解析を行う。</remarks>
+        public virtual bool TryParseToEndCondition(string s, IsEndCondition condition, out IElement result)
         {
             // 文字列を1文字ずつチェックし、その内容に応じた要素のリストを作成する
-            endIndex = -1;
             ListElement list = new ListElement();
             StringBuilder b = new StringBuilder();
             for (int i = 0; i < s.Length; i++)
             {
                 // 終了条件のチェック、未指定時は条件なし
-                if (regex != null)
+                if (condition != null && condition(s, i))
                 {
-                    Match match = regex.Match(s.Substring(i));
-                    if (match.Success)
-                    {
-                        endIndex = i + match.Length;
-                        break;
-                    }
+                    break;
                 }
 
                 // 各要素のTryParse処理を呼び出し
@@ -142,7 +135,7 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentOutOfRangeException">インデックスが文字列の範囲外の場合。</exception>
         /// <exception cref="NotImplementedException">このクラスでは未実装。</exception>
         /// <remarks>
-        /// このクラスの<see cref="TryParse"/>実装を用いる場合、
+        /// このクラスの<see cref="TryParseToEndCondition"/>実装を用いる場合、
         /// ここで<c>TryParseAt</c>等を用いてそのParserで必要な解析処理呼び出しを列挙する。
         /// </remarks>
         protected virtual bool TryParseElementAt(string s, int index, out IElement result)

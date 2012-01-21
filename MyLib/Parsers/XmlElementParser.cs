@@ -393,10 +393,7 @@ namespace Honememo.Parsers
         /// <param name="tag">解析するタグ名。</param>
         /// <param name="innerElement">解析したコンテンツ部分。</param>
         /// <param name="endIndex">閉じタグ終了箇所（'&gt;'）のインデックス。閉じていない場合は-1。</param>
-        /// <returns>
-        /// 解析に成功した場合<c>true</c>。
-        /// ※現状では常に<c>true</c>。単に他とパラメータをあわせただけ。
-        /// </returns>
+        /// <returns>解析に成功した場合<c>true</c>。</returns>
         private bool TryParseContent(string s, string tag, out IElement innerElement, out int endIndex)
         {
             // 検索条件作成
@@ -407,11 +404,35 @@ namespace Honememo.Parsers
                 options = options | RegexOptions.IgnoreCase;
             }
 
+            // 終了条件をデリゲートで作成し、XMLテキストのパーサーを呼び出し
             // 閉じタグに遭遇するまで、内部要素を再帰的に解析
             // TODO: 閉じないタグ（<br>とか）だと延々無駄に処理をしてしまうので、可能であれば改善する
-            this.parser.TryParseToRegex(s, new Regex("^</" + Regex.Escape(tag) + "\\s*>", options), out innerElement, out endIndex);
+            Regex regex = new Regex("^</" + Regex.Escape(tag) + "\\s*>", options);
+            int end = -1;
+            bool success = this.parser.TryParseToEndCondition(
+                s,
+                (string str, int index)
+                    =>
+                {
+                    // 毎回Substringと正規表現をすると遅いのでチェックが必要かをチェック
+                    if (str[index] != '<')
+                    {
+                        return false;
+                    }
 
-            return true;
+                    Match match = regex.Match(str.Substring(index));
+                    if (!match.Success)
+                    {
+                        return false;
+                    }
+
+                    end = index + match.Length;
+                    return true;
+                },
+                out innerElement);
+
+            endIndex = end;
+            return success;
         }
 
         #endregion

@@ -47,6 +47,8 @@
     <Compile Include="Parsers\MediaWikiLinkParserTest.cs" />
     <Compile Include="Parsers\MediaWikiNowikiParserTest.cs" />
     <Compile Include="Parsers\MediaWikiTemplateParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiVariableParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiRedirectParserTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\MockFoctory.cs" />

@@ -3,7 +3,7 @@
 //      文字列処理に関するユーティリティクラスソース。</summary>
 //
 // <copyright file="StringUtils.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -46,6 +46,50 @@ namespace Honememo.Utilities
             }
 
             return str;
+        }
+
+        #endregion
+
+        #region 切り出しメソッド
+
+        /// <summary>
+        /// 指定された文字列の部分文字列を例外を発生させることなく取得します。
+        /// </summary>
+        /// <param name="str">部分文字列の取得対象となる文字列。</param>
+        /// <param name="startIndex">部分文字列の開始位置。</param>
+        /// <returns>開始位置からの部分文字列。</returns>
+        public static string Substring(string str, int startIndex)
+        {
+            return StringUtils.Substring(str, startIndex, Int32.MaxValue);
+        }
+
+        /// <summary>
+        /// 指定された文字列の部分文字列を例外を発生させることなく取得します。
+        /// </summary>
+        /// <param name="str">部分文字列の取得対象となる文字列。</param>
+        /// <param name="startIndex">部分文字列の開始位置。</param>
+        /// <param name="length">部分文字列の文字数。</param>
+        /// <returns>開始位置から指定された文字数の部分文字列。文字数が足りない場合、最後まで。</returns>
+        public static string Substring(string str, int startIndex, int length)
+        {
+            if (str == null)
+            {
+                return null;
+            }
+
+            int i = startIndex > 0 ? startIndex : 0;
+            if (i > str.Length)
+            {
+                return String.Empty;
+            }
+
+            int l = length > 0 ? length : 0;
+            if (l > str.Length - i)
+            {
+                l = str.Length - i;
+            }
+
+            return str.Substring(i, l);
         }
 
         #endregion

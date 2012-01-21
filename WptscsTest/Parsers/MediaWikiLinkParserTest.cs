@@ -84,19 +84,14 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testpipe2", link.PipeTexts[1].ToString());
             Assert.AreEqual("en", link.Code);
             Assert.IsTrue(link.IsColon);
-            
-            // パイプ後の文字列にコメント等があってもOK
-            Assert.IsTrue(parser.TryParse("[[testtitle|testpipe1<!--コメントアウト-->]]", out element));
+
+            // コメントはどこにあってもOK
+            // TODO: [<!--test-->[タイトル]] みたいなのもMediaWiki上では認識されるが、2012年1月現在未対応
+            Assert.IsTrue(parser.TryParse("[[testtitle<!--仮-->|testpipe1<!--コメントアウト-->]]", out element));
             link = (MediaWikiLink)element;
-            Assert.AreEqual("testtitle", link.Title);
+            Assert.AreEqual("testtitle<!--仮-->", link.Title);
             Assert.AreEqual(1, link.PipeTexts.Count);
             Assert.AreEqual("testpipe1<!--コメントアウト-->", link.PipeTexts[0].ToString());
-
-            Assert.IsTrue(parser.TryParse("[[ロシア語|{{lang|ru|русский язык}}]]", out element));
-            link = (MediaWikiLink)element;
-            Assert.AreEqual("ロシア語", link.Title);
-            Assert.AreEqual(1, link.PipeTexts.Count);
-            Assert.AreEqual("{{lang|ru|русский язык}}", link.PipeTexts[0].ToString());
         }
 
         /// <summary>
@@ -123,7 +118,38 @@ namespace Honememo.Wptscs.Parsers
             // テンプレートタグ
             Assert.IsFalse(parser.TryParse("{{testtitle}}", out element));
 
-            // TODO: 使用不可の文字が含まれるパターン等
+            // 記事名名の部分に < > [ ] { } \n のいずれかの文字が存在する場合、NG
+            // ※ コメントや変数であれば可能、それ以外で存在するのがNG
+            Assert.IsFalse(parser.TryParse("[[test<title]]", out element));
+            Assert.IsFalse(parser.TryParse("[[test>title]]", out element));
+            Assert.IsFalse(parser.TryParse("[[test[title]]", out element));
+            Assert.IsFalse(parser.TryParse("[[test]title]]", out element));
+            Assert.IsFalse(parser.TryParse("[[test{title]]", out element));
+            Assert.IsFalse(parser.TryParse("[[test}title]]", out element));
+            Assert.IsFalse(parser.TryParse("[[testtitle\n]]", out element));
+        }
+
+        /// <summary>
+        /// TryParseメソッドテストケース（入れ子）。
+        /// </summary>
+        [Test]
+        public void TestTryParseNested()
+        {
+            IElement element;
+            MediaWikiLink link;
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+
+            // テンプレートはパイプ以後にある分には全てOK
+            Assert.IsTrue(parser.TryParse("[[ロシア語|{{lang|ru|русский язык}}]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("ロシア語", link.Title);
+            Assert.AreEqual(1, link.PipeTexts.Count);
+            Assert.AreEqual("{{lang|ru|русский язык}}", link.PipeTexts[0].ToString());
+
+            // 変数の場合、記事名の部分にも入れられる
+            Assert.IsTrue(parser.TryParse("[[{{{title|デフォルトジャンル}}}-stub]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("{{{title|デフォルトジャンル}}}-stub", link.Title);
         }
 
         /// <summary>

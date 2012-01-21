@@ -93,25 +93,24 @@ namespace Honememo.Wptscs.Parsers
                 // | の前のとき
                 if (pipeCounter <= 0)
                 {
-                    // 変数（[[{{{1}}}]]とか）の再帰チェック
-                    // TODO: これをこのまま返してよいか要検討
-                    IElement variable;
-                    if (this.TryParseAt(s, i, out variable, this.parser.VariableParser))
+                    // 変数・コメントの再帰チェック
+                    IElement element;
+                    if (this.TryParseAt(s, i, out element, this.parser.CommentParser, this.parser.VariableParser))
                     {
-                        i += variable.ToString().Length - 1;
+                        i += element.ToString().Length - 1;
                         if (sharpFlag)
                         {
-                            section += variable.ToString();
+                            section += element.ToString();
                         }
                         else
                         {
-                            article += variable.ToString();
+                            article += element.ToString();
                         }
 
                         continue;
                     }
 
-                    // 変数以外で { } または < > [ ] \n が含まれている場合、リンクは無効
+                    // 変数・コメント以外で { } または < > [ ] \n が含まれている場合、リンクは無効
                     if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n'))
                     {
                         break;
@@ -141,8 +140,7 @@ namespace Honememo.Wptscs.Parsers
                 {
                     // | の後は、何でもありえるので親のパーサーで再帰的に解析
                     IElement element;
-                    int delimiterEndIndex;
-                    if (this.parser.TryParseToDelimiter(s.Substring(i), out element, out delimiterEndIndex, MediaWikiLink.DelimiterEnd, "|"))
+                    if (this.parser.TryParseToDelimiter(s.Substring(i), out element, MediaWikiLink.DelimiterEnd, "|"))
                     {
                         i += element.ToString().Length - 1;
                         pipeTexts[pipeCounter - 1] = element;
@@ -160,7 +158,7 @@ namespace Honememo.Wptscs.Parsers
             // 解析に成功した場合、結果を出力値に設定
             MediaWikiLink link = new MediaWikiLink();
 
-            // 変数ブロックの文字列をリンクのテキストに設定
+            // 解析した内部リンクの素のテキストを保存
             link.ParsedString = s.Substring(0, lastIndex + 1);
 
             // 前後のスペースは削除（見出しは後ろのみ）

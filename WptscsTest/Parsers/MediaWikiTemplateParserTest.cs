@@ -66,7 +66,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("Template:testtitle", template.Title);
             Assert.AreEqual(0, template.PipeTexts.Count);
 
-            // 先頭のコロンは一応認識する
+            // 先頭のコロンは認識する
             Assert.IsTrue(parser.TryParse("{{:Template:testtitle}}", out element));
             template = (MediaWikiTemplate)element;
             Assert.AreEqual("Template:testtitle", template.Title);
@@ -88,11 +88,11 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testpipe1\n", template.PipeTexts[0].ToString());
             Assert.AreEqual("testpipe2\n", template.PipeTexts[1].ToString());
             Assert.IsTrue(template.NewLine);
-            
-            // パイプ後の文字列にコメント等があってもOK
-            Assert.IsTrue(parser.TryParse("{{Cite web|url=http://www.example.com|title=test|publisher=[[company]]<!--|date=2011-08-05-->|accessdate=2011-11-10}}", out element));
+
+            // コメントはどこにあってもOK
+            Assert.IsTrue(parser.TryParse("{{Cite web<!--newsの方がよいか？-->|url=http://www.example.com|title=test|publisher=[[company]]<!--|date=2011-08-05-->|accessdate=2011-11-10}}", out element));
             template = (MediaWikiTemplate)element;
-            Assert.AreEqual("Cite web", template.Title);
+            Assert.AreEqual("Cite web<!--newsの方がよいか？-->", template.Title);
             Assert.AreEqual(4, template.PipeTexts.Count);
             Assert.AreEqual("url=http://www.example.com", template.PipeTexts[0].ToString());
             Assert.AreEqual("title=test", template.PipeTexts[1].ToString());
@@ -124,7 +124,17 @@ namespace Honememo.Wptscs.Parsers
             // 内部リンクタグ
             Assert.IsFalse(parser.TryParse("[[testtitle]]", out element));
 
-            // TODO: 使用不可の文字が含まれるパターン等
+            // 無理な位置のコメント（2012年1月現在、内部リンクはこれでもMediaWikiに認識されたがテンプレートはNG）
+            Assert.IsFalse(parser.TryParse("{<!--test-->{テンプレート}}", out element));
+
+            // テンプレート名の部分に < > [ ] { } のいずれかの文字が存在する場合、NG
+            // ※ コメントや変数であれば可能、それ以外で存在するのがNG
+            Assert.IsFalse(parser.TryParse("{{test<title}}", out element));
+            Assert.IsFalse(parser.TryParse("{{test>title}}", out element));
+            Assert.IsFalse(parser.TryParse("{{test[title}}", out element));
+            Assert.IsFalse(parser.TryParse("{{test]title}}", out element));
+            Assert.IsFalse(parser.TryParse("{{test{title}}", out element));
+            Assert.IsFalse(parser.TryParse("{{test}title}}", out element));
         }
 
         /// <summary>
@@ -137,7 +147,7 @@ namespace Honememo.Wptscs.Parsers
             MediaWikiTemplate template;
             MediaWikiTemplateParser parser = new MediaWikiTemplateParser(new MediaWikiParser(new MockFactory().GetMediaWiki("ja")));
 
-            // ファイル、入れ子もあり
+            // 入れ子もあり
             Assert.IsTrue(parser.TryParse("{{outertemplate|test=[[innerlink]]{{innertemplate}}}}", out element));
             template = (MediaWikiTemplate)element;
             Assert.AreEqual("outertemplate", template.Title);
@@ -149,6 +159,11 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("test=", list[0].ToString());
             Assert.AreEqual("[[innerlink]]", list[1].ToString());
             Assert.AreEqual("{{innertemplate}}", list[2].ToString());
+
+            // 変数の場合、テンプレート名の部分にも入れられる
+            Assert.IsTrue(parser.TryParse("{{{{{title|デフォルトジャンル}}}メニュー}}", out element));
+            template = (MediaWikiTemplate)element;
+            Assert.AreEqual("{{{title|デフォルトジャンル}}}メニュー", template.Title);
         }
 
         /// <summary>

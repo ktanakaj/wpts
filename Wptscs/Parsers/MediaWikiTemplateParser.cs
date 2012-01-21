@@ -90,16 +90,16 @@ namespace Honememo.Wptscs.Parsers
                 // | の前のとき
                 if (pipeCounter <= 0)
                 {
-                    // 変数（[[{{{1}}}]]とか）の再帰チェック
-                    IElement variable;
-                    if (this.TryParseAt(s, i, out variable, this.parser.VariableParser))
+                    // 変数・コメントの再帰チェック
+                    IElement element;
+                    if (this.TryParseAt(s, i, out element, this.parser.CommentParser, this.parser.VariableParser))
                     {
-                        i += variable.ToString().Length - 1;
-                        article += variable.ToString();
+                        i += element.ToString().Length - 1;
+                        article += element.ToString();
                         continue;
                     }
 
-                    // 変数以外で < > [ ] { } が含まれている場合、リンクは無効
+                    // 変数・コメント以外で < > [ ] { } が含まれている場合、リンクは無効
                     if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}'))
                     {
                         break;
@@ -111,8 +111,7 @@ namespace Honememo.Wptscs.Parsers
                 {
                     // | の後は、何でもありえるので親のパーサーで再帰的に解析
                     IElement element;
-                    int delimiterEndIndex;
-                    if (this.parser.TryParseToDelimiter(s.Substring(i), out element, out delimiterEndIndex, MediaWikiTemplate.DelimiterEnd, "|"))
+                    if (this.parser.TryParseToDelimiter(s.Substring(i), out element, MediaWikiTemplate.DelimiterEnd, "|"))
                     {
                         i += element.ToString().Length - 1;
                         pipeTexts[pipeCounter - 1] = element;

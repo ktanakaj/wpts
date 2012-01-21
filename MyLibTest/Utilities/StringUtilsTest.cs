@@ -3,7 +3,7 @@
 //      StringUtilsのテストクラスソース。</summary>
 //
 // <copyright file="StringUtilsTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -29,16 +29,50 @@ namespace Honememo.Utilities
         public void TestDefaultString()
         {
             // 引数一つ
-            Assert.AreEqual(String.Empty, StringUtils.DefaultString(null));
-            Assert.AreEqual(String.Empty, StringUtils.DefaultString(String.Empty));
+            Assert.IsEmpty(StringUtils.DefaultString(null));
+            Assert.IsEmpty(StringUtils.DefaultString(String.Empty));
             Assert.AreEqual(" ", StringUtils.DefaultString(" "));
             Assert.AreEqual("null以外の文字列", StringUtils.DefaultString("null以外の文字列"));
 
             // 引数二つ
             Assert.AreEqual("初期値", StringUtils.DefaultString(null, "初期値"));
-            Assert.AreEqual(String.Empty, StringUtils.DefaultString(String.Empty, "初期値"));
+            Assert.IsEmpty(StringUtils.DefaultString(String.Empty, "初期値"));
             Assert.AreEqual(" ", StringUtils.DefaultString(" ", "初期値"));
             Assert.AreEqual("null以外の文字列", StringUtils.DefaultString("null以外の文字列", "初期値"));
+        }
+
+        #endregion
+
+        #region 切り出しメソッドテストケース
+
+        /// <summary>
+        /// Substringメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestSubstring()
+        {
+            // 引数一つ
+            Assert.IsNull(StringUtils.Substring(null, 0));
+            Assert.AreEqual("abc", StringUtils.Substring("abc", 0));
+            Assert.AreEqual("c", StringUtils.Substring("abc", 2));
+            Assert.IsEmpty(StringUtils.Substring("abc", 4));
+            Assert.AreEqual("abc", StringUtils.Substring("abc", -2));
+            Assert.AreEqual("abc", StringUtils.Substring("abc", -4));
+            Assert.AreEqual("3", StringUtils.Substring("0123", 3));
+            Assert.IsEmpty(StringUtils.Substring("0123", 4));
+
+            // 引数二つ
+            Assert.IsNull(StringUtils.Substring(null, 0, 0));
+            Assert.IsEmpty(StringUtils.Substring(String.Empty, 0, 1));
+            Assert.AreEqual("ab", StringUtils.Substring("abc", 0, 2));
+            Assert.IsEmpty(StringUtils.Substring("abc", 2, 0));
+            Assert.AreEqual("c", StringUtils.Substring("abc", 2, 2));
+            Assert.IsEmpty(StringUtils.Substring("abc", 4, 2));
+            Assert.IsEmpty(StringUtils.Substring("abc", -2, -1));
+            Assert.AreEqual("ab", StringUtils.Substring("abc", -4, 2));
+            Assert.AreEqual("3", StringUtils.Substring("0123", 3, 1));
+            Assert.AreEqual("3", StringUtils.Substring("0123", 3, 2));
+            Assert.IsEmpty(StringUtils.Substring("0123", 4, 1));
         }
 
         #endregion

@@ -13,7 +13,6 @@ namespace Honememo.Wptscs.Parsers
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using System.Text.RegularExpressions;
     using Honememo.Parsers;
     using Honememo.Utilities;
     using Honememo.Wptscs.Websites;
@@ -136,32 +135,25 @@ namespace Honememo.Wptscs.Parsers
         #region インタフェース実装メソッド
 
         /// <summary>
-        /// 渡されたMediaWikiページに対して、指定された正規表現にマッチする位置まで解析を行う。
+        /// 渡されたMediaWikiページに対して、指定された終了条件を満たすまで解析を行う。
         /// </summary>
         /// <param name="s">解析対象の文字列。</param>
-        /// <param name="regex">解析を終了する正規表現。指定が無い場合最後まで解析する。</param>
+        /// <param name="condition">解析を終了するかの判定を行うデリゲート。</param>
         /// <param name="result">解析結果。</param>
-        /// <param name="endIndex">終了正規表現最終インデックス。指定された正規表現で終了しなかった場合は-1。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
-        /// <remarks>指定された正規表現が出現しない場合、最終位置まで解析を行う。</remarks>
-        public override bool TryParseToRegex(string s, Regex regex, out IElement result, out int endIndex)
+        /// <remarks>指定された終了条件を満たさない場合、最終位置まで解析を行う。</remarks>
+        public override bool TryParseToEndCondition(string s, IsEndCondition condition, out IElement result)
         {
             // 文字列を1文字ずつチェックし、その内容に応じた要素のリストを作成する
-            endIndex = -1;
             ListElement list = new ListElement();
             StringBuilder b = new StringBuilder();
             bool newLine = false;
             for (int i = 0; i < s.Length; i++)
             {
                 // 終了条件のチェック、未指定時は条件なし
-                if (regex != null)
+                if (condition != null && condition(s, i))
                 {
-                    Match match = regex.Match(s.Substring(i));
-                    if (match.Success)
-                    {
-                        endIndex = i + match.Length;
-                        break;
-                    }
+                    break;
                 }
 
                 IElement innerElement;
