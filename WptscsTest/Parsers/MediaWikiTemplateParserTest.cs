@@ -88,7 +88,16 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testpipe1\n", template.PipeTexts[0].ToString());
             Assert.AreEqual("testpipe2\n", template.PipeTexts[1].ToString());
             Assert.IsTrue(template.NewLine);
-
+            
+            // パイプ後の文字列にコメント等があってもOK
+            Assert.IsTrue(parser.TryParse("{{Cite web|url=http://www.example.com|title=test|publisher=[[company]]<!--|date=2011-08-05-->|accessdate=2011-11-10}}", out element));
+            template = (MediaWikiTemplate)element;
+            Assert.AreEqual("Cite web", template.Title);
+            Assert.AreEqual(4, template.PipeTexts.Count);
+            Assert.AreEqual("url=http://www.example.com", template.PipeTexts[0].ToString());
+            Assert.AreEqual("title=test", template.PipeTexts[1].ToString());
+            Assert.AreEqual("publisher=[[company]]<!--|date=2011-08-05-->", template.PipeTexts[2].ToString());
+            Assert.AreEqual("accessdate=2011-11-10", template.PipeTexts[3].ToString());
         }
 
         /// <summary>

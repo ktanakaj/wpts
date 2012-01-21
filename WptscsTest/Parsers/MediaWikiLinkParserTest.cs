@@ -84,6 +84,19 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testpipe2", link.PipeTexts[1].ToString());
             Assert.AreEqual("en", link.Code);
             Assert.IsTrue(link.IsColon);
+            
+            // パイプ後の文字列にコメント等があってもOK
+            Assert.IsTrue(parser.TryParse("[[testtitle|testpipe1<!--コメントアウト-->]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("testtitle", link.Title);
+            Assert.AreEqual(1, link.PipeTexts.Count);
+            Assert.AreEqual("testpipe1<!--コメントアウト-->", link.PipeTexts[0].ToString());
+
+            Assert.IsTrue(parser.TryParse("[[ロシア語|{{lang|ru|русский язык}}]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("ロシア語", link.Title);
+            Assert.AreEqual(1, link.PipeTexts.Count);
+            Assert.AreEqual("{{lang|ru|русский язык}}", link.PipeTexts[0].ToString());
         }
 
         /// <summary>

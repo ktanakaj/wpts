@@ -67,7 +67,7 @@ namespace Honememo.Wptscs.Parsers
             // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
             string article = String.Empty;
             string section = null;
-            IList<StringBuilder> pipeTexts = new List<StringBuilder>();
+            IList<IElement> pipeTexts = new List<IElement>();
             int lastIndex = -1;
             int pipeCounter = 0;
             bool sharpFlag = false;
@@ -86,35 +86,31 @@ namespace Honememo.Wptscs.Parsers
                 if (c == '|')
                 {
                     ++pipeCounter;
-                    pipeTexts.Add(new StringBuilder());
-                    continue;
-                }
-
-                // 変数（[[{{{1}}}]]とか）の再帰チェック
-                // TODO: これをこのまま返してよいか要検討
-                IElement variable;
-                if (this.TryParseAt(s, i, out variable, this.parser.VariableParser))
-                {
-                    i += variable.ToString().Length - 1;
-                    if (pipeCounter > 0)
-                    {
-                        pipeTexts[pipeCounter - 1].Append(variable.ToString());
-                    }
-                    else if (sharpFlag)
-                    {
-                        section += variable.ToString();
-                    }
-                    else
-                    {
-                        article += variable.ToString();
-                    }
-
+                    pipeTexts.Add(new TextElement());
                     continue;
                 }
 
                 // | の前のとき
                 if (pipeCounter <= 0)
                 {
+                    // 変数（[[{{{1}}}]]とか）の再帰チェック
+                    // TODO: これをこのまま返してよいか要検討
+                    IElement variable;
+                    if (this.TryParseAt(s, i, out variable, this.parser.VariableParser))
+                    {
+                        i += variable.ToString().Length - 1;
+                        if (sharpFlag)
+                        {
+                            section += variable.ToString();
+                        }
+                        else
+                        {
+                            article += variable.ToString();
+                        }
+
+                        continue;
+                    }
+
                     // 変数以外で { } または < > [ ] \n が含まれている場合、リンクは無効
                     if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n'))
                     {
@@ -143,22 +139,15 @@ namespace Honememo.Wptscs.Parsers
                 }
                 else
                 {
-                    // | の後のとき
+                    // | の後は、何でもありえるので親のパーサーで再帰的に解析
                     IElement element;
-                    if (this.TryParseAt(s, i, out element, this.parser.CommentParser))
+                    int delimiterEndIndex;
+                    if (this.parser.TryParseToDelimiter(s.Substring(i), out element, out delimiterEndIndex, MediaWikiLink.DelimiterEnd, "|"))
                     {
-                        // ここにコメント（<!--）が含まれている場合、リンクは無効
-                        break;
-                    }
-                    else if (this.TryParseAt(s, i, out element, this.parser.NowikiParser, this, this.parser.TemplateParser))
-                    {
-                        // nowikiまたはリンク [[ {{ （[[image:xx|[[test]]の画像]]とか）の再帰
                         i += element.ToString().Length - 1;
-                        pipeTexts[pipeCounter - 1].Append(element.ToString());
+                        pipeTexts[pipeCounter - 1] = element;
                         continue;
                     }
-
-                    pipeTexts[pipeCounter - 1].Append(c);
                 }
             }
 
@@ -178,12 +167,8 @@ namespace Honememo.Wptscs.Parsers
             link.Title = article.Trim();
             link.Section = section != null ? section.TrimEnd() : section;
 
-            // | 以降は再帰的に解析して設定
-            link.PipeTexts = new List<IElement>();
-            foreach (StringBuilder b in pipeTexts)
-            {
-                link.PipeTexts.Add(this.parser.Parse(b.ToString()));
-            }
+            // | 以降は再帰的に解析した値を設定
+            link.PipeTexts = pipeTexts;
 
             // 記事名から情報を抽出
             // サブページ
