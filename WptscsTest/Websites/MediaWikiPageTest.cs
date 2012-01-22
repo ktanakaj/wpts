@@ -105,6 +105,18 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
+        /// GetInterWikiメソッドテストケース（テンプレートページ実データ使用）。
+        /// </summary>
+        [Test, Timeout(20000)]
+        public void TestGetInterWikiPlanetboxBegin()
+        {
+            MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Template:Planetbox begin");
+            Assert.AreEqual("Template:Planetbox begin", page.GetInterWiki("ja"));
+            Assert.AreEqual("Шаблон:Planetbox begin", page.GetInterWiki("ru"));
+            Assert.IsEmpty(page.GetInterWiki("zh"));
+        }
+
+        /// <summary>
         /// GetInterWikiメソッドテストケース（Template:Documentation使用ページ）。
         /// </summary>
         [Test]

@@ -3,7 +3,7 @@
 //      MediaWikiページのテンプレート要素をあらわすモデルクラスソース</summary>
 //
 // <copyright file="MediaWikiTemplate.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -137,14 +137,14 @@ namespace Honememo.Wptscs.Parsers
                 b.Append(':');
             }
 
-            // リンクの付加
+            // テンプレート名の付加
             if (!String.IsNullOrEmpty(this.Title))
             {
                 b.Append(this.Title);
             }
 
             // セクション名の付加
-            if (!String.IsNullOrEmpty(this.Section))
+            if (this.Section != null)
             {
                 b.Append('#');
                 b.Append(this.Section);

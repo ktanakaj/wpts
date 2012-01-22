@@ -3,7 +3,7 @@
 //      MediaWikiLinkのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiLinkTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -14,8 +14,6 @@ namespace Honememo.Wptscs.Parsers
     using System.Collections.Generic;
     using NUnit.Framework;
     using Honememo.Parsers;
-    using Honememo.Wptscs.Models;
-    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// MediaWikiLinkのテストクラスです。
@@ -111,6 +109,8 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("[[testtitle]]", element.ToString());
 
             // タイトルとセクション
+            element.Section = String.Empty;
+            Assert.AreEqual("[[testtitle#]]", element.ToString());
             element.Section = "testsection";
             Assert.AreEqual("[[testtitle#testsection]]", element.ToString());
 
@@ -127,7 +127,16 @@ namespace Honememo.Wptscs.Parsers
             element.IsColon = true;
             Assert.AreEqual("[[:en:testtitle#testsection|testpipe1|testpipe2]]", element.ToString());
 
-            //TODO: もうちょっと組み合わせがあったほうがよい
+            // 実例）ファイルタグ
+            element.Title = "ファイル:Kepler22b-artwork.jpg";
+            element.Section = null;
+            element.PipeTexts.Clear();
+            element.PipeTexts.Add(new TextElement("thumb"));
+            element.PipeTexts.Add(new TextElement("right"));
+            element.PipeTexts.Add(new TextElement("[[ケプラー22b]]（想像図）"));
+            element.Code = null;
+            element.IsColon = false;
+            Assert.AreEqual("[[ファイル:Kepler22b-artwork.jpg|thumb|right|[[ケプラー22b]]（想像図）]]", element.ToString());
         }
 
         #endregion

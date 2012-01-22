@@ -49,6 +49,8 @@
     <Compile Include="Parsers\MediaWikiTemplateParserTest.cs" />
     <Compile Include="Parsers\MediaWikiVariableParserTest.cs" />
     <Compile Include="Parsers\MediaWikiRedirectParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiTemplateTest.cs" />
+    <Compile Include="Parsers\MediaWikiHeadingTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\MockFoctory.cs" />
@@ -85,6 +87,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\en\Nothing Page.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_Planetbox begin.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\en\_api.xml">

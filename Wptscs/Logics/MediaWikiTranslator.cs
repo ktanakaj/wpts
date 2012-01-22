@@ -3,7 +3,7 @@
 //      Wikipedia用の翻訳支援処理実装クラスソース</summary>
 //
 // <copyright file="MediaWikiTranslator.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -113,7 +113,7 @@ namespace Honememo.Wptscs.Logics
                 string langTitle = this.GetFullName(this.From, this.To.Language.Code);
                 if (langTitle != String.Empty)
                 {
-                    originalName = "[[" + langTitle + "]]: ";
+                    originalName = MediaWikiLink.DelimiterStart + langTitle + MediaWikiLink.DelimiterEnd + ": ";
                 }
 
                 this.Text += String.Format(bracket, originalName + "'''" + name + "'''");
@@ -142,7 +142,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 新しい言語間リンクと、コメントを追記
-            this.Text += "\n\n[[" + this.From.Language.Code + ":" + name + "]]\n";
+            this.Text += "\n\n" + MediaWikiLink.DelimiterStart + this.From.Language.Code + ":" + name + MediaWikiLink.DelimiterEnd + "\n";
             this.Text += String.Format(
                 Resources.ArticleFooter,
                 FormUtils.ApplicationName(),
@@ -194,7 +194,7 @@ namespace Honememo.Wptscs.Logics
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
-                this.LogLine(Resources.RightArrow + " " + Resources.LogMessage_Redirect + " [[" + page.Redirect.Title + "]]");
+                this.LogLine(Resources.RightArrow + " " + Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd);
                 page = this.GetPage(page.Redirect.Title, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
             }
 
@@ -214,7 +214,7 @@ namespace Honememo.Wptscs.Logics
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
-                this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect.Title + "]] " + Resources.RightArrow + " ";
+                this.Log += Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
                 page = this.GetPage(page.Redirect.Title, Resources.LogMessage_LinkArticleNothing);
             }
 
@@ -225,7 +225,7 @@ namespace Honememo.Wptscs.Logics
                 interWiki = page.GetInterWiki(this.To.Language.Code);
                 if (!String.IsNullOrEmpty(interWiki))
                 {
-                    Log += "[[" + interWiki + "]]";
+                    Log += MediaWikiLink.DelimiterStart + interWiki + MediaWikiLink.DelimiterEnd;
                 }
                 else
                 {
@@ -261,13 +261,13 @@ namespace Honememo.Wptscs.Logics
                     // リダイレクトがあれば、そのメッセージも表示
                     if (!String.IsNullOrWhiteSpace(item.Alias))
                     {
-                        this.Log += Resources.LogMessage_Redirect + " [[" + item.Alias + "]] " + Resources.RightArrow + " ";
+                        this.Log += Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + item.Alias + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
                     }
 
                     if (!String.IsNullOrEmpty(item.Word))
                     {
                         interWiki = item.Word;
-                        Log += "[[" + interWiki + "]]";
+                        Log += MediaWikiLink.DelimiterStart + interWiki + MediaWikiLink.DelimiterEnd;
                     }
                     else
                     {
@@ -288,7 +288,7 @@ namespace Honememo.Wptscs.Logics
                 if (page != null && page.IsRedirect())
                 {
                     item.Alias = page.Redirect.Title;
-                    this.Log += Resources.LogMessage_Redirect + " [[" + page.Redirect.Title + "]] " + Resources.RightArrow + " ";
+                    this.Log += Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
                     page = this.GetPage(page.Redirect.Title, Resources.LogMessage_LinkArticleNothing);
                 }
 
@@ -298,7 +298,7 @@ namespace Honememo.Wptscs.Logics
                     interWiki = page.GetInterWiki(this.To.Language.Code);
                     if (!String.IsNullOrEmpty(interWiki))
                     {
-                        Log += "[[" + interWiki + "]]";
+                        Log += MediaWikiLink.DelimiterStart + interWiki + MediaWikiLink.DelimiterEnd;
                     }
                     else
                     {
@@ -325,11 +325,11 @@ namespace Honememo.Wptscs.Logics
             // ※記事自体が存在しない場合、NULLを返す
             if (!template)
             {
-                Log += "[[" + title + "]] " + Resources.RightArrow + " ";
+                Log += MediaWikiLink.DelimiterStart + title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
             }
             else
             {
-                Log += "{{" + title + "}} " + Resources.RightArrow + " ";
+                Log += MediaWikiTemplate.DelimiterStart + title + MediaWikiTemplate.DelimiterEnd + " " + Resources.RightArrow + " ";
             }
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得

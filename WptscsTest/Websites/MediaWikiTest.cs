@@ -3,7 +3,7 @@
 //      MediaWikiのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -300,7 +300,7 @@ namespace Honememo.Wptscs.Websites
         #region 公開メソッドテストケース
 
         /// <summary>
-        /// GetPageプロパティテストケース。
+        /// GetPageメソッドテストケース。
         /// </summary>
         [Test]
         public void TestGetPage()
