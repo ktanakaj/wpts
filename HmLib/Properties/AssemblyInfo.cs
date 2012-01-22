@@ -1,9 +1,9 @@
 ﻿// ================================================================================================
 // <summary>
-//      MyLibのアセンブリソース</summary>
+//      HmLibのアセンブリソース</summary>
 //
 // <copyright file="AssemblyInfo.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -15,12 +15,12 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("MyLib")]
-[assembly: AssemblyDescription("汎用的なクラス等を抽出した自分用ライブラリ")]
+[assembly: AssemblyTitle("HmLib")]
+[assembly: AssemblyDescription("汎用的なクラス等を抽出したライブラリ")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MyLib")]
-[assembly: AssemblyCopyright("Copyright (C) Honeplus 2011")]
+[assembly: AssemblyProduct("HmLib")]
+[assembly: AssemblyCopyright("Copyright (C) Honeplus 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

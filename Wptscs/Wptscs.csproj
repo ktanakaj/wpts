@@ -127,9 +127,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyLib\MyLib.csproj">
+    <ProjectReference Include="..\HmLib\HmLib.csproj">
       <Project>{CC7F6106-0C00-427B-9BF2-1EE65448907B}</Project>
-      <Name>MyLib</Name>
+      <Name>HmLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

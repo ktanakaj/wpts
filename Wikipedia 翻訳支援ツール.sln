@@ -8,9 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wptscs", "wptscs\Wptscs.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WptscsTest", "WptscsTest\WptscsTest.csproj", "{FDBDFBB8-2975-4521-87C6-D75CF9144DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLib", "MyLib\MyLib.csproj", "{CC7F6106-0C00-427B-9BF2-1EE65448907B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmLib", "HmLib\HmLib.csproj", "{CC7F6106-0C00-427B-9BF2-1EE65448907B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLibTest", "MyLibTest\MyLibTest.csproj", "{77218F38-BD1C-469B-B975-68AE3E9EE14E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmLibTest", "HmLibTest\HmLibTest.csproj", "{77218F38-BD1C-469B-B975-68AE3E9EE14E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

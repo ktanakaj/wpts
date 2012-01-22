@@ -63,9 +63,9 @@
     <Compile Include="Utilities\FormUtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyLib\MyLib.csproj">
+    <ProjectReference Include="..\HmLib\HmLib.csproj">
       <Project>{CC7F6106-0C00-427B-9BF2-1EE65448907B}</Project>
-      <Name>MyLib</Name>
+      <Name>HmLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\wptscs\Wptscs.csproj">
       <Project>{4E20E523-0230-474C-B8F1-1E991360F5F5}</Project>

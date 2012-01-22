@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール（テスト）のアセンブリソース</summary>
 //
 // <copyright file="AssemblyInfo.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Wikipedia 翻訳支援ツール")]
-[assembly: AssemblyCopyright("Copyright (C) Honeplus 2011")]
+[assembly: AssemblyCopyright("Copyright (C) Honeplus 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -42,4 +42,4 @@ using System.Runtime.InteropServices;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.50.*")]
+[assembly: AssemblyVersion("1.10.*")]
