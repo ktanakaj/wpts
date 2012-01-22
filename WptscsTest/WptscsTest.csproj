@@ -86,7 +86,16 @@
     <Content Include="Data\MediaWiki\en\Discovery Channel.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\MediaWiki\en\Fuji %28Spacecraft%29.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\MediaWiki\en\Nothing Page.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_Citation needed.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_Citation needed_doc.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\en\Template_Planetbox begin.xml">

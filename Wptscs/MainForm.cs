@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール主画面クラスソース</summary>
 //
 // <copyright file="MainForm.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -343,7 +343,7 @@ namespace Honememo.Wptscs
                 this.logLastLength = 0;
                 this.textBoxLog.AppendText(
                     String.Format(
-                        Resources.LogMessage_Start,
+                        Resources.LogMessageStart,
                         FormUtils.ApplicationName(),
                         DateTime.Now.ToString("F")));
 
@@ -360,8 +360,8 @@ namespace Honememo.Wptscs
                 catch (NotImplementedException)
                 {
                     // 将来の拡張用
-                    this.textBoxLog.AppendText(String.Format(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理"));
-                    FormUtils.InformationDialog(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理");
+                    this.textBoxLog.AppendText(String.Format(Resources.InformationMessageDevelopingMethod, "Wikipedia以外の処理"));
+                    FormUtils.InformationDialog(Resources.InformationMessageDevelopingMethod, "Wikipedia以外の処理");
                     return;
                 }
 
@@ -370,7 +370,7 @@ namespace Honememo.Wptscs
                 // 実行前に、ユーザーから中止要求がされているかをチェック
                 if (this.backgroundWorkerRun.CancellationPending)
                 {
-                    this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
+                    this.textBoxLog.AppendText(String.Format(Resources.LogMessageStop, logName));
                 }
                 else
                 {
@@ -388,7 +388,7 @@ namespace Honememo.Wptscs
                             try
                             {
                                 sw.Write(this.translate.Text);
-                                this.textBoxLog.AppendText(String.Format(Resources.LogMessage_End, fileName, logName));
+                                this.textBoxLog.AppendText(String.Format(Resources.LogMessageEnd, fileName, logName));
                             }
                             finally
                             {
@@ -398,12 +398,12 @@ namespace Honememo.Wptscs
                         catch (Exception ex)
                         {
                             this.textBoxLog.AppendText(String.Format(Resources.LogMessage_ErrorFileSave, Path.Combine(this.textBoxSaveDirectory.Text, fileName), ex.Message));
-                            this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
+                            this.textBoxLog.AppendText(String.Format(Resources.LogMessageStop, logName));
                         }
                     }
                     else
                     {
-                        this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
+                        this.textBoxLog.AppendText(String.Format(Resources.LogMessageStop, logName));
                     }
                 }
 

@@ -123,9 +123,7 @@
   </data>
   <data name="ArticleFooter" xml:space="preserve">
     <value>&lt;!-- {0}、[[:{1}:{2}]]（{3}(UTC)）より --&gt;</value>
-  </data>
-  <data name="ErrorMessage_TemporayError" xml:space="preserve">
-    <value>一時ファイルの作成に失敗しました。設定ファイルに異常が無いか、また以下のフォルダにファイルが作成可能かを確認してください。</value>
+    <comment>変換した記事の末尾に付けるフッター</comment>
   </data>
   <data name="ErrorMessageConfigLordFailed" xml:space="preserve">
     <value>設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。
@@ -161,8 +159,9 @@
     <value>エラー</value>
     <comment>エラーダイアログのタイトル</comment>
   </data>
-  <data name="InformationMessage_DevelopingMethod" xml:space="preserve">
+  <data name="InformationMessageDevelopingMethod" xml:space="preserve">
     <value>現在、{0}には未対応ですm(__)m</value>
+    <comment>未実装の機能が呼ばれた際のメッセージ</comment>
   </data>
   <data name="InformationTitle" xml:space="preserve">
     <value>お知らせ</value>
@@ -177,10 +176,11 @@
   <data name="LogMessage_CheckAndReplaceStart" xml:space="preserve">
     <value>言語間リンクの探索、見出しの変換を行います</value>
   </data>
-  <data name="LogMessage_End" xml:space="preserve">
+  <data name="LogMessageEnd" xml:space="preserve">
     <value>
 処理結果を {0} に出力しました。このログは {1} に保存されます。
 </value>
+    <comment>変換処理を完了した際のメッセージ</comment>
   </data>
   <data name="LogMessage_ErrorFileSave" xml:space="preserve">
     <value>
@@ -199,28 +199,33 @@
   <data name="LogMessage_LinkArticleNothing" xml:space="preserve">
     <value>記事無し</value>
   </data>
-  <data name="LogMessage_Redirect" xml:space="preserve">
+  <data name="LogMessageRedirect" xml:space="preserve">
     <value>リダイレクト</value>
+    <comment>記事がリダイレクトの場合のメッセージ</comment>
   </data>
-  <data name="LogMessage_Start" xml:space="preserve">
+  <data name="LogMessageStart" xml:space="preserve">
     <value>{0}、実行日時 {1}
 
 </value>
+    <comment>変換処理を開始した際のメッセージ</comment>
   </data>
-  <data name="LogMessage_Stop" xml:space="preserve">
+  <data name="LogMessageStop" xml:space="preserve">
     <value>
 処理を中止しました。このログは {0} に保存されます。
 </value>
+    <comment>変換処理を中止した際のメッセージ</comment>
   </data>
-  <data name="LogMessage_TemplateUnknown" xml:space="preserve">
-    <value>{{{{0}}}} の識別に失敗しました。{{{{0}}}} は {{1}}名前空間の記事して処理します。（{{2}}）</value>
+  <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
+    <value>{{{{0}}}} の名前空間の確認に失敗しました。{{{{0}}}} は {{1}}名前空間と仮定して処理します。（{{2}}）</value>
+    <comment>テンプレートの名前空間を補完する際に、想定外のエラーとなった場合のメッセージ</comment>
   </data>
-  <data name="LogMessageTranslation" xml:space="preserve">
+  <data name="LogMessageNoteTranslation" xml:space="preserve">
     <value> ※キャッシュ</value>
     <comment>対訳表使用時の注釈</comment>
   </data>
-  <data name="QuestionMessage_ArticleExist" xml:space="preserve">
+  <data name="QuestionMessageArticleExisted" xml:space="preserve">
     <value>対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？</value>
+    <comment>指定された記事が既に翻訳先に存在する場合の確認メッセージ</comment>
   </data>
   <data name="QuestionMessage_CommonWorkQuestion" xml:space="preserve">
     <value>{0}を行います。よろしいですか？</value>

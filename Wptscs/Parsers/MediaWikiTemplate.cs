@@ -118,7 +118,7 @@ namespace Honememo.Wptscs.Parsers
             // 開始タグの付加
             b.Append(MediaWikiTemplate.DelimiterStart);
 
-            // 先頭の : の付加
+            // 先頭の : の付加（テンプレート名前空間ではなく標準名前空間となる）
             if (this.IsColon)
             {
                 b.Append(':');

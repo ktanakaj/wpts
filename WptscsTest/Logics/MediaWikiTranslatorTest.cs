@@ -37,14 +37,35 @@ namespace Honememo.Wptscs.Logics
             #region 非公開メソッドテスト用のオーラーライドメソッド
 
             /// <summary>
-            /// 内部リンクの文字列を変換する。
+            /// 内部リンクを解析し、変換先言語の記事へのリンクに変換する。
             /// </summary>
-            /// <param name="link">変換元リンク文字列。</param>
-            /// <param name="parent">元記事タイトル。</param>
-            /// <returns>変換済みリンク文字列。</returns>
-            public new IElement ReplaceInnerLink(MediaWikiLink link, string parent)
+            /// <param name="link">変換元リンク。</param>
+            /// <param name="parent">サブページ用の親記事タイトル。</param>
+            /// <returns>変換済みリンク。</returns>
+            public new IElement ReplaceLink(MediaWikiLink link, string parent)
             {
-                return base.ReplaceInnerLink(link, parent);
+                return base.ReplaceLink(link, parent);
+            }
+
+            /// <summary>
+            /// テンプレートを解析し、変換先言語の記事へのテンプレートに変換する。
+            /// </summary>
+            /// <param name="template">変換元テンプレート。</param>
+            /// <param name="parent">サブページ用の親記事タイトル。</param>
+            /// <returns>変換済みテンプレート。</returns>
+            public new IElement ReplaceTemplate(MediaWikiTemplate template, string parent)
+            {
+                return base.ReplaceTemplate(template, parent);
+            }
+
+            /// <summary>
+            /// 指定された見出しに対して、対訳表による変換を行う。
+            /// </summary>
+            /// <param name="heading">見出し。</param>
+            /// <returns>変換後の見出し。</returns>
+            public new IElement ReplaceHeading(MediaWikiHeading heading)
+            {
+                return base.ReplaceHeading(heading);
             }
 
             #endregion
@@ -62,10 +83,10 @@ namespace Honememo.Wptscs.Logics
         #region 各処理のメソッドテストケース
 
         /// <summary>
-        /// ReplaceInnerLinkメソッドテストケース。
+        /// ReplaceLinkメソッドテストケース。
         /// </summary>
         [Test]
-        public void TestReplaceInnerLink()
+        public void TestReplaceLink()
         {
             TestMediaWikiTranslator translate = new TestMediaWikiTranslator();
             MockFactory mock = new MockFactory();
@@ -82,67 +103,67 @@ namespace Honememo.Wptscs.Logics
             translate.HeadingTable.To = "en";
             MediaWikiLink link;
 
-            // 記事名だけの内部リンクで言語間リンクあり
+            // 記事名だけの内部リンクで言語間リンクあり、変換先言語へのリンクとなる
             link = new MediaWikiLink();
             link.Title = "ホワイトナイトツー";
-            Assert.AreEqual("[[Scaled Composites White Knight Two|ホワイトナイトツー]]", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Scaled Composites White Knight Two|ホワイトナイトツー]]", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
             // 見出しあり
             link.Section = "見出し";
-            Assert.AreEqual("[[Scaled Composites White Knight Two#見出し|ホワイトナイトツー]]", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Scaled Composites White Knight Two#見出し|ホワイトナイトツー]]", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
             // 変換パターンに該当する見出しの場合
             link.Section = "外部リンク";
-            Assert.AreEqual("[[Scaled Composites White Knight Two#External links|ホワイトナイトツー]]", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Scaled Composites White Knight Two#External links|ホワイトナイトツー]]", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
             // 表示名あり
             link.PipeTexts.Add(new TextElement("母機"));
-            Assert.AreEqual("[[Scaled Composites White Knight Two#External links|母機]]", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Scaled Composites White Knight Two#External links|母機]]", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
-            // 記事名だけの内部リンクで言語間リンクなし
+            // 記事名だけの内部リンクで言語間リンクなし、変換元言語へのリンクとなる
             translate.From = mock.GetMediaWiki("en");
             translate.To = mock.GetMediaWiki("ja");
             translate.HeadingTable.From = "en";
             translate.HeadingTable.To = "ja";
             link = new MediaWikiLink();
             link.Title = "Examplum";
-            Assert.AreEqual("[[:en:Examplum|Examplum]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[:en:Examplum|Examplum]]", translate.ReplaceLink(link, "example").ToString());
 
             // 見出しあり
             link.Section = "Three examples of exempla";
-            Assert.AreEqual("[[:en:Examplum#Three examples of exempla|Examplum]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[:en:Examplum#Three examples of exempla|Examplum]]", translate.ReplaceLink(link, "example").ToString());
 
             // 変換パターンに該当する見出しの場合
             link.Section = "External links";
-            Assert.AreEqual("[[:en:Examplum#外部リンク|Examplum]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[:en:Examplum#外部リンク|Examplum]]", translate.ReplaceLink(link, "example").ToString());
 
             // 表示名あり
             link.PipeTexts.Add(new TextElement("Examplum_1"));
-            Assert.AreEqual("[[:en:Examplum#外部リンク|Examplum_1]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[:en:Examplum#外部リンク|Examplum_1]]", translate.ReplaceLink(link, "example").ToString());
 
-            // 記事名だけの内部リンクで赤リンク
+            // 記事名だけの内部リンクで赤リンク、処理されない
             link = new MediaWikiLink();
             link.Title = "Nothing Page";
-            Assert.AreEqual("[[Nothing Page]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[Nothing Page]]", translate.ReplaceLink(link, "example").ToString());
 
             // 見出しあり
             link.Section = "Section A";
-            Assert.AreEqual("[[Nothing Page#Section A]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[Nothing Page#Section A]]", translate.ReplaceLink(link, "example").ToString());
 
             // 変換パターンに該当する見出しの場合
             link.Section = "External links";
-            Assert.AreEqual("[[Nothing Page#外部リンク|Nothing Page]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[Nothing Page#外部リンク|Nothing Page]]", translate.ReplaceLink(link, "example").ToString());
 
             // 表示名あり
             link.PipeTexts.Add(new TextElement("Dummy Link"));
-            Assert.AreEqual("[[Nothing Page|Dummy Link]]", translate.ReplaceInnerLink(link, "example").ToString());
+            Assert.AreEqual("[[Nothing Page|Dummy Link]]", translate.ReplaceLink(link, "example").ToString());
         }
 
         /// <summary>
-        /// ReplaceInnerLinkメソッドテストケース（カテゴリ）。
+        /// ReplaceLinkメソッドテストケース（カテゴリ）。
         /// </summary>
         [Test]
-        public void TestReplaceInnerLinkCategory()
+        public void TestReplaceLinkCategory()
         {
             TestMediaWikiTranslator translate = new TestMediaWikiTranslator();
             MockFactory mock = new MockFactory();
@@ -150,33 +171,155 @@ namespace Honememo.Wptscs.Logics
             translate.To = mock.GetMediaWiki("en");
             MediaWikiLink link;
 
-            // 記事名だけの内部リンクで言語間リンクあり
+            // 記事名だけの内部リンクで言語間リンクあり、変換先言語でのカテゴリとなる
             link = new MediaWikiLink();
             link.Title = "Category:宇宙船";
-            Assert.AreEqual("[[Category:Manned spacecraft]]<!-- [[Category:宇宙船]] -->", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Category:Manned spacecraft]]<!-- [[Category:宇宙船]] -->", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
             // ソートキーあり
             link.PipeTexts.Add(new TextElement("すへえすしつふつう"));
-            Assert.AreEqual("[[Category:Manned spacecraft|すへえすしつふつう]]<!-- [[Category:宇宙船|すへえすしつふつう]] -->", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Category:Manned spacecraft|すへえすしつふつう]]<!-- [[Category:宇宙船|すへえすしつふつう]] -->", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
-            // 記事名だけの内部リンクで言語間リンクなし
+            // 記事名だけの内部リンクで言語間リンクなし、変換元言語へのリンクとなり元のカテゴリはコメントとなる
             translate.To = mock.GetMediaWiki("it");
             link = new MediaWikiLink();
             link.Title = "Category:宇宙船";
-            Assert.AreEqual("[[:ja:Category:宇宙船]]<!-- [[Category:宇宙船]] -->", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[:ja:Category:宇宙船]]<!-- [[Category:宇宙船]] -->", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
             // ソートキーあり
             link.PipeTexts.Add(new TextElement("すへえすしつふつう"));
-            Assert.AreEqual("[[:ja:Category:宇宙船]]<!-- [[Category:宇宙船|すへえすしつふつう]] -->", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[:ja:Category:宇宙船]]<!-- [[Category:宇宙船|すへえすしつふつう]] -->", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
-            // 記事名だけの内部リンクで赤リンク
+            // 記事名だけの内部リンクで赤リンク、処理されない
             link = new MediaWikiLink();
             link.Title = "Category:ｘｘ国の宇宙船";
-            Assert.AreEqual("[[Category:ｘｘ国の宇宙船]]", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Category:ｘｘ国の宇宙船]]", translate.ReplaceLink(link, "スペースシップツー").ToString());
 
             // ソートキーあり
             link.PipeTexts.Add(new TextElement("すへえすしつふつう"));
-            Assert.AreEqual("[[Category:ｘｘ国の宇宙船|すへえすしつふつう]]", translate.ReplaceInnerLink(link, "スペースシップツー").ToString());
+            Assert.AreEqual("[[Category:ｘｘ国の宇宙船|すへえすしつふつう]]", translate.ReplaceLink(link, "スペースシップツー").ToString());
+        }
+
+        /// <summary>
+        /// ReplaceLinkメソッドテストケース（ファイル）。
+        /// </summary>
+        [Test]
+        public void TestReplaceLinkFile()
+        {
+            TestMediaWikiTranslator translate = new TestMediaWikiTranslator();
+            MockFactory mock = new MockFactory();
+            translate.From = mock.GetMediaWiki("en");
+            translate.To = mock.GetMediaWiki("ja");
+            MediaWikiLink link;
+
+            // 画像などのファイルについては、名前空間を他国語に置き換えるだけ
+            link = new MediaWikiLink();
+            link.Title = "File:Kepler22b-artwork.jpg";
+            Assert.AreEqual("[[ファイル:Kepler22b-artwork.jpg]]", translate.ReplaceLink(link, "Kepler-22b").ToString());
+
+            // パラメータあり
+            link.PipeTexts.Add(new TextElement("thumb"));
+            link.PipeTexts.Add(new TextElement("right"));
+            link.PipeTexts.Add(new TextElement("Artist's conception of Kepler-22b."));
+            Assert.AreEqual("[[ファイル:Kepler22b-artwork.jpg|thumb|right|Artist's conception of Kepler-22b.]]", translate.ReplaceLink(link, "Kepler-22b").ToString());
+
+            // ja→enの場合もちゃんと置き換える（en→jaはFileのままでも使えるが逆は置き換えないと動かない）
+            translate.From = mock.GetMediaWiki("ja");
+            translate.To = mock.GetMediaWiki("en");
+
+            link = new MediaWikiLink();
+            link.Title = "ファイル:Kepler22b-artwork.jpg";
+            Assert.AreEqual("[[File:Kepler22b-artwork.jpg]]", translate.ReplaceLink(link, "ケプラー22b").ToString());
+        }
+
+        /// <summary>
+        /// ReplaceTemplateメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestReplaceTemplate()
+        {
+            TestMediaWikiTranslator translate = new TestMediaWikiTranslator();
+            MockFactory mock = new MockFactory();
+            translate.From = mock.GetMediaWiki("en");
+            translate.To = mock.GetMediaWiki("ja");
+            MediaWikiTemplate template;
+
+            // テンプレート名だけで言語間リンクあり、変換先言語でのテンプレートとなる
+            template = new MediaWikiTemplate("Citation needed");
+            Assert.AreEqual("{{要出典}}", translate.ReplaceTemplate(template, "example").ToString());
+
+            // パラメータあり
+            template.PipeTexts.Add(new TextElement("date=January 2012"));
+            Assert.AreEqual("{{要出典|date=January 2012}}", translate.ReplaceTemplate(template, "example").ToString());
+
+            // テンプレート名だけで言語間リンクなし、変換元言語へのリンクとなり元のテンプレートはコメントとなる
+            template = new MediaWikiTemplate("Wiktionary");
+            Assert.AreEqual("[[:en:Template:Wiktionary]]<!-- {{Wiktionary}} -->", translate.ReplaceTemplate(template, "example").ToString());
+
+            // パラメータあり
+            template.PipeTexts.Add(new TextElement("Sample"));
+            Assert.AreEqual("[[:en:Template:Wiktionary]]<!-- {{Wiktionary|Sample}} -->", translate.ReplaceTemplate(template, "example").ToString());
+
+            // テンプレート名だけで赤リンク、処理されない
+            template = new MediaWikiTemplate("Invalid Template");
+            Assert.AreEqual("{{Invalid Template}}", translate.ReplaceTemplate(template, "example").ToString());
+
+            // パラメータあり
+            template.PipeTexts.Add(new TextElement("parameter=1"));
+            Assert.AreEqual("{{Invalid Template|parameter=1}}", translate.ReplaceTemplate(template, "example").ToString());
+
+            // システム定義変数、処理されない
+            template = new MediaWikiTemplate("PAGENAME");
+            Assert.AreEqual("{{PAGENAME}}", translate.ReplaceTemplate(template, "example").ToString());
+        }
+
+        /// <summary>
+        /// ReplaceTemplateメソッドテストケース（入れ子）。
+        /// </summary>
+        [Test]
+        public void TestReplaceTemplateNested()
+        {
+            TestMediaWikiTranslator translate = new TestMediaWikiTranslator();
+            MockFactory mock = new MockFactory();
+            translate.From = mock.GetMediaWiki("en");
+            translate.To = mock.GetMediaWiki("ja");
+            MediaWikiTemplate template;
+            MediaWikiLink link;
+            ListElement list;
+
+            // テンプレート名だけで言語間リンクあり、入れ子も処理される
+            // ※ 以下listを毎回作り直しているのは、更新されてしまうケースがあるため
+            template = new MediaWikiTemplate("Citation needed");
+            template.PipeTexts.Add(new TextElement("date=January 2012"));
+            list = new ListElement();
+            list.Add(new TextElement("note=See also "));
+            link = new MediaWikiLink();
+            link.Title = "Fuji (Spacecraft)";
+            list.Add(link);
+            template.PipeTexts.Add(list);
+            Assert.AreEqual("{{要出典|date=January 2012|note=See also [[ふじ (宇宙船)|Fuji (Spacecraft)]]}}", translate.ReplaceTemplate(template, "example").ToString());
+
+            // テンプレート名だけで言語間リンクなし、入れ子は処理されない
+            template = new MediaWikiTemplate("Wiktionary");
+            template.PipeTexts.Add(new TextElement("Sample"));
+            list = new ListElement();
+            list.Add(new TextElement("note=See also "));
+            link = new MediaWikiLink();
+            link.Title = "Fuji (Spacecraft)";
+            list.Add(link);
+            template.PipeTexts.Add(list);
+            Assert.AreEqual("[[:en:Template:Wiktionary]]<!-- {{Wiktionary|Sample|note=See also [[Fuji (Spacecraft)]]}} -->", translate.ReplaceTemplate(template, "example").ToString());
+
+            // テンプレート名だけで赤リンク、入れ子は処理されない
+            template = new MediaWikiTemplate("Invalid Template");
+            template.PipeTexts.Add(new TextElement("parameter=1"));
+            list = new ListElement();
+            list.Add(new TextElement("note=See also "));
+            link = new MediaWikiLink();
+            link.Title = "Fuji (Spacecraft)";
+            list.Add(link);
+            template.PipeTexts.Add(list);
+            Assert.AreEqual("{{Invalid Template|parameter=1|note=See also [[Fuji (Spacecraft)]]}}", translate.ReplaceTemplate(template, "example").ToString());
         }
 
         #endregion

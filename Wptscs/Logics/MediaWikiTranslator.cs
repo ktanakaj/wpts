@@ -13,6 +13,7 @@ namespace Honememo.Wptscs.Logics
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Text;
     using System.Windows.Forms;
@@ -89,13 +90,13 @@ namespace Honememo.Wptscs.Logics
             if (interWiki != String.Empty)
             {
                 if (MessageBox.Show(
-                        String.Format(Resources.QuestionMessage_ArticleExist, interWiki),
+                        String.Format(Resources.QuestionMessageArticleExisted, interWiki),
                         Resources.QuestionTitle,
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question)
                    == System.Windows.Forms.DialogResult.No)
                 {
-                    this.LogLine(ENTER + String.Format(Resources.QuestionMessage_ArticleExist, interWiki));
+                    this.LogLine(ENTER + String.Format(Resources.QuestionMessageArticleExisted, interWiki));
                     return false;
                 }
                 else
@@ -194,7 +195,7 @@ namespace Honememo.Wptscs.Logics
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
-                this.LogLine(Resources.RightArrow + " " + Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd);
+                this.LogLine(Resources.RightArrow + " " + Resources.LogMessageRedirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd);
                 page = this.GetPage(page.Redirect.Title, Resources.RightArrow + " " + Resources.LogMessage_ArticleNothing);
             }
 
@@ -214,7 +215,7 @@ namespace Honememo.Wptscs.Logics
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
             if (page != null && page.IsRedirect())
             {
-                this.Log += Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
+                this.Log += Resources.LogMessageRedirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
                 page = this.GetPage(page.Redirect.Title, Resources.LogMessage_LinkArticleNothing);
             }
 
@@ -261,7 +262,7 @@ namespace Honememo.Wptscs.Logics
                     // リダイレクトがあれば、そのメッセージも表示
                     if (!String.IsNullOrWhiteSpace(item.Alias))
                     {
-                        this.Log += Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + item.Alias + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
+                        this.Log += Resources.LogMessageRedirect + " " + MediaWikiLink.DelimiterStart + item.Alias + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
                     }
 
                     if (!String.IsNullOrEmpty(item.Word))
@@ -275,7 +276,7 @@ namespace Honememo.Wptscs.Logics
                         Log += Resources.LogMessage_InterWikiNothing;
                     }
 
-                    Log += Resources.LogMessageTranslation;
+                    Log += Resources.LogMessageNoteTranslation;
                     return interWiki;
                 }
 
@@ -288,7 +289,7 @@ namespace Honememo.Wptscs.Logics
                 if (page != null && page.IsRedirect())
                 {
                     item.Alias = page.Redirect.Title;
-                    this.Log += Resources.LogMessage_Redirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
+                    this.Log += Resources.LogMessageRedirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
                     page = this.GetPage(page.Redirect.Title, Resources.LogMessage_LinkArticleNothing);
                 }
 
@@ -370,7 +371,6 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 要素の型に応じて、必要な置き換えを行う
-            // TODO: 第一段階として、とりあえずみんな既存同様テキストで返してる
             if (element is MediaWikiTemplate)
             {
                 // テンプレート
@@ -380,7 +380,7 @@ namespace Honememo.Wptscs.Logics
             {
                 // 内部リンク
                 // TODO: ここも再帰がいるはず
-                return this.ReplaceInnerLink((MediaWikiLink)element, parent);
+                return this.ReplaceLink((MediaWikiLink)element, parent);
             }
             else if (element is MediaWikiHeading)
             {
@@ -423,12 +423,12 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// 内部リンクの文字列を変換する。
+        /// 内部リンクを解析し、変換先言語の記事へのリンクに変換する。
         /// </summary>
-        /// <param name="link">変換元リンク文字列。</param>
-        /// <param name="parent">元記事タイトル。</param>
-        /// <returns>変換済みリンク文字列。</returns>
-        protected IElement ReplaceInnerLink(MediaWikiLink link, string parent)
+        /// <param name="link">変換元リンク。</param>
+        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <returns>変換済みリンク。</returns>
+        protected IElement ReplaceLink(MediaWikiLink link, string parent)
         {
             // 変数初期設定
             XmlCommentElement comment = null;
@@ -543,106 +543,58 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// テンプレートの文字列を変換する。
+        /// テンプレートを解析し、変換先言語の記事へのテンプレートに変換する。
         /// </summary>
-        /// <param name="link">変換元テンプレート文字列。</param>
-        /// <param name="parent">元記事タイトル。</param>
-        /// <returns>変換済みテンプレート文字列。</returns>
-        protected IElement ReplaceTemplate(MediaWikiTemplate link, string parent)
+        /// <param name="template">変換元テンプレート。</param>
+        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <returns>変換済みテンプレート。</returns>
+        protected IElement ReplaceTemplate(MediaWikiTemplate template, string parent)
         {
-            // システム変数の場合は対象外
-            if (this.From.IsMagicWord(link.Title))
+            // システム変数（{{PAGENAME}}とか）の場合は対象外
+            if (this.From.IsMagicWord(template.Title))
             {
-                System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.replaceTemplate > システム変数 : " + link.ToString());
-                return link;
+                return template;
             }
 
-            // テンプレート名前空間か、普通の記事かを判定
-            if (!link.IsColon && !link.IsSubpage)
-            {
-                string prefix = null;
-                IList<string> prefixes = this.From.Namespaces[this.From.TemplateNamespace];
-                if (prefixes != null && prefixes.Count > 0)
-                {
-                    prefix = prefixes[0];
-                }
-
-                if (!String.IsNullOrEmpty(prefix) && !link.Title.StartsWith(prefix + ":"))
-                {
-                    // 頭にTemplate:を付けた記事名でアクセスし、テンプレートが存在するかをチェック
-                    string title = prefix + ":" + link.Title;
-                    MediaWikiPage page = null;
-                    try
-                    {
-                        page = this.From.GetPage(title) as MediaWikiPage;
-                    }
-                    catch (WebException e)
-                    {
-                        if (e.Status == WebExceptionStatus.ProtocolError
-                            && (e.Response as HttpWebResponse).StatusCode != HttpStatusCode.NotFound)
-                        {
-                            // 記事が取得できない場合も、404でない場合は存在するとして処理
-                            this.LogLine(String.Format(Resources.LogMessage_TemplateUnknown, link.Title, prefix, e.Message));
-                            link.Title = title;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.ReplaceTemplate > " + e.Message);
-                    }
-
-                    if (page != null)
-                    {
-                        // 記事が存在する場合、テンプレートをつけた名前を使用
-                        link.Title = title;
-                    }
-                }
-            }
-            else if (link.IsSubpage)
-            {
-                // サブページの場合、記事名を補填
-                link.Title = parent + link.Title;
-            }
+            // テンプレートは通常名前空間が省略されているので補完する
+            string filledTitle = this.FillTemplateName(template, parent);
 
             // リンクを辿り、対象記事の言語間リンクを取得
-            string interWiki = this.GetInterWiki(link.Title, true);
-            IElement result = link;
-
+            string interWiki = this.GetInterWiki(filledTitle, true);
             if (interWiki == null)
             {
                 // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
+                return template;
             }
             else if (interWiki == String.Empty)
             {
                 // 言語間リンクが存在しない場合、[[:en:Template:xxx]]みたいな普通のリンクに置換
                 // おまけで、元のテンプレートの状態をコメントでつける
                 ListElement list = new ListElement();
-                MediaWikiLink l = new MediaWikiLink();
-                l.IsColon = true;
-                l.Title = this.From.Language.Code + ':' + link.Title;
-                list.Add(l);
+                MediaWikiLink link = new MediaWikiLink();
+                link.IsColon = true;
+                link.Title = this.From.Language.Code + ':' + filledTitle;
+                list.Add(link);
                 XmlCommentElement comment = new XmlCommentElement();
-                comment.Raw = ' ' + link.ToString() + ' ';
+                comment.Raw = ' ' + template.ToString() + ' ';
                 list.Add(comment);
-                result = list;
+                return list;
             }
             else
             {
                 // 言語間リンクが存在する場合、そちらを指すように置換
                 // : より前の部分を削除して出力（: が無いときは-1+1で0から）
-                link.Title = interWiki.Substring(interWiki.IndexOf(':') + 1);
+                template.Title = interWiki.Substring(interWiki.IndexOf(':') + 1);
 
                 // | の後に内部リンクやテンプレートが書かれている場合があるので、再帰的に処理する
-                for (int i = 0; i < link.PipeTexts.Count; i++)
+                for (int i = 0; i < template.PipeTexts.Count; i++)
                 {
-                    link.PipeTexts[i] = this.ReplaceElement(link.PipeTexts[i], parent);
+                    template.PipeTexts[i] = this.ReplaceElement(template.PipeTexts[i], parent);
                 }
 
-                link.ParsedString = null;
+                template.ParsedString = null;
+                return template;
             }
-
-            System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.replaceTemplate > " + result.ToString());
-            return result;
         }
 
         /// <summary>
@@ -729,6 +681,81 @@ namespace Honememo.Wptscs.Logics
             link.Title = names[0] + link.Title.Substring(link.Title.IndexOf(':'));
             link.ParsedString = null;
             return link;
+        }
+
+        /// <summary>
+        /// テンプレート名に必要に応じて名前空間を補完する。
+        /// </summary>
+        /// <param name="template">テンプレート。</param>
+        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <returns>補完済みのテンプレート名。</returns>
+        private string FillTemplateName(MediaWikiTemplate template, string parent)
+        {
+            if (template.IsColon || !new MediaWikiPage(this.From, template.Title).IsMain())
+            {
+                // 標準名前空間が指定されている（先頭にコロンが無い）
+                // または何かしらの名前空間が指定されている場合、補完不要
+                return template.Title;
+            }
+            else if (template.IsSubpage)
+            {
+                // サブページの場合、親記事名での補完のみ
+                return parent + template.Title;
+            }
+
+            // 補完する必要がある場合、名前空間のプレフィックス（Template等）を取得
+            string prefix = this.GetTemplatePrefix();
+            if (String.IsNullOrEmpty(prefix))
+            {
+                // 名前空間の設定が存在しない場合、何も出来ないため終了
+                return template.Title;
+            }
+
+            // 頭にプレフィックスを付けた記事名でアクセスし、その名前で存在するかをチェック
+            string filledTitle = prefix + ":" + template.Title;
+            MediaWikiPage page = null;
+            try
+            {
+                page = this.From.GetPage(filledTitle) as MediaWikiPage;
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError
+                    && (e.Response as HttpWebResponse).StatusCode != HttpStatusCode.NotFound)
+                {
+                    // 記事が取得できない場合も、404でない場合は存在するものとして処理
+                    this.LogLine(String.Format(Resources.LogMessageTemplateNameUnidentified, template.Title, prefix, e.Message));
+                    return filledTitle;
+                }
+            }
+            catch (Exception e)
+            {
+                // それ以外のエラー（Webではなくfileでのエラーとか）は存在しないものと扱う
+                System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.FillTemplateName > " + e.Message);
+            }
+
+            if (page != null)
+            {
+                // 記事が存在する場合、プレフィックスをつけた名前を使用
+                return filledTitle;
+            }
+
+            return template.Title;
+        }
+
+        /// <summary>
+        /// テンプレート名前空間のプレフィックスを取得。
+        /// </summary>
+        /// <returns>プレフィックス。取得できない場合<c>null</c></returns>
+        private string GetTemplatePrefix()
+        {
+            IList<string> prefixes = this.From.Namespaces[this.From.TemplateNamespace];
+            if (prefixes != null)
+            {
+                return prefixes.FirstOrDefault();
+            }
+
+            return null;
         }
 
         #endregion

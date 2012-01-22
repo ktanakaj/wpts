@@ -167,7 +167,7 @@ namespace Honememo.Wptscs.Parsers
             }
             else if (template.Title.StartsWith(":"))
             {
-                // 先頭が :
+                // 先頭が :（テンプレート名前空間ではなく標準名前空間となる）
                 template.IsColon = true;
                 template.Title = template.Title.TrimStart(':').TrimStart();
             }
