@@ -3,7 +3,7 @@
 //      MediaWikiのページをあらわすモデルクラスソース</summary>
 //
 // <copyright file="MediaWikiPage.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -304,39 +304,30 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// 渡されたTemplate:Documentationの呼び出しから、指定された言語コードへの言語間リンクを返す。
         /// </summary>
-        /// <param name="link">テンプレート呼び出しのリンク。</param>
+        /// <param name="template">テンプレート呼び出しのリンク。</param>
         /// <param name="code">言語コード。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合またはパラメータが対象外の場合は空。</returns>
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        private string GetDocumentationInterWiki(MediaWikiTemplate link, string code)
+        private string GetDocumentationInterWiki(MediaWikiTemplate template, string code)
         {
-            // この言語にTemplate:Documentationの設定がされているかを確認
-            string docTitle = this.Website.DocumentationTemplate;
-            if (String.IsNullOrEmpty(docTitle))
+            // Documentationテンプレートのリンクかを確認
+            if (!this.IsDocumentationTemplate(template.Title))
             {
                 return String.Empty;
             }
 
-            // Documentationテンプレートのリンクかを確認
-            if (link.Title.ToLower() != docTitle.ToLower())
+            // インライン・コンテンツの可能性があるため、先にパラメータを再帰的に探索
+            foreach (IElement e in template.PipeTexts)
             {
-                // 名前空間で一致していない可能性があるので、名前空間を取ってもう一度判定
-                int index = docTitle.IndexOf(':');
-                if (new MediaWikiPage(this.Website, docTitle).IsTemplate()
-                    && index >= 0 && index + 1 < docTitle.Length)
+                string interWiki = this.GetInterWiki(code, e);
+                if (!String.IsNullOrEmpty(interWiki))
                 {
-                    docTitle = docTitle.Substring(docTitle.IndexOf(':') + 1);
-                }
-
-                if (link.Title.ToLower() != docTitle.ToLower())
-                {
-                    // どちらでも一致しない場合は別のテンプレートなりなので無視
-                    return String.Empty;
+                    return interWiki;
                 }
             }
 
-            // 解説記事名を確認
-            string subtitle = ObjectUtils.ToString(link.PipeTexts.ElementAtOrDefault(0));
+            // インラインでなさそうな場合、解説記事名を確認
+            string subtitle = ObjectUtils.ToString(template.PipeTexts.ElementAtOrDefault(0));
             if (String.IsNullOrWhiteSpace(subtitle) || subtitle.Contains('='))
             {
                 // 指定されていない場合はデフォルトのページを探索
@@ -379,6 +370,42 @@ namespace Honememo.Wptscs.Websites
 
             // 未発見の場合、空文字列
             return String.Empty;
+        }
+
+        /// <summary>
+        /// 渡されたテンプレート名がTemplate:Documentationのいずれかに該当するか？
+        /// </summary>
+        /// <param name="title">テンプレート名。</param>
+        /// <returns>該当する場合<c>true</c>。</returns>
+        private bool IsDocumentationTemplate(string title)
+        {
+            // Documentationテンプレートのリンクかを確認
+            string lowerTitle = title.ToLower();
+            foreach (string docTitle in this.Website.DocumentationTemplates)
+            {
+                string lowerDocTitle = docTitle.ToLower();
+
+                // 普通にテンプレート名を比較
+                if (lowerTitle == lowerDocTitle)
+                {
+                    return true;
+                }
+
+                // 名前空間で一致していない可能性があるので、名前空間を取ってもう一度判定
+                int index = lowerDocTitle.IndexOf(':');
+                if (new MediaWikiPage(this.Website, lowerDocTitle).IsTemplate()
+                    && index >= 0 && index + 1 < lowerDocTitle.Length)
+                {
+                    lowerDocTitle = lowerDocTitle.Substring(lowerDocTitle.IndexOf(':') + 1);
+                }
+
+                if (lowerTitle == lowerDocTitle)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         #endregion

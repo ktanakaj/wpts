@@ -157,6 +157,12 @@ namespace Honememo.Wptscs.Logics
             // 表示名あり
             link.PipeTexts.Add(new TextElement("Dummy Link"));
             Assert.AreEqual("[[Nothing Page|Dummy Link]]", translate.ReplaceLink(link, "example").ToString());
+
+            // [[Apollo&nbsp;17]] のように文字参照が入っていても処理できる
+            link = new MediaWikiLink();
+            link.Title = "Fuji&nbsp;(Spacecraft)";
+            Assert.AreEqual("[[ふじ (宇宙船)]]", translate.ReplaceLink(link, "example").ToString());
+
         }
 
         /// <summary>

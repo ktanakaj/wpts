@@ -233,6 +233,10 @@
     <Content Include="Data\MediaWiki\ja\遠地点.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\MediaWiki\result\config.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\MediaWiki\result\example.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

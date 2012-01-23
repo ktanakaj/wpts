@@ -275,10 +275,12 @@ namespace Honememo.Wptscs.Websites
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
             // デフォルトでは空
-            Assert.IsNullOrEmpty(site.DocumentationTemplate);
-            // その値が返る
-            site.DocumentationTemplate = "Template:Documentation";
-            Assert.AreEqual("Template:Documentation", site.DocumentationTemplate);
+            Assert.IsNotNull(site.DocumentationTemplates);
+            Assert.AreEqual(0, site.DocumentationTemplates.Count);
+            // 値を追加
+            site.DocumentationTemplates.Add("Template:Documentation");
+            Assert.AreEqual(1, site.DocumentationTemplates.Count);
+            Assert.AreEqual("Template:Documentation", site.DocumentationTemplates[0]);
         }
 
         /// <summary>
@@ -357,7 +359,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             // プロパティはデフォルト値の場合出力しないという動作あり
-            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><NamespacePath /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /></MediaWiki>", b.ToString());
+            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><NamespacePath /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /><DocumentationTemplates /></MediaWiki>", b.ToString());
             // TODO: プロパティに値が設定されたパターンを追加すべき
         }
 

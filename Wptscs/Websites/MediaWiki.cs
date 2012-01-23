@@ -3,7 +3,7 @@
 //      MediaWikiのウェブサイト（システム）をあらわすモデルクラスソース</summary>
 //
 // <copyright file="MediaWiki.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -84,6 +84,7 @@ namespace Honememo.Wptscs.Websites
             this.Language = language;
             this.Location = location;
             this.WebProxy = new AppDefaultWebProxy();
+            this.DocumentationTemplates = new List<string>();
         }
 
         /// <summary>
@@ -97,6 +98,7 @@ namespace Honememo.Wptscs.Websites
             this.Language = language;
             this.Location = String.Format(Settings.Default.WikipediaLocation, language.Code);
             this.WebProxy = new AppDefaultWebProxy();
+            this.DocumentationTemplates = new List<string>();
         }
 
         /// <summary>
@@ -105,6 +107,7 @@ namespace Honememo.Wptscs.Websites
         protected MediaWiki()
         {
             this.WebProxy = new AppDefaultWebProxy();
+            this.DocumentationTemplates = new List<string>();
         }
 
         #endregion
@@ -384,10 +387,10 @@ namespace Honememo.Wptscs.Websites
         /// Template:Documentation（言語間リンク等を別ページに記述するためのテンプレート）に相当するページ名。
         /// </summary>
         /// <remarks>空の場合、その言語版にはこれに相当する機能は無いものとして扱う。</remarks>
-        public string DocumentationTemplate
+        public IList<string> DocumentationTemplates
         {
             get;
-            set;
+            protected set;
         }
 
         /// <summary>
@@ -571,11 +574,18 @@ namespace Honememo.Wptscs.Websites
             }
 
             // Template:Documentationの設定
-            XmlElement docElement = siteElement.SelectSingleNode("DocumentationTemplate") as XmlElement;
-            if (docElement != null)
+            this.DocumentationTemplates = new List<string>();
+            foreach (XmlNode docNode in siteElement.SelectNodes("DocumentationTemplates/DocumentationTemplate"))
             {
-                this.DocumentationTemplate = docElement.InnerText;
-                this.DocumentationTemplateDefaultPage = docElement.GetAttribute("DefaultPage");
+                this.DocumentationTemplates.Add(docNode.InnerText);
+                XmlElement docElement = docNode as XmlElement;
+                if (docElement != null)
+                {
+                    // ※ XML上DefaultPageはテンプレートごとに異なる値を持てるが、
+                    //    そうした例を見かけたことがないため、代表で一つの値のみ使用
+                    //    （複数値が持てるのも、リダイレクトが存在するためその対策として）
+                    this.DocumentationTemplateDefaultPage = docElement.GetAttribute("DefaultPage");
+                }
             }
         }
 
@@ -613,16 +623,18 @@ namespace Honememo.Wptscs.Websites
                 }
             }
 
+            // Template:Documentationの設定
             writer.WriteEndElement();
-
-            // Template:Documentationの設定は一項目で出力
-            if (!String.IsNullOrEmpty(this.DocumentationTemplate))
+            writer.WriteStartElement("DocumentationTemplates");
+            foreach (string doc in this.DocumentationTemplates)
             {
                 writer.WriteStartElement("DocumentationTemplate");
                 writer.WriteAttributeString("DefaultPage", this.DocumentationTemplateDefaultPage);
-                writer.WriteValue(this.DocumentationTemplate);
+                writer.WriteValue(doc);
                 writer.WriteEndElement();
             }
+
+            writer.WriteEndElement();
         }
 
         #endregion

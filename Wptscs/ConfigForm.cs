@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール設定画面クラスソース</summary>
 //
 // <copyright file="ConfigForm.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -15,6 +15,7 @@ namespace Honememo.Wptscs
     using System.ComponentModel;
     using System.Data;
     using System.Drawing;
+    using System.Linq;
     using System.Reflection;
     using System.Text;
     using System.Windows.Forms;
@@ -728,7 +729,7 @@ namespace Honememo.Wptscs
             this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
             this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
             this.textBoxRedirect.Text = StringUtils.DefaultString(site.Redirect);
-            this.textBoxDocumentationTemplate.Text = StringUtils.DefaultString(site.DocumentationTemplate);
+            this.textBoxDocumentationTemplate.Text = site.DocumentationTemplates.FirstOrDefault();
             this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
         }
 
@@ -810,10 +811,11 @@ namespace Honememo.Wptscs
                 site.Redirect = str;
             }
 
+            // TODO: 仮、入力欄を複数入る形にする
             str = StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Trim();
-            if (str != site.DocumentationTemplate)
+            if (str != site.DocumentationTemplates.FirstOrDefault())
             {
-                site.DocumentationTemplate = str;
+                site.DocumentationTemplates[0] = str;
             }
 
             str = StringUtils.DefaultString(this.textBoxDocumentationTemplateDefaultPage.Text).Trim();

@@ -124,7 +124,7 @@ namespace Honememo.Wptscs.Websites
         {
             // Template:Documentation を使ってるページ
             MediaWiki site = new DummySite(new Language("en"));
-            site.DocumentationTemplate = "Template:Documentation";
+            site.DocumentationTemplates.Add("Template:Documentation");
             site.DocumentationTemplateDefaultPage = "/doc";
             MediaWikiPage page = new MediaWikiPage(site, "Template:Test", "TestText{{Documentation}}");
 
