@@ -80,11 +80,11 @@ C:\Users\[ユーザー名]\AppData\Local\Honememo\Wikipedia 翻訳支援ツー�
 ない場合で仮リンクが有効  →  {{仮リンク|Japan|en|Japan|label=Nihon}}
 英語版も赤リンクの場合    →  [[Japan|Nihon]]
 
-例）[[Category:Japan]]
+例）[[Category:Japan|sortkey]]
 
-言語間リンクがある場合    →  [[Category:日本]]<!-- [[Category:Japan]] -->
-言語間リンクがない場合    →  [[:en:Category:Japan]]<!-- [[Category:Japan]] -->
-英語版も赤リンクの場合    →  [[Category:Japan]]
+言語間リンクがある場合    →  [[Category:日本|sortkey]]
+言語間リンクがない場合    →  [[:en:Category:Japan]]<!-- [[Category:Japan|sortkey]] -->
+英語版も赤リンクの場合    →  [[Category:Japan|sortkey]]
 
 例）{{Citation needed|date=January 2012}}
 

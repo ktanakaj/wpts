@@ -35,7 +35,7 @@
 {{Reusable launch systems}}
 
 {{DEFAULTSORT:すへすしつふ2}}
-[[Category:Manned spacecraft]]<!-- [[Category:宇宙船]] -->
+[[Category:Manned spacecraft]]
 
 [[cs:SpaceShipTwo]]
 [[de:SpaceShipTwo]]

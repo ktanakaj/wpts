@@ -729,7 +729,15 @@ namespace Honememo.Wptscs
             this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
             this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
             this.textBoxRedirect.Text = StringUtils.DefaultString(site.Redirect);
-            this.textBoxDocumentationTemplate.Text = site.DocumentationTemplates.FirstOrDefault();
+
+            // Template:Documentionは改行区切りのマルチテキストとして扱う
+            StringBuilder b = new StringBuilder();
+            foreach (string s in site.DocumentationTemplates)
+            {
+                b.Append(s).Append(Environment.NewLine);
+            }
+
+            this.textBoxDocumentationTemplate.Text = b.ToString();
             this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
         }
 
@@ -790,7 +798,7 @@ namespace Honememo.Wptscs
             this.SaveChangedValue((Website)site);
 
             // 初期値を持つパラメータがあるため、全て変更された場合のみ格納する。
-            // ※ もうちょっと綺麗に書きたかったが、リフレクションを使わないと共通化できなさそうだったので力技
+            // ※ もうちょっと綺麗に書きたかったが、うまい手が思いつかなかったので力技
             //    MediaWikiクラス側で行わないのは、場合によっては意図的に初期値と同じ値を設定すること
             //    もありえるから（初期値が変わる可能性がある場合など）。
             string str = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
@@ -811,11 +819,15 @@ namespace Honememo.Wptscs
                 site.Redirect = str;
             }
 
-            // TODO: 仮、入力欄を複数入る形にする
-            str = StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Trim();
-            if (str != site.DocumentationTemplates.FirstOrDefault())
+            // Template:Documentionの設定は行ごとに格納
+            // ※ この値は初期値を持たないパラメータ
+            site.DocumentationTemplates.Clear();
+            foreach (string s in StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Split('\n'))
             {
-                site.DocumentationTemplates[0] = str;
+                if (!String.IsNullOrWhiteSpace(s))
+                {
+                    site.DocumentationTemplates.Add(s.Trim());
+                }
             }
 
             str = StringUtils.DefaultString(this.textBoxDocumentationTemplateDefaultPage.Text).Trim();
