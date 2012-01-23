@@ -405,14 +405,10 @@ namespace Honememo.Wptscs.Logics
         /// <returns>変換済みリンク。</returns>
         protected virtual IElement ReplaceLink(MediaWikiLink link, string parent)
         {
-            // 変数初期設定
-            XmlCommentElement comment = null;
-            bool colon = link.IsColon;
-            string orgText = link.ToString();
-
+            // 記事名が存在しないor自記事内の別セクションへのリンクの場合、記事名絡みの処理を飛ばす
             if (!this.IsSectionLink(link, parent))
             {
-                // 記事名が存在する通常のリンクの場合、記事名の種類に応じて処理を実施
+                // 記事名の種類に応じて処理を実施
                 MediaWikiPage article = new MediaWikiPage(this.From, link.Title);
 
                 if (link.IsSubpage)
@@ -422,27 +418,23 @@ namespace Honememo.Wptscs.Logics
                 }
                 else if (!String.IsNullOrEmpty(link.Code))
                 {
-                    // 言語間リンク・姉妹プロジェクトへのリンクの場合、対象外とする
-                    if (!link.IsColon && link.Code == this.To.Language.Code)
-                    {
-                        // 先頭が : でない、翻訳先言語への言語間リンクの場合は削除
-                        return new TextElement();
-                    }
-
-                    // それ以外は対象外として元の値を返す
-                    return link;
+                    // 言語間リンク・姉妹プロジェクトへのリンクの場合、変換対象外とする
+                    // ただし、先頭が : でない、翻訳先言語への言語間リンクだけは削除
+                    return this.ReplaceLinkInterwiki(link);
                 }
                 else if (article.IsFile())
                 {
-                    // 画像の場合、名前空間を翻訳先言語の書式に変換
-                    // またパラメータ部を再帰的に処理して終了
-                    link.Title = this.ReplaceLinkNamespace(link.Title, this.To.FileNamespace);
-                    link.PipeTexts = this.ReplaceElements(link.PipeTexts, parent);
-                    link.ParsedString = null;
-                    return link;
+                    // 画像の場合、名前空間を翻訳先言語の書式に変換、パラメータ部を再帰的に処理
+                    return this.ReplaceLinkFile(link, parent);
+                }
+                else if (article.IsCategory() && !link.IsColon)
+                {
+                    // カテゴリで記事へのリンクでない（[[:Category:xxx]]みたいなリンクでない）場合、
+                    // カテゴリ用の変換を実施
+                    return this.ReplaceLinkCategory(link);
                 }
 
-                // リンクを辿り、対象記事の言語間リンクを取得
+                // 専用処理の無い内部リンクの場合、言語間リンクによる置き換えを行う
                 string interWiki = this.GetInterWiki(link.Title);
                 if (interWiki == null)
                 {
@@ -451,19 +443,13 @@ namespace Honememo.Wptscs.Logics
                 else if (interWiki == String.Empty)
                 {
                     // 言語間リンクが存在しない場合、[[:en:xxx]]みたいな形式に置換
-                    link.IsColon = true;
                     link.Title = this.From.Language.Code + ':' + link.Title;
+                    link.IsColon = true;
                 }
                 else if (link.IsSubpage)
                 {
                     // 言語間リンクが存在してサブページの場合、親ページ部分を消す
-                    int index = interWiki.IndexOf('/');
-                    if (index == -1)
-                    {
-                        index = 0;
-                    }
-
-                    link.Title = interWiki.Substring(index);
+                    link.Title = StringUtils.Substring(interWiki, interWiki.IndexOf('/'));
                 }
                 else
                 {
@@ -471,19 +457,7 @@ namespace Honememo.Wptscs.Logics
                     link.Title = interWiki;
                 }
 
-                if (article.IsCategory() && !colon)
-                {
-                    if (interWiki == String.Empty)
-                    {
-                        // カテゴリーの場合は、コメントで元の文字列を追加する
-                        comment = new XmlCommentElement();
-                        comment.Raw = ' ' + orgText + ' ';
-
-                        // カテゴリーで[[:en:xxx]]みたいな形式にした場合、| 以降は不要なので削除
-                        link.PipeTexts.Clear();
-                    }
-                }
-                else if (link.PipeTexts.Count == 0 && interWiki != null)
+                if (link.PipeTexts.Count == 0 && interWiki != null)
                 {
                     // 表示名が存在しない場合、元の名前を表示名に設定
                     link.PipeTexts.Add(new TextElement(article.Title));
@@ -491,20 +465,13 @@ namespace Honememo.Wptscs.Logics
             }
 
             // セクション部分（[[#関連項目]]とか）を変換
-            link.Section = this.ReplaceLinkSection(link.Section);
-
-            // コメントを付加
-            IElement result = link;
-            if (comment != null)
+            if (!String.IsNullOrEmpty(link.Section))
             {
-                ListElement list = new ListElement();
-                list.Add(link);
-                list.Add(comment);
-                result = list;
+                link.Section = this.ReplaceLinkSection(link.Section);
             }
 
-            result.ParsedString = null;
-            return result;
+            link.ParsedString = null;
+            return link;
         }
 
         /// <summary>
@@ -655,14 +622,81 @@ namespace Honememo.Wptscs.Logics
         /// <returns>セクション部分のみ変換済みリンク。</returns>
         private string ReplaceLinkSection(string section)
         {
-            if (String.IsNullOrEmpty(section))
-            {
-                return section;
-            }
-
             // セクションが指定されている場合、定型句変換を通す
             string heading = this.GetHeading(section);
             return heading != null ? heading : section;
+        }
+
+        /// <summary>
+        /// 言語間リンク指定の内部リンクを解析し、不要であれば削除する。
+        /// </summary>
+        /// <param name="link">変換元言語間リンク。</param>
+        /// <returns>変換済み言語間リンク。</returns>
+        private IElement ReplaceLinkInterwiki(MediaWikiLink link)
+        {
+            // 言語間リンク・姉妹プロジェクトへのリンクの場合、変換対象外とする
+            // ただし、先頭が : でない、翻訳先言語への言語間リンクだけは削除
+            if (!link.IsColon && link.Code == this.To.Language.Code)
+            {
+                return new TextElement();
+            }
+
+            return link;
+        }
+
+        /// <summary>
+        /// カテゴリ指定の内部リンクを解析し、変換先言語のカテゴリへのリンクに変換する。
+        /// </summary>
+        /// <param name="link">変換元カテゴリ。</param>
+        /// <returns>変換済みカテゴリ。</returns>
+        private IElement ReplaceLinkCategory(MediaWikiLink link)
+        {
+            // リンクを辿り、対象記事の言語間リンクを取得
+            string interWiki = this.GetInterWiki(link.Title);
+            if (interWiki == null)
+            {
+                // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
+                return link;
+            }
+            else if (interWiki == String.Empty)
+            {
+                // 言語間リンクが存在しない場合、コメントで元の文字列を保存した後
+                // [[:en:xxx]]みたいな形式に置換。また | 以降は削除する
+                XmlCommentElement comment = new XmlCommentElement();
+                comment.Raw = ' ' + link.ToString() + ' ';
+
+                link.Title = this.From.Language.Code + ':' + link.Title;
+                link.IsColon = true;
+                link.PipeTexts.Clear();
+                link.ParsedString = null;
+
+                ListElement list = new ListElement();
+                list.Add(link);
+                list.Add(comment);
+                return list;
+            }
+            else
+            {
+                // 普通に言語間リンクが存在する場合、記事名を置き換え
+                link.Title = interWiki;
+                link.ParsedString = null;
+                return link;
+            }
+        }
+
+        /// <summary>
+        /// ファイル指定の内部リンクを解析し、変換先言語で参照可能なファイルへのリンクに変換する。
+        /// </summary>
+        /// <param name="link">変換元リンク。</param>
+        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <returns>変換済みリンク。</returns>
+        private IElement ReplaceLinkFile(MediaWikiLink link, string parent)
+        {
+            // 名前空間を翻訳先言語の書式に変換、またパラメータ部を再帰的に処理
+            link.Title = this.ReplaceLinkNamespace(link.Title, this.To.FileNamespace);
+            link.PipeTexts = this.ReplaceElements(link.PipeTexts, parent);
+            link.ParsedString = null;
+            return link;
         }
 
         /// <summary>
