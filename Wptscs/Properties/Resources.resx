@@ -167,20 +167,23 @@
     <value>お知らせ</value>
     <comment>お知らせダイアログのタイトル</comment>
   </data>
-  <data name="LogMessage_ArticleExistInterWiki" xml:space="preserve">
+  <data name="LogMessageTargetArticleHadInterWiki" xml:space="preserve">
     <value>注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。</value>
+    <comment>翻訳支援対象の記事が言語間リンクを持っている場合の警告メッセージ</comment>
   </data>
-  <data name="LogMessage_ArticleNothing" xml:space="preserve">
+  <data name="LogMessageTargetArticleNotFound" xml:space="preserve">
     <value>翻訳元として指定された記事は存在しません。記事名を確認してください。</value>
+    <comment>翻訳支援対象の記事が存在しない場合のエラーメッセージ</comment>
   </data>
-  <data name="LogMessage_CheckAndReplaceStart" xml:space="preserve">
+  <data name="LogMessageStartParseAndReplace" xml:space="preserve">
     <value>言語間リンクの探索、見出しの変換を行います</value>
+    <comment>翻訳支援処理本体を開始する際のメッセージ</comment>
   </data>
   <data name="LogMessageEnd" xml:space="preserve">
     <value>
 処理結果を {0} に出力しました。このログは {1} に保存されます。
 </value>
-    <comment>変換処理を完了した際のメッセージ</comment>
+    <comment>翻訳支援処理処理を完了した際のメッセージ</comment>
   </data>
   <data name="LogMessage_ErrorFileSave" xml:space="preserve">
     <value>
@@ -190,8 +193,9 @@
   <data name="LogMessage_ErrorURL" xml:space="preserve">
     <value>要求したURLは {0} です。</value>
   </data>
-  <data name="LogMessage_GetArticle" xml:space="preserve">
+  <data name="LogMessageGetTargetArticle" xml:space="preserve">
     <value>{0} より [[{1}]] を取得。</value>
+    <comment>翻訳支援対象の記事を取得する際のメッセージ</comment>
   </data>
   <data name="LogMessage_InterWikiNothing" xml:space="preserve">
     <value>言語間リンク無し</value>
@@ -207,13 +211,13 @@
     <value>{0}、実行日時 {1}
 
 </value>
-    <comment>変換処理を開始した際のメッセージ</comment>
+    <comment>翻訳支援処理処理を開始した際のメッセージ</comment>
   </data>
   <data name="LogMessageStop" xml:space="preserve">
     <value>
 処理を中止しました。このログは {0} に保存されます。
 </value>
-    <comment>変換処理を中止した際のメッセージ</comment>
+    <comment>翻訳支援処理処理を中止した際のメッセージ</comment>
   </data>
   <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
     <value>{{{{0}}}} の名前空間の確認に失敗しました。{{{{0}}}} は {{1}}名前空間と仮定して処理します。（{{2}}）</value>

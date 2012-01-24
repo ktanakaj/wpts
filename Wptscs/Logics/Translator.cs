@@ -35,12 +35,12 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// ログメッセージ。
         /// </summary>
-        private string log;
+        private string log = String.Empty;
 
         /// <summary>
         /// 変換後テキスト。
         /// </summary>
-        private string text;
+        private string text = String.Empty;
 
         #endregion
         

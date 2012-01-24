@@ -170,33 +170,6 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_ArticleExistInterWiki {
-            get {
-                return ResourceManager.GetString("LogMessage_ArticleExistInterWiki", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   翻訳元として指定された記事は存在しません。記事名を確認してください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_ArticleNothing {
-            get {
-                return ResourceManager.GetString("LogMessage_ArticleNothing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   言語間リンクの探索、見出しの変換を行います に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_CheckAndReplaceStart {
-            get {
-                return ResourceManager.GetString("LogMessage_CheckAndReplaceStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   
         ///ファイル {0} の保存に失敗しました。（{1}）
         /// に類似しているローカライズされた文字列を検索します。
@@ -213,15 +186,6 @@ namespace Honememo.Wptscs.Properties {
         internal static string LogMessage_ErrorURL {
             get {
                 return ResourceManager.GetString("LogMessage_ErrorURL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} より [[{1}]] を取得。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_GetArticle {
-            get {
-                return ResourceManager.GetString("LogMessage_GetArticle", resourceCulture);
             }
         }
         
@@ -255,6 +219,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   {0} より [[{1}]] を取得。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageGetTargetArticle {
+            get {
+                return ResourceManager.GetString("LogMessageGetTargetArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    ※キャッシュ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageNoteTranslation {
@@ -284,6 +257,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   言語間リンクの探索、見出しの変換を行います に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageStartParseAndReplace {
+            get {
+                return ResourceManager.GetString("LogMessageStartParseAndReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   
         ///処理を中止しました。このログは {0} に保存されます。
         /// に類似しているローカライズされた文字列を検索します。
@@ -291,6 +273,24 @@ namespace Honememo.Wptscs.Properties {
         internal static string LogMessageStop {
             get {
                 return ResourceManager.GetString("LogMessageStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageTargetArticleHadInterWiki {
+            get {
+                return ResourceManager.GetString("LogMessageTargetArticleHadInterWiki", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   翻訳元として指定された記事は存在しません。記事名を確認してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageTargetArticleNotFound {
+            get {
+                return ResourceManager.GetString("LogMessageTargetArticleNotFound", resourceCulture);
             }
         }
         

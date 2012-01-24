@@ -29,6 +29,8 @@ namespace Honememo.Wptscs.Logics
     [TestFixture]
     public class MediaWikiTranslatorTest
     {
+        #region テスト用クラス
+
         /// <summary>
         /// MediaWikiTranslatorテスト用のクラスです。
         /// </summary>
@@ -70,6 +72,8 @@ namespace Honememo.Wptscs.Logics
 
             #endregion
         }
+
+        #endregion
 
         #region 定数
 
