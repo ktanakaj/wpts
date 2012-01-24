@@ -375,7 +375,7 @@ namespace Honememo.Wptscs.Logics
             else if (element is MediaWikiHeading)
             {
                 // 見出し
-                return this.ReplaceHeading((MediaWikiHeading)element);
+                return this.ReplaceHeading((MediaWikiHeading)element, parent);
             }
             else if (element is MediaWikiVariable)
             {
@@ -523,32 +523,33 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 指定された見出しに対して、対訳表による変換を行う。
         /// </summary>
-        /// <param name="element">見出し。</param>
+        /// <param name="heading">見出し。</param>
+        /// <param name="parent">サブページ用の親記事タイトル。</param>
         /// <returns>変換後の見出し。</returns>
-        protected virtual IElement ReplaceHeading(MediaWikiHeading element)
+        protected virtual IElement ReplaceHeading(MediaWikiHeading heading, string parent)
         {
             // 定型句変換
             StringBuilder oldText = new StringBuilder();
-            foreach (IElement e in element)
+            foreach (IElement e in heading)
             {
                 oldText.Append(e.ToString());
             }
 
-            string oldHeading = element.ToString();
+            string oldHeading = heading.ToString();
             string newText = this.GetHeading(oldText.ToString().Trim());
             if (newText != null)
             {
-                element.Clear();
-                element.ParsedString = null;
-                element.Add(new XmlTextElement(newText));
-                this.LogLine(ENTER + oldHeading + " " + Resources.RightArrow + " " + element.ToString());
-            }
-            else
-            {
-                this.LogLine(ENTER + element.ToString());
+                // 対訳表による変換が行えた場合、そこで処理終了
+                heading.Clear();
+                heading.ParsedString = null;
+                heading.Add(new XmlTextElement(newText));
+                this.LogLine(ENTER + oldHeading + " " + Resources.RightArrow + " " + heading.ToString());
+                return heading;
             }
 
-            return element;
+            // 対訳表に存在しない場合、内部要素を通常の変換で再帰的に処理
+            this.LogLine(ENTER + heading.ToString());
+            return this.ReplaceListElement(heading, parent);
         }
 
         /// <summary>

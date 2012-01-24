@@ -64,10 +64,11 @@ namespace Honememo.Wptscs.Logics
             /// 指定された見出しに対して、対訳表による変換を行う。
             /// </summary>
             /// <param name="heading">見出し。</param>
+            /// <param name="parent">サブページ用の親記事タイトル。</param>
             /// <returns>変換後の見出し。</returns>
-            public new IElement ReplaceHeading(MediaWikiHeading heading)
+            public new IElement ReplaceHeading(MediaWikiHeading heading, string parent)
             {
-                return base.ReplaceHeading(heading);
+                return base.ReplaceHeading(heading, parent);
             }
 
             #endregion
@@ -365,6 +366,87 @@ namespace Honememo.Wptscs.Logics
             list.Add(link);
             template.PipeTexts.Add(list);
             Assert.AreEqual("{{Invalid Template|parameter=1|note=See also [[Fuji (Spacecraft)]]}}", translate.ReplaceTemplate(template, "example").ToString());
+        }
+
+        /// <summary>
+        /// ReplaceHeadingメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestReplaceHeading()
+        {
+            TestMediaWikiTranslator translate = new TestMediaWikiTranslator();
+            MockFactory mock = new MockFactory();
+            translate.From = mock.GetMediaWiki("en");
+            translate.To = mock.GetMediaWiki("ja");
+
+            // 見出しの変換パターンを設定
+            translate.HeadingTable = new TranslationTable();
+            IDictionary<string, string> dic = new Dictionary<string, string>();
+            dic["en"] = "External links";
+            dic["ja"] = "外部リンク";
+            translate.HeadingTable.Add(dic);
+            translate.HeadingTable.From = "en";
+            translate.HeadingTable.To = "ja";
+
+            MediaWikiHeading heading = new MediaWikiHeading();
+
+            // 対訳表に登録されていない見出し
+            // ※ 以下リストを毎回作り直しているのは、更新されてしまうケースがあるため
+            heading.Level = 2;
+            heading.Add(new TextElement(" invalid section "));
+            Assert.AreEqual("== invalid section ==", translate.ReplaceHeading(heading, "example").ToString());
+
+            // 対訳表に登録されている見出し
+            heading.Clear();
+            heading.Add(new TextElement(" External links "));
+            Assert.AreEqual("==外部リンク==", translate.ReplaceHeading(heading, "example").ToString());
+
+            // 一部が内部リンク等になっている場合、対訳表とは一致しない
+            heading.Clear();
+            heading.Add(new TextElement(" External "));
+            heading.Add(new MediaWikiLink("link"));
+            heading.Add(new TextElement("s "));
+            Assert.AreEqual("== External [[link]]s ==", translate.ReplaceHeading(heading, "example").ToString());
+        }
+
+        /// <summary>
+        /// ReplaceHeadingメソッドテストケース（入れ子）。
+        /// </summary>
+        [Test]
+        public void TestReplaceHeadingNested()
+        {
+            TestMediaWikiTranslator translate = new TestMediaWikiTranslator();
+            MockFactory mock = new MockFactory();
+            translate.From = mock.GetMediaWiki("ja");
+            translate.To = mock.GetMediaWiki("en");
+
+            // 見出しの変換パターンを設定
+            translate.HeadingTable = new TranslationTable();
+            IDictionary<string, string> dic = new Dictionary<string, string>();
+            translate.HeadingTable.Add(dic);
+            translate.HeadingTable.From = "ja";
+            translate.HeadingTable.To = "en";
+
+            MediaWikiHeading heading = new MediaWikiHeading();
+
+            // 対訳表に登録されていない見出しの場合、入れ子も処理される
+            // ※ 以下リストを毎回作り直しているのは、更新されてしまうケースがあるため
+            heading.Level = 3;
+            heading.Add(new TextElement(" "));
+            heading.Add(new MediaWikiLink("宇宙旅行"));
+            heading.Add(new MediaWikiTemplate("ref-en"));
+            heading.Add(new TextElement(" "));
+            Assert.AreEqual("=== [[Space tourism|宇宙旅行]]{{En icon}} ===", translate.ReplaceHeading(heading, "スペースシップツー").ToString());
+
+            // 対訳表に登録されている見出しの場合、入れ子は処理されない
+            dic["ja"] = "[[宇宙旅行]]{{ref-en}}";
+            dic["en"] = "[[弾道飛行]]{{ref-en}}";
+            heading.Clear();
+            heading.Add(new TextElement(" "));
+            heading.Add(new MediaWikiLink("宇宙旅行"));
+            heading.Add(new MediaWikiTemplate("ref-en"));
+            heading.Add(new TextElement(" "));
+            Assert.AreEqual("===[[弾道飛行]]{{ref-en}}===", translate.ReplaceHeading(heading, "スペースシップツー").ToString());
         }
 
         #endregion

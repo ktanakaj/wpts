@@ -3,7 +3,7 @@
 //      MediaWikiの見出しを解析するパーサークラスソース</summary>
 //
 // <copyright file="MediaWikiHeadingParser.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -14,6 +14,7 @@ namespace Honememo.Wptscs.Parsers
     using System.Collections.Generic;
     using System.Text;
     using Honememo.Parsers;
+    using Honememo.Utilities;
 
     /// <summary>
     /// MediaWikiの見出しを解析するパーサークラスです。
@@ -52,75 +53,51 @@ namespace Honememo.Wptscs.Parsers
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         /// <remarks>
         /// 見出しは行単位で有効になるため、行頭からの文字列を渡す必要がある。
-        /// 見出し行であればコメントが含まれていても解析する。
+        /// （ただし、--&lt;==見出し== みたいな事もできるので、その場合は=の開始部分から。）
         /// </remarks>
         public override bool TryParse(string s, out IElement result)
         {
             // 出力値初期化
             result = null;
 
-            // 構文を解析して、1行の文字列と、=の個数を取得
+            // 始まりの = の数を数える
             // ※ 構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
-            // ※ Wikipediaでは <!--test-->=<!--test-->=関連項目<!--test-->==<!--test--> みたいなのでも
-            //    正常に認識するので、できるだけ対応する
-            // ※ 上記の見出し前後のコメントは、元文字列には含むが設定する方法はない。
-            bool startFlag = true;
-            int startSignCounter = 0;
-            string nonCommentLine = String.Empty;
-            StringBuilder b = new StringBuilder();
-            IParser commentParser = new XmlCommentElementParser();
+            // TODO: Wikipediaでは <!--test-->=<!--test-->=関連項目<!--test-->==<!--test--> みたいなのでも認識するが、2012年1月現在未対応
+            //      （昔は対応していたが、その過程でコメントが失われれるつくりになっており、
+            //        Parser周りを整理した際に情報を取りこぼさないことを最優先としたため取り止め。）
+            int startCount = 0;
             for (int i = 0; i < s.Length; i++)
             {
-                char c = s[i];
-
-                // 改行まで
-                if (c == '\n' || c == '\r')
+                if (s[i] == MediaWikiHeading.DelimiterStart)
+                {
+                    ++startCount;
+                }
+                else
                 {
                     break;
                 }
-
-                // コメントは無視する
-                IElement comment;
-                if (commentParser.TryParse(s.Substring(i), out comment))
-                {
-                    b.Append(comment.ToString());
-                    i += comment.ToString().Length - 1;
-                    continue;
-                }
-                else if (startFlag)
-                {
-                    // 先頭部の場合、=の数を数える
-                    if (c == MediaWikiHeading.DelimiterStart)
-                    {
-                        ++startSignCounter;
-                    }
-                    else
-                    {
-                        startFlag = false;
-                    }
-                }
-
-                nonCommentLine += c;
-                b.Append(c);
             }
 
-            string line = b.ToString();
-
             // = で始まる行ではない場合、処理対象外
-            if (startSignCounter < 1)
+            if (startCount < 1)
             {
                 return false;
             }
 
+            // 始まりの = の次の文字から、行の終わりまでを解析
+            // （=={{lang\n|ja|見出し}}== みたいに何かの中にある改行はOK。Wikipediaでも認識された）
+            IElement element;
+            this.parser.TryParseToDelimiter(StringUtils.Substring(s, startCount), out element, "\r", "\n");
+
             // 終わりの = の数を確認
-            // ※↓の処理だと中身の無い行（====とか）は弾かれてしまうが、どうせ処理できないので許容する
-            nonCommentLine = nonCommentLine.TrimEnd();
-            int endSignCounter = 0;
-            for (int i = nonCommentLine.Length - 1; i >= startSignCounter; i--)
+            // ※ この処理だと中身の無い行（====とか）は弾かれてしまうが、どうせ処理できないので許容する
+            string substr = element.ToString().TrimEnd();
+            int endCount = 0;
+            for (int i = substr.Length - 1; i >= 0; i--)
             {
-                if (nonCommentLine[i] == MediaWikiHeading.DelimiterEnd)
+                if (substr[i] == MediaWikiHeading.DelimiterEnd)
                 {
-                    ++endSignCounter;
+                    ++endCount;
                 }
                 else
                 {
@@ -129,29 +106,54 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // = で終わる行ではない場合、処理対象外
-            if (endSignCounter < 1)
+            if (endCount < 1)
             {
                 return false;
             }
 
             // 始まりと終わり、=の少ないほうにあわせる（==test===とか用の処理）
-            int signCounter = startSignCounter;
-            if (startSignCounter > endSignCounter)
+            int level = startCount;
+            if (startCount > endCount)
             {
-                signCounter = endSignCounter;
+                level = endCount;
             }
 
-            // 内部要素を再帰的に探索
+            // 確定した見出しの階層から、見出し内部の文字列を抽出。内部要素を再帰的に探索する
+            // ※ 二重処理になってしまうが、後ろの = を取り除くと微妙にややこしいことになりそうだったので
+            //    見出しは処理件数も少なく、深い再帰もないはずなので、影響ない・・・はず
             IElement innerElement;
-            if (!this.parser.TryParse(nonCommentLine.Trim('='), out innerElement))
+            if (!this.parser.TryParse(substr.Substring(0, substr.Length - level), out innerElement))
             {
                 return false;
             }
 
-            // 結果がリストの場合マージ、それ以外はそのままElementに代入
+            // 解析に成功した場合、結果を出力値に設定
+            result = this.MakeElement(innerElement, level, s.Substring(0, startCount + element.ToString().Length));
+            return true;
+        }
+        
+        #endregion
+
+        #region 内部処理用メソッド
+
+        /// <summary>
+        /// 見出しタグを解析した結果から、MediaWiki見出し要素を生成する。
+        /// </summary>
+        /// <param name="innerElement">見出しタグ上の見出し部分の要素。</param>
+        /// <param name="level">見出しの階層。</param>
+        /// <param name="parsedString">解析した見出しタグの文字列。</param>
+        /// <returns>生成した見出し要素。</returns>
+        private MediaWikiHeading MakeElement(IElement innerElement, int level, string parsedString)
+        {
             MediaWikiHeading heading = new MediaWikiHeading();
-            heading.Level = signCounter;
-            heading.ParsedString = line;
+
+            // 解析した見出しの素のテキストを保存
+            heading.ParsedString = parsedString;
+
+            // 見出しの階層を保存
+            heading.Level = level;
+
+            // 内部要素については、結果がリストの場合マージ、それ以外はそのままElementに代入
             if (innerElement.GetType() == typeof(ListElement))
             {
                 heading.AddRange((ListElement)innerElement);
@@ -161,10 +163,9 @@ namespace Honememo.Wptscs.Parsers
                 heading.Add(innerElement);
             }
 
-            result = heading;
-            return true;
+            return heading;
         }
-        
+
         #endregion
     }
 }
