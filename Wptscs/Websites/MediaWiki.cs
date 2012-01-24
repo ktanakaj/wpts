@@ -13,7 +13,6 @@ namespace Honememo.Wptscs.Websites
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Web;
     using System.Xml;
     using System.Xml.Serialization;
     using Honememo.Utilities;
@@ -78,27 +77,23 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         /// <param name="language">ウェブサイトの言語。</param>
         /// <param name="location">ウェブサイトの場所。</param>
-        public MediaWiki(Language language, string location)
+        public MediaWiki(Language language, string location) : this()
         {
             // メンバ変数の初期設定
             this.Language = language;
             this.Location = location;
-            this.WebProxy = new AppDefaultWebProxy();
-            this.DocumentationTemplates = new List<string>();
         }
 
         /// <summary>
         /// コンストラクタ（Wikipedia用）。
         /// </summary>
         /// <param name="language">ウェブサイトの言語。</param>
-        public MediaWiki(Language language)
+        public MediaWiki(Language language) : this()
         {
             // メンバ変数の初期設定
             // ※ オーバーロードメソッドを呼んでいないのは、languageがnullのときに先にエラーになるから
             this.Language = language;
             this.Location = String.Format(Settings.Default.WikipediaLocation, language.Code);
-            this.WebProxy = new AppDefaultWebProxy();
-            this.DocumentationTemplates = new List<string>();
         }
 
         /// <summary>
@@ -428,13 +423,9 @@ namespace Honememo.Wptscs.Websites
         /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
         public override Page GetPage(string title)
         {
-            // &amp; &nbsp; 等の特殊文字をデコード
-            // ※ 本当は呼び元側ですべき処理の気がするが、現状手ごろな場所が無いので
-            string decodeTitle = HttpUtility.HtmlDecode(title);
-
             // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
             // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
-            string escapeTitle = decodeTitle;
+            string escapeTitle = title;
             if (new Uri(this.Location).Scheme == "file")
             {
                 escapeTitle = FormUtils.ReplaceInvalidFileNameChars(title);

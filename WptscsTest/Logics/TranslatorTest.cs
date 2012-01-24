@@ -35,9 +35,9 @@ namespace Honememo.Wptscs.Logics
             #region テスト支援用パラメータ
 
             /// <summary>
-            /// <see cref="RunBody"/>の戻り値。
+            /// <see cref="RunBody"/>で例外を投げるか？
             /// </summary>
-            public bool result = false;
+            public bool exception = false;
 
             #endregion
 
@@ -119,9 +119,12 @@ namespace Honememo.Wptscs.Logics
             /// </summary>
             /// <param name="name">記事名。</param>
             /// <returns><c>true</c> 処理成功</returns>
-            protected override bool RunBody(string name)
+            protected override void RunBody(string name)
             {
-                return result;
+                if (exception)
+                {
+                    throw new ApplicationException("Dummy");
+                }
             }
 
             #endregion
@@ -151,9 +154,8 @@ namespace Honememo.Wptscs.Logics
             /// </summary>
             /// <param name="name">記事名。</param>
             /// <returns><c>true</c> 処理成功</returns>
-            protected override bool RunBody(string name)
+            protected override void RunBody(string name)
             {
-                return false;
             }
 
             #endregion
@@ -371,13 +373,29 @@ namespace Honememo.Wptscs.Logics
 
             // 正常に実行が行えること
             // また、実行ごとに結果が初期化されること
-            Assert.IsFalse(translator.Run("test"));
+            translator.Run("test");
             Assert.IsEmpty(translator.Log);
             Assert.IsEmpty(translator.Text);
             translator.Log = "testlog";
             translator.Text = "testtext";
-            translator.result = true;
-            Assert.IsTrue(translator.Run("test"));
+            translator.Run("test");
+            Assert.IsEmpty(translator.Log);
+            Assert.IsEmpty(translator.Text);
+
+            // 失敗はApplicationExceptionで表現、RunBodyから例外が投げられること
+            translator.Log = "testlog";
+            translator.Text = "testtext";
+            translator.exception = true;
+            try
+            {
+                translator.Run("test");
+                Assert.Fail();
+            }
+            catch (ApplicationException e)
+            {
+                Assert.AreEqual("Dummy", e.Message);
+            }
+
             Assert.IsEmpty(translator.Log);
             Assert.IsEmpty(translator.Text);
         }
@@ -405,14 +423,14 @@ namespace Honememo.Wptscs.Logics
 
             // Fromにホストが指定されている場合、pingチェックが行われる
             translator.From.Location = "http://localhost";
-            translator.result = true;
-            Assert.IsTrue(translator.Run("test"));
+            translator.Run("test");
         }
 
         /// <summary>
         /// Runメソッドテストケース（ping失敗）。
         /// </summary>
         [Test]
+        [ExpectedException(typeof(ApplicationException))]
         public void TestRunPingFailed()
         {
             TranslatorMock translator = new TranslatorMock();
@@ -421,8 +439,7 @@ namespace Honememo.Wptscs.Logics
 
             // Fromにホストが指定されている場合、pingチェックが行われる
             translator.From.Location = "http://xxx.invalid";
-            translator.result = true;
-            Assert.IsFalse(translator.Run("test"));
+            translator.Run("test");
         }
 
         #endregion

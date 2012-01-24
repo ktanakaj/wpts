@@ -16,6 +16,7 @@ namespace Honememo.Wptscs.Logics
     using System.Linq;
     using System.Net;
     using System.Text;
+    using System.Web;
     using System.Windows.Forms;
     using Honememo.Parsers;
     using Honememo.Utilities;
@@ -73,14 +74,14 @@ namespace Honememo.Wptscs.Logics
         /// ※継承クラスでは、この関数に処理を実装すること
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <returns><c>true</c> 処理成功。</returns>
-        protected override bool RunBody(string name)
+        /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Translator.Log"/>に出力される。</exception>
+        protected override void RunBody(string name)
         {
             // 対象記事を取得
             MediaWikiPage article = this.GetTargetPage(name);
             if (article == null)
             {
-                return false;
+                throw new ApplicationException("article is not found");
             }
 
             // 対象記事に言語間リンクが存在する場合、処理を継続するか確認
@@ -95,7 +96,7 @@ namespace Honememo.Wptscs.Logics
                    == DialogResult.No)
                 {
                     this.LogLine(ENTER + String.Format(Resources.QuestionMessageArticleExisted, interWiki));
-                    return false;
+                    throw new ApplicationException("user canceled");
                 }
                 else
                 {
@@ -108,39 +109,15 @@ namespace Honememo.Wptscs.Logics
 
             // 言語間リンク・定型句の変換
             this.LogLine(ENTER + Resources.RightArrow + " " + String.Format(Resources.LogMessageStartParseAndReplace, interWiki));
-            try
-            {
-                // 指定された記事の言語間リンク・見出しを探索し、翻訳先言語での名称に変換し、それに置換した文字列を返す
-                this.Text += this.ReplaceElement(new MediaWikiParser(this.From).Parse(article.Text), article.Title).ToString();
-            }
-            catch (ApplicationException e)
-            {
-                // ユーザーからの中止要求をチェック
-                if (CancellationPending)
-                {
-                    return false;
-                }
-                else
-                {
-                    throw e;
-                }
-            }
+            this.Text += this.ReplaceElement(new MediaWikiParser(this.From).Parse(article.Text), article.Title).ToString();
 
-            // 新しい言語間リンクと、コメントを追記
-            this.Text += "\n\n" + MediaWikiLink.DelimiterStart + this.From.Language.Code + ":" + name + MediaWikiLink.DelimiterEnd + "\n";
-            this.Text += String.Format(
-                Resources.ArticleFooter,
-                FormUtils.ApplicationName(),
-                this.From.Language.Code,
-                name,
-                article.Timestamp.HasValue ? article.Timestamp.Value.ToString("U") : String.Empty) + "\n";
+            // 記事の末尾に新しい言語間リンクと、コメントを追記
+            this.Text += this.CreateEnding(article);
 
-            // ダウンロードされるテキストがLFなので、ここで全てCRLFに変換
+            // ダウンロードされるテキストがLFなので、最後に全てCRLFに変換
             // ※ダウンロード時にCRLFにするような仕組みが見つかれば、そちらを使う
             //   その場合、上のように\nをべたに吐いている部分を修正する
             this.Text = this.Text.Replace("\n", ENTER);
-
-            return true;
         }
 
         #endregion
@@ -156,42 +133,20 @@ namespace Honememo.Wptscs.Logics
         /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
         protected new MediaWikiPage GetPage(string title, string notFoundMsg)
         {
-            // 親クラスのメソッドを戻り値の型だけ変更
-            return base.GetPage(title, notFoundMsg) as MediaWikiPage;
+            // &amp; &nbsp; 等の特殊文字をデコードして、親クラスのメソッドを呼び出し
+            return base.GetPage(HttpUtility.HtmlDecode(title), notFoundMsg) as MediaWikiPage;
         }
 
         #endregion
 
-        #region 各処理のメソッド
-        
-        /// <summary>
-        /// 翻訳支援対象のページを取得。
-        /// </summary>
-        /// <param name="title">翻訳支援対象の記事名。</param>
-        /// <returns>取得したページ。取得失敗時は<c>null</c>。</returns>
-        protected MediaWikiPage GetTargetPage(string title)
-        {
-            // 指定された記事のXMLデータをWikipediaから取得
-            this.LogLine(String.Format(Resources.LogMessageGetTargetArticle, this.From.Location, title));
-            MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessageTargetArticleNotFound);
-
-            // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
-            if (page != null && page.IsRedirect())
-            {
-                this.LogLine(Resources.RightArrow + " " + Resources.LogMessageRedirect + " "
-                    + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd);
-                page = this.GetPage(page.Redirect.Title, Resources.RightArrow + " " + Resources.LogMessageTargetArticleNotFound);
-            }
-
-            return page;
-        }
+        #region 冒頭／末尾ブロックの生成メソッド
 
         /// <summary>
-        /// 変換後記事冒頭部用の「'''日本語記事名'''（[[英語|英]]: '''英語記事名'''）」みたいなのを作成する。
+        /// 変換後記事冒頭用の「'''日本語記事名'''（[[英語|英]]: '''英語記事名'''）」みたいなのを作成する。
         /// </summary>
         /// <param name="title">翻訳支援対象の記事名。</param>
         /// <returns>冒頭部のテキスト。</returns>
-        protected string CreateOpening(string title)
+        protected virtual string CreateOpening(string title)
         {
             StringBuilder b = new StringBuilder("'''xxx'''");
             string bracket = this.To.Language.Bracket;
@@ -201,7 +156,7 @@ namespace Honememo.Wptscs.Logics
                 string langTitle = this.GetFullName(this.From, this.To.Language.Code);
                 if (!String.IsNullOrEmpty(langTitle))
                 {
-                    langPart = MediaWikiLink.DelimiterStart + langTitle + MediaWikiLink.DelimiterEnd + ": ";
+                    langPart = new MediaWikiLink(langTitle).ToString() + ": ";
                 }
 
                 b.Append(String.Format(bracket, langPart + "'''" + title + "'''"));
@@ -212,35 +167,62 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ログメッセージを出力しつつ、指定された記事の指定された言語コードへの言語間リンクを返す。
+        /// 変換後記事末尾用の新しい言語間リンクとコメントを作成する。
+        /// </summary>
+        /// <param name="page">翻訳支援対象の記事。</param>
+        /// <returns>末尾部のテキスト。</returns>
+        protected virtual string CreateEnding(MediaWikiPage page)
+        {
+            MediaWikiLink link = new MediaWikiLink();
+            link.Title = page.Title;
+            link.Code = this.From.Language.Code;
+            return "\n\n" + link.ToString() + "\n" + String.Format(
+                Resources.ArticleFooter,
+                FormUtils.ApplicationName(),
+                this.From.Language.Code,
+                page.Title,
+                page.Timestamp.HasValue ? page.Timestamp.Value.ToString("U") : String.Empty) + "\n";
+        }
+
+        #endregion
+
+        #region 言語間リンクの取得メソッド
+
+        /// <summary>
+        /// 指定された記事を取得し、言語間リンクを確認、返す（テンプレート以外）。
+        /// </summary>
+        /// <param name="name">記事名。</param>
+        /// <returns>言語間リンク先の記事、存在しない場合 <c>null</c>。</returns>
+        protected string GetInterWiki(string name)
+        {
+            return this.GetInterWiki(name, false);
+        }
+
+        /// <summary>
+        /// 指定された記事を取得し、言語間リンクを確認、返す。
         /// </summary>
         /// <param name="title">記事名。</param>
-        /// <param name="code">言語コード。</param>
-        /// <returns>言語間リンク先の記事名。見つからない場合は空。ページ自体が存在しない場合は<c>null</c>。</returns>
-        protected string GetInterWiki(string title, string code)
+        /// <param name="template"><c>true</c> テンプレート。</param>
+        /// <returns>言語間リンク先の記事、存在しない場合 <c>null</c>。</returns>
+        protected string GetInterWiki(string title, bool template)
         {
-            MediaWikiPage page = this.GetPage(title, Resources.LogMessage_LinkArticleNothing);
-
-            // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
-            if (page != null && page.IsRedirect())
+            MediaWikiLink element;
+            if (template)
             {
-                this.Log += Resources.LogMessageRedirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
-                page = this.GetPage(page.Redirect.Title, Resources.LogMessage_LinkArticleNothing);
+                element = new MediaWikiTemplate(title);
+            }
+            else
+            {
+                element = new MediaWikiLink(title);
             }
 
-            // 記事があればその言語間リンクを取得
-            string interWiki = null;
-            if (page != null)
+            Log += element.ToString() + " " + Resources.RightArrow + " ";
+            string interWiki = this.GetInterWikiUseTable(title, this.To.Language.Code);
+
+            // 改行が出力されていない場合（正常時）、改行
+            if (!Log.EndsWith(ENTER))
             {
-                interWiki = page.GetInterWiki(this.To.Language.Code);
-                if (!String.IsNullOrEmpty(interWiki))
-                {
-                    Log += MediaWikiLink.DelimiterStart + interWiki + MediaWikiLink.DelimiterEnd;
-                }
-                else
-                {
-                    Log += Resources.LogMessage_InterWikiNothing;
-                }
+                Log += ENTER;
             }
 
             return interWiki;
@@ -264,27 +246,31 @@ namespace Honememo.Wptscs.Logics
             string interWiki = null;
             lock (this.ItemTable)
             {
+                // 対訳表を使用して言語間リンクを確認
+                // ※ 対訳表へのキーとしてはHTMLデコードした記事名を使用する
                 TranslationDictionary.Item item;
-                if (this.ItemTable.TryGetValue(title, out item))
+                if (this.ItemTable.TryGetValue(HttpUtility.HtmlDecode(title), out item))
                 {
                     // 対訳表に存在する場合はその値を使用
                     // リダイレクトがあれば、そのメッセージも表示
                     if (!String.IsNullOrWhiteSpace(item.Alias))
                     {
-                        this.Log += Resources.LogMessageRedirect + " " + MediaWikiLink.DelimiterStart + item.Alias + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
+                        this.Log += Resources.LogMessageRedirect + " "
+                            + new MediaWikiLink(item.Alias).ToString() + " " + Resources.RightArrow + " ";
                     }
 
                     if (!String.IsNullOrEmpty(item.Word))
                     {
                         interWiki = item.Word;
-                        Log += MediaWikiLink.DelimiterStart + interWiki + MediaWikiLink.DelimiterEnd;
+                        Log += new MediaWikiLink(interWiki).ToString();
                     }
                     else
                     {
                         interWiki = String.Empty;
-                        Log += Resources.LogMessage_InterWikiNothing;
+                        Log += Resources.LogMessageInterWikiNotFound;
                     }
 
+                    // ログ上に対訳表を使用した旨通知
                     Log += Resources.LogMessageNoteTranslation;
                     return interWiki;
                 }
@@ -292,14 +278,15 @@ namespace Honememo.Wptscs.Logics
                 // 対訳表に存在しない場合は、普通に取得し表に記録
                 // ※ nullも存在しないことの記録として格納
                 item = new TranslationDictionary.Item { Timestamp = DateTime.UtcNow };
-                MediaWikiPage page = this.GetPage(title, Resources.LogMessage_LinkArticleNothing);
+                MediaWikiPage page = this.GetPage(title, Resources.LogMessageLinkArticleNotFound);
 
                 // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
                 if (page != null && page.IsRedirect())
                 {
                     item.Alias = page.Redirect.Title;
-                    this.Log += Resources.LogMessageRedirect + " " + MediaWikiLink.DelimiterStart + page.Redirect.Title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
-                    page = this.GetPage(page.Redirect.Title, Resources.LogMessage_LinkArticleNothing);
+                    this.Log += Resources.LogMessageRedirect + " "
+                        + new MediaWikiLink(page.Redirect.Title).ToString() + " " + Resources.RightArrow + " ";
+                    page = this.GetPage(page.Redirect.Title, Resources.LogMessageLinkArticleNotFound);
                 }
 
                 // 記事があればその言語間リンクを取得
@@ -308,61 +295,60 @@ namespace Honememo.Wptscs.Logics
                     interWiki = page.GetInterWiki(this.To.Language.Code);
                     if (!String.IsNullOrEmpty(interWiki))
                     {
-                        Log += MediaWikiLink.DelimiterStart + interWiki + MediaWikiLink.DelimiterEnd;
+                        Log += new MediaWikiLink(interWiki).ToString();
                     }
                     else
                     {
-                        Log += Resources.LogMessage_InterWikiNothing;
+                        Log += Resources.LogMessageInterWikiNotFound;
                     }
 
                     item.Word = interWiki;
-                    this.ItemTable[title] = item;
+                    this.ItemTable[HttpUtility.HtmlDecode(title)] = item;
                 }
             }
 
             return interWiki;
         }
-        
+
         /// <summary>
-        /// 指定された記事を取得し、言語間リンクを確認、返す。
+        /// ログメッセージを出力しつつ、指定された記事の指定された言語コードへの言語間リンクを返す。
         /// </summary>
         /// <param name="title">記事名。</param>
-        /// <param name="template"><c>true</c> テンプレート。</param>
-        /// <returns>言語間リンク先の記事、存在しない場合 <c>null</c>。</returns>
-        protected string GetInterWiki(string title, bool template)
+        /// <param name="code">言語コード。</param>
+        /// <returns>言語間リンク先の記事名。見つからない場合は空。ページ自体が存在しない場合は<c>null</c>。</returns>
+        protected string GetInterWiki(string title, string code)
         {
-            // 指定された記事の生データをWikipediaから取得
-            // ※記事自体が存在しない場合、NULLを返す
-            if (!template)
-            {
-                Log += MediaWikiLink.DelimiterStart + title + MediaWikiLink.DelimiterEnd + " " + Resources.RightArrow + " ";
-            }
-            else
-            {
-                Log += MediaWikiTemplate.DelimiterStart + title + MediaWikiTemplate.DelimiterEnd + " " + Resources.RightArrow + " ";
-            }
+            MediaWikiPage page = this.GetPage(title, Resources.LogMessageLinkArticleNotFound);
 
             // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
-            string interWiki = this.GetInterWikiUseTable(title, this.To.Language.Code);
-
-            // 改行が出力されていない場合（正常時）、改行
-            if (!Log.EndsWith(ENTER))
+            if (page != null && page.IsRedirect())
             {
-                Log += ENTER;
+                this.Log += Resources.LogMessageRedirect + " "
+                    + new MediaWikiLink(page.Redirect.Title).ToString() + " " + Resources.RightArrow + " ";
+                page = this.GetPage(page.Redirect.Title, Resources.LogMessageLinkArticleNotFound);
+            }
+
+            // 記事があればその言語間リンクを取得
+            string interWiki = null;
+            if (page != null)
+            {
+                interWiki = page.GetInterWiki(this.To.Language.Code);
+                if (!String.IsNullOrEmpty(interWiki))
+                {
+                    Log += new MediaWikiLink(interWiki).ToString();
+                }
+                else
+                {
+                    Log += Resources.LogMessageInterWikiNotFound;
+                }
             }
 
             return interWiki;
         }
 
-        /// <summary>
-        /// 指定された記事を取得し、言語間リンクを確認、返す（テンプレート以外）。
-        /// </summary>
-        /// <param name="name">記事名。</param>
-        /// <returns>言語間リンク先の記事、存在しない場合 <c>null</c>。</returns>
-        protected string GetInterWiki(string name)
-        {
-            return this.GetInterWiki(name, false);
-        }
+        #endregion
+
+        #region 要素の変換メソッド
 
         /// <summary>
         /// 渡されたページ要素の変換を行う。
@@ -373,10 +359,7 @@ namespace Honememo.Wptscs.Logics
         protected virtual IElement ReplaceElement(IElement element, string parent)
         {
             // ユーザーからの中止要求をチェック
-            if (this.CancellationPending)
-            {
-                throw new ApplicationException("CancellationPending is true");
-            }
+            this.ThrowExceptionIfCanceled();
 
             // 要素の型に応じて、必要な置き換えを行う
             if (element is MediaWikiTemplate)
@@ -609,6 +592,34 @@ namespace Honememo.Wptscs.Logics
             }
 
             return listElement;
+        }
+
+        #endregion
+
+        #region その他内部処理用メソッド
+
+        /// <summary>
+        /// 翻訳支援対象のページを取得。
+        /// </summary>
+        /// <param name="title">翻訳支援対象の記事名。</param>
+        /// <returns>取得したページ。取得失敗時は<c>null</c>。</returns>
+        protected MediaWikiPage GetTargetPage(string title)
+        {
+            // 指定された記事のXMLデータをWikipediaから取得
+            this.LogLine(String.Format(Resources.LogMessageGetTargetArticle, this.From.Location, title));
+            MediaWikiPage page = this.GetPage(title, Resources.RightArrow + " " + Resources.LogMessageTargetArticleNotFound);
+
+            // リダイレクトかをチェックし、リダイレクトであれば、その先の記事を取得
+            if (page != null && page.IsRedirect())
+            {
+                this.LogLine(Resources.RightArrow + " " + Resources.LogMessageRedirect
+                    + " " + new MediaWikiLink(page.Redirect.Title).ToString());
+                page = this.GetPage(
+                    page.Redirect.Title,
+                    Resources.RightArrow + " " + Resources.LogMessageTargetArticleNotFound);
+            }
+
+            return page;
         }
 
         /// <summary>

@@ -185,23 +185,27 @@
 </value>
     <comment>翻訳支援処理処理を完了した際のメッセージ</comment>
   </data>
-  <data name="LogMessage_ErrorFileSave" xml:space="preserve">
+  <data name="LogMessageFileSaveFailed" xml:space="preserve">
     <value>
 ファイル {0} の保存に失敗しました。（{1}）
 </value>
+    <comment>ファイルの出力に失敗した場合のエラーメッセージ</comment>
   </data>
-  <data name="LogMessage_ErrorURL" xml:space="preserve">
+  <data name="LogMessageErrorURL" xml:space="preserve">
     <value>要求したURLは {0} です。</value>
+    <comment>通信エラー発生時のURLを示すメッセージ</comment>
   </data>
   <data name="LogMessageGetTargetArticle" xml:space="preserve">
     <value>{0} より [[{1}]] を取得。</value>
     <comment>翻訳支援対象の記事を取得する際のメッセージ</comment>
   </data>
-  <data name="LogMessage_InterWikiNothing" xml:space="preserve">
+  <data name="LogMessageInterWikiNotFound" xml:space="preserve">
     <value>言語間リンク無し</value>
+    <comment>記事に言語間リンクが存在しない場合のメッセージ</comment>
   </data>
-  <data name="LogMessage_LinkArticleNothing" xml:space="preserve">
+  <data name="LogMessageLinkArticleNotFound" xml:space="preserve">
     <value>記事無し</value>
+    <comment>内部リンク先の記事が存在しない場合のメッセージ</comment>
   </data>
   <data name="LogMessageRedirect" xml:space="preserve">
     <value>リダイレクト</value>
@@ -230,9 +234,6 @@
   <data name="QuestionMessageArticleExisted" xml:space="preserve">
     <value>対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？</value>
     <comment>指定された記事が既に翻訳先に存在する場合の確認メッセージ</comment>
-  </data>
-  <data name="QuestionMessage_CommonWorkQuestion" xml:space="preserve">
-    <value>{0}を行います。よろしいですか？</value>
   </data>
   <data name="QuestionTitle" xml:space="preserve">
     <value>確認</value>

@@ -37,6 +37,15 @@ namespace Honememo.Wptscs.Parsers
         #region コンストラクタ
 
         /// <summary>
+        /// 指定されたタイトルの内部リンク要素をあらわすインスタンスを生成する。
+        /// </summary>
+        /// <param name="title">記事名。</param>
+        public MediaWikiLink(string title) : this()
+        {
+            this.Title = title;
+        }
+
+        /// <summary>
         /// 内部リンク要素をあらわす空のインスタンスを生成する。
         /// </summary>
         public MediaWikiLink()

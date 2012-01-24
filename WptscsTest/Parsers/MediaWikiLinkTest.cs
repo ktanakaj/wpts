@@ -21,6 +21,29 @@ namespace Honememo.Wptscs.Parsers
     [TestFixture]
     public class MediaWikiLinkTest
     {
+        #region コンストラクタテストケース
+
+        /// <summary>
+        /// コンストラクタテストケース。
+        /// </summary>
+        [Test]
+        public void TestConstructor()
+        {
+            MediaWikiLink element;
+
+            element = new MediaWikiLink();
+            Assert.IsNull(element.Title);
+            Assert.IsNotNull(element.PipeTexts);
+            Assert.AreEqual(0, element.PipeTexts.Count);
+
+            element = new MediaWikiLink("記事名");
+            Assert.AreEqual("記事名", element.Title);
+            Assert.IsNotNull(element.PipeTexts);
+            Assert.AreEqual(0, element.PipeTexts.Count);
+        }
+
+        #endregion
+
         #region プロパティテストケース
 
         /// <summary>

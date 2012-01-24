@@ -55,10 +55,8 @@ namespace Honememo.Wptscs.Parsers
         /// 指定されたタイトルのテンプレート要素をあらわすインスタンスを生成する。
         /// </summary>
         /// <param name="title">テンプレート名。</param>
-        public MediaWikiTemplate(string title)
+        public MediaWikiTemplate(string title) : base(title)
         {
-            this.Title = title;
-            this.PipeTexts = new List<IElement>();
         }
 
         #endregion

@@ -171,44 +171,6 @@ namespace Honememo.Wptscs.Properties {
         
         /// <summary>
         ///   
-        ///ファイル {0} の保存に失敗しました。（{1}）
-        /// に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_ErrorFileSave {
-            get {
-                return ResourceManager.GetString("LogMessage_ErrorFileSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   要求したURLは {0} です。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_ErrorURL {
-            get {
-                return ResourceManager.GetString("LogMessage_ErrorURL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   言語間リンク無し に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_InterWikiNothing {
-            get {
-                return ResourceManager.GetString("LogMessage_InterWikiNothing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   記事無し に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string LogMessage_LinkArticleNothing {
-            get {
-                return ResourceManager.GetString("LogMessage_LinkArticleNothing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   
         ///処理結果を {0} に出力しました。このログは {1} に保存されます。
         /// に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -219,11 +181,49 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   要求したURLは {0} です。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageErrorURL {
+            get {
+                return ResourceManager.GetString("LogMessageErrorURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   
+        ///ファイル {0} の保存に失敗しました。（{1}）
+        /// に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageFileSaveFailed {
+            get {
+                return ResourceManager.GetString("LogMessageFileSaveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} より [[{1}]] を取得。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageGetTargetArticle {
             get {
                 return ResourceManager.GetString("LogMessageGetTargetArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   言語間リンク無し に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageInterWikiNotFound {
+            get {
+                return ResourceManager.GetString("LogMessageInterWikiNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   記事無し に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageLinkArticleNotFound {
+            get {
+                return ResourceManager.GetString("LogMessageLinkArticleNotFound", resourceCulture);
             }
         }
         
@@ -300,15 +300,6 @@ namespace Honememo.Wptscs.Properties {
         internal static string LogMessageTemplateNameUnidentified {
             get {
                 return ResourceManager.GetString("LogMessageTemplateNameUnidentified", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0}を行います。よろしいですか？ に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string QuestionMessage_CommonWorkQuestion {
-            get {
-                return ResourceManager.GetString("QuestionMessage_CommonWorkQuestion", resourceCulture);
             }
         }
         

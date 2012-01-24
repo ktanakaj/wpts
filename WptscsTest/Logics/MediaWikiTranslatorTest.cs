@@ -186,7 +186,7 @@ namespace Honememo.Wptscs.Logics
             // [[Apollo&nbsp;17]] のように文字参照が入っていても処理できる
             link = new MediaWikiLink();
             link.Title = "Fuji&nbsp;(Spacecraft)";
-            Assert.AreEqual("[[ふじ (宇宙船)]]", translate.ReplaceLink(link, "example").ToString());
+            Assert.AreEqual("[[ふじ (宇宙船)|Fuji&nbsp;(Spacecraft)]]", translate.ReplaceLink(link, "example").ToString());
 
         }
 
@@ -385,8 +385,7 @@ namespace Honememo.Wptscs.Logics
             translate.HeadingTable = new TranslationTable();
             translate.HeadingTable.From = "en";
             translate.HeadingTable.To = "ja";
-
-            Assert.IsTrue(translate.Run("example"));
+            translate.Run("example");
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
@@ -424,8 +423,7 @@ namespace Honememo.Wptscs.Logics
             translate.HeadingTable.Add(dic);
             translate.HeadingTable.From = "en";
             translate.HeadingTable.To = "ja";
-
-            Assert.IsTrue(translate.Run("example"));
+            translate.Run("example");
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
@@ -470,8 +468,7 @@ namespace Honememo.Wptscs.Logics
             table.Add(".example", new TranslationDictionary.Item { Word = "。さんぷる", Alias = ".dummy" });
             table.Add("Template:Disambig", new TranslationDictionary.Item { Word = "Template:曖昧さ回避" });
             translate.ItemTable = table;
-
-            Assert.IsTrue(translate.Run("example"));
+            translate.Run("example");
 
             // キャッシュに今回の処理で取得した内容が更新されているかを確認
             Assert.IsTrue(table.ContainsKey("example.com"));
@@ -532,8 +529,7 @@ namespace Honememo.Wptscs.Logics
             translate.HeadingTable.Add(dic);
             translate.HeadingTable.From = "ja";
             translate.HeadingTable.To = "en";
-
-            Assert.IsTrue(translate.Run("スペースシップツー"));
+            translate.Run("スペースシップツー");
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
@@ -562,14 +558,20 @@ namespace Honememo.Wptscs.Logics
             translate.From = from;
             translate.To = mock.GetMediaWiki("ja");
 
-            Assert.IsFalse(translate.Run("Nothing Page"));
-
-            // 実行ログを期待されるログと比較する
-            Assert.AreEqual(
-                ("http://en.wikipedia.org より [[Nothing Page]] を取得。\r\n"
-                + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。")
-                .Replace("http://en.wikipedia.org", from.Location),
-                translate.Log);
+            try
+            {
+                translate.Run("Nothing Page");
+                Assert.Fail();
+            }
+            catch (ApplicationException)
+            {
+                // 実行ログを期待されるログと比較する
+                Assert.AreEqual(
+                    ("http://en.wikipedia.org より [[Nothing Page]] を取得。\r\n"
+                    + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。")
+                    .Replace("http://en.wikipedia.org", from.Location),
+                    translate.Log);
+            }
         }
 
         #endregion

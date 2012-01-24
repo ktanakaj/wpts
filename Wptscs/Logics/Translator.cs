@@ -3,7 +3,7 @@
 //      翻訳支援処理を実装するための共通クラスソース</summary>
 //
 // <copyright file="Translator.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -88,7 +88,7 @@ namespace Honememo.Wptscs.Logics
 
             protected set
             {
-                this.log = (value != null) ? value : String.Empty;
+                this.log = StringUtils.DefaultString(value);
                 if (this.LogUpdate != null)
                 {
                     this.LogUpdate(this, EventArgs.Empty);
@@ -189,8 +189,9 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <returns><c>true</c> 処理成功</returns>
-        public virtual bool Run(string name)
+        /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Log"/>に出力される。</exception>
+        /// <exception cref="InvalidOperationException"><see cref="From"/>, <see cref="To"/>が設定されていない場合。</exception>
+        public virtual void Run(string name)
         {
             // ※必須な情報が設定されていない場合、InvalidOperationExceptionを返す
             if (this.From == null || this.To == null)
@@ -207,13 +208,16 @@ namespace Honememo.Wptscs.Logics
             {
                 if (!this.Ping(host))
                 {
-                    return false;
+                    throw new ApplicationException("ping failed");
                 }
             }
 
+            // ここまでの間に終了条件が出ているかを確認
+            this.ThrowExceptionIfCanceled();
+
             // 翻訳支援処理実行部の本体を実行
             // ※以降の処理は、継承クラスにて定義
-            return this.RunBody(name);
+            this.RunBody(name);
         }
         
         #endregion
@@ -224,9 +228,9 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行部の本体。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <returns><c>true</c> 処理成功</returns>
+        /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Log"/>に出力する。</exception>
         /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
-        protected abstract bool RunBody(string name);
+        protected abstract void RunBody(string name);
 
         /// <summary>
         /// ログメッセージを1行追加出力。
@@ -285,7 +289,7 @@ namespace Honememo.Wptscs.Logics
                     this.LogLine(Resources.RightArrow + " " + e.Message);
                     if (e.Response != null)
                     {
-                        this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
+                        this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, e.Response.ResponseUri));
                     }
                 }
             }
@@ -302,6 +306,18 @@ namespace Honememo.Wptscs.Logics
 
             // 取得失敗時いずれの場合もnull
             return null;
+        }
+
+        /// <summary>
+        /// 終了要求が出ている場合、例外を投げる。
+        /// </summary>
+        /// <exception cref="ApplicationException"><see cref="CancellationPending"/>が<c>true</c>の場合。</exception>
+        protected void ThrowExceptionIfCanceled()
+        {
+            if (this.CancellationPending)
+            {
+                throw new ApplicationException("CancellationPending is true");
+            }
         }
 
         #endregion
