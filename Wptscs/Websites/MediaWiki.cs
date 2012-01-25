@@ -402,6 +402,16 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
+        /// Template:仮リンク（他言語へのリンク）で書式化するためのフォーマット。
+        /// </summary>
+        /// <remarks>空の場合、その言語版にはこれに相当する機能は無いor使用しないものとして扱う。</remarks>
+        public string LinkInterwikiFormat
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// このクラスで使用するWebアクセス用Proxyインスタンス。
         /// </summary>
         /// <remarks>setterはユニットテスト用に公開。</remarks>
@@ -434,7 +444,7 @@ namespace Honememo.Wptscs.Websites
             // ページのXMLデータをMediaWikiサーバーから取得
             XmlDocument xml = new XmlDocument();
             using (Stream reader = this.WebProxy.GetStream(
-                new Uri(new Uri(this.Location), String.Format(this.ExportPath, escapeTitle))))
+                new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle))))
             {
                 xml.Load(reader);
             }
@@ -494,6 +504,24 @@ namespace Honememo.Wptscs.Websites
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// <see cref="LinkInterwikiFormat"/> を渡された記事名, 言語, 表示名で書式化した文字列を返す。
+        /// </summary>
+        /// <param name="title">記事名。</param>
+        /// <param name="lang">言語。</param>
+        /// <param name="langTitle">他言語版記事名。</param>
+        /// <param name="label">表示名。</param>
+        /// <returns>書式化した文字列。<see cref="LinkInterwikiFormat"/>が未設定の場合<c>null</c>。</returns>
+        public string FormatLinkInterwiki(string title, string lang, string langTitle, string label)
+        {
+            if (String.IsNullOrEmpty(this.LinkInterwikiFormat))
+            {
+                return null;
+            }
+
+            return StringUtils.FormatDollarVariable(this.LinkInterwikiFormat, title, lang, langTitle, label);
         }
         
         #endregion
@@ -578,6 +606,8 @@ namespace Honememo.Wptscs.Websites
                     this.DocumentationTemplateDefaultPage = docElement.GetAttribute("DefaultPage");
                 }
             }
+
+            this.LinkInterwikiFormat = XmlUtils.InnerText(siteElement.SelectSingleNode("LinkInterwikiFormat"));
         }
 
         /// <summary>
@@ -626,6 +656,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             writer.WriteEndElement();
+            writer.WriteElementString("LinkInterwikiFormat", this.LinkInterwikiFormat);
         }
 
         #endregion

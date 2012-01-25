@@ -109,7 +109,7 @@ namespace Honememo.Wptscs.Models
             UriBuilder b = new UriBuilder("file", "");
             b.Path = Path.GetFullPath(MockFactory.TestMediaWikiDir) + "\\";
             wiki.Location = new Uri(b.Uri, lang + "/").ToString();
-            wiki.ExportPath = "{0}.xml";
+            wiki.ExportPath = "$1.xml";
             wiki.NamespacePath = "_api.xml";
 
             return wiki;

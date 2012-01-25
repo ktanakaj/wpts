@@ -149,19 +149,14 @@ namespace Honememo.Wptscs.Logics
         protected virtual string CreateOpening(string title)
         {
             StringBuilder b = new StringBuilder("'''xxx'''");
-            string bracket = this.To.Language.Bracket;
-            if (bracket.Contains("{0}"))
+            string langPart = String.Empty;
+            string langTitle = this.GetFullName(this.From, this.To.Language.Code);
+            if (!String.IsNullOrEmpty(langTitle))
             {
-                string langPart = String.Empty;
-                string langTitle = this.GetFullName(this.From, this.To.Language.Code);
-                if (!String.IsNullOrEmpty(langTitle))
-                {
-                    langPart = new MediaWikiLink(langTitle).ToString() + ": ";
-                }
-
-                b.Append(String.Format(bracket, langPart + "'''" + title + "'''"));
+                langPart = new MediaWikiLink(langTitle).ToString() + ": ";
             }
 
+            b.Append(this.To.Language.FormatBracket(langPart + "'''" + title + "'''"));
             b.Append("\n\n");
             return b.ToString();
         }
@@ -437,7 +432,13 @@ namespace Honememo.Wptscs.Logics
                 }
                 else if (interWiki == String.Empty)
                 {
-                    // 言語間リンクが存在しない場合、[[:en:xxx]]みたいな形式に置換
+                    // 言語間リンクが存在しない場合、可能なら{{仮リンク}}に置き換え
+                    if (!String.IsNullOrEmpty(this.To.LinkInterwikiFormat))
+                    {
+                        return this.ReplaceLinkLinkInterwiki(link);
+                    }
+
+                    // 設定が無ければ [[:en:xxx]] みたいな形式に置換
                     link.Title = this.From.Language.Code + ':' + link.Title;
                     link.IsColon = true;
                 }
@@ -455,7 +456,10 @@ namespace Honememo.Wptscs.Logics
                 if (link.PipeTexts.Count == 0 && interWiki != null)
                 {
                     // 表示名が存在しない場合、元の名前を表示名に設定
-                    link.PipeTexts.Add(new TextElement(article.Title));
+                    // 元の名前にはあればセクションも含む
+                    link.PipeTexts.Add(
+                        new TextElement(new MediaWikiLink { Title = article.Title, Section = link.Section }
+                            .GetLinkString()));
                 }
             }
 
@@ -741,6 +745,35 @@ namespace Honememo.Wptscs.Logics
 
             // 記事名の名前空間部分を置き換えて返す
             return names[0] + title.Substring(title.IndexOf(':'));
+        }
+
+        /// <summary>
+        /// 内部リンクを他言語版への{{仮リンク}}等に変換する。。
+        /// </summary>
+        /// <param name="link">変換元言語間リンク。</param>
+        /// <returns>変換済み言語間リンク。</returns>
+        private IElement ReplaceLinkLinkInterwiki(MediaWikiLink link)
+        {
+            // 仮リンクにはセクションの指定が可能なので、存在する場合付加する
+            // ※ 渡されたlinkをそのまま使わないのは、余計なゴミが含まれる可能性があるため
+            MediaWikiLink title = new MediaWikiLink { Title = link.Title, Section = link.Section };
+            string langTitle = title.GetLinkString();
+            if (!String.IsNullOrEmpty(title.Section))
+            {
+                // 変換先言語版のセクションは、セクションの変換を通したものにする
+                title.Section = this.ReplaceLinkSection(title.Section);
+            }
+            
+            // 表示名は、設定されていればその値を、なければ変換元言語の記事名を使用
+            string label = langTitle;
+            if (link.PipeTexts.Count > 0)
+            {
+                label = link.PipeTexts.Last().ToString();
+            }
+
+            // 書式化した文字列を返す
+            // ※ {{仮リンク}}を想定しているが、やろうと思えば何でもできるのでテキストで処理
+            return new TextElement(this.To.FormatLinkInterwiki(title.GetLinkString(), this.From.Language.Code, langTitle, label));
         }
 
         /// <summary>

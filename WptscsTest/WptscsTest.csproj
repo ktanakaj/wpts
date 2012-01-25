@@ -52,6 +52,7 @@
     <Compile Include="Parsers\MediaWikiRedirectParserTest.cs" />
     <Compile Include="Parsers\MediaWikiTemplateTest.cs" />
     <Compile Include="Parsers\MediaWikiHeadingTest.cs" />
+    <Compile Include="Parsers\MediaWikiVariableTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\MockFoctory.cs" />
@@ -245,6 +246,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\result\example_定型句なし.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\result\example_仮リンク有効.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\result\スペースシップツー.txt">

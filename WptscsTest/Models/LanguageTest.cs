@@ -3,7 +3,7 @@
 //      Languageのテストクラスソース。</summary>
 //
 // <copyright file="LanguageTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -95,7 +95,7 @@ namespace Honememo.Wptscs.Models
             Language lang = new Language("en");
 
             // 設定ファイルからデフォルト値が設定されていること
-            Assert.AreEqual(" ({0}) ", lang.Bracket);
+            Assert.AreEqual(" ($1) ", lang.Bracket);
 
             // 設定後はそちらが有効になること
             lang.Bracket = "test";
@@ -103,9 +103,33 @@ namespace Honememo.Wptscs.Models
 
             // 消すとデフォルトが有効になること
             lang.Bracket = null;
-            Assert.AreEqual(" ({0}) ", lang.Bracket);
+            Assert.AreEqual(" ($1) ", lang.Bracket);
             lang.Bracket = "";
-            Assert.AreEqual(" ({0}) ", lang.Bracket);
+            Assert.AreEqual(" ($1) ", lang.Bracket);
+        }
+
+        #endregion
+
+        #region 公開メソッドテストケース
+
+        /// <summary>
+        /// FormatLinkInterwikiメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestFormatLinkInterwiki()
+        {
+            Language lang = new Language("en");
+
+            // パラメータを埋め込んで書式化される
+            Assert.AreEqual(" (値1) ", lang.FormatBracket("値1"));
+            lang.Bracket = " {$1} ";
+            Assert.AreEqual(" {値2} ", lang.FormatBracket("値2"));
+            lang.Bracket = "xxx";
+            Assert.AreEqual("xxx", lang.FormatBracket("値3"));
+
+            // 値がnull等でも特に制限はない
+            lang.Bracket = null;
+            Assert.AreEqual(" () ", lang.FormatBracket(null));
         }
 
         #endregion

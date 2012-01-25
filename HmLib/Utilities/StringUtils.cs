@@ -11,6 +11,7 @@
 namespace Honememo.Utilities
 {
     using System;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// 文字列処理に関するユーティリティクラスです。
@@ -18,6 +19,15 @@ namespace Honememo.Utilities
     /// <remarks>一部メソッドは、Apache Commons Lang の StringUtils やJava標準の String を参考にしています。</remarks>
     public static class StringUtils
     {
+        #region 定数
+
+        /// <summary>
+        /// <see cref="FormatDollarVariable"/>で使用する正規表現。
+        /// </summary>
+        private static readonly Regex DollarVariableRegex = new Regex("\\$([0-9]+)");
+
+        #endregion
+
         #region 初期化メソッド
 
         /// <summary>
@@ -137,7 +147,37 @@ namespace Honememo.Utilities
             // 後は普通のStartWithで処理
             return str.Substring(toffset).StartsWith(prefix);
         }
-        
+
+        #endregion
+
+        #region 書式化メソッド
+
+        /// <summary>
+        /// 指定した文字列の書式項目を、指定した配列内の対応するオブジェクトの文字列形式に置換します。
+        /// </summary>
+        /// <param name="format">$1～$数値の形式でパラメータを指定する書式指定文字列。</param>
+        /// <param name="args">書式設定対象オブジェクト。</param>
+        /// <returns>書式項目が <para>args</para> の対応するオブジェクトの文字列形式に置換された <para>format</para> のコピー。</returns>
+        /// <exception cref="ArgumentNullException"><para>format</para>または<para>args</para>が<c>null</c>の場合。</exception>
+        /// <remarks>.netではなくPerl等で見かける$～形式のフォーマットを行う。</remarks>
+        public static string FormatDollarVariable(string format, params object[] args)
+        {
+            // nullチェック
+            Validate.NotNull(format);
+            Validate.NotNull(args);
+
+            // 正規表現で$1～$数値のパラメータ部分を抜き出し、対応するパラメータに置き換える
+            // 対応するパラメータが存在しない場合、空文字列となる
+            return DollarVariableRegex.Replace(
+                format,
+                (Match match)
+                =>
+                {
+                    int index = Int32.Parse(match.Groups[1].Value) - 1;
+                    return args.Length > index ? ObjectUtils.ToString(args[index]) : String.Empty;
+                });
+        }
+
         #endregion
     }
 }

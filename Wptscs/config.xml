@@ -20,12 +20,13 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%D8%AE%D8%A7%D8%B5:%D8%AA%D8%B5%D8%AF%D9%8A%D8%B1/{0}</ExportPath>
+      <ExportPath>/wiki/%D8%AE%D8%A7%D8%B5:%D8%AA%D8%B5%D8%AF%D9%8A%D8%B1/$1</ExportPath>
       <Redirect>#تحويل</Redirect>
       <MagicWords />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/شرح">قالب:توثيق</DocumentationTemplate>
       </DocumentationTemplates>
+      <LinkInterwikiFormat>{{وإو|عر=$1|لغ=$2|تر=$3|نص=$4}}</LinkInterwikiFormat>
     </MediaWiki>
     <MediaWiki>
       <Location>http://bn.wikipedia.org</Location>
@@ -45,7 +46,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7:Export/{0}</ExportPath>
+      <ExportPath>/wiki/%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7:Export/$1</ExportPath>
       <MagicWords />
       <DocumentationTemplates />
     </MediaWiki>
@@ -75,7 +76,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Spezial:Exportieren/{0}</ExportPath>
+      <ExportPath>/wiki/Spezial:Exportieren/$1</ExportPath>
       <Redirect>#WEITERLEITUNG</Redirect>
       <MagicWords />
       <DocumentationTemplates>
@@ -121,6 +122,7 @@
         <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
         <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
       </DocumentationTemplates>
+      <LinkInterwikiFormat>{{link-interwiki|en=$1|en_text=$4|lang=$2|lang_title=$3}}</LinkInterwikiFormat>
     </MediaWiki>
     <MediaWiki>
       <Location>http://es.wikipedia.org</Location>
@@ -148,7 +150,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Especial:Exportar/{0}</ExportPath>
+      <ExportPath>/wiki/Especial:Exportar/$1</ExportPath>
       <Redirect>#REDIRECCIÓN</Redirect>
       <MagicWords />
       <DocumentationTemplates>
@@ -181,12 +183,13 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Sp%C3%A9cial:Exporter/{0}</ExportPath>
+      <ExportPath>/wiki/Sp%C3%A9cial:Exporter/$1</ExportPath>
       <Redirect>#REDIRECTION</Redirect>
       <MagicWords />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Modèle:Documentation</DocumentationTemplate>
       </DocumentationTemplates>
+      <LinkInterwikiFormat>{{Lien|fr=$1|lang=$2|trad=$3|texte=$4}}</LinkInterwikiFormat>
     </MediaWiki>
     <MediaWiki>
       <Location>http://hi.wikipedia.org</Location>
@@ -206,7 +209,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%E0%A4%B5%E0%A4%BF%E0%A4%B6%E0%A5%87%E0%A4%B7:Export/{0}</ExportPath>
+      <ExportPath>/wiki/%E0%A4%B5%E0%A4%BF%E0%A4%B6%E0%A5%87%E0%A4%B7:Export/$1</ExportPath>
       <MagicWords />
       <DocumentationTemplates />
     </MediaWiki>
@@ -236,7 +239,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Speciale:Esporta/{0}</ExportPath>
+      <ExportPath>/wiki/Speciale:Esporta/$1</ExportPath>
       <Redirect>#RINVIA</Redirect>
       <MagicWords />
       <DocumentationTemplates>
@@ -276,15 +279,16 @@
             <ShortName />
           </LanguageName>
         </Names>
-        <Bracket>（{0}）</Bracket>
+        <Bracket>（$1）</Bracket>
       </Language>
-      <ExportPath>/wiki/%E7%89%B9%E5%88%A5:%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97/{0}</ExportPath>
+      <ExportPath>/wiki/%E7%89%B9%E5%88%A5:%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97/$1</ExportPath>
       <Redirect>#転送</Redirect>
       <MagicWords />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
         <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
       </DocumentationTemplates>
+      <LinkInterwikiFormat>{{仮リンク|$1|$2|$3|label=$4}}</LinkInterwikiFormat>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ko.wikipedia.org</Location>
@@ -308,7 +312,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%ED%8A%B9%EC%88%98%EA%B8%B0%EB%8A%A5:%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0/{0}</ExportPath>
+      <ExportPath>/wiki/%ED%8A%B9%EC%88%98%EA%B8%B0%EB%8A%A5:%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0/$1</ExportPath>
       <Redirect>#넘겨주기</Redirect>
       <MagicWords />
       <DocumentationTemplates>
@@ -337,7 +341,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Speciaal:Exporteren/{0}</ExportPath>
+      <ExportPath>/wiki/Speciaal:Exporteren/$1</ExportPath>
       <MagicWords />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Sjabloon:Sjabdoc</DocumentationTemplate>
@@ -361,7 +365,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Specjalna:Eksport/{0}</ExportPath>
+      <ExportPath>/wiki/Specjalna:Eksport/$1</ExportPath>
       <Redirect>#PATRZ</Redirect>
       <MagicWords />
       <DocumentationTemplates>
@@ -394,7 +398,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Especial:Exportar/{0}</ExportPath>
+      <ExportPath>/wiki/Especial:Exportar/$1</ExportPath>
       <Redirect>#REDIRECIONAMENTO</Redirect>
       <MagicWords />
       <DocumentationTemplates>
@@ -427,7 +431,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Служебная:Export/{0}</ExportPath>
+      <ExportPath>/wiki/Служебная:Export/$1</ExportPath>
       <Redirect>#перенаправление</Redirect>
       <MagicWords />
       <DocumentationTemplates>
@@ -456,7 +460,7 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Special:%E5%AF%BC%E5%87%BA%E9%A1%B5%E9%9D%A2/{0}</ExportPath>
+      <ExportPath>/wiki/Special:%E5%AF%BC%E5%87%BA%E9%A1%B5%E9%9D%A2/$1</ExportPath>
       <MagicWords />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>

@@ -127,5 +127,49 @@ namespace Honememo.Utilities
         }
 
         #endregion
+
+        #region 書式化メソッドテストケース
+
+        /// <summary>
+        /// FormatDollarVariableメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestFormatDollarVariable()
+        {
+            // 空文字列
+            Assert.IsEmpty(StringUtils.FormatDollarVariable(String.Empty));
+            Assert.IsEmpty(StringUtils.FormatDollarVariable(String.Empty, String.Empty));
+
+            // 通常
+            Assert.AreEqual("test", StringUtils.FormatDollarVariable("test"));
+            Assert.AreEqual("testtest", StringUtils.FormatDollarVariable("test$1test"));
+            Assert.AreEqual("test15test", StringUtils.FormatDollarVariable("test$1test", 15));
+            Assert.AreEqual("testtest", StringUtils.FormatDollarVariable("test$2test", 15));
+            Assert.AreEqual(
+                "int[] value = {30, {0}, 10000};\nstring[] = {\"文字列$1\", \"12.345\"};\n",
+                StringUtils.FormatDollarVariable("int[] value = {$1, $2, $3};\nstring[] = {\"$4\", \"$5\"};\n", 30, "{0}", 10000, "文字列$1", 12.345));
+        }
+
+        /// <summary>
+        /// FormatDollarVariableメソッドテストケース（書式がnull）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestFormatDollarVariableFormatNull()
+        {
+            StringUtils.FormatDollarVariable(null);
+        }
+
+        /// <summary>
+        /// FormatDollarVariableメソッドテストケース（パラメータがnull）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestFormatDollarVariableArgsNull()
+        {
+            StringUtils.FormatDollarVariable(String.Empty, null);
+        }
+
+        #endregion
     }
 }

@@ -54,6 +54,8 @@
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.textBoxLinkInterwikiFormat = new System.Windows.Forms.TextBox();
+            this.labelLinkInterwikiFormat = new System.Windows.Forms.Label();
             this.textBoxDocumentationTemplateDefaultPage = new System.Windows.Forms.TextBox();
             this.labelDocumentationTemplateDefaultPage = new System.Windows.Forms.Label();
             this.textBoxDocumentationTemplate = new System.Windows.Forms.TextBox();
@@ -298,6 +300,8 @@
             // groupBoxServer
             // 
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
+            this.groupBoxServer.Controls.Add(this.textBoxLinkInterwikiFormat);
+            this.groupBoxServer.Controls.Add(this.labelLinkInterwikiFormat);
             this.groupBoxServer.Controls.Add(this.textBoxDocumentationTemplateDefaultPage);
             this.groupBoxServer.Controls.Add(this.labelDocumentationTemplateDefaultPage);
             this.groupBoxServer.Controls.Add(this.textBoxDocumentationTemplate);
@@ -318,6 +322,18 @@
             this.groupBoxServer.Controls.Add(this.labelLocation);
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
+            // 
+            // textBoxLinkInterwikiFormat
+            // 
+            resources.ApplyResources(this.textBoxLinkInterwikiFormat, "textBoxLinkInterwikiFormat");
+            this.textBoxLinkInterwikiFormat.Name = "textBoxLinkInterwikiFormat";
+            this.toolTip.SetToolTip(this.textBoxLinkInterwikiFormat, resources.GetString("textBoxLinkInterwikiFormat.ToolTip"));
+            // 
+            // labelLinkInterwikiFormat
+            // 
+            resources.ApplyResources(this.labelLinkInterwikiFormat, "labelLinkInterwikiFormat");
+            this.labelLinkInterwikiFormat.Name = "labelLinkInterwikiFormat";
+            this.toolTip.SetToolTip(this.labelLinkInterwikiFormat, resources.GetString("labelLinkInterwikiFormat.ToolTip"));
             // 
             // textBoxDocumentationTemplateDefaultPage
             // 
@@ -679,5 +695,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
+        private System.Windows.Forms.Label labelLinkInterwikiFormat;
+        private System.Windows.Forms.TextBox textBoxLinkInterwikiFormat;
     }
 }

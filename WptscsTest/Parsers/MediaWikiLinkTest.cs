@@ -116,7 +116,54 @@ namespace Honememo.Wptscs.Parsers
         }
 
         #endregion
-        
+
+        #region 公開メソッドテストケース
+
+        /// <summary>
+        /// GetLinkStringメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestGetLinkString()
+        {
+            MediaWikiLink element = new MediaWikiLink();
+
+            // タイトルのみ
+            element.Title = "testtitle";
+            Assert.AreEqual("testtitle", element.GetLinkString());
+
+            // タイトルとセクション
+            element.Section = String.Empty;
+            Assert.AreEqual("testtitle#", element.GetLinkString());
+            element.Section = "testsection";
+            Assert.AreEqual("testtitle#testsection", element.GetLinkString());
+
+            // タイトルとセクションとパイプ後の文字列
+            element.PipeTexts.Add(new TextElement("testpipe1"));
+            element.PipeTexts.Add(new TextElement("testpipe2"));
+            Assert.AreEqual("testtitle#testsection", element.GetLinkString());
+
+            // タイトルとセクションとパイプ後の文字列とコード
+            element.Code = "en";
+            Assert.AreEqual("en:testtitle#testsection", element.GetLinkString());
+
+            // タイトルとセクションとパイプ後の文字列とコードとコロン
+            element.IsColon = true;
+            Assert.AreEqual(":en:testtitle#testsection", element.GetLinkString());
+
+            // 実例）ファイルタグ
+            element.Title = "ファイル:Kepler22b-artwork.jpg";
+            element.Section = null;
+            element.PipeTexts.Clear();
+            element.PipeTexts.Add(new TextElement("thumb"));
+            element.PipeTexts.Add(new TextElement("right"));
+            element.PipeTexts.Add(new TextElement("[[ケプラー22b]]（想像図）"));
+            element.Code = null;
+            element.IsColon = false;
+            Assert.AreEqual("ファイル:Kepler22b-artwork.jpg", element.GetLinkString());
+        }
+
+        #endregion
+
         #region インタフェース実装メソッドテストケース
 
         /// <summary>

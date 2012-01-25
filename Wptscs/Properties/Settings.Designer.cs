@@ -165,7 +165,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/wiki/Special:Export/{0}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("/wiki/Special:Export/$1")]
         public string MediaWikiExportPath {
             get {
                 return ((string)(this["MediaWikiExportPath"]));
@@ -174,7 +174,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(" ({0}) ")]
+        [global::System.Configuration.DefaultSettingValueAttribute(" ($1) ")]
         public string Bracket {
             get {
                 return ((string)(this["Bracket"]));

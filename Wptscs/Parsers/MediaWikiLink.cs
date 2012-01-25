@@ -117,19 +117,15 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region 実装支援用抽象メソッド実装
+        #region 公開メソッド
 
         /// <summary>
-        /// この要素を書式化した内部リンクテキストを返す。
+        /// この要素を書式化したリンク先部分のテキスト（先頭の:から言語コード, 記事名, セクションまで）を返す。
         /// </summary>
-        /// <returns>内部リンクテキスト。</returns>
-        protected override string ToStringImpl()
+        /// <returns>記事名部分のテキスト。</returns>
+        public string GetLinkString()
         {
-            // 戻り値初期化
             StringBuilder b = new StringBuilder();
-            
-            // 開始タグの付加
-            b.Append(MediaWikiLink.DelimiterStart);
 
             // 先頭の : の付加
             if (this.IsColon)
@@ -156,6 +152,28 @@ namespace Honememo.Wptscs.Parsers
                 b.Append('#');
                 b.Append(this.Section);
             }
+
+            return b.ToString();
+        }
+
+        #endregion
+
+        #region 実装支援用抽象メソッド実装
+
+        /// <summary>
+        /// この要素を書式化した内部リンクテキストを返す。
+        /// </summary>
+        /// <returns>内部リンクテキスト。</returns>
+        protected override string ToStringImpl()
+        {
+            // 戻り値初期化
+            StringBuilder b = new StringBuilder();
+            
+            // 開始タグの付加
+            b.Append(MediaWikiLink.DelimiterStart);
+
+            // リンク先部分のテキスト（先頭の:から言語コード, 記事名, セクションまで）を設定
+            b.Append(this.GetLinkString());
 
             // パイプ後の文字列の付加
             if (this.PipeTexts != null)
