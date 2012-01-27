@@ -90,9 +90,10 @@ namespace Honememo.Wptscs.Logics
             this.ChangeStatusInExecuting(
                 () => interWiki = article.GetInterWiki(this.To.Language.Code),
                 Resources.StatusParsing);
-
             if (!String.IsNullOrEmpty(interWiki))
             {
+                // ※ 確認ダイアログの表示中は処理時間をカウントしない
+                this.Stopwatch.Stop();
                 if (MessageBox.Show(
                         String.Format(Resources.QuestionMessageArticleExisted, interWiki),
                         Resources.QuestionTitle,
@@ -103,10 +104,10 @@ namespace Honememo.Wptscs.Logics
                     this.LogLine(ENTER + String.Format(Resources.QuestionMessageArticleExisted, interWiki));
                     throw new ApplicationException("user canceled");
                 }
-                else
-                {
-                    this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessageTargetArticleHadInterWiki, interWiki));
-                }
+
+                // OKが選択された場合、処理続行
+                this.Stopwatch.Start();
+                this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessageTargetArticleHadInterWiki, interWiki));
             }
 
             // 冒頭部を作成

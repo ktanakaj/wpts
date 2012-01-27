@@ -146,9 +146,9 @@
     <comment>サーバーへの接続失敗</comment>
   </data>
   <data name="ErrorMessageDevelopmentError" xml:space="preserve">
-    <value>想定外のエラーが発生しました。プログラムが不安定な状態になった可能性があります。プログラムを再起動してください。
-問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。
-また、手順や現在の設定を確認し、開発者にご連絡ください。
+    <value>想定外のエラーが発生しました。正常に処理が続けられない状態になった可能性があります。プログラムを再起動してください。
+
+問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。また、手順や現在の設定を確認し、開発者にご連絡ください。
 
 ＜エラーの内容＞
 {0}
@@ -326,5 +326,9 @@
   <data name="StatusFileWriting" xml:space="preserve">
     <value>ファイル出力中...</value>
     <comment>処理状態がファイル出力中</comment>
+  </data>
+  <data name="ElapsedTime" xml:space="preserve">
+    <value>実行時間: {0:m\:ss}</value>
+    <comment>ステータスバー処理時間のフォーマット</comment>
   </data>
 </root>

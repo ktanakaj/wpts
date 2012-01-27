@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Logics
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Net;
     using System.Net.NetworkInformation;
@@ -46,6 +47,18 @@ namespace Honememo.Wptscs.Logics
         /// 変換後テキスト。
         /// </summary>
         private string text = String.Empty;
+
+        #endregion
+
+        #region コンストラクタ
+
+        /// <summary>
+        /// インスタンスを生成する。
+        /// </summary>
+        public Translator()
+        {
+            this.Stopwatch = new Stopwatch();
+        }
 
         #endregion
 
@@ -133,6 +146,15 @@ namespace Honememo.Wptscs.Logics
                     this.StatusUpdate(this, EventArgs.Empty);
                 }
             }
+        }
+
+        /// <summary>
+        /// 処理時間ストップウォッチ。
+        /// </summary>
+        public Stopwatch Stopwatch
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -238,8 +260,9 @@ namespace Honememo.Wptscs.Logics
                 throw new InvalidOperationException("From or To is null");
             }
 
-            // 変数を初期化
+            // 変数を初期化、処理時間を測定開始
             this.Initialize();
+            this.Stopwatch.Start();
 
             // サーバー接続チェック
             string host = new Uri(this.From.Location).Host;
@@ -262,8 +285,9 @@ namespace Honememo.Wptscs.Logics
             }
             finally
             {
-                // 終了後は処理状態をクリア
+                // 終了後は処理状態をクリア、処理時間を測定終了
                 this.Status = String.Empty;
+                this.Stopwatch.Stop();
             }
         }
         
@@ -373,6 +397,7 @@ namespace Honememo.Wptscs.Logics
             // 変数を初期化
             this.Log = String.Empty;
             this.Status = String.Empty;
+            this.Stopwatch.Reset();
             this.Text = String.Empty;
             this.CancellationPending = false;
         }

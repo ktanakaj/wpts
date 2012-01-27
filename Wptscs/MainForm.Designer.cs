@@ -65,6 +65,8 @@ namespace Honememo.Wptscs
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelStopwatch = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timerStatusStopwatch = new System.Windows.Forms.Timer(this.components);
             this.groupBoxTransfer.SuspendLayout();
             this.groupBoxSaveDirectory.SuspendLayout();
             this.groupBoxRun.SuspendLayout();
@@ -234,7 +236,8 @@ namespace Honememo.Wptscs
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelStatus});
+            this.toolStripStatusLabelStatus,
+            this.toolStripStatusLabelStopwatch});
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             // 
@@ -242,6 +245,17 @@ namespace Honememo.Wptscs
             // 
             this.toolStripStatusLabelStatus.Name = "toolStripStatusLabelStatus";
             resources.ApplyResources(this.toolStripStatusLabelStatus, "toolStripStatusLabelStatus");
+            this.toolStripStatusLabelStatus.Spring = true;
+            // 
+            // toolStripStatusLabelStopwatch
+            // 
+            this.toolStripStatusLabelStopwatch.Name = "toolStripStatusLabelStopwatch";
+            resources.ApplyResources(this.toolStripStatusLabelStopwatch, "toolStripStatusLabelStopwatch");
+            // 
+            // timerStatusStopwatch
+            // 
+            this.timerStatusStopwatch.Interval = 1000;
+            this.timerStatusStopwatch.Tick += new System.EventHandler(this.TimerStatusStopwatch_Tick);
             // 
             // MainForm
             // 
@@ -291,6 +305,8 @@ namespace Honememo.Wptscs
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStatus;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStopwatch;
+        private System.Windows.Forms.Timer timerStatusStopwatch;
     }
 }
 

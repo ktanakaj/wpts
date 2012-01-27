@@ -357,8 +357,10 @@ namespace Honememo.Wptscs
                 }
 
                 // ログ・処理状態更新通知を受け取るためのイベント登録
+                // 処理時間更新用にタイマーを起動
                 this.translator.LogUpdate += new EventHandler(this.GetLogUpdate);
                 this.translator.StatusUpdate += new EventHandler(this.GetStatusUpdate);
+                this.Invoke((MethodInvoker)delegate { this.timerStatusStopwatch.Start(); });
 
                 // 翻訳支援処理を実行
                 bool success = true;
@@ -371,6 +373,11 @@ namespace Honememo.Wptscs
                     // 中止要求で停止した場合、その旨イベントに格納する
                     e.Cancel = this.backgroundWorkerRun.CancellationPending;
                     success = false;
+                }
+                finally
+                {
+                    // 処理時間更新用のタイマーを終了
+                    this.Invoke((MethodInvoker)delegate { this.timerStatusStopwatch.Stop(); });
                 }
 
                 // 実行結果から、ログと変換後テキストをファイル出力
@@ -412,6 +419,17 @@ namespace Honememo.Wptscs
 
             // 画面をロック中から解放
             this.Release();
+        }
+
+        /// <summary>
+        /// ステータスバー処理時間更新タイマー処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TimerStatusStopwatch_Tick(object sender, EventArgs e)
+        {
+            // 処理時間をステータスバーに反映
+            this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, this.translator.Stopwatch.Elapsed);
         }
 
         #endregion
