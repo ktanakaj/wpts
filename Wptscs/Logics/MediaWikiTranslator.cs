@@ -834,8 +834,19 @@ namespace Honememo.Wptscs.Logics
                 return template.Title;
             }
 
-            // 頭にプレフィックスを付けた記事名でアクセスし、その名前で存在するかをチェック
+            // 頭にプレフィックスを付けた記事名で実在するかをチェック
             string filledTitle = prefix + ":" + template.Title;
+
+            // 既に対訳表にプレフィックス付きの記事名が確認されているか？
+            // ※ 対訳表へのキーとしてはHTMLデコードした記事名を使用する
+            if (this.ItemTable != null && this.ItemTable.ContainsKey(HttpUtility.HtmlDecode(filledTitle)))
+            {
+                // 記事が存在する場合、プレフィックスをつけた名前を使用
+                return filledTitle;
+            }
+
+            // 未確認の場合、実際に頭にプレフィックスを付けた記事名でアクセスし、存在するかをチェック
+            // TODO: GetInterWikiの方とあわせ、テンプレートでは2度GetPageが呼ばれている。可能であれば共通化する
             MediaWikiPage page = null;
             try
             {
