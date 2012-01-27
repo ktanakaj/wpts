@@ -85,7 +85,12 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 対象記事に言語間リンクが存在する場合、処理を継続するか確認
-            string interWiki = article.GetInterWiki(this.To.Language.Code);
+            // ※ 言語間リンク取得中は、処理状態を解析中に変更
+            string interWiki = null;
+            this.ChangeStatusInExecuting(
+                () => interWiki = article.GetInterWiki(this.To.Language.Code),
+                Resources.StatusParsing);
+
             if (!String.IsNullOrEmpty(interWiki))
             {
                 if (MessageBox.Show(
@@ -107,9 +112,11 @@ namespace Honememo.Wptscs.Logics
             // 冒頭部を作成
             this.Text += this.CreateOpening(article.Title);
 
-            // 言語間リンク・定型句の変換
+            // 言語間リンク・定型句の変換、実行中は処理状態を解析中に設定
             this.LogLine(ENTER + Resources.RightArrow + " " + String.Format(Resources.LogMessageStartParseAndReplace, interWiki));
-            this.Text += this.ReplaceElement(new MediaWikiParser(this.From).Parse(article.Text), article.Title).ToString();
+            this.ChangeStatusInExecuting(
+                () => this.Text += this.ReplaceElement(new MediaWikiParser(this.From).Parse(article.Text), article.Title).ToString(),
+                Resources.StatusParsing);
 
             // 記事の末尾に新しい言語間リンクと、コメントを追記
             this.Text += this.CreateEnding(article);

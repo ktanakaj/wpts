@@ -303,4 +303,28 @@
   <data name="WarningMessageEmptySaveDirectory" xml:space="preserve">
     <value>出力先フォルダを指定してください。</value>
   </data>
+  <data name="StatusDownloading" xml:space="preserve">
+    <value>ページ取得中...</value>
+    <comment>処理状態がページのダウンロード中</comment>
+  </data>
+  <data name="StatusParsing" xml:space="preserve">
+    <value>ページ解析中...</value>
+    <comment>処理状態がページの解析中</comment>
+  </data>
+  <data name="StatusPinging" xml:space="preserve">
+    <value>サーバー接続中...</value>
+    <comment>処理状態がサーバー接続確認中</comment>
+  </data>
+  <data name="StatusCacheUpdating" xml:space="preserve">
+    <value>キャッシュ更新中...</value>
+    <comment>処理状態がキャッシュ更新中</comment>
+  </data>
+  <data name="StatusConfigReading" xml:space="preserve">
+    <value>設定ファイル読込中...</value>
+    <comment>処理状態が設定ファイル読込中</comment>
+  </data>
+  <data name="StatusFileWriting" xml:space="preserve">
+    <value>ファイル出力中...</value>
+    <comment>処理状態がファイル出力中</comment>
+  </data>
 </root>

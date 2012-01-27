@@ -331,6 +331,60 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   キャッシュ更新中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StatusCacheUpdating {
+            get {
+                return ResourceManager.GetString("StatusCacheUpdating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   設定ファイル読込中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StatusConfigReading {
+            get {
+                return ResourceManager.GetString("StatusConfigReading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ページ取得中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StatusDownloading {
+            get {
+                return ResourceManager.GetString("StatusDownloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ファイル出力中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StatusFileWriting {
+            get {
+                return ResourceManager.GetString("StatusFileWriting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ページ解析中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StatusParsing {
+            get {
+                return ResourceManager.GetString("StatusParsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   サーバー接続中... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StatusPinging {
+            get {
+                return ResourceManager.GetString("StatusPinging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   キャッシュの保存に失敗しました。今回参照したページの情報は、アプリケーション終了まで有効です。
         ///
         ///{0} に類似しているローカライズされた文字列を検索します。
