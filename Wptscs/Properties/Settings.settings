@@ -134,6 +134,16 @@
   &lt;string&gt;#tag&lt;/string&gt;
   &lt;string&gt;gender&lt;/string&gt;
   &lt;string&gt;groupconvert&lt;/string&gt;
+  &lt;string&gt;#expr&lt;/string&gt;
+  &lt;string&gt;#if&lt;/string&gt;
+  &lt;string&gt;#ifeq&lt;/string&gt;
+  &lt;string&gt;#ifexist&lt;/string&gt;
+  &lt;string&gt;#ifexpr&lt;/string&gt;
+  &lt;string&gt;#switch&lt;/string&gt;
+  &lt;string&gt;#time&lt;/string&gt;
+  &lt;string&gt;#rel2abs&lt;/string&gt;
+  &lt;string&gt;#titleparts&lt;/string&gt;
+  &lt;string&gt;#iferror&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="MediaWikiExportPath" Type="System.String" Scope="Application">

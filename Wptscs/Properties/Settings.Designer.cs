@@ -155,8 +155,11 @@ namespace Honememo.Wptscs.Properties {
             "ng>\r\n  <string>#formatdate</string>\r\n  <string>padleft</string>\r\n  <string>padri" +
             "ght</string>\r\n  <string>plural</string>\r\n  <string>grammar</string>\r\n  <string>i" +
             "nt</string>\r\n  <string>#language</string>\r\n  <string>#special</string>\r\n  <strin" +
-            "g>#tag</string>\r\n  <string>gender</string>\r\n  <string>groupconvert</string>\r\n</A" +
-            "rrayOfString>")]
+            "g>#tag</string>\r\n  <string>gender</string>\r\n  <string>groupconvert</string>\r\n  <" +
+            "string>#expr</string>\r\n  <string>#if</string>\r\n  <string>#ifeq</string>\r\n  <stri" +
+            "ng>#ifexist</string>\r\n  <string>#ifexpr</string>\r\n  <string>#switch</string>\r\n  " +
+            "<string>#time</string>\r\n  <string>#rel2abs</string>\r\n  <string>#titleparts</stri" +
+            "ng>\r\n  <string>#iferror</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection MediaWikiMagicWords {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWords"]));
