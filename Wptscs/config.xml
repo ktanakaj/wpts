@@ -470,9 +470,11 @@
   <ItemTables>
     <ItemTable From="en" To="ja">
       <Item From="Template:Refend" To="Template:Refend" />
+      <Item From="Template:Documentation" To="Template:Documentation" />
     </ItemTable>
     <ItemTable From="ja" To="en">
       <Item From="Template:Refend" To="Template:Refend" />
+      <Item From="Template:Documentation" To="Template:Documentation" />
     </ItemTable>
   </ItemTables>
   <HeadingTable>
