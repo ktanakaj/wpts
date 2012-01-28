@@ -12,8 +12,8 @@ namespace Honememo.Parsers
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using System.Text;
-    using System.Web;
 
     /// <summary>
     /// ページのHTML要素をあらわすモデルクラスです。
@@ -63,15 +63,15 @@ namespace Honememo.Parsers
 
             // 開始タグ
             b.Append('<');
-            b.Append(HttpUtility.HtmlEncode(this.Name));
+            b.Append(WebUtility.HtmlEncode(this.Name));
             
             // 属性
             foreach (KeyValuePair<string, string> attr in this.Attributes)
             {
                 b.Append(' ');
-                b.Append(HttpUtility.HtmlEncode(attr.Key));
+                b.Append(WebUtility.HtmlEncode(attr.Key));
                 b.Append("=\"");
-                b.Append(HttpUtility.HtmlEncode(attr.Value));
+                b.Append(WebUtility.HtmlEncode(attr.Value));
                 b.Append('"');
             }
 
@@ -90,7 +90,7 @@ namespace Honememo.Parsers
             if (this.Count > 0)
             {
                 b.Append("</");
-                b.Append(HttpUtility.HtmlEncode(this.Name));
+                b.Append(WebUtility.HtmlEncode(this.Name));
                 b.Append('>');
             }
 

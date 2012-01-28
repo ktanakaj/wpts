@@ -12,6 +12,7 @@ namespace Honememo.Parsers
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using System.Text;
     using Honememo.Utilities;
 
@@ -101,7 +102,7 @@ namespace Honememo.Parsers
             }
             else if (this.IsHtml)
             {
-                return System.Web.HttpUtility.HtmlDecode(s);
+                return WebUtility.HtmlDecode(s);
             }
             else
             {

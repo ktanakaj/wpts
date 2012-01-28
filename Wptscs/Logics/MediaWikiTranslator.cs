@@ -16,7 +16,6 @@ namespace Honememo.Wptscs.Logics
     using System.Linq;
     using System.Net;
     using System.Text;
-    using System.Web;
     using System.Windows.Forms;
     using Honememo.Parsers;
     using Honememo.Utilities;
@@ -142,7 +141,7 @@ namespace Honememo.Wptscs.Logics
         protected new MediaWikiPage GetPage(string title, string notFoundMsg)
         {
             // &amp; &nbsp; 等の特殊文字をデコードして、親クラスのメソッドを呼び出し
-            return base.GetPage(HttpUtility.HtmlDecode(title), notFoundMsg) as MediaWikiPage;
+            return base.GetPage(WebUtility.HtmlDecode(title), notFoundMsg) as MediaWikiPage;
         }
 
         #endregion
@@ -252,7 +251,7 @@ namespace Honememo.Wptscs.Logics
                 // 対訳表を使用して言語間リンクを確認
                 // ※ 対訳表へのキーとしてはHTMLデコードした記事名を使用する
                 TranslationDictionary.Item item;
-                if (this.ItemTable.TryGetValue(HttpUtility.HtmlDecode(title), out item))
+                if (this.ItemTable.TryGetValue(WebUtility.HtmlDecode(title), out item))
                 {
                     // 対訳表に存在する場合はその値を使用
                     // リダイレクトがあれば、そのメッセージも表示
@@ -306,7 +305,7 @@ namespace Honememo.Wptscs.Logics
                     }
 
                     item.Word = interWiki;
-                    this.ItemTable[HttpUtility.HtmlDecode(title)] = item;
+                    this.ItemTable[WebUtility.HtmlDecode(title)] = item;
                 }
             }
 
@@ -839,7 +838,7 @@ namespace Honememo.Wptscs.Logics
 
             // 既に対訳表にプレフィックス付きの記事名が確認されているか？
             // ※ 対訳表へのキーとしてはHTMLデコードした記事名を使用する
-            if (this.ItemTable != null && this.ItemTable.ContainsKey(HttpUtility.HtmlDecode(filledTitle)))
+            if (this.ItemTable != null && this.ItemTable.ContainsKey(WebUtility.HtmlDecode(filledTitle)))
             {
                 // 記事が存在する場合、プレフィックスをつけた名前を使用
                 return filledTitle;
