@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonConfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 61</value>
+  </data>
+  <data name="buttonConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonConfig.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="buttonConfig.Text" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>464, 17</value>
+  </metadata>
+  <data name="buttonConfig.ToolTip" xml:space="preserve">
+    <value>言語に関する設定を行います。</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.Name" xml:space="preserve">
+    <value>buttonConfig</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelTarget.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 64</value>
+  </data>
+  <data name="labelTarget.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 21</value>
+  </data>
+  <data name="labelTarget.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelTarget.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="labelTarget.ToolTip" xml:space="preserve">
+    <value>翻訳先の言語です。</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Name" xml:space="preserve">
+    <value>labelTarget</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="comboBoxTarget.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="comboBoxTarget.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 64</value>
+  </data>
+  <data name="comboBoxTarget.MaxLength" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="comboBoxTarget.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 20</value>
+  </data>
+  <data name="comboBoxTarget.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="comboBoxTarget.ToolTip" xml:space="preserve">
+    <value>翻訳先の言語を選択、または入力します。
+入力の場合、Wikipediaで使用されている言語コードを入力してください。</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Name" xml:space="preserve">
+    <value>comboBoxTarget</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelArrow.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelArrow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 46</value>
+  </data>
+  <data name="labelArrow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="labelArrow.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labelArrow.Text" xml:space="preserve">
+    <value>↓</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Name" xml:space="preserve">
+    <value>labelArrow</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="linkLabelSourceURL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>193, 21</value>
+  </data>
+  <data name="linkLabelSourceURL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 20</value>
+  </data>
+  <data name="linkLabelSourceURL.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="linkLabelSourceURL.Text" xml:space="preserve">
+    <value>http://</value>
+  </data>
+  <data name="linkLabelSourceURL.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="linkLabelSourceURL.ToolTip" xml:space="preserve">
+    <value>翻訳元WikipediaのURLです。</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Name" xml:space="preserve">
+    <value>linkLabelSourceURL</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 21</value>
+  </data>
+  <data name="labelSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 21</value>
+  </data>
+  <data name="labelSource.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelSource.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="labelSource.ToolTip" xml:space="preserve">
+    <value>翻訳元の言語です。</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Name" xml:space="preserve">
+    <value>labelSource</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;labelSource.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="comboBoxSource.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="comboBoxSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 21</value>
+  </data>
+  <data name="comboBoxSource.MaxLength" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="comboBoxSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 20</value>
+  </data>
+  <data name="comboBoxSource.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="comboBoxSource.ToolTip" xml:space="preserve">
+    <value>翻訳元の言語を選択、または入力します。
+入力の場合、Wikipediaで使用されている言語コードを入力してください。</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Name" xml:space="preserve">
+    <value>comboBoxSource</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="groupBoxTransfer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="groupBoxTransfer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 96</value>
+  </data>
+  <data name="groupBoxTransfer.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxTransfer.Text" xml:space="preserve">
+    <value>翻訳元→先の言語を設定</value>
+  </data>
+  <data name="groupBoxTransfer.ToolTip" xml:space="preserve">
+    <value>翻訳元・先の言語を選択してください。
+コンボボックスに目的の言語コードが存在しない場合は、設定画面で登録を行ってください。</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Name" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 18</value>
+  </data>
+  <data name="textBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 19</value>
+  </data>
+  <data name="textBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxSaveDirectory.ToolTip" xml:space="preserve">
+    <value>出力先フォルダはこちらに直接入力することもできます。</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.Name" xml:space="preserve">
+    <value>textBoxSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.Parent" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 16</value>
+  </data>
+  <data name="buttonSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 23</value>
+  </data>
+  <data name="buttonSaveDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonSaveDirectory.Text" xml:space="preserve">
+    <value>参照</value>
+  </data>
+  <data name="buttonSaveDirectory.ToolTip" xml:space="preserve">
+    <value>処理結果を出力するフォルダを選択します。</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveDirectory.Name" xml:space="preserve">
+    <value>buttonSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveDirectory.Parent" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveDirectory.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 114</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 49</value>
+  </data>
+  <data name="groupBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
+    <value>処理結果を出力するフォルダの選択</value>
+  </data>
+  <data name="groupBoxSaveDirectory.ToolTip" xml:space="preserve">
+    <value>処理結果を出力するフォルダを選択してください。
+指定されたフォルダに記事テキストとログを出力します。</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Name" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBoxRun.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="textBoxLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="textBoxLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 56</value>
+  </data>
+  <data name="textBoxLog.MaxLength" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxLog.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textBoxLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="textBoxLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 193</value>
+  </data>
+  <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Name" xml:space="preserve">
+    <value>textBoxLog</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonStop.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonStop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 18</value>
+  </data>
+  <data name="buttonStop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 23</value>
+  </data>
+  <data name="buttonStop.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="buttonStop.Text" xml:space="preserve">
+    <value>中止</value>
+  </data>
+  <data name="buttonStop.ToolTip" xml:space="preserve">
+    <value>処理を中断します。</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Name" xml:space="preserve">
+    <value>buttonStop</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 18</value>
+  </data>
+  <data name="buttonRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 23</value>
+  </data>
+  <data name="buttonRun.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonRun.Text" xml:space="preserve">
+    <value>実行</value>
+  </data>
+  <data name="buttonRun.ToolTip" xml:space="preserve">
+    <value>記事にアクセスし、翻訳支援処理を行います。
+作成した翻訳支援ファイルとログは、出力先フォルダに出力されます。</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Name" xml:space="preserve">
+    <value>buttonRun</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxArticle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 20</value>
+  </data>
+  <data name="textBoxArticle.MaxLength" type="System.Int32, mscorlib">
+    <value>255</value>
+  </data>
+  <data name="textBoxArticle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 19</value>
+  </data>
+  <data name="textBoxArticle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxArticle.ToolTip" xml:space="preserve">
+    <value>翻訳元Wikipediaでの記事名を入力します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Name" xml:space="preserve">
+    <value>textBoxArticle</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelArticle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelArticle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 23</value>
+  </data>
+  <data name="labelArticle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 12</value>
+  </data>
+  <data name="labelArticle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelArticle.Text" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="labelArticle.ToolTip" xml:space="preserve">
+    <value>翻訳元Wikipediaでの記事名を入力します。</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Name" xml:space="preserve">
+    <value>labelArticle</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupBoxRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 169</value>
+  </data>
+  <data name="groupBoxRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 262</value>
+  </data>
+  <data name="groupBoxRun.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBoxRun.Text" xml:space="preserve">
+    <value>翻訳する記事を指定して、実行</value>
+  </data>
+  <data name="groupBoxRun.ToolTip" xml:space="preserve">
+    <value>目的の記事の、翻訳元言語のWikipediaでの記事名を入力し、実行ボタンを押してください。</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Name" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="folderBrowserDialogSaveDirectory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="folderBrowserDialogSaveDirectory.Description" xml:space="preserve">
+    <value>処理結果を出力するフォルダを選択してください。</value>
+  </data>
+  <metadata name="backgroundWorkerRun.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>274, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>464, 443</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAIAICAQAAAABADoAgAAJgAAABAQEAAAAAQAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAAAC
+        AAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAICAgADAwMAAAAD/AAD/
+        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAC7sAAAAAAAAAAAAAAAAAAAu7sAAAAAAAAAAAAAAAAAAAC7AAAAAAAAAAAAABEAAAAAuwAAu7sLsAAA
+        AAAREAAAALsAC7u7u7AAAAAAAREAAAC7AAuwAAuwAREREREREAAAuwALsAALsAERERERERAAALsAALsA
+        C7AAAAAAAREAAAC7AAALu7uwAAAAABEQAAAAuwAAsAALsAAAAAARAAAAu7sAALu7u7AAAAAAAAAAALu7
+        AAC7u7sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7AAAAAAAAAAAAAAAA
+        AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAu7uwALsAALsAAAAAAAAAC7
+        u7uwC7AAC7AAAAAAAAALuwAAsAuwAAuwAAAAAAAAC7AAAAALsAALsAAAAAAAAAu7u7uwC7AAC7AAAAAA
+        AAALsAALsAuwAAuwAAAAAAAAC7sAC7ALsAALsAAAAAAAAAC7u7sAC7u7u7AAAAAAAAAAC7uwAAuwu7sA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////
+        /////x////8P////z///P88J/x/OAf+PznmAB855gAfPOf+Pz4H/H895/z8PAf//DwP/////////////
+        z////8/////////////g55//wGef/49nn/+f55//gGef/55nn/+OZ5//wOAf/+HkP///////////////
+        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
+        AACAAIAAgIAAAICAgADAwMAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAB3d3d3d3
+        d3dERERERERER0////////hHT///////+EdP///////4R0////////hHT///////+EdP///////4R0//
+        //////hHT///////+EdIiIiIiIiIR0zMzMzMzMxHxERERERERMAAAAAAAAAAAAAAAAAAAAAA//8AAIAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAD//wAA//8AAA==
+</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>480, 480</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Wikipedia 翻訳支援ツール C#</value>
+  </data>
+  <data name="&gt;&gt;folderBrowserDialogSaveDirectory.Name" xml:space="preserve">
+    <value>folderBrowserDialogSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;folderBrowserDialogSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerRun.Name" xml:space="preserve">
+    <value>backgroundWorkerRun</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerRun.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

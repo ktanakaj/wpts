@@ -1,0 +1,181 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>スペースシップワン</title>
+    <id>103231</id>
+    <revision>
+      <id>31953257</id>
+      <timestamp>2010-05-06T08:21:22Z</timestamp>
+      <contributor>
+        <username>Loveless</username>
+        <id>129239</id>
+      </contributor>
+      <minor />
+      <comment>ロボットによる 追加: [[fa:فضاپیمای یک]]</comment>
+      <text xml:space="preserve">'''スペースシップワン''' ('''SpaceShipOne''') は[[スケールド・コンポジッツ|スケールド・コンポジッツ社]]によって開発された有人[[宇宙船]]である。[[企業|民間企業]]による[[有人宇宙飛行]]としては世界で初めて、[[2004年]][[6月21日]]に高度約[[1_E5_m|100 km]]（10万メートル）を達成した。
+[[Image:Spaceship One and White Knight in flight 1.jpg|thumb|right|250px|ホワイト・ナイトに搭載されて飛行中のスペースシップワン]]
+
+さらに、[[2004年]][[9月29日]]、[[10月4日]]には、民間宇宙船開発に対する賞金制度「[[Ansari X Prize|ANSARI X PRIZE]]」の受賞条件を最も早く達成し、賞金1000万ドルを同社は獲得した。なお、受賞条件は以下の通り。
+* 高度100 km以上に到達する
+* 乗員3名（操縦者1名と乗員2名分のバラスト）相当を打ち上げる
+* 2週間以内に同一機体を再使用し、飛行を行う
+
+それまでの宇宙開発は、すべて国家計画の一環であり、国家予算を使って行われていたものである。事実、[[スプートニク1号|世界初の人工衛星]]、[[ボストーク|初の有人宇宙飛行]]、[[アポロ11号|初の有人月着陸]]、いずれも国家の強力な主導のもとで行われた。しかしながら、航空宇宙史を振り返ると、[[ライト兄弟]]の初飛行、[[チャールズ・リンドバーグ|リンドバーグ]]の大西洋無着陸横断などの大記録は民間・個人によって達成されたものであった。スペースシップワンが達成した成果はしばしばこれらに匹敵する成功として評価されている。史上初の民間による宇宙飛行の栄誉をたたえ、[[NASA]]の惑星探査機[[ニュー・ホライズンズ]]には、スペースシップワンの機体の一部が搭載されて宇宙へと旅立っていった。
+
+[[ヴァージングループ]]に設立された宇宙旅行会社[[ヴァージン・ギャラクティック]](Virgin Galactic) はスペースシップワンからの技術供与を受け、宇宙旅行ビジネスを開始することを発表した。2007年からのサービス開始を目指していたが、2010年現在も実現は難航している。
+[[Image:Spaceship One at Smithsonian.jpg|thumb|right|250px|[[国立航空宇宙博物館]]に展示されているスペースシップワン]]
+
+== 飛行の概要 ==
+[[Image:Spaceship One in flight 1.jpg|thumb|right|250px|飛行中のスペースシップワン]]
+[[Image:Spaceship One cockpit in flight.jpg|thumb|right|250px|飛行中のホワイトナイトの操縦席]]
+初めて高度100kmを達成した2004年6月21日の飛行'''15P'''は次のように行われた。
+
+カリフォルニア州モハベ砂漠にある飛行場から離陸。運搬用航空機「[[ホワイトナイト (航空機)|ホワイトナイト]]」により吊り下げられた状態のまま、高度約15キロまで上昇後、切り離された。その後は[[ロケット|ロケットエンジン]]に点火し音速の3倍まで加速。ロケットの燃焼終了後は[[慣性]]で放物線を描くように[[弾道飛行]]し、ついに高度100kmへの到達を果たした。3分間余りの[[無重量状態]]での宇宙飛行を経て、大気圏に再突入。高度15キロまで降下した後は滑空により元の飛行場へ着陸した。更に'''16P'''・'''17P'''にて2週間以内の再飛行を達成、X PRIZE受賞条件をクリアした。
+
+現在、スペースシップワンの実物は[[アメリカ合衆国]][[ワシントンD.C.]]の[[国立航空宇宙博物館]]で見る事ができる。
+
+
+
+
+{| cellpadding="4" cellspacing="3" border="1"
+|+スペースシップワンの飛行記録
+|- bgcolor="#A0DFFF"
+!飛行番号!!日付!!最高速度!!到達高度!!パイロット!!備考
+|- bgcolor="e0ffe0"
+!11P
+|2003-12-17||[[マッハ]]1.2||align="right"|20.7 km||Brian Binnie||&amp;nbsp;
+|- bgcolor="e0e0e0"
+!13P
+|2004-04-08|||マッハ1.6||align="right"|32.0 km||Peter Siebold||&amp;nbsp;
+|- bgcolor="e0ffe0"
+!14P
+|2004-05-13||マッハ2.5||align="right"|64.4 km||Mike Melvill||&amp;nbsp;
+|- bgcolor="e0e0e0"
+!15P
+|2004-06-21||マッハ2.9||align="right"|100.1 km||Mike Melvill||初の高度100km超
+|- bgcolor="e0ffe0"
+!16P
+|2004-09-29||&amp;nbsp;||align="right"|102.9 km||Mike Melvill||&amp;nbsp;
+|- bgcolor="e0e0e0"
+!17P
+|2004-10-04||マッハ3.09||align="right"|112.0 km||Brian Binnie||X PRIZE受賞
+|}
+
+== 機体 ==
+{|class="wikitable" align="right"
+|-align="center"
+!乗員
+|1名（最大3名可）
+|-align="center"
+!全長
+|5 m
+|-align="center"
+!翼幅
+|5 m
+|-align="center"
+!胴体直径
+|1.52 m
+|-align="center"
+!翼面積
+|15 m²
+|-align="center"
+!機体質量
+|1200 kg
+|-align="center"
+!離陸時質量
+|3600 kg
+|-align="center"
+!推力
+|7500 kgf (74 kN)
+|-align="center"
+!比推力
+|250 s (2.5 km/s)
+|-align="center"
+!燃焼時間
+|87 s
+|}
+機体は米国の航空機開発会社、[[スケールド・コンポジッツ|スケールド・コンポジッツ社]]の設計によるもので、重さ約3トン、3人乗り。[[ロケット|ロケットエンジン]]は、[[酸化|酸化剤]]として液体の[[亜酸化窒素]]、推進剤として固体の合成[[ゴム]]を使用した[[ハイブリッドロケット]]である。制御性に優れた液体ロケットの長所と、取り扱いが容易な固体ロケットの長所の双方を兼ね備えている（詳細については[[ロケットエンジンの推進剤]]を参照）。高度15キロメートルまでは親機ホワイトナイトに吊り下げられて上昇することにより、大気圏を脱出するために必要な燃料の量を抑えている。
+
+尾翼部分が回転し65°まで立てることが出来る特徴的な設計となっている。最高度からの落下時には尾翼を立てることで、降下スピードを抑え、機体の加熱を防いでいる。また、これによって落下時の機体の安定性を保つ役割も果たしている。
+高度15.5キロメートルまで降下した時点で尾翼を水平に戻し、滑空しながら着陸地点を目指す。
+
+登録されている機体番号はN328KFで、これは目標高度の100 km（= 約328キロ[[フィート]]）に由来する。同社によれば、N100KMという機体番号は既に取得されていたとのことである。
+
+==ギャラリー==
+&lt;gallery&gt;
+Image:SpaceShipOne schematic.png|スペースシップワンの[[ハイブリッドロケット]]エンジンの詳細 ([http://scaled.com/projects/tierone/data_sheets/html/ox_tank.htm より詳しい情報]).
+Image:Ss1 smithsonian.jpg|ワシントンD.Cの国立航空宇宙博物館のスペースシップワン [[スピリットオブセントルイス号]]と[[X-1 (航空機)|ベル X-1]] "Glamorous Glennis"と並んで展示される
+Image:Spaceship One.JPG|展示されている様子
+&lt;/gallery&gt;
+
+== 関連項目 ==
+* [[アニューシャ・アンサリ]]
+* [[宇宙旅行]]
+
+== 外部リンク ==
+* [http://udonfact.hp.infoseek.co.jp/paper/space/ss1.html Space Ship One　スペースシップワン]
+* [http://scaled.com/projects/tierone/index.htm SpaceShipOne] （スケールド・コンポジッツ社、英語）
+
+{{commons|Category:Spaceship One|{{PAGENAME}}}}
+{{Reusable launch systems}}
+{{DEFAULTSORT:すへすしつふ1}}
+[[Category:宇宙船]]
+[[Category:ヴァージン・グループ]]
+
+[[ar:سبيس شيب وان]]
+[[bg:SpaceShipOne]]
+[[ca:SpaceShipOne]]
+[[cs:SpaceShipOne]]
+[[da:SpaceShipOne]]
+[[de:SpaceShipOne]]
+[[en:SpaceShipOne]]
+[[eo:SpaceShipOne]]
+[[es:SpaceShipOne]]
+[[fa:فضاپیمای یک]]
+[[fi:SpaceShipOne]]
+[[fr:SpaceShipOne]]
+[[he:ספייס שיפ 1]]
+[[hu:SpaceShipOne]]
+[[it:Scaled Composites SpaceShipOne]]
+[[ko:스페이스십원]]
+[[ms:SpaceShipOne]]
+[[nl:SpaceShipOne]]
+[[pl:SpaceShipOne]]
+[[pt:SpaceShipOne]]
+[[ru:SpaceShipOne]]
+[[sk:SpaceShipOne]]
+[[sl:SpaceShipOne]]
+[[sv:SpaceShipOne]]
+[[zh:太空船1號]]</text>
+    </revision>
+  </page>
+</mediawiki>

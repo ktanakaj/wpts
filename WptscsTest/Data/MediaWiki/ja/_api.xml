@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<api xmlns="http://www.mediawiki.org/xml/api/">
+  <query>
+    <namespaces>
+      <ns id="-2" case="first-letter" canonical="Media" xml:space="preserve">メディア</ns>
+      <ns id="-1" case="first-letter" canonical="Special" xml:space="preserve">特別</ns>
+      <ns id="0" case="first-letter" content="" xml:space="preserve" />
+      <ns id="1" case="first-letter" subpages="" canonical="Talk" xml:space="preserve">ノート</ns>
+      <ns id="2" case="first-letter" subpages="" canonical="User" xml:space="preserve">利用者</ns>
+      <ns id="3" case="first-letter" subpages="" canonical="User talk" xml:space="preserve">利用者‐会話</ns>
+      <ns id="4" case="first-letter" subpages="" canonical="Project" xml:space="preserve">Wikipedia</ns>
+      <ns id="5" case="first-letter" subpages="" canonical="Project talk" xml:space="preserve">Wikipedia‐ノート</ns>
+      <ns id="6" case="first-letter" canonical="File" xml:space="preserve">ファイル</ns>
+      <ns id="7" case="first-letter" subpages="" canonical="File talk" xml:space="preserve">ファイル‐ノート</ns>
+      <ns id="8" case="first-letter" canonical="MediaWiki" xml:space="preserve">MediaWiki</ns>
+      <ns id="9" case="first-letter" subpages="" canonical="MediaWiki talk" xml:space="preserve">MediaWiki‐ノート</ns>
+      <ns id="10" case="first-letter" subpages="" canonical="Template" xml:space="preserve">Template</ns>
+      <ns id="11" case="first-letter" subpages="" canonical="Template talk" xml:space="preserve">Template‐ノート</ns>
+      <ns id="12" case="first-letter" subpages="" canonical="Help" xml:space="preserve">Help</ns>
+      <ns id="13" case="first-letter" subpages="" canonical="Help talk" xml:space="preserve">Help‐ノート</ns>
+      <ns id="14" case="first-letter" canonical="Category" xml:space="preserve">Category</ns>
+      <ns id="15" case="first-letter" subpages="" canonical="Category talk" xml:space="preserve">Category‐ノート</ns>
+      <ns id="100" case="first-letter" subpages="" canonical="Portal" xml:space="preserve">Portal</ns>
+      <ns id="101" case="first-letter" subpages="" canonical="Portal‐ノート" xml:space="preserve">Portal‐ノート</ns>
+      <ns id="102" case="first-letter" subpages="" canonical="プロジェクト" xml:space="preserve">プロジェクト</ns>
+      <ns id="103" case="first-letter" subpages="" canonical="プロジェクト‐ノート" xml:space="preserve">プロジェクト‐ノート</ns>
+    </namespaces>
+    <namespacealiases>
+      <ns id="1" xml:space="preserve">トーク</ns>
+      <ns id="3" xml:space="preserve">利用者・トーク</ns>
+      <ns id="5" xml:space="preserve">Wikipedia・トーク</ns>
+      <ns id="7" xml:space="preserve">ファイル・トーク</ns>
+      <ns id="9" xml:space="preserve">MediaWiki・トーク</ns>
+      <ns id="10" xml:space="preserve">テンプレート</ns>
+      <ns id="11" xml:space="preserve">テンプレート・トーク</ns>
+      <ns id="12" xml:space="preserve">ヘルプ</ns>
+      <ns id="13" xml:space="preserve">ヘルプ・トーク</ns>
+      <ns id="14" xml:space="preserve">カテゴリ</ns>
+      <ns id="15" xml:space="preserve">カテゴリ・トーク</ns>
+      <ns id="101" xml:space="preserve">ポータル‐ノート</ns>
+      <ns id="101" xml:space="preserve">Portal・トーク</ns>
+      <ns id="103" xml:space="preserve">プロジェクト・トーク</ns>
+      <ns id="6" xml:space="preserve">Image</ns>
+      <ns id="7" xml:space="preserve">Image talk</ns>
+      <ns id="6" xml:space="preserve">画像</ns>
+      <ns id="7" xml:space="preserve">画像‐ノート</ns>
+    </namespacealiases>
+  </query>
+</api>

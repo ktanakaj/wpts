@@ -1,0 +1,159 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>ポール・アレン</title>
+    <id>143204</id>
+    <revision>
+      <id>34037206</id>
+      <timestamp>2010-09-17T03:42:53Z</timestamp>
+      <contributor>
+        <username>F-mikanBot</username>
+        <id>444844</id>
+      </contributor>
+      <minor />
+      <comment>ロボットによる: 良質な記事へのリンク [[en:Paul Allen]]</comment>
+      <text xml:space="preserve">{{Infobox 人物
+ | name        = ポール・アレン&lt;br /&gt;''Paul Allen''
+ | image       = Paull Allen.JPG
+ | imagesize   = 225px
+ | caption     = 
+ | birth_date  = {{生年月日と年齢|1953|1|21}}
+ | birth_place = {{USA}}&lt;br /&gt;[[ワシントン州]][[マーサーアイランド]]（[[シアトル]]近郊）
+ | death_date  = 
+ | death_place = 
+ | occupation  = [[実業家]]
+ | salary      = 
+ | networth    = 105億ドル（[[2009年]]時点）&lt;ref&gt;{{cite web|url=http://www.forbes.com/lists/2009/10/billionaires-2009-richest-people_Paul-Allen_1217.html|title=#32 Paul Allen|date=2009年3月11日|accessyear=2009年|accessdate=11月28日|author=[[フォーブス (雑誌)|フォーブス]]}}&lt;/ref&gt;
+ | spouse      =
+ | website     =
+ | footnotes   = 
+}}
+'''ポール・ガードナー・アレン'''（Paul Gardner Allen, [[1953年]][[1月21日]] - ）は、[[マイクロソフト]]社の共同創業者。[[1983年]]に退社し、[[1990年]]に復帰するが、[[2000年]]に再び退社、[[取締役]]も退任。現在は[[資産運用]]や[[投資]]を業務とする[[バルカン]]社を経営している。
+
+大資産家として知られており、6つの財団を傘下に率いるポール・G・アレン財団を運営している。また、アレン脳科学研究所や音楽史美術館 Experience Music Project など様々な事業に出資や寄付をしている。[[サイエンス・フィクション|SF]] ファンとしても知られ、私財を投じて SF 博物館 Science Fiction Museum and Hall of Fame を設立したほか、[[SETI@home]] にも寄付を行っている。
+
+[[アメリカ合衆国|アメリカ]]の[[アメリカンフットボール]]プロリーグ（[[NFL]]）の[[シアトル・シーホークス]]、プロ[[バスケットボール]]リーグ（[[NBA]]）の[[ポートランド・トレイルブレイザーズ]]、プロ[[サッカー]]リーグ（[[メジャーリーグサッカー|MLS]]）の[[シアトル・サウンダーズFC]]のオーナーとしても知られる。
+
+== 経歴 ==
+[[アメリカ合衆国]]・[[ワシントン州]][[シアトル]]生まれ。父は司書。シアトルの名門私立学校、レイクサイド中学・高校で[[ビル・ゲイツ]]と知り合い、[[1968年]]に同校が導入した [[ディジタル・イクイップメント・コーポレーション|DEC]] 社の [[PDP-10]] を使用してコンピュータの魅力に取り憑かれる。[[1970年]]にゲイツと共にレイクサイド・プログラマーズ・グループを結成、ISI 社から給与計算システムの開発を受注。高校生の時にゲイツと共にトラフォデータ社を設立、独自に開発した交通量分析システムを州政府に納入した。卒業後は[[ワシントン州立大学 (プルマン)|ワシントン州立大学]]に進学するが、2年後に中退し[[ボストン]]の[[ハネウェル]]社にプログラマーとして勤務する。
+
+[[1975年]]、[[ハーバード大学]]に在籍していたゲイツを説得し、[[ニューメキシコ州]][[アルバカーキ]]にてマイクロソフト社を設立。[[BASIC]] [[インタプリタ]]の販売を開始する。[[1980年]]に [[IBM]] 社から OS 開発の要請を受け、アレンは[[シアトル・コンピュータ・プロダクツ]]社から 86-DOS（[[QDOS]]）を50,000米ドルで買収する交渉の先頭に立った。彼らは 86-DOS を原型に PC-DOS（[[MS-DOS]]）を開発し IBM へ納入し、今日のマイクロソフト社の成長の基盤を築いていった。
+
+[[1983年]]に持病である[[ホジキンリンパ腫|ホジキン病]]を理由にマイクロソフト社を退社。数か月に渡る[[放射線療法|放射線治療]]と[[骨髄移植]]で克服し、[[1985年]]には[[:en:Asymetrix|アシンメトリックス社]]を設立し自ら社長に就任した。その後ホジキン病という診断がそもそも[[誤診]]であることが判明したため[[1990年]]にマイクロソフトに復帰するも、[[2000年]]11月には再びマイクロソフトを退社し[[取締役]]も退任。
+
+[[1998年]]には米国の大手[[CATV]]会社である[[チャーター・コミュニケーションズ]]の株式を買収して筆頭株主となり、自らも同社の会長に就任したが、同社はその後経営不振に陥っており、2009年2月現在[[連邦倒産法第11章]]の申請を準備中である&lt;ref&gt;[http://www.nikkei.co.jp/news/kaigai/20090213AT2M1301A13022009.html 米ＣＡＴＶ大手のチャーターが破産法申請へ] - NIKKEI NET&lt;/ref&gt;。また[[2008年]]1月に行われた米国の700MHz帯の競売にも「バルカン・スペクトラム」として参加し、シアトルなど2か所の免許を得ている。
+
+ポール・アレンの姉妹でバルカン社CEOのジョディ・アレンは2009年11月16日、ポールが[[非ホジキンリンパ腫]]と診断されたと発表した&lt;ref&gt;{{cite news|first=Ina|last=Fried|date=2009-11-16|url=http://news.cnet.com/8301-13860_3-10399143-56.html|title=Paul Allen diagnosed with cancer|publisher=[[CNET]]|accessdate=2009-11-28}}&lt;/ref&gt;。
+
+== 慈善活動 ==
+[[ファイル:Ansari_X-Prize_Check.jpg|thumb|right|250px|ポール・アレン（右から3番目）、[[Ansari X Prize]] 優勝賞金1,000万ドルの贈呈式にて（2004年11月6日）]]
+マイクロソフト退社後は慈善事業に参入し、[[1986年]]に慈善団体のポール・G・アレン一族財団を創設した。以来毎年3,000万米ドルを太平洋岸北西地域の民間非営利組織に分配している。[[2003年]]9月には私財1億米ドルを投じてアレン脳科学研究所を設立し、マウス脳[[遺伝子発現]]マップ作成プロジェクト Allen Brain Atlas を開始した。[[2004年]]に [[Ansari X Prize]] を受賞した有人宇宙船 [[スペースシップワン|SpaceShipOne]] にも出資した。
+
+1980年代後半、[[ワシントン大学 (ワシントン州)|ワシントン大学]]に1800万米ドルを寄付し、アレンの父の名を冠した図書館 Kenneth S. Allen Library が建設された。[[2002年]]にも1400万米ドルを寄付し、ポール・アレンの名を冠した Paul G. Allen Center for Computer Science &amp; Engineering が新設された。[[2003年]]にも500万米ドルを寄付し、アレンの母の名を冠した Faye G. Allen Center for Visual Arts が設立された。
+
+[[ハナアブ]]の一種である[[ポールアレンハナアブ]]は、[[ハエ目|双翅目]]学に対する貢献から彼に[[献名]]されたものである&lt;ref&gt;{{cite web|first=Jennifer E.|last=Fairman|date=1999-08-19|url=http://www.sel.barc.usda.gov/Diptera/syrphid/allen.htm|title=Paul Allen's Flower Fly|publisher=[[アメリカ合衆国農務省]]|accessdate=2009-11-28}}&lt;/ref&gt;。
+
+== スポーツへの関わり ==
+[[1988年]]にプロ[[バスケットボール]]リーグ（[[NBA]]）の[[ポートランド・トレイルブレイザーズ]]を7000万米ドルで購入し、[[1993年]]に2億6200万米ドルの資金を投入して本拠地[[ローズ・ガーデン・アリーナ]]を建設した。[[1997年]]には[[アメリカンフットボール]]プロリーグ（[[NFL]]）の[[シアトル・シーホークス]]を購入し、本拠地[[クエスト・フィールド]]の建設に大きな役割を果たした。また、メジャーリーグサッカーのシアトル・サウンダーズFCのオーナーとしてクラブの運営に関わっている。
+
+== 脚注・出典 ==
+{{脚注ヘルプ}}
+{{reflist}}
+
+== 外部リンク ==
+* [http://www.paulallen.com/ PaulAllen.com]
+* [http://www.vulcan.com/ バルカン社のWEBサイト]
+* [http://www.pgafoundation.com/ ポール・G・アレン財団]
+* [http://www.pgafamilyfoundation.org/ ポール・G・アレン一族財団]
+* [http://www.brainatlas.org/ アレン脳科学研究所]
+* [http://www.europaluxury.com/yacht/shipyard/luerssen.html Allen's Octopus Yacht]
+* [http://www.emplive.com/ Experience Music Project]
+* [http://www.sfhomeworld.org/ Science Fiction Museum and Hall of Fame]
+* [http://hotwired.goo.ne.jp/news/news/technology/story/20040325307.html ポール・アレン氏、宇宙人探索に1350万ドルを寄付（HotWired Japan）]
+&lt;!--* [http://www.europaluxury.com/Section/Boats/LUERSSEN.html Paul Allen's Yacht shipyard]←リンク切れ--&gt;
+
+{{マイクロソフト}}
+{{DEFAULTSORT:あれん ほる}}
+[[Category:アメリカ合衆国の実業家]]
+[[Category:アメリカ合衆国のサッカークラブの代表者]]
+[[Category:マイクロソフトの人物]]
+[[Category:NBAのオーナー]]
+[[Category:ポートランド・トレイルブレイザーズ]]
+[[Category:NFLのオーナー]]
+[[Category:シアトル・シーホークス]]
+[[Category:シアトル出身の人物]]
+[[Category:1953年生]]
+[[Category:存命人物]]
+{{Link GA|en}}
+
+[[ar:بول ألين]]
+[[bg:Пол Алън]]
+[[bn:পল অ্যালেন]]
+[[br:Paul Allen]]
+[[ca:Paul Allen]]
+[[cs:Paul Allen]]
+[[da:Paul Allen]]
+[[de:Paul Allen]]
+[[el:Πολ Άλεν]]
+[[en:Paul Allen]]
+[[eo:Paul Allen]]
+[[es:Paul Allen]]
+[[fa:پل آلن]]
+[[fi:Paul Allen]]
+[[fr:Paul Allen]]
+[[gl:Paul Allen]]
+[[he:פול אלן]]
+[[id:Paul Allen]]
+[[it:Paul Allen]]
+[[ka:პოლ ალენი]]
+[[ko:폴 앨런]]
+[[ml:പോൾ അല്ലൻ]]
+[[mt:Paul Allen]]
+[[nl:Paul Allen]]
+[[nn:Paul Allen]]
+[[no:Paul Allen]]
+[[pam:Paul Allen]]
+[[pl:Paul Allen]]
+[[pt:Paul Allen]]
+[[ro:Paul Allen]]
+[[ru:Аллен, Пол]]
+[[simple:Paul Allen]]
+[[sk:Paul Allen]]
+[[sr:Пол Ален]]
+[[sv:Paul Allen]]
+[[tr:Paul Gardner Allen]]
+[[uk:Аллен Пол]]
+[[vi:Paul Allen]]
+[[zh:保罗·艾伦]]</text>
+    </revision>
+  </page>
+</mediawiki>

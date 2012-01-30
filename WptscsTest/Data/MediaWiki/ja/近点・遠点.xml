@@ -1,0 +1,116 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>近点・遠点</title>
+    <id>12448</id>
+    <revision>
+      <id>33797695</id>
+      <timestamp>2010-09-02T01:45:55Z</timestamp>
+      <contributor>
+        <username>SieBot</username>
+        <id>126695</id>
+      </contributor>
+      <minor />
+      <comment>ロボットによる 追加: [[mr:उपनाभी बिंदू]]</comment>
+      <text xml:space="preserve">[[画像:Elliptical-orbit.png|right|thumb|250px|近地点と遠地点の位置関係]]
+'''近点・遠点'''（きんてん・えんてん）または'''近星点・遠星点'''（きんせいてん・えんせいてん） (periapsis and apoapsis) とは、[[軌道 (力学)|軌道]]運動する[[天体]]が、主星の重力中心に最も近づく位置と、最も遠ざかる位置のことである。特に、主星が[[太陽]]のとき'''近日点・遠日点'''（きんじつてん・えんじつてん） (perihelion and aphelion)、主星が[[地球]]のとき'''近地点・遠地点'''（きんちてん・えんちてん） (perigee and apogee) という。[[人工衛星]]については'''ペリジー・アポジー'''ということもある。近点と遠点を総称して'''アプシス''' (apsis) とも言う。
+
+[[放物線軌道]]と[[双曲線軌道]]には近点しかないが、[[楕円軌道]]には近点と遠点がある。そのとき、遠点・近点および主星の[[重力]]中心は一直線をなし、この直線は[[楕円]]の長軸に一致する。
+
+主星の重力中心から近点までの距離を近点距離（近日点距離、近地点距離）、遠点までの距離を遠点距離（遠日点距離、遠地点距離）といい、それぞれ[[軌道要素]]の1つである。[[軌道長半径]]、[[離心率]]、近点距離、遠点距離の4つの軌道要素のうち2つを指定すれば、軌道の[[2次元]]的な形状が決まる。通常、軌道長半径と離心率が使われるが、放物線軌道・双曲線軌道（特に、[[彗星]]の軌道）については通常の意味での軌道長半径を定義できないので、近点距離と離心率が使われる。なお、人工衛星については近地点高度・遠地点高度という言葉もあるが、これらは地球の海面（[[ジオイド]]）からの距離である。
+
+他の天体による[[摂動]]、[[一般相対論]]的効果により、近点は（したがって遠点も）少しずつ移動することがある。これを[[近日点移動|近点移動]]（近日点移動、近地点移動）という。
+
+== 関連項目 ==
+* [[人工衛星の軌道]]
+* [[楕円軌道]]
+
+[[Category:軌道|きんてんえんてん]]
+[[Category:太陽系|きんてんえんてん]]
+
+[[als:Apsis (Astronomie)]]
+[[ar:قبا]]
+[[bg:Апсида (астрономия)]]
+[[bn:অপদূরবিন্দু]]
+[[bs:Periapsis]]
+[[ca:Àpside]]
+[[cs:Apsida (astronomie)]]
+[[da:Apsis (astronomi)]]
+[[de:Apsis (Astronomie)]]
+[[el:Αφήλιο]]
+[[en:Apsis]]
+[[eo:Apsido]]
+[[es:Apoastro]]
+[[et:Apogee]]
+[[fa:اوج و حضیض]]
+[[fi:Apogeum]]
+[[fr:Apsides]]
+[[ga:Apaigí]]
+[[he:אפסיד]]
+[[hi:सूर्योच्य]]
+[[hr:Periapsis]]
+[[ht:Afeli]]
+[[hu:Apszispont]]
+[[id:Apsis]]
+[[io:Apsido (astronomio)]]
+[[it:Apside]]
+[[ka:აპოცენტრი და პერიცენტრი]]
+[[kk:Афелий]]
+[[ko:장축단]]
+[[la:Apsis]]
+[[lb:Perihel]]
+[[lt:Apsidė (astronomija)]]
+[[lv:Apsīda]]
+[[ml:അപസൗരം]]
+[[mr:उपनाभी बिंदू]]
+[[ms:Apsis]]
+[[nds:Apsis (Astronomie)]]
+[[nl:Apofocus en perifocus]]
+[[nn:Aphel]]
+[[no:Apsis (astronomi)]]
+[[pl:Perycentrum]]
+[[pt:Apoastro]]
+[[ru:Апоцентр и перицентр]]
+[[simple:Aphelion]]
+[[sk:Apsida (astronómia)]]
+[[sl:Apsidna točka]]
+[[sr:Периапсис]]
+[[sv:Apsis]]
+[[ta:சுற்றுப்பாதை வீச்சு]]
+[[th:จุดปลายระยะทางวงโคจร]]
+[[tr:Enberi]]
+[[uk:Перицентр та апоцентр]]
+[[vi:Củng điểm quỹ đạo]]
+[[zh:拱點]]</text>
+    </revision>
+  </page>
+</mediawiki>

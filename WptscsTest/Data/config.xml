@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+<Config>
+  <Translator>MediaWikiTranslator</Translator>
+  <Websites>
+    <MediaWiki>
+      <Location>http://ar.wikipedia.org</Location>
+      <Language Code="ar">
+        <Names>
+          <LanguageName Code="ar">
+            <Name>لغة عربية</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Arabic language</Name>
+            <ShortName>Arabic</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>アラビア語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/%D8%AE%D8%A7%D8%B5:%D8%AA%D8%B5%D8%AF%D9%8A%D8%B1/{0}</ExportPath>
+      <Redirect>#تحويل</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/شرح">قالب:توثيق</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://de.wikipedia.org</Location>
+      <Language Code="de">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Deutsche Sprache</Name>
+            <ShortName>Deutsch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>German language</Name>
+            <ShortName>German</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ドイツ語</Name>
+            <ShortName>独</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>독일어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>德语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Spezial:Exportieren/{0}</ExportPath>
+      <Redirect>#WEITERLEITUNG</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://en.wikipedia.org</Location>
+      <Language Code="en">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Englische Sprache</Name>
+            <ShortName>Englisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>English language</Name>
+            <ShortName>English</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma inglés</Name>
+            <ShortName>Inglés</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>英語</Name>
+            <ShortName>英</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>영어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua inglesa</Name>
+            <ShortName>Inglês</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>英语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://es.wikipedia.org</Location>
+      <Language Code="es">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Spanish language</Name>
+            <ShortName>Spanish</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma español</Name>
+            <ShortName>Español</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>スペイン語</Name>
+            <ShortName>西</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>에스파냐어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>西班牙语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Especial:Exportar/{0}</ExportPath>
+      <Redirect>#REDIRECCIÓN</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://fr.wikipedia.org</Location>
+      <Language Code="fr">
+        <Names>
+          <LanguageName Code="en">
+            <Name>French language</Name>
+            <ShortName>French</ShortName>
+          </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Français</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>フランス語</Name>
+            <ShortName>仏</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>프랑스어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>法语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Sp%C3%A9cial:Exporter/{0}</ExportPath>
+      <Redirect>#REDIRECTION</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Modèle:Documentation</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://it.wikipedia.org</Location>
+      <Language Code="it">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Italian language</Name>
+            <ShortName>Italian</ShortName>
+          </LanguageName>
+          <LanguageName Code="it">
+            <Name>Lingua italiana</Name>
+            <ShortName>Italiano</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>イタリア語</Name>
+            <ShortName>伊</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>이탈리아어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>意大利语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Speciale:Esporta/{0}</ExportPath>
+      <Redirect>#RINVIA</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://ja.wikipedia.org</Location>
+      <Language Code="ja">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Japanische Sprache</Name>
+            <ShortName>Japanisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Japanese language</Name>
+            <ShortName>Japanese</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma japonés</Name>
+            <ShortName>Japonés</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>日本語</Name>
+            <ShortName>日</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>일본어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua japonesa</Name>
+            <ShortName>Japonês</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>日语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+        <Bracket>（{0}）</Bracket>
+      </Language>
+      <ExportPath>/wiki/%E7%89%B9%E5%88%A5:%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97/{0}</ExportPath>
+      <Redirect>#転送</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://ko.wikipedia.org</Location>
+      <Language Code="ko">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Korean language</Name>
+            <ShortName>Korean</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>朝鮮語</Name>
+            <ShortName>ハングル</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>한국어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>朝鮮語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/%ED%8A%B9%EC%88%98%EA%B8%B0%EB%8A%A5:%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0/{0}</ExportPath>
+      <Redirect>#넘겨주기</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/설명문서">틀:틀 설명문서</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://nl.wikipedia.org</Location>
+      <Language Code="nl">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Niederländisch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Dutch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>オランダ語</Name>
+            <ShortName>蘭</ShortName>
+          </LanguageName>
+          <LanguageName Code="nl">
+            <Name>Nederlands</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Speciaal:Exporteren/{0}</ExportPath>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Sjabloon:Sjabdoc</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://pl.wikipedia.org</Location>
+      <Language Code="pl">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Polish_language</Name>
+            <ShortName>Polish</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ポーランド語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pl">
+            <Name>Język polski</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Specjalna:Eksport/{0}</ExportPath>
+      <Redirect>#PATRZ</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/opis">Szablon:Dokumentacja</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://pt.wikipedia.org</Location>
+      <Language Code="pt">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Portuguese language</Name>
+            <ShortName>Portuguese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ポルトガル語</Name>
+            <ShortName>葡</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>포르투갈어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua portuguesa</Name>
+            <ShortName>Português</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>葡萄牙語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Especial:Exportar/{0}</ExportPath>
+      <Redirect>#REDIRECIONAMENTO</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://ru.wikipedia.org</Location>
+      <Language Code="ru">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Russian language</Name>
+            <ShortName>Russian</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ロシア語</Name>
+            <ShortName>露</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>러시아어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Русский язык</Name>
+            <ShortName>Русский</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>俄语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Служебная:Export/{0}</ExportPath>
+      <Redirect>#перенаправление</Redirect>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://zh.wikipedia.org</Location>
+      <Language Code="zh">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Chinese language</Name>
+            <ShortName>Chinese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>中国語</Name>
+            <ShortName>中</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>중국어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>中文</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/Special:%E5%AF%BC%E5%87%BA%E9%A1%B5%E9%9D%A2/{0}</ExportPath>
+      <MagicWords />
+      <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
+    </MediaWiki>
+  </Websites>
+  <ItemTables />
+  <HeadingTable>
+    <Group>
+      <Word Lang="en">Advantages</Word>
+      <Word Lang="ja">利点</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Background</Word>
+      <Word Lang="ja">背景</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Costs</Word>
+      <Word Lang="ja">費用</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Criticism</Word>
+      <Word Lang="ja">批判</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Disadvantages</Word>
+      <Word Lang="ja">欠点</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Example</Word>
+      <Word Lang="ja">例</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Weblinks</Word>
+      <Word Lang="en">External links</Word>
+      <Word Lang="es">Enlaces externos</Word>
+      <Word Lang="fr">Liens externes</Word>
+      <Word Lang="it">Collegamenti esterni</Word>
+      <Word Lang="ja">外部リンク</Word>
+      <Word Lang="ko">바깥 고리</Word>
+      <Word Lang="nl">Externe links</Word>
+      <Word Lang="pl">Linki zewnętrzne</Word>
+      <Word Lang="pt">Links Externos</Word>
+      <Word Lang="zh">外部連結</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">History</Word>
+      <Word Lang="es">Historia</Word>
+      <Word Lang="fr">Histoire</Word>
+      <Word Lang="ja">歴史</Word>
+      <Word Lang="nl">Geschiedenis</Word>
+      <Word Lang="pl">Historia</Word>
+      <Word Lang="zh">歷史</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Quellen</Word>
+      <Word Lang="en">Notes</Word>
+      <Word Lang="es">Notas</Word>
+      <Word Lang="fr">Notes</Word>
+      <Word Lang="ja">脚注</Word>
+      <Word Lang="pl">Przypisy</Word>
+      <Word Lang="ru">Примечания</Word>
+      <Word Lang="zh">注釋</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Literatur</Word>
+      <Word Lang="en">References</Word>
+      <Word Lang="es">Referencias</Word>
+      <Word Lang="fr">Bibliographie</Word>
+      <Word Lang="it">Bibliografia</Word>
+      <Word Lang="ja">参考文献</Word>
+      <Word Lang="ko">참고 자료</Word>
+      <Word Lang="pl">Bibliografia</Word>
+      <Word Lang="ru">Ссылки</Word>
+      <Word Lang="zh">参考文献</Word>
+    </Group>
+    <Group>
+      <Word Lang="de">Siehe auch</Word>
+      <Word Lang="en">See Also</Word>
+      <Word Lang="es">Véase también</Word>
+      <Word Lang="fr">Voir aussi</Word>
+      <Word Lang="it">Voci correlate</Word>
+      <Word Lang="ja">関連項目</Word>
+      <Word Lang="ko">관련항목</Word>
+      <Word Lang="nl">Zie ook</Word>
+      <Word Lang="pt">Ver também</Word>
+      <Word Lang="ru">См. также</Word>
+      <Word Lang="zh">參見</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Theory</Word>
+      <Word Lang="ja">理論</Word>
+    </Group>
+  </HeadingTable>
+</Config>

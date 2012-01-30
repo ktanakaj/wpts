@@ -1,0 +1,89 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="en">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://en.wikipedia.org/wiki/Main_Page</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal talk</namespace>
+      <namespace key="108" case="first-letter">Book</namespace>
+      <namespace key="109" case="first-letter">Book talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Example.com</title>
+    <id>1191806</id>
+    <revision>
+      <id>370265247</id>
+      <timestamp>2010-06-26T15:50:17Z</timestamp>
+      <contributor>
+        <username>Mindmatrix</username>
+        <id>160367</id>
+      </contributor>
+      <comment>links and other tweaks</comment>
+      <text xml:space="preserve">__NOTOC__
+[[Image:Examplewebsite.PNG|thumb|200px|right|The web page served for example.com, example.net and example.org]]
+'''example.com''', '''example.net''', and '''example.org''' are [[Second-level domain|second-level]] [[domain name]]s reserved by the [[Internet Engineering Task Force]] through RFC 2606, Section 3,&lt;ref&gt;RFC 2606, ''Reserved Top Level DNS Names'', D. Eastlake, A. Panitz, The [[Internet Society]] (June 1999)&lt;/ref&gt; for use in documentation and examples. They are not available for registration.
+
+By implementing the reservation, the [[Internet Assigned Numbers Authority]] (IANA) made available domains to use in [[technical documentation|technical]] and [[software documentation]], [[manual]]s and sample software configurations. Thus, [[Technical writer |documentation writers]] can be sure to select a domain name without creating naming conflicts if end-users try to use the sample configurations or examples verbatim.
+
+When an address such as "username@example.com" is used to demonstrate the sign-up process on a website, it indicates to the user they should fill in an actual [[e-mail address]] at which they receive mail. "example.com" is used in a generic and vendor-neutral manner.
+
+These domain names resolve to a server managed by [[ICANN]].
+
+==Subdomains==
+The example domains have one subdomain name defined in the [[Domain Name System]]. For each domain, the &lt;tt&gt;www&lt;/tt&gt; [[third-level domain]] name resolves to functioning web sites hosted at the same [[IP address]] as the corresponding [[second-level domain]] name.
+
+==See also==
+* [[.example]] Top-level domain name reserved for documentation purposes
+* [[Fictitious domain name]]
+* [[IPv4#Allocation]]&amp;nbsp;– [[IPv4]] address ranges reserved for documentation and examples
+* [[Top-level domain#Reserved domains|Reserved top-level domains]]
+
+==References==
+{{reflist}}
+
+==External links==
+*[http://example.com example.com]
+*[http://example.net example.net]
+*[http://example.org example.org]
+
+[[Category:Domain name system]]
+[[Category:Placeholder names]]
+
+[[bcl:Example.com]]
+[[ca:Example.com]]
+[[ceb:Example.com]]
+[[cbk-zam:Example.com]]
+[[es:Example.com]]
+[[fr:Example.com]]
+[[is:Example.net]]
+[[it:Example.com]]
+[[ja:Example.com]]
+[[ksh:.example.com]]
+[[ru:Домены для примеров]]
+[[fi:Example.com]]
+[[tl:Example.com]]
+[[zh:Example.com]]</text>
+    </revision>
+  </page>
+</mediawiki>

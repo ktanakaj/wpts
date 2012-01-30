@@ -1,0 +1,186 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>ホワイトナイトツー</title>
+    <id>1757090</id>
+    <revision>
+      <id>31228488</id>
+      <timestamp>2010-03-26T16:41:51Z</timestamp>
+      <contributor>
+        <username>Luckas-bot</username>
+        <id>225041</id>
+      </contributor>
+      <minor />
+      <comment>ロボットによる 追加: [[zh:白色骑士2号]]</comment>
+      <text xml:space="preserve">{{Infobox 航空機
+| 名称=ホワイトナイトツー
+| 画像=ファイル:Vg-wk2-080728 (148) cr8.jpg
+| キャプション=2008年7月28日に行われたホワイトナイトツーのロールアウトと命名の式典
+| 用途=輸送機
+| 分類=
+| 設計者=[[バート・ルータン]]と[[ボブ・モーガン]]&lt;ref&gt;{{cite web
+  | title = WK2 Rollout Audio Clips (parts 4 &amp; 6)
+  | work = Movaje Skies
+  | date = [[2008年]][[7月30日]]
+  | url = http://mojaveskies.blogspot.com/2008/07/wk2-rollout-audio-clips.html
+  | accessdate = 2009-03-10 }}&lt;/ref&gt;
+| 製造者=[[スケールド・コンポジッツ]]
+| 運用者=
+| 初飛行年月日=[[2008年]][[12月21日]]
+| 生産数=
+| 生産開始年月日=
+| 運用開始年月日=
+| 退役年月日=
+| 運用状況=
+| ユニットコスト=  
+}}
+
+[[File:VMS Eve Maiden Flight.jpg|thumb|2008年12月21日に行われたVMS Eveの初飛行]]
+[[File:Vg-wk2-080728 (153) cr8.jpg|thumb|VMS Eveの機首のデザイン]]
+[[File:Vg-wk2-080728 (2) cr8.jpg|thumb|ホワイトナイトツーで使用された[[プラット・アンド・ホイットニー・カナダ PW300|PW308]]]]
+
+'''スケールド・コンボジッツ モデル348 ホワイトナイトツー (Scaled Composites Model 348 WhiteKnightTwo, WK2)'''は、[[スペースシップツー]][[宇宙船]]を発射するために使用される、輸送用のジェット[[航空機]]である。これは[[スケールド・コンポジッツ]]によって、二段階の有人弾道飛行発射システムである[[Tier 1b]]の第一段階として開発された。ホワイトナイトツーは、[[スペースシップワン]]の母艦である[[ホワイトナイト (航空機)|ホワイトナイト]]（これは[[スケールド・コンポジッツ プロテウス|プロテウス]]に基づいて開発された）の成功に基づいている。
+
+[[ヴァージン・ギャラクティック]]は2機のホワイトナイトツーを発注済みである&lt;ref&gt;{{cite web |url=http://www.space.com/news/080123-virgingalactic-ss2-design.html |title=Virgin Galactic Unveils Suborbital Spaceliner Design |accessdate=2008-01-25 |date=[[2008年]][[1月23日]] |first=Tariq |last=Malik |publisher=''SPACE.com''}}&lt;/ref&gt;。ホワイトナイトツーとスペースシップツーは、ヴァージン・ギャラクティックが行う弾道飛行で使用されるスペースプレーンのベースとなっている。
+
+最初のホワイトナイトツーは[[リチャード・ブランソン]]の母に因んで[[VMS Eve|VMS ''Eve'']]と名づけられた。これは[[2008年]][[7月28日]]に公式に公開され、[[2008年]][[12月21日]]に初飛行を行った。二番目のホワイトナイトツーは、ブランソンの親しい友人である[[スティーヴ・フォセット]]に因んで[[VMS Spirit of Steve Fossett|VMS ''Spirit of Steve Fossett'']]と名づけられる予定である。&lt;ref&gt;{{cite web |first=Ari |last=Burack |url=http://www.sanfranciscosentinel.com/?p=5903 |title=Sir Richard Branson... |accessdate=2008-02-28 |publisher=''San Francisco Sentinel'' |date=[[2007年]][[10月10日]]}}&lt;/ref&gt;&lt;ref&gt;{{cite web |url=http://newsfromrussia.com/news/science/23-01-2008/103605-spacecraft-0 |title=Spaceship Company unveils design of SpaceShipTwo |accessdate=2008-01-25 |date=[[2008年]][[1月23日]] |publisher=''[[Pravda Online]]''}}&lt;/ref&gt;
+
+== 設計 ==
+ホワイトナイトツーは、大型の[[スペースシップツー]]宇宙船を輸送([[:en:captive carry]])するために、[[ホワイトナイト (航空機)|ホワイトナイト]]に比べておよそ3倍の大きさがある。&lt;ref&gt;{{cite web |url=http://www.thespacereview.com/article/943/1 |title=Something dangerous and new |accessdate=2007-08-28 |date=[[2007年]][[8月28日]] |publisher=thespacereview.com}}&lt;/ref&gt; ホワイトナイトツーは、[[B-29 (航空機)|B-29 スーパーフォートレス]]と同程度の[[翼幅]]である。大きさの比較とは関係なく、ホワイトナイトツーは完全に最新の航空機である。フライトコントロールケーブルでさえ、カーボンファイバー製の、新しく特許を受けた設計である。&lt;ref&gt;[http://www.space.com/businesstechnology/080606-virgin-mother.html David, Leonard. "Virgin Galactic Spaceline: Mega-Mothership Set for Rollout Debut". Space.com [[2008年]][[6月6日]]]&lt;/ref&gt;
+
+実際の弾道飛行の前に、ホワイトナイトツーは数秒間の[[無重力状態]]を体験できる、プレビュー飛行を行う。ホワイトナイトツーは、およそ60,000フィート(18km)の実用上限高度を持つことを意図しており、乗客にダークブルーの空を提供する。これにより、乗客は本当の飛行の前に訓練を行うことが出来る。&lt;ref&gt;{{cite web |url=http://www.space.com/news/060811_rutan_interview.html |title=Burt Rutan on Civilian Spaceflight, Breakthroughs, and Inside SpaceShipTwo |accessdate=2007-08-25 |date=[[2006年]][[8月11日]] |author=Leonard David |publisher=Space.com }}&lt;/ref&gt;
+
+ホワイトナイトツーは[[双胴機]]であり、それぞれの機体に2つずつの[[ジェットエンジン]]を持つ。&lt;ref&gt;{{cite book |author=Kenny Kemp |title=Destination Space |month=March | year=2007 |publisher=[[Virgin Books]] }}&lt;/ref&gt;ひとつの機体はスペースシップツーの正確なレプリカである（乗客の訓練を行うため）。もうひとつの機体は、割引料金の日帰り旅行客を成層圏へ運ぶためのものである。&lt;ref&gt;{{cite web |url=http://www.wired.com/science/space/magazine/15-06/ff_space_virgin |title=Burt Rutan and Richard Branson Want You to Hit Space in High Style |accessdate=2007-08-25 |date=[[2007年]][[5月22日]] |author= Spencer Reiss |publisher=Wired.com }}&lt;/ref&gt;
+
+ホワイトナイトツーの設計は、サイズ・尾翼・エンジンの構成・コクピットの配置など、ホワイトナイトと完全に異なる。ホワイトナイトは2つのT字尾翼であったが、ホワイトナイトツーは2つの十字尾翼である。エンジンの構成も大きく異なっている。ホワイトナイトツーではエンジンを翼の下に吊り下げているが、ホワイトナイトでは唯一のコクピットの両側に配置していた。
+
+== 仕様 ==
+{{航空機スペック
+
+|固定翼 or 回転翼?=固定翼
+|ジェット or プロペラ?=ジェット
+
+|出典=&lt;ref&gt;{{cite web |url=http://www.pwc.ca/en/0_0/0_0_8/0_0_8_1_1_1.asp?id_news=454 |title=Pratt &amp; Whitney Canada PW308 Engine to Power Virgin Galactic's Suborbital Spaceship Launcher |accessdate=2007-08-25 |date=[[2007年]][[7月11日]] |publisher=Pratt &amp; Whitney Canada }}&lt;/ref&gt;&lt;ref&gt;{{cite web |url=http://www.brightcove.tv/title.jsp?title=1119231942&amp;channel=627008079 |title=Virgin Galactic presentation Oshkosh Theater in the Woods 2007 |accessdate=2007-09-22 |date=[[2007年]][[7月22日]] | author= Will Whitehorn and Alex Tai |publisher=BrightCove.TV }}&lt;/ref&gt;
+
+|乗員=
+|定員=
+|ペイロード SI= 17,000 kg &lt;ref name="flight319910"&gt;{{cite web |url=http://www.flightglobal.com/articles/2008/12/09/319910/virgin-galactic-in-spaceshipthree-talks.html |title=Virgin Galactic in SpaceShipThree talks |accessdate=2008-12-09 |date=[[2008年]][[12月9日]] | author= Rob Coppinger |publisher=Flightglobal }}&lt;/ref&gt;
+|ペイロード fp=
+|全長 SI= 24m
+|全長 fp= 79ft
+&lt;!-- 翼長・全幅 --&gt;
+|スパン SI= 43m
+|スパン fp= 141ft
+|全高 SI= m
+|全高 fp= ft
+|面積 SI= m&lt;sup&gt;2&lt;/sup&gt;
+|面積 fp= ft&lt;sup&gt;2&lt;/sup&gt;
+|翼型=
+|空虚重量 SI= kg
+|空虚重量 fp= lb
+|運用時重量 SI= kg
+|運用時重量 fp= lb
+|有効搭載量 SI= kg
+|有効搭載量 fp= lb
+|最大離陸重量 SI= kg
+|最大離陸重量 fp= lb
+|その他の諸元=
+
+|エンジン名（ジェット）=[[プラット・アンド・ホイットニー・カナダ PW300|プラット・アンド・ホイットニー・カナダ PW308]]
+|エンジン種類（ジェット）=[[ターボファン]]
+|エンジン数（ジェット）=4
+|推力 SI= kN
+|推力 fp= lbf
+|推力 original=
+|推力 more=
+|アフターバーナー作動時 推力 SI= kN
+|アフターバーナー作動時 推力 fp= lbf
+|エンジン名（プロペラ）=
+|エンジン種類（プロペラ）=&lt;!--レシプロ/ターボプロップ/ターボシャフト/など--&gt;
+|エンジン数（プロペラ）=&lt;!--1つなら1と書くこと--&gt;
+|出力 SI= kW
+|出力 fp= hp
+|出力 original=&lt;!--出典にある数値と単位--&gt;
+|出力 more=
+
+|最大速度 SI= km/h
+|最大速度 fp= kt
+|最大速度 more=
+|巡航速度 SI= km/h
+|巡航速度 fp= kt
+|巡航速度 more=
+|失速速度 SI= km/h
+|失速速度 fp= kt
+|失速速度 more=
+|超過禁止速度 SI= km/h
+|超過禁止速度 fp= kt
+|航続距離 SI= km
+|航続距離 fp= 海里
+|航続距離 more=
+|フェリーレンジ SI= km
+|フェリーレンジ fp= 海里
+|フェリーレンジ more=
+|上昇限度 SI= 21.3 km
+|上昇限度 fp= 70,000 ft
+|上昇率 SI= m/min
+|上昇率 fp= ft/s
+|翼面（円板）荷重 SI= kg/m&lt;sup&gt;2&lt;/sup&gt;
+|翼面（円板）荷重 fp= lb/ft&lt;sup&gt;2&lt;/sup&gt;
+|推力重量比= &lt;!--計算して無次元数にする--&gt;
+|馬力荷重 SI= kW/kg
+|馬力荷重 fp= hp/lb
+|最大馬力荷重 SI=
+|最大馬力荷重 fp=
+|最大推力重量比=
+}}
+
+
+== 参照 ==
+{{Reflist}}
+
+== 外部リンク ==
+*[http://news.bbc.co.uk/2/hi/in_pictures/7530070.stm   BBC - In pictures: Space tourism jet]
+*[http://www.educatedearth.net/video.php?id=3785 Video of White Knight Two being unveiled]
+*[http://travel.latimes.com/daily-deal-blog/index.php/virgin-galatic-space-2379/  Photos of Virgin Galactic’s White Knight Two unveiling]
+
+{{DEFAULTSORT:ほわいとないとつう}}
+[[Category:航空機]]
+
+[[de:White Knight Two]]
+[[en:Scaled Composites White Knight Two]]
+[[fr:White Knight Two]]
+[[hu:WhiteKnightTwo]]
+[[sv:White Knight 2]]
+[[zh:白色骑士2号]]</text>
+    </revision>
+  </page>
+</mediawiki>

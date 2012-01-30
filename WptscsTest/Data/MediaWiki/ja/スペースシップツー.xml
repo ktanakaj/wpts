@@ -1,0 +1,95 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd" version="0.5" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.17wmf1</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>スペースシップツー</title>
+    <id>1751498</id>
+    <revision>
+      <id>32113142</id>
+      <timestamp>2010-05-16T01:47:15Z</timestamp>
+      <contributor>
+        <ip>59.84.93.2</ip>
+      </contributor>
+      <text xml:space="preserve" bytes="4801">{{Infobox 航空機
+  |名称 = スペースシップツー
+  |画像 = ファイル:SS2 and VMS Eve.jpg
+  |キャプション = 
+  |用途 = [[スペースプレーン]]
+  |製造者 = [[スケールド・コンポジッツ]]
+  |運用状況 = 生産中（1号機は2009年12月7日ロールアウト）
+}}
+スケールド・コンポジッツ '''モデル339 スペースシップツー''' (Model 339 SpaceShipTwo, SS2) は、開発中の[[宇宙旅行|宇宙旅行者]]向けの[[弾道飛行]][[スペースプレーン]]である。[[スケールド・コンポジッツ]]と、[[リチャード・ブランソン]]の[[ヴァージン・グループ]]によるジョイントベンチャーである[[スペースシップ・カンパニー]] ([[:en:The Spaceship Company|The Spaceship Company]]) により、Tier 1bプログラムの一部として開発されている。2009年12月7日、[[カリフォルニア州]]の[[モハーヴェ空港|モハーヴェ宇宙港]]にて1号機'''[[VSSエンタープライズ]]'''が公開され、2010年3月22日には母機に吊るされて初飛行を行った&lt;ref&gt;{{cite news
+| title= VSSエンタープライズ“処女飛行”
+| url= http://www.nationalgeographic.co.jp/news/news_article.php?file_id=2010032508&amp;expand
+| publisher=ナショナルジオグラフィック ニュース | date=2010-03-25 | accessdate=2010-03-28 }}&lt;/ref&gt;。
+
+宇宙航空会社の[[ヴァージン・ギャラクティック]]は、2009年以前には行われたことのなかった乗客向けの[[民間宇宙飛行]]サービスを提供するために、この宇宙機を5機編成で運用する予定である&lt;ref&gt;{{cite web|url=http://www.nytimes.com/2008/01/23/science/space/23cnd-spaceship.html?hp|title=New Tourist Spacecraft Unveiled|accessdate=2008-01-23|author=John Schwartz|publisher=nytimes.com}}&lt;/ref&gt;。初めての宇宙飛行は2011年6月前後に行うとしている&lt;ref&gt;{{cite web|url=http://www.afpbb.com/article/environment-science-it/science-technology/2672434/5010250|title=格安宇宙旅行実現へ、ヴァージン・ギャラクティック 世界初の商用宇宙船を公開|date=2009-12-07|accessdate=2009-12-09|publisher=[[フランス通信社|AFPBB News]]}}&lt;/ref&gt;。
+
+== 設計と開発 ==
+[[ファイル:Trajectoire-White-Knight.png|thumb|300px]]
+世界初の民間宇宙船[[スペースシップワン]]は、[[ポール・アレン]]が出資し、スケールド・コンポジッツが実施したTier Oneプログラムの一部として開発された。スペースシップツーはその技術の一部を基に作られている。スペースシップ・カンパニーはポール・アレンの[[モハーヴェ・エアロスペース・ベンチャーズ]]からライセンスを受けている。
+
+スペースシップツーは、8人の乗員（6人の乗客と2人のパイロット）を乗せることができる。飛行軌道の[[遠地点]]はおよそ高度110&amp;nbsp;km （68マイル）の[[熱圏]]内である。これはスペースシップワンの目標高度である[[カーマン・ライン]]よりも10&amp;nbsp;km （6マイル）高い（もっとも、スペースシップワンの最後のフライトは112&amp;nbsp;kmに達している）。スペースシップツーは母機である[[ホワイトナイトツー]]から、高度15,200&amp;nbsp;m （50,000フィート）で発射され、1基の[[ハイブリッドロケット]]により4,200&amp;nbsp;km/h (2,600 mph) の速度に達する。客室は長さ3.66&amp;nbsp;m（12フィート）、直径2.28&amp;nbsp;m（7.5フィート）である。&lt;ref name=&quot;flightglobal-unveil&quot;&gt;{{cite web |url=http://www.flightglobal.com/articles/2008/01/23/221031/pictures-virgin-galactic-unveils-dyna-soar-style-spaceshiptwo-design-and-twin-fuselage-white-knight.html|title=PICTURES: Virgin Galactic unveils Dyna-Soar style SpaceShipTwo design and twin-fuselage White Knight II configuration |accessdate=2008-01-23 |author=Rob Coppinger|publisher=flightglobal.com }}&lt;/ref&gt; 翼長は8.23&amp;nbsp;m（27フィート）、全長は18.29&amp;nbsp;m （60フィート）、尾翼の高さは4.57&amp;nbsp;m（15フィート）である。
+
+== 脚注 ==
+{{Reflist}}
+
+== 外部リンク ==
+{{commonscat|SpaceShipTwo}}
+*[http://www.scaled.com Scaled Composites] {{ref-en}}
+
+== 関連項目==
+* [[宇宙旅行]]
+* [[スケールド・コンポジッツ]]
+
+{{Reusable launch systems}}
+
+{{DEFAULTSORT:すへすしつふ2}}
+[[Category:宇宙船]]
+
+[[cs:SpaceShipTwo]]
+[[de:SpaceShipTwo]]
+<!--当面NUnitが対応できないのでコメントアウト[[en:SpaceShipTwo]]-->
+[[eo:SpaceShipTwo]]
+[[es:SpaceShipTwo]]
+[[fa:فضاپیمای دو]]
+[[fr:SpaceShipTwo]]
+[[hu:SpaceShipTwo]]
+[[it:Scaled Composites SpaceShipTwo]]
+[[nl:SpaceShipTwo]]
+[[pl:SpaceShipTwo]]
+[[ru:SpaceShipTwo]]
+[[sk:SpaceShipTwo]]
+[[sv:SpaceShipTwo]]
+[[zh:太空船2号]]</text>
+    </revision>
+  </page>
+</mediawiki>

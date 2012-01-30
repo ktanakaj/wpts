@@ -1,0 +1,173 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Honememo.Wptscs.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConfigurationFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">config.xml</Value>
+    </Setting>
+    <Setting Name="DefaultUserAgent" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">WikipediaTranslationSupportTool/{0}.{1:D2}</Value>
+    </Setting>
+    <Setting Name="WikipediaLocation" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://{0}.wikipedia.org</Value>
+    </Setting>
+    <Setting Name="SaveDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastSelectedSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en</Value>
+    </Setting>
+    <Setting Name="LastSelectedTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UserAgent" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Referer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MediaWikiMagicWords" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;CURRENTYEAR&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTH&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTHNAME&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTHNAMEGEN&lt;/string&gt;
+  &lt;string&gt;CURRENTMONTHABBREV&lt;/string&gt;
+  &lt;string&gt;CURRENTDAY&lt;/string&gt;
+  &lt;string&gt;CURRENTDAY2&lt;/string&gt;
+  &lt;string&gt;CURRENTDOW&lt;/string&gt;
+  &lt;string&gt;CURRENTDAYNAME&lt;/string&gt;
+  &lt;string&gt;CURRENTTIME&lt;/string&gt;
+  &lt;string&gt;CURRENTHOUR&lt;/string&gt;
+  &lt;string&gt;CURRENTWEEK&lt;/string&gt;
+  &lt;string&gt;CURRENTTIMESTAMP&lt;/string&gt;
+  &lt;string&gt;LOCALYEAR&lt;/string&gt;
+  &lt;string&gt;LOCALMONTH&lt;/string&gt;
+  &lt;string&gt;LOCALMONTHNAME&lt;/string&gt;
+  &lt;string&gt;LOCALMONTHNAMEGEN&lt;/string&gt;
+  &lt;string&gt;LOCALMONTHABBREV&lt;/string&gt;
+  &lt;string&gt;LOCALDAY&lt;/string&gt;
+  &lt;string&gt;LOCALDAY2&lt;/string&gt;
+  &lt;string&gt;LOCALDOW&lt;/string&gt;
+  &lt;string&gt;LOCALDAYNAME&lt;/string&gt;
+  &lt;string&gt;LOCALTIME&lt;/string&gt;
+  &lt;string&gt;LOCALHOUR&lt;/string&gt;
+  &lt;string&gt;LOCALWEEK&lt;/string&gt;
+  &lt;string&gt;LOCALTIMESTAMP&lt;/string&gt;
+  &lt;string&gt;SITENAME&lt;/string&gt;
+  &lt;string&gt;SERVER&lt;/string&gt;
+  &lt;string&gt;SERVERNAME&lt;/string&gt;
+  &lt;string&gt;DIRMARK&lt;/string&gt;
+  &lt;string&gt;DIRECTIONMARK&lt;/string&gt;
+  &lt;string&gt;SCRIPTPATH&lt;/string&gt;
+  &lt;string&gt;STYLEPATH&lt;/string&gt;
+  &lt;string&gt;CURRENTVERSION&lt;/string&gt;
+  &lt;string&gt;CONTENTLANGUAGE&lt;/string&gt;
+  &lt;string&gt;CONTENTLANG&lt;/string&gt;
+  &lt;string&gt;REVISIONID&lt;/string&gt;
+  &lt;string&gt;REVISIONDAY&lt;/string&gt;
+  &lt;string&gt;REVISIONDAY2&lt;/string&gt;
+  &lt;string&gt;REVISIONMONTH&lt;/string&gt;
+  &lt;string&gt;REVISIONYEAR&lt;/string&gt;
+  &lt;string&gt;REVISIONTIMESTAMP&lt;/string&gt;
+  &lt;string&gt;REVISIONUSER&lt;/string&gt;
+  &lt;string&gt;PAGESIZE&lt;/string&gt;
+  &lt;string&gt;PROTECTIONLEVEL&lt;/string&gt;
+  &lt;string&gt;DISPLAYTITLE&lt;/string&gt;
+  &lt;string&gt;DEFAULTSORT&lt;/string&gt;
+  &lt;string&gt;DEFAULTSORTKEY&lt;/string&gt;
+  &lt;string&gt;DEFAULTCATEGORYSORT&lt;/string&gt;
+  &lt;string&gt;NUMBEROFPAGES&lt;/string&gt;
+  &lt;string&gt;NUMBEROFARTICLES&lt;/string&gt;
+  &lt;string&gt;NUMBEROFFILES&lt;/string&gt;
+  &lt;string&gt;NUMBEROFEDITS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFVIEWS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFUSERS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFADMINS&lt;/string&gt;
+  &lt;string&gt;NUMBEROFACTIVEUSERS&lt;/string&gt;
+  &lt;string&gt;PAGESINCATEGORY&lt;/string&gt;
+  &lt;string&gt;PAGESINCAT&lt;/string&gt;
+  &lt;string&gt;NUMBERINGROUP&lt;/string&gt;
+  &lt;string&gt;NUMINGROUP&lt;/string&gt;
+  &lt;string&gt;PAGESINNS&lt;/string&gt;
+  &lt;string&gt;PAGESINNAMESPACE&lt;/string&gt;
+  &lt;string&gt;FULLPAGENAME&lt;/string&gt;
+  &lt;string&gt;PAGENAME&lt;/string&gt;
+  &lt;string&gt;BASEPAGENAME&lt;/string&gt;
+  &lt;string&gt;SUBPAGENAME&lt;/string&gt;
+  &lt;string&gt;SUBJECTPAGENAME&lt;/string&gt;
+  &lt;string&gt;TALKPAGENAME&lt;/string&gt;
+  &lt;string&gt;FULLPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;PAGENAMEE&lt;/string&gt;
+  &lt;string&gt;BASEPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;SUBPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;SUBJECTPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;TALKPAGENAMEE&lt;/string&gt;
+  &lt;string&gt;NAMESPACE&lt;/string&gt;
+  &lt;string&gt;SUBJECTSPACE&lt;/string&gt;
+  &lt;string&gt;ARTICLESPACE&lt;/string&gt;
+  &lt;string&gt;TALKSPACE&lt;/string&gt;
+  &lt;string&gt;NAMESPACEE&lt;/string&gt;
+  &lt;string&gt;SUBJECTSPACEE&lt;/string&gt;
+  &lt;string&gt;TALKSPACEE&lt;/string&gt;
+  &lt;string&gt;localurl&lt;/string&gt;
+  &lt;string&gt;fullurl&lt;/string&gt;
+  &lt;string&gt;filepath&lt;/string&gt;
+  &lt;string&gt;urlencode&lt;/string&gt;
+  &lt;string&gt;anchorencode&lt;/string&gt;
+  &lt;string&gt;ns&lt;/string&gt;
+  &lt;string&gt;lc&lt;/string&gt;
+  &lt;string&gt;lcfirst&lt;/string&gt;
+  &lt;string&gt;uc&lt;/string&gt;
+  &lt;string&gt;ucfirst&lt;/string&gt;
+  &lt;string&gt;formatnum&lt;/string&gt;
+  &lt;string&gt;#dateformat&lt;/string&gt;
+  &lt;string&gt;#formatdate&lt;/string&gt;
+  &lt;string&gt;padleft&lt;/string&gt;
+  &lt;string&gt;padright&lt;/string&gt;
+  &lt;string&gt;plural&lt;/string&gt;
+  &lt;string&gt;grammar&lt;/string&gt;
+  &lt;string&gt;int&lt;/string&gt;
+  &lt;string&gt;#language&lt;/string&gt;
+  &lt;string&gt;#special&lt;/string&gt;
+  &lt;string&gt;#tag&lt;/string&gt;
+  &lt;string&gt;gender&lt;/string&gt;
+  &lt;string&gt;groupconvert&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="MediaWikiExportPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/wiki/Special:Export/{0}</Value>
+    </Setting>
+    <Setting Name="Bracket" Type="System.String" Scope="Application">
+      <Value Profile="(Default)"> ({0}) </Value>
+    </Setting>
+    <Setting Name="MediaWikiRedirect" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">#REDIRECT</Value>
+    </Setting>
+    <Setting Name="MediaWikiTemplateNamespace" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="MediaWikiCategoryNamespace" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="MediaWikiFileNamespace" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="CacheExpire" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">15.00:00:00</Value>
+    </Setting>
+    <Setting Name="ConfigurationCompatible" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1.0.0.0</Value>
+    </Setting>
+    <Setting Name="MediaWikiNamespacePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases</Value>
+    </Setting>
+    <Setting Name="IsUpgraded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IgnoreError" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

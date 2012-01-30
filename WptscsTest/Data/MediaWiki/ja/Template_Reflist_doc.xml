@@ -1,0 +1,127 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Template:Reflist/doc</title>
+    <id>1169930</id>
+    <revision>
+      <id>33780015</id>
+      <timestamp>2010-08-31T17:52:07Z</timestamp>
+      <contributor>
+        <username>まさふゆ</username>
+        <id>232040</id>
+      </contributor>
+      <minor/>
+      <text xml:space="preserve">&lt;noinclude&gt;{{Documentation subpage|種類=[[Help:テンプレート|テンプレート]]}}&lt;/noinclude&gt;&lt;includeonly&gt;{{Pp-template}}{{使用箇所の多いテンプレート|80,000以上}}&lt;/includeonly&gt;
+&lt;!-- 以下でテンプレートの解説を編集してください --&gt;
+[[Help:脚注|脚注]]に参照文献リストを載せるためのテンプレート。[[Help:脚注#脚注の作成方法1|&lt;code&gt;&lt;nowiki&gt;&lt;references /&gt;&lt;/nowiki&gt;&lt;/code&gt;]]の代用として&lt;code&gt;&lt;nowiki&gt;{{Reflist}}&lt;/nowiki&gt;&lt;/code&gt;を使用する。
+
+本文と脚注のstyleを変えて、全体を読みやすくしている。
+
+== 使用法 ==
+=== 複数の列 ===
+&lt;code&gt;&amp;#123;&amp;#123;{{BASEPAGENAME}}|2&amp;#125;&amp;#125;&lt;/code&gt;とすると脚注が2列のリストに、&lt;code&gt;&amp;#123;&amp;#123;{{BASEPAGENAME}}|3&amp;#125;&amp;#125;&lt;/code&gt;とすると3列のリストになる。
+
+&lt;code&gt;&amp;#123;&amp;#123;{{BASEPAGENAME}}|colwidth=30em&amp;#125;&amp;#125;&lt;/code&gt;とすると、列数はブラウザに自動設定させる代わりに、列幅を指定できる。
+
+'''注意'''：2009年時点では、'''Firefoxなど一部のブラウザのみで有効な機能'''で、IEなどのブラウザでは指定してあっても無視されます。
+
+=== Reflistとreferencesの相違 ===
+参照する項目間の行間の幅が異なる。すなわち、&lt;code&gt;&lt;nowiki&gt;{{Reflist}}&lt;/nowiki&gt;&lt;/code&gt;方式の10項目が&lt;code&gt;&lt;nowiki&gt;&lt;references /&gt;&lt;/nowiki&gt;&lt;/code&gt;方式の約8項目幅内に収まる。
+
+&lt;code&gt;&lt;nowiki&gt;{{Reflist}}&lt;/nowiki&gt;&lt;/code&gt;方式では行間が狭くなる：&lt;ref&gt;1111111111&lt;/ref&gt;&lt;ref&gt;2222222222&lt;/ref&gt;&lt;ref&gt;3333333333&lt;/ref&gt;&lt;ref&gt;4444444444&lt;/ref&gt;&lt;ref&gt;5555555555&lt;/ref&gt;&lt;ref&gt;6666666666&lt;/ref&gt;&lt;ref&gt;7777777777&lt;/ref&gt;&lt;ref&gt;8888888888&lt;/ref&gt;&lt;ref&gt;9999999999&lt;/ref&gt;&lt;ref&gt;0000000000&lt;/ref&gt;
+{{Reflist}}
+下記の&lt;code&gt;&lt;nowiki&gt;&lt;references /&gt;&lt;/nowiki&gt;&lt;/code&gt;方式では行間が広くなる：&lt;ref&gt;1111111111&lt;/ref&gt;&lt;ref&gt;2222222222&lt;/ref&gt;&lt;ref&gt;3333333333&lt;/ref&gt;&lt;ref&gt;4444444444&lt;/ref&gt;&lt;ref&gt;5555555555&lt;/ref&gt;&lt;ref&gt;6666666666&lt;/ref&gt;&lt;ref&gt;7777777777&lt;/ref&gt;&lt;ref&gt;8888888888&lt;/ref&gt;&lt;ref&gt;9999999999&lt;/ref&gt;&lt;ref&gt;0000000000&lt;/ref&gt;
+&lt;references /&gt;
+
+=== group引数 ===
+同一記事内に複数の脚注を設置する場合（[[Help:脚注#参考文献リストと注釈リストを別置したいとき|&lt;nowiki&gt;&lt;ref group=&gt;, &lt;references group=&gt;&lt;/nowiki&gt;]]を使用する場合）は、group引数を用いる事で対応可能。
+
+表示例
+* 脚注1では&lt;code&gt;&lt;nowiki&gt;{{Reflist}}&lt;/nowiki&gt;&lt;/code&gt;を使用し、脚注は&lt;nowiki&gt;&lt;ref&gt;〜&lt;/ref&gt;&lt;/nowiki&gt;で括ったもの。&lt;ref&gt;1111111111&lt;/ref&gt;&lt;ref&gt;2222222222&lt;/ref&gt;&lt;ref&gt;3333333333&lt;/ref&gt;&lt;ref&gt;4444444444&lt;/ref&gt;&lt;ref&gt;5555555555&lt;/ref&gt;&lt;ref&gt;6666666666&lt;/ref&gt;&lt;ref&gt;7777777777&lt;/ref&gt;&lt;ref&gt;8888888888&lt;/ref&gt;&lt;ref&gt;9999999999&lt;/ref&gt;&lt;ref&gt;0000000000&lt;/ref&gt;
+* 脚注2では&lt;code&gt;&lt;nowiki&gt;{{Reflist|group=※}}&lt;/nowiki&gt;&lt;/code&gt;を使用し、脚注は&lt;nowiki&gt;&lt;ref group=&quot;※&quot;&gt;〜&lt;/ref&gt;で括ったもの。&lt;/nowiki&gt;&lt;ref group=&quot;※&quot;&gt;aaaaaaaaaa&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;bbbbbbbbbb&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;cccccccccc&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;dddddddddd&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;eeeeeeeeee&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;ffffffffff&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;gggggggggg&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;hhhhhhhhhh&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;iiiiiiiiii&lt;/ref&gt;&lt;ref group=&quot;※&quot;&gt;jjjjjjjjjj&lt;/ref&gt;
+
+==== 脚注1 ====
+{{Reflist}}
+
+==== 脚注2 ====
+{{Reflist|group=※}}
+
+=== scrollパラメータ（現在は[[Help‐ノート:脚注]]の合意に基づき廃止） ===
+'''注意'''：2009年5月の合意により、脚注をスクロール表示にしたい場合は各自[[MediaWiki:Gadget-ScrolledReflist|Scrolled Reflist]]という[[Wikipedia:ガジェット|ガジェット]]を利用し、Template:Reflistのscrollパラメータは使用しないことになりました。この注意文を取り除くには、&lt;nowiki&gt;{{reflist|scroll=1}}&lt;/nowiki&gt;から&lt;nowiki&gt;&quot;|scroll=1&quot;&lt;/nowiki&gt;の部分を除去してください。なお、{{tl|Reflist}}を使っている項目の脚注部分にはclass名として「reflist」が指定されていますので、ウェブブラウザのユーザスタイルシートに[[MediaWiki:Gadget-ScrolledReflist.css]]の内容を転記すればIP利用者でも同等の効果を得ることができます。
+
+== 関連項目 ==
+* {{Tl|脚注ヘルプ}}
+
+
+&lt;div style=&quot;visibility:hidden; height:0px; speak:none;&quot;&gt;
+&lt;references /&gt;
+&lt;/div&gt;
+
+&lt;includeonly&gt;
+&lt;!-- カテゴリは以下に追加してください --&gt;
+[[Category:出典テンプレート|{{BASEPAGENAME}}]]
+[[Category:段組みテンプレート|{{BASEPAGENAME}}]]
+&lt;!-- 言語間リンクは以下に追加してください --&gt;
+[[ar:قالب:ثبت المراجع]]
+[[be-x-old:Шаблён:Зноскі]]
+[[ca:Plantilla:Referències]]
+[[en:Template:Reflist]]
+[[eo:Ŝablono:Referencoj]]
+[[es:Plantilla:Listaref]]
+[[fi:Malline:Viitteet]]
+[[fr:Modèle:Références]]
+[[hi:Template:टिप्पणीसूची]]
+[[hr:Predložak:Izvori]]
+[[hsb:Předłoha:Referency]]
+[[hu:Reflist]]
+[[ia:Patrono:Reflist]]
+[[it:Template:References]]
+[[ka:თარგი:სქოლიოს სია]]
+[[ko:틀:주석]]
+[[lv:Veidne:Reflist]]
+[[ml:ഫലകം:Reflist]]
+[[ms:Templat:Reflist]]
+[[no:Mal:Reflist]]
+[[pl:Szablon:Przypisy]]
+[[pt:Predefinição:Reflist]]
+[[ro:Format:Listănote]]
+[[ru:Шаблон:Примечания]]
+[[sr:Шаблон:Напомене]]
+[[sv:Mall:Reflist]]
+[[th:แม่แบบ:รายการอ้างอิง]]
+[[uk:Шаблон:Reflist]]
+[[vi:Bản mẫu:Tham khảo]]
+[[zh:Template:Reflist]]
+&lt;/includeonly&gt;</text>
+    </revision>
+  </page>
+</mediawiki>

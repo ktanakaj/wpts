@@ -1,0 +1,72 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>弾道飛行</title>
+    <id>556978</id>
+    <revision>
+      <id>32592651</id>
+      <timestamp>2010-06-14T14:45:19Z</timestamp>
+      <contributor>
+        <username>Nekosuki600</username>
+        <id>21263</id>
+      </contributor>
+      <text xml:space="preserve">'''弾道飛行'''（だんどうひこう、{{lang-en-short|sub-orbital flight}}）は、[[大砲]]の[[砲弾|弾]]のように[[円 (数学)|弧]]の[[弾道]]を描く飛行形態。一般的には、[[弾道ミサイル]]や[[軌道 (力学)|軌道]]に到達しない[[ロケット]]の飛行経路を指す言葉として使われる。[[宇宙開発]]の分野では'''宇宙弾道飛行'''や'''準軌道飛行'''と呼ばれることもある（英：Sub-orbital spaceflight）。
+
+[[大陸間弾道ミサイル|ICBM]]などの弾道ミサイルの中には、高度1000kmという[[スペースシャトル]]の飛行高度（～578km）以上の高さに達するものもあるが、弾道飛行では速度が[[宇宙速度#第一宇宙速度|第一宇宙速度]]を超えないため、いずれは地表に到達し、[[地球]]を回る軌道となることはない。
+
+[[宇宙飛行]]という観点から見ると、弾道飛行は宇宙空間に到達でき、かつ必要な速度は抑えられるため、最初の目標とされてきた。[[1961年]]、[[アメリカ合衆国|アメリカ]]初の[[有人宇宙飛行]]を実現した[[マーキュリー計画]]も、当初は16分間の弾道飛行であった。また、[[2004年]]に民間企業による[[宇宙船]]として初めて有人宇宙飛行を実現した[[スペースシップワン]]も、高度100km、[[マッハ数|マッハ]]3の弾道飛行であった。[[2006年]]現在では、弾道飛行は[[宇宙旅行]]の対象となっている。
+
+==関連項目==
+*[[人工衛星の軌道]]
+*[[宇宙速度]]
+
+==外部リンク==
+*[http://www.spaceadventures.jp/web/subo.html スペースアドベンチャーズ 宇宙への旅 - 宇宙弾道飛行]
+
+{{aviation-stub|たんとうひこう}}
+
+[[Category:ロケット|たんとうひこう]]
+[[Category:弾道ミサイル|たんとうひこう]]
+
+[[cs:Suborbitální kosmický let]]
+[[de:Suborbitaler Flug]]
+[[en:Sub-orbital spaceflight]]
+[[es:Vuelo suborbital]]
+[[fr:Vol suborbital]]
+[[it:Volo suborbitale]]
+[[nl:Suborbitale ruimtevlucht]]
+[[pl:Lot suborbitalny]]
+[[ru:Суборбитальный космический полёт]]
+[[sk:Suborbitálny kozmický let]]</text>
+    </revision>
+  </page>
+</mediawiki>

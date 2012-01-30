@@ -1,0 +1,90 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Template:En icon</title>
+    <id>764402</id>
+    <revision>
+      <id>29520301</id>
+      <timestamp>2009-12-15T14:51:15Z</timestamp>
+      <contributor>
+        <username>JAnDbot</username>
+        <id>66507</id>
+      </contributor>
+      <minor />
+      <comment>ロボットによる 追加: bar, eo, se, uk 除去: es 変更: hr, tr</comment>
+      <text xml:space="preserve">{{Languageicon|en|英語}}&lt;noinclude&gt;
+[[Category:言語アイコン|en]]
+
+&lt;!--interwiki--&gt;
+[[bar:Vorlage:EnS]]
+[[bs:Šablon:En simbol]]
+[[ca:Plantilla:En]]
+[[cs:Šablona:En]]
+[[cy:Nodyn:Eicon en]]
+[[da:Skabelon:En sprog]]
+[[el:Πρότυπο:En]]
+[[en:Template:En icon]]
+[[eo:Ŝablono:Lang-en]]
+[[eu:Txantiloi:En]]
+[[fi:Malline:En]]
+[[fr:Modèle:En]]
+[[gl:Modelo:En]]
+[[hi:साँचा:En]]
+[[hr:Predložak:Eng icon]]
+[[hu:Sablon:En]]
+[[ia:Patrono:En]]
+[[id:Templat:En]]
+[[it:Template:En]]
+[[lb:Schabloun:En]]
+[[li:Sjabloon:En]]
+[[mk:Шаблон:En]]
+[[ms:Templat:En icon]]
+[[nl:Sjabloon:En]]
+[[pt:Predefinição:((en))]]
+[[ro:Format:En icon]]
+[[ru:Шаблон:Ref-en]]
+[[se:Template:En]]
+[[sh:Šablon:En icon]]
+[[sk:Šablóna:Eng icon]]
+[[sl:Predloga:Ikona en]]
+[[sr:Шаблон:En]]
+[[sv:Mall:En ikon]]
+[[tl:Suleras:En icon]]
+[[tr:Şablon:En icon]]
+[[uk:Шаблон:Lang-en]]
+[[vi:Bản mẫu:En icon]]
+[[zh:Template:En icon]]
+[[zh-classical:Template:En]]
+&lt;/noinclude&gt;</text>
+    </revision>
+  </page>
+</mediawiki>

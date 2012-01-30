@@ -1,0 +1,134 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.4/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.4/ http://www.mediawiki.org/xml/export-0.4.xsd" version="0.4" xml:lang="ja">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <base>http://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%9A%E3%83%BC%E3%82%B8</base>
+    <generator>MediaWiki 1.16wmf4</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">メディア</namespace>
+      <namespace key="-1" case="first-letter">特別</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">ノート</namespace>
+      <namespace key="2" case="first-letter">利用者</namespace>
+      <namespace key="3" case="first-letter">利用者‐会話</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia‐ノート</namespace>
+      <namespace key="6" case="first-letter">ファイル</namespace>
+      <namespace key="7" case="first-letter">ファイル‐ノート</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki‐ノート</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template‐ノート</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help‐ノート</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category‐ノート</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal‐ノート</namespace>
+      <namespace key="102" case="first-letter">プロジェクト</namespace>
+      <namespace key="103" case="first-letter">プロジェクト‐ノート</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>モハーヴェ空港</title>
+    <id>914777</id>
+    <revision>
+      <id>31841433</id>
+      <timestamp>2010-04-29T17:31:21Z</timestamp>
+      <contributor>
+        <username>Ajtnk</username>
+        <id>18368</id>
+      </contributor>
+      <comment>/* 「飛行機の墓場」 */</comment>
+      <text xml:space="preserve">{| class="infobox bordered" style="width: 200px; font-size:100%;"
+|-
+! colspan="4" style="text-align: center; background-color: #4682B4; color: white;" |モハーヴェ空港 &amp; 宇宙港&lt;br/&gt;Mojave Airport &amp; Spaceport&lt;br/&gt;[[画像:Mhv-031118-area3-31cr-8.jpg|300px|駐機されている旅客機]]
+|-
+!align="center" colspan="4"|&lt;small&gt;IATA：MHV - ICAO：KMHV&lt;/small&gt;
+|-
+!colspan="4" style="text-align: center; background-color: #4682B4; color: white;" |概略
+&lt;tr&gt;&lt;th colspan="2" align="left" valign="top"&gt;&lt;small&gt;空港種別&lt;/small&gt;&lt;/th&gt;&lt;td colspan="2" valign="top"&gt;&lt;small&gt;民間&lt;/small&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th colspan="2" align="left" valign="top"&gt;&lt;small&gt;航空管制&lt;/small&gt;&lt;/th&gt;&lt;td colspan="2" valign="top"&gt;&lt;small&gt;CIVIL &lt;/small&gt;&lt;/td&gt;&lt;/tr&gt;
+|-
+!colspan="2" align="left" valign="top"|&lt;small&gt;海抜&lt;/small&gt;
+|colspan="2" valign="top"|&lt;small&gt;2,791ft(851m)&lt;/small&gt;
+|-
+!colspan="2" align="left" valign="top"|&lt;small&gt;位置&lt;/small&gt;
+|colspan="2" valign="top"|&lt;small&gt;{{ウィキ座標度分秒|35|03|34|N|118|09|07|W|}}&lt;/small&gt;
+|-
+!colspan="4" style="text-align: center; background-color: #4682B4; color: white;" |滑走路
+|-
+!bgcolor="lightgrey" rowspan="2"|&lt;small&gt;方向&lt;/small&gt;
+!bgcolor="lightgrey" colspan="2"|&lt;small&gt;全長&lt;/small&gt;
+!bgcolor="lightgrey" rowspan="2"|&lt;small&gt;表面&lt;/small&gt;
+|-
+!bgcolor="lightgrey"|&lt;small&gt;ILS&lt;/small&gt;
+!bgcolor="lightgrey"|&lt;small&gt;m×幅&lt;/small&gt;
+|-
+!align="left" valign="top"|&lt;small&gt;12/30&lt;/small&gt;
+|valign="top"|&lt;small&gt;NO&lt;/small&gt;
+|valign="top"|&lt;small&gt;2,896×61&lt;/small&gt;
+|valign="top"|&lt;small&gt;[[アスファルト|舗装]]&lt;/small&gt;
+|-
+!align="left" valign="top"|&lt;small&gt;08/26&lt;/small&gt;
+|valign="top"|&lt;small&gt;NO&lt;/small&gt;
+|valign="top"|&lt;small&gt;2,149×30&lt;/small&gt;
+|valign="top"|&lt;small&gt;[[アスファルト|舗装]]&lt;/small&gt;
+|-
+!align="left" valign="top"|&lt;small&gt;04/22&lt;/small&gt;
+|valign="top"|&lt;small&gt;NO&lt;/small&gt;
+|valign="top"|&lt;small&gt;1,446×15&lt;/small&gt;
+|valign="top"|&lt;small&gt;[[アスファルト|舗装]]&lt;/small&gt;
+|}
+
+'''モハーヴェ空港 &amp; 宇宙港''' ('''Mojave Airport &amp; Spaceport''')は、[[アメリカ合衆国|アメリカ]]の[[カリフォルニア州]]、[[モハーヴェ (カリフォルニア州)|モハーヴェ]]にある[[空港]]である。
+
+== 概要 ==
+===実験及び開発拠点===
+[[1935年]]に開港し、[[第二次世界大戦]]中の[[1942年]]に[[アメリカ海兵隊|海兵隊]]の訓練基地となった。その後[[1972年]]に民間に運営が戻され、軍民問わず様々な[[航空機]]の実験及び開発の拠点として運営されている。
+
+3本の滑走路を持つ大規模な空港であり、[[旅客機]]をはじめとした航空機の整備の施設や訓練施設も置かれているが、[[1980年代]]より定期便の運航はないこともあり、旅客ターミナルは置かれていない。周辺は[[モハーヴェ砂漠]]で、廃棄予定の航空機の駐機場の地面も砂漠の上である。
+
+===「宇宙港」===
+[[File:Spaceship One and White Knight side view.jpg|thumb|right|220px|ヴァージン社の宇宙船]]
+[[File:Ansett-767-N407AN-070405-01-12.jpg|thumb|right|220px|解体された[[アンセット・オーストラリア航空]]の[[ボーイング767]]-300]]
+モハーヴェ空港は、[[イギリス]]の[[ヴァージン・グループ]]傘下の[[ヴァージン・ギャラクティック]]社と、航空機開発を行う[[スケールド・コンポジッツ]]社による、宇宙旅行の宇宙船の開発拠点が置かれていることでも知られ、「Airport（空港）」と同時に、「Spaceport（宇宙港）」という名前となっている。
+
+===「飛行機の墓場」===
+また現在は、他社への売却の途上で一時的に保管されたり、経年化により廃棄される予定の[[航空機]]を留置する空港として世界的に有名で、常時百機以上の[[旅客機]]が保管されている。
+
+現在は、[[マクドネル・ダグラス]][[DC-9]]や[[DC-10]]、[[ボーイング747]]-100/200/300や[[ボーイング737]]-200/300、[[エアバスA300]]や[[BAe 146]]などの機齢25-35年程度の経年機が多く保管、もしくは廃棄待ちされており、中には[[ダグラス]][[DC-8]]や[[ボーイング707]]、[[ボーイング727]]などの[[1960年代]]に製造された機体や、[[1980年代]]に製造された[[ボーイング757]]や[[ボーイング767]]、[[エアバスA310]]や[[エアバスA320]]などの比較的新しい機体も保管、もしくは廃棄待ちされている。
+
+そのため、「'''飛行機の墓場'''」との異名を持ち、世界中から旅客機や軍用機マニアが多く集まる。また、広大な敷地とロサンゼルス市内から100キロ程度というアクセスの利便性の高さから、「[[ダイ・ハード2]]」や「[[S.W.A.T.]]」、「[[24]]」など、様々な[[映画]]や[[テレビ]]シリーズの撮影場所としても使用されている。
+
+==その他の施設==
+[[File:Ifta-a36-N812AD-071115-01-16.jpg|thumb|right|220px|IFTAのビーチクラフトA36]]
+===訓練設備===
+[[全日本空輸]]の[[パイロット]]の訓練施設「International Flight Training Academy：IFTA（Base APO: [[Meadows Field Airport]]）」の訓練で利用する空港の一つで、全日空の塗装を施された[[ビーチクラフト]]A36「ボナンザ」が飛行訓練で訪れることがある。なおモハーヴェ空港内には、廃棄処分となる全日空の塗装を施された機材が保管されている。
+
+===ゲートガード===
+モハーヴェ空港のゲートガードとして、空港入り口に空港の[[ロゴ]]が入った[[コンベア990]]型機が駐機している。なおこの機材は[[アメリカ航空宇宙局|NASA]]で実験機として使用されていたもので、世界でも数少ない原形をとどめるコンベア990型機の1つである。
+
+== 交通 ==
+===車===
+カリフォルニア州内の[[ロサンゼルス]]市内からは約100km圏内にある。ロサンゼルスから、[[州間高速道路5号線]]を北上、途中のジャンクションから[[カリフォルニア州道14号線]]に入り、しばらくしてまた[[カリフォルニア州道58号線]]に乗り換えてしばらくたったところにある。
+
+==宿泊施設==
+「モーテル8」など複数の[[ホテル]]が空港周辺にある他、空港周辺には複数の[[レストラン]]や「[[サブウェイ]]」などの[[ファストフード]]店もいくつか存在する。
+
+== 参考文献 ==
+*[[FLY! FLY! FLY!]]
+** 「飛行機の墓場　モハベ空港」 (DVD)、ポニーキャニオン
+
+== 関連項目 ==
+*[[デビスモンサン空軍基地]] - 飛行機の墓場としてモハーヴェと同様に著名。退役した軍用機が大量に保管されている
+
+{{airport-info|KMHV}}
+[[Category:カリフォルニア州の空港|もはあへくうこう]]
+[[Category:グレイト・ベイスン|もはあへくうこう]]
+
+[[de:Mojave Air &amp; Space Port]]
+[[en:Mojave Air and Space Port]]</text>
+    </revision>
+  </page>
+</mediawiki>
