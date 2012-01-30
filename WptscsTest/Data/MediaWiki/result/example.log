@@ -1,0 +1,15 @@
+http://en.wikipedia.org より [[example]] を取得。
+
+→ 言語間リンクの探索、見出しの変換を行います
+{{Template:wiktionary}} → 言語間リンク無し
+{{Template:wikiquote}} → 言語間リンク無し
+[[Example (rapper)]] → 言語間リンク無し
+[[example.com]] → [[Example.com]]
+[[example.net]] → リダイレクト [[Example.com]] → [[Example.com]]
+[[example.org]] → リダイレクト [[Example.com]] → [[Example.com]]
+[[.example]] → [[トップレベルドメイン]]
+
+==See also== → ==関連項目==
+[[Exemplum]] → 言語間リンク無し
+[[Exemplar]] → 言語間リンク無し
+{{Template:disambig}} → 言語間リンク無し
