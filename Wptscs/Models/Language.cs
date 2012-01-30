@@ -3,7 +3,7 @@
 //      言語に関する情報をあらわすモデルクラスソース</summary>
 //
 // <copyright file="Language.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -119,6 +119,20 @@ namespace Honememo.Wptscs.Models
             {
                 this.bracket = value;
             }
+        }
+
+        #endregion
+
+        #region 公開メソッド
+
+        /// <summary>
+        /// <see cref="Bracket"/> を渡された値で書式化した文字列を返す。
+        /// </summary>
+        /// <param name="value">記事名。</param>
+        /// <returns>書式化した文字列。<see cref="Bracket"/>が未設定の場合<c>null</c>。</returns>
+        public string FormatBracket(string value)
+        {
+            return StringUtils.FormatDollarVariable(this.Bracket, value);
         }
 
         #endregion

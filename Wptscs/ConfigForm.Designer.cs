@@ -35,6 +35,13 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageItems = new System.Windows.Forms.TabPage();
             this.dataGridViewItems = new System.Windows.Forms.DataGridView();
+            this.ColumnFromCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnFromTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAlias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnArrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnToCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnToTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageHeadings = new System.Windows.Forms.TabPage();
             this.dataGridViewHeading = new System.Windows.Forms.DataGridView();
             this.tabPageServer = new System.Windows.Forms.TabPage();
@@ -47,6 +54,8 @@
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.textBoxLinkInterwikiFormat = new System.Windows.Forms.TextBox();
+            this.labelLinkInterwikiFormat = new System.Windows.Forms.Label();
             this.textBoxDocumentationTemplateDefaultPage = new System.Windows.Forms.TextBox();
             this.labelDocumentationTemplateDefaultPage = new System.Windows.Forms.Label();
             this.textBoxDocumentationTemplate = new System.Windows.Forms.TextBox();
@@ -86,13 +95,6 @@
             this.labelUserAgent = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.ColumnFromCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnFromTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnAlias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnArrow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnToCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnToTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTimestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
@@ -162,6 +164,49 @@
             this.dataGridViewItems.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGridViewItems_RowsAdded);
             this.dataGridViewItems.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.ResetErrorText_RowValidated);
             this.dataGridViewItems.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridViewItems_RowValidating);
+            // 
+            // ColumnFromCode
+            // 
+            resources.ApplyResources(this.ColumnFromCode, "ColumnFromCode");
+            this.ColumnFromCode.MaxInputLength = 16;
+            this.ColumnFromCode.Name = "ColumnFromCode";
+            // 
+            // ColumnFromTitle
+            // 
+            resources.ApplyResources(this.ColumnFromTitle, "ColumnFromTitle");
+            this.ColumnFromTitle.MaxInputLength = 255;
+            this.ColumnFromTitle.Name = "ColumnFromTitle";
+            // 
+            // ColumnAlias
+            // 
+            resources.ApplyResources(this.ColumnAlias, "ColumnAlias");
+            this.ColumnAlias.MaxInputLength = 255;
+            this.ColumnAlias.Name = "ColumnAlias";
+            // 
+            // ColumnArrow
+            // 
+            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
+            this.ColumnArrow.Name = "ColumnArrow";
+            this.ColumnArrow.ReadOnly = true;
+            this.ColumnArrow.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnArrow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ColumnToCode
+            // 
+            resources.ApplyResources(this.ColumnToCode, "ColumnToCode");
+            this.ColumnToCode.MaxInputLength = 16;
+            this.ColumnToCode.Name = "ColumnToCode";
+            // 
+            // ColumnToTitle
+            // 
+            resources.ApplyResources(this.ColumnToTitle, "ColumnToTitle");
+            this.ColumnToTitle.MaxInputLength = 255;
+            this.ColumnToTitle.Name = "ColumnToTitle";
+            // 
+            // ColumnTimestamp
+            // 
+            resources.ApplyResources(this.ColumnTimestamp, "ColumnTimestamp");
+            this.ColumnTimestamp.Name = "ColumnTimestamp";
             // 
             // tabPageHeadings
             // 
@@ -255,6 +300,8 @@
             // groupBoxServer
             // 
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
+            this.groupBoxServer.Controls.Add(this.textBoxLinkInterwikiFormat);
+            this.groupBoxServer.Controls.Add(this.labelLinkInterwikiFormat);
             this.groupBoxServer.Controls.Add(this.textBoxDocumentationTemplateDefaultPage);
             this.groupBoxServer.Controls.Add(this.labelDocumentationTemplateDefaultPage);
             this.groupBoxServer.Controls.Add(this.textBoxDocumentationTemplate);
@@ -276,6 +323,18 @@
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
             // 
+            // textBoxLinkInterwikiFormat
+            // 
+            resources.ApplyResources(this.textBoxLinkInterwikiFormat, "textBoxLinkInterwikiFormat");
+            this.textBoxLinkInterwikiFormat.Name = "textBoxLinkInterwikiFormat";
+            this.toolTip.SetToolTip(this.textBoxLinkInterwikiFormat, resources.GetString("textBoxLinkInterwikiFormat.ToolTip"));
+            // 
+            // labelLinkInterwikiFormat
+            // 
+            resources.ApplyResources(this.labelLinkInterwikiFormat, "labelLinkInterwikiFormat");
+            this.labelLinkInterwikiFormat.Name = "labelLinkInterwikiFormat";
+            this.toolTip.SetToolTip(this.labelLinkInterwikiFormat, resources.GetString("labelLinkInterwikiFormat.ToolTip"));
+            // 
             // textBoxDocumentationTemplateDefaultPage
             // 
             resources.ApplyResources(this.textBoxDocumentationTemplateDefaultPage, "textBoxDocumentationTemplateDefaultPage");
@@ -290,6 +349,7 @@
             // 
             // textBoxDocumentationTemplate
             // 
+            this.textBoxDocumentationTemplate.AcceptsReturn = true;
             resources.ApplyResources(this.textBoxDocumentationTemplate, "textBoxDocumentationTemplate");
             this.textBoxDocumentationTemplate.Name = "textBoxDocumentationTemplate";
             this.toolTip.SetToolTip(this.textBoxDocumentationTemplate, resources.GetString("textBoxDocumentationTemplate.ToolTip"));
@@ -533,49 +593,6 @@
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // ColumnFromCode
-            // 
-            resources.ApplyResources(this.ColumnFromCode, "ColumnFromCode");
-            this.ColumnFromCode.MaxInputLength = 16;
-            this.ColumnFromCode.Name = "ColumnFromCode";
-            // 
-            // ColumnFromTitle
-            // 
-            resources.ApplyResources(this.ColumnFromTitle, "ColumnFromTitle");
-            this.ColumnFromTitle.MaxInputLength = 255;
-            this.ColumnFromTitle.Name = "ColumnFromTitle";
-            // 
-            // ColumnAlias
-            // 
-            resources.ApplyResources(this.ColumnAlias, "ColumnAlias");
-            this.ColumnAlias.MaxInputLength = 255;
-            this.ColumnAlias.Name = "ColumnAlias";
-            // 
-            // ColumnArrow
-            // 
-            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
-            this.ColumnArrow.Name = "ColumnArrow";
-            this.ColumnArrow.ReadOnly = true;
-            this.ColumnArrow.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnArrow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ColumnToCode
-            // 
-            resources.ApplyResources(this.ColumnToCode, "ColumnToCode");
-            this.ColumnToCode.MaxInputLength = 16;
-            this.ColumnToCode.Name = "ColumnToCode";
-            // 
-            // ColumnToTitle
-            // 
-            resources.ApplyResources(this.ColumnToTitle, "ColumnToTitle");
-            this.ColumnToTitle.MaxInputLength = 255;
-            this.ColumnToTitle.Name = "ColumnToTitle";
-            // 
-            // ColumnTimestamp
-            // 
-            resources.ApplyResources(this.ColumnTimestamp, "ColumnTimestamp");
-            this.ColumnTimestamp.Name = "ColumnTimestamp";
-            // 
             // ConfigForm
             // 
             this.AcceptButton = this.buttonOk;
@@ -678,5 +695,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
+        private System.Windows.Forms.Label labelLinkInterwikiFormat;
+        private System.Windows.Forms.TextBox textBoxLinkInterwikiFormat;
     }
 }

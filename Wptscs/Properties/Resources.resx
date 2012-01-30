@@ -123,9 +123,7 @@
   </data>
   <data name="ArticleFooter" xml:space="preserve">
     <value>&lt;!-- {0}、[[:{1}:{2}]]（{3}(UTC)）より --&gt;</value>
-  </data>
-  <data name="ErrorMessage_TemporayError" xml:space="preserve">
-    <value>一時ファイルの作成に失敗しました。設定ファイルに異常が無いか、また以下のフォルダにファイルが作成可能かを確認してください。</value>
+    <comment>変換した記事の末尾に付けるフッター</comment>
   </data>
   <data name="ErrorMessageConfigLordFailed" xml:space="preserve">
     <value>設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。
@@ -148,9 +146,9 @@
     <comment>サーバーへの接続失敗</comment>
   </data>
   <data name="ErrorMessageDevelopmentError" xml:space="preserve">
-    <value>想定外のエラーが発生しました。プログラムが不安定な状態になった可能性があります。プログラムを再起動してください。
-問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。
-また、手順や現在の設定を確認し、開発者にご連絡ください。
+    <value>想定外のエラーが発生しました。正常に処理が続けられない状態になった可能性があります。プログラムを再起動してください。
+
+問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。また、手順や現在の設定を確認し、開発者にご連絡ください。
 
 ＜エラーの内容＞
 {0}
@@ -161,69 +159,81 @@
     <value>エラー</value>
     <comment>エラーダイアログのタイトル</comment>
   </data>
-  <data name="InformationMessage_DevelopingMethod" xml:space="preserve">
+  <data name="InformationMessageDevelopingMethod" xml:space="preserve">
     <value>現在、{0}には未対応ですm(__)m</value>
+    <comment>未実装の機能が呼ばれた際のメッセージ</comment>
   </data>
   <data name="InformationTitle" xml:space="preserve">
     <value>お知らせ</value>
     <comment>お知らせダイアログのタイトル</comment>
   </data>
-  <data name="LogMessage_ArticleExistInterWiki" xml:space="preserve">
+  <data name="LogMessageTargetArticleHadInterWiki" xml:space="preserve">
     <value>注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。</value>
+    <comment>翻訳支援対象の記事が言語間リンクを持っている場合の警告メッセージ</comment>
   </data>
-  <data name="LogMessage_ArticleNothing" xml:space="preserve">
+  <data name="LogMessageTargetArticleNotFound" xml:space="preserve">
     <value>翻訳元として指定された記事は存在しません。記事名を確認してください。</value>
+    <comment>翻訳支援対象の記事が存在しない場合のエラーメッセージ</comment>
   </data>
-  <data name="LogMessage_CheckAndReplaceStart" xml:space="preserve">
+  <data name="LogMessageStartParseAndReplace" xml:space="preserve">
     <value>言語間リンクの探索、見出しの変換を行います</value>
+    <comment>翻訳支援処理本体を開始する際のメッセージ</comment>
   </data>
-  <data name="LogMessage_End" xml:space="preserve">
+  <data name="LogMessageEnd" xml:space="preserve">
     <value>
 処理結果を {0} に出力しました。このログは {1} に保存されます。
 </value>
+    <comment>翻訳支援処理処理を完了した際のメッセージ</comment>
   </data>
-  <data name="LogMessage_ErrorFileSave" xml:space="preserve">
+  <data name="LogMessageFileSaveFailed" xml:space="preserve">
     <value>
 ファイル {0} の保存に失敗しました。（{1}）
 </value>
+    <comment>ファイルの出力に失敗した場合のエラーメッセージ</comment>
   </data>
-  <data name="LogMessage_ErrorURL" xml:space="preserve">
+  <data name="LogMessageErrorURL" xml:space="preserve">
     <value>要求したURLは {0} です。</value>
+    <comment>通信エラー発生時のURLを示すメッセージ</comment>
   </data>
-  <data name="LogMessage_GetArticle" xml:space="preserve">
+  <data name="LogMessageGetTargetArticle" xml:space="preserve">
     <value>{0} より [[{1}]] を取得。</value>
+    <comment>翻訳支援対象の記事を取得する際のメッセージ</comment>
   </data>
-  <data name="LogMessage_InterWikiNothing" xml:space="preserve">
+  <data name="LogMessageInterWikiNotFound" xml:space="preserve">
     <value>言語間リンク無し</value>
+    <comment>記事に言語間リンクが存在しない場合のメッセージ</comment>
   </data>
-  <data name="LogMessage_LinkArticleNothing" xml:space="preserve">
+  <data name="LogMessageLinkArticleNotFound" xml:space="preserve">
     <value>記事無し</value>
+    <comment>内部リンク先の記事が存在しない場合のメッセージ</comment>
   </data>
-  <data name="LogMessage_Redirect" xml:space="preserve">
+  <data name="LogMessageRedirect" xml:space="preserve">
     <value>リダイレクト</value>
+    <comment>記事がリダイレクトの場合のメッセージ</comment>
   </data>
-  <data name="LogMessage_Start" xml:space="preserve">
+  <data name="LogMessageStart" xml:space="preserve">
     <value>{0}、実行日時 {1}
 
 </value>
+    <comment>翻訳支援処理処理を開始した際のメッセージ</comment>
   </data>
-  <data name="LogMessage_Stop" xml:space="preserve">
+  <data name="LogMessageStop" xml:space="preserve">
     <value>
 処理を中止しました。このログは {0} に保存されます。
 </value>
+    <comment>翻訳支援処理処理を中止した際のメッセージ</comment>
   </data>
-  <data name="LogMessage_TemplateUnknown" xml:space="preserve">
-    <value>{{{{0}}}} の識別に失敗しました。{{{{0}}}} は {{1}}名前空間の記事して処理します。（{{2}}）</value>
+  <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
+    <value>{{{{0}}}} の名前空間の確認に失敗しました。{{{{0}}}} は {{1}}名前空間と仮定して処理します。（{{2}}）</value>
+    <comment>テンプレートの名前空間を補完する際に、想定外のエラーとなった場合のメッセージ</comment>
   </data>
-  <data name="LogMessageTranslation" xml:space="preserve">
+  <data name="LogMessageNoteTranslation" xml:space="preserve">
     <value> ※キャッシュ</value>
     <comment>対訳表使用時の注釈</comment>
   </data>
-  <data name="QuestionMessage_ArticleExist" xml:space="preserve">
+  <data name="QuestionMessageArticleExisted" xml:space="preserve">
     <value>対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？</value>
-  </data>
-  <data name="QuestionMessage_CommonWorkQuestion" xml:space="preserve">
-    <value>{0}を行います。よろしいですか？</value>
+    <comment>指定された記事が既に翻訳先に存在する場合の確認メッセージ</comment>
   </data>
   <data name="QuestionTitle" xml:space="preserve">
     <value>確認</value>
@@ -292,5 +302,33 @@
   </data>
   <data name="WarningMessageEmptySaveDirectory" xml:space="preserve">
     <value>出力先フォルダを指定してください。</value>
+  </data>
+  <data name="StatusDownloading" xml:space="preserve">
+    <value>ページ取得中...</value>
+    <comment>処理状態がページのダウンロード中</comment>
+  </data>
+  <data name="StatusParsing" xml:space="preserve">
+    <value>ページ解析中...</value>
+    <comment>処理状態がページの解析中</comment>
+  </data>
+  <data name="StatusPinging" xml:space="preserve">
+    <value>サーバー接続中...</value>
+    <comment>処理状態がサーバー接続確認中</comment>
+  </data>
+  <data name="StatusCacheUpdating" xml:space="preserve">
+    <value>キャッシュ更新中...</value>
+    <comment>処理状態がキャッシュ更新中</comment>
+  </data>
+  <data name="StatusConfigReading" xml:space="preserve">
+    <value>設定ファイル読込中...</value>
+    <comment>処理状態が設定ファイル読込中</comment>
+  </data>
+  <data name="StatusFileWriting" xml:space="preserve">
+    <value>ファイル出力中...</value>
+    <comment>処理状態がファイル出力中</comment>
+  </data>
+  <data name="ElapsedTime" xml:space="preserve">
+    <value>実行時間: {0:m\:ss}</value>
+    <comment>ステータスバー処理時間のフォーマット</comment>
   </data>
 </root>

@@ -1,0 +1,21 @@
+'''xxx'''（[[英語|英]]: '''Example'''）
+
+[[ファイル:Example.png|thumb|Wikipedia's example image. (Example.png)]]
+[[:en:Template:wiktionary]]<!-- {{wiktionary}} -->
+[[:en:Template:wikiquote]]<!-- {{wikiquote}} -->
+'''Example''' may refer to:
+
+*{{仮リンク|Example (rapper)|en|Example (rapper)|label=Example (rapper)}}, a British rapper
+*[[Example.com|example.com]], [[Example.com|example.net]], [[Example.com|example.org]]  and [[トップレベルドメイン|.example]], domain names reserved for use in documentation as examples 
+
+==関連項目==
+*{{仮リンク|Exemplum|en|Exemplum|label=Exemplum}}, medieval collections of short stories to be told in sermons
+*{{仮リンク|Exemplar|en|Exemplar|label=Exemplar}}, a prototype or model which others can use to understand a topic better
+
+[[:en:Template:disambig]]<!-- {{disambig}} -->
+
+[[fr:Example]]
+[[ksh:Example (Watt ėßß datt?)]]
+
+[[en:Example]]
+<!-- Wikipedia 翻訳支援ツール Ver0.73、[[:en:Example]]（2010年7月13日 0:49:18(UTC)）より -->

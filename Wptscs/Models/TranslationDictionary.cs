@@ -3,7 +3,7 @@
 //      言語間の翻訳パターンをあらわすモデルクラスソース</summary>
 //
 // <copyright file="TranslationDictionary.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -201,7 +201,7 @@ namespace Honememo.Wptscs.Models
                 {
                     writer.WriteAttributeString(
                         "Timestamp",
-                        item.Value.Timestamp.Value.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"));
+                        XmlConvert.ToString(item.Value.Timestamp.Value, XmlDateTimeSerializationMode.Utc));
                 }
 
                 writer.WriteEndElement();

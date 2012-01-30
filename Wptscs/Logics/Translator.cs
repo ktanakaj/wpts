@@ -3,7 +3,7 @@
 //      翻訳支援処理を実装するための共通クラスソース</summary>
 //
 // <copyright file="Translator.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Logics
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Net;
     using System.Net.NetworkInformation;
@@ -18,6 +19,7 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// 翻訳支援処理を実装するための共通クラスです。
@@ -34,21 +36,52 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// ログメッセージ。
         /// </summary>
-        private string log;
+        private string log = String.Empty;
+
+        /// <summary>
+        /// 処理状態メッセージ。
+        /// </summary>
+        private string status = String.Empty;
 
         /// <summary>
         /// 変換後テキスト。
         /// </summary>
-        private string text;
+        private string text = String.Empty;
 
         #endregion
-        
+
+        #region コンストラクタ
+
+        /// <summary>
+        /// インスタンスを生成する。
+        /// </summary>
+        public Translator()
+        {
+            this.Stopwatch = new Stopwatch();
+        }
+
+        #endregion
+
+        #region デリゲート
+
+        /// <summary>
+        /// <see cref="ChangeStatusInExecuting"/> で実行する処理のためのデリゲート。
+        /// </summary>
+        protected delegate void MethodWithChangeStatus();
+
+        #endregion
+
         #region イベント
 
         /// <summary>
         /// ログ更新伝達イベント。
         /// </summary>
         public event EventHandler LogUpdate;
+
+        /// <summary>
+        /// 処理状態更新伝達イベント。
+        /// </summary>
+        public event EventHandler StatusUpdate;
 
         #endregion
 
@@ -87,12 +120,41 @@ namespace Honememo.Wptscs.Logics
 
             protected set
             {
-                this.log = (value != null) ? value : String.Empty;
+                this.log = StringUtils.DefaultString(value);
                 if (this.LogUpdate != null)
                 {
                     this.LogUpdate(this, EventArgs.Empty);
                 }
             }
+        }
+
+        /// <summary>
+        /// 処理状態メッセージ。
+        /// </summary>
+        public string Status
+        {
+            get
+            {
+                return this.status;
+            }
+
+            protected set
+            {
+                this.status = StringUtils.DefaultString(value);
+                if (this.StatusUpdate != null)
+                {
+                    this.StatusUpdate(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 処理時間ストップウォッチ。
+        /// </summary>
+        public Stopwatch Stopwatch
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -188,8 +250,9 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <returns><c>true</c> 処理成功</returns>
-        public virtual bool Run(string name)
+        /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Log"/>に出力される。</exception>
+        /// <exception cref="InvalidOperationException"><see cref="From"/>, <see cref="To"/>が設定されていない場合。</exception>
+        public virtual void Run(string name)
         {
             // ※必須な情報が設定されていない場合、InvalidOperationExceptionを返す
             if (this.From == null || this.To == null)
@@ -197,8 +260,9 @@ namespace Honememo.Wptscs.Logics
                 throw new InvalidOperationException("From or To is null");
             }
 
-            // 変数を初期化
+            // 変数を初期化、処理時間を測定開始
             this.Initialize();
+            this.Stopwatch.Start();
 
             // サーバー接続チェック
             string host = new Uri(this.From.Location).Host;
@@ -206,13 +270,25 @@ namespace Honememo.Wptscs.Logics
             {
                 if (!this.Ping(host))
                 {
-                    return false;
+                    throw new ApplicationException("ping failed");
                 }
             }
 
+            // ここまでの間に終了条件が出ているかを確認
+            this.ThrowExceptionIfCanceled();
+
             // 翻訳支援処理実行部の本体を実行
             // ※以降の処理は、継承クラスにて定義
-            return this.RunBody(name);
+            try
+            {
+                this.RunBody(name);
+            }
+            finally
+            {
+                // 終了後は処理状態をクリア、処理時間を測定終了
+                this.Status = String.Empty;
+                this.Stopwatch.Stop();
+            }
         }
         
         #endregion
@@ -223,9 +299,9 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行部の本体。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <returns><c>true</c> 処理成功</returns>
+        /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Log"/>に出力する。</exception>
         /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
-        protected abstract bool RunBody(string name);
+        protected abstract void RunBody(string name);
 
         /// <summary>
         /// ログメッセージを1行追加出力。
@@ -261,8 +337,122 @@ namespace Honememo.Wptscs.Logics
         /// <param name="title">ページタイトル。</param>
         /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
         /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
-        /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
+        /// <remarks>
+        /// 通信エラーなど例外が発生した場合は、別途エラーログを出力する。
+        /// また、実行中は処理状態をサーバー接続中に更新する。
+        /// </remarks>
         protected Page GetPage(string title, string notFoundMsg)
+        {
+            // ページ取得処理、実行中は処理状態を変更
+            Page result = null;
+            this.ChangeStatusInExecuting(
+                () => result = this.GetPageAtNotChangeStatus(title, notFoundMsg),
+                Resources.StatusDownloading);
+            return result;
+        }
+
+        /// <summary>
+        /// 終了要求が出ている場合、例外を投げる。
+        /// </summary>
+        /// <exception cref="ApplicationException"><see cref="CancellationPending"/>が<c>true</c>の場合。</exception>
+        protected void ThrowExceptionIfCanceled()
+        {
+            if (this.CancellationPending)
+            {
+                throw new ApplicationException("CancellationPending is true");
+            }
+        }
+
+        /// <summary>
+        /// 指定された処理を実行する間、処理状態を渡された値に更新する。
+        /// 処理終了後は以前の処理状態に戻す。
+        /// </summary>
+        /// <param name="method">実行する処理。</param>
+        /// <param name="status">処理状態。</param>
+        protected void ChangeStatusInExecuting(MethodWithChangeStatus method, string status)
+        {
+            // 現在の処理状態を保存、新しい処理状態をセットし、処理を実行する
+            string oldStatus = this.Status;
+            this.Status = status;
+            try
+            {
+                method();
+            }
+            finally
+            {
+                // 処理状態を以前の状態に戻す
+                this.Status = oldStatus;
+            }
+        }
+
+        #endregion
+
+        #region privateメソッド
+
+        /// <summary>
+        /// 翻訳支援処理実行時の初期化処理。
+        /// </summary>
+        private void Initialize()
+        {
+            // 変数を初期化
+            this.Log = String.Empty;
+            this.Status = String.Empty;
+            this.Stopwatch.Reset();
+            this.Text = String.Empty;
+            this.CancellationPending = false;
+        }
+
+        /// <summary>
+        /// サーバー接続チェック。
+        /// </summary>
+        /// <param name="server">サーバー名。</param>
+        /// <returns><c>true</c> 接続成功。</returns>
+        /// <remarks>実行中は処理状態をサーバー接続中に更新する。</remarks>
+        private bool Ping(string server)
+        {
+            // サーバー接続チェック、実行中は処理状態を変更
+            bool result = false;
+            this.ChangeStatusInExecuting(
+                () => result = this.PingAtNotChangeStatus(server),
+                Resources.StatusPinging);
+            return result;
+        }
+
+        /// <summary>
+        /// サーバー接続チェック（処理状態更新無し）。
+        /// </summary>
+        /// <param name="server">サーバー名。</param>
+        /// <returns><c>true</c> 接続成功。</returns>
+        private bool PingAtNotChangeStatus(string server)
+        {
+            // サーバー接続チェック
+            Ping ping = new Ping();
+            try
+            {
+                PingReply reply = ping.Send(server);
+                if (reply.Status != IPStatus.Success)
+                {
+                    this.LogLine(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                this.LogLine(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// ログメッセージを出力しつつページを取得（処理状態更新無し）。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
+        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
+        private Page GetPageAtNotChangeStatus(string title, string notFoundMsg)
         {
             try
             {
@@ -284,7 +474,7 @@ namespace Honememo.Wptscs.Logics
                     this.LogLine(Resources.RightArrow + " " + e.Message);
                     if (e.Response != null)
                     {
-                        this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessage_ErrorURL, e.Response.ResponseUri));
+                        this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, e.Response.ResponseUri));
                     }
                 }
             }
@@ -301,48 +491,6 @@ namespace Honememo.Wptscs.Logics
 
             // 取得失敗時いずれの場合もnull
             return null;
-        }
-
-        #endregion
-
-        #region privateメソッド
-
-        /// <summary>
-        /// 翻訳支援処理実行時の初期化処理。
-        /// </summary>
-        private void Initialize()
-        {
-            // 変数を初期化
-            this.log = String.Empty;
-            this.Text = String.Empty;
-            this.CancellationPending = false;
-        }
-
-        /// <summary>
-        /// サーバー接続チェック。
-        /// </summary>
-        /// <param name="server">サーバー名。</param>
-        /// <returns><c>true</c> 接続成功。</returns>
-        private bool Ping(string server)
-        {
-            // サーバー接続チェック
-            Ping ping = new Ping();
-            try
-            {
-                PingReply reply = ping.Send(server);
-                if (reply.Status != IPStatus.Success)
-                {
-                    this.LogLine(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                this.LogLine(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
-                return false;
-            }
-
-            return true;
         }
 
         #endregion

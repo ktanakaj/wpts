@@ -2,8 +2,15 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wptscs", "wptscs\Wptscs.csproj", "{4E20E523-0230-474C-B8F1-1E991360F5F5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CC7F6106-0C00-427B-9BF2-1EE65448907B} = {CC7F6106-0C00-427B-9BF2-1EE65448907B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WptscsTest", "WptscsTest\WptscsTest.csproj", "{FDBDFBB8-2975-4521-87C6-D75CF9144DED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmLib", "HmLib\HmLib.csproj", "{CC7F6106-0C00-427B-9BF2-1EE65448907B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmLibTest", "HmLibTest\HmLibTest.csproj", "{77218F38-BD1C-469B-B975-68AE3E9EE14E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +32,18 @@ Global
 		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FDBDFBB8-2975-4521-87C6-D75CF9144DED}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC7F6106-0C00-427B-9BF2-1EE65448907B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7F6106-0C00-427B-9BF2-1EE65448907B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC7F6106-0C00-427B-9BF2-1EE65448907B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC7F6106-0C00-427B-9BF2-1EE65448907B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7F6106-0C00-427B-9BF2-1EE65448907B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC7F6106-0C00-427B-9BF2-1EE65448907B}.Release|x86.ActiveCfg = Release|Any CPU
+		{77218F38-BD1C-469B-B975-68AE3E9EE14E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77218F38-BD1C-469B-B975-68AE3E9EE14E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77218F38-BD1C-469B-B975-68AE3E9EE14E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77218F38-BD1C-469B-B975-68AE3E9EE14E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77218F38-BD1C-469B-B975-68AE3E9EE14E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77218F38-BD1C-469B-B975-68AE3E9EE14E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

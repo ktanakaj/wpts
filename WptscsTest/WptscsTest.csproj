@@ -12,6 +12,7 @@
     <AssemblyName>WptscsTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,26 +41,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logics\MediaWikiTranslatorTest.cs" />
+    <Compile Include="Logics\TranslatorTest.cs" />
     <Compile Include="Models\ConfigTest.cs" />
-    <Compile Include="Models\IgnoreCaseDictionaryTest.cs" />
-    <Compile Include="Models\MediaWikiPageTest.cs" />
-    <Compile Include="Models\PageTest.cs" />
-    <Compile Include="Models\TestingConfig.cs" />
+    <Compile Include="Parsers\MediaWikiLinkTest.cs" />
+    <Compile Include="Parsers\MediaWikiParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiHeadingParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiLinkParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiNowikiParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiTemplateParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiVariableParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiRedirectParserTest.cs" />
+    <Compile Include="Parsers\MediaWikiTemplateTest.cs" />
+    <Compile Include="Parsers\MediaWikiHeadingTest.cs" />
+    <Compile Include="Parsers\MediaWikiVariableTest.cs" />
+    <Compile Include="Websites\MediaWikiPageTest.cs" />
+    <Compile Include="Websites\PageTest.cs" />
+    <Compile Include="Models\MockFoctory.cs" />
     <Compile Include="Models\LanguageTest.cs" />
-    <Compile Include="Models\MediaWikiTest.cs" />
+    <Compile Include="Websites\MediaWikiTest.cs" />
     <Compile Include="Models\TranslationDictionaryTest.cs" />
     <Compile Include="Models\TranslationTableTest.cs" />
-    <Compile Include="Models\WebsiteTest.cs" />
+    <Compile Include="Websites\WebsiteTest.cs" />
     <Compile Include="PrivateAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AppDefaultWebProxyTest.cs" />
     <Compile Include="Utilities\FormUtilsTest.cs" />
-    <Compile Include="Utilities\LazyXmlParserTest.cs" />
-    <Compile Include="Utilities\ObjectUtilsTest.cs" />
-    <Compile Include="Utilities\StringUtilsTest.cs" />
-    <Compile Include="Utilities\ValidateTest.cs" />
-    <Compile Include="Utilities\XmlUtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HmLib\HmLib.csproj">
+      <Project>{CC7F6106-0C00-427B-9BF2-1EE65448907B}</Project>
+      <Name>HmLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\wptscs\Wptscs.csproj">
       <Project>{4E20E523-0230-474C-B8F1-1E991360F5F5}</Project>
       <Name>Wptscs</Name>
@@ -74,7 +86,22 @@
     <Content Include="Data\MediaWiki\en\.example.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\MediaWiki\en\Discovery Channel.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Fuji %28Spacecraft%29.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\MediaWiki\en\Nothing Page.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_Citation needed.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_Citation needed_doc.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Template_Planetbox begin.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\en\_api.xml">
@@ -209,6 +236,10 @@
     <Content Include="Data\MediaWiki\ja\遠地点.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\MediaWiki\result\config.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\MediaWiki\result\example.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -216,6 +247,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\result\example_定型句なし.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\result\example_仮リンク有効.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\result\スペースシップツー.txt">

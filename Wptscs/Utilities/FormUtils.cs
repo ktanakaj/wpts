@@ -3,12 +3,12 @@
 //      Windows処理に関するユーティリティクラスソース。</summary>
 //
 // <copyright file="FormUtils.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-namespace Honememo.Utilities
+namespace Honememo.Wptscs.Utilities
 {
     using System;
     using System.Collections.Generic;
@@ -114,6 +114,7 @@ namespace Honememo.Utilities
 
         /// <summary>
         /// 文字列中のファイル名に使用できない文字を「_」に置換。
+        /// また、&amp;nbsp;由来の半角スペース (u00a0) も普通の半角スペース (u0020) に置換する。
         /// </summary>
         /// <param name="fileName">ファイル名。</param>
         /// <returns>置換後のファイル名。</returns>
@@ -121,12 +122,13 @@ namespace Honememo.Utilities
         {
             // 渡された文字列にファイル名に使えない文字が含まれている場合、_ に置き換える
             string result = fileName;
-            char[] unuseChars = Path.GetInvalidFileNameChars();
-            foreach (char c in unuseChars)
+            foreach (char c in Path.GetInvalidFileNameChars())
             {
                 result = result.Replace(c, '_');
             }
 
+            // &nbsp;由来の半角スペース (u00a0) も普通の半角スペース (u0020) に置き換える
+            result = result.Replace(' ', ' ');
             return result;
         }
 

@@ -3,15 +3,16 @@
 //      FormUtilsのテストクラスソース。</summary>
 //
 // <copyright file="FormUtilsTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-namespace Honememo.Utilities
+namespace Honememo.Wptscs.Utilities
 {
     using System;
     using System.Windows.Forms;
+    using Honememo.Wptscs.Utilities;
     using NUnit.Framework;
 
     /// <summary>
@@ -24,6 +25,8 @@ namespace Honememo.Utilities
     [TestFixture]
     public class FormUtilsTest
     {
+        #region モッククラス
+
         /// <summary>
         /// Websiteテスト用のモッククラスです。
         /// </summary>
@@ -31,8 +34,10 @@ namespace Honememo.Utilities
         {
         }
 
+        #endregion
+
         #region リソース関連テストケース
-        
+
         /// <summary>
         /// ReplaceInvalidFileNameCharsメソッドテストケース。
         /// </summary>
@@ -55,6 +60,10 @@ namespace Honememo.Utilities
             Assert.AreEqual("C__test_test.doc", FormUtils.ReplaceInvalidFileNameChars("C:\\test\\test.doc"));
             Assert.AreEqual("_home_test_test.doc", FormUtils.ReplaceInvalidFileNameChars("/home/test/test.doc"));
             Assert.AreEqual("______", FormUtils.ReplaceInvalidFileNameChars("*?\"<>|"));
+
+            // 一見普通のファイル名に見えるが、&nbsp;由来の半角スペース (u00a0) が含まれており問題を起こす
+            // 通常の半角スペース (u0020) に変換する
+            Assert.AreEqual("Fuji (Spacecraft).xml", FormUtils.ReplaceInvalidFileNameChars("Fuji (Spacecraft).xml"));
         }
 
         #endregion

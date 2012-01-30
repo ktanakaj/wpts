@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツールの設定アクセス用ソース</summary>
 //
 // <copyright file="Settings.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================

@@ -63,9 +63,14 @@ namespace Honememo.Wptscs
             this.folderBrowserDialogSaveDirectory = new System.Windows.Forms.FolderBrowserDialog();
             this.backgroundWorkerRun = new System.ComponentModel.BackgroundWorker();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelStopwatch = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timerStatusStopwatch = new System.Windows.Forms.Timer(this.components);
             this.groupBoxTransfer.SuspendLayout();
             this.groupBoxSaveDirectory.SuspendLayout();
             this.groupBoxRun.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxTransfer
@@ -228,10 +233,35 @@ namespace Honememo.Wptscs
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelStatus,
+            this.toolStripStatusLabelStopwatch});
+            resources.ApplyResources(this.statusStrip, "statusStrip");
+            this.statusStrip.Name = "statusStrip";
+            // 
+            // toolStripStatusLabelStatus
+            // 
+            this.toolStripStatusLabelStatus.Name = "toolStripStatusLabelStatus";
+            resources.ApplyResources(this.toolStripStatusLabelStatus, "toolStripStatusLabelStatus");
+            this.toolStripStatusLabelStatus.Spring = true;
+            // 
+            // toolStripStatusLabelStopwatch
+            // 
+            this.toolStripStatusLabelStopwatch.Name = "toolStripStatusLabelStopwatch";
+            resources.ApplyResources(this.toolStripStatusLabelStopwatch, "toolStripStatusLabelStopwatch");
+            // 
+            // timerStatusStopwatch
+            // 
+            this.timerStatusStopwatch.Interval = 1000;
+            this.timerStatusStopwatch.Tick += new System.EventHandler(this.TimerStatusStopwatch_Tick);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBoxRun);
             this.Controls.Add(this.groupBoxSaveDirectory);
             this.Controls.Add(this.groupBoxTransfer);
@@ -244,7 +274,10 @@ namespace Honememo.Wptscs
             this.groupBoxSaveDirectory.PerformLayout();
             this.groupBoxRun.ResumeLayout(false);
             this.groupBoxRun.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -270,6 +303,10 @@ namespace Honememo.Wptscs
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogSaveDirectory;
         private System.ComponentModel.BackgroundWorker backgroundWorkerRun;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStatus;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStopwatch;
+        private System.Windows.Forms.Timer timerStatusStopwatch;
     }
 }
 

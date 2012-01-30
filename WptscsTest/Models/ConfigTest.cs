@@ -3,7 +3,7 @@
 //      Configのテストクラスソース。</summary>
 //
 // <copyright file="ConfigTest.cs.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -20,6 +20,7 @@ namespace Honememo.Wptscs.Models
     using NUnit.Framework;
     using Honememo.Utilities;
     using Honememo.Wptscs.Logics;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// Configのテストクラスです。
@@ -27,7 +28,26 @@ namespace Honememo.Wptscs.Models
     [TestFixture]
     public class ConfigTest
     {
-        // TODO: テストケース全然足りない
+        #region モッククラス
+
+        /// <summary>
+        /// Configテスト用のモッククラスです。
+        /// </summary>
+        /// <remarks>そのままではnewすることができないため。</remarks>
+        public class DummyConfig : Config
+        {
+        }
+
+        #endregion
+
+        #region 定数
+
+        /// <summary>
+        /// テスト結果が格納されているフォルダパス。
+        /// </summary>
+        private static readonly string resultXml = Path.Combine(MockFactory.TestMediaWikiDir, "result\\config.xml");
+
+        #endregion
 
         #region XMLシリアライズ用メソッドケース
 
@@ -39,7 +59,7 @@ namespace Honememo.Wptscs.Models
         {
             // TODO: デシリアライズでも細かい動作の差異があるので、もう少しテストケースが必要
             Config config;
-            using (Stream stream = new FileStream("Data\\config.xml", FileMode.Open, FileAccess.Read))
+            using (Stream stream = new FileStream(MockFactory.TestConfigXml, FileMode.Open, FileAccess.Read))
             {
                 config = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
             }
@@ -51,7 +71,7 @@ namespace Honememo.Wptscs.Models
             Assert.AreEqual("http://en.wikipedia.org", en.Location);
             Assert.IsTrue(en.Language.Names.ContainsKey("ja"));
             // TODO: この辺も、内容の確認が必要
-            Assert.IsTrue(config.ItemTables.Count == 0);
+            Assert.IsTrue(config.ItemTables.Count > 0);
             Assert.IsTrue(config.HeadingTable.Count > 0);
             Assert.AreEqual("関連項目", config.HeadingTable.GetWord("en", "ja", "See Also"));
         }
@@ -63,7 +83,7 @@ namespace Honememo.Wptscs.Models
         public void TestWriteXml()
         {
             // TODO: シリアライズでも細かい動作の差異があるので、もう少しテストケースが必要
-            Config config = new TestingConfig();
+            Config config = new DummyConfig();
             config.Translator = typeof(MediaWikiTranslator);
             TranslationDictionary dic = new TranslationDictionary("en", "ja");
             dic.Add("dicKey", new TranslationDictionary.Item { Word = "dicTest" });
@@ -85,6 +105,30 @@ namespace Honememo.Wptscs.Models
             Assert.AreEqual("<Config><Translator>MediaWikiTranslator</Translator><Websites />"
                 + "<ItemTables><ItemTable From=\"en\" To=\"ja\"><Item From=\"dicKey\" To=\"dicTest\" /></ItemTable></ItemTables>"
                 + "<HeadingTable><Group><Word Lang=\"recordKey\">recordValue</Word></Group></HeadingTable></Config>", b.ToString());
+        }
+
+        /// <summary>
+        /// XMLデシリアライズ→シリアライズの通しのテストケース。
+        /// </summary>
+        [Test]
+        public void TestReadXmlToWriteXml()
+        {
+            Config config;
+            using (Stream stream = new FileStream(MockFactory.TestConfigXml, FileMode.Open, FileAccess.Read))
+            {
+                config = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
+            }
+
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+
+            StringBuilder b = new StringBuilder();
+            using (XmlWriter w = XmlWriter.Create(b, settings))
+            {
+                new XmlSerializer(typeof(Config)).Serialize(w, config);
+            }
+
+            Assert.AreEqual(File.ReadAllText(resultXml), b.ToString());
         }
 
         #endregion

@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール主画面クラスソース</summary>
 //
 // <copyright file="MainForm.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -22,6 +22,8 @@ namespace Honememo.Wptscs
     using Honememo.Wptscs.Logics;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Utilities;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// Wikipedia翻訳支援ツール主画面のクラスです。
@@ -38,12 +40,12 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 検索支援処理クラスのオブジェクト。
         /// </summary>
-        private Translator translate;
+        private Translator translator;
 
         /// <summary>
         /// 表示済みログ文字列長。
         /// </summary>
-        private int logLastLength;
+        private int logLength;
 
         #endregion
 
@@ -76,7 +78,7 @@ namespace Honememo.Wptscs
                 this.Close();
             }
 
-            this.translate = null;
+            this.translator = null;
             Control.CheckForIllegalCrossThreadCalls = false;
 
             // コンボボックス設定
@@ -320,9 +322,9 @@ namespace Honememo.Wptscs
             {
                 System.Diagnostics.Debug.WriteLine("MainForm.-Stop_Click > 処理中断");
                 this.backgroundWorkerRun.CancelAsync();
-                if (this.translate != null)
+                if (this.translator != null)
                 {
-                    this.translate.CancellationPending = true;
+                    this.translator.CancellationPending = true;
                 }
             }
         }
@@ -336,98 +338,54 @@ namespace Honememo.Wptscs
         {
             try
             {
-                // 翻訳支援処理の前処理
+                // 初期化と開始メッセージ
                 this.textBoxLog.Clear();
-                this.logLastLength = 0;
-                this.textBoxLog.AppendText(
-                    String.Format(
-                        Resources.LogMessage_Start,
-                        FormUtils.ApplicationName(),
-                        DateTime.Now.ToString("F")));
+                this.logLength = 0;
+                this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now.ToString("F")));
 
-                // 処理結果とログのための出力ファイル名を作成
-                string fileName;
-                string logName;
-                this.MakeFileName(out fileName, out logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
-
-                // 翻訳支援処理を実行し、結果とログをファイルに出力
+                // 翻訳支援処理ロジックのオブジェクトを生成
                 try
                 {
-                    this.translate = Translator.Create(this.config, this.comboBoxSource.Text, this.comboBoxTarget.Text);
+                    this.translator = Translator.Create(this.config, this.comboBoxSource.Text, this.comboBoxTarget.Text);
                 }
                 catch (NotImplementedException)
                 {
-                    // 将来の拡張用
-                    this.textBoxLog.AppendText(String.Format(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理"));
-                    FormUtils.InformationDialog(Resources.InformationMessage_DevelopingMethod, "Wikipedia以外の処理");
+                    // 設定ファイルに対応していないパターンが書かれている場合の例外、将来の拡張用
+                    this.textBoxLog.AppendText(String.Format(Resources.InformationMessageDevelopingMethod, "Wikipedia以外の処理"));
+                    FormUtils.InformationDialog(Resources.InformationMessageDevelopingMethod, "Wikipedia以外の処理");
                     return;
                 }
 
-                this.translate.LogUpdate += new EventHandler(this.GetLogUpdate);
+                // ログ・処理状態更新通知を受け取るためのイベント登録
+                // 処理時間更新用にタイマーを起動
+                this.translator.LogUpdate += new EventHandler(this.GetLogUpdate);
+                this.translator.StatusUpdate += new EventHandler(this.GetStatusUpdate);
+                this.Invoke((MethodInvoker)delegate { this.timerStatusStopwatch.Start(); });
 
-                // 実行前に、ユーザーから中止要求がされているかをチェック
-                if (this.backgroundWorkerRun.CancellationPending)
-                {
-                    this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
-                }
-                else
-                {
-                    // 翻訳支援処理を実行
-                    bool successFlag = this.translate.Run(this.textBoxArticle.Text.Trim());
-
-                    // 処理に時間がかかるため、出力ファイル名を再確認
-                    this.MakeFileName(out fileName, out logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
-                    if (successFlag)
-                    {
-                        // 処理結果を出力
-                        try
-                        {
-                            StreamWriter sw = new StreamWriter(Path.Combine(this.textBoxSaveDirectory.Text, fileName));
-                            try
-                            {
-                                sw.Write(this.translate.Text);
-                                this.textBoxLog.AppendText(String.Format(Resources.LogMessage_End, fileName, logName));
-                            }
-                            finally
-                            {
-                                sw.Close();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            this.textBoxLog.AppendText(String.Format(Resources.LogMessage_ErrorFileSave, Path.Combine(this.textBoxSaveDirectory.Text, fileName), ex.Message));
-                            this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
-                        }
-                    }
-                    else
-                    {
-                        this.textBoxLog.AppendText(String.Format(Resources.LogMessage_Stop, logName));
-                    }
-                }
-
-                // ログを出力
+                // 翻訳支援処理を実行
+                bool success = true;
                 try
                 {
-                    StreamWriter sw = new StreamWriter(Path.Combine(this.textBoxSaveDirectory.Text, logName));
-                    try
-                    {
-                        sw.Write(this.textBoxLog.Text);
-                    }
-                    finally
-                    {
-                        sw.Close();
-                    }
+                    this.translator.Run(this.textBoxArticle.Text.Trim());
                 }
-                catch (Exception ex)
+                catch (ApplicationException)
                 {
-                    this.textBoxLog.AppendText(String.Format(Resources.LogMessage_ErrorFileSave, Path.Combine(this.textBoxSaveDirectory.Text, logName), ex.Message));
+                    // 中止要求で停止した場合、その旨イベントに格納する
+                    e.Cancel = this.backgroundWorkerRun.CancellationPending;
+                    success = false;
                 }
+                finally
+                {
+                    // 処理時間更新用のタイマーを終了
+                    this.Invoke((MethodInvoker)delegate { this.timerStatusStopwatch.Stop(); });
+                }
+
+                // 実行結果から、ログと変換後テキストをファイル出力
+                this.WriteResult(success);
             }
             catch (Exception ex)
             {
                 this.textBoxLog.AppendText("\r\n" + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + "\r\n");
-                System.Diagnostics.Debug.WriteLine("MainForm.backgroundWorkerRun_DoWork > 想定外のエラー : " + ex.Message);
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
         }
 
@@ -439,9 +397,18 @@ namespace Honememo.Wptscs
         private void BackgroundWorkerRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // 設定ファイルのキャッシュ情報を更新
+            // ※ 微妙に時間がかかるので、ステータスバーに通知
             try
             {
-                this.config.Save(Settings.Default.ConfigurationFile);
+                this.toolStripStatusLabelStatus.Text = Resources.StatusCacheUpdating;
+                try
+                {
+                    this.config.Save(Settings.Default.ConfigurationFile);
+                }
+                finally
+                {
+                    this.toolStripStatusLabelStatus.Text = String.Empty;
+                }
             }
             catch (Exception ex)
             {
@@ -452,6 +419,17 @@ namespace Honememo.Wptscs
 
             // 画面をロック中から解放
             this.Release();
+        }
+
+        /// <summary>
+        /// ステータスバー処理時間更新タイマー処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TimerStatusStopwatch_Tick(object sender, EventArgs e)
+        {
+            // 処理時間をステータスバーに反映
+            this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, this.translator.Stopwatch.Elapsed);
         }
 
         #endregion
@@ -482,9 +460,18 @@ namespace Honememo.Wptscs
         private bool LoadConfig()
         {
             // 設定ファイルの読み込み
+            // ※ 微妙に時間がかかるので、ステータスバーに通知
             try
             {
-                this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
+                this.toolStripStatusLabelStatus.Text = Resources.StatusConfigReading;
+                try
+                {
+                    this.config = Config.GetInstance(Settings.Default.ConfigurationFile);
+                }
+                finally
+                {
+                    this.toolStripStatusLabelStatus.Text = String.Empty;
+                }
             }
             catch (FileNotFoundException ex)
             {
@@ -542,6 +529,57 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
+        /// 翻訳支援処理のログ・変換後テキストをファイル出力。
+        /// </summary>
+        /// <param name="success">翻訳支援処理が成功した場合<c>true</c>。</param>
+        private void WriteResult(bool success)
+        {
+            // 若干時間がかかるのでステータスバーに通知
+            this.toolStripStatusLabelStatus.Text = Resources.StatusFileWriting;
+            try
+            {
+                // 使用可能な出力ファイル名を生成
+                string fileName;
+                string logName;
+                this.MakeFileName(out fileName, out logName, this.textBoxArticle.Text.Trim(), this.textBoxSaveDirectory.Text);
+
+                if (success)
+                {
+                    // 翻訳支援処理成功時は変換後テキストを出力
+                    try
+                    {
+                        File.WriteAllText(Path.Combine(this.textBoxSaveDirectory.Text, fileName), this.translator.Text);
+                        this.textBoxLog.AppendText(String.Format(Resources.LogMessageEnd, fileName, logName));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.textBoxLog.AppendText(String.Format(Resources.LogMessageFileSaveFailed, Path.Combine(this.textBoxSaveDirectory.Text, fileName), ex.Message));
+                        this.textBoxLog.AppendText(String.Format(Resources.LogMessageStop, logName));
+                    }
+                }
+                else
+                {
+                    this.textBoxLog.AppendText(String.Format(Resources.LogMessageStop, logName));
+                }
+
+                // ログを出力
+                try
+                {
+                    File.WriteAllText(Path.Combine(this.textBoxSaveDirectory.Text, logName), this.textBoxLog.Text);
+                }
+                catch (Exception ex)
+                {
+                    this.textBoxLog.AppendText(String.Format(Resources.LogMessageFileSaveFailed, Path.Combine(this.textBoxSaveDirectory.Text, logName), ex.Message));
+                }
+            }
+            finally
+            {
+                // ステータスバーをクリア
+                this.toolStripStatusLabelStatus.Text = String.Empty;
+            }
+        }
+
+        /// <summary>
         /// 渡された文字列から.txtと.logの重複していないファイル名を作成。
         /// </summary>
         /// <param name="fileName">出力結果ファイル名。</param>
@@ -577,20 +615,31 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
-        /// 翻訳支援処理クラスのイベント用。
+        /// 翻訳支援処理クラスのログ更新イベント用。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void GetLogUpdate(object sender, System.EventArgs e)
+        private void GetLogUpdate(object sender, EventArgs e)
         {
             // 前回以降に追加されたログをテキストボックスに出力
-            int length = this.translate.Log.Length;
-            if (length > this.logLastLength)
+            int length = this.translator.Log.Length;
+            if (length > this.logLength)
             {
-                this.textBoxLog.AppendText(this.translate.Log.Substring(this.logLastLength, length - this.logLastLength));
+                this.textBoxLog.AppendText(this.translator.Log.Substring(this.logLength, length - this.logLength));
             }
 
-            this.logLastLength = length;
+            this.logLength = length;
+        }
+
+        /// <summary>
+        /// 翻訳支援処理クラスの処理状態更新イベント用。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void GetStatusUpdate(object sender, EventArgs e)
+        {
+            // 処理状態をステータスバーに通知
+            this.toolStripStatusLabelStatus.Text = this.translator.Status;
         }
 
         #endregion

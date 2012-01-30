@@ -134,13 +134,23 @@
   &lt;string&gt;#tag&lt;/string&gt;
   &lt;string&gt;gender&lt;/string&gt;
   &lt;string&gt;groupconvert&lt;/string&gt;
+  &lt;string&gt;#expr&lt;/string&gt;
+  &lt;string&gt;#if&lt;/string&gt;
+  &lt;string&gt;#ifeq&lt;/string&gt;
+  &lt;string&gt;#ifexist&lt;/string&gt;
+  &lt;string&gt;#ifexpr&lt;/string&gt;
+  &lt;string&gt;#switch&lt;/string&gt;
+  &lt;string&gt;#time&lt;/string&gt;
+  &lt;string&gt;#rel2abs&lt;/string&gt;
+  &lt;string&gt;#titleparts&lt;/string&gt;
+  &lt;string&gt;#iferror&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="MediaWikiExportPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/wiki/Special:Export/{0}</Value>
+      <Value Profile="(Default)">/wiki/Special:Export/$1</Value>
     </Setting>
     <Setting Name="Bracket" Type="System.String" Scope="Application">
-      <Value Profile="(Default)"> ({0}) </Value>
+      <Value Profile="(Default)"> ($1) </Value>
     </Setting>
     <Setting Name="MediaWikiRedirect" Type="System.String" Scope="Application">
       <Value Profile="(Default)">#REDIRECT</Value>
@@ -158,7 +168,7 @@
       <Value Profile="(Default)">15.00:00:00</Value>
     </Setting>
     <Setting Name="ConfigurationCompatible" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">1.0.0.0</Value>
+      <Value Profile="(Default)">1.10.0.0</Value>
     </Setting>
     <Setting Name="MediaWikiNamespacePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases</Value>

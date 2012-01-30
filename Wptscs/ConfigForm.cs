@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール設定画面クラスソース</summary>
 //
 // <copyright file="ConfigForm.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -15,12 +15,15 @@ namespace Honememo.Wptscs
     using System.ComponentModel;
     using System.Data;
     using System.Drawing;
+    using System.Linq;
     using System.Reflection;
     using System.Text;
     using System.Windows.Forms;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Utilities;
+    using Honememo.Wptscs.Websites;
 
     /// <summary>
     /// Wikipedia翻訳支援ツール設定画面のクラスです。
@@ -54,7 +57,7 @@ namespace Honememo.Wptscs
             this.InitializeComponent();
 
             // 設定対象のConfigを受け取る
-            this.config = Utilities.Validate.NotNull(config, "config");
+            this.config = Honememo.Utilities.Validate.NotNull(config, "config");
         }
 
         #endregion
@@ -726,8 +729,17 @@ namespace Honememo.Wptscs
             this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
             this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
             this.textBoxRedirect.Text = StringUtils.DefaultString(site.Redirect);
-            this.textBoxDocumentationTemplate.Text = StringUtils.DefaultString(site.DocumentationTemplate);
+
+            // Template:Documentionは改行区切りのマルチテキストとして扱う
+            StringBuilder b = new StringBuilder();
+            foreach (string s in site.DocumentationTemplates)
+            {
+                b.Append(s).Append(Environment.NewLine);
+            }
+
+            this.textBoxDocumentationTemplate.Text = b.ToString();
             this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
+            this.textBoxLinkInterwikiFormat.Text = StringUtils.DefaultString(site.LinkInterwikiFormat);
         }
 
         /// <summary>
@@ -787,7 +799,7 @@ namespace Honememo.Wptscs
             this.SaveChangedValue((Website)site);
 
             // 初期値を持つパラメータがあるため、全て変更された場合のみ格納する。
-            // ※ もうちょっと綺麗に書きたかったが、リフレクションを使わないと共通化できなさそうだったので力技
+            // ※ もうちょっと綺麗に書きたかったが、うまい手が思いつかなかったので力技
             //    MediaWikiクラス側で行わないのは、場合によっては意図的に初期値と同じ値を設定すること
             //    もありえるから（初期値が変わる可能性がある場合など）。
             string str = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
@@ -808,16 +820,27 @@ namespace Honememo.Wptscs
                 site.Redirect = str;
             }
 
-            str = StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Trim();
-            if (str != site.DocumentationTemplate)
+            // Template:Documentionの設定は行ごとに格納
+            // ※ この値は初期値を持たないパラメータ
+            site.DocumentationTemplates.Clear();
+            foreach (string s in StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Split('\n'))
             {
-                site.DocumentationTemplate = str;
+                if (!String.IsNullOrWhiteSpace(s))
+                {
+                    site.DocumentationTemplates.Add(s.Trim());
+                }
             }
 
             str = StringUtils.DefaultString(this.textBoxDocumentationTemplateDefaultPage.Text).Trim();
             if (str != site.DocumentationTemplateDefaultPage)
             {
                 site.DocumentationTemplateDefaultPage = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxLinkInterwikiFormat.Text).Trim();
+            if (str != site.LinkInterwikiFormat)
+            {
+                site.LinkInterwikiFormat = str;
             }
 
             // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
