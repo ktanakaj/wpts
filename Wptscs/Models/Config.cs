@@ -3,7 +3,7 @@
 //      アプリケーションの設定を保持するクラスソース</summary>
 //
 // <copyright file="Config.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -27,15 +27,6 @@ namespace Honememo.Wptscs.Models
     /// </summary>
     public class Config : IXmlSerializable
     {
-        #region 静的変数
-
-        /// <summary>
-        /// アプリケーション内でのインスタンス保持変数。
-        /// </summary>
-        private static IDictionary<string, Config> configs = new Dictionary<string, Config>();
-
-        #endregion
-
         #region private変数
 
         /// <summary>
@@ -148,37 +139,24 @@ namespace Honememo.Wptscs.Models
         /// 読み込んで、インスタンスを作成する。
         /// </summary>
         /// <param name="file">設定ファイル名。</param>
-        /// <returns>作成した／既に存在するインスタンス。</returns>
+        /// <returns>作成したインスタンス。</returns>
         public static Config GetInstance(string file)
         {
-            // シングルトンとするため、処理をロック
-            lock (configs)
+            // ユーザーごと・または初期設定用の設定ファイルを読み込み
+            string path = FormUtils.SearchUserAppData(file, Settings.Default.ConfigurationCompatible);
+            if (String.IsNullOrEmpty(path))
             {
-                // 既に作成済みのインスタンスがあればその値を使用
-                // （設定ファイルのタイムスタンプとか確認して再読み込みした方がよい？）
-                if (Config.configs.ContainsKey(file))
-                {
-                    return Config.configs[file];
-                }
-
-                // 無い場合はユーザーごと・または初期設定用の設定ファイルを読み込み
-                string path = FormUtils.SearchUserAppData(file, Settings.Default.ConfigurationCompatible);
-                if (String.IsNullOrEmpty(path))
-                {
-                    // どこにも無い場合は例外を投げる
-                    // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
-                    throw new FileNotFoundException(file + " is not found");
-                }
-
-                // 設定ファイルを読み込み
-                System.Diagnostics.Debug.WriteLine("Config.GetInstance > " + path + " を読み込み");
-                using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    Config.configs[file] = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
-                }
+                // どこにも無い場合は例外を投げる
+                // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
+                throw new FileNotFoundException(file + " is not found");
             }
 
-            return Config.configs[file];
+            // 設定ファイルを読み込み
+            System.Diagnostics.Debug.WriteLine("Config.GetInstance > " + path + " を読み込み");
+            using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                return new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
+            }
         }
 
         #endregion
@@ -191,23 +169,17 @@ namespace Honememo.Wptscs.Models
         /// <param name="file">設定ファイル名。</param>
         public void Save(string file)
         {
-            // ファイル出力のため、競合しないよう一応ロック
-            lock (Config.configs)
+            // 最初にディレクトリの有無を確認し作成
+            string path = Application.UserAppDataPath;
+            if (!Directory.Exists(path))
             {
-                // 最初にディレクトリの有無を確認し作成
-                string path = Application.UserAppDataPath;
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
+                Directory.CreateDirectory(path);
+            }
 
-                // 設定ファイルを出力
-                using (Stream stream = new FileStream(
-                    Path.Combine(path, file),
-                    FileMode.Create))
-                {
-                    new XmlSerializer(typeof(Config)).Serialize(stream, this);
-                }
+            // 設定ファイルを出力
+            using (Stream stream = new FileStream(Path.Combine(path, file), FileMode.Create))
+            {
+                new XmlSerializer(typeof(Config)).Serialize(stream, this);
             }
         }
         
