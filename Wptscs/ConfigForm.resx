@@ -135,6 +135,12 @@
   <data name="buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>148, 17</value>
+  </metadata>
+  <data name="buttonOk.ToolTip" xml:space="preserve">
+    <value>設定を入力された内容で更新し、この画面を閉じます。</value>
+  </data>
   <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
     <value>buttonOk</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
+  </data>
+  <data name="buttonCancel.ToolTip" xml:space="preserve">
+    <value>設定を更新せず、この画面を閉じます。</value>
   </data>
   <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
@@ -373,6 +382,66 @@
   <data name="&gt;&gt;tabPageHeadings.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="buttonLanguageRemove.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonLanguageRemove.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonLanguageRemove.Location" type="System.Drawing.Point, System.Drawing">
+    <value>209, 11</value>
+  </data>
+  <data name="buttonLanguageRemove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 23</value>
+  </data>
+  <data name="buttonLanguageRemove.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="buttonLanguageRemove.Text" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="buttonLanguageRemove.ToolTip" xml:space="preserve">
+    <value>選択されている言語を削除します。</value>
+  </data>
+  <data name="&gt;&gt;buttonLanguageRemove.Name" xml:space="preserve">
+    <value>buttonLanguageRemove</value>
+  </data>
+  <data name="&gt;&gt;buttonLanguageRemove.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonLanguageRemove.Parent" xml:space="preserve">
+    <value>tabPageServer</value>
+  </data>
+  <data name="&gt;&gt;buttonLanguageRemove.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonLunguageAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 11</value>
+  </data>
+  <data name="buttonLunguageAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 23</value>
+  </data>
+  <data name="buttonLunguageAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonLunguageAdd.Text" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="buttonLunguageAdd.ToolTip" xml:space="preserve">
+    <value>言語を追加するダイアログを表示します。</value>
+  </data>
+  <data name="&gt;&gt;buttonLunguageAdd.Name" xml:space="preserve">
+    <value>buttonLunguageAdd</value>
+  </data>
+  <data name="&gt;&gt;buttonLunguageAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonLunguageAdd.Parent" xml:space="preserve">
+    <value>tabPageServer</value>
+  </data>
+  <data name="&gt;&gt;buttonLunguageAdd.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="groupBoxLanguage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -451,9 +520,6 @@
   <data name="groupBoxLanguageName.Text" xml:space="preserve">
     <value>各言語での言語名</value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>148, 17</value>
-  </metadata>
   <data name="groupBoxLanguageName.ToolTip" xml:space="preserve">
     <value>その言語が、各言語でなんと表記されるかを登録します。
 （例 日本語→英語では Japanese と表記）</value>
@@ -539,7 +605,7 @@
     <value>286, 352</value>
   </data>
   <data name="groupBoxLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="groupBoxLanguage.Text" xml:space="preserve">
     <value>言語の設定</value>
@@ -554,7 +620,7 @@
     <value>tabPageServer</value>
   </data>
   <data name="&gt;&gt;groupBoxLanguage.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="groupBoxServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -569,7 +635,7 @@
     <value>153, 19</value>
   </data>
   <data name="textBoxLinkInterwikiFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>10</value>
   </data>
   <data name="textBoxLinkInterwikiFormat.ToolTip" xml:space="preserve">
     <value>言語間リンクが見つからない場合に置き換えるフォーマットを入力します。
@@ -630,7 +696,7 @@
     <value>90, 19</value>
   </data>
   <data name="textBoxDocumentationTemplateDefaultPage.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="textBoxDocumentationTemplateDefaultPage.ToolTip" xml:space="preserve">
     <value>その言語での [[Template:Documentation]] の [[/doc]] に相当する、デフォルトの解説ページ名を入力します。</value>
@@ -693,7 +759,7 @@
     <value>160, 39</value>
   </data>
   <data name="textBoxDocumentationTemplate.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="textBoxDocumentationTemplate.ToolTip" xml:space="preserve">
     <value>その言語での [[Template:Documentation]] に相当するテンプレート名を入力します。
@@ -755,7 +821,7 @@
     <value>36, 19</value>
   </data>
   <data name="textBoxFileNamespace.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="textBoxFileNamespace.ToolTip" xml:space="preserve">
     <value>上記APIで取得した名前空間のうち、ファイルに該当する番号を入力します。</value>
@@ -815,7 +881,7 @@
     <value>36, 19</value>
   </data>
   <data name="textBoxCategoryNamespace.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="textBoxCategoryNamespace.ToolTip" xml:space="preserve">
     <value>上記APIで取得した名前空間のうち、カテゴリに該当する番号を入力します。</value>
@@ -875,7 +941,7 @@
     <value>36, 19</value>
   </data>
   <data name="textBoxTemplateNamespace.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="textBoxTemplateNamespace.ToolTip" xml:space="preserve">
     <value>上記APIで取得した名前空間のうち、テンプレートに該当する番号を入力します。</value>
@@ -932,7 +998,7 @@
     <value>153, 19</value>
   </data>
   <data name="textBoxRedirect.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="textBoxRedirect.ToolTip" xml:space="preserve">
     <value>その言語でのリダイレクトの書式（例 #転送 ）を入力します。
@@ -1058,7 +1124,7 @@
     <value>187, 19</value>
   </data>
   <data name="textBoxNamespacePath.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="textBoxNamespacePath.ToolTip" xml:space="preserve">
     <value>サーバーから名前空間の情報をXMLでダウンロードするためのパスを入力します。
@@ -1178,7 +1244,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>288, 352</value>
   </data>
   <data name="groupBoxServer.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="groupBoxServer.Text" xml:space="preserve">
     <value>MediaWikiの設定</value>
@@ -1193,16 +1259,10 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>tabPageServer</value>
   </data>
   <data name="&gt;&gt;groupBoxServer.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="comboBoxLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
+    <value>3</value>
   </data>
   <data name="comboBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 13</value>
-  </data>
-  <data name="comboBoxLanguage.MaxLength" type="System.Int32, mscorlib">
-    <value>10</value>
   </data>
   <data name="comboBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 20</value>
@@ -1211,8 +1271,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>1</value>
   </data>
   <data name="comboBoxLanguage.ToolTip" xml:space="preserve">
-    <value>設定を変更したい言語を選択します。
-新しい言語を追加するときは、直接言語コードを入力してください。</value>
+    <value>設定を変更したい言語を選択します。</value>
   </data>
   <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
     <value>comboBoxLanguage</value>
@@ -1224,7 +1283,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>tabPageServer</value>
   </data>
   <data name="&gt;&gt;comboBoxLanguage.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="labelLanguage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1242,8 +1301,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>言語:</value>
   </data>
   <data name="labelLanguage.ToolTip" xml:space="preserve">
-    <value>設定を変更したい言語を選択します。
-新しい言語を追加するときは、直接言語コードを入力してください。</value>
+    <value>設定を変更したい言語を選択します。</value>
   </data>
   <data name="&gt;&gt;labelLanguage.Name" xml:space="preserve">
     <value>labelLanguage</value>
@@ -1255,7 +1313,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>tabPageServer</value>
   </data>
   <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="tabPageServer.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

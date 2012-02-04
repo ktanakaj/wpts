@@ -30,11 +30,6 @@ namespace Honememo.Wptscs.Models
         #region private変数
 
         /// <summary>
-        /// 言語に関する情報。
-        /// </summary>
-        private IList<Language> languages = new List<Language>();
-
-        /// <summary>
         /// ウェブサイトの情報。
         /// </summary>
         private IList<Website> websites = new List<Website>();
@@ -64,6 +59,16 @@ namespace Honememo.Wptscs.Models
         #endregion
         
         #region プロパティ
+
+        /// <summary>
+        /// 設定ファイルと紐付いている場合のファイル名。
+        /// </summary>
+        /// <remarks>ファイルと紐付いていない場合は空。</remarks>
+        public string File
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 翻訳支援処理で使用するロジッククラス名。
@@ -151,11 +156,13 @@ namespace Honememo.Wptscs.Models
                 throw new FileNotFoundException(file + " is not found");
             }
 
-            // 設定ファイルを読み込み
+            // 設定ファイルを読み込み、読み込み元のファイル名は記録しておく
             System.Diagnostics.Debug.WriteLine("Config.GetInstance > " + path + " を読み込み");
             using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                return new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
+                Config config = new XmlSerializer(typeof(Config)).Deserialize(stream) as Config;
+                config.File = file;
+                return config;
             }
         }
 
@@ -166,9 +173,17 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 設定をユーザーごとの設定ファイルに書き出し。
         /// </summary>
-        /// <param name="file">設定ファイル名。</param>
-        public void Save(string file)
+        /// <exception cref="InvalidOperationException">
+        /// <see cref="File"/>にこのインスタンスと紐付くファイル名が指定されていない場合。
+        /// </exception>
+        public void Save()
         {
+            // このインスタンスとファイルが紐付いていない場合、実行不可
+            if (String.IsNullOrWhiteSpace(this.File))
+            {
+                throw new InvalidOperationException("file is empty");
+            }
+
             // 最初にディレクトリの有無を確認し作成
             string path = Application.UserAppDataPath;
             if (!Directory.Exists(path))
@@ -177,7 +192,7 @@ namespace Honememo.Wptscs.Models
             }
 
             // 設定ファイルを出力
-            using (Stream stream = new FileStream(Path.Combine(path, file), FileMode.Create))
+            using (Stream stream = new FileStream(Path.Combine(path, this.File), FileMode.Create))
             {
                 new XmlSerializer(typeof(Config)).Serialize(stream, this);
             }

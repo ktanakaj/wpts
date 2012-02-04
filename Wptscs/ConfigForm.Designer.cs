@@ -45,6 +45,8 @@
             this.tabPageHeadings = new System.Windows.Forms.TabPage();
             this.dataGridViewHeading = new System.Windows.Forms.DataGridView();
             this.tabPageServer = new System.Windows.Forms.TabPage();
+            this.buttonLanguageRemove = new System.Windows.Forms.Button();
+            this.buttonLunguageAdd = new System.Windows.Forms.Button();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.groupBoxLanguageName = new System.Windows.Forms.GroupBox();
             this.dataGridViewLanguageName = new System.Windows.Forms.DataGridView();
@@ -115,6 +117,7 @@
             // 
             resources.ApplyResources(this.buttonOk, "buttonOk");
             this.buttonOk.Name = "buttonOk";
+            this.toolTip.SetToolTip(this.buttonOk, resources.GetString("buttonOk.ToolTip"));
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
             // 
@@ -124,6 +127,7 @@
             this.buttonCancel.CausesValidation = false;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
+            this.toolTip.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // tabControl
@@ -224,6 +228,8 @@
             // 
             // tabPageServer
             // 
+            this.tabPageServer.Controls.Add(this.buttonLanguageRemove);
+            this.tabPageServer.Controls.Add(this.buttonLunguageAdd);
             this.tabPageServer.Controls.Add(this.groupBoxLanguage);
             this.tabPageServer.Controls.Add(this.groupBoxServer);
             this.tabPageServer.Controls.Add(this.comboBoxLanguage);
@@ -231,6 +237,22 @@
             resources.ApplyResources(this.tabPageServer, "tabPageServer");
             this.tabPageServer.Name = "tabPageServer";
             this.tabPageServer.UseVisualStyleBackColor = true;
+            // 
+            // buttonLanguageRemove
+            // 
+            resources.ApplyResources(this.buttonLanguageRemove, "buttonLanguageRemove");
+            this.buttonLanguageRemove.Name = "buttonLanguageRemove";
+            this.toolTip.SetToolTip(this.buttonLanguageRemove, resources.GetString("buttonLanguageRemove.ToolTip"));
+            this.buttonLanguageRemove.UseVisualStyleBackColor = true;
+            this.buttonLanguageRemove.Click += new System.EventHandler(this.ButtonLanguageRemove_Click);
+            // 
+            // buttonLunguageAdd
+            // 
+            resources.ApplyResources(this.buttonLunguageAdd, "buttonLunguageAdd");
+            this.buttonLunguageAdd.Name = "buttonLunguageAdd";
+            this.toolTip.SetToolTip(this.buttonLunguageAdd, resources.GetString("buttonLunguageAdd.ToolTip"));
+            this.buttonLunguageAdd.UseVisualStyleBackColor = true;
+            this.buttonLunguageAdd.Click += new System.EventHandler(this.ButtonLunguageAdd_Click);
             // 
             // groupBoxLanguage
             // 
@@ -452,13 +474,13 @@
             // 
             // comboBoxLanguage
             // 
+            this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLanguage.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
             this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.comboBoxLanguage.Sorted = true;
             this.toolTip.SetToolTip(this.comboBoxLanguage, resources.GetString("comboBoxLanguage.ToolTip"));
             this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLanguuage_SelectedIndexChanged);
-            this.comboBoxLanguage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ComboBoxLanguage_KeyDown);
-            this.comboBoxLanguage.Leave += new System.EventHandler(this.ComboBoxLanguage_Leave);
             // 
             // labelLanguage
             // 
@@ -697,5 +719,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
         private System.Windows.Forms.Label labelLinkInterwikiFormat;
         private System.Windows.Forms.TextBox textBoxLinkInterwikiFormat;
+        private System.Windows.Forms.Button buttonLanguageRemove;
+        private System.Windows.Forms.Button buttonLunguageAdd;
     }
 }

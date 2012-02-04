@@ -86,8 +86,8 @@ namespace Honememo.Wptscs
 
             // 前回の処理状態を復元
             this.textBoxSaveDirectory.Text = Settings.Default.SaveDirectory;
-            this.comboBoxSource.SelectedText = Settings.Default.LastSelectedSource;
-            this.comboBoxTarget.SelectedText = Settings.Default.LastSelectedTarget;
+            this.comboBoxSource.SelectedItem = Settings.Default.LastSelectedSource;
+            this.comboBoxTarget.SelectedItem = Settings.Default.LastSelectedTarget;
 
             // コンボボックス変更時の処理をコール
             this.ComboBoxSource_SelectedIndexChanged(sender, e);
@@ -120,8 +120,6 @@ namespace Honememo.Wptscs
             this.linkLabelSourceURL.Text = "http://";
             if (!String.IsNullOrWhiteSpace(this.comboBoxSource.Text))
             {
-                this.comboBoxSource.Text = this.comboBoxSource.Text.Trim().ToLower();
-
                 // その言語の、ユーザーが使用している言語での表示名を表示
                 // （日本語環境だったら日本語を、英語だったら英語を）
                 Language.LanguageName name;
@@ -177,8 +175,7 @@ namespace Honememo.Wptscs
 
                 // その言語の、ユーザーが使用している言語での表示名を表示
                 // （日本語環境だったら日本語を、英語だったら英語を）
-                if (this.config.GetWebsite(
-                    this.comboBoxTarget.Text) != null)
+                if (this.config.GetWebsite(this.comboBoxTarget.Text) != null)
                 {
                     this.labelTarget.Text = this.config.GetWebsite(
                         this.comboBoxTarget.Text).Language.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
@@ -209,15 +206,15 @@ namespace Honememo.Wptscs
             form.ShowDialog();
 
             // 戻ってきたら設定ファイルを再読み込み
-            // ※ 万が一エラーでもとりあえず続行
+            // ※ キャンセル時もインスタンスは更新されてしまうので
             this.LoadConfig();
 
             // コンボボックス設定
-            string backupSourceSelected = this.comboBoxSource.SelectedText;
-            string backupSourceTarget = this.comboBoxTarget.SelectedText;
+            string backupSourceSelected = this.comboBoxSource.Text;
+            string backupSourceTarget = this.comboBoxTarget.Text;
             this.Initialize();
-            this.comboBoxSource.SelectedText = backupSourceSelected;
-            this.comboBoxTarget.SelectedText = backupSourceTarget;
+            this.comboBoxSource.SelectedItem = backupSourceSelected;
+            this.comboBoxTarget.SelectedItem = backupSourceTarget;
 
             // コンボボックス変更時の処理をコール
             this.ComboBoxSource_SelectedIndexChanged(sender, e);
@@ -403,7 +400,7 @@ namespace Honememo.Wptscs
                 this.toolStripStatusLabelStatus.Text = Resources.StatusCacheUpdating;
                 try
                 {
-                    this.config.Save(Settings.Default.ConfigurationFile);
+                    this.config.Save();
                 }
                 finally
                 {
