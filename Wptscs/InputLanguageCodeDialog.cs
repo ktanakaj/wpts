@@ -75,17 +75,15 @@ namespace Honememo.Wptscs
         private void ButtonOk_Click(object sender, EventArgs e)
         {
             // 入力値チェック
-            // TODO: 可能ならエラープロバイダーを使う方法に置き換える
-            // TODO: エラーメッセージはこれ用のものに置き換える
             if (String.IsNullOrWhiteSpace(this.textBoxCode.Text))
             {
-                FormUtils.WarningDialog(Resources.WarningMessageEmptyCodeColumn);
+                FormUtils.WarningDialog(Resources.WarningMessageEmptyLanguageCode);
                 this.textBoxCode.Focus();
                 return;
             }
             else if (this.config.GetWebsite(this.textBoxCode.Text.Trim()) != null)
             {
-                FormUtils.WarningDialog(Resources.WarningMessageDuplicateCodeColumn);
+                FormUtils.WarningDialog(Resources.WarningMessageDuplicateLanguageCode);
                 this.textBoxCode.Focus();
                 return;
             }

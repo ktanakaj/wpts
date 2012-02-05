@@ -331,4 +331,12 @@
     <value>実行時間: {0:m\:ss}</value>
     <comment>ステータスバー処理時間のフォーマット</comment>
   </data>
+  <data name="WarningMessageDuplicateLanguageCode" xml:space="preserve">
+    <value>指定された言語は既に登録されています。</value>
+    <comment>言語コード追加でのコード重複バリデートNGメッセージ</comment>
+  </data>
+  <data name="WarningMessageEmptyLanguageCode" xml:space="preserve">
+    <value>言語コードを入力してください。</value>
+    <comment>言語追加でのコード未入力バリデートNGメッセージ</comment>
+  </data>
 </root>

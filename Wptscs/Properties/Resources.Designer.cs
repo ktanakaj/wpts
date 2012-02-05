@@ -414,6 +414,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   指定された言語は既に登録されています。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageDuplicateLanguageCode {
+            get {
+                return ResourceManager.GetString("WarningMessageDuplicateLanguageCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   記事名を指定してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyArticle {
@@ -428,6 +437,15 @@ namespace Honememo.Wptscs.Properties {
         internal static string WarningMessageEmptyCodeColumn {
             get {
                 return ResourceManager.GetString("WarningMessageEmptyCodeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   言語コードを入力してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageEmptyLanguageCode {
+            get {
+                return ResourceManager.GetString("WarningMessageEmptyLanguageCode", resourceCulture);
             }
         }
         
