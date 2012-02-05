@@ -29,16 +29,6 @@ namespace Honememo.Wptscs.Logics
         #region private変数
 
         /// <summary>
-        /// 改行コード。
-        /// </summary>
-        public static readonly string ENTER = "\r\n";
-
-        /// <summary>
-        /// ログメッセージ。
-        /// </summary>
-        private string log = String.Empty;
-
-        /// <summary>
         /// 処理状態メッセージ。
         /// </summary>
         private string status = String.Empty;
@@ -47,6 +37,11 @@ namespace Honememo.Wptscs.Logics
         /// 変換後テキスト。
         /// </summary>
         private string text = String.Empty;
+
+        /// <summary>
+        /// ログテキスト生成用ロガー。
+        /// </summary>
+        private Logger logger;
 
         #endregion
 
@@ -58,6 +53,7 @@ namespace Honememo.Wptscs.Logics
         public Translator()
         {
             this.Stopwatch = new Stopwatch();
+            this.Logger = new Logger();
         }
 
         #endregion
@@ -110,21 +106,9 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         public string Log
         {
-            // ※ 将来的には、ロジックでログメッセージを出すなんて形を止めて
-            //    データとして保持させてメッセージはビューで・・・としたいが、
-            //    手間を考えて当面はこの形のまま実装する。
             get
             {
-                return this.log;
-            }
-
-            protected set
-            {
-                this.log = StringUtils.DefaultString(value);
-                if (this.LogUpdate != null)
-                {
-                    this.LogUpdate(this, EventArgs.Empty);
-                }
+                return this.Logger.ToString();
             }
         }
 
@@ -200,6 +184,24 @@ namespace Honememo.Wptscs.Logics
             set;
         }
 
+        /// <summary>
+        /// ログテキスト生成用ロガー。
+        /// </summary>
+        protected Logger Logger
+        {
+            get
+            {
+                return this.logger;
+            }
+
+            set
+            {
+                // nullは不可。また、ロガー変更後はイベントを設定
+                this.logger = Validate.NotNull(value);
+                this.logger.LogUpdate += this.GetLogUpdate;
+            }
+        }
+
         #endregion
 
         #region 静的メソッド
@@ -250,7 +252,7 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Log"/>に出力される。</exception>
+        /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Logger"/>に出力される。</exception>
         /// <exception cref="InvalidOperationException"><see cref="From"/>, <see cref="To"/>が設定されていない場合。</exception>
         public virtual void Run(string name)
         {
@@ -299,37 +301,9 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行部の本体。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Log"/>に出力する。</exception>
+        /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Logger"/>に出力する。</exception>
         /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
         protected abstract void RunBody(string name);
-
-        /// <summary>
-        /// ログメッセージを1行追加出力。
-        /// </summary>
-        /// <param name="log">ログメッセージ。</param>
-        protected void LogLine(string log)
-        {
-            // 直前のログが改行されていない場合、改行して出力
-            if (this.Log != String.Empty && this.Log.EndsWith(ENTER) == false)
-            {
-                this.Log += ENTER + log + ENTER;
-            }
-            else
-            {
-                this.Log += log + ENTER;
-            }
-        }
-
-        /// <summary>
-        /// ログメッセージを1行追加出力（入力された文字列を書式化して表示）。
-        /// </summary>
-        /// <param name="format">書式項目を含んだログメッセージ。</param>
-        /// <param name="args">書式設定対象オブジェクト配列。</param>
-        protected void LogLine(string format, params object[] args)
-        {
-            // オーバーロードメソッドをコール
-            this.LogLine(String.Format(format, args));
-        }
 
         /// <summary>
         /// ログメッセージを出力しつつページを取得。
@@ -395,7 +369,7 @@ namespace Honememo.Wptscs.Logics
         private void Initialize()
         {
             // 変数を初期化
-            this.Log = String.Empty;
+            this.Logger.Clear();
             this.Status = String.Empty;
             this.Stopwatch.Reset();
             this.Text = String.Empty;
@@ -432,13 +406,13 @@ namespace Honememo.Wptscs.Logics
                 PingReply reply = ping.Send(server);
                 if (reply.Status != IPStatus.Success)
                 {
-                    this.LogLine(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
+                    this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
                     return false;
                 }
             }
             catch (Exception e)
             {
-                this.LogLine(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
+                this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
                 return false;
             }
 
@@ -466,31 +440,45 @@ namespace Honememo.Wptscs.Logics
                     && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
                 {
                     // 404
-                    this.Log += notFoundMsg;
+                    this.Logger.Add(notFoundMsg);
                 }
                 else
                 {
                     // それ以外のエラー
-                    this.LogLine(Resources.RightArrow + " " + e.Message);
+                    this.Logger.AddResponse(e.Message);
                     if (e.Response != null)
                     {
-                        this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, e.Response.ResponseUri));
+                        this.Logger.AddResponse(Resources.LogMessageErrorURL, e.Response.ResponseUri);
                     }
                 }
             }
             catch (FileNotFoundException)
             {
                 // ファイル無し
-                this.Log += notFoundMsg;
+                this.Logger.Add(notFoundMsg);
             }
             catch (Exception e)
             {
                 // その他の想定外のエラー
-                this.LogLine(Resources.RightArrow + " " + e.Message);
+                this.Logger.AddResponse(e.Message);
             }
 
             // 取得失敗時いずれの場合もnull
             return null;
+        }
+
+        /// <summary>
+        /// ロガーのログ状態更新イベント用。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void GetLogUpdate(object sender, EventArgs e)
+        {
+            // もともとこのクラスにあったログ通知イベントをロガーに移動したため、入れ子で呼び出す
+            if (this.LogUpdate != null)
+            {
+                this.LogUpdate(this, EventArgs.Empty);
+            }
         }
 
         #endregion

@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Logics\MediaWikiTranslatorTest.cs" />
     <Compile Include="Logics\TranslatorTest.cs" />
+    <Compile Include="Logics\LoggerTest.cs" />
+    <Compile Include="Logics\MediaWikiLoggerTest.cs" />
     <Compile Include="Models\ConfigTest.cs" />
     <Compile Include="Parsers\MediaWikiLinkTest.cs" />
     <Compile Include="Parsers\MediaWikiParserTest.cs" />

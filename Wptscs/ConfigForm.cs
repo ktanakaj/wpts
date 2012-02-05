@@ -741,6 +741,7 @@ namespace Honememo.Wptscs
             this.textBoxDocumentationTemplate.Text = b.ToString();
             this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
             this.textBoxLinkInterwikiFormat.Text = StringUtils.DefaultString(site.LinkInterwikiFormat);
+            this.textBoxLangFormat.Text = StringUtils.DefaultString(site.LangFormat);
         }
 
         /// <summary>
@@ -842,6 +843,12 @@ namespace Honememo.Wptscs
             if (str != site.LinkInterwikiFormat)
             {
                 site.LinkInterwikiFormat = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxLangFormat.Text).Trim();
+            if (str != site.LangFormat)
+            {
+                site.LangFormat = str;
             }
 
             // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない

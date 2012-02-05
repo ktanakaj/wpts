@@ -56,6 +56,8 @@
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.textBoxLangFormat = new System.Windows.Forms.TextBox();
+            this.labelLangFormat = new System.Windows.Forms.Label();
             this.textBoxLinkInterwikiFormat = new System.Windows.Forms.TextBox();
             this.labelLinkInterwikiFormat = new System.Windows.Forms.Label();
             this.textBoxDocumentationTemplateDefaultPage = new System.Windows.Forms.TextBox();
@@ -322,6 +324,8 @@
             // groupBoxServer
             // 
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
+            this.groupBoxServer.Controls.Add(this.textBoxLangFormat);
+            this.groupBoxServer.Controls.Add(this.labelLangFormat);
             this.groupBoxServer.Controls.Add(this.textBoxLinkInterwikiFormat);
             this.groupBoxServer.Controls.Add(this.labelLinkInterwikiFormat);
             this.groupBoxServer.Controls.Add(this.textBoxDocumentationTemplateDefaultPage);
@@ -344,6 +348,18 @@
             this.groupBoxServer.Controls.Add(this.labelLocation);
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
+            // 
+            // textBoxLangFormat
+            // 
+            resources.ApplyResources(this.textBoxLangFormat, "textBoxLangFormat");
+            this.textBoxLangFormat.Name = "textBoxLangFormat";
+            this.toolTip.SetToolTip(this.textBoxLangFormat, resources.GetString("textBoxLangFormat.ToolTip"));
+            // 
+            // labelLangFormat
+            // 
+            resources.ApplyResources(this.labelLangFormat, "labelLangFormat");
+            this.labelLangFormat.Name = "labelLangFormat";
+            this.toolTip.SetToolTip(this.labelLangFormat, resources.GetString("labelLangFormat.ToolTip"));
             // 
             // textBoxLinkInterwikiFormat
             // 
@@ -721,5 +737,7 @@
         private System.Windows.Forms.TextBox textBoxLinkInterwikiFormat;
         private System.Windows.Forms.Button buttonLanguageRemove;
         private System.Windows.Forms.Button buttonLunguageAdd;
+        private System.Windows.Forms.TextBox textBoxLangFormat;
+        private System.Windows.Forms.Label labelLangFormat;
     }
 }

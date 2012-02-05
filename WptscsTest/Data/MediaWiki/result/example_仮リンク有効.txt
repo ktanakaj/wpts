@@ -1,4 +1,4 @@
-'''xxx'''（[[英語|英]]: '''Example'''）
+'''xxx'''（[[英語|英]]: '''{{Lang|en|Example}}'''）
 
 [[ファイル:Example.png|thumb|Wikipedia's example image. (Example.png)]]
 [[:en:Template:wiktionary]]<!-- {{wiktionary}} -->

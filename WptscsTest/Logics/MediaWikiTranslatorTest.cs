@@ -556,6 +556,7 @@ namespace Honememo.Wptscs.Logics
             translator.From = from;
             translator.To = mock.GetMediaWiki("ja");
             translator.To.LinkInterwikiFormat = null;
+            translator.To.LangFormat = null;
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
@@ -693,6 +694,7 @@ namespace Honememo.Wptscs.Logics
             translator.To = mock.GetMediaWiki("en");
             translator.To.LinkInterwikiFormat = null;
             translator.ItemTable = new TranslationDictionary("ja", "en");
+            translator.IsContinueAtInterwikiExisted = (string interwiki) => true;
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
