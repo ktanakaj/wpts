@@ -348,8 +348,8 @@ namespace Honememo.Wptscs
                 catch (NotImplementedException)
                 {
                     // 設定ファイルに対応していないパターンが書かれている場合の例外、将来の拡張用
-                    this.textBoxLog.AppendText(String.Format(Resources.InformationMessageDevelopingMethod, "Wikipedia以外の処理"));
-                    FormUtils.InformationDialog(Resources.InformationMessageDevelopingMethod, "Wikipedia以外の処理");
+                    this.textBoxLog.AppendText(String.Format(Resources.InformationMessageDevelopingMethod, "MediaWiki以外の処理"));
+                    FormUtils.InformationDialog(Resources.InformationMessageDevelopingMethod, "MediaWiki以外の処理");
                     return;
                 }
 

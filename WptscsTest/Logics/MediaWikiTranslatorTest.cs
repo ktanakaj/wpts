@@ -751,12 +751,40 @@ namespace Honememo.Wptscs.Logics
                 // 実行ログを期待されるログと比較する
                 Assert.AreEqual(
                     ("http://en.wikipedia.org より [[Nothing Page]] を取得。\r\n"
-                    + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。")
+                    + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。\r\n")
                     .Replace("http://en.wikipedia.org", from.Location),
                     translator.Log);
             }
         }
 
+        /// <summary>
+        /// Runを通しで実行するテストケース（対象記事がリダイレクトで無し）。
+        /// </summary>
+        [Test]
+        public void TestPageRedirectNothing()
+        {
+            MockFactory mock = new MockFactory();
+            MediaWiki from = mock.GetMediaWiki("en");
+            Translator translator = new MediaWikiTranslator();
+            translator.From = from;
+            translator.To = mock.GetMediaWiki("ja");
+
+            try
+            {
+                translator.Run("Redirect→Nothing Page");
+                Assert.Fail();
+            }
+            catch (ApplicationException)
+            {
+                // 実行ログを期待されるログと比較する
+                Assert.AreEqual(
+                    ("http://en.wikipedia.org より [[Redirect→Nothing Page]] を取得。\r\n"
+                    + "→ リダイレクト [[Nothing Page]]\r\n"
+                    + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。\r\n")
+                    .Replace("http://en.wikipedia.org", from.Location),
+                    translator.Log);
+            }
+        }
         #endregion
     }
 }

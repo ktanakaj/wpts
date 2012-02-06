@@ -74,22 +74,6 @@ namespace Honememo.Wptscs.Logics
 
             #endregion
 
-            #region 非公開メソッドテスト用のオーラーライドメソッド
-            
-            /// <summary>
-            /// ログメッセージを出力しつつページを取得。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
-            /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
-            /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
-            public new Page GetPage(string title, string notFoundMsg)
-            {
-                return base.GetPage(title, notFoundMsg);
-            }
-
-            #endregion
-
             #region ダミーメソッド
 
             /// <summary>

@@ -82,10 +82,10 @@ namespace Honememo.Wptscs.Logics
             logger.AddSource(new MediaWikiTemplate("記事名") { Section = "セクション", Code = "ja" });
             Assert.AreEqual("{{記事名}} → ", logger.ToString());
 
-            // 見出しの場合、右矢印が出ない
+            // 見出しの場合、右矢印が出ない＆直前に空行が入る
             logger.Clear();
             logger.AddSource(new MediaWikiHeading {ParsedString = "==見出し==" });
-            Assert.AreEqual("==見出し==", logger.ToString());
+            Assert.AreEqual(Environment.NewLine + "==見出し==", logger.ToString());
 
             // いずれのケースでも、親クラスにある改行されていなければ改行は行われる
             logger.Clear();
@@ -93,7 +93,7 @@ namespace Honememo.Wptscs.Logics
             logger.AddSource(new MediaWikiLink("記事名") { Section = "セクション", Code = "ja" });
             Assert.AreEqual("test" + Environment.NewLine + "[[記事名]] → ", logger.ToString());
             logger.AddSource(new MediaWikiHeading { ParsedString = "==見出し==" });
-            Assert.AreEqual("test" + Environment.NewLine + "[[記事名]] → " + Environment.NewLine + "==見出し==", logger.ToString());
+            Assert.AreEqual("test" + Environment.NewLine + "[[記事名]] → " + Environment.NewLine + Environment.NewLine + "==見出し==", logger.ToString());
         }
 
         #endregion

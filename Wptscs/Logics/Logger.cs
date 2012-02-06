@@ -64,20 +64,7 @@ namespace Honememo.Wptscs.Logics
         #endregion
 
         #region ログ登録メソッド（一般）
-
-        /// <summary>
-        /// ログを追加する。
-        /// </summary>
-        /// <param name="log">ログ。</param>
-        /// <remarks>
-        /// ロガー未使用ソースからの移行用メソッド。整形されないため、出来る限り使用すべきでない。
-        /// </remarks>
-        public void Add(string log)
-        {
-            // TODO: 使用箇所が無くなり次第このメソッドは削除する。
-            this.Log += StringUtils.DefaultString(log);
-        }
-
+        
         /// <summary>
         /// ログメッセージを登録する。
         /// </summary>

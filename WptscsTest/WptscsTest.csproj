@@ -139,6 +139,9 @@
     <Content Include="Data\MediaWiki\en\Template_wiktionary.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\MediaWiki\en\Redirect→Nothing Page.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\MediaWiki\ja\Category_宇宙船.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

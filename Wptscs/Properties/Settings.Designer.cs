@@ -234,7 +234,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.10.0.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.11.0.0")]
         public string ConfigurationCompatible {
             get {
                 return ((string)(this["ConfigurationCompatible"]));

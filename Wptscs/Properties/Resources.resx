@@ -160,7 +160,7 @@
     <comment>エラーダイアログのタイトル</comment>
   </data>
   <data name="InformationMessageDevelopingMethod" xml:space="preserve">
-    <value>現在、{0}には未対応ですm(__)m</value>
+    <value>このバージョンは{0}には未対応です。</value>
     <comment>未実装の機能が呼ばれた際のメッセージ</comment>
   </data>
   <data name="InformationTitle" xml:space="preserve">

@@ -38,7 +38,8 @@ namespace Honememo.Wptscs.Logics
             if (source is MediaWikiHeading)
             {
                 // 見出しの場合、変換先が無い場合は単に「見出し」として出力するので矢印を出さない
-                this.AddNewLineIfNotEndWithNewLine();
+                // また、見出しの部分でログを一区切りする
+                this.AddSeparator();
                 this.Log += this.FormatElement(source);
             }
             else

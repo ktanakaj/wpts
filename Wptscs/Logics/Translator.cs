@@ -254,7 +254,7 @@ namespace Honememo.Wptscs.Logics
         /// <param name="name">記事名。</param>
         /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Logger"/>に出力される。</exception>
         /// <exception cref="InvalidOperationException"><see cref="From"/>, <see cref="To"/>が設定されていない場合。</exception>
-        public virtual void Run(string name)
+        public void Run(string name)
         {
             // ※必須な情報が設定されていない場合、InvalidOperationExceptionを返す
             if (this.From == null || this.To == null)
@@ -276,7 +276,7 @@ namespace Honememo.Wptscs.Logics
                 }
             }
 
-            // ここまでの間に終了条件が出ているかを確認
+            // ここまでの間に終了要求が出ているかを確認
             this.ThrowExceptionIfCanceled();
 
             // 翻訳支援処理実行部の本体を実行
@@ -306,23 +306,38 @@ namespace Honememo.Wptscs.Logics
         protected abstract void RunBody(string name);
 
         /// <summary>
-        /// ログメッセージを出力しつつページを取得。
+        /// ログ出力によるエラー処理を含んだページ取得処理。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
-        /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
-        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <param name="page">取得したページ。ページが存在しない場合は <c>null</c> を返す。</param>
+        /// <returns>処理が成功した（404も含む）場合<c>true</c>、失敗した（通信エラーなど）の場合<c>false</c>。</returns>
+        /// <exception cref="ApplicationException"><see cref="CancellationPending"/>が<c>true</c>の場合。</exception>
         /// <remarks>
-        /// 通信エラーなど例外が発生した場合は、別途エラーログを出力する。
+        /// 本メソッドは、大きく3パターンの動作を行う。
+        /// <list type="number">
+        /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
+        /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
+        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り</description></item>
+        /// </list>
         /// また、実行中は処理状態をサーバー接続中に更新する。
+        /// 実行前後には終了要求のチェックも行う。
         /// </remarks>
-        protected Page GetPage(string title, string notFoundMsg)
+        protected bool TryGetPage(string title, out Page page)
         {
+            // 通信開始の前に終了要求が出ているかを確認
+            this.ThrowExceptionIfCanceled();
+
             // ページ取得処理、実行中は処理状態を変更
+            bool success = false;
             Page result = null;
             this.ChangeStatusInExecuting(
-                () => result = this.GetPageAtNotChangeStatus(title, notFoundMsg),
+                () => success = this.TryGetPageBody(title, out result),
                 Resources.StatusDownloading);
-            return result;
+            page = result;
+
+            // 通信終了後にも再度終了要求を確認
+            this.ThrowExceptionIfCanceled();
+            return success;
         }
 
         /// <summary>
@@ -387,17 +402,17 @@ namespace Honememo.Wptscs.Logics
             // サーバー接続チェック、実行中は処理状態を変更
             bool result = false;
             this.ChangeStatusInExecuting(
-                () => result = this.PingAtNotChangeStatus(server),
+                () => result = this.PingBody(server),
                 Resources.StatusPinging);
             return result;
         }
 
         /// <summary>
-        /// サーバー接続チェック（処理状態更新無し）。
+        /// サーバー接続チェック本体。
         /// </summary>
         /// <param name="server">サーバー名。</param>
         /// <returns><c>true</c> 接続成功。</returns>
-        private bool PingAtNotChangeStatus(string server)
+        private bool PingBody(string server)
         {
             // サーバー接続チェック
             Ping ping = new Ping();
@@ -420,18 +435,27 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ログメッセージを出力しつつページを取得（処理状態更新無し）。
+        /// ログ出力によるエラー処理を含んだページ取得処理本体。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
-        /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
-        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
-        /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
-        private Page GetPageAtNotChangeStatus(string title, string notFoundMsg)
+        /// <param name="page">取得したページ。ページが存在しない場合は <c>null</c> を返す。</param>
+        /// <returns>処理が成功した（404も含む）場合<c>true</c>、失敗した（通信エラーなど）の場合<c>false</c>。</returns>
+        /// <remarks>
+        /// 本メソッドは、大きく3パターンの動作を行う。
+        /// <list type="number">
+        /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
+        /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
+        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り</description></item>
+        /// </list>
+        /// </remarks>
+        private bool TryGetPageBody(string title, out Page page)
         {
+            bool success = false;
             try
             {
-                // 取得できた場合はここで終了
-                return this.From.GetPage(title);
+                // 普通に取得できた場合はここで終了
+                page = this.From.GetPage(title);
+                return true;
             }
             catch (WebException e)
             {
@@ -439,8 +463,8 @@ namespace Honememo.Wptscs.Logics
                 if (e.Status == WebExceptionStatus.ProtocolError
                     && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
                 {
-                    // 404
-                    this.Logger.Add(notFoundMsg);
+                    // 404なら戻り値は正常
+                    success = true;
                 }
                 else
                 {
@@ -454,8 +478,8 @@ namespace Honememo.Wptscs.Logics
             }
             catch (FileNotFoundException)
             {
-                // ファイル無し
-                this.Logger.Add(notFoundMsg);
+                // ファイル無しは戻り値は正常
+                success = true;
             }
             catch (Exception e)
             {
@@ -463,8 +487,9 @@ namespace Honememo.Wptscs.Logics
                 this.Logger.AddResponse(e.Message);
             }
 
-            // 取得失敗時いずれの場合もnull
-            return null;
+            // 例外発生時はいずれの場合も出力値がnull
+            page = null;
+            return success;
         }
 
         /// <summary>
