@@ -486,6 +486,24 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   ウェイト時間には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageIgnoreConnectRetryTime {
+            get {
+                return ResourceManager.GetString("WarningMessageIgnoreConnectRetryTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   リトライ回数には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageIgnoreMaxConnectRetries {
+            get {
+                return ResourceManager.GetString("WarningMessageIgnoreMaxConnectRetries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   名前空間のIDには数値を指定してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreNumericNamespace {

@@ -14,7 +14,7 @@ namespace Honememo.Parsers
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// <see cref="TryParseToEndCondition"/>の終了条件を判定するためのデリゲート。
+    /// <see cref="ITextParser.TryParseToEndCondition"/>の終了条件を判定するためのデリゲート。
     /// </summary>
     /// <param name="s">解析対象の文字列。</param>
     /// <param name="index">処理インデックス。</param>

@@ -274,5 +274,29 @@ namespace Honememo.Wptscs.Properties {
                 this["IgnoreError"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int MaxConnectRetries {
+            get {
+                return ((int)(this["MaxConnectRetries"]));
+            }
+            set {
+                this["MaxConnectRetries"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
+        public int ConnectRetryTime {
+            get {
+                return ((int)(this["ConnectRetryTime"]));
+            }
+            set {
+                this["ConnectRetryTime"] = value;
+            }
+        }
     }
 }

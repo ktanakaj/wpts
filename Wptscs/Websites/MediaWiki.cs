@@ -440,7 +440,8 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。</returns>
-        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
+        /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         public override Page GetPage(string title)
         {
             // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
@@ -453,10 +454,23 @@ namespace Honememo.Wptscs.Websites
 
             // ページのXMLデータをMediaWikiサーバーから取得
             XmlDocument xml = new XmlDocument();
-            using (Stream reader = this.WebProxy.GetStream(
-                new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle))))
+            try
             {
-                xml.Load(reader);
+                using (Stream reader = this.WebProxy.GetStream(
+                    new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle))))
+                {
+                    xml.Load(reader);
+                }
+            }
+            catch (System.Net.WebException e)
+            {
+                // 404エラーによるページ取得失敗は詰め替えて返す
+                if (this.IsNotFound(e))
+                {
+                    throw new FileNotFoundException("page not found", e);
+                }
+
+                throw e;
             }
 
             // ルートエレメントまで取得し、フォーマットをチェック

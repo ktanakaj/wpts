@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <StartAction>Program</StartAction>
     <StartProgram>$(ProgramFiles)\NUnit 2.5.5\bin\net-2.0\nunit.exe</StartProgram>
+    <DocumentationFile>bin\Debug\WptscsTest.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

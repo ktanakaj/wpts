@@ -87,6 +87,12 @@
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelApplicationName = new System.Windows.Forms.Label();
             this.groupBoxApplicationConfig = new System.Windows.Forms.GroupBox();
+            this.textBoxConnectRetryTime = new System.Windows.Forms.TextBox();
+            this.labelConnectRetryTimeNote = new System.Windows.Forms.Label();
+            this.labelConnectRetryTime = new System.Windows.Forms.Label();
+            this.textBoxMaxConnectRetries = new System.Windows.Forms.TextBox();
+            this.labelMaxConnectRetriesNote = new System.Windows.Forms.Label();
+            this.labelMaxConnectRetries = new System.Windows.Forms.Label();
             this.checkBoxIgnoreError = new System.Windows.Forms.CheckBox();
             this.labelRefererNote = new System.Windows.Forms.Label();
             this.labelUserAgentNote = new System.Windows.Forms.Label();
@@ -191,11 +197,11 @@
             // 
             // ColumnArrow
             // 
-            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
             this.ColumnArrow.Name = "ColumnArrow";
             this.ColumnArrow.ReadOnly = true;
             this.ColumnArrow.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnArrow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
             // 
             // ColumnToCode
             // 
@@ -547,6 +553,12 @@
             // groupBoxApplicationConfig
             // 
             resources.ApplyResources(this.groupBoxApplicationConfig, "groupBoxApplicationConfig");
+            this.groupBoxApplicationConfig.Controls.Add(this.textBoxConnectRetryTime);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelConnectRetryTimeNote);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelConnectRetryTime);
+            this.groupBoxApplicationConfig.Controls.Add(this.textBoxMaxConnectRetries);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelMaxConnectRetriesNote);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelMaxConnectRetries);
             this.groupBoxApplicationConfig.Controls.Add(this.checkBoxIgnoreError);
             this.groupBoxApplicationConfig.Controls.Add(this.labelRefererNote);
             this.groupBoxApplicationConfig.Controls.Add(this.labelUserAgentNote);
@@ -559,6 +571,44 @@
             this.groupBoxApplicationConfig.Controls.Add(this.labelUserAgent);
             this.groupBoxApplicationConfig.Name = "groupBoxApplicationConfig";
             this.groupBoxApplicationConfig.TabStop = false;
+            // 
+            // textBoxConnectRetryTime
+            // 
+            resources.ApplyResources(this.textBoxConnectRetryTime, "textBoxConnectRetryTime");
+            this.textBoxConnectRetryTime.Name = "textBoxConnectRetryTime";
+            this.toolTip.SetToolTip(this.textBoxConnectRetryTime, resources.GetString("textBoxConnectRetryTime.ToolTip"));
+            this.textBoxConnectRetryTime.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxConnectRetryTime_Validating);
+            this.textBoxConnectRetryTime.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
+            // 
+            // labelConnectRetryTimeNote
+            // 
+            resources.ApplyResources(this.labelConnectRetryTimeNote, "labelConnectRetryTimeNote");
+            this.labelConnectRetryTimeNote.Name = "labelConnectRetryTimeNote";
+            // 
+            // labelConnectRetryTime
+            // 
+            resources.ApplyResources(this.labelConnectRetryTime, "labelConnectRetryTime");
+            this.labelConnectRetryTime.Name = "labelConnectRetryTime";
+            this.toolTip.SetToolTip(this.labelConnectRetryTime, resources.GetString("labelConnectRetryTime.ToolTip"));
+            // 
+            // textBoxMaxConnectRetries
+            // 
+            resources.ApplyResources(this.textBoxMaxConnectRetries, "textBoxMaxConnectRetries");
+            this.textBoxMaxConnectRetries.Name = "textBoxMaxConnectRetries";
+            this.toolTip.SetToolTip(this.textBoxMaxConnectRetries, resources.GetString("textBoxMaxConnectRetries.ToolTip"));
+            this.textBoxMaxConnectRetries.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxMaxConnectRetries_Validating);
+            this.textBoxMaxConnectRetries.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
+            // 
+            // labelMaxConnectRetriesNote
+            // 
+            resources.ApplyResources(this.labelMaxConnectRetriesNote, "labelMaxConnectRetriesNote");
+            this.labelMaxConnectRetriesNote.Name = "labelMaxConnectRetriesNote";
+            // 
+            // labelMaxConnectRetries
+            // 
+            resources.ApplyResources(this.labelMaxConnectRetries, "labelMaxConnectRetries");
+            this.labelMaxConnectRetries.Name = "labelMaxConnectRetries";
+            this.toolTip.SetToolTip(this.labelMaxConnectRetries, resources.GetString("labelMaxConnectRetries.ToolTip"));
             // 
             // checkBoxIgnoreError
             // 
@@ -739,5 +789,11 @@
         private System.Windows.Forms.Button buttonLunguageAdd;
         private System.Windows.Forms.TextBox textBoxLangFormat;
         private System.Windows.Forms.Label labelLangFormat;
+        private System.Windows.Forms.Label labelMaxConnectRetries;
+        private System.Windows.Forms.Label labelConnectRetryTime;
+        private System.Windows.Forms.TextBox textBoxMaxConnectRetries;
+        private System.Windows.Forms.Label labelMaxConnectRetriesNote;
+        private System.Windows.Forms.Label labelConnectRetryTimeNote;
+        private System.Windows.Forms.TextBox textBoxConnectRetryTime;
     }
 }

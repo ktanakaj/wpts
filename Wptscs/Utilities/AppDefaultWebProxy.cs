@@ -13,6 +13,7 @@ namespace Honememo.Wptscs.Utilities
     using System;
     using System.IO;
     using System.Net;
+    using System.Threading;
     using Honememo.Wptscs.Properties;
     
     /// <summary>
@@ -112,8 +113,54 @@ namespace Honememo.Wptscs.Utilities
         /// </summary>
         /// <param name="uri">取得対象のURI。</param>
         /// <returns>取得したストリーム。使用後は必ずクローズすること。</returns>
-        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        /// <remarks>
+        /// 通信エラー等の場合、アプリケーション設定に指定されている回数リトライする。
+        /// それでも取得できない場合は例外を投げる。
+        /// </remarks>
         public Stream GetStream(Uri uri)
+        {
+            // 実際の処理はサブメソッドで行い、このメソッドでは通信エラー時のリトライを行う
+            int retry = Settings.Default.MaxConnectRetries;
+            int wait = Settings.Default.ConnectRetryTime;
+            while (true)
+            {
+                try
+                {
+                    return this.GetStreamBody(uri);
+                }
+                catch (WebException e)
+                {
+                    // 通信エラーの場合、指定回数までリトライを試みる
+                    if (--retry < 0 || !this.IsRetryable(e))
+                    {
+                        // リトライ回数を消化、またはリトライしても意味が無い場合、そのまま例外を投げる
+                        throw e;
+                    }
+
+                    // 時間を置いてからリトライする（0はスレッド停止のため除外）
+                    System.Diagnostics.Debug.WriteLine("AppDefaultWebProxy.GetStream > retry : " + e.Message);
+                    if (wait > 0)
+                    {
+                        Thread.Sleep(wait);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region 内部処理用メソッド
+
+        /// <summary>
+        /// 指定されたURIの情報をストリームで取得。
+        /// </summary>
+        /// <param name="uri">取得対象のURI。</param>
+        /// <returns>取得したストリーム。使用後は必ずクローズすること。</returns>
+        /// <remarks>
+        /// 通信エラー等の場合、アプリケーション設定に指定されている回数リトライする。
+        /// それでも取得できない場合は例外を投げる。
+        /// </remarks>
+        private Stream GetStreamBody(Uri uri)
         {
             // URIに応じたWebRequestを取得
             WebRequest req = WebRequest.Create(uri);
@@ -131,10 +178,6 @@ namespace Honememo.Wptscs.Utilities
             return req.GetResponse().GetResponseStream();
         }
 
-        #endregion
-
-        #region 内部処理用メソッド
-
         /// <summary>
         /// HttpWebRequest用の設定を行う。
         /// </summary>
@@ -146,8 +189,36 @@ namespace Honememo.Wptscs.Utilities
 
             // Referer設定
             req.Referer = this.Referer;
+
+            // 可能であれば自動的に圧縮を行う用設定
+            req.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
         }
-        
+
+        /// <summary>
+        /// 渡された<see cref="WebException"/>がリトライ可能なものか？
+        /// </summary>
+        /// <param name="e">発生した<c>WebException</c>。</param>
+        /// <returns>リトライ可能な場合<c>true</c>。</returns>
+        private bool IsRetryable(WebException e)
+        {
+            // HTTPプロトコルエラーの場合、ステータスコードで判断する
+            if (e.Status == WebExceptionStatus.ProtocolError)
+            {
+                HttpStatusCode sc = ((HttpWebResponse)e.Response).StatusCode;
+                return sc == HttpStatusCode.InternalServerError
+                    || sc == HttpStatusCode.BadGateway
+                    || sc == HttpStatusCode.ServiceUnavailable
+                    || sc == HttpStatusCode.GatewayTimeout;
+            }
+
+            // それ以外は、応答ステータスで判断する
+            // ※ fileスキームのエラー等はUnknownErrorで来るので注意
+            return e.Status != WebExceptionStatus.TrustFailure
+                && e.Status != WebExceptionStatus.UnknownError
+                && e.Status != WebExceptionStatus.RequestProhibitedByCachePolicy
+                && e.Status != WebExceptionStatus.RequestProhibitedByProxy;
+        }
+
         #endregion
     }
 }

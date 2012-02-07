@@ -172,7 +172,8 @@ namespace Honememo.Wptscs.Logics
         /// <list type="number">
         /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
         /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
-        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り</description></item>
+        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
+        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreErrorによる）。</description></item>
         /// </list>
         /// また、実行中は処理状態をサーバー接続中に更新する。
         /// 実行前後には終了要求のチェックも行う。
@@ -905,31 +906,28 @@ namespace Honememo.Wptscs.Logics
             MediaWikiPage page = null;
             try
             {
+                // 記事が存在する場合、プレフィックスをつけた名前を使用
                 page = this.From.GetPage(WebUtility.HtmlDecode(filledTitle)) as MediaWikiPage;
+                return filledTitle;
             }
-            catch (WebException e)
+            catch (FileNotFoundException)
             {
-                if (e.Status == WebExceptionStatus.ProtocolError
-                    && (e.Response as HttpWebResponse).StatusCode != HttpStatusCode.NotFound)
-                {
-                    // 一時的なサーバーエラー等で判別が付かない場合は存在するものとして処理
-                    this.Logger.AddMessage(Resources.LogMessageTemplateNameUnidentified, template.Title, prefix, e.Message);
-                    return filledTitle;
-                }
+                // 記事が存在しない場合、元のページ名を使用
+                return template.Title;
             }
             catch (Exception e)
             {
-                // それ以外は存在しないものと扱う
-                System.Diagnostics.Debug.WriteLine("MediaWikiTranslator.FillTemplateName > " + e.Message);
-            }
+                // 想定外の例外が発生した場合
+                if (!Settings.Default.IgnoreError)
+                {
+                    // エラーを無視しない場合、ここで翻訳支援処理を中断する
+                    throw new ApplicationException(e.Message, e);
+                }
 
-            if (page != null)
-            {
-                // 記事が存在する場合、プレフィックスをつけた名前を使用
+                // 続行する場合は、とりあえずプレフィックスをつけた名前で処理
+                this.Logger.AddMessage(Resources.LogMessageTemplateNameUnidentified, template.Title, prefix, e.Message);
                 return filledTitle;
             }
-
-            return template.Title;
         }
 
         /// <summary>

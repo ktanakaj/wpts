@@ -317,7 +317,8 @@ namespace Honememo.Wptscs.Logics
         /// <list type="number">
         /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
         /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
-        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り</description></item>
+        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
+        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreErrorによる）。</description></item>
         /// </list>
         /// また、実行中は処理状態をサーバー接続中に更新する。
         /// 実行前後には終了要求のチェックも行う。
@@ -445,51 +446,42 @@ namespace Honememo.Wptscs.Logics
         /// <list type="number">
         /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
         /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
-        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り</description></item>
+        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
+        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreErrorによる）。</description></item>
         /// </list>
         /// </remarks>
         private bool TryGetPageBody(string title, out Page page)
         {
-            bool success = false;
+            page = null;
             try
             {
                 // 普通に取得できた場合はここで終了
                 page = this.From.GetPage(title);
                 return true;
             }
-            catch (WebException e)
-            {
-                // 通信エラー
-                if (e.Status == WebExceptionStatus.ProtocolError
-                    && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
-                {
-                    // 404なら戻り値は正常
-                    success = true;
-                }
-                else
-                {
-                    // それ以外のエラー
-                    this.Logger.AddResponse(e.Message);
-                    if (e.Response != null)
-                    {
-                        this.Logger.AddResponse(Resources.LogMessageErrorURL, e.Response.ResponseUri);
-                    }
-                }
-            }
             catch (FileNotFoundException)
             {
-                // ファイル無しは戻り値は正常
-                success = true;
+                // ページ無しによる例外も正常終了
+                return true;
             }
             catch (Exception e)
             {
-                // その他の想定外のエラー
+                // その他例外の場合、まずエラー情報を出力
                 this.Logger.AddResponse(e.Message);
-            }
+                if (e is WebException && ((WebException)e).Response != null)
+                {
+                    // 出せるならエラーとなったURLも出力
+                    this.Logger.AddResponse(Resources.LogMessageErrorURL, ((WebException)e).Response.ResponseUri);
+                }
 
-            // 例外発生時はいずれの場合も出力値がnull
-            page = null;
-            return success;
+                // エラーを無視しない場合、ここで翻訳支援処理を中断する
+                if (!Settings.Default.IgnoreError)
+                {
+                    throw new ApplicationException(e.Message, e);
+                }
+
+                return false;
+            }
         }
 
         /// <summary>

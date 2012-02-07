@@ -91,6 +91,8 @@ namespace Honememo.Wptscs
                 this.textBoxCacheExpire.Text = Settings.Default.CacheExpire.Days.ToString();
                 this.textBoxUserAgent.Text = Settings.Default.UserAgent;
                 this.textBoxReferer.Text = Settings.Default.Referer;
+                this.textBoxMaxConnectRetries.Text = Settings.Default.MaxConnectRetries.ToString();
+                this.textBoxConnectRetryTime.Text = Settings.Default.ConnectRetryTime.ToString();
                 this.checkBoxIgnoreError.Checked = Settings.Default.IgnoreError;
                 this.labelApplicationName.Text = FormUtils.ApplicationName();
                 AssemblyCopyrightAttribute copyright = Attribute.GetCustomAttribute(
@@ -133,6 +135,8 @@ namespace Honememo.Wptscs
                 Settings.Default.CacheExpire = new TimeSpan(int.Parse(this.textBoxCacheExpire.Text), 0, 0, 0);
                 Settings.Default.UserAgent = this.textBoxUserAgent.Text;
                 Settings.Default.Referer = this.textBoxReferer.Text;
+                Settings.Default.MaxConnectRetries = int.Parse(this.textBoxMaxConnectRetries.Text);
+                Settings.Default.ConnectRetryTime = int.Parse(this.textBoxConnectRetryTime.Text);
                 Settings.Default.IgnoreError = this.checkBoxIgnoreError.Checked;
 
                 // 設定をファイルに保存
@@ -887,20 +891,36 @@ namespace Honememo.Wptscs
         #region その他タブのイベントのメソッド
         
         /// <summary>
-        /// キャッシュ有効期限ボックスバリデート処理。。
+        /// キャッシュ有効期限ボックスバリデート処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
         private void TextBoxCacheExpire_Validating(object sender, CancelEventArgs e)
         {
-            TextBox box = (TextBox)sender;
-            box.Text = StringUtils.DefaultString(box.Text).Trim();
-            int expire;
-            if (!int.TryParse(box.Text, out expire) || expire < 0)
-            {
-                this.errorProvider.SetError(box, Resources.WarningMessageIgnoreCacheExpire);
-                e.Cancel = true;
-            }
+            // 値が0以上の数値かをチェック
+            this.TextBoxGreaterThanValidating((TextBox)sender, e, 0, Resources.WarningMessageIgnoreCacheExpire);
+        }
+
+        /// <summary>
+        /// リトライ回数ボックスバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxMaxConnectRetries_Validating(object sender, CancelEventArgs e)
+        {
+            // 値が0以上の数値かをチェック
+            this.TextBoxGreaterThanValidating((TextBox)sender, e, 0, Resources.WarningMessageIgnoreMaxConnectRetries);
+        }
+
+        /// <summary>
+        /// ウェイト時間ボックスバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxConnectRetryTime_Validating(object sender, CancelEventArgs e)
+        {
+            // 値が0以上の数値かをチェック
+            this.TextBoxGreaterThanValidating((TextBox)sender, e, 0, Resources.WarningMessageIgnoreConnectRetryTime);
         }
 
         /// <summary>
@@ -914,10 +934,32 @@ namespace Honememo.Wptscs
             System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
         }
 
+        #region イベント実装支援用メソッド
+
+        /// <summary>
+        /// メッセージのみ差し替え可能なテキストボックス用の値がxx以上の数値か、のバリデート処理。
+        /// </summary>
+        /// <param name="box">イベント発生テキストボックス。</param>
+        /// <param name="e">発生したイベント。</param>
+        /// <param name="num">比較対象の数値。</param>
+        /// <param name="message">バリデートメッセージ。</param>
+        private void TextBoxGreaterThanValidating(TextBox box, CancelEventArgs e, int num, string message)
+        {
+            box.Text = StringUtils.DefaultString(box.Text).Trim();
+            int value;
+            if (!int.TryParse(box.Text, out value) || value < num)
+            {
+                this.errorProvider.SetError(box, message);
+                e.Cancel = true;
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region 共通のイベントメソッド
-        
+
         /// <summary>
         /// 汎用のエラープロバイダ初期化処理。
         /// </summary>

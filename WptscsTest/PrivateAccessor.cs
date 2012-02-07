@@ -296,6 +296,7 @@ namespace Honememo.Tests
         /// テストする／したクラスのオブジェクトより、指定されたプロパティの値を返す。
         /// </summary>
         /// <param name="name">プロパティ名。</param>
+        /// <param name="index">インデックスプロパティの場合のインデックス。</param>
         /// <returns>プロパティの値。</returns>
         /// <remarks>値の取得に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。</remarks>
         public object GetProperty(string name, params object[] index)
@@ -329,6 +330,7 @@ namespace Honememo.Tests
         /// テストするクラスのオブジェクトで、指定されたプロパティに値を設定する。
         /// </summary>
         /// <param name="name">プロパティ名。</param>
+        /// <param name="index">インデックスプロパティの場合のインデックス。</param>
         /// <param name="value">新しいプロパティ値。</param>
         /// <remarks>
         /// 設定先オブジェクトには <c>NewInstance()</c> または <c> SetInstance()</c>
