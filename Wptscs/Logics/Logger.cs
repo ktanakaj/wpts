@@ -166,13 +166,14 @@ namespace Honememo.Wptscs.Logics
         /// </remarks>
         public virtual void AddDestination(IElement destination, bool cacheUsed = false)
         {
-            this.Log += destination.ToString();
+            StringBuilder b = new StringBuilder(destination.ToString());
             if (cacheUsed)
             {
-                this.Log += Resources.LogMessageNoteTranslation;
+                b.Append(Resources.LogMessageNoteTranslation);
             }
 
-            this.Log += Environment.NewLine;
+            b.Append(Environment.NewLine);
+            this.Log += b.ToString();
         }
 
         #endregion
@@ -190,7 +191,7 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
-        #region その他メソッド
+        #region 初期化メソッド
 
         /// <summary>
         /// このロガーが保持する内容を初期状態に戻す。

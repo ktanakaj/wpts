@@ -62,6 +62,7 @@ namespace Honememo.Wptscs.Logics
         public override void AddAlias(IElement alias)
         {
             // 直前のログが見出しの場合矢印を出力、その後リダイレクトを出力
+            // ※ 見出しでリダイレクトというのはありえないが、一応AddDestinationとあわせて
             this.AddRightArrowIfEndWithHeading();
             ListElement list = new ListElement();
             list.Add(new TextElement(Resources.LogMessageRedirect + " "));
