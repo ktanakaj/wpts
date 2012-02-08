@@ -135,7 +135,7 @@
     <value>464, 17</value>
   </metadata>
   <data name="buttonConfig.ToolTip" xml:space="preserve">
-    <value>言語に関する設定を行います。</value>
+    <value>サーバーやツールの設定を行います。</value>
   </data>
   <data name="&gt;&gt;buttonConfig.Name" xml:space="preserve">
     <value>buttonConfig</value>
@@ -176,15 +176,8 @@
   <data name="&gt;&gt;labelTarget.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="comboBoxTarget.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
-  </data>
   <data name="comboBoxTarget.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 64</value>
-  </data>
-  <data name="comboBoxTarget.MaxLength" type="System.Int32, mscorlib">
-    <value>10</value>
   </data>
   <data name="comboBoxTarget.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 20</value>
@@ -292,14 +285,8 @@
   <data name="&gt;&gt;labelSource.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="comboBoxSource.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
-  </data>
   <data name="comboBoxSource.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 21</value>
-  </data>
-  <data name="comboBoxSource.MaxLength" type="System.Int32, mscorlib">
-    <value>10</value>
   </data>
   <data name="comboBoxSource.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 20</value>
@@ -430,6 +417,7 @@
   <data name="&gt;&gt;groupBoxSaveDirectory.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupBoxRun.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>

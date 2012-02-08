@@ -104,6 +104,7 @@ namespace Honememo.Wptscs
             // 
             // comboBoxTarget
             // 
+            this.comboBoxTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTarget.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxTarget, "comboBoxTarget");
             this.comboBoxTarget.Name = "comboBoxTarget";
@@ -135,6 +136,7 @@ namespace Honememo.Wptscs
             // 
             // comboBoxSource
             // 
+            this.comboBoxSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSource.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxSource, "comboBoxSource");
             this.comboBoxSource.Name = "comboBoxSource";

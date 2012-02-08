@@ -94,15 +94,53 @@ namespace Honememo.Wptscs.Websites
 
         #endregion
         
-        #region メソッド
+        #region 抽象メソッド
 
         /// <summary>
         /// ページを取得。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。</returns>
-        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
+        /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         public abstract Page GetPage(string title);
+
+        #endregion
+
+        #region 実装支援用メソッド
+
+        /// <summary>
+        /// 指定された<see cref="WebException"/>は対象データ無しで発生したものか？
+        /// </summary>
+        /// <param name="e">判定する例外。</param>
+        /// <returns>対象データ無しで発生したものの場合<c>true</c>。</returns>
+        /// <remarks>HTTPスキームの404と、fileスキームのファイル無しをデータ無しと判定。</remarks>
+        protected bool IsNotFound(WebException e)
+        {
+            if (e.Status == WebExceptionStatus.ProtocolError
+                && ((HttpWebResponse)e.Response).StatusCode == HttpStatusCode.NotFound)
+            {
+                // HTTPのエラーでステータスコードが404
+                return true;
+            }
+
+            if (e.Status == WebExceptionStatus.ConnectFailure
+                || e.Status == WebExceptionStatus.UnknownError)
+            {
+                // fileスキームでは、FileNotFoundExceptionが入れ子（2段とかもある）
+                // のUnknownError, ConnectFailureとかで返ってくるので再帰的にチェック
+                if (e.InnerException is FileNotFoundException)
+                {
+                    return true;
+                }
+                else if (e.InnerException is WebException)
+                {
+                    return this.IsNotFound((WebException)e.InnerException);
+                }
+            }
+
+            return false;
+        }
 
         #endregion
     }

@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <StartAction>Program</StartAction>
     <StartProgram>$(ProgramFiles)\NUnit 2.5.5\bin\net-2.0\nunit.exe</StartProgram>
+    <DocumentationFile>bin\Debug\WptscsTest.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Logics\MediaWikiTranslatorTest.cs" />
     <Compile Include="Logics\TranslatorTest.cs" />
+    <Compile Include="Logics\LoggerTest.cs" />
+    <Compile Include="Logics\MediaWikiLoggerTest.cs" />
     <Compile Include="Models\ConfigTest.cs" />
     <Compile Include="Parsers\MediaWikiLinkTest.cs" />
     <Compile Include="Parsers\MediaWikiParserTest.cs" />
@@ -135,6 +138,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\en\Template_wiktionary.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MediaWiki\en\Redirect→Nothing Page.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\ja\Category_宇宙船.xml">

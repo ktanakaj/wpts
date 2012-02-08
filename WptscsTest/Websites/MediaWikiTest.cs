@@ -315,6 +315,22 @@ namespace Honememo.Wptscs.Websites
             Assert.IsNullOrEmpty(site.LinkInterwikiFormat);
         }
 
+        /// <summary>
+        /// LangFormatプロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestLangFormat()
+        {
+            MediaWiki site = new MediaWiki(new Language("ja"));
+            // デフォルトでは空
+            Assert.IsNullOrEmpty(site.LangFormat);
+            // 値を設定するとその値が返る
+            site.LangFormat = ("{{Lang|$1|$2}}");
+            Assert.AreEqual("{{Lang|$1|$2}}", site.LangFormat);
+            site.LangFormat = null;
+            Assert.IsNullOrEmpty(site.LangFormat);
+        }
+
         #endregion
 
         #region 公開メソッドテストケース
@@ -387,6 +403,31 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("{{仮リンク||||label=}}", site.FormatLinkInterwiki(null, null, null, null));
         }
 
+        /// <summary>
+        /// FormatLangメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestFormatLang()
+        {
+            MediaWiki site = new MediaWiki(new Language("en"), "http://example.com");
+
+            // LangFormatが空の場合、nullが返る
+            site.LangFormat = null;
+            Assert.IsNull(site.FormatLang("ja", "日本語テキスト"));
+            site.LangFormat = String.Empty;
+            Assert.IsNull(site.FormatLang("ja", "日本語テキスト"));
+
+            // 値が設定されている場合、パラメータを埋め込んで書式化される
+            site.LangFormat = "{{Lang|$1|$2}}";
+            Assert.AreEqual("{{Lang|ja|日本語テキスト}}", site.FormatLang("ja", "日本語テキスト"));
+            site.LangFormat = "xxx";
+            Assert.AreEqual("xxx", site.FormatLang("ja", "日本語テキスト"));
+
+            // 値がnull等でも特に制限はない
+            site.LangFormat = "{{Lang|$1|$2}}";
+            Assert.AreEqual("{{Lang||}}", site.FormatLang(null, null));
+        }
+
         #endregion
 
         #region XMLシリアライズ用メソッドテストケース
@@ -430,7 +471,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             // プロパティはデフォルト値の場合出力しないという動作あり
-            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><NamespacePath /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /><DocumentationTemplates /><LinkInterwikiFormat /></MediaWiki>", b.ToString());
+            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><NamespacePath /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /><DocumentationTemplates /><LinkInterwikiFormat /><LangFormat /></MediaWiki>", b.ToString());
             // TODO: プロパティに値が設定されたパターンを追加すべき
         }
 

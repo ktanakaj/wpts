@@ -45,6 +45,8 @@
             this.tabPageHeadings = new System.Windows.Forms.TabPage();
             this.dataGridViewHeading = new System.Windows.Forms.DataGridView();
             this.tabPageServer = new System.Windows.Forms.TabPage();
+            this.buttonLanguageRemove = new System.Windows.Forms.Button();
+            this.buttonLunguageAdd = new System.Windows.Forms.Button();
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.groupBoxLanguageName = new System.Windows.Forms.GroupBox();
             this.dataGridViewLanguageName = new System.Windows.Forms.DataGridView();
@@ -54,6 +56,8 @@
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.textBoxLangFormat = new System.Windows.Forms.TextBox();
+            this.labelLangFormat = new System.Windows.Forms.Label();
             this.textBoxLinkInterwikiFormat = new System.Windows.Forms.TextBox();
             this.labelLinkInterwikiFormat = new System.Windows.Forms.Label();
             this.textBoxDocumentationTemplateDefaultPage = new System.Windows.Forms.TextBox();
@@ -83,6 +87,12 @@
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelApplicationName = new System.Windows.Forms.Label();
             this.groupBoxApplicationConfig = new System.Windows.Forms.GroupBox();
+            this.textBoxConnectRetryTime = new System.Windows.Forms.TextBox();
+            this.labelConnectRetryTimeNote = new System.Windows.Forms.Label();
+            this.labelConnectRetryTime = new System.Windows.Forms.Label();
+            this.textBoxMaxConnectRetries = new System.Windows.Forms.TextBox();
+            this.labelMaxConnectRetriesNote = new System.Windows.Forms.Label();
+            this.labelMaxConnectRetries = new System.Windows.Forms.Label();
             this.checkBoxIgnoreError = new System.Windows.Forms.CheckBox();
             this.labelRefererNote = new System.Windows.Forms.Label();
             this.labelUserAgentNote = new System.Windows.Forms.Label();
@@ -115,6 +125,7 @@
             // 
             resources.ApplyResources(this.buttonOk, "buttonOk");
             this.buttonOk.Name = "buttonOk";
+            this.toolTip.SetToolTip(this.buttonOk, resources.GetString("buttonOk.ToolTip"));
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
             // 
@@ -124,6 +135,7 @@
             this.buttonCancel.CausesValidation = false;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
+            this.toolTip.SetToolTip(this.buttonCancel, resources.GetString("buttonCancel.ToolTip"));
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // tabControl
@@ -185,11 +197,11 @@
             // 
             // ColumnArrow
             // 
-            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
             this.ColumnArrow.Name = "ColumnArrow";
             this.ColumnArrow.ReadOnly = true;
             this.ColumnArrow.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ColumnArrow.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            resources.ApplyResources(this.ColumnArrow, "ColumnArrow");
             // 
             // ColumnToCode
             // 
@@ -224,6 +236,8 @@
             // 
             // tabPageServer
             // 
+            this.tabPageServer.Controls.Add(this.buttonLanguageRemove);
+            this.tabPageServer.Controls.Add(this.buttonLunguageAdd);
             this.tabPageServer.Controls.Add(this.groupBoxLanguage);
             this.tabPageServer.Controls.Add(this.groupBoxServer);
             this.tabPageServer.Controls.Add(this.comboBoxLanguage);
@@ -231,6 +245,22 @@
             resources.ApplyResources(this.tabPageServer, "tabPageServer");
             this.tabPageServer.Name = "tabPageServer";
             this.tabPageServer.UseVisualStyleBackColor = true;
+            // 
+            // buttonLanguageRemove
+            // 
+            resources.ApplyResources(this.buttonLanguageRemove, "buttonLanguageRemove");
+            this.buttonLanguageRemove.Name = "buttonLanguageRemove";
+            this.toolTip.SetToolTip(this.buttonLanguageRemove, resources.GetString("buttonLanguageRemove.ToolTip"));
+            this.buttonLanguageRemove.UseVisualStyleBackColor = true;
+            this.buttonLanguageRemove.Click += new System.EventHandler(this.ButtonLanguageRemove_Click);
+            // 
+            // buttonLunguageAdd
+            // 
+            resources.ApplyResources(this.buttonLunguageAdd, "buttonLunguageAdd");
+            this.buttonLunguageAdd.Name = "buttonLunguageAdd";
+            this.toolTip.SetToolTip(this.buttonLunguageAdd, resources.GetString("buttonLunguageAdd.ToolTip"));
+            this.buttonLunguageAdd.UseVisualStyleBackColor = true;
+            this.buttonLunguageAdd.Click += new System.EventHandler(this.ButtonLunguageAdd_Click);
             // 
             // groupBoxLanguage
             // 
@@ -300,6 +330,8 @@
             // groupBoxServer
             // 
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
+            this.groupBoxServer.Controls.Add(this.textBoxLangFormat);
+            this.groupBoxServer.Controls.Add(this.labelLangFormat);
             this.groupBoxServer.Controls.Add(this.textBoxLinkInterwikiFormat);
             this.groupBoxServer.Controls.Add(this.labelLinkInterwikiFormat);
             this.groupBoxServer.Controls.Add(this.textBoxDocumentationTemplateDefaultPage);
@@ -322,6 +354,18 @@
             this.groupBoxServer.Controls.Add(this.labelLocation);
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
+            // 
+            // textBoxLangFormat
+            // 
+            resources.ApplyResources(this.textBoxLangFormat, "textBoxLangFormat");
+            this.textBoxLangFormat.Name = "textBoxLangFormat";
+            this.toolTip.SetToolTip(this.textBoxLangFormat, resources.GetString("textBoxLangFormat.ToolTip"));
+            // 
+            // labelLangFormat
+            // 
+            resources.ApplyResources(this.labelLangFormat, "labelLangFormat");
+            this.labelLangFormat.Name = "labelLangFormat";
+            this.toolTip.SetToolTip(this.labelLangFormat, resources.GetString("labelLangFormat.ToolTip"));
             // 
             // textBoxLinkInterwikiFormat
             // 
@@ -452,13 +496,13 @@
             // 
             // comboBoxLanguage
             // 
+            this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLanguage.FormattingEnabled = true;
             resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
             this.comboBoxLanguage.Name = "comboBoxLanguage";
+            this.comboBoxLanguage.Sorted = true;
             this.toolTip.SetToolTip(this.comboBoxLanguage, resources.GetString("comboBoxLanguage.ToolTip"));
             this.comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this.ComboBoxLanguuage_SelectedIndexChanged);
-            this.comboBoxLanguage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ComboBoxLanguage_KeyDown);
-            this.comboBoxLanguage.Leave += new System.EventHandler(this.ComboBoxLanguage_Leave);
             // 
             // labelLanguage
             // 
@@ -509,6 +553,12 @@
             // groupBoxApplicationConfig
             // 
             resources.ApplyResources(this.groupBoxApplicationConfig, "groupBoxApplicationConfig");
+            this.groupBoxApplicationConfig.Controls.Add(this.textBoxConnectRetryTime);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelConnectRetryTimeNote);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelConnectRetryTime);
+            this.groupBoxApplicationConfig.Controls.Add(this.textBoxMaxConnectRetries);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelMaxConnectRetriesNote);
+            this.groupBoxApplicationConfig.Controls.Add(this.labelMaxConnectRetries);
             this.groupBoxApplicationConfig.Controls.Add(this.checkBoxIgnoreError);
             this.groupBoxApplicationConfig.Controls.Add(this.labelRefererNote);
             this.groupBoxApplicationConfig.Controls.Add(this.labelUserAgentNote);
@@ -521,6 +571,44 @@
             this.groupBoxApplicationConfig.Controls.Add(this.labelUserAgent);
             this.groupBoxApplicationConfig.Name = "groupBoxApplicationConfig";
             this.groupBoxApplicationConfig.TabStop = false;
+            // 
+            // textBoxConnectRetryTime
+            // 
+            resources.ApplyResources(this.textBoxConnectRetryTime, "textBoxConnectRetryTime");
+            this.textBoxConnectRetryTime.Name = "textBoxConnectRetryTime";
+            this.toolTip.SetToolTip(this.textBoxConnectRetryTime, resources.GetString("textBoxConnectRetryTime.ToolTip"));
+            this.textBoxConnectRetryTime.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxConnectRetryTime_Validating);
+            this.textBoxConnectRetryTime.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
+            // 
+            // labelConnectRetryTimeNote
+            // 
+            resources.ApplyResources(this.labelConnectRetryTimeNote, "labelConnectRetryTimeNote");
+            this.labelConnectRetryTimeNote.Name = "labelConnectRetryTimeNote";
+            // 
+            // labelConnectRetryTime
+            // 
+            resources.ApplyResources(this.labelConnectRetryTime, "labelConnectRetryTime");
+            this.labelConnectRetryTime.Name = "labelConnectRetryTime";
+            this.toolTip.SetToolTip(this.labelConnectRetryTime, resources.GetString("labelConnectRetryTime.ToolTip"));
+            // 
+            // textBoxMaxConnectRetries
+            // 
+            resources.ApplyResources(this.textBoxMaxConnectRetries, "textBoxMaxConnectRetries");
+            this.textBoxMaxConnectRetries.Name = "textBoxMaxConnectRetries";
+            this.toolTip.SetToolTip(this.textBoxMaxConnectRetries, resources.GetString("textBoxMaxConnectRetries.ToolTip"));
+            this.textBoxMaxConnectRetries.Validating += new System.ComponentModel.CancelEventHandler(this.TextBoxMaxConnectRetries_Validating);
+            this.textBoxMaxConnectRetries.Validated += new System.EventHandler(this.ResetErrorProvider_Validated);
+            // 
+            // labelMaxConnectRetriesNote
+            // 
+            resources.ApplyResources(this.labelMaxConnectRetriesNote, "labelMaxConnectRetriesNote");
+            this.labelMaxConnectRetriesNote.Name = "labelMaxConnectRetriesNote";
+            // 
+            // labelMaxConnectRetries
+            // 
+            resources.ApplyResources(this.labelMaxConnectRetries, "labelMaxConnectRetries");
+            this.labelMaxConnectRetries.Name = "labelMaxConnectRetries";
+            this.toolTip.SetToolTip(this.labelMaxConnectRetries, resources.GetString("labelMaxConnectRetries.ToolTip"));
             // 
             // checkBoxIgnoreError
             // 
@@ -697,5 +785,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
         private System.Windows.Forms.Label labelLinkInterwikiFormat;
         private System.Windows.Forms.TextBox textBoxLinkInterwikiFormat;
+        private System.Windows.Forms.Button buttonLanguageRemove;
+        private System.Windows.Forms.Button buttonLunguageAdd;
+        private System.Windows.Forms.TextBox textBoxLangFormat;
+        private System.Windows.Forms.Label labelLangFormat;
+        private System.Windows.Forms.Label labelMaxConnectRetries;
+        private System.Windows.Forms.Label labelConnectRetryTime;
+        private System.Windows.Forms.TextBox textBoxMaxConnectRetries;
+        private System.Windows.Forms.Label labelMaxConnectRetriesNote;
+        private System.Windows.Forms.Label labelConnectRetryTimeNote;
+        private System.Windows.Forms.TextBox textBoxConnectRetryTime;
     }
 }

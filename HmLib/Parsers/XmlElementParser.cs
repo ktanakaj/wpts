@@ -187,7 +187,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// 渡された文字が<see cref="Parse"/>, <see cref="TryParse"/>の候補となる先頭文字かを判定する。
+        /// 渡された文字が<see cref="TryParse"/>等の候補となる先頭文字かを判定する。
         /// </summary>
         /// <param name="c">解析文字列の先頭文字。</param>
         /// <returns>候補となる場合<c>true</c>。このクラスでは常に<c>true</c>を返す。</returns>

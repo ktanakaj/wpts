@@ -161,7 +161,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   現在、{0}には未対応ですm(__)m に類似しているローカライズされた文字列を検索します。
+        ///   このバージョンは{0}には未対応です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InformationMessageDevelopingMethod {
             get {
@@ -414,6 +414,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   指定された言語は既に登録されています。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageDuplicateLanguageCode {
+            get {
+                return ResourceManager.GetString("WarningMessageDuplicateLanguageCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   記事名を指定してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyArticle {
@@ -428,6 +437,15 @@ namespace Honememo.Wptscs.Properties {
         internal static string WarningMessageEmptyCodeColumn {
             get {
                 return ResourceManager.GetString("WarningMessageEmptyCodeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   言語コードを入力してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageEmptyLanguageCode {
+            get {
+                return ResourceManager.GetString("WarningMessageEmptyLanguageCode", resourceCulture);
             }
         }
         
@@ -464,6 +482,24 @@ namespace Honememo.Wptscs.Properties {
         internal static string WarningMessageIgnoreCacheExpire {
             get {
                 return ResourceManager.GetString("WarningMessageIgnoreCacheExpire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ウェイト時間には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageIgnoreConnectRetryTime {
+            get {
+                return ResourceManager.GetString("WarningMessageIgnoreConnectRetryTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   リトライ回数には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageIgnoreMaxConnectRetries {
+            get {
+                return ResourceManager.GetString("WarningMessageIgnoreMaxConnectRetries", resourceCulture);
             }
         }
         

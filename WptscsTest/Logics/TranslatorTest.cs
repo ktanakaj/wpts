@@ -12,10 +12,7 @@ namespace Honememo.Wptscs.Logics
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
     using NUnit.Framework;
-    using Honememo.Tests;
-    using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
 
@@ -44,18 +41,18 @@ namespace Honememo.Wptscs.Logics
             #region 非公開プロパティテスト用のオーラーライドプロパティ
 
             /// <summary>
-            /// ログメッセージ。
+            /// ログテキスト生成用ロガー。
             /// </summary>
-            public new string Log
+            public new Logger Logger
             {
                 get
                 {
-                    return base.Log;
+                    return base.Logger;
                 }
 
                 set
                 {
-                    base.Log = value;
+                    base.Logger = value;
                 }
             }
 
@@ -73,41 +70,6 @@ namespace Honememo.Wptscs.Logics
                 {
                     base.Text = value;
                 }
-            }
-
-            #endregion
-
-            #region 非公開メソッドテスト用のオーラーライドメソッド
-
-            /// <summary>
-            /// ログメッセージを1行追加出力。
-            /// </summary>
-            /// <param name="log">ログメッセージ。</param>
-            public new void LogLine(string log)
-            {
-                base.LogLine(log);
-            }
-
-            /// <summary>
-            /// ログメッセージを1行追加出力（入力された文字列を書式化して表示）。
-            /// </summary>
-            /// <param name="format">書式項目を含んだログメッセージ。</param>
-            /// <param name="args">書式設定対象オブジェクト配列。</param>
-            public new void LogLine(string format, params object[] args)
-            {
-                base.LogLine(format, args);
-            }
-
-            /// <summary>
-            /// ログメッセージを出力しつつページを取得。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
-            /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
-            /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
-            public new Page GetPage(string title, string notFoundMsg)
-            {
-                return base.GetPage(title, notFoundMsg);
             }
 
             #endregion
@@ -224,22 +186,16 @@ namespace Honememo.Wptscs.Logics
             TranslatorMock translator = new TranslatorMock();
             Assert.IsEmpty(translator.Log);
 
-            // null設定時は空白が設定されること、それ以外はそのまま
-            translator.Log = null;
-            Assert.IsEmpty(translator.Log);
-            translator.Log = "test";
-            Assert.AreEqual("test", translator.Log);
-
             // 更新時にLogUpdateイベントが実行されること
             int count = 0;
             translator.LogUpdate += new EventHandler((object sender, EventArgs e) => { ++count; });
             Assert.AreEqual(0, count);
-            translator.Log = "ログ";
+            translator.Logger.AddMessage("ログ");
             Assert.AreEqual(1, count);
-            Assert.AreEqual("ログ", translator.Log);
-            translator.Log += "add";
+            Assert.AreEqual("ログ" + Environment.NewLine, translator.Log);
+            translator.Logger.AddMessage("add");
             Assert.AreEqual(2, count);
-            Assert.AreEqual("ログadd", translator.Log);
+            Assert.AreEqual("ログ" + Environment.NewLine + "add" + Environment.NewLine, translator.Log);
         }
 
         /// <summary>
@@ -376,14 +332,14 @@ namespace Honememo.Wptscs.Logics
             translator.Run("test");
             Assert.IsEmpty(translator.Log);
             Assert.IsEmpty(translator.Text);
-            translator.Log = "testlog";
+            translator.Logger.AddMessage("testlog");
             translator.Text = "testtext";
             translator.Run("test");
             Assert.IsEmpty(translator.Log);
             Assert.IsEmpty(translator.Text);
 
             // 失敗はApplicationExceptionで表現、RunBodyから例外が投げられること
-            translator.Log = "testlog";
+            translator.Logger.AddMessage("testlog");
             translator.Text = "testtext";
             translator.exception = true;
             try
@@ -440,35 +396,6 @@ namespace Honememo.Wptscs.Logics
             // Fromにホストが指定されている場合、pingチェックが行われる
             translator.From.Location = "http://xxx.invalid";
             translator.Run("test");
-        }
-
-        #endregion
-
-        #region protectedメソッドテストケース
-
-        /// <summary>
-        /// LogLineメソッドテストケース。
-        /// </summary>
-        [Test]
-        public void TestLogLine()
-        {
-            TranslatorMock translator = new TranslatorMock();
-            
-            // 通常は一行が出力される
-            Assert.IsEmpty(translator.Log);
-            translator.LogLine("1st string");
-            Assert.AreEqual("1st string\r\n", translator.Log);
-            translator.LogLine("2nd string");
-            Assert.AreEqual("1st string\r\n2nd string\r\n", translator.Log);
-
-            // 直前のログが改行されていない場合、改行して出力される
-            translator.Log += "3rd ";
-            translator.LogLine("string");
-            Assert.AreEqual("1st string\r\n2nd string\r\n3rd \r\nstring\r\n", translator.Log);
-
-            // パラメータが二つの方は、String.Formatした値を出力する
-            translator.LogLine("{0}th string", 4);
-            Assert.AreEqual("1st string\r\n2nd string\r\n3rd \r\nstring\r\n4th string\r\n", translator.Log);
         }
 
         #endregion

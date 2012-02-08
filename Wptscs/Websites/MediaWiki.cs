@@ -412,6 +412,16 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
+        /// Template:Langで書式化するためのフォーマット。
+        /// </summary>
+        /// <remarks>空の場合、その言語版にはこれに相当する機能は無いor使用しないものとして扱う。</remarks>
+        public string LangFormat
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// このクラスで使用するWebアクセス用Proxyインスタンス。
         /// </summary>
         /// <remarks>setterはユニットテスト用に公開。</remarks>
@@ -430,7 +440,8 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。</returns>
-        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
+        /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         public override Page GetPage(string title)
         {
             // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
@@ -443,10 +454,23 @@ namespace Honememo.Wptscs.Websites
 
             // ページのXMLデータをMediaWikiサーバーから取得
             XmlDocument xml = new XmlDocument();
-            using (Stream reader = this.WebProxy.GetStream(
-                new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle))))
+            try
             {
-                xml.Load(reader);
+                using (Stream reader = this.WebProxy.GetStream(
+                    new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle))))
+                {
+                    xml.Load(reader);
+                }
+            }
+            catch (System.Net.WebException e)
+            {
+                // 404エラーによるページ取得失敗は詰め替えて返す
+                if (this.IsNotFound(e))
+                {
+                    throw new FileNotFoundException("page not found", e);
+                }
+
+                throw e;
             }
 
             // ルートエレメントまで取得し、フォーマットをチェック
@@ -507,7 +531,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// <see cref="LinkInterwikiFormat"/> を渡された記事名, 言語, 表示名で書式化した文字列を返す。
+        /// <see cref="LinkInterwikiFormat"/> を渡された記事名, 言語, 他言語版記事名, 表示名で書式化した文字列を返す。
         /// </summary>
         /// <param name="title">記事名。</param>
         /// <param name="lang">言語。</param>
@@ -522,6 +546,26 @@ namespace Honememo.Wptscs.Websites
             }
 
             return StringUtils.FormatDollarVariable(this.LinkInterwikiFormat, title, lang, langTitle, label);
+        }
+
+        /// <summary>
+        /// <see cref="LangFormat"/> を渡された言語, 文字列で書式化した文字列を返す。
+        /// </summary>
+        /// <param name="lang">言語。</param>
+        /// <param name="text">文字列。</param>
+        /// <returns>書式化した文字列。<see cref="LangFormat"/>が未設定の場合<c>null</c>。</returns>
+        /// <remarks>
+        /// この<para>lang</para>と<see cref="Language"/>のコードは、厳密には一致しないケースがあるが
+        /// （例、simple→en）、2012年2月現在の実装ではそこまで正確さは要求していない。
+        /// </remarks>
+        public string FormatLang(string lang, string text)
+        {
+            if (String.IsNullOrEmpty(this.LangFormat))
+            {
+                return null;
+            }
+
+            return StringUtils.FormatDollarVariable(this.LangFormat, lang, text);
         }
         
         #endregion
@@ -608,6 +652,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             this.LinkInterwikiFormat = XmlUtils.InnerText(siteElement.SelectSingleNode("LinkInterwikiFormat"));
+            this.LangFormat = XmlUtils.InnerText(siteElement.SelectSingleNode("LangFormat"));
         }
 
         /// <summary>
@@ -657,6 +702,7 @@ namespace Honememo.Wptscs.Websites
 
             writer.WriteEndElement();
             writer.WriteElementString("LinkInterwikiFormat", this.LinkInterwikiFormat);
+            writer.WriteElementString("LangFormat", this.LangFormat);
         }
 
         #endregion

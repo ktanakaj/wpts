@@ -234,7 +234,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.10.0.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.11.0.0")]
         public string ConfigurationCompatible {
             get {
                 return ((string)(this["ConfigurationCompatible"]));
@@ -272,6 +272,30 @@ namespace Honememo.Wptscs.Properties {
             }
             set {
                 this["IgnoreError"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int MaxConnectRetries {
+            get {
+                return ((int)(this["MaxConnectRetries"]));
+            }
+            set {
+                this["MaxConnectRetries"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
+        public int ConnectRetryTime {
+            get {
+                return ((int)(this["ConnectRetryTime"]));
+            }
+            set {
+                this["ConnectRetryTime"] = value;
             }
         }
     }

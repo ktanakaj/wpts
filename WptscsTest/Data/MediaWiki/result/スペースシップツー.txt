@@ -1,4 +1,4 @@
-'''xxx''' ([[Japanese language|Japanese]]: '''スペースシップツー''') 
+'''xxx''' ([[Japanese language|Japanese]]: '''{{Lang|ja|スペースシップツー}}''') 
 
 [[:ja:Template:Infobox 航空機]]<!-- {{Infobox 航空機
   |名称 = スペースシップツー

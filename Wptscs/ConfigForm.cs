@@ -91,6 +91,8 @@ namespace Honememo.Wptscs
                 this.textBoxCacheExpire.Text = Settings.Default.CacheExpire.Days.ToString();
                 this.textBoxUserAgent.Text = Settings.Default.UserAgent;
                 this.textBoxReferer.Text = Settings.Default.Referer;
+                this.textBoxMaxConnectRetries.Text = Settings.Default.MaxConnectRetries.ToString();
+                this.textBoxConnectRetryTime.Text = Settings.Default.ConnectRetryTime.ToString();
                 this.checkBoxIgnoreError.Checked = Settings.Default.IgnoreError;
                 this.labelApplicationName.Text = FormUtils.ApplicationName();
                 AssemblyCopyrightAttribute copyright = Attribute.GetCustomAttribute(
@@ -133,13 +135,15 @@ namespace Honememo.Wptscs
                 Settings.Default.CacheExpire = new TimeSpan(int.Parse(this.textBoxCacheExpire.Text), 0, 0, 0);
                 Settings.Default.UserAgent = this.textBoxUserAgent.Text;
                 Settings.Default.Referer = this.textBoxReferer.Text;
+                Settings.Default.MaxConnectRetries = int.Parse(this.textBoxMaxConnectRetries.Text);
+                Settings.Default.ConnectRetryTime = int.Parse(this.textBoxConnectRetryTime.Text);
                 Settings.Default.IgnoreError = this.checkBoxIgnoreError.Checked;
 
                 // 設定をファイルに保存
                 Settings.Default.Save();
                 try
                 {
-                    this.config.Save(Settings.Default.ConfigurationFile);
+                    this.config.Save();
 
                     // 全部成功なら画面を閉じる
                     // ※ エラーの場合、どうしても駄目ならキャンセルボタンで閉じてもらう
@@ -148,7 +152,6 @@ namespace Honememo.Wptscs
                 catch (Exception ex)
                 {
                     // 異常時はエラーメッセージを表示
-                    // ※ この場合でもConfigオブジェクトは更新済みのため設定は一時的に有効
                     System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                     FormUtils.ErrorDialog(Resources.ErrorMessageConfigSaveFailed, ex.Message);
                 }
@@ -491,22 +494,23 @@ namespace Honememo.Wptscs
                 }
 
                 // 変更後の値に応じて、画面表示を更新
-                string code = ObjectUtils.ToString(this.comboBoxLanguage.SelectedItem).Trim();
-                if (!String.IsNullOrEmpty(code))
+                if (!String.IsNullOrEmpty(this.comboBoxLanguage.Text))
                 {
                     // 設定が存在しなければ基本的に自動生成されるのでそのまま使用
-                    this.LoadCurrentValue(this.GetMediaWikiNeedCreate(this.config.Websites, code));
+                    this.LoadCurrentValue(this.GetMediaWikiNeedCreate(this.config.Websites, this.comboBoxLanguage.Text));
 
                     // 各入力欄を有効に
+                    this.buttonLanguageRemove.Enabled = true;
                     this.groupBoxServer.Enabled = true;
                     this.groupBoxLanguage.Enabled = true;
 
                     // 現在の選択値を更新
-                    this.comboBoxLanguageSelectedText = code;
+                    this.comboBoxLanguageSelectedText = this.comboBoxLanguage.Text;
                 }
                 else
                 {
                     // 各入力欄を無効に
+                    this.buttonLanguageRemove.Enabled = false;
                     this.groupBoxServer.Enabled = false;
                     this.groupBoxLanguage.Enabled = false;
 
@@ -522,46 +526,47 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
-        /// 言語コンボボックスキー入力時の処理。
+        /// 言語の追加ボタン押下時の処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void ComboBoxLanguage_KeyDown(object sender, KeyEventArgs e)
+        private void ButtonLunguageAdd_Click(object sender, EventArgs e)
         {
-            // エンターキーが押された場合、現在の値が一覧に無ければ登録する（フォーカスを失ったときの処理）
-            if (e.KeyCode == Keys.Enter)
+            // 言語追加用ダイアログを表示
+            InputLanguageCodeDialog form = new InputLanguageCodeDialog(this.config);
+            form.ShowDialog();
+
+            // 値が登録された場合
+            if (!String.IsNullOrWhiteSpace(form.LanguageCode))
             {
-                System.Diagnostics.Debug.WriteLine("ComboBoxLanguage::_KeyDown > " + this.comboBoxLanguage.Text);
-                this.ComboBoxLanguage_Leave(sender, e);
+                // 値を一覧・見出しの対訳表に追加、登録した値を選択状態に変更
+                this.comboBoxLanguage.Items.Add(form.LanguageCode);
+                this.dataGridViewHeading.Columns.Add(form.LanguageCode, form.LanguageCode);
+                this.comboBoxLanguage.SelectedItem = form.LanguageCode;
             }
         }
 
         /// <summary>
-        /// 言語コンボボックスフォーカス喪失時の処理。
+        /// 言語の削除ボタン押下時の処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void ComboBoxLanguage_Leave(object sender, EventArgs e)
+        private void ButtonLanguageRemove_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("ComboBoxLanguage::_Leave > " + this.comboBoxLanguage.Text);
-
-            this.comboBoxLanguage.Text = this.comboBoxLanguage.Text.Trim().ToLower();
-            if (String.IsNullOrEmpty(this.comboBoxLanguage.Text))
+            // 表示されている言語を設定から削除する
+            for (int i = this.config.Websites.Count - 1; i >= 0; i--)
             {
-                // 空にしたとき、変更でイベントが起こらないようなので、強制的に呼ぶ
-                this.ComboBoxLanguuage_SelectedIndexChanged(sender, e);
+                if (this.config.Websites[i].Language.Code == this.comboBoxLanguage.Text)
+                {
+                    // 万が一複数あれば全て削除
+                    this.config.Websites.RemoveAt(i);
+                }
             }
-            else if (!this.comboBoxLanguage.Items.Contains(this.comboBoxLanguage.Text))
-            {
-                // 現在の値が一覧に無ければ登録する
-                this.comboBoxLanguage.Items.Add(this.comboBoxLanguage.Text);
 
-                // 登録した場合、見出しの対訳表にも列を追加
-                this.dataGridViewHeading.Columns.Add(this.comboBoxLanguage.Text, this.comboBoxLanguage.Text);
-
-                // 登録した値を選択状態に変更
-                this.comboBoxLanguage.SelectedItem = this.comboBoxLanguage.Text;
-            }
+            // コンボボックスからも削除し、表示を更新する
+            this.comboBoxLanguageSelectedText = null;
+            this.comboBoxLanguage.Items.Remove(this.comboBoxLanguage.Text);
+            this.ComboBoxLanguuage_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -740,6 +745,7 @@ namespace Honememo.Wptscs
             this.textBoxDocumentationTemplate.Text = b.ToString();
             this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
             this.textBoxLinkInterwikiFormat.Text = StringUtils.DefaultString(site.LinkInterwikiFormat);
+            this.textBoxLangFormat.Text = StringUtils.DefaultString(site.LangFormat);
         }
 
         /// <summary>
@@ -843,6 +849,12 @@ namespace Honememo.Wptscs
                 site.LinkInterwikiFormat = str;
             }
 
+            str = StringUtils.DefaultString(this.textBoxLangFormat.Text).Trim();
+            if (str != site.LangFormat)
+            {
+                site.LangFormat = str;
+            }
+
             // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
             if (!String.IsNullOrWhiteSpace(this.textBoxTemplateNamespace.Text))
             {
@@ -879,20 +891,36 @@ namespace Honememo.Wptscs
         #region その他タブのイベントのメソッド
         
         /// <summary>
-        /// キャッシュ有効期限ボックスバリデート処理。。
+        /// キャッシュ有効期限ボックスバリデート処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
         private void TextBoxCacheExpire_Validating(object sender, CancelEventArgs e)
         {
-            TextBox box = (TextBox)sender;
-            box.Text = StringUtils.DefaultString(box.Text).Trim();
-            int expire;
-            if (!int.TryParse(box.Text, out expire) || expire < 0)
-            {
-                this.errorProvider.SetError(box, Resources.WarningMessageIgnoreCacheExpire);
-                e.Cancel = true;
-            }
+            // 値が0以上の数値かをチェック
+            this.TextBoxGreaterThanValidating((TextBox)sender, e, 0, Resources.WarningMessageIgnoreCacheExpire);
+        }
+
+        /// <summary>
+        /// リトライ回数ボックスバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxMaxConnectRetries_Validating(object sender, CancelEventArgs e)
+        {
+            // 値が0以上の数値かをチェック
+            this.TextBoxGreaterThanValidating((TextBox)sender, e, 0, Resources.WarningMessageIgnoreMaxConnectRetries);
+        }
+
+        /// <summary>
+        /// ウェイト時間ボックスバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxConnectRetryTime_Validating(object sender, CancelEventArgs e)
+        {
+            // 値が0以上の数値かをチェック
+            this.TextBoxGreaterThanValidating((TextBox)sender, e, 0, Resources.WarningMessageIgnoreConnectRetryTime);
         }
 
         /// <summary>
@@ -906,10 +934,32 @@ namespace Honememo.Wptscs
             System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
         }
 
+        #region イベント実装支援用メソッド
+
+        /// <summary>
+        /// メッセージのみ差し替え可能なテキストボックス用の値がxx以上の数値か、のバリデート処理。
+        /// </summary>
+        /// <param name="box">イベント発生テキストボックス。</param>
+        /// <param name="e">発生したイベント。</param>
+        /// <param name="num">比較対象の数値。</param>
+        /// <param name="message">バリデートメッセージ。</param>
+        private void TextBoxGreaterThanValidating(TextBox box, CancelEventArgs e, int num, string message)
+        {
+            box.Text = StringUtils.DefaultString(box.Text).Trim();
+            int value;
+            if (!int.TryParse(box.Text, out value) || value < num)
+            {
+                this.errorProvider.SetError(box, message);
+                e.Cancel = true;
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region 共通のイベントメソッド
-        
+
         /// <summary>
         /// 汎用のエラープロバイダ初期化処理。
         /// </summary>

@@ -29,16 +29,6 @@ namespace Honememo.Wptscs.Logics
         #region private変数
 
         /// <summary>
-        /// 改行コード。
-        /// </summary>
-        public static readonly string ENTER = "\r\n";
-
-        /// <summary>
-        /// ログメッセージ。
-        /// </summary>
-        private string log = String.Empty;
-
-        /// <summary>
         /// 処理状態メッセージ。
         /// </summary>
         private string status = String.Empty;
@@ -47,6 +37,11 @@ namespace Honememo.Wptscs.Logics
         /// 変換後テキスト。
         /// </summary>
         private string text = String.Empty;
+
+        /// <summary>
+        /// ログテキスト生成用ロガー。
+        /// </summary>
+        private Logger logger;
 
         #endregion
 
@@ -58,6 +53,7 @@ namespace Honememo.Wptscs.Logics
         public Translator()
         {
             this.Stopwatch = new Stopwatch();
+            this.Logger = new Logger();
         }
 
         #endregion
@@ -110,21 +106,9 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         public string Log
         {
-            // ※ 将来的には、ロジックでログメッセージを出すなんて形を止めて
-            //    データとして保持させてメッセージはビューで・・・としたいが、
-            //    手間を考えて当面はこの形のまま実装する。
             get
             {
-                return this.log;
-            }
-
-            protected set
-            {
-                this.log = StringUtils.DefaultString(value);
-                if (this.LogUpdate != null)
-                {
-                    this.LogUpdate(this, EventArgs.Empty);
-                }
+                return this.Logger.ToString();
             }
         }
 
@@ -200,6 +184,24 @@ namespace Honememo.Wptscs.Logics
             set;
         }
 
+        /// <summary>
+        /// ログテキスト生成用ロガー。
+        /// </summary>
+        protected Logger Logger
+        {
+            get
+            {
+                return this.logger;
+            }
+
+            set
+            {
+                // nullは不可。また、ロガー変更後はイベントを設定
+                this.logger = Validate.NotNull(value);
+                this.logger.LogUpdate += this.GetLogUpdate;
+            }
+        }
+
         #endregion
 
         #region 静的メソッド
@@ -250,9 +252,9 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Log"/>に出力される。</exception>
+        /// <exception cref="ApplicationException">処理が中断された場合。中断の理由は<see cref="Logger"/>に出力される。</exception>
         /// <exception cref="InvalidOperationException"><see cref="From"/>, <see cref="To"/>が設定されていない場合。</exception>
-        public virtual void Run(string name)
+        public void Run(string name)
         {
             // ※必須な情報が設定されていない場合、InvalidOperationExceptionを返す
             if (this.From == null || this.To == null)
@@ -274,7 +276,7 @@ namespace Honememo.Wptscs.Logics
                 }
             }
 
-            // ここまでの間に終了条件が出ているかを確認
+            // ここまでの間に終了要求が出ているかを確認
             this.ThrowExceptionIfCanceled();
 
             // 翻訳支援処理実行部の本体を実行
@@ -299,56 +301,44 @@ namespace Honememo.Wptscs.Logics
         /// 翻訳支援処理実行部の本体。
         /// </summary>
         /// <param name="name">記事名。</param>
-        /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Log"/>に出力する。</exception>
+        /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Logger"/>に出力する。</exception>
         /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
         protected abstract void RunBody(string name);
 
         /// <summary>
-        /// ログメッセージを1行追加出力。
-        /// </summary>
-        /// <param name="log">ログメッセージ。</param>
-        protected void LogLine(string log)
-        {
-            // 直前のログが改行されていない場合、改行して出力
-            if (this.Log != String.Empty && this.Log.EndsWith(ENTER) == false)
-            {
-                this.Log += ENTER + log + ENTER;
-            }
-            else
-            {
-                this.Log += log + ENTER;
-            }
-        }
-
-        /// <summary>
-        /// ログメッセージを1行追加出力（入力された文字列を書式化して表示）。
-        /// </summary>
-        /// <param name="format">書式項目を含んだログメッセージ。</param>
-        /// <param name="args">書式設定対象オブジェクト配列。</param>
-        protected void LogLine(string format, params object[] args)
-        {
-            // オーバーロードメソッドをコール
-            this.LogLine(String.Format(format, args));
-        }
-
-        /// <summary>
-        /// ログメッセージを出力しつつページを取得。
+        /// ログ出力によるエラー処理を含んだページ取得処理。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
-        /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
-        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
+        /// <param name="page">取得したページ。ページが存在しない場合は <c>null</c> を返す。</param>
+        /// <returns>処理が成功した（404も含む）場合<c>true</c>、失敗した（通信エラーなど）の場合<c>false</c>。</returns>
+        /// <exception cref="ApplicationException"><see cref="CancellationPending"/>が<c>true</c>の場合。</exception>
         /// <remarks>
-        /// 通信エラーなど例外が発生した場合は、別途エラーログを出力する。
+        /// 本メソッドは、大きく3パターンの動作を行う。
+        /// <list type="number">
+        /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
+        /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
+        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
+        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreErrorによる）。</description></item>
+        /// </list>
         /// また、実行中は処理状態をサーバー接続中に更新する。
+        /// 実行前後には終了要求のチェックも行う。
         /// </remarks>
-        protected Page GetPage(string title, string notFoundMsg)
+        protected bool TryGetPage(string title, out Page page)
         {
+            // 通信開始の前に終了要求が出ているかを確認
+            this.ThrowExceptionIfCanceled();
+
             // ページ取得処理、実行中は処理状態を変更
+            bool success = false;
             Page result = null;
             this.ChangeStatusInExecuting(
-                () => result = this.GetPageAtNotChangeStatus(title, notFoundMsg),
+                () => success = this.TryGetPageBody(title, out result),
                 Resources.StatusDownloading);
-            return result;
+            page = result;
+
+            // 通信終了後にも再度終了要求を確認
+            this.ThrowExceptionIfCanceled();
+            return success;
         }
 
         /// <summary>
@@ -395,7 +385,7 @@ namespace Honememo.Wptscs.Logics
         private void Initialize()
         {
             // 変数を初期化
-            this.Log = String.Empty;
+            this.Logger.Clear();
             this.Status = String.Empty;
             this.Stopwatch.Reset();
             this.Text = String.Empty;
@@ -413,17 +403,17 @@ namespace Honememo.Wptscs.Logics
             // サーバー接続チェック、実行中は処理状態を変更
             bool result = false;
             this.ChangeStatusInExecuting(
-                () => result = this.PingAtNotChangeStatus(server),
+                () => result = this.PingBody(server),
                 Resources.StatusPinging);
             return result;
         }
 
         /// <summary>
-        /// サーバー接続チェック（処理状態更新無し）。
+        /// サーバー接続チェック本体。
         /// </summary>
         /// <param name="server">サーバー名。</param>
         /// <returns><c>true</c> 接続成功。</returns>
-        private bool PingAtNotChangeStatus(string server)
+        private bool PingBody(string server)
         {
             // サーバー接続チェック
             Ping ping = new Ping();
@@ -432,13 +422,13 @@ namespace Honememo.Wptscs.Logics
                 PingReply reply = ping.Send(server);
                 if (reply.Status != IPStatus.Success)
                 {
-                    this.LogLine(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
+                    this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
                     return false;
                 }
             }
             catch (Exception e)
             {
-                this.LogLine(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
+                this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
                 return false;
             }
 
@@ -446,51 +436,66 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ログメッセージを出力しつつページを取得（処理状態更新無し）。
+        /// ログ出力によるエラー処理を含んだページ取得処理本体。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
-        /// <param name="notFoundMsg">取得できない場合に出力するメッセージ。</param>
-        /// <returns>取得したページ。ページが存在しない場合は <c>null</c> を返す。</returns>
-        /// <remarks>通信エラーなど例外が発生した場合は、別途エラーログを出力する。</remarks>
-        private Page GetPageAtNotChangeStatus(string title, string notFoundMsg)
+        /// <param name="page">取得したページ。ページが存在しない場合は <c>null</c> を返す。</param>
+        /// <returns>処理が成功した（404も含む）場合<c>true</c>、失敗した（通信エラーなど）の場合<c>false</c>。</returns>
+        /// <remarks>
+        /// 本メソッドは、大きく3パターンの動作を行う。
+        /// <list type="number">
+        /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
+        /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
+        /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
+        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreErrorによる）。</description></item>
+        /// </list>
+        /// </remarks>
+        private bool TryGetPageBody(string title, out Page page)
         {
+            page = null;
             try
             {
-                // 取得できた場合はここで終了
-                return this.From.GetPage(title);
-            }
-            catch (WebException e)
-            {
-                // 通信エラー
-                if (e.Status == WebExceptionStatus.ProtocolError
-                    && (e.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound)
-                {
-                    // 404
-                    this.Log += notFoundMsg;
-                }
-                else
-                {
-                    // それ以外のエラー
-                    this.LogLine(Resources.RightArrow + " " + e.Message);
-                    if (e.Response != null)
-                    {
-                        this.LogLine(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, e.Response.ResponseUri));
-                    }
-                }
+                // 普通に取得できた場合はここで終了
+                page = this.From.GetPage(title);
+                return true;
             }
             catch (FileNotFoundException)
             {
-                // ファイル無し
-                this.Log += notFoundMsg;
+                // ページ無しによる例外も正常終了
+                return true;
             }
             catch (Exception e)
             {
-                // その他の想定外のエラー
-                this.LogLine(Resources.RightArrow + " " + e.Message);
-            }
+                // その他例外の場合、まずエラー情報を出力
+                this.Logger.AddResponse(e.Message);
+                if (e is WebException && ((WebException)e).Response != null)
+                {
+                    // 出せるならエラーとなったURLも出力
+                    this.Logger.AddResponse(Resources.LogMessageErrorURL, ((WebException)e).Response.ResponseUri);
+                }
 
-            // 取得失敗時いずれの場合もnull
-            return null;
+                // エラーを無視しない場合、ここで翻訳支援処理を中断する
+                if (!Settings.Default.IgnoreError)
+                {
+                    throw new ApplicationException(e.Message, e);
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// ロガーのログ状態更新イベント用。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void GetLogUpdate(object sender, EventArgs e)
+        {
+            // もともとこのクラスにあったログ通知イベントをロガーに移動したため、入れ子で呼び出す
+            if (this.LogUpdate != null)
+            {
+                this.LogUpdate(this, EventArgs.Empty);
+            }
         }
 
         #endregion
