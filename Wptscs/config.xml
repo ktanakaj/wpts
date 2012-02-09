@@ -89,6 +89,14 @@
       <Location>http://en.wikipedia.org</Location>
       <Language Code="en">
         <Names>
+          <LanguageName Code="ar">
+            <Name>لغة إنجليزية</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="bn">
+            <Name>ইংরেজি ভাষা</Name>
+            <ShortName />
+          </LanguageName>
           <LanguageName Code="de">
             <Name>Englische Sprache</Name>
             <ShortName>Englisch</ShortName>
@@ -101,6 +109,18 @@
             <Name>Idioma inglés</Name>
             <ShortName>Inglés</ShortName>
           </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Anglais</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="hi">
+            <Name>अंग्रेज़ी भाषा</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="it">
+            <Name>Lingua inglese</Name>
+            <ShortName>inglese</ShortName>
+          </LanguageName>
           <LanguageName Code="ja">
             <Name>英語</Name>
             <ShortName>英</ShortName>
@@ -109,9 +129,21 @@
             <Name>영어</Name>
             <ShortName />
           </LanguageName>
+          <LanguageName Code="nl">
+            <Name>Engels</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pl">
+            <Name>Język angielski</Name>
+            <ShortName />
+          </LanguageName>
           <LanguageName Code="pt">
             <Name>Língua inglesa</Name>
             <ShortName>Inglês</ShortName>
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Английский язык</Name>
+            <ShortName />
           </LanguageName>
           <LanguageName Code="zh">
             <Name>英语</Name>
@@ -449,6 +481,50 @@
         <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://si.wikipedia.org</Location>
+      <Language Code="si">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Sinhala language</Name>
+            <ShortName>Sinhala</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>シンハラ語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="si">
+            <Name>සිංහල භාෂාව</Name>
+            <ShortName>සිංහල</ShortName>
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/%E0%B7%80%E0%B7%92%E0%B7%81%E0%B7%9A%E0%B7%82:%E0%B6%B1%E0%B7%92%E0%B6%BB%E0%B7%8A%E0%B6%BA%E0%B7%8F%E0%B6%AD%E0%B6%9A%E0%B6%BB%E0%B6%B1%E0%B7%8A%E0%B6%B1/$1</ExportPath>
+      <MagicWords />
+      <DocumentationTemplates />
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://ta.wikipedia.org</Location>
+      <Language Code="ta">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Tamil language</Name>
+            <ShortName>Tamil</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>タミル語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ta">
+            <Name>தமிழ் மொழி</Name>
+            <ShortName>தமிழ்</ShortName>
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/%E0%AE%9A%E0%AE%BF%E0%AE%B1%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81:Export/$1</ExportPath>
+      <MagicWords />
+      <DocumentationTemplates />
     </MediaWiki>
     <MediaWiki>
       <Location>http://zh.wikipedia.org</Location>
