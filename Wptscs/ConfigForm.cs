@@ -236,15 +236,19 @@ namespace Honememo.Wptscs
             // ※ ただし全列が空（新規行など）の場合は無視
             if (e.RowIndex >= 0)
             {
-                string value = FormUtils.ToString(this.dataGridViewItems["ColumnTimestamp", e.RowIndex]);
-                if (String.IsNullOrWhiteSpace(value)
-                    && !this.IsEmptyDataGridViewItemsRow(this.dataGridViewItems.Rows[e.RowIndex]))
+                DataGridViewRow row = this.dataGridViewItems.Rows[e.RowIndex];
+                if (String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnTimestamp"]))
+                    && !this.IsEmptyDataGridViewItemsRow(row))
                 {
-                    this.dataGridViewItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Bisque;
+                    // 背景色を変更
+                    row.DefaultCellStyle.BackColor = Color.Bisque;
                 }
-                else
+                else if (row.InheritedStyle.BackColor != this.dataGridViewItems.DefaultCellStyle.BackColor)
                 {
-                    this.dataGridViewItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = this.dataGridViewItems.DefaultCellStyle.BackColor;
+                    // 背景色を戻す
+                    // ※ DefaultCellStyleプロパティにアクセスしたタイミングでインスタンスが
+                    //    作成されてしまうため、InheritedStyleを調べて変更が必要な場合だけアクセス
+                    row.DefaultCellStyle.BackColor = this.dataGridViewItems.DefaultCellStyle.BackColor;
                 }
             }
         }
