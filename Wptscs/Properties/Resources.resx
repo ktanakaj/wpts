@@ -347,4 +347,8 @@
     <value>リトライ回数には0以上の数値を指定してください。</value>
     <comment>リトライ回数に不正な値を入れられた場合のメッセージ</comment>
   </data>
+  <data name="LogMessageErrorPageName" xml:space="preserve">
+    <value>{0} は、現在のツールでは処理できないページ名です。</value>
+    <comment>ページ名絡みの既知の不具合用の暫定メッセージ</comment>
+  </data>
 </root>

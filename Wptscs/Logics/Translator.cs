@@ -447,7 +447,7 @@ namespace Honememo.Wptscs.Logics
         /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
         /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
         /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
-        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreErrorによる）。</description></item>
+        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreError等による）。</description></item>
         /// </list>
         /// </remarks>
         private bool TryGetPageBody(string title, out Page page)
@@ -463,6 +463,12 @@ namespace Honememo.Wptscs.Logics
             {
                 // ページ無しによる例外も正常終了
                 return true;
+            }
+            catch (NotSupportedException)
+            {
+                // 末尾がピリオドで終わるページが処理できない既知の不具合への対応、警告メッセージを出す
+                this.Logger.AddResponse(Resources.LogMessageErrorPageName, title);
+                return false;
             }
             catch (Exception e)
             {
