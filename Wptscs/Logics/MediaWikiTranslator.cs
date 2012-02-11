@@ -317,6 +317,14 @@ namespace Honememo.Wptscs.Logics
                     // カテゴリ用の変換を実施
                     return this.ReplaceLinkCategory(link);
                 }
+                else if (StringUtils.DefaultString(link.Title).StartsWith("../"))
+                {
+                    // ..形式のサブページが処理できない既知の不具合への対応、警告メッセージを出す
+                    // ※ 2012年2月現在、..形式のサブページはIsSubpageも立たない
+                    this.Logger.AddSource(link);
+                    this.Logger.AddResponse(Resources.LogMessageErrorPageName, link.Title);
+                    return link;
+                }
 
                 // 専用処理の無い内部リンクの場合、言語間リンクによる置き換えを行う
                 string interWiki = this.GetInterwiki(link);

@@ -193,6 +193,40 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
+        /// ReplaceLinkメソッドテストケース（サブページ）。
+        /// </summary>
+        [Test]
+        public void TestReplaceLinkSubpage()
+        {
+            TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
+            MockFactory mock = new MockFactory();
+            translator.From = mock.GetMediaWiki("en");
+            translator.To = mock.GetMediaWiki("ja");
+            MediaWikiLink link;
+
+            // 親記事名も全て指定したサブページ
+            // ※ 以下オブジェクトを毎回作り直しているのは、更新されてしまうケースがあるため
+            link = new MediaWikiLink();
+            link.Title = "Template:Citation needed/Doc";
+            Assert.AreEqual("[[Template:要出典|Template:Citation needed/Doc]]", translator.ReplaceLink(link, "Template:Citation needed").ToString());
+
+            // 親記事名を省略し別途指定
+            link = new MediaWikiLink();
+            link.Title = "/Doc";
+            link.IsSubpage = true;
+            Assert.AreEqual("[[Template:要出典|/Doc]]", translator.ReplaceLink(link, "Template:Citation needed").ToString());
+
+            // ../形式でのサブページ
+            // ※ この形式は2012年2月現在未対応で渡す方法も無い、暫定対応の処理が動く
+            link = new MediaWikiLink();
+            link.Title = "../Doc";
+            Assert.AreEqual("[[../Doc]]", translator.ReplaceLink(link, "Template:Citation needed").ToString());
+            Assert.IsTrue(translator.Log.EndsWith(
+                "[[../Doc]] → " + Environment.NewLine
+                + "→ ../Doc は、現在のツールでは処理できないページ名です。" + Environment.NewLine));
+        }
+
+        /// <summary>
         /// ReplaceLinkメソッドテストケース（カテゴリ）。
         /// </summary>
         [Test]
