@@ -186,6 +186,69 @@
   <data name="tabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="labelItemsNote.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="labelItemsNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelItemsNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 399</value>
+  </data>
+  <data name="labelItemsNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 12</value>
+  </data>
+  <data name="labelItemsNote.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelItemsNote.Text" xml:space="preserve">
+    <value>※ 一度に大量の行を削除すると、画面が長時間反応しなくなります（50行程度が限界）。</value>
+  </data>
+  <data name="&gt;&gt;labelItemsNote.Name" xml:space="preserve">
+    <value>labelItemsNote</value>
+  </data>
+  <data name="&gt;&gt;labelItemsNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelItemsNote.Parent" xml:space="preserve">
+    <value>tabPageItems</value>
+  </data>
+  <data name="&gt;&gt;labelItemsNote.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 390</value>
+  </data>
+  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
     <value>dataGridViewItems</value>
   </data>
@@ -196,7 +259,7 @@
     <value>tabPageItems</value>
   </data>
   <data name="&gt;&gt;dataGridViewItems.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tabPageItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -376,69 +439,6 @@
   <data name="&gt;&gt;tabPageServer.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBoxInformation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.Name" xml:space="preserve">
-    <value>labelWebsite</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;labelWebsite.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.Name" xml:space="preserve">
-    <value>linkLabelWebsite</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;linkLabelWebsite.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
-    <value>labelCopyright</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;labelCopyright.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.Name" xml:space="preserve">
-    <value>labelApplicationName</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.Parent" xml:space="preserve">
-    <value>groupBoxInformation</value>
-  </data>
-  <data name="&gt;&gt;labelApplicationName.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBoxInformation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 266</value>
-  </data>
-  <data name="groupBoxInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 145</value>
-  </data>
-  <data name="groupBoxInformation.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="groupBoxInformation.Text" xml:space="preserve">
-    <value>バージョン情報</value>
-  </data>
   <data name="&gt;&gt;groupBoxInformation.Name" xml:space="preserve">
     <value>groupBoxInformation</value>
   </data>
@@ -450,506 +450,6 @@
   </data>
   <data name="&gt;&gt;groupBoxInformation.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxConnectRetryTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
-  </data>
-  <data name="textBoxConnectRetryTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 125</value>
-  </data>
-  <data name="textBoxConnectRetryTime.MaxLength" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="textBoxConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 19</value>
-  </data>
-  <data name="textBoxConnectRetryTime.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="textBoxConnectRetryTime.ToolTip" xml:space="preserve">
-    <value>通信エラー時にリトライする際の待機時間です。
-サーバーが混雑している場合など、ウェイト時間を取ったほうがリトライに成功する可能性があがります。
-単位はミリ秒です。待機しない場合は0を指定してください。</value>
-  </data>
-  <data name="&gt;&gt;textBoxConnectRetryTime.Name" xml:space="preserve">
-    <value>textBoxConnectRetryTime</value>
-  </data>
-  <data name="&gt;&gt;textBoxConnectRetryTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxConnectRetryTime.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxConnectRetryTime.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 128</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 12</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.Text" xml:space="preserve">
-    <value>（0:ウェイトしない）</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTimeNote.Name" xml:space="preserve">
-    <value>labelConnectRetryTimeNote</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTimeNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTimeNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTimeNote.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="labelConnectRetryTime.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelConnectRetryTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 128</value>
-  </data>
-  <data name="labelConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 12</value>
-  </data>
-  <data name="labelConnectRetryTime.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="labelConnectRetryTime.Text" xml:space="preserve">
-    <value>リトライ時のウェイト時間（ミリ秒）:</value>
-  </data>
-  <data name="labelConnectRetryTime.ToolTip" xml:space="preserve">
-    <value>通信エラー時にリトライする際の待機時間です。
-サーバーが混雑している場合など、ウェイト時間を取ったほうがリトライに成功する可能性があがります。
-単位はミリ秒です。待機しない場合は0を指定してください。</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTime.Name" xml:space="preserve">
-    <value>labelConnectRetryTime</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTime.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelConnectRetryTime.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="textBoxMaxConnectRetries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
-  </data>
-  <data name="textBoxMaxConnectRetries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 99</value>
-  </data>
-  <data name="textBoxMaxConnectRetries.MaxLength" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="textBoxMaxConnectRetries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 19</value>
-  </data>
-  <data name="textBoxMaxConnectRetries.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="textBoxMaxConnectRetries.ToolTip" xml:space="preserve">
-    <value>通信エラー時にリトライする回数です。
-リトライしない場合は0を指定してください。
-</value>
-  </data>
-  <data name="&gt;&gt;textBoxMaxConnectRetries.Name" xml:space="preserve">
-    <value>textBoxMaxConnectRetries</value>
-  </data>
-  <data name="&gt;&gt;textBoxMaxConnectRetries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxMaxConnectRetries.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxMaxConnectRetries.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="labelMaxConnectRetriesNote.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelMaxConnectRetriesNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>198, 102</value>
-  </data>
-  <data name="labelMaxConnectRetriesNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 12</value>
-  </data>
-  <data name="labelMaxConnectRetriesNote.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="labelMaxConnectRetriesNote.Text" xml:space="preserve">
-    <value>（0:リトライしない）</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetriesNote.Name" xml:space="preserve">
-    <value>labelMaxConnectRetriesNote</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetriesNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetriesNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetriesNote.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="labelMaxConnectRetries.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelMaxConnectRetries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
-  </data>
-  <data name="labelMaxConnectRetries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 12</value>
-  </data>
-  <data name="labelMaxConnectRetries.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="labelMaxConnectRetries.Text" xml:space="preserve">
-    <value>通信エラー時のリトライ回数:</value>
-  </data>
-  <data name="labelMaxConnectRetries.ToolTip" xml:space="preserve">
-    <value>通信エラー時にリトライする回数です。
-リトライしない場合は0を指定してください。</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetries.Name" xml:space="preserve">
-    <value>labelMaxConnectRetries</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetries.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetries.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelMaxConnectRetries.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="checkBoxIgnoreError.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBoxIgnoreError.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 157</value>
-  </data>
-  <data name="checkBoxIgnoreError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 16</value>
-  </data>
-  <data name="checkBoxIgnoreError.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="checkBoxIgnoreError.Text" xml:space="preserve">
-    <value>エラーを可能な限り無視して続行する</value>
-  </data>
-  <data name="checkBoxIgnoreError.ToolTip" xml:space="preserve">
-    <value>エラーが発生した際に処理を中止せず、無視して可能な限り処理を続行したい場合、チェックします。</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.Name" xml:space="preserve">
-    <value>checkBoxIgnoreError</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="labelRefererNote.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelRefererNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelRefererNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 71</value>
-  </data>
-  <data name="labelRefererNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 12</value>
-  </data>
-  <data name="labelRefererNote.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="labelRefererNote.Text" xml:space="preserve">
-    <value>（空欄:なし ※現在のバージョンでは空）</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
-    <value>labelRefererNote</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="labelUserAgentNote.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelUserAgentNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelUserAgentNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 46</value>
-  </data>
-  <data name="labelUserAgentNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 12</value>
-  </data>
-  <data name="labelUserAgentNote.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="labelUserAgentNote.Text" xml:space="preserve">
-    <value>（空欄:デフォルト値）</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.Name" xml:space="preserve">
-    <value>labelUserAgentNote</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="labelChaceNote.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelChaceNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 18</value>
-  </data>
-  <data name="labelChaceNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 12</value>
-  </data>
-  <data name="labelChaceNote.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="labelChaceNote.Text" xml:space="preserve">
-    <value>（0:無効）</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.Name" xml:space="preserve">
-    <value>labelChaceNote</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="textBoxCacheExpire.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
-  </data>
-  <data name="textBoxCacheExpire.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 15</value>
-  </data>
-  <data name="textBoxCacheExpire.MaxLength" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="textBoxCacheExpire.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 19</value>
-  </data>
-  <data name="textBoxCacheExpire.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="textBoxCacheExpire.ToolTip" xml:space="preserve">
-    <value>記事の置き換えで取得済みの内容をキャッシュとして使用する有効期限です。
-日数、またはキャッシュしない場合0を入力します。</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.Name" xml:space="preserve">
-    <value>textBoxCacheExpire</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="textBoxReferer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 68</value>
-  </data>
-  <data name="textBoxReferer.MaxLength" type="System.Int32, mscorlib">
-    <value>2083</value>
-  </data>
-  <data name="textBoxReferer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 19</value>
-  </data>
-  <data name="textBoxReferer.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="textBoxReferer.ToolTip" xml:space="preserve">
-    <value>Referer を固定で指定する場合、URLを入力します。
-空欄の場合、Refererは設定しません。
-
-※ 現状、Referer は動的には設定されません。</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.Name" xml:space="preserve">
-    <value>textBoxReferer</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="labelReferer.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelReferer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 71</value>
-  </data>
-  <data name="labelReferer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 12</value>
-  </data>
-  <data name="labelReferer.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="labelReferer.Text" xml:space="preserve">
-    <value>Referer:</value>
-  </data>
-  <data name="labelReferer.ToolTip" xml:space="preserve">
-    <value>Referer を固定で指定する場合、URLを入力します。
-空欄の場合、Refererは設定しません。
-
-※ 現状、Referer は動的には設定されません。</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.Name" xml:space="preserve">
-    <value>labelReferer</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="labelCacheExpire.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelCacheExpire.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
-  </data>
-  <data name="labelCacheExpire.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 12</value>
-  </data>
-  <data name="labelCacheExpire.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="labelCacheExpire.Text" xml:space="preserve">
-    <value>キャッシュ有効期限（日）:</value>
-  </data>
-  <data name="labelCacheExpire.ToolTip" xml:space="preserve">
-    <value>記事の置き換えで取得済みの内容をキャッシュとして使用する有効期限です。
-日数、またはキャッシュしない場合0を入力します。</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.Name" xml:space="preserve">
-    <value>labelCacheExpire</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="textBoxUserAgent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 43</value>
-  </data>
-  <data name="textBoxUserAgent.MaxLength" type="System.Int32, mscorlib">
-    <value>255</value>
-  </data>
-  <data name="textBoxUserAgent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 19</value>
-  </data>
-  <data name="textBoxUserAgent.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="textBoxUserAgent.ToolTip" xml:space="preserve">
-    <value>User Agent として使用する文字列を入力します。
-空欄の場合、このツール独自のUAを使用します。</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.Name" xml:space="preserve">
-    <value>textBoxUserAgent</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="labelUserAgent.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelUserAgent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 46</value>
-  </data>
-  <data name="labelUserAgent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 12</value>
-  </data>
-  <data name="labelUserAgent.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="labelUserAgent.Text" xml:space="preserve">
-    <value>UserAgent:</value>
-  </data>
-  <data name="labelUserAgent.ToolTip" xml:space="preserve">
-    <value>User Agent として使用する文字列を入力します。
-空欄の場合、このツール独自のUAを使用します。</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.Name" xml:space="preserve">
-    <value>labelUserAgent</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
-  </data>
-  <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 254</value>
-  </data>
-  <data name="groupBoxApplicationConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBoxApplicationConfig.Text" xml:space="preserve">
-    <value>アプリケーションの設定</value>
   </data>
   <data name="&gt;&gt;groupBoxApplicationConfig.Name" xml:space="preserve">
     <value>groupBoxApplicationConfig</value>
@@ -1016,132 +516,6 @@
   </data>
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
-  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 395</value>
-  </data>
-  <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Name" xml:space="preserve">
-    <value>dataGridViewItems</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.Parent" xml:space="preserve">
-    <value>tabPageItems</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewItems.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
-    <value>翻訳元</value>
-  </data>
-  <data name="ColumnFromCode.ToolTipText" xml:space="preserve">
-    <value>記事の置き換えパターンの翻訳元言語です。</value>
-  </data>
-  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnFromTitle.ToolTipText" xml:space="preserve">
-    <value>記事の置き換えパターンの翻訳元記事名です。</value>
-  </data>
-  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnAlias.HeaderText" xml:space="preserve">
-    <value>リダイレクト</value>
-  </data>
-  <data name="ColumnAlias.ToolTipText" xml:space="preserve">
-    <value>翻訳元記事名がリダイレクトの場合の、リダイレクト先の記事名です。</value>
-  </data>
-  <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToCode.HeaderText" xml:space="preserve">
-    <value>翻訳先</value>
-  </data>
-  <data name="ColumnToCode.ToolTipText" xml:space="preserve">
-    <value>記事の置き換えパターンの翻訳先言語です。</value>
-  </data>
-  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="ColumnToTitle.ToolTipText" xml:space="preserve">
-    <value>記事の置き換えパターンの翻訳先記事名です。
-言語間リンクが無い場合は空欄です。</value>
-  </data>
-  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
-    <value>取得日時</value>
-  </data>
-  <data name="ColumnTimestamp.ToolTipText" xml:space="preserve">
-    <value>置き換えパターンを言語間リンクから取得した場合の取得日時です。
-取得日時から一定期間キャッシュとしてこの置き換えを使用します。
-空欄の場合、無期限で使用します。</value>
-  </data>
-  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
-    <value>78</value>
   </data>
   <data name="dataGridViewHeading.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2482,6 +1856,81 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="&gt;&gt;labelLanguage.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="groupBoxInformation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Name" xml:space="preserve">
+    <value>labelWebsite</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelWebsite.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Name" xml:space="preserve">
+    <value>linkLabelWebsite</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;linkLabelWebsite.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Name" xml:space="preserve">
+    <value>labelCopyright</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelCopyright.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Name" xml:space="preserve">
+    <value>labelApplicationName</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.Parent" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupBoxInformation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 266</value>
+  </data>
+  <data name="groupBoxInformation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 145</value>
+  </data>
+  <data name="groupBoxInformation.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBoxInformation.Text" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Name" xml:space="preserve">
+    <value>groupBoxInformation</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.Parent" xml:space="preserve">
+    <value>tabPageApplication</value>
+  </data>
+  <data name="&gt;&gt;groupBoxInformation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="labelWebsite.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2593,6 +2042,710 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="&gt;&gt;labelApplicationName.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="groupBoxApplicationConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.Name" xml:space="preserve">
+    <value>textBoxConnectRetryTime</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.Name" xml:space="preserve">
+    <value>labelConnectRetryTimeNote</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.Name" xml:space="preserve">
+    <value>labelConnectRetryTime</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.Name" xml:space="preserve">
+    <value>textBoxMaxConnectRetries</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.Name" xml:space="preserve">
+    <value>labelMaxConnectRetriesNote</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.Name" xml:space="preserve">
+    <value>labelMaxConnectRetries</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Name" xml:space="preserve">
+    <value>checkBoxIgnoreError</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
+    <value>labelRefererNote</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Name" xml:space="preserve">
+    <value>labelUserAgentNote</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Name" xml:space="preserve">
+    <value>labelChaceNote</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Name" xml:space="preserve">
+    <value>textBoxCacheExpire</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Name" xml:space="preserve">
+    <value>textBoxReferer</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Name" xml:space="preserve">
+    <value>labelReferer</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Name" xml:space="preserve">
+    <value>labelCacheExpire</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Name" xml:space="preserve">
+    <value>textBoxUserAgent</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Name" xml:space="preserve">
+    <value>labelUserAgent</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 254</value>
+  </data>
+  <data name="groupBoxApplicationConfig.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Text" xml:space="preserve">
+    <value>アプリケーションの設定</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Name" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.Parent" xml:space="preserve">
+    <value>tabPageApplication</value>
+  </data>
+  <data name="&gt;&gt;groupBoxApplicationConfig.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="textBoxConnectRetryTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxConnectRetryTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 125</value>
+  </data>
+  <data name="textBoxConnectRetryTime.MaxLength" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="textBoxConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 19</value>
+  </data>
+  <data name="textBoxConnectRetryTime.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="textBoxConnectRetryTime.ToolTip" xml:space="preserve">
+    <value>通信エラー時にリトライする際の待機時間です。
+サーバーが混雑している場合など、ウェイト時間を取ったほうがリトライに成功する可能性があがります。
+単位はミリ秒です。待機しない場合は0を指定してください。</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.Name" xml:space="preserve">
+    <value>textBoxConnectRetryTime</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxConnectRetryTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 128</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 12</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.Text" xml:space="preserve">
+    <value>（0:ウェイトしない）</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.Name" xml:space="preserve">
+    <value>labelConnectRetryTimeNote</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTimeNote.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelConnectRetryTime.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelConnectRetryTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 128</value>
+  </data>
+  <data name="labelConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 12</value>
+  </data>
+  <data name="labelConnectRetryTime.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="labelConnectRetryTime.Text" xml:space="preserve">
+    <value>リトライ時のウェイト時間（ミリ秒）:</value>
+  </data>
+  <data name="labelConnectRetryTime.ToolTip" xml:space="preserve">
+    <value>通信エラー時にリトライする際の待機時間です。
+サーバーが混雑している場合など、ウェイト時間を取ったほうがリトライに成功する可能性があがります。
+単位はミリ秒です。待機しない場合は0を指定してください。</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.Name" xml:space="preserve">
+    <value>labelConnectRetryTime</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelConnectRetryTime.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 99</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.MaxLength" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 19</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.ToolTip" xml:space="preserve">
+    <value>通信エラー時にリトライする回数です。
+リトライしない場合は0を指定してください。
+</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.Name" xml:space="preserve">
+    <value>textBoxMaxConnectRetries</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxMaxConnectRetries.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelMaxConnectRetriesNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelMaxConnectRetriesNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 102</value>
+  </data>
+  <data name="labelMaxConnectRetriesNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 12</value>
+  </data>
+  <data name="labelMaxConnectRetriesNote.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="labelMaxConnectRetriesNote.Text" xml:space="preserve">
+    <value>（0:リトライしない）</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.Name" xml:space="preserve">
+    <value>labelMaxConnectRetriesNote</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetriesNote.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelMaxConnectRetries.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelMaxConnectRetries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 102</value>
+  </data>
+  <data name="labelMaxConnectRetries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 12</value>
+  </data>
+  <data name="labelMaxConnectRetries.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelMaxConnectRetries.Text" xml:space="preserve">
+    <value>通信エラー時のリトライ回数:</value>
+  </data>
+  <data name="labelMaxConnectRetries.ToolTip" xml:space="preserve">
+    <value>通信エラー時にリトライする回数です。
+リトライしない場合は0を指定してください。</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.Name" xml:space="preserve">
+    <value>labelMaxConnectRetries</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelMaxConnectRetries.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="checkBoxIgnoreError.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxIgnoreError.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 157</value>
+  </data>
+  <data name="checkBoxIgnoreError.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 16</value>
+  </data>
+  <data name="checkBoxIgnoreError.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="checkBoxIgnoreError.Text" xml:space="preserve">
+    <value>エラーを可能な限り無視して続行する</value>
+  </data>
+  <data name="checkBoxIgnoreError.ToolTip" xml:space="preserve">
+    <value>エラーが発生した際に処理を中止せず、無視して可能な限り処理を続行したい場合、チェックします。</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Name" xml:space="preserve">
+    <value>checkBoxIgnoreError</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelRefererNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelRefererNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelRefererNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>342, 71</value>
+  </data>
+  <data name="labelRefererNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 12</value>
+  </data>
+  <data name="labelRefererNote.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="labelRefererNote.Text" xml:space="preserve">
+    <value>（空欄:なし ※現在のバージョンでは空）</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
+    <value>labelRefererNote</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelUserAgentNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelUserAgentNote.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelUserAgentNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>342, 46</value>
+  </data>
+  <data name="labelUserAgentNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 12</value>
+  </data>
+  <data name="labelUserAgentNote.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="labelUserAgentNote.Text" xml:space="preserve">
+    <value>（空欄:デフォルト値）</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Name" xml:space="preserve">
+    <value>labelUserAgentNote</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="labelChaceNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelChaceNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 18</value>
+  </data>
+  <data name="labelChaceNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 12</value>
+  </data>
+  <data name="labelChaceNote.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="labelChaceNote.Text" xml:space="preserve">
+    <value>（0:無効）</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Name" xml:space="preserve">
+    <value>labelChaceNote</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="textBoxCacheExpire.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxCacheExpire.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 15</value>
+  </data>
+  <data name="textBoxCacheExpire.MaxLength" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="textBoxCacheExpire.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 19</value>
+  </data>
+  <data name="textBoxCacheExpire.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxCacheExpire.ToolTip" xml:space="preserve">
+    <value>記事の置き換えで取得済みの内容をキャッシュとして使用する有効期限です。
+日数、またはキャッシュしない場合0を入力します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Name" xml:space="preserve">
+    <value>textBoxCacheExpire</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="textBoxReferer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 68</value>
+  </data>
+  <data name="textBoxReferer.MaxLength" type="System.Int32, mscorlib">
+    <value>2083</value>
+  </data>
+  <data name="textBoxReferer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 19</value>
+  </data>
+  <data name="textBoxReferer.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="textBoxReferer.ToolTip" xml:space="preserve">
+    <value>Referer を固定で指定する場合、URLを入力します。
+空欄の場合、Refererは設定しません。
+
+※ 現状、Referer は動的には設定されません。</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Name" xml:space="preserve">
+    <value>textBoxReferer</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="labelReferer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelReferer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 71</value>
+  </data>
+  <data name="labelReferer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 12</value>
+  </data>
+  <data name="labelReferer.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelReferer.Text" xml:space="preserve">
+    <value>Referer:</value>
+  </data>
+  <data name="labelReferer.ToolTip" xml:space="preserve">
+    <value>Referer を固定で指定する場合、URLを入力します。
+空欄の場合、Refererは設定しません。
+
+※ 現状、Referer は動的には設定されません。</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Name" xml:space="preserve">
+    <value>labelReferer</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="labelCacheExpire.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCacheExpire.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="labelCacheExpire.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 12</value>
+  </data>
+  <data name="labelCacheExpire.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelCacheExpire.Text" xml:space="preserve">
+    <value>キャッシュ有効期限（日）:</value>
+  </data>
+  <data name="labelCacheExpire.ToolTip" xml:space="preserve">
+    <value>記事の置き換えで取得済みの内容をキャッシュとして使用する有効期限です。
+日数、またはキャッシュしない場合0を入力します。</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Name" xml:space="preserve">
+    <value>labelCacheExpire</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="textBoxUserAgent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 43</value>
+  </data>
+  <data name="textBoxUserAgent.MaxLength" type="System.Int32, mscorlib">
+    <value>255</value>
+  </data>
+  <data name="textBoxUserAgent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 19</value>
+  </data>
+  <data name="textBoxUserAgent.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxUserAgent.ToolTip" xml:space="preserve">
+    <value>User Agent として使用する文字列を入力します。
+空欄の場合、このツール独自のUAを使用します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Name" xml:space="preserve">
+    <value>textBoxUserAgent</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="labelUserAgent.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelUserAgent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 46</value>
+  </data>
+  <data name="labelUserAgent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 12</value>
+  </data>
+  <data name="labelUserAgent.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelUserAgent.Text" xml:space="preserve">
+    <value>UserAgent:</value>
+  </data>
+  <data name="labelUserAgent.ToolTip" xml:space="preserve">
+    <value>User Agent として使用する文字列を入力します。
+空欄の場合、このツール独自のUAを使用します。</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Name" xml:space="preserve">
+    <value>labelUserAgent</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -2632,6 +2785,36 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>設定</value>
+  </data>
+  <data name="&gt;&gt;ColumnCode.Name" xml:space="preserve">
+    <value>ColumnCode</value>
+  </data>
+  <data name="&gt;&gt;ColumnCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
+    <value>ColumnName</value>
+  </data>
+  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColumnShortName.Name" xml:space="preserve">
+    <value>ColumnShortName</value>
+  </data>
+  <data name="&gt;&gt;ColumnShortName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
+    <value>errorProvider</value>
+  </data>
+  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ColumnFromCode.Name" xml:space="preserve">
     <value>ColumnFromCode</value>
@@ -2675,40 +2858,94 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="&gt;&gt;ColumnTimestamp.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnCode.Name" xml:space="preserve">
-    <value>ColumnCode</value>
-  </data>
-  <data name="&gt;&gt;ColumnCode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnName.Name" xml:space="preserve">
-    <value>ColumnName</value>
-  </data>
-  <data name="&gt;&gt;ColumnName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ColumnShortName.Name" xml:space="preserve">
-    <value>ColumnShortName</value>
-  </data>
-  <data name="&gt;&gt;ColumnShortName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
-    <value>errorProvider</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
-    <value>toolTip</value>
-  </data>
-  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ConfigForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromCode.HeaderText" xml:space="preserve">
+    <value>翻訳元</value>
+  </data>
+  <data name="ColumnFromCode.ToolTipText" xml:space="preserve">
+    <value>記事の置き換えパターンの翻訳元言語です。</value>
+  </data>
+  <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnFromTitle.ToolTipText" xml:space="preserve">
+    <value>記事の置き換えパターンの翻訳元記事名です。</value>
+  </data>
+  <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnAlias.HeaderText" xml:space="preserve">
+    <value>リダイレクト</value>
+  </data>
+  <data name="ColumnAlias.ToolTipText" xml:space="preserve">
+    <value>翻訳元記事名がリダイレクトの場合の、リダイレクト先の記事名です。</value>
+  </data>
+  <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnArrow.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToCode.HeaderText" xml:space="preserve">
+    <value>翻訳先</value>
+  </data>
+  <data name="ColumnToCode.ToolTipText" xml:space="preserve">
+    <value>記事の置き換えパターンの翻訳先言語です。</value>
+  </data>
+  <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnToTitle.HeaderText" xml:space="preserve">
+    <value>記事名</value>
+  </data>
+  <data name="ColumnToTitle.ToolTipText" xml:space="preserve">
+    <value>記事の置き換えパターンの翻訳先記事名です。
+言語間リンクが無い場合は空欄です。</value>
+  </data>
+  <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
+    <value>取得日時</value>
+  </data>
+  <data name="ColumnTimestamp.ToolTipText" xml:space="preserve">
+    <value>置き換えパターンを言語間リンクから取得した場合の取得日時です。
+取得日時から一定期間キャッシュとしてこの置き換えを使用します。
+空欄の場合、無期限で使用します。</value>
+  </data>
+  <data name="ColumnTimestamp.Width" type="System.Int32, mscorlib">
+    <value>78</value>
   </data>
 </root>
