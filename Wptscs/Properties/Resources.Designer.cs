@@ -190,6 +190,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   {0} は、現在のツールでは処理できないページ名です。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LogMessageErrorPageName {
+            get {
+                return ResourceManager.GetString("LogMessageErrorPageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   要求したURLは {0} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageErrorURL {

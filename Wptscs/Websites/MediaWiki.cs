@@ -441,23 +441,32 @@ namespace Honememo.Wptscs.Websites
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。</returns>
         /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
+        /// <exception cref="NotSupportedException">末尾がピリオドのページの場合（既知の不具合への対応）。</exception>
         /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         public override Page GetPage(string title)
         {
             // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
             // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
             string escapeTitle = title;
-            if (new Uri(this.Location).Scheme == "file")
+            if (new Uri(this.Location).IsFile)
             {
                 escapeTitle = FormUtils.ReplaceInvalidFileNameChars(title);
+            }
+
+            // URIを生成
+            Uri uri = new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle));
+            if (uri.OriginalString.EndsWith("."))
+            {
+                // 末尾がピリオドのページが取得できない既知の不具合への暫定対応
+                // 対処方法が不明なため、せめて例外を投げて検知する
+                throw new NotSupportedException(title + " is not suppoted");
             }
 
             // ページのXMLデータをMediaWikiサーバーから取得
             XmlDocument xml = new XmlDocument();
             try
             {
-                using (Stream reader = this.WebProxy.GetStream(
-                    new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle))))
+                using (Stream reader = this.WebProxy.GetStream(uri))
                 {
                     xml.Load(reader);
                 }
