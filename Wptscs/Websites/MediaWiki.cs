@@ -13,8 +13,10 @@ namespace Honememo.Wptscs.Websites
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Xml;
     using System.Xml.Serialization;
+    using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
@@ -30,7 +32,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// 名前空間情報取得用にアクセスするAPI。
         /// </summary>
-        private string namespacePath;
+        private string metaApi;
 
         /// <summary>
         /// 記事のXMLデータが存在するパス。
@@ -58,15 +60,29 @@ namespace Honememo.Wptscs.Websites
         private int? fileNamespace;
 
         /// <summary>
-        /// Wikipedia書式のシステム定義変数。
+        /// MediaWiki書式のシステム定義変数。
         /// </summary>
-        /// <remarks>初期値は http://www.mediawiki.org/wiki/Help:Magic_words を参照</remarks>
-        private IList<string> magicWords;
+        private ISet<string> magicWords;
 
         /// <summary>
         /// MediaWikiの名前空間の情報。
         /// </summary>
-        private IDictionary<int, IList<string>> namespaces = new Dictionary<int, IList<string>>();
+        private IDictionary<int, IgnoreCaseSet> namespaces;
+
+        /// <summary>
+        /// MediaWikiのウィキ間リンクのプレフィックス情報。
+        /// </summary>
+        private IgnoreCaseSet interwikiPrefixs;
+
+        /// <summary>
+        /// MediaWikiのウィキ間リンクのプレフィックス情報（APIから取得した値と設定値の集合）。
+        /// </summary>
+        private IgnoreCaseSet interwikiPrefixCaches;
+
+        /// <summary>
+        /// <see cref="InitializeByMetaApi"/>同期用ロックオブジェクト。
+        /// </summary>
+        private object lockLoadMetaApi = new object();
 
         #endregion
 
@@ -110,24 +126,24 @@ namespace Honememo.Wptscs.Websites
         #region 設定ファイルに初期値を持つプロパティ
         
         /// <summary>
-        /// MediaWiki名前空間情報取得用にアクセスするAPI。
+        /// MediaWikiメタ情報取得用にアクセスするAPI。
         /// </summary>
         /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
-        public string NamespacePath
+        public string MetaApi
         {
             get
             {
-                if (String.IsNullOrEmpty(this.namespacePath))
+                if (String.IsNullOrEmpty(this.metaApi))
                 {
-                    return Settings.Default.MediaWikiNamespacePath;
+                    return Settings.Default.MediaWikiMetaApi;
                 }
 
-                return this.namespacePath;
+                return this.metaApi;
             }
 
             set
             {
-                this.namespacePath = value;
+                this.metaApi = value;
             }
         }
 
@@ -227,18 +243,22 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Wikipedia書式のシステム定義変数。
+        /// MediaWiki書式のシステム定義変数。
         /// </summary>
-        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
-        public IList<string> MagicWords
+        /// <remarks>
+        /// 値が指定されていない場合、デフォルト値を返す。
+        /// 大文字小文字を区別する。
+        /// </remarks>
+        public ISet<string> MagicWords
         {
             get
             {
                 if (this.magicWords == null)
                 {
-                    string[] w = new string[Settings.Default.MediaWikiMagicWords.Count];
-                    Settings.Default.MediaWikiMagicWords.CopyTo(w, 0);
-                    return w;
+                    // ※ 初期値は http://www.mediawiki.org/wiki/Help:Magic_words 等を参考に設定。
+                    //    APIからも取得できるが、2012年2月現在 #expr でなければ認識されないものが
+                    //    exprで返ってきたりとアプリで使うには情報が足りないため人力で対応。
+                    return new HashSet<string>(Settings.Default.MediaWikiMagicWords.Cast<string>());
                 }
 
                 return this.magicWords;
@@ -252,131 +272,89 @@ namespace Honememo.Wptscs.Websites
 
         #endregion
 
-        #region それ以外のプロパティ
+        #region サーバーから値を取得するプロパティ
 
         /// <summary>
         /// MediaWikiの名前空間の情報。
         /// </summary>
-        /// <remarks>値が指定されていない場合、サーバーから情報を取得。</remarks>
-        public IDictionary<int, IList<string>> Namespaces
+        /// <remarks>
+        /// サーバーから情報を取得。大文字小文字を区別しない。
+        /// </remarks>
+        public IDictionary<int, IgnoreCaseSet> Namespaces
         {
             get
             {
-                lock (this.namespaces)
+                // 値が設定されていない場合、サーバーから取得して初期化する
+                // ※ コンストラクタ等で初期化していないのは、通信の準備が整うまで行えないため
+                // ※ 余計なロック・通信をしないよう、ロックの前後に値のチェックを行う
+                if (this.namespaces != null)
                 {
-                    // 値が設定されていない場合、サーバーから取得して初期化する
-                    // ※ コンストラクタ等で初期化していないのは、通信の準備が整うまで行えないため
-                    // ※ MagicWordsがnullでこちらが空で若干条件が違うのは、あちらは設定ファイルに
-                    //    保存する設定だが、こちらは設定ファイルに保存しない基本的に読み込み用の設定だから。
-                    if (this.namespaces.Count > 0)
+                    return this.namespaces;
+                }
+
+                lock (this.lockLoadMetaApi)
+                {
+                    if (this.namespaces != null)
                     {
                         return this.namespaces;
                     }
 
-                    // APIのXMLデータをMediaWikiサーバーから取得
-                    XmlDocument xml = new XmlDocument();
-                    using (Stream reader = this.WebProxy.GetStream(new Uri(new Uri(this.Location), this.NamespacePath)))
-                    {
-                        xml.Load(reader);
-                    }
-
-                    // ルートエレメントまで取得し、フォーマットをチェック
-                    XmlElement rootElement = xml["api"];
-                    if (rootElement == null)
-                    {
-                        // XMLは取得できたが空 or フォーマットが想定外
-                        throw new InvalidDataException("parse failed");
-                    }
-
-                    // クエリーを取得
-                    XmlElement queryElement = rootElement["query"];
-                    if (queryElement == null)
-                    {
-                        // フォーマットが想定外
-                        throw new InvalidDataException("parse failed");
-                    }
-
-                    // ネームスペースブロックを取得、ネームスペースブロックまでは必須
-                    XmlElement namespacesElement = queryElement["namespaces"];
-                    if (namespacesElement == null)
-                    {
-                        // フォーマットが想定外
-                        throw new InvalidDataException("parse failed");
-                    }
-
-                    // ネームスペースを取得
-                    foreach (XmlNode node in namespacesElement.ChildNodes)
-                    {
-                        XmlElement namespaceElement = node as XmlElement;
-                        if (namespaceElement != null)
-                        {
-                            try
-                            {
-                                int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
-                                IList<string> values = new List<string>();
-                                values.Add(namespaceElement.InnerText);
-                                this.namespaces[id] = values;
-
-                                // あればシステム名？も設定
-                                string canonical = namespaceElement.GetAttribute("canonical");
-                                if (!String.IsNullOrEmpty(canonical))
-                                {
-                                    values.Add(canonical);
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                // キャッチしているのは、万が一想定外の書式が返された場合に、完璧に動かなくなるのを防ぐため
-                                System.Diagnostics.Debug.WriteLine("MediaWiki.Namespaces > 例外発生 : " + e);
-                            }
-                        }
-                    }
-
-                    // ネームスペースエイリアスブロックを取得、無い場合も想定
-                    XmlElement aliasesElement = queryElement["namespacealiases"];
-                    if (aliasesElement != null)
-                    {
-                        // ネームスペースエイリアスを取得
-                        foreach (XmlNode node in aliasesElement.ChildNodes)
-                        {
-                            XmlElement namespaceElement = node as XmlElement;
-                            if (namespaceElement != null)
-                            {
-                                try
-                                {
-                                    int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
-                                    IList<string> values = new List<string>();
-                                    if (this.namespaces.ContainsKey(id))
-                                    {
-                                        values = this.namespaces[id];
-                                    }
-
-                                    values.Add(namespaceElement.InnerText);
-                                }
-                                catch (Exception e)
-                                {
-                                    // キャッチしているのは、万が一想定外の書式が返された場合に、完璧に動かなくなるのを防ぐため
-                                    System.Diagnostics.Debug.WriteLine("MediaWiki.Namespaces > 例外発生 : " + e);
-                                }
-                            }
-                        }
-                    }
+                    this.InitializeByMetaApi();
                 }
 
                 return this.namespaces;
             }
 
-            set
+            protected set
             {
-                // ※必須な情報が設定されていない場合、ArgumentNullExceptionを返す
-                if (value == null)
-                {
-                    throw new ArgumentNullException("namespaces");
-                }
-
                 this.namespaces = value;
             }
         }
+
+        /// <summary>
+        /// MediaWikiのウィキ間リンクのプレフィックス情報。
+        /// </summary>
+        /// <remarks>
+        /// 値が設定されていない場合デフォルト値とサーバーから、
+        /// 設定されている場合その内容とサーバーから取得した情報を使用する。
+        /// 大文字小文字を区別しない。
+        /// </remarks>
+        public IgnoreCaseSet InterwikiPrefixs
+        {
+            get
+            {
+                // 値が準備されていない場合、サーバーと設定ファイルから取得して初期化する
+                // ※ コンストラクタ等で初期化していないのは、通信の準備が整うまで行えないため
+                // ※ 余計なロック・通信をしないよう、ロックの前後に値のチェックを行う
+                if (this.interwikiPrefixCaches != null)
+                {
+                    return this.interwikiPrefixCaches;
+                }
+
+                lock (this.lockLoadMetaApi)
+                {
+                    if (this.interwikiPrefixCaches != null)
+                    {
+                        return this.interwikiPrefixCaches;
+                    }
+
+                    this.InitializeByMetaApi();
+                }
+
+                return this.interwikiPrefixCaches;
+            }
+
+            set
+            {
+                // 値を代入しキャッシュを消去
+                this.interwikiPrefixs = value;
+                this.interwikiPrefixCaches = null;
+            }
+        }
+
+        #endregion
+
+        #region それ以外のプロパティ
 
         /// <summary>
         /// Template:Documentation（言語間リンク等を別ページに記述するためのテンプレート）に相当するページ名。
@@ -487,7 +465,7 @@ namespace Honememo.Wptscs.Websites
             if (rootElement == null)
             {
                 // XMLは取得できたが空 or フォーマットが想定外
-                throw new InvalidDataException("parse failed");
+                throw new InvalidDataException("parse failed : mediawiki element is not found");
             }
 
             // ページの解析
@@ -519,18 +497,73 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// 指定された文字列がWikipediaのシステム変数に相当かを判定。
+        /// 指定された文字列がMediaWikiのシステム変数に相当かを判定。
         /// </summary>
         /// <param name="text">チェックする文字列。</param>
-        /// <returns><c>true</c> システム変数に相当。</returns>
+        /// <returns>システム変数に相当する場合<c>true</c>。</returns>
+        /// <remarks>大文字小文字は区別する。</remarks>
         public bool IsMagicWord(string text)
         {
-            string s = text != null ? text : String.Empty;
-
             // {{CURRENTYEAR}}や{{ns:1}}みたいなパターンがある
+            string s = StringUtils.DefaultString(text);
             foreach (string variable in this.MagicWords)
             {
                 if (s == variable || s.StartsWith(variable + ":"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 指定されたリンク文字列がMediaWikiのウィキ間リンクかを判定。
+        /// </summary>
+        /// <param name="link">チェックするリンク文字列。</param>
+        /// <returns>ウィキ間リンクに該当する場合<c>true</c>。</returns>
+        /// <remarks>大文字小文字は区別しない。</remarks>
+        public bool IsInterwiki(string link)
+        {
+            // ※ ウィキ間リンクには入れ子もあるが、ここでは意識する必要はない
+            string s = StringUtils.DefaultString(link);
+
+            // 名前空間と被る場合はそちらが優先、ウィキ間リンクと判定しない
+            if (this.IsNamespace(link))
+            {
+                return false;
+            }
+
+            // 文字列がいずれかのウィキ間リンクのプレフィックスで始まるか
+            int index = s.IndexOf(':');
+            if (index < 0)
+            {
+                return false;
+            }
+
+            return this.InterwikiPrefixs.Contains(s.Remove(index));
+        }
+
+        /// <summary>
+        /// 指定されたリンク文字列がMediaWikiのいずれかの名前空間に属すかを判定。
+        /// </summary>
+        /// <param name="link">チェックするリンク文字列。</param>
+        /// <returns>いずれかの名前空間に該当する場合<c>true</c>。</returns>
+        /// <remarks>大文字小文字は区別しない。</remarks>
+        public bool IsNamespace(string link)
+        {
+            // 文字列がいずれかの名前空間のプレフィックスで始まるか
+            string s = StringUtils.DefaultString(link);
+            int index = s.IndexOf(':');
+            if (index < 0)
+            {
+                return false;
+            }
+
+            string prefix = s.Remove(index);
+            foreach (IgnoreCaseSet prefixes in this.Namespaces.Values)
+            {
+                if (prefixes.Contains(prefix))
                 {
                     return true;
                 }
@@ -610,7 +643,7 @@ namespace Honememo.Wptscs.Websites
                 this.Language = new XmlSerializer(typeof(Language)).Deserialize(r) as Language;
             }
 
-            this.NamespacePath = XmlUtils.InnerText(siteElement.SelectSingleNode("NamespacePath"));
+            this.MetaApi = XmlUtils.InnerText(siteElement.SelectSingleNode("MetaApi"));
             this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
             this.Redirect = XmlUtils.InnerText(siteElement.SelectSingleNode("Redirect"));
 
@@ -633,7 +666,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             // システム定義変数
-            IList<string> variables = new List<string>();
+            ISet<string> variables = new HashSet<string>();
             foreach (XmlNode variableNode in siteElement.SelectNodes("MagicWords/Variable"))
             {
                 variables.Add(variableNode.InnerText);
@@ -643,6 +676,19 @@ namespace Honememo.Wptscs.Websites
             {
                 // 初期値の都合上、値がある場合のみ
                 this.MagicWords = variables;
+            }
+
+            // ウィキ間リンク
+            IgnoreCaseSet prefixs = new IgnoreCaseSet();
+            foreach (XmlNode prefixNode in siteElement.SelectNodes("InterwikiPrefixs/Prefix"))
+            {
+                prefixs.Add(prefixNode.InnerText);
+            }
+
+            if (prefixs.Count > 0)
+            {
+                // 初期値の都合上、値がある場合のみ
+                this.InterwikiPrefixs = prefixs;
             }
 
             // Template:Documentationの設定
@@ -675,7 +721,7 @@ namespace Honememo.Wptscs.Websites
 
             // MediaWiki固有の情報
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力
-            writer.WriteElementString("NamespacePath", this.namespacePath);
+            writer.WriteElementString("MetaApi", this.metaApi);
             writer.WriteElementString("ExportPath", this.exportPath);
             writer.WriteElementString("Redirect", this.redirect);
             writer.WriteElementString(
@@ -698,6 +744,17 @@ namespace Honememo.Wptscs.Websites
                 }
             }
 
+            // ウィキ間リンク
+            writer.WriteEndElement();
+            writer.WriteStartElement("InterwikiPrefixs");
+            if (this.interwikiPrefixs != null)
+            {
+                foreach (string prefix in this.interwikiPrefixs)
+                {
+                    writer.WriteElementString("Prefix", prefix);
+                }
+            }
+
             // Template:Documentationの設定
             writer.WriteEndElement();
             writer.WriteStartElement("DocumentationTemplates");
@@ -712,6 +769,167 @@ namespace Honememo.Wptscs.Websites
             writer.WriteEndElement();
             writer.WriteElementString("LinkInterwikiFormat", this.LinkInterwikiFormat);
             writer.WriteElementString("LangFormat", this.LangFormat);
+        }
+
+        #endregion
+
+        #region 内部処理用メソッド
+
+        /// <summary>
+        /// <see cref="MetaApi"/>を使用してサーバーからメタ情報を取得する。
+        /// </summary>
+        /// <exception cref="System.Net.WebException">通信エラー等が発生した場合。</exception>
+        /// <exception cref="InvalidDataException">APIから取得した情報が想定外のフォーマットの場合。</exception>
+        private void InitializeByMetaApi()
+        {
+            // APIのXMLデータをMediaWikiサーバーから取得
+            XmlDocument xml = new XmlDocument();
+            using (Stream reader = this.WebProxy.GetStream(new Uri(new Uri(this.Location), this.MetaApi)))
+            {
+                xml.Load(reader);
+            }
+
+            // ルートエレメントまで取得し、フォーマットをチェック
+            XmlElement rootElement = xml["api"];
+            if (rootElement == null)
+            {
+                // XMLは取得できたが空 or フォーマットが想定外
+                throw new InvalidDataException("parse failed : api element is not found");
+            }
+
+            // クエリーを取得
+            XmlElement queryElement = rootElement["query"];
+            if (queryElement == null)
+            {
+                // フォーマットが想定外
+                throw new InvalidDataException("parse failed : query element is not found");
+            }
+
+            // クエリー内のネームスペース・ネームスペースエイリアス、ウィキ間リンクを読み込み
+            this.namespaces = this.LoadNamespacesElement(queryElement);
+            this.interwikiPrefixCaches = this.LoadInterwikimapElement(queryElement);
+
+            // ウィキ間リンクは読み込んだ後に設定ファイルorプロパティの分をマージ
+            // ※ 設定ファイルの初期値は下記より作成。
+            //    http://svn.wikimedia.org/viewvc/mediawiki/trunk/phase3/maintenance/interwiki.sql?view=markup
+            //    APIに加えて設定ファイルも持っているのは、2012年2月現在APIから返ってこない
+            //    項目（wikipediaとかcommonsとか）が存在するため。
+            this.interwikiPrefixCaches.UnionWith(
+                this.interwikiPrefixs == null
+                ? Settings.Default.MediaWikiInterwikiPrefixs.Cast<string>()
+                : this.interwikiPrefixs);
+        }
+
+        /// <summary>
+        /// <see cref="MetaApi"/>から取得したXMLのうち、ネームスペースに関する部分を読み込む。
+        /// </summary>
+        /// <param name="queryElement">APIから取得したXML要素のうち、api→query部分のエレメント。</param>
+        /// <returns>読み込んだネームスペース情報。</returns>
+        /// <exception cref="InvalidDataException">namespacesエレメントが存在しない場合。</exception>
+        private IDictionary<int, IgnoreCaseSet> LoadNamespacesElement(XmlElement queryElement)
+        {
+            // ネームスペースブロックを取得、ネームスペースブロックまでは必須
+            XmlElement namespacesElement = queryElement["namespaces"];
+            if (namespacesElement == null)
+            {
+                // フォーマットが想定外
+                throw new InvalidDataException("parse failed : namespaces element is not found");
+            }
+
+            // ネームスペースを取得
+            IDictionary<int, IgnoreCaseSet> namespaces = new Dictionary<int, IgnoreCaseSet>();
+            foreach (XmlNode node in namespacesElement.ChildNodes)
+            {
+                XmlElement namespaceElement = node as XmlElement;
+                if (namespaceElement != null)
+                {
+                    try
+                    {
+                        int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
+                        IgnoreCaseSet values = new IgnoreCaseSet();
+                        values.Add(namespaceElement.InnerText);
+                        namespaces[id] = values;
+
+                        // あれば標準名も設定
+                        string canonical = namespaceElement.GetAttribute("canonical");
+                        if (!String.IsNullOrEmpty(canonical))
+                        {
+                            values.Add(canonical);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        // キャッチしているのは、万が一想定外の書式が返された場合に、完璧に動かなくなるのを防ぐため
+                        System.Diagnostics.Debug.WriteLine("MediaWiki.LoadNamespacesElement > 例外発生 : " + e);
+                    }
+                }
+            }
+
+            // ネームスペースエイリアスブロックを取得、無い場合も想定
+            XmlElement aliasesElement = queryElement["namespacealiases"];
+            if (aliasesElement != null)
+            {
+                // ネームスペースエイリアスを取得
+                foreach (XmlNode node in aliasesElement.ChildNodes)
+                {
+                    XmlElement namespaceElement = node as XmlElement;
+                    if (namespaceElement != null)
+                    {
+                        try
+                        {
+                            int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
+                            ISet<string> values = new HashSet<string>();
+                            if (namespaces.ContainsKey(id))
+                            {
+                                values = namespaces[id];
+                            }
+
+                            values.Add(namespaceElement.InnerText);
+                        }
+                        catch (Exception e)
+                        {
+                            // キャッチしているのは、万が一想定外の書式が返された場合に、完璧に動かなくなるのを防ぐため
+                            System.Diagnostics.Debug.WriteLine("MediaWiki.LoadNamespacesElement > 例外発生 : " + e);
+                        }
+                    }
+                }
+            }
+
+            return namespaces;
+        }
+
+        /// <summary>
+        /// <see cref="MetaApi"/>から取得したXMLのうち、ウィキ間リンクに関する部分を読み込む。
+        /// </summary>
+        /// <param name="queryElement">APIから取得したXML要素のうち、api→query部分のエレメント。</param>
+        /// <returns>読み込んだウィキ間リンク情報。</returns>
+        /// <exception cref="InvalidDataException">interwikimapエレメントが存在しない場合。</exception>
+        private IgnoreCaseSet LoadInterwikimapElement(XmlElement queryElement)
+        {
+            // ウィキ間リンクブロックを取得、ウィキ間リンクブロックまでは必須
+            XmlElement interwikimapElement = queryElement["interwikimap"];
+            if (interwikimapElement == null)
+            {
+                // フォーマットが想定外
+                throw new InvalidDataException("parse failed : interwikimap element is not found");
+            }
+
+            // ウィキ間リンクを取得
+            IgnoreCaseSet interwikiPrefixs = new IgnoreCaseSet();
+            foreach (XmlNode node in interwikimapElement.ChildNodes)
+            {
+                XmlElement interwikiElement = node as XmlElement;
+                if (interwikiElement != null)
+                {
+                    string prefix = interwikiElement.GetAttribute("prefix");
+                    if (!String.IsNullOrWhiteSpace(prefix))
+                    {
+                        interwikiPrefixs.Add(prefix);
+                    }
+                }
+            }
+
+            return interwikiPrefixs;
         }
 
         #endregion

@@ -101,10 +101,10 @@ namespace Honememo.Wptscs.Logics
 
             // MediaWiki関連の一部要素は独自に整形して出力
             logger.Clear();
-            logger.AddSource(new MediaWikiLink("記事名") { Section = "セクション", Code = "ja" });
+            logger.AddSource(new MediaWikiLink("記事名") { Section = "セクション", Interwiki = "ja" });
             Assert.AreEqual("[[記事名]] → ", logger.ToString());
             logger.Clear();
-            logger.AddSource(new MediaWikiTemplate("記事名") { Section = "セクション", Code = "ja" });
+            logger.AddSource(new MediaWikiTemplate("記事名") { Section = "セクション", Interwiki = "ja" });
             Assert.AreEqual("{{記事名}} → ", logger.ToString());
 
             // 見出しの場合、右矢印が出ない＆直前に空行が入る
@@ -115,7 +115,7 @@ namespace Honememo.Wptscs.Logics
             // いずれのケースでも、親クラスにある改行されていなければ改行は行われる
             logger.Clear();
             logger.Log = "test";
-            logger.AddSource(new MediaWikiLink("記事名") { Section = "セクション", Code = "ja" });
+            logger.AddSource(new MediaWikiLink("記事名") { Section = "セクション", Interwiki = "ja" });
             Assert.AreEqual("test" + Environment.NewLine + "[[記事名]] → ", logger.ToString());
             logger.AddSource(new MediaWikiHeading { ParsedString = "==見出し==" });
             Assert.AreEqual("test" + Environment.NewLine + "[[記事名]] → " + Environment.NewLine + Environment.NewLine + "==見出し==", logger.ToString());
@@ -140,10 +140,10 @@ namespace Honememo.Wptscs.Logics
 
             // MediaWiki関連の一部要素は独自に整形して出力
             logger.Clear();
-            logger.AddAlias(new MediaWikiLink("記事名") { Section = "セクション", Code = "ja" });
+            logger.AddAlias(new MediaWikiLink("記事名") { Section = "セクション", Interwiki = "ja" });
             Assert.AreEqual("リダイレクト [[記事名]] → ", logger.ToString());
             logger.Clear();
-            logger.AddAlias(new MediaWikiTemplate("記事名") { Section = "セクション", Code = "ja" });
+            logger.AddAlias(new MediaWikiTemplate("記事名") { Section = "セクション", Interwiki = "ja" });
             Assert.AreEqual("リダイレクト {{記事名}} → ", logger.ToString());
 
             // 直前のログが見出しの場合矢印を出力、その後リダイレクトを出力
@@ -180,10 +180,10 @@ namespace Honememo.Wptscs.Logics
 
             // MediaWiki関連の一部要素は独自に整形して出力
             logger.Clear();
-            logger.AddDestination(new MediaWikiLink("記事名") { Section = "セクション", Code = "ja" });
+            logger.AddDestination(new MediaWikiLink("記事名") { Section = "セクション", Interwiki = "ja" });
             Assert.AreEqual("[[記事名]]" + Environment.NewLine, logger.ToString());
             logger.Clear();
-            logger.AddDestination(new MediaWikiTemplate("記事名") { Section = "セクション", Code = "ja" }, true);
+            logger.AddDestination(new MediaWikiTemplate("記事名") { Section = "セクション", Interwiki = "ja" }, true);
             Assert.AreEqual("{{記事名}} ※キャッシュ" + Environment.NewLine, logger.ToString());
 
             // 直前のログが見出しの場合矢印を出力、その後独自に整形した変換先を出力

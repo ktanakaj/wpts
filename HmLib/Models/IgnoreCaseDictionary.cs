@@ -3,7 +3,7 @@
 //      大文字小文字を区別しないIDictionary実装のラッパークラスソース</summary>
 //
 // <copyright file="IgnoreCaseDictionary.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -15,7 +15,7 @@ namespace Honememo.Models
     using Honememo.Utilities;
 
     /// <summary>
-    /// 大文字小文字を区別しない<c>IDictionary</c>実装のラッパークラスです。
+    /// 大文字小文字を区別しない<see cref="IDictionary&lt;TKey, TValue&gt;"/>実装のラッパークラスです。
     /// </summary>
     /// <typeparam name="TValue">ディクショナリ内の値の型。</typeparam>
     /// <remarks>
@@ -39,17 +39,18 @@ namespace Honememo.Models
         #region コンストラクタ
 
         /// <summary>
-        /// 指定された<c>IDictionary</c>インスタンスをラップするインスタンスを生成。
+        /// 指定された<see cref="IDictionary&lt;TKey, TValue&gt;"/>インスタンスをラップするインスタンスを生成。
         /// </summary>
         /// <param name="dictionary">ラップされるインスタンス。</param>
-        /// <remarks>インスタンスに大文字小文字違いのキー値が格納されている場合、動作は保障しない。</remarks>
+        /// <exception cref="ArgumentNullException"><para>dictionary</para>が<c>null</c>の場合。</exception>
+        /// <remarks><para>dictionary</para>に既に大文字小文字違いのキー値が格納されている場合、動作は保障しない。</remarks>
         public IgnoreCaseDictionary(IDictionary<string, TValue> dictionary)
         {
             this.Dictionary = dictionary;
         }
 
         /// <summary>
-        /// 空の<c>Dictionary</c>インスタンスをラップするインスタンスを生成。
+        /// 空の<see cref="System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;"/>インスタンスをラップするインスタンスを生成。
         /// </summary>
         public IgnoreCaseDictionary()
             : this(new Dictionary<string, TValue>())
@@ -63,6 +64,7 @@ namespace Honememo.Models
         /// <summary>
         /// ラップする<c>IDictionary</c>実装クラスのインスタンス。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <remarks>
         /// getしたインスタンスへの変更はこのクラスに反映されない。
         /// 必要ならsetで再度インスタンスを読み込ませること。
@@ -162,21 +164,19 @@ namespace Honememo.Models
         /// </summary>
         /// <param name="key">取得または設定する要素のキー。</param>
         /// <returns>指定したキーを持つ要素。</returns>
+        /// <exception cref="ArgumentNullException"><para>key</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="KeyNotFoundException">プロパティが取得されたが、コレクション内に <para>key</para> が存在しない場合。</exception>
         public TValue this[string key]
         {
             get
             {
                 // 小文字に変換し、マップを経てラップインスタンスにアクセス
-                // ※ nullの場合は事前にArgumentNullExceptionを投げる
-                //    またKeyがなければKeyNotFoundExceptionが飛ぶはず
                 return this.Dictionary[this.KeyMap[Validate.NotNull(key).ToLower()]];
             }
 
             set
             {
                 // 小文字に変換し、マップを経てラップインスタンスにアクセス
-                // ※ nullの場合は事前にArgumentNullExceptionを投げる
-                //    またKeyがなければKeyNotFoundExceptionが飛ぶはず
                 string k = Validate.NotNull(key).ToLower();
                 string orgKey;
                 if (this.KeyMap.TryGetValue(k, out orgKey))
@@ -200,10 +200,11 @@ namespace Honememo.Models
         /// </summary>
         /// <param name="key">追加する要素のキーとして使用するオブジェクト。</param>
         /// <param name="value">追加する要素の値として使用するオブジェクト。</param>
+        /// <exception cref="ArgumentNullException"><para>key</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException">同じキーを持つ要素が既に存在する場合。</exception>
         public void Add(string key, TValue value)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            // ※ nullの場合は事前にArgumentNullExceptionを投げる
             string k = Validate.NotNull(key).ToLower();
             this.KeyMap.Add(k, key);
             this.Dictionary.Add(key, value);
@@ -214,11 +215,11 @@ namespace Honememo.Models
         /// </summary>
         /// <param name="key"><c>IgnoreCaseDictionary</c>内で検索されるキー。</param>
         /// <returns>指定したキーを持つ要素を<c>IgnoreCaseDictionary</c>が保持している場合は<c>true</c>。それ以外の場合は<c>false</c>。</returns>
+        /// <exception cref="ArgumentNullException"><para>key</para>が<c>null</c>の場合。</exception>
         public bool ContainsKey(string key)
         {
             // 同期が取れていることを前提に、キーマップのみ確認する
             // （ラップインスタンスまで見ると、他の例外が起こりえて面倒なため）
-            // ※ nullの場合は事前にArgumentNullExceptionを投げる
             return this.KeyMap.ContainsKey(Validate.NotNull(key).ToLower());
         }
 
@@ -230,10 +231,10 @@ namespace Honememo.Models
         /// 要素が正常に削除された場合は<c>true</c>。それ以外の場合は<c>false</c>。
         /// このメソッドは、<c>key</c>が元の<c>IDictionary</c>に見つからなかった場合にも<c>false</c>を返します。
         /// </returns>
+        /// <exception cref="ArgumentNullException"><para>key</para>が<c>null</c>の場合。</exception>
         public bool Remove(string key)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            // ※ nullの場合は事前にArgumentNullExceptionを投げる
             string k = Validate.NotNull(key).ToLower();
             string orgKey;
             bool removed = false;
@@ -257,13 +258,13 @@ namespace Honememo.Models
         /// 指定したキーを持つ要素が<c>IDictionary</c>を実装するオブジェクトに格納されている場合は<c>true</c>。
         /// それ以外の場合は<c>false</c>。
         /// </returns>
+        /// <exception cref="ArgumentNullException"><para>key</para>が<c>null</c>の場合。</exception>
         public bool TryGetValue(string key, out TValue value)
         {
             // 返り値をそのクラスのデフォルト値で初期化
             value = default(TValue);
 
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            // ※ nullの場合は事前にArgumentNullExceptionを投げる
             string k = Validate.NotNull(key).ToLower();
             string orgKey;
             if (this.KeyMap.TryGetValue(k, out orgKey))
@@ -278,10 +279,10 @@ namespace Honememo.Models
         /// キーの大文字小文字を区別せず、ラップする<c>IDictionary</c>インスタンスの<c>Add</c>メソッドを呼び出す。
         /// </summary>
         /// <param name="item"><c>ICollection</c>に追加するオブジェクト。</param>
+        /// <exception cref="ArgumentNullException"><para>item.key</para>が<c>null</c>の場合。</exception>
         public void Add(KeyValuePair<string, TValue> item)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            // ※ nullの場合は事前にArgumentNullExceptionを投げる
             string k = Validate.NotNull(item.Key).ToLower();
             this.KeyMap.Add(k, item.Key);
             this.Dictionary.Add(item);
@@ -326,6 +327,9 @@ namespace Honememo.Models
         /// </summary>
         /// <param name="array"><c>ICollection</c>から要素がコピーされる1次元のArray。Arrayには、0から始まるインデックス番号が必要です。</param>
         /// <param name="arrayIndex">コピーの開始位置となる、arrayの0から始まるインデックス。</param>
+        /// <exception cref="ArgumentNullException"><para>array</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><para>arrayIndex</para>が0未満の場合。</exception>
+        /// <exception cref="ArgumentException">コピー元の<c>ICollection</c>の要素数が、コピー先の<para>array</para>の<para>arrayIndex</para>から最後までの領域を超えている場合。</exception>
         public void CopyTo(KeyValuePair<string, TValue>[] array, int arrayIndex)
         {
             // 入力値チェック
@@ -335,15 +339,16 @@ namespace Honememo.Models
                 throw new ArgumentOutOfRangeException("arrayIndex");
             }
 
-            if (array.Length >= arrayIndex)
+            if (array.Length - arrayIndex < this.Count)
             {
-                throw new ArgumentException("array.Length >= arrayIndex");
+                throw new ArgumentException("array.Length - arrayIndex < this.Count");
             }
 
-            // 渡された情報をコピーする
-            for (int i = arrayIndex; i < array.Length; i++)
+            // このコレクションが保持している情報をコピーする
+            int i = arrayIndex;
+            foreach (KeyValuePair<string, TValue> item in this)
             {
-                this[array[i].Key] = array[i].Value;
+                array[i++] = item;
             }
         }
 

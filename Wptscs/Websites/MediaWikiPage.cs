@@ -13,6 +13,7 @@ namespace Honememo.Wptscs.Websites
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Honememo.Models;
     using Honememo.Parsers;
     using Honememo.Utilities;
     using Honememo.Wptscs.Parsers;
@@ -136,7 +137,7 @@ namespace Honememo.Wptscs.Websites
 
         #endregion
         
-        #region 公開インスタンスメソッド
+        #region 公開メソッド
 
         /// <summary>
         /// 指定された言語コードへの言語間リンクを返す。
@@ -144,13 +145,13 @@ namespace Honememo.Wptscs.Websites
         /// <param name="code">言語コード。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        public string GetInterWiki(string code)
+        public string GetInterlanguage(string code)
         {
             // Textが設定されている場合のみ有効
             this.ValidateIncomplete();
 
             // 記事を解析し、その結果から言語間リンクを探索
-            return this.GetInterWiki(code, new MediaWikiParser(this.Website).Parse(this.Text));
+            return this.GetInterlanguage(code, new MediaWikiParser(this.Website).Parse(this.Text));
         }
 
         /// <summary>
@@ -169,7 +170,7 @@ namespace Honememo.Wptscs.Websites
         /// <returns><c>true</c> テンプレート。</returns>
         public bool IsTemplate()
         {
-            // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
+            // ページ名がカテゴリー（Category:等で始まる）かをチェック
             return this.IsNamespacePage(this.Website.TemplateNamespace);
         }
 
@@ -179,7 +180,7 @@ namespace Honememo.Wptscs.Websites
         /// <returns><c>true</c> カテゴリー。</returns>
         public bool IsCategory()
         {
-            // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
+            // ページ名がカテゴリー（Category:等で始まる）かをチェック
             return this.IsNamespacePage(this.Website.CategoryNamespace);
         }
 
@@ -189,7 +190,7 @@ namespace Honememo.Wptscs.Websites
         /// <returns><c>true</c> 画像。</returns>
         public bool IsFile()
         {
-            // 指定されたページ名がファイル（Image:等で始まる）かをチェック
+            // ページ名がファイル（Image:等で始まる）かをチェック
             return this.IsNamespacePage(this.Website.FileNamespace);
         }
 
@@ -199,48 +200,32 @@ namespace Honememo.Wptscs.Websites
         /// <returns><c>true</c> 標準名前空間。</returns>
         public bool IsMain()
         {
-            // 指定されたページ名が標準名前空間以外の名前空間（Wikipedia:等で始まる）かをチェック
-            string title = this.Title.ToLower();
-            foreach (IList<string> prefixes in this.Website.Namespaces.Values)
-            {
-                foreach (string prefix in prefixes)
-                {
-                    if (title.StartsWith(prefix.ToLower() + ":"))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            // ページ名が標準名前空間以外のなんらかの名前空間かをチェック
+            return !this.Website.IsNamespace(this.Title);
         }
 
         #endregion
 
-        #region 内部処理用インスタンスメソッド
+        #region 内部処理用メソッド
 
         /// <summary>
         /// ページが指定された番号の名前空間に所属するかをチェック。
         /// </summary>
         /// <param name="id">名前空間のID。</param>
-        /// <returns><c>true</c> 所属する。</returns>
+        /// <returns>所属する場合<c>true</c>。</returns>
+        /// <remarks>大文字小文字は区別しない。</remarks>
         protected bool IsNamespacePage(int id)
         {
             // 指定された記事名がカテゴリー（Category:等で始まる）かをチェック
-            IList<string> prefixes = this.Website.Namespaces[id];
-            if (prefixes != null)
+            int index = this.Title.IndexOf(':');
+            if (index < 0)
             {
-                string title = this.Title.ToLower();
-                foreach (string prefix in prefixes)
-                {
-                    if (title.StartsWith(prefix.ToLower() + ":"))
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
 
-            return false;
+            string title = this.Title.Remove(index);
+            IgnoreCaseSet prefixes = this.Website.Namespaces[id];
+            return prefixes != null && prefixes.Contains(title);
         }
 
         /// <summary>
@@ -264,12 +249,12 @@ namespace Honememo.Wptscs.Websites
         /// <param name="element">要素。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合は空。</returns>
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        private string GetInterWiki(string code, IElement element)
+        private string GetInterlanguage(string code, IElement element)
         {
             if (element is MediaWikiTemplate)
             {
                 // Documentationテンプレートがある場合は、その中を探索
-                string interWiki = this.GetDocumentationInterWiki((MediaWikiTemplate)element, code);
+                string interWiki = this.GetDocumentationInterlanguage((MediaWikiTemplate)element, code);
                 if (!String.IsNullOrEmpty(interWiki))
                 {
                     return interWiki;
@@ -279,7 +264,7 @@ namespace Honememo.Wptscs.Websites
             {
                 // 指定言語への言語間リンクの場合、内容を取得し、処理終了
                 MediaWikiLink link = (MediaWikiLink)element;
-                if (link.Code == code && !link.IsColon)
+                if (link.Interwiki == code && !link.IsColon)
                 {
                     return link.Title;
                 }
@@ -289,7 +274,7 @@ namespace Honememo.Wptscs.Websites
                 // 子要素を持つ場合、再帰的に探索
                 foreach (IElement e in (IEnumerable<IElement>)element)
                 {
-                    string interWiki = this.GetInterWiki(code, e);
+                    string interWiki = this.GetInterlanguage(code, e);
                     if (!String.IsNullOrEmpty(interWiki))
                     {
                         return interWiki;
@@ -308,7 +293,7 @@ namespace Honememo.Wptscs.Websites
         /// <param name="code">言語コード。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合またはパラメータが対象外の場合は空。</returns>
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        private string GetDocumentationInterWiki(MediaWikiTemplate template, string code)
+        private string GetDocumentationInterlanguage(MediaWikiTemplate template, string code)
         {
             // Documentationテンプレートのリンクかを確認
             if (!this.IsDocumentationTemplate(template.Title))
@@ -319,7 +304,7 @@ namespace Honememo.Wptscs.Websites
             // インライン・コンテンツの可能性があるため、先にパラメータを再帰的に探索
             foreach (IElement e in template.PipeTexts)
             {
-                string interWiki = this.GetInterWiki(code, e);
+                string interWiki = this.GetInterlanguage(code, e);
                 if (!String.IsNullOrEmpty(interWiki))
                 {
                     return interWiki;
@@ -361,7 +346,7 @@ namespace Honememo.Wptscs.Websites
 
             if (subpage != null)
             {
-                string interWiki = subpage.GetInterWiki(code);
+                string interWiki = subpage.GetInterlanguage(code);
                 if (!String.IsNullOrEmpty(interWiki))
                 {
                     return interWiki;

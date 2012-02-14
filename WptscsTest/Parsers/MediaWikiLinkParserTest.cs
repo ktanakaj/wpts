@@ -40,7 +40,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testtitle", link.Title);
             Assert.IsNull(link.Section);
             Assert.AreEqual(0, link.PipeTexts.Count);
-            Assert.IsNull(link.Code);
+            Assert.IsNull(link.Interwiki);
             Assert.IsFalse(link.IsColon);
 
             // タイトルとセクション
@@ -49,7 +49,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testtitle", link.Title);
             Assert.AreEqual("testsection", link.Section);
             Assert.AreEqual(0, link.PipeTexts.Count);
-            Assert.IsNull(link.Code);
+            Assert.IsNull(link.Interwiki);
             Assert.IsFalse(link.IsColon);
 
             // タイトルとセクションとパイプ後の文字列
@@ -60,7 +60,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(2, link.PipeTexts.Count);
             Assert.AreEqual("testpipe1", link.PipeTexts[0].ToString());
             Assert.AreEqual("testpipe2", link.PipeTexts[1].ToString());
-            Assert.IsNull(link.Code);
+            Assert.IsNull(link.Interwiki);
             Assert.IsFalse(link.IsColon);
 
             // タイトルとセクションとパイプ後の文字列とコード
@@ -71,19 +71,8 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(2, link.PipeTexts.Count);
             Assert.AreEqual("testpipe1", link.PipeTexts[0].ToString());
             Assert.AreEqual("testpipe2", link.PipeTexts[1].ToString());
-            Assert.AreEqual("en", link.Code);
+            Assert.AreEqual("en", link.Interwiki);
             Assert.IsFalse(link.IsColon);
-
-            // タイトルとセクションとパイプ後の文字列とコードとコロン
-            Assert.IsTrue(parser.TryParse("[[:en:testtitle#testsection|testpipe1|testpipe2]]", out element));
-            link = (MediaWikiLink)element;
-            Assert.AreEqual("testtitle", link.Title);
-            Assert.AreEqual("testsection", link.Section);
-            Assert.AreEqual(2, link.PipeTexts.Count);
-            Assert.AreEqual("testpipe1", link.PipeTexts[0].ToString());
-            Assert.AreEqual("testpipe2", link.PipeTexts[1].ToString());
-            Assert.AreEqual("en", link.Code);
-            Assert.IsTrue(link.IsColon);
 
             // コメントはどこにあってもOK
             // TODO: [<!--test-->[タイトル]] みたいなのもMediaWiki上では認識されるが、2012年1月現在未対応
@@ -167,7 +156,7 @@ namespace Honememo.Wptscs.Parsers
             link = (MediaWikiLink)element;
             Assert.AreEqual("Category:test", link.Title);
             Assert.AreEqual(0, link.PipeTexts.Count);
-            Assert.IsNull(link.Code);
+            Assert.IsNull(link.Interwiki);
             Assert.IsFalse(link.IsColon);
 
             // カテゴリソート名指定
@@ -176,7 +165,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("Category:test", link.Title);
             Assert.AreEqual(1, link.PipeTexts.Count);
             Assert.AreEqual("てすと", link.PipeTexts[0].ToString());
-            Assert.IsNull(link.Code);
+            Assert.IsNull(link.Interwiki);
             Assert.IsFalse(link.IsColon);
 
             // カテゴリにならないような指定
@@ -184,7 +173,7 @@ namespace Honememo.Wptscs.Parsers
             link = (MediaWikiLink)element;
             Assert.AreEqual("Category:test", link.Title);
             Assert.AreEqual(0, link.PipeTexts.Count);
-            Assert.IsNull(link.Code);
+            Assert.IsNull(link.Interwiki);
             Assert.IsTrue(link.IsColon);
 
             // ファイル、入れ子もあり
@@ -200,7 +189,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual("テスト", list[0].ToString());
             Assert.AreEqual("[[画像]]", list[1].ToString());
-            Assert.IsNull(link.Code);
+            Assert.IsNull(link.Interwiki);
         }
 
         /// <summary>
@@ -231,6 +220,52 @@ namespace Honememo.Wptscs.Parsers
             link = (MediaWikiLink)element;
             Assert.AreEqual("../../subpage", link.Title);
             Assert.IsFalse(link.IsSubpage);
+        }
+
+        /// <summary>
+        /// TryParseメソッドテストケース（ウィキ間リンク）。
+        /// </summary>
+        [Test]
+        public void TestTryParseInterwiki()
+        {
+            IElement element;
+            MediaWikiLink link;
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+
+            // タイトルとセクションとパイプ後の文字列とウィキ間リンクとコロンの全部入り
+            Assert.IsTrue(parser.TryParse("[[:en:testtitle#testsection|testpipe1|testpipe2]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("testtitle", link.Title);
+            Assert.AreEqual("testsection", link.Section);
+            Assert.AreEqual(2, link.PipeTexts.Count);
+            Assert.AreEqual("testpipe1", link.PipeTexts[0].ToString());
+            Assert.AreEqual("testpipe2", link.PipeTexts[1].ToString());
+            Assert.AreEqual("en", link.Interwiki);
+            Assert.IsTrue(link.IsColon);
+
+            // 普通の言語間リンク
+            Assert.IsTrue(parser.TryParse("[[ja:日本語版記事名]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("日本語版記事名", link.Title);
+            Assert.AreEqual("ja", link.Interwiki);
+
+            // ウィキ間リンク
+            Assert.IsTrue(parser.TryParse("[[commons:コモンズ記事名]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("コモンズ記事名", link.Title);
+            Assert.AreEqual("commons", link.Interwiki);
+
+            // ウィキ間リンクの構文だが名前空間と被るためそうならないもの
+            Assert.IsTrue(parser.TryParse("[[wikipedia:ウィキペディア記事名]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("wikipedia:ウィキペディア記事名", link.Title);
+            Assert.IsNull(link.Interwiki);
+
+            // :が含まれるだけの普通の記事（1.10以前のバージョンでは誤判定されていた）
+            Assert.IsTrue(parser.TryParse("[[Marathon 2: Durandal]]", out element));
+            link = (MediaWikiLink)element;
+            Assert.AreEqual("Marathon 2: Durandal", link.Title);
+            Assert.IsNull(link.Interwiki);
         }
 
         #endregion

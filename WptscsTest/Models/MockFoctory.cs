@@ -3,7 +3,7 @@
 //      モックオブジェクト生成処理をまとめたファクトリークラスソース</summary>
 //
 // <copyright file="MockFactory.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -110,7 +110,7 @@ namespace Honememo.Wptscs.Models
             b.Path = Path.GetFullPath(MockFactory.TestMediaWikiDir) + "\\";
             wiki.Location = new Uri(b.Uri, lang + "/").ToString();
             wiki.ExportPath = "$1.xml";
-            wiki.NamespacePath = "_api.xml";
+            wiki.MetaApi = "_api.xml";
 
             return wiki;
         }

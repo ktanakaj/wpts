@@ -129,9 +129,9 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 言語コード・他プロジェクトコードの付加
-            if (!String.IsNullOrEmpty(this.Code))
+            if (!String.IsNullOrEmpty(this.Interwiki))
             {
-                b.Append(this.Code);
+                b.Append(this.Interwiki);
                 b.Append(':');
             }
 

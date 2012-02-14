@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\IgnoreCaseDictionary.cs" />
+    <Compile Include="Models\IgnoreCaseSet.cs" />
     <Compile Include="Parsers\IElement.cs" />
     <Compile Include="Parsers\IParser.cs" />
     <Compile Include="Parsers\ListElement.cs" />

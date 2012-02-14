@@ -170,8 +170,8 @@
     <Setting Name="ConfigurationCompatible" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1.11.0.0</Value>
     </Setting>
-    <Setting Name="MediaWikiNamespacePath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases</Value>
+    <Setting Name="MediaWikiMetaApi" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases|interwikimap</Value>
     </Setting>
     <Setting Name="IsUpgraded" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -184,6 +184,106 @@
     </Setting>
     <Setting Name="ConnectRetryTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2000</Value>
+    </Setting>
+    <Setting Name="MediaWikiInterwikiPrefixs" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;acronym&lt;/string&gt;
+  &lt;string&gt;advogato&lt;/string&gt;
+  &lt;string&gt;annotationwiki&lt;/string&gt;
+  &lt;string&gt;arxiv&lt;/string&gt;
+  &lt;string&gt;c2find&lt;/string&gt;
+  &lt;string&gt;cache&lt;/string&gt;
+  &lt;string&gt;commons&lt;/string&gt;
+  &lt;string&gt;corpknowpedia&lt;/string&gt;
+  &lt;string&gt;dictionary&lt;/string&gt;
+  &lt;string&gt;disinfopedia&lt;/string&gt;
+  &lt;string&gt;docbook&lt;/string&gt;
+  &lt;string&gt;doi&lt;/string&gt;
+  &lt;string&gt;drumcorpswiki&lt;/string&gt;
+  &lt;string&gt;dwjwiki&lt;/string&gt;
+  &lt;string&gt;emacswiki&lt;/string&gt;
+  &lt;string&gt;elibre&lt;/string&gt;
+  &lt;string&gt;foldoc&lt;/string&gt;
+  &lt;string&gt;foxwiki&lt;/string&gt;
+  &lt;string&gt;freebsdman&lt;/string&gt;
+  &lt;string&gt;gej&lt;/string&gt;
+  &lt;string&gt;gentoo-wiki&lt;/string&gt;
+  &lt;string&gt;google&lt;/string&gt;
+  &lt;string&gt;googlegroups&lt;/string&gt;
+  &lt;string&gt;hammondwiki&lt;/string&gt;
+  &lt;string&gt;hewikisource&lt;/string&gt;
+  &lt;string&gt;hrwiki&lt;/string&gt;
+  &lt;string&gt;imdb&lt;/string&gt;
+  &lt;string&gt;jargonfile&lt;/string&gt;
+  &lt;string&gt;jspwiki&lt;/string&gt;
+  &lt;string&gt;keiki&lt;/string&gt;
+  &lt;string&gt;kmwiki&lt;/string&gt;
+  &lt;string&gt;linuxwiki&lt;/string&gt;
+  &lt;string&gt;lojban&lt;/string&gt;
+  &lt;string&gt;lqwiki&lt;/string&gt;
+  &lt;string&gt;lugkr&lt;/string&gt;
+  &lt;string&gt;mathsongswiki&lt;/string&gt;
+  &lt;string&gt;meatball&lt;/string&gt;
+  &lt;string&gt;mediazilla&lt;/string&gt;
+  &lt;string&gt;mediawikiwiki&lt;/string&gt;
+  &lt;string&gt;memoryalpha&lt;/string&gt;
+  &lt;string&gt;metawiki&lt;/string&gt;
+  &lt;string&gt;metawikipedia&lt;/string&gt;
+  &lt;string&gt;moinmoin&lt;/string&gt;
+  &lt;string&gt;mozillawiki&lt;/string&gt;
+  &lt;string&gt;mw&lt;/string&gt;
+  &lt;string&gt;oeis&lt;/string&gt;
+  &lt;string&gt;openfacts&lt;/string&gt;
+  &lt;string&gt;openwiki&lt;/string&gt;
+  &lt;string&gt;patwiki&lt;/string&gt;
+  &lt;string&gt;pmeg&lt;/string&gt;
+  &lt;string&gt;ppr&lt;/string&gt;
+  &lt;string&gt;pythoninfo&lt;/string&gt;
+  &lt;string&gt;rfc&lt;/string&gt;
+  &lt;string&gt;s23wiki&lt;/string&gt;
+  &lt;string&gt;seattlewiki&lt;/string&gt;
+  &lt;string&gt;seattlewireless&lt;/string&gt;
+  &lt;string&gt;senseislibrary&lt;/string&gt;
+  &lt;string&gt;slashdot&lt;/string&gt;
+  &lt;string&gt;sourceforge&lt;/string&gt;
+  &lt;string&gt;squeak&lt;/string&gt;
+  &lt;string&gt;susning&lt;/string&gt;
+  &lt;string&gt;svgwiki&lt;/string&gt;
+  &lt;string&gt;tavi&lt;/string&gt;
+  &lt;string&gt;tejo&lt;/string&gt;
+  &lt;string&gt;tmbw&lt;/string&gt;
+  &lt;string&gt;tmnet&lt;/string&gt;
+  &lt;string&gt;tmwiki&lt;/string&gt;
+  &lt;string&gt;theopedia&lt;/string&gt;
+  &lt;string&gt;twiki&lt;/string&gt;
+  &lt;string&gt;uea&lt;/string&gt;
+  &lt;string&gt;unreal&lt;/string&gt;
+  &lt;string&gt;usemod&lt;/string&gt;
+  &lt;string&gt;vinismo&lt;/string&gt;
+  &lt;string&gt;webseitzwiki&lt;/string&gt;
+  &lt;string&gt;why&lt;/string&gt;
+  &lt;string&gt;wiki&lt;/string&gt;
+  &lt;string&gt;wikia&lt;/string&gt;
+  &lt;string&gt;wikibooks&lt;/string&gt;
+  &lt;string&gt;wikicities&lt;/string&gt;
+  &lt;string&gt;wikif1&lt;/string&gt;
+  &lt;string&gt;wikihow&lt;/string&gt;
+  &lt;string&gt;wikinfo&lt;/string&gt;
+  &lt;string&gt;wikimedia&lt;/string&gt;
+  &lt;string&gt;wikinews&lt;/string&gt;
+  &lt;string&gt;wikiquote&lt;/string&gt;
+  &lt;string&gt;wikipedia&lt;/string&gt;
+  &lt;string&gt;wikisource&lt;/string&gt;
+  &lt;string&gt;wikispecies&lt;/string&gt;
+  &lt;string&gt;wikitravel&lt;/string&gt;
+  &lt;string&gt;wikiversity&lt;/string&gt;
+  &lt;string&gt;wikt&lt;/string&gt;
+  &lt;string&gt;wiktionary&lt;/string&gt;
+  &lt;string&gt;wlug&lt;/string&gt;
+  &lt;string&gt;zwiki&lt;/string&gt;
+  &lt;string&gt;zzz wiki&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

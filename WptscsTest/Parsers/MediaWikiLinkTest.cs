@@ -88,16 +88,16 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// Codeプロパティテストケース。
+        /// Interwikiプロパティテストケース。
         /// </summary>
         [Test]
-        public void TestCode()
+        public void TestInterwiki()
         {
             MediaWikiLink element = new MediaWikiLink();
 
-            Assert.IsNull(element.Code);
-            element.Code = "test";
-            Assert.AreEqual("test", element.Code);
+            Assert.IsNull(element.Interwiki);
+            element.Interwiki = "test";
+            Assert.AreEqual("test", element.Interwiki);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testtitle#testsection", element.GetLinkString());
 
             // タイトルとセクションとパイプ後の文字列とコード
-            element.Code = "en";
+            element.Interwiki = "en";
             Assert.AreEqual("en:testtitle#testsection", element.GetLinkString());
 
             // タイトルとセクションとパイプ後の文字列とコードとコロン
@@ -157,7 +157,7 @@ namespace Honememo.Wptscs.Parsers
             element.PipeTexts.Add(new TextElement("thumb"));
             element.PipeTexts.Add(new TextElement("right"));
             element.PipeTexts.Add(new TextElement("[[ケプラー22b]]（想像図）"));
-            element.Code = null;
+            element.Interwiki = null;
             element.IsColon = false;
             Assert.AreEqual("ファイル:Kepler22b-artwork.jpg", element.GetLinkString());
         }
@@ -190,7 +190,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("[[testtitle#testsection|testpipe1|testpipe2]]", element.ToString());
 
             // タイトルとセクションとパイプ後の文字列とコード
-            element.Code = "en";
+            element.Interwiki = "en";
             Assert.AreEqual("[[en:testtitle#testsection|testpipe1|testpipe2]]", element.ToString());
 
             // タイトルとセクションとパイプ後の文字列とコードとコロン
@@ -204,7 +204,7 @@ namespace Honememo.Wptscs.Parsers
             element.PipeTexts.Add(new TextElement("thumb"));
             element.PipeTexts.Add(new TextElement("right"));
             element.PipeTexts.Add(new TextElement("[[ケプラー22b]]（想像図）"));
-            element.Code = null;
+            element.Interwiki = null;
             element.IsColon = false;
             Assert.AreEqual("[[ファイル:Kepler22b-artwork.jpg|thumb|right|[[ケプラー22b]]（想像図）]]", element.ToString());
         }
