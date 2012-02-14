@@ -70,57 +70,57 @@ namespace Honememo.Wptscs.Websites
 
         #endregion
 
-        // TODO: いっぱい足らない
+        // TODO: 試験項目不足
         
-        #region 公開インスタンスメソッドテストケース
+        #region 公開メソッドテストケース
 
         /// <summary>
-        /// GetInterWikiメソッドテストケース（通常ページ）。
+        /// GetInterlanguageメソッドテストケース（通常ページ）。
         /// </summary>
         [Test]
-        public void TestGetInterWiki()
+        public void TestGetInterlanguage()
         {
             // 普通のページ
             MediaWikiPage page = new MediaWikiPage(new DummySite(new Language("en")), "TestTitle", "TestText\n"
                 + " [[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
-            Assert.AreEqual("テストページ", page.GetInterWiki("ja"));
-            Assert.AreEqual("Test_Fr", page.GetInterWiki("fr"));
-            Assert.IsEmpty(page.GetInterWiki("de"));
-            Assert.IsEmpty(page.GetInterWiki("ru"));
-            Assert.IsEmpty(page.GetInterWiki("zh"));
+            Assert.AreEqual("テストページ", page.GetInterlanguage("ja"));
+            Assert.AreEqual("Test_Fr", page.GetInterlanguage("fr"));
+            Assert.IsEmpty(page.GetInterlanguage("de"));
+            Assert.IsEmpty(page.GetInterlanguage("ru"));
+            Assert.IsEmpty(page.GetInterlanguage("zh"));
         }
 
         /// <summary>
-        /// GetInterWikiメソッドテストケース（通常ページ実データ使用）。
+        /// GetInterlanguageメソッドテストケース（通常ページ実データ使用）。
         /// </summary>
         [Test, Timeout(20000)]
-        public void TestGetInterWikiDiscoveryChannel()
+        public void TestGetInterlanguageDiscoveryChannel()
         {
             MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Discovery Channel");
-            Assert.AreEqual("ディスカバリーチャンネル", page.GetInterWiki("ja"));
-            Assert.AreEqual("Discovery Channel (Italia)", page.GetInterWiki("it"));
-            Assert.AreEqual("Discovery Channel", page.GetInterWiki("simple"));
-            Assert.AreEqual("Discovery (телеканал)", page.GetInterWiki("ru"));
-            Assert.IsEmpty(page.GetInterWiki("io"));
+            Assert.AreEqual("ディスカバリーチャンネル", page.GetInterlanguage("ja"));
+            Assert.AreEqual("Discovery Channel (Italia)", page.GetInterlanguage("it"));
+            Assert.AreEqual("Discovery Channel", page.GetInterlanguage("simple"));
+            Assert.AreEqual("Discovery (телеканал)", page.GetInterlanguage("ru"));
+            Assert.IsEmpty(page.GetInterlanguage("io"));
         }
 
         /// <summary>
-        /// GetInterWikiメソッドテストケース（テンプレートページ実データ使用）。
+        /// GetInterlanguageメソッドテストケース（テンプレートページ実データ使用）。
         /// </summary>
         [Test, Timeout(20000)]
-        public void TestGetInterWikiPlanetboxBegin()
+        public void TestGetInterlanguagePlanetboxBegin()
         {
             MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Template:Planetbox begin");
-            Assert.AreEqual("Template:Planetbox begin", page.GetInterWiki("ja"));
-            Assert.AreEqual("Шаблон:Planetbox begin", page.GetInterWiki("ru"));
-            Assert.IsEmpty(page.GetInterWiki("zh"));
+            Assert.AreEqual("Template:Planetbox begin", page.GetInterlanguage("ja"));
+            Assert.AreEqual("Шаблон:Planetbox begin", page.GetInterlanguage("ru"));
+            Assert.IsEmpty(page.GetInterlanguage("zh"));
         }
 
         /// <summary>
-        /// GetInterWikiメソッドテストケース（Template:Documentation使用ページ）。
+        /// GetInterlanguageメソッドテストケース（Template:Documentation使用ページ）。
         /// </summary>
         [Test]
-        public void TestGetInterWikiDocumentation()
+        public void TestGetInterlanguageDocumentation()
         {
             // Template:Documentation を使ってるページ
             MediaWiki site = new DummySite(new Language("en"));
@@ -128,11 +128,11 @@ namespace Honememo.Wptscs.Websites
             site.DocumentationTemplateDefaultPage = "/doc";
             MediaWikiPage page = new MediaWikiPage(site, "Template:Test", "TestText{{Documentation}}");
 
-            Assert.AreEqual("テストページ", page.GetInterWiki("ja"));
-            Assert.AreEqual("Test_Fr", page.GetInterWiki("fr"));
-            Assert.IsEmpty(page.GetInterWiki("de"));
-            Assert.IsEmpty(page.GetInterWiki("ru"));
-            Assert.IsEmpty(page.GetInterWiki("zh"));
+            Assert.AreEqual("テストページ", page.GetInterlanguage("ja"));
+            Assert.AreEqual("Test_Fr", page.GetInterlanguage("fr"));
+            Assert.IsEmpty(page.GetInterlanguage("de"));
+            Assert.IsEmpty(page.GetInterlanguage("ru"));
+            Assert.IsEmpty(page.GetInterlanguage("zh"));
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Honememo.Wptscs.Websites
 
         #endregion
 
-        #region 内部処理用インスタンスメソッドテストケース
+        #region 内部処理用メソッドテストケース
 
         // 非公開メソッドについてはprotected以上、またはやりたい部分だけ実施
 

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\IgnoreCaseDictionaryTest.cs" />
+    <Compile Include="Models\IgnoreCaseSetTest.cs" />
     <Compile Include="Parsers\XmlCommentElementTest.cs" />
     <Compile Include="Parsers\ListElementTest.cs" />
     <Compile Include="Parsers\TextElementTest.cs" />

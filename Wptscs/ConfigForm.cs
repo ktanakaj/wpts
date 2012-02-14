@@ -733,7 +733,7 @@ namespace Honememo.Wptscs
 
             // MediaWikiクラス分の読み込み
             this.textBoxExportPath.Text = StringUtils.DefaultString(site.ExportPath);
-            this.textBoxNamespacePath.Text = StringUtils.DefaultString(site.NamespacePath);
+            this.textBoxMetaApi.Text = StringUtils.DefaultString(site.MetaApi);
             this.textBoxTemplateNamespace.Text = site.TemplateNamespace.ToString();
             this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
             this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
@@ -818,10 +818,10 @@ namespace Honememo.Wptscs
                 site.ExportPath = str;
             }
             
-            str = StringUtils.DefaultString(this.textBoxNamespacePath.Text).Trim();
-            if (str != site.NamespacePath)
+            str = StringUtils.DefaultString(this.textBoxMetaApi.Text).Trim();
+            if (str != site.MetaApi)
             {
-                site.NamespacePath = str;
+                site.MetaApi = str;
             }
 
             str = StringUtils.DefaultString(this.textBoxRedirect.Text).Trim();

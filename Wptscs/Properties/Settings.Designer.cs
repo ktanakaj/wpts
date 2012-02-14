@@ -244,10 +244,10 @@ namespace Honememo.Wptscs.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealias" +
-            "es")]
-        public string MediaWikiNamespacePath {
+            "es|interwikimap")]
+        public string MediaWikiMetaApi {
             get {
-                return ((string)(this["MediaWikiNamespacePath"]));
+                return ((string)(this["MediaWikiMetaApi"]));
             }
         }
         
@@ -296,6 +296,51 @@ namespace Honememo.Wptscs.Properties {
             }
             set {
                 this["ConnectRetryTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>acronym</string>\r\n  <string>advogato</string>\r\n  <string>annotationwiki</s" +
+            "tring>\r\n  <string>arxiv</string>\r\n  <string>c2find</string>\r\n  <string>cache</st" +
+            "ring>\r\n  <string>commons</string>\r\n  <string>corpknowpedia</string>\r\n  <string>d" +
+            "ictionary</string>\r\n  <string>disinfopedia</string>\r\n  <string>docbook</string>\r" +
+            "\n  <string>doi</string>\r\n  <string>drumcorpswiki</string>\r\n  <string>dwjwiki</st" +
+            "ring>\r\n  <string>emacswiki</string>\r\n  <string>elibre</string>\r\n  <string>foldoc" +
+            "</string>\r\n  <string>foxwiki</string>\r\n  <string>freebsdman</string>\r\n  <string>" +
+            "gej</string>\r\n  <string>gentoo-wiki</string>\r\n  <string>google</string>\r\n  <stri" +
+            "ng>googlegroups</string>\r\n  <string>hammondwiki</string>\r\n  <string>hewikisource" +
+            "</string>\r\n  <string>hrwiki</string>\r\n  <string>imdb</string>\r\n  <string>jargonf" +
+            "ile</string>\r\n  <string>jspwiki</string>\r\n  <string>keiki</string>\r\n  <string>km" +
+            "wiki</string>\r\n  <string>linuxwiki</string>\r\n  <string>lojban</string>\r\n  <strin" +
+            "g>lqwiki</string>\r\n  <string>lugkr</string>\r\n  <string>mathsongswiki</string>\r\n " +
+            " <string>meatball</string>\r\n  <string>mediazilla</string>\r\n  <string>mediawikiwi" +
+            "ki</string>\r\n  <string>memoryalpha</string>\r\n  <string>metawiki</string>\r\n  <str" +
+            "ing>metawikipedia</string>\r\n  <string>moinmoin</string>\r\n  <string>mozillawiki</" +
+            "string>\r\n  <string>mw</string>\r\n  <string>oeis</string>\r\n  <string>openfacts</st" +
+            "ring>\r\n  <string>openwiki</string>\r\n  <string>patwiki</string>\r\n  <string>pmeg</" +
+            "string>\r\n  <string>ppr</string>\r\n  <string>pythoninfo</string>\r\n  <string>rfc</s" +
+            "tring>\r\n  <string>s23wiki</string>\r\n  <string>seattlewiki</string>\r\n  <string>se" +
+            "attlewireless</string>\r\n  <string>senseislibrary</string>\r\n  <string>slashdot</s" +
+            "tring>\r\n  <string>sourceforge</string>\r\n  <string>squeak</string>\r\n  <string>sus" +
+            "ning</string>\r\n  <string>svgwiki</string>\r\n  <string>tavi</string>\r\n  <string>te" +
+            "jo</string>\r\n  <string>tmbw</string>\r\n  <string>tmnet</string>\r\n  <string>tmwiki" +
+            "</string>\r\n  <string>theopedia</string>\r\n  <string>twiki</string>\r\n  <string>uea" +
+            "</string>\r\n  <string>unreal</string>\r\n  <string>usemod</string>\r\n  <string>vinis" +
+            "mo</string>\r\n  <string>webseitzwiki</string>\r\n  <string>why</string>\r\n  <string>" +
+            "wiki</string>\r\n  <string>wikia</string>\r\n  <string>wikibooks</string>\r\n  <string" +
+            ">wikicities</string>\r\n  <string>wikif1</string>\r\n  <string>wikihow</string>\r\n  <" +
+            "string>wikinfo</string>\r\n  <string>wikimedia</string>\r\n  <string>wikinews</strin" +
+            "g>\r\n  <string>wikiquote</string>\r\n  <string>wikipedia</string>\r\n  <string>wikiso" +
+            "urce</string>\r\n  <string>wikispecies</string>\r\n  <string>wikitravel</string>\r\n  " +
+            "<string>wikiversity</string>\r\n  <string>wikt</string>\r\n  <string>wiktionary</str" +
+            "ing>\r\n  <string>wlug</string>\r\n  <string>zwiki</string>\r\n  <string>zzz wiki</str" +
+            "ing>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection MediaWikiInterwikiPrefixs {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiInterwikiPrefixs"]));
             }
         }
     }

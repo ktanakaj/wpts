@@ -18,6 +18,7 @@ namespace Honememo.Wptscs.Websites
     using System.Xml;
     using System.Xml.Serialization;
     using NUnit.Framework;
+    using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
 
@@ -50,7 +51,7 @@ namespace Honememo.Wptscs.Websites
             b.Path = Path.GetFullPath(testDir) + "\\";
             MediaWiki server = new MediaWiki(new Language(language), new Uri(b.Uri, language + "/").ToString());
             server.ExportPath = "$1.xml";
-            server.NamespacePath = "_api.xml";
+            server.MetaApi = "_api.xml";
             return server;
         }
 
@@ -115,22 +116,25 @@ namespace Honememo.Wptscs.Websites
         #region 設定ファイルに初期値を持つプロパティテストケース
 
         /// <summary>
-        /// NamespacePathプロパティテストケース。
+        /// MetaApiプロパティテストケース。
         /// </summary>
         [Test]
-        public void TestNamespacePath()
+        public void TestMetaApi()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは設定ファイルの値が返される
-            Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases", site.NamespacePath);
+            Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases|interwikimap", site.MetaApi);
+
             // 値を設定するとその値が返る
-            site.NamespacePath = "test";
-            Assert.AreEqual("test", site.NamespacePath);
+            site.MetaApi = "test";
+            Assert.AreEqual("test", site.MetaApi);
+
             // 空またはnullの場合、再び設定ファイルの値が入る
-            site.NamespacePath = null;
-            Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases", site.NamespacePath);
-            site.NamespacePath = String.Empty;
-            Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases", site.NamespacePath);
+            site.MetaApi = null;
+            Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases|interwikimap", site.MetaApi);
+            site.MetaApi = String.Empty;
+            Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases|interwikimap", site.MetaApi);
         }
 
         /// <summary>
@@ -140,11 +144,14 @@ namespace Honememo.Wptscs.Websites
         public void TestExportPath()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは設定ファイルの値が返される
             Assert.AreEqual("/wiki/Special:Export/$1", site.ExportPath);
+
             // 値を設定するとその値が返る
             site.ExportPath = "test";
             Assert.AreEqual("test", site.ExportPath);
+
             // 空またはnullの場合、再び設定ファイルの値が入る
             site.ExportPath = null;
             Assert.AreEqual("/wiki/Special:Export/$1", site.ExportPath);
@@ -159,11 +166,14 @@ namespace Honememo.Wptscs.Websites
         public void TestRedirect()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは設定ファイルの値が返される
             Assert.AreEqual("#REDIRECT", site.Redirect);
+
             // 値を設定するとその値が返る
             site.Redirect = "test";
             Assert.AreEqual("test", site.Redirect);
+
             // 空またはnullの場合、再び設定ファイルの値が入る
             site.Redirect = null;
             Assert.AreEqual("#REDIRECT", site.Redirect);
@@ -178,8 +188,10 @@ namespace Honememo.Wptscs.Websites
         public void TestTemplateNamespace()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは設定ファイルの値が返される
             Assert.AreEqual(10, site.TemplateNamespace);
+
             // 値を設定するとその値が返る
             site.TemplateNamespace = -1;
             Assert.AreEqual(-1, site.TemplateNamespace);
@@ -192,8 +204,10 @@ namespace Honememo.Wptscs.Websites
         public void TestCategoryNamespace()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは設定ファイルの値が返される
             Assert.AreEqual(14, site.CategoryNamespace);
+
             // 値を設定するとその値が返る
             site.CategoryNamespace = -1;
             Assert.AreEqual(-1, site.CategoryNamespace);
@@ -206,8 +220,10 @@ namespace Honememo.Wptscs.Websites
         public void TestFileNamespace()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは設定ファイルの値が返される
             Assert.AreEqual(6, site.FileNamespace);
+
             // 値を設定するとその値が返る
             site.FileNamespace = -1;
             Assert.AreEqual(-1, site.FileNamespace);
@@ -220,11 +236,14 @@ namespace Honememo.Wptscs.Websites
         public void TestMagicWords()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは設定ファイルの値が返される
             Assert.IsTrue(site.MagicWords.Contains("SERVERNAME"));
+
             // 値を設定するとその値が返る
-            site.MagicWords = new string[0];
+            site.MagicWords = new HashSet<string>();
             Assert.AreEqual(0, site.MagicWords.Count);
+
             // nullの場合、再び設定ファイルの値が入る
             site.MagicWords = null;
             Assert.IsTrue(site.MagicWords.Contains("SERVERNAME"));
@@ -232,7 +251,7 @@ namespace Honememo.Wptscs.Websites
 
         #endregion
 
-        #region それ以外のプロパティテストケース
+        #region サーバーから値を取得するプロパティテストケース
 
         /// <summary>
         /// Namespacesプロパティテストケース。
@@ -241,31 +260,48 @@ namespace Honememo.Wptscs.Websites
         public void TestNamespaces()
         {
             MediaWiki site = this.GetTestServer("en");
-            // デフォルトではサーバーからダウンロードした値が返される
-            IList<string> names = site.Namespaces[6];
-            Assert.AreEqual("File", names[0]);
-            Assert.AreEqual("File", names[1]);
-            Assert.AreEqual("Image", names[2]);
-            // 値を設定するとその値が返る
-            IDictionary<int, IList<string>> dic = new Dictionary<int, IList<string>>();
-            dic.Add(1, new string[]{"test"});
-            site.Namespaces = dic;
-            Assert.AreEqual(1, site.Namespaces.Count);
-            // 空の場合、再び設定ファイルの値が入る
-            site.Namespaces = new Dictionary<int, IList<string>>();
-            Assert.AreEqual("File", names[0]);
+
+            // サーバーからダウンロードした値が返される
+            ISet<string> names = site.Namespaces[6];
+            Assert.IsNotNull(site.Namespaces);
+            Assert.IsTrue(site.Namespaces.Count > 0);
+            Assert.IsTrue(names.Contains("File"));
+            Assert.IsTrue(names.Contains("Image"));
         }
 
         /// <summary>
-        /// Namespacesプロパティテストケース（null）。
+        /// InterwikiPrefixsプロパティテストケース。
         /// </summary>
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestNamespacesNull()
+        public void TestInterwikiPrefixs()
         {
-            MediaWiki site = new MediaWiki(new Language("ja"));
-            site.Namespaces = null;
+            MediaWiki site = this.GetTestServer("en");
+
+            // デフォルトではサーバーからダウンロードした値+設定ファイルの値が返される
+            Assert.IsNotNull(site.InterwikiPrefixs);
+            Assert.IsTrue(site.InterwikiPrefixs.Count > 0);
+            Assert.IsTrue(site.InterwikiPrefixs.Contains("ja"));
+            Assert.IsTrue(site.InterwikiPrefixs.Contains("w"));
+            Assert.IsTrue(site.InterwikiPrefixs.Contains("wikipedia"));
+            Assert.IsTrue(site.InterwikiPrefixs.Contains("commons"));
+
+            // 値を設定すると設定ファイルの値の代わりにその値が返る
+            IgnoreCaseSet prefixs = new IgnoreCaseSet();
+            prefixs.Add("testtesttest");
+            site.InterwikiPrefixs = prefixs;
+            Assert.IsFalse(site.InterwikiPrefixs.Contains("wikipedia"));
+            Assert.IsTrue(site.InterwikiPrefixs.Contains("testtesttest"));
+
+            // 空の場合、再び設定ファイルの値が入る
+            site.InterwikiPrefixs = null;
+            Assert.AreNotSame(prefixs, site.InterwikiPrefixs);
+            Assert.IsTrue(site.InterwikiPrefixs.Contains("wikipedia"));
+            Assert.IsFalse(site.InterwikiPrefixs.Contains("testtesttest"));
         }
+
+        #endregion
+
+        #region それ以外のプロパティテストケース
 
         /// <summary>
         /// DocumentationTemplatesプロパティテストケース。
@@ -274,9 +310,11 @@ namespace Honememo.Wptscs.Websites
         public void TestDocumentationTemplates()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは空
             Assert.IsNotNull(site.DocumentationTemplates);
             Assert.AreEqual(0, site.DocumentationTemplates.Count);
+
             // 値を追加
             site.DocumentationTemplates.Add("Template:Documentation");
             Assert.AreEqual(1, site.DocumentationTemplates.Count);
@@ -290,8 +328,10 @@ namespace Honememo.Wptscs.Websites
         public void TestDocumentationTemplateDefaultPage()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは空
             Assert.IsNullOrEmpty(site.DocumentationTemplateDefaultPage);
+
             // 値を設定するとその値が返る
             site.DocumentationTemplateDefaultPage = "/doc";
             Assert.AreEqual("/doc", site.DocumentationTemplateDefaultPage);
@@ -306,8 +346,10 @@ namespace Honememo.Wptscs.Websites
         public void TestLinkInterwikiFormat()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは空
             Assert.IsNullOrEmpty(site.LinkInterwikiFormat);
+
             // 値を設定するとその値が返る
             site.LinkInterwikiFormat = ("{{仮リンク|$1|$2|$3|label=$4}}");
             Assert.AreEqual("{{仮リンク|$1|$2|$3|label=$4}}", site.LinkInterwikiFormat);
@@ -322,8 +364,10 @@ namespace Honememo.Wptscs.Websites
         public void TestLangFormat()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
+
             // デフォルトでは空
             Assert.IsNullOrEmpty(site.LangFormat);
+
             // 値を設定するとその値が返る
             site.LangFormat = ("{{Lang|$1|$2}}");
             Assert.AreEqual("{{Lang|$1|$2}}", site.LangFormat);
@@ -357,21 +401,67 @@ namespace Honememo.Wptscs.Websites
         public void TestIsMagicWord()
         {
             MediaWiki site = new MediaWiki(new Language("en"), "http://example.com");
-            site.MagicWords = new List<string>();
+            site.MagicWords = new HashSet<string>();
 
             // 値が設定されていなければ一致しない
             Assert.IsFalse(site.IsMagicWord("CURRENTYEAR"));
             Assert.IsFalse(site.IsMagicWord("ns:1"));
 
-            // 値が一致
+            // 値が一致、大文字小文字は区別する
             site.MagicWords.Add("CURRENTYEAR");
             Assert.IsTrue(site.IsMagicWord("CURRENTYEAR"));
+            Assert.IsFalse(site.IsMagicWord("currentyear"));
             Assert.IsFalse(site.IsMagicWord("ns:1"));
 
             // コロンが入るものは、その前の部分までで判定
             site.MagicWords.Add("ns");
             Assert.IsTrue(site.IsMagicWord("CURRENTYEAR"));
             Assert.IsTrue(site.IsMagicWord("ns:1"));
+        }
+
+        /// <summary>
+        /// IsInterwikiメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestIsInterwiki()
+        {
+            MediaWiki site = this.GetTestServer("en");
+            site.InterwikiPrefixs = new IgnoreCaseSet();
+
+            // 値が存在しなければ一致しない
+            Assert.IsFalse(site.IsInterwiki("commons:test"));
+            Assert.IsFalse(site.IsInterwiki("commons:"));
+            Assert.IsFalse(site.IsInterwiki("common:"));
+            Assert.IsFalse(site.IsInterwiki("zzz:zzz語版記事"));
+            Assert.IsFalse(site.IsInterwiki("ZZZ:zzz語版記事"));
+
+            // 値が設定されていれば、前方一致で一致する、大文字小文字は区別しない
+            site.InterwikiPrefixs.Add("commons");
+            site.InterwikiPrefixs.Add("zzz");
+            Assert.IsTrue(site.IsInterwiki("commons:test"));
+            Assert.IsTrue(site.IsInterwiki("commons:"));
+            Assert.IsFalse(site.IsInterwiki("common:"));
+            Assert.IsTrue(site.IsInterwiki("zzz:zzz語版記事"));
+            Assert.IsTrue(site.IsInterwiki("ZZZ:zzz語版記事"));
+
+            // 名前空間名と被るときはそちらが優先、ウィキ間リンクとは判定されない
+            site.InterwikiPrefixs.Add("File");
+            Assert.IsFalse(site.IsInterwiki("File:zzz語版記事"));
+        }
+
+        /// <summary>
+        /// IsNamespaceメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestIsNamespace()
+        {
+            MediaWiki site = this.GetTestServer("en");
+
+            // 値が設定されていれば、前方一致で一致する、大文字小文字は区別しない
+            Assert.IsFalse(site.IsNamespace("page"));
+            Assert.IsTrue(site.IsNamespace("File:image.png"));
+            Assert.IsTrue(site.IsNamespace("file:image.png"));
+            Assert.IsFalse(site.IsNamespace("画像:image.png"));
         }
 
         /// <summary>
@@ -471,7 +561,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             // プロパティはデフォルト値の場合出力しないという動作あり
-            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><NamespacePath /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /><DocumentationTemplates /><LinkInterwikiFormat /><LangFormat /></MediaWiki>", b.ToString());
+            Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><MetaApi /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /><InterwikiPrefixs /><DocumentationTemplates /><LinkInterwikiFormat /><LangFormat /></MediaWiki>", b.ToString());
             // TODO: プロパティに値が設定されたパターンを追加すべき
         }
 

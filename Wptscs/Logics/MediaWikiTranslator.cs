@@ -17,6 +17,7 @@ namespace Honememo.Wptscs.Logics
     using System.Net;
     using System.Text;
     using System.Windows.Forms;
+    using Honememo.Models;
     using Honememo.Parsers;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
@@ -122,7 +123,7 @@ namespace Honememo.Wptscs.Logics
             // ※ 言語間リンク取得中は、処理状態を解析中に変更
             string interWiki = null;
             this.ChangeStatusInExecuting(
-                () => interWiki = article.GetInterWiki(this.To.Language.Code),
+                () => interWiki = article.GetInterlanguage(this.To.Language.Code),
                 Resources.StatusParsing);
             if (!String.IsNullOrEmpty(interWiki))
             {
@@ -226,7 +227,7 @@ namespace Honememo.Wptscs.Logics
         {
             MediaWikiLink link = new MediaWikiLink();
             link.Title = page.Title;
-            link.Code = this.From.Language.Code;
+            link.Interwiki = this.From.Language.Code;
             return "\n\n" + link.ToString() + "\n" + String.Format(
                 Resources.ArticleFooter,
                 FormUtils.ApplicationName(),
@@ -300,7 +301,7 @@ namespace Honememo.Wptscs.Logics
                     // サブページの場合、記事名を補完
                     link.Title = parent + link.Title;
                 }
-                else if (!String.IsNullOrEmpty(link.Code))
+                else if (!String.IsNullOrEmpty(link.Interwiki))
                 {
                     // 言語間リンク・姉妹プロジェクトへのリンクの場合、変換対象外とする
                     // ただし、先頭が : でない、翻訳先言語への言語間リンクだけは削除
@@ -327,7 +328,7 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 // 専用処理の無い内部リンクの場合、言語間リンクによる置き換えを行う
-                string interWiki = this.GetInterwiki(link);
+                string interWiki = this.GetInterlanguage(link);
                 if (interWiki == null)
                 {
                     // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
@@ -393,7 +394,7 @@ namespace Honememo.Wptscs.Logics
             string filledTitle = this.FillTemplateName(template, parent);
 
             // リンクを辿り、対象記事の言語間リンクを取得
-            string interWiki = this.GetInterwiki(new MediaWikiTemplate(filledTitle));
+            string interWiki = this.GetInterlanguage(new MediaWikiTemplate(filledTitle));
             if (interWiki == null)
             {
                 // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
@@ -592,7 +593,7 @@ namespace Honememo.Wptscs.Logics
         /// <param name="element">内部リンク要素。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合は空。ページ自体が存在しない場合は<c>null</c>。</returns>
         /// <remarks>取得処理では対訳表を使用する。また新たな取得結果は対訳表に追加する。</remarks>
-        protected string GetInterwiki(MediaWikiLink element)
+        protected string GetInterlanguage(MediaWikiLink element)
         {
             // 翻訳元をロガーに出力
             this.Logger.AddSource(element);
@@ -601,7 +602,7 @@ namespace Honememo.Wptscs.Logics
             if (this.ItemTable == null)
             {
                 // 対訳表が指定されていない場合は、使わずに言語間リンクを探索して終了
-                return this.GetInterwikiWithCreateCache(title, out item);
+                return this.GetInterlanguageWithCreateCache(title, out item);
             }
 
             // 対訳表を使用して言語間リンクを探索
@@ -627,7 +628,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 対訳表に存在しない場合は、普通に取得し表に記録
-            string interWiki = this.GetInterwikiWithCreateCache(title, out item);
+            string interWiki = this.GetInterlanguageWithCreateCache(title, out item);
             if (interWiki != null)
             {
                 // ページ自体が存在しない場合を除き、結果を対訳表に登録
@@ -645,7 +646,7 @@ namespace Honememo.Wptscs.Logics
         /// <param name="title">記事名。</param>
         /// <param name="item">キャッシュ用の処理結果情報。</param>
         /// <returns>言語間リンク先の記事名。見つからない場合は空。ページ自体が存在しない場合は<c>null</c>。</returns>
-        private string GetInterwikiWithCreateCache(string title, out TranslationDictionary.Item item)
+        private string GetInterlanguageWithCreateCache(string title, out TranslationDictionary.Item item)
         {
             // 記事名から記事を探索
             item = new TranslationDictionary.Item { Timestamp = DateTime.UtcNow };
@@ -662,7 +663,7 @@ namespace Honememo.Wptscs.Logics
             string interWiki = null;
             if (page != null)
             {
-                interWiki = page.GetInterWiki(this.To.Language.Code);
+                interWiki = page.GetInterlanguage(this.To.Language.Code);
                 item.Word = interWiki;
                 if (!String.IsNullOrEmpty(interWiki))
                 {
@@ -713,7 +714,7 @@ namespace Honememo.Wptscs.Logics
             // （記事名もセクションも指定されていない・・・というケースもありえるが、
             //   その場合他に指定できるものも思いつかないので通す）
             return String.IsNullOrEmpty(link.Title)
-                || (link.Title == parent && String.IsNullOrEmpty(link.Code) && !String.IsNullOrEmpty(link.Section));
+                || (link.Title == parent && String.IsNullOrEmpty(link.Interwiki) && !String.IsNullOrEmpty(link.Section));
         }
 
         /// <summary>
@@ -737,7 +738,7 @@ namespace Honememo.Wptscs.Logics
         {
             // 言語間リンク・姉妹プロジェクトへのリンクの場合、変換対象外とする
             // ただし、先頭が : でない、翻訳先言語への言語間リンクだけは削除
-            if (!link.IsColon && link.Code == this.To.Language.Code)
+            if (!link.IsColon && link.Interwiki == this.To.Language.Code)
             {
                 return new TextElement();
             }
@@ -753,7 +754,7 @@ namespace Honememo.Wptscs.Logics
         private IElement ReplaceLinkCategory(MediaWikiLink link)
         {
             // リンクを辿り、対象記事の言語間リンクを取得
-            string interWiki = this.GetInterwiki(link);
+            string interWiki = this.GetInterlanguage(link);
             if (interWiki == null)
             {
                 // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
@@ -809,7 +810,7 @@ namespace Honememo.Wptscs.Logics
         private string ReplaceLinkNamespace(string title, int id)
         {
             // 名前空間だけ翻訳先言語の書式に変換
-            IList<string> names;
+            IgnoreCaseSet names;
             if (!this.To.Namespaces.TryGetValue(id, out names))
             {
                 // 翻訳先言語に相当する名前空間が無い場合、何もしない
@@ -817,7 +818,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 記事名の名前空間部分を置き換えて返す
-            return names[0] + title.Substring(title.IndexOf(':'));
+            return names.FirstOrDefault() + title.Substring(title.IndexOf(':'));
         }
 
         /// <summary>
@@ -944,7 +945,7 @@ namespace Honememo.Wptscs.Logics
         /// <returns>プレフィックス。取得できない場合<c>null</c></returns>
         private string GetTemplatePrefix()
         {
-            IList<string> prefixes = this.From.Namespaces[this.From.TemplateNamespace];
+            ISet<string> prefixes = this.From.Namespaces[this.From.TemplateNamespace];
             if (prefixes != null)
             {
                 return prefixes.FirstOrDefault();

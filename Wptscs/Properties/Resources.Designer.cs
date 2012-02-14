@@ -119,7 +119,8 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。（{0}） に類似しているローカライズされた文字列を検索します。
+        ///   サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。
+        ///（{0}） に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessageConnectionFailed {
             get {

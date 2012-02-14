@@ -210,11 +210,12 @@ namespace Honememo.Wptscs.Parsers
                 link.Title = link.Title.TrimStart(':').TrimStart();
             }
 
-            // 標準名前空間以外で[[xxx:yyy]]のようになっている場合、言語コード
-            // ※ : を含む名前空間以外を全て言語コードと判定
-            if (link.Title.Contains(":") && new MediaWikiPage(this.parser.Website, link.Title).IsMain())
+            // 記事名の前にウィキ間リンク（en:やcommons:）が付加されているか？
+            if (this.parser.Website.IsInterwiki(link.Title))
             {
-                link.Code = link.Title.Substring(0, link.Title.IndexOf(':')).TrimEnd();
+                // ウィキ間リンク部分を記事名から分離
+                // ※ 厳密には入れ子もあるが、2012年2月現在未対応（ウィキ間リンクの時点でこのツールの処理対象外だが）
+                link.Interwiki = link.Title.Substring(0, link.Title.IndexOf(':')).TrimEnd();
                 link.Title = link.Title.Substring(link.Title.IndexOf(':') + 1).TrimStart();
             }
 

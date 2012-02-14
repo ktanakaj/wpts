@@ -23,6 +23,7 @@
       <ExportPath>/wiki/%D8%AE%D8%A7%D8%B5:%D8%AA%D8%B5%D8%AF%D9%8A%D8%B1/$1</ExportPath>
       <Redirect>#تحويل</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/شرح">قالب:توثيق</DocumentationTemplate>
       </DocumentationTemplates>
@@ -49,6 +50,7 @@
       </Language>
       <ExportPath>/wiki/%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7:Export/$1</ExportPath>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates />
     </MediaWiki>
     <MediaWiki>
@@ -80,6 +82,7 @@
       <ExportPath>/wiki/Spezial:Exportieren/$1</ExportPath>
       <Redirect>#WEITERLEITUNG</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
       </DocumentationTemplates>
@@ -89,6 +92,14 @@
       <Location>http://en.wikipedia.org</Location>
       <Language Code="en">
         <Names>
+          <LanguageName Code="ar">
+            <Name>لغة إنجليزية</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="bn">
+            <Name>ইংরেজি ভাষা</Name>
+            <ShortName />
+          </LanguageName>
           <LanguageName Code="de">
             <Name>Englische Sprache</Name>
             <ShortName>Englisch</ShortName>
@@ -101,6 +112,18 @@
             <Name>Idioma inglés</Name>
             <ShortName>Inglés</ShortName>
           </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Anglais</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="hi">
+            <Name>अंग्रेज़ी भाषा</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="it">
+            <Name>Lingua inglese</Name>
+            <ShortName>inglese</ShortName>
+          </LanguageName>
           <LanguageName Code="ja">
             <Name>英語</Name>
             <ShortName>英</ShortName>
@@ -109,9 +132,21 @@
             <Name>영어</Name>
             <ShortName />
           </LanguageName>
+          <LanguageName Code="nl">
+            <Name>Engels</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pl">
+            <Name>Język angielski</Name>
+            <ShortName />
+          </LanguageName>
           <LanguageName Code="pt">
             <Name>Língua inglesa</Name>
             <ShortName>Inglês</ShortName>
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Английский язык</Name>
+            <ShortName />
           </LanguageName>
           <LanguageName Code="zh">
             <Name>英语</Name>
@@ -120,6 +155,7 @@
         </Names>
       </Language>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
         <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
@@ -156,6 +192,7 @@
       <ExportPath>/wiki/Especial:Exportar/$1</ExportPath>
       <Redirect>#REDIRECCIÓN</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
       </DocumentationTemplates>
@@ -190,6 +227,7 @@
       <ExportPath>/wiki/Sp%C3%A9cial:Exporter/$1</ExportPath>
       <Redirect>#REDIRECTION</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Modèle:Documentation</DocumentationTemplate>
       </DocumentationTemplates>
@@ -216,6 +254,7 @@
       </Language>
       <ExportPath>/wiki/%E0%A4%B5%E0%A4%BF%E0%A4%B6%E0%A5%87%E0%A4%B7:Export/$1</ExportPath>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates />
       <LangFormat>{{भाषा|$1|$2}}</LangFormat>
     </MediaWiki>
@@ -248,6 +287,7 @@
       <ExportPath>/wiki/Speciale:Esporta/$1</ExportPath>
       <Redirect>#RINVIA</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
       </DocumentationTemplates>
@@ -290,7 +330,154 @@
       </Language>
       <ExportPath>/wiki/%E7%89%B9%E5%88%A5:%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97/$1</ExportPath>
       <Redirect>#転送</Redirect>
-      <MagicWords />
+      <MagicWords>
+        <Variable>CURRENTYEAR</Variable>
+        <Variable>CURRENTMONTH</Variable>
+        <Variable>CURRENTMONTHNAME</Variable>
+        <Variable>CURRENTMONTHNAMEGEN</Variable>
+        <Variable>CURRENTMONTHABBREV</Variable>
+        <Variable>CURRENTDAY</Variable>
+        <Variable>CURRENTDAY2</Variable>
+        <Variable>CURRENTDOW</Variable>
+        <Variable>CURRENTDAYNAME</Variable>
+        <Variable>CURRENTTIME</Variable>
+        <Variable>CURRENTHOUR</Variable>
+        <Variable>CURRENTWEEK</Variable>
+        <Variable>CURRENTTIMESTAMP</Variable>
+        <Variable>LOCALYEAR</Variable>
+        <Variable>LOCALMONTH</Variable>
+        <Variable>LOCALMONTHNAME</Variable>
+        <Variable>LOCALMONTHNAMEGEN</Variable>
+        <Variable>LOCALMONTHABBREV</Variable>
+        <Variable>LOCALDAY</Variable>
+        <Variable>LOCALDAY2</Variable>
+        <Variable>LOCALDOW</Variable>
+        <Variable>LOCALDAYNAME</Variable>
+        <Variable>LOCALTIME</Variable>
+        <Variable>LOCALHOUR</Variable>
+        <Variable>LOCALWEEK</Variable>
+        <Variable>LOCALTIMESTAMP</Variable>
+        <Variable>SITENAME</Variable>
+        <Variable>SERVER</Variable>
+        <Variable>SERVERNAME</Variable>
+        <Variable>DIRMARK</Variable>
+        <Variable>DIRECTIONMARK</Variable>
+        <Variable>SCRIPTPATH</Variable>
+        <Variable>STYLEPATH</Variable>
+        <Variable>CURRENTVERSION</Variable>
+        <Variable>CONTENTLANGUAGE</Variable>
+        <Variable>CONTENTLANG</Variable>
+        <Variable>REVISIONID</Variable>
+        <Variable>REVISIONDAY</Variable>
+        <Variable>REVISIONDAY2</Variable>
+        <Variable>REVISIONMONTH</Variable>
+        <Variable>REVISIONYEAR</Variable>
+        <Variable>REVISIONTIMESTAMP</Variable>
+        <Variable>REVISIONUSER</Variable>
+        <Variable>PAGESIZE</Variable>
+        <Variable>PROTECTIONLEVEL</Variable>
+        <Variable>DISPLAYTITLE</Variable>
+        <Variable>DEFAULTSORT</Variable>
+        <Variable>DEFAULTSORTKEY</Variable>
+        <Variable>DEFAULTCATEGORYSORT</Variable>
+        <Variable>NUMBEROFPAGES</Variable>
+        <Variable>NUMBEROFARTICLES</Variable>
+        <Variable>NUMBEROFFILES</Variable>
+        <Variable>NUMBEROFEDITS</Variable>
+        <Variable>NUMBEROFVIEWS</Variable>
+        <Variable>NUMBEROFUSERS</Variable>
+        <Variable>NUMBEROFADMINS</Variable>
+        <Variable>NUMBEROFACTIVEUSERS</Variable>
+        <Variable>PAGESINCATEGORY</Variable>
+        <Variable>PAGESINCAT</Variable>
+        <Variable>NUMBERINGROUP</Variable>
+        <Variable>NUMINGROUP</Variable>
+        <Variable>PAGESINNS</Variable>
+        <Variable>PAGESINNAMESPACE</Variable>
+        <Variable>FULLPAGENAME</Variable>
+        <Variable>PAGENAME</Variable>
+        <Variable>BASEPAGENAME</Variable>
+        <Variable>SUBPAGENAME</Variable>
+        <Variable>SUBJECTPAGENAME</Variable>
+        <Variable>TALKPAGENAME</Variable>
+        <Variable>FULLPAGENAMEE</Variable>
+        <Variable>PAGENAMEE</Variable>
+        <Variable>BASEPAGENAMEE</Variable>
+        <Variable>SUBPAGENAMEE</Variable>
+        <Variable>SUBJECTPAGENAMEE</Variable>
+        <Variable>TALKPAGENAMEE</Variable>
+        <Variable>NAMESPACE</Variable>
+        <Variable>SUBJECTSPACE</Variable>
+        <Variable>ARTICLESPACE</Variable>
+        <Variable>TALKSPACE</Variable>
+        <Variable>NAMESPACEE</Variable>
+        <Variable>SUBJECTSPACEE</Variable>
+        <Variable>TALKSPACEE</Variable>
+        <Variable>localurl</Variable>
+        <Variable>fullurl</Variable>
+        <Variable>filepath</Variable>
+        <Variable>urlencode</Variable>
+        <Variable>anchorencode</Variable>
+        <Variable>ns</Variable>
+        <Variable>lc</Variable>
+        <Variable>lcfirst</Variable>
+        <Variable>uc</Variable>
+        <Variable>ucfirst</Variable>
+        <Variable>formatnum</Variable>
+        <Variable>#dateformat</Variable>
+        <Variable>#formatdate</Variable>
+        <Variable>padleft</Variable>
+        <Variable>padright</Variable>
+        <Variable>plural</Variable>
+        <Variable>grammar</Variable>
+        <Variable>int</Variable>
+        <Variable>#language</Variable>
+        <Variable>#special</Variable>
+        <Variable>#tag</Variable>
+        <Variable>gender</Variable>
+        <Variable>groupconvert</Variable>
+        <Variable>#expr</Variable>
+        <Variable>#if</Variable>
+        <Variable>#ifeq</Variable>
+        <Variable>#ifexist</Variable>
+        <Variable>#ifexpr</Variable>
+        <Variable>#switch</Variable>
+        <Variable>#time</Variable>
+        <Variable>#rel2abs</Variable>
+        <Variable>#titleparts</Variable>
+        <Variable>#iferror</Variable>
+        <Variable>#式</Variable>
+        <Variable>#もし</Variable>
+        <Variable>#もし等しい</Variable>
+        <Variable>#もし式</Variable>
+        <Variable>#もしエラー</Variable>
+        <Variable>#切り替え</Variable>
+        <Variable>#もし存在</Variable>
+        <Variable>#時間</Variable>
+        <Variable>#参照から絶対</Variable>
+        <Variable>#タイトル部分</Variable>
+        <Variable>#言語</Variable>
+        <Variable>現在の月</Variable>
+        <Variable>現在の月名</Variable>
+        <Variable>現在の月省略形</Variable>
+        <Variable>現在の日</Variable>
+        <Variable>現在の年</Variable>
+        <Variable>現在の時刻</Variable>
+        <Variable>現在の時</Variable>
+        <Variable>ページ数</Variable>
+        <Variable>記事数</Variable>
+        <Variable>ファイル数</Variable>
+        <Variable>利用者数</Variable>
+        <Variable>活動利用者数</Variable>
+        <Variable>編集回数</Variable>
+        <Variable>閲覧回数</Variable>
+        <Variable>ページ名</Variable>
+        <Variable>名前空間</Variable>
+        <Variable>完全なページ名</Variable>
+        <Variable>サブページ名</Variable>
+        <Variable>親ページ名</Variable>
+      </MagicWords>
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
         <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
@@ -323,6 +510,7 @@
       <ExportPath>/wiki/%ED%8A%B9%EC%88%98%EA%B8%B0%EB%8A%A5:%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0/$1</ExportPath>
       <Redirect>#넘겨주기</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/설명문서">틀:틀 설명문서</DocumentationTemplate>
       </DocumentationTemplates>
@@ -352,6 +540,7 @@
       </Language>
       <ExportPath>/wiki/Speciaal:Exporteren/$1</ExportPath>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Sjabloon:Sjabdoc</DocumentationTemplate>
       </DocumentationTemplates>
@@ -378,6 +567,7 @@
       <ExportPath>/wiki/Specjalna:Eksport/$1</ExportPath>
       <Redirect>#PATRZ</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/opis">Szablon:Dokumentacja</DocumentationTemplate>
       </DocumentationTemplates>
@@ -411,6 +601,7 @@
       <ExportPath>/wiki/Especial:Exportar/$1</ExportPath>
       <Redirect>#REDIRECIONAMENTO</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
       </DocumentationTemplates>
@@ -445,10 +636,57 @@
       <ExportPath>/wiki/Служебная:Export/$1</ExportPath>
       <Redirect>#перенаправление</Redirect>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://si.wikipedia.org</Location>
+      <Language Code="si">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Sinhala language</Name>
+            <ShortName>Sinhala</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>シンハラ語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="si">
+            <Name>සිංහල භාෂාව</Name>
+            <ShortName>සිංහල</ShortName>
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/%E0%B7%80%E0%B7%92%E0%B7%81%E0%B7%9A%E0%B7%82:%E0%B6%B1%E0%B7%92%E0%B6%BB%E0%B7%8A%E0%B6%BA%E0%B7%8F%E0%B6%AD%E0%B6%9A%E0%B6%BB%E0%B6%B1%E0%B7%8A%E0%B6%B1/$1</ExportPath>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <DocumentationTemplates />
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://ta.wikipedia.org</Location>
+      <Language Code="ta">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Tamil language</Name>
+            <ShortName>Tamil</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>タミル語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ta">
+            <Name>தமிழ் மொழி</Name>
+            <ShortName>தமிழ்</ShortName>
+          </LanguageName>
+        </Names>
+      </Language>
+      <ExportPath>/wiki/%E0%AE%9A%E0%AE%BF%E0%AE%B1%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81:Export/$1</ExportPath>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <DocumentationTemplates />
     </MediaWiki>
     <MediaWiki>
       <Location>http://zh.wikipedia.org</Location>
@@ -474,6 +712,7 @@
       </Language>
       <ExportPath>/wiki/Special:%E5%AF%BC%E5%87%BA%E9%A1%B5%E9%9D%A2/$1</ExportPath>
       <MagicWords />
+      <InterwikiPrefixs />
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
       </DocumentationTemplates>

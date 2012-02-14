@@ -142,7 +142,8 @@
     <comment>設定ファイルの保存時にエラーが発生した場合のメッセージ</comment>
   </data>
   <data name="ErrorMessageConnectionFailed" xml:space="preserve">
-    <value>サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。（{0}）</value>
+    <value>サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。
+（{0}）</value>
     <comment>サーバーへの接続失敗</comment>
   </data>
   <data name="ErrorMessageDevelopmentError" xml:space="preserve">

@@ -39,7 +39,7 @@ namespace Honememo.Wptscs.Parsers
             template = (MediaWikiTemplate)element;
             Assert.AreEqual("testtitle", template.Title);
             Assert.AreEqual(0, template.PipeTexts.Count);
-            Assert.IsNull(template.Code);
+            Assert.IsNull(template.Interwiki);
             Assert.IsFalse(template.IsColon);
             Assert.IsFalse(template.IsMsgnw);
             Assert.IsFalse(template.NewLine);
@@ -255,7 +255,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(37, template.PipeTexts.Count);
             Assert.AreEqual(" terr serv 1 = [[Selective TV Inc.]]&lt;br/&gt;'''([[Alexandria, Minnesota]])'''\n", template.PipeTexts[13].ToString());
             Assert.AreEqual(" adsl chan 2 =Channel 120 (SD)&lt;br&gt; 1120 (HD)\n", template.PipeTexts[36].ToString());
-            Assert.IsNull(template.Code);
+            Assert.IsNull(template.Interwiki);
             Assert.IsFalse(template.IsColon);
             Assert.IsFalse(template.IsMsgnw);
             Assert.IsTrue(template.NewLine);

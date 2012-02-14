@@ -16,6 +16,7 @@ namespace Honememo.Wptscs
     using System.Data;
     using System.Drawing;
     using System.IO;
+    using System.Net;
     using System.Text;
     using System.Windows.Forms;
     using Honememo.Utilities;
@@ -380,9 +381,20 @@ namespace Honememo.Wptscs
                 // 実行結果から、ログと変換後テキストをファイル出力
                 this.WriteResult(success);
             }
+            catch (WebException ex)
+            {
+                // 想定外の通信エラー（↓とまとめてもよいが、こちらはサーバーの状況などで発生しやすいので）
+                this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageConnectionFailed, ex.Message) + Environment.NewLine);
+                if (ex.Response != null)
+                {
+                    // 出せるならエラーとなったURLも出力
+                    this.textBoxLog.AppendText(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, ex.Response.ResponseUri) + Environment.NewLine);
+                }
+            }
             catch (Exception ex)
             {
-                this.textBoxLog.AppendText("\r\n" + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + "\r\n");
+                // 想定外のエラー
+                this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + Environment.NewLine);
             }
         }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<api xmlns="http://www.mediawiki.org/xml/api/">
+<api>
   <query>
     <namespaces>
       <ns id="-2" case="first-letter" canonical="Media" xml:space="preserve">Media</ns>
@@ -31,5 +31,617 @@
       <ns id="6" xml:space="preserve">Image</ns>
       <ns id="7" xml:space="preserve">Image talk</ns>
     </namespacealiases>
+    <interwikimap>
+      <iw prefix="aa" local="" language="Qafár af" url="http://aa.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ab" local="" language="Аҧсуа" url="http://ab.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="abbenormal" url="http://ourpla.net/cgi/pikie?$1" wikiid="" api="" />
+      <iw prefix="ace" local="" language="Acèh" url="http://ace.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="acronym" url="http://www.acronymfinder.com/af-query.asp?String=exact&amp;Acronym=$1" wikiid="" api="" />
+      <iw prefix="advogato" url="http://www.advogato.org/$1" wikiid="" api="" />
+      <iw prefix="aew" url="http://wiki.arabeyes.org/$1" wikiid="" api="" />
+      <iw prefix="af" local="" language="Afrikaans" url="http://af.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="airwarfare" url="http://airwarfare.com/mediawiki-1.4.5/index.php?$1" wikiid="" api="" />
+      <iw prefix="aiwiki" url="http://www.ifi.unizh.ch/ailab/aiwiki/aiw.cgi?$1" wikiid="" api="" />
+      <iw prefix="ak" local="" language="Akan" url="http://ak.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="allwiki" url="http://allwiki.com/index.php/$1" wikiid="" api="" />
+      <iw prefix="als" local="" language="Alemannisch" url="http://als.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="am" local="" language="አማርኛ" url="http://am.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="an" local="" language="Aragonés" url="http://an.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ang" local="" language="Ænglisc" url="http://ang.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="appropedia" url="http://www.appropedia.org/$1" wikiid="" api="" />
+      <iw prefix="aquariumwiki" url="http://www.theaquariumwiki.com/$1" wikiid="" api="" />
+      <iw prefix="ar" local="" language="العربية" url="http://ar.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="arborwiki" url="http://arborwiki.org/city/$1" wikiid="" api="" />
+      <iw prefix="arc" local="" language="ܐܪܡܝܐ" url="http://arc.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="arxiv" url="http://arxiv.org/abs/$1" wikiid="" api="" />
+      <iw prefix="arz" local="" language="مصرى" url="http://arz.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="as" local="" language="অসমীয়া" url="http://as.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ast" local="" language="Asturianu" url="http://ast.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="atmwiki" url="http://www.otterstedt.de/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="av" local="" language="Авар" url="http://av.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ay" local="" language="Aymar aru" url="http://ay.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="az" local="" language="Azərbaycanca" url="http://az.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="b" local="" url="http://en.wikibooks.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ba" local="" language="Башҡортса" url="http://ba.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bar" local="" language="Boarisch" url="http://bar.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bat-smg" local="" language="Žemaitėška" url="http://bat-smg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="battlestarwiki" url="http://en.battlestarwiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bcl" local="" language="Bikol Central" url="http://bcl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bcnbio" url="http://historiapolitica.bcn.cl/resenas_parlamentarias/wiki/$1" wikiid="" api="" />
+      <iw prefix="be" local="" language="Беларуская" url="http://be.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="be-x-old" local="" language="‪Беларуская (тарашкевіца)‬" url="http://be-x-old.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bemi" url="http://bemi.free.fr/vikio/index.php?$1" wikiid="" api="" />
+      <iw prefix="benefitswiki" url="http://www.benefitslink.com/cgi-bin/wiki.cgi?$1" wikiid="" api="" />
+      <iw prefix="bg" local="" language="Български" url="http://bg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bh" local="" language="भोजपुरी" url="http://bh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bi" local="" language="Bislama" url="http://bi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="biblewiki" url="http://bible.tmtm.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="bjn" local="" language="Bahasa Banjar" url="http://bjn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bluwiki" url="http://bluwiki.com/go/$1" wikiid="" api="" />
+      <iw prefix="blw" local="" url="http://britainloveswikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bm" local="" language="Bamanankan" url="http://bm.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bn" local="" language="বাংলা" url="http://bn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bo" local="" language="བོད་ཡིག" url="http://bo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="botwiki" url="http://botwiki.sno.cc/wiki/$1" wikiid="" api="" />
+      <iw prefix="boxrec" url="http://www.boxrec.com/media/index.php?$1" wikiid="" api="" />
+      <iw prefix="bpy" local="" language="ইমার ঠার/বিষ্ণুপ্রিয়া মণিপুরী" url="http://bpy.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="br" local="" language="Brezhoneg" url="http://br.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="brickwiki" url="http://lego.wikia.com/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="bs" local="" language="Bosanski" url="http://bs.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bug" local="" language="ᨅᨔ ᨕᨘᨁᨗ" url="http://bug.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bugzilla" local="" url="https://bugzilla.wikimedia.org/show_bug.cgi?id=$1" wikiid="" api="" />
+      <iw prefix="bulba" url="http://bulbapedia.bulbagarden.net/wiki/$1" wikiid="" api="" />
+      <iw prefix="buzztard" url="http://buzztard.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="bxr" local="" language="Буряад" url="http://bxr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="bytesmiths" url="http://www.Bytesmiths.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="c2" url="http://c2.com/cgi/wiki?$1" wikiid="" api="" />
+      <iw prefix="c2find" url="http://c2.com/cgi/wiki?FindPage&amp;value=$1" wikiid="" api="" />
+      <iw prefix="ca" local="" language="Català" url="http://ca.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="canwiki" url="http://www.can-wiki.info/$1" wikiid="" api="" />
+      <iw prefix="canyonwiki" url="http://www.canyonwiki.com/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="cbk-zam" local="" language="Chavacano de Zamboanga" url="http://cbk-zam.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="cdo" local="" language="Mìng-dĕ̤ng-ngṳ̄" url="http://cdo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ce" local="" language="Нохчийн" url="http://ce.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ceb" local="" language="Cebuano" url="http://ceb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="cellwiki" url="http://cell.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="centralwikia" url="http://community.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="ch" local="" language="Chamoru" url="http://ch.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="chapter" local="" url="http://en.wikimedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="chej" url="http://esperanto.blahus.cz/cxej/vikio/index.php/$1" wikiid="" api="" />
+      <iw prefix="cho" local="" language="Choctaw" url="http://cho.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="choralwiki" url="http://www.cpdl.org/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="chr" local="" language="ᏣᎳᎩ" url="http://chr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="chy" local="" language="Tsetsêhestâhese" url="http://chy.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="citizendium" url="http://en.citizendium.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ckb" local="" language="کوردی" url="http://ckb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ckwiss" url="http://ck-wissen.de/ckwiki/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="cndbname" url="http://cndb.com/actor.html?name=$1" wikiid="" api="" />
+      <iw prefix="cndbtitle" url="http://cndb.com/movie.html?title=$1" wikiid="" api="" />
+      <iw prefix="co" local="" language="Corsu" url="http://co.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="comixpedia" url="http://www.comixpedia.org/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="communityscheme" url="http://community.schemewiki.org/?c=s&amp;key=$1" wikiid="" api="" />
+      <iw prefix="communitywiki" url="http://www.communitywiki.org/$1" wikiid="" api="" />
+      <iw prefix="comune" url="http://rete.comuni-italiani.it/wiki/$1" wikiid="" api="" />
+      <iw prefix="corpknowpedia" url="http://corpknowpedia.org/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="cr" local="" language="Nēhiyawēwin / ᓀᐦᐃᔭᐍᐏᐣ" url="http://cr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="crazyhacks" url="http://www.crazy-hacks.org/wiki/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="creativecommonswiki" url="http://wiki.creativecommons.org/$1" wikiid="" api="" />
+      <iw prefix="creatureswiki" url="http://creatures.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="crh" local="" language="Qırımtatarca" url="http://crh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="cs" local="" language="Česky" url="http://cs.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="csb" local="" language="Kaszëbsczi" url="http://csb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="cu" local="" language="Словѣ́ньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ" url="http://cu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="cv" local="" language="Чӑвашла" url="http://cv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="cxej" url="http://esperanto.blahus.cz/cxej/vikio/index.php/$1" wikiid="" api="" />
+      <iw prefix="cy" local="" language="Cymraeg" url="http://cy.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="cz" local="" url="http://cz.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="da" local="" language="Dansk" url="http://da.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="dbdump" local="" url="http://download.wikimedia.org/$1/latest/" wikiid="" api="" />
+      <iw prefix="dcc" url="http://www.dccwiki.com/$1" wikiid="" api="" />
+      <iw prefix="dcdatabase" url="http://dc.wikia.com/$1" wikiid="" api="" />
+      <iw prefix="dcma" url="http://www.christian-morgenstern.de/dcma/$1" wikiid="" api="" />
+      <iw prefix="de" local="" language="Deutsch" url="http://de.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="dejanews" url="http://www.deja.com/=dnc/getdoc.xp?AN=$1" wikiid="" api="" />
+      <iw prefix="demokraatia" url="http://wiki.demokraatia.ee/index.php/$1" wikiid="" api="" />
+      <iw prefix="devmo" url="https://developer.mozilla.org/en/docs/$1" wikiid="" api="" />
+      <iw prefix="dict" url="http://www.dict.org/bin/Dict?Database=*&amp;Form=Dict1&amp;Strategy=*&amp;Query=$1" wikiid="" api="" />
+      <iw prefix="dictionary" url="http://www.dict.org/bin/Dict?Database=*&amp;Form=Dict1&amp;Strategy=*&amp;Query=$1" wikiid="" api="" />
+      <iw prefix="diq" local="" language="Zazaki" url="http://diq.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="disinfopedia" url="http://www.sourcewatch.org/wiki.phtml?title=$1" wikiid="" api="" />
+      <iw prefix="distributedproofreaders" url="http://www.pgdp.net/wiki/$1" wikiid="" api="" />
+      <iw prefix="distributedproofreadersca" url="http://www.pgdpcanada.net/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="dk" local="" url="http://dk.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="dmoz" url="http://www.dmoz.org/$1" wikiid="" api="" />
+      <iw prefix="dmozs" url="http://www.dmoz.org/cgi-bin/search?search=$1" wikiid="" api="" />
+      <iw prefix="docbook" url="http://wiki.docbook.org/topic/$1" wikiid="" api="" />
+      <iw prefix="doi" url="http://dx.doi.org/$1" wikiid="" api="" />
+      <iw prefix="doom_wiki" url="http://doom.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="download" local="" url="http://download.wikimedia.org/$1" wikiid="" api="" />
+      <iw prefix="drae" url="http://buscon.rae.es/draeI/SrvltGUIBusUsual?LEMA=$1" wikiid="" api="" />
+      <iw prefix="dreamhost" url="http://wiki.dreamhost.com/index.php/$1" wikiid="" api="" />
+      <iw prefix="drumcorpswiki" url="http://www.drumcorpswiki.com/index.php/$1" wikiid="" api="" />
+      <iw prefix="dsb" local="" language="Dolnoserbski" url="http://dsb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="dv" local="" language="ދިވެހިބަސް" url="http://dv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="dwjwiki" url="http://www.suberic.net/cgi-bin/dwj/wiki.cgi?$1" wikiid="" api="" />
+      <iw prefix="dz" local="" language="ཇོང་ཁ" url="http://dz.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="echei" url="http://www.ikso.net/cgi-bin/wiki.pl?$1" wikiid="" api="" />
+      <iw prefix="ecoreality" url="http://www.EcoReality.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ecxei" url="http://www.ikso.net/cgi-bin/wiki.pl?$1" wikiid="" api="" />
+      <iw prefix="ee" local="" language="Eʋegbe" url="http://ee.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="el" local="" language="Ελληνικά" url="http://el.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="elibre" url="http://enciclopedia.us.es/index.php/$1" wikiid="" api="" />
+      <iw prefix="emacswiki" url="http://www.emacswiki.org/cgi-bin/wiki.pl?$1" wikiid="" api="" />
+      <iw prefix="eml" local="" language="Emiliàn e rumagnòl" url="http://eml.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="en" local="" language="English" url="http://en.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="encyc" url="http://encyc.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="energiewiki" url="http://www.netzwerk-energieberater.de/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="eo" local="" language="Esperanto" url="http://eo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="eokulturcentro" url="http://esperanto.toulouse.free.fr/nova/wikini/wakka.php?wiki=$1" wikiid="" api="" />
+      <iw prefix="epo" local="" url="http://epo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="es" local="" language="Español" url="http://es.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="et" local="" language="Eesti" url="http://et.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="etherpad" local="" url="http://etherpad.wikimedia.org/$1" wikiid="" api="" />
+      <iw prefix="eu" local="" language="Euskara" url="http://eu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="evowiki" url="http://wiki.cotch.net/index.php/$1" wikiid="" api="" />
+      <iw prefix="exotica" url="http://www.exotica.org.uk/wiki/$1" wikiid="" api="" />
+      <iw prefix="ext" local="" language="Estremeñu" url="http://ext.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="eĉei" url="http://www.ikso.net/cgi-bin/wiki.pl?$1" wikiid="" api="" />
+      <iw prefix="fa" local="" language="فارسی" url="http://fa.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="fanimutationwiki" url="http://wiki.animutationportal.com/index.php/$1" wikiid="" api="" />
+      <iw prefix="ff" local="" language="Fulfulde" url="http://ff.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="fi" local="" language="Suomi" url="http://fi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="finalempire" url="http://final-empire.sourceforge.net/cgi-bin/wiki.pl?$1" wikiid="" api="" />
+      <iw prefix="finalfantasy" url="http://finalfantasy.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="finnix" url="http://www.finnix.org/$1" wikiid="" api="" />
+      <iw prefix="fiu-vro" local="" language="Võro" url="http://fiu-vro.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="fj" local="" language="Na Vosa Vakaviti" url="http://fj.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="flickrphoto" url="http://www.flickr.com/photo.gne?id=$1" wikiid="" api="" />
+      <iw prefix="flickruser" url="http://www.flickr.com/people/$1" wikiid="" api="" />
+      <iw prefix="floralwiki" url="http://www.floralwiki.co.uk/wiki/$1" wikiid="" api="" />
+      <iw prefix="flyerwiki-de" url="http://de.flyerwiki.net/index.php/$1" wikiid="" api="" />
+      <iw prefix="fo" local="" language="Føroyskt" url="http://fo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="foldoc" url="http://www.foldoc.org/$1" wikiid="" api="" />
+      <iw prefix="forthfreak" url="http://wiki.forthfreak.net/index.cgi?$1" wikiid="" api="" />
+      <iw prefix="foxwiki" url="http://fox.wikis.com/wc.dll?Wiki~$1" wikiid="" api="" />
+      <iw prefix="fr" local="" language="Français" url="http://fr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="freebio" url="http://freebiology.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="freebsdman" url="http://www.FreeBSD.org/cgi/man.cgi?apropos=1&amp;query=$1" wikiid="" api="" />
+      <iw prefix="freeculturewiki" url="http://wiki.freeculture.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="freedomdefined" url="http://freedomdefined.org/$1" wikiid="" api="" />
+      <iw prefix="freefeel" url="http://freefeel.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="freekiwiki" url="http://wiki.freegeek.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="frp" local="" language="Arpetan" url="http://frp.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="frr" local="" language="Nordfriisk" url="http://frr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="fur" local="" language="Furlan" url="http://fur.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="fy" local="" language="Frysk" url="http://fy.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ga" local="" language="Gaeilge" url="http://ga.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="gag" local="" language="Gagauz" url="http://gag.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="gan" local="" language="贛語" url="http://gan.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ganfyd" url="http://ganfyd.org/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="gardenology" url="http://www.gardenology.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="gausswiki" url="http://gauss.ffii.org/$1" wikiid="" api="" />
+      <iw prefix="gd" local="" language="Gàidhlig" url="http://gd.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="gentoo-wiki" url="http://gentoo-wiki.com/$1" wikiid="" api="" />
+      <iw prefix="genwiki" url="http://wiki.genealogy.net/index.php/$1" wikiid="" api="" />
+      <iw prefix="gl" local="" language="Galego" url="http://gl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="glk" local="" language="گیلکی" url="http://glk.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="globalvoices" url="http://cyber.law.harvard.edu/dyn/globalvoices/wiki/$1" wikiid="" api="" />
+      <iw prefix="glossarwiki" url="http://glossar.hs-augsburg.de/$1" wikiid="" api="" />
+      <iw prefix="glossarywiki" url="http://glossary.hs-augsburg.de/$1" wikiid="" api="" />
+      <iw prefix="gn" local="" language="Avañe&#039;ẽ" url="http://gn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="got" local="" language="𐌲𐌿𐍄𐌹𐍃𐌺" url="http://got.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="gotamac" url="http://www.got-a-mac.org/$1" wikiid="" api="" />
+      <iw prefix="greatlakeswiki" url="http://greatlakeswiki.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="gu" local="" language="ગુજરાતી" url="http://gu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="guildwarswiki" url="http://www.wiki.guildwars.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="guildwiki" url="http://guildwars.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="gutenberg" url="http://www.gutenberg.org/etext/$1" wikiid="" api="" />
+      <iw prefix="gutenbergwiki" url="http://www.gutenberg.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="gv" local="" language="Gaelg" url="http://gv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="h2wiki" url="http://halowiki.net/p/$1" wikiid="" api="" />
+      <iw prefix="ha" local="" language="هَوُسَ" url="http://ha.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hak" local="" language="Hak-kâ-fa" url="http://hak.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hammondwiki" url="http://www.dairiki.org/HammondWiki/index.php3?$1" wikiid="" api="" />
+      <iw prefix="haw" local="" language="Hawai`i" url="http://haw.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="he" local="" language="עברית" url="http://he.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="heroeswiki" url="http://heroeswiki.com/$1" wikiid="" api="" />
+      <iw prefix="herzkinderwiki" url="http://www.herzkinderinfo.de/Mediawiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="hi" local="" language="हिन्दी" url="http://hi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hif" local="" language="Fiji Hindi" url="http://hif.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ho" local="" language="Hiri Motu" url="http://ho.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hr" local="" language="Hrvatski" url="http://hr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hrfwiki" url="http://fanstuff.hrwiki.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="hrwiki" url="http://www.hrwiki.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="hsb" local="" language="Hornjoserbsce" url="http://hsb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ht" local="" language="Kreyòl ayisyen" url="http://ht.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hu" local="" language="Magyar" url="http://hu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hupwiki" url="http://wiki.hup.hu/index.php/$1" wikiid="" api="" />
+      <iw prefix="hy" local="" language="Հայերեն" url="http://hy.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="hz" local="" language="Otsiherero" url="http://hz.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ia" local="" language="Interlingua" url="http://ia.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="id" local="" language="Bahasa Indonesia" url="http://id.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ie" local="" language="Interlingue" url="http://ie.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ig" local="" language="Igbo" url="http://ig.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ii" local="" language="ꆇꉙ" url="http://ii.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ik" local="" language="Iñupiak" url="http://ik.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ilo" local="" language="Ilokano" url="http://ilo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="imdbcharacter" url="http://www.imdb.com/character/ch$1/" wikiid="" api="" />
+      <iw prefix="imdbcompany" url="http://www.imdb.com/company/co$1/" wikiid="" api="" />
+      <iw prefix="imdbname" url="http://www.imdb.com/name/nm$1/" wikiid="" api="" />
+      <iw prefix="imdbtitle" url="http://www.imdb.com/title/tt$1/" wikiid="" api="" />
+      <iw prefix="infoanarchy" url="http://www.infoanarchy.org/en/$1" wikiid="" api="" />
+      <iw prefix="infosecpedia" url="http://infosecpedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="infosphere" url="http://theinfosphere.org/$1" wikiid="" api="" />
+      <iw prefix="io" local="" language="Ido" url="http://io.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="is" local="" language="Íslenska" url="http://is.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="iso639-3" url="http://www.sil.org/iso639-3/documentation.asp?id=$1" wikiid="" api="" />
+      <iw prefix="it" local="" language="Italiano" url="http://it.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="iu" local="" language="ᐃᓄᒃᑎᑐᑦ/inuktitut" url="http://iu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="iuridictum" url="http://iuridictum.pecina.cz/w/$1" wikiid="" api="" />
+      <iw prefix="ja" local="" language="日本語" url="http://ja.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="jameshoward" url="http://jameshoward.us/$1" wikiid="" api="" />
+      <iw prefix="javanet" url="http://wiki.java.net/bin/view/Main/$1" wikiid="" api="" />
+      <iw prefix="javapedia" url="http://wiki.java.net/bin/view/Javapedia/$1" wikiid="" api="" />
+      <iw prefix="jbo" local="" language="Lojban" url="http://jbo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="jefo" url="http://esperanto-jeunes.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="jiniwiki" url="http://www.cdegroot.com/cgi-bin/jini?$1" wikiid="" api="" />
+      <iw prefix="jira" url="https://jira.toolserver.org/browse/$1" wikiid="" api="" />
+      <iw prefix="jp" local="" url="http://jp.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="jspwiki" url="http://www.ecyrd.com/JSPWiki/Wiki.jsp?page=$1" wikiid="" api="" />
+      <iw prefix="jstor" url="http://www.jstor.org/journals/$1" wikiid="" api="" />
+      <iw prefix="jv" local="" language="Basa Jawa" url="http://jv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ka" local="" language="ქართული" url="http://ka.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kaa" local="" language="Qaraqalpaqsha" url="http://kaa.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kab" local="" language="Taqbaylit" url="http://kab.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kamelo" url="http://kamelopedia.mormo.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="karlsruhe" url="http://ka.stadtwiki.net/$1" wikiid="" api="" />
+      <iw prefix="kbd" local="" language="Адыгэбзэ" url="http://kbd.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kerimwiki" url="http://wiki.oxus.net/$1" wikiid="" api="" />
+      <iw prefix="kg" local="" language="Kongo" url="http://kg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ki" local="" language="Gĩkũyũ" url="http://ki.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kinowiki" url="http://kino.skripov.com/index.php/$1" wikiid="" api="" />
+      <iw prefix="kj" local="" language="Kwanyama" url="http://kj.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kk" local="" language="Қазақша" url="http://kk.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kl" local="" language="Kalaallisut" url="http://kl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="km" local="" language="ភាសាខ្មែរ" url="http://km.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kn" local="" language="ಕನ್ನಡ" url="http://kn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ko" local="" language="한국어" url="http://ko.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="koi" local="" language="Перем Коми" url="http://koi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kontuwiki" url="http://kontu.merri.net/wiki/$1" wikiid="" api="" />
+      <iw prefix="koslarwiki" url="http://wiki.koslar.de/index.php/$1" wikiid="" api="" />
+      <iw prefix="kpopwiki" url="http://www.kpopwiki.com/$1" wikiid="" api="" />
+      <iw prefix="kr" local="" language="Kanuri" url="http://kr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="krc" local="" language="Къарачай-Малкъар" url="http://krc.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ks" local="" language="कॉशुर - کٲشُر" url="http://ks.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ksh" local="" language="Ripoarisch" url="http://ksh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ku" local="" language="Kurdî" url="http://ku.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kv" local="" language="Коми" url="http://kv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="kw" local="" language="Kernowek" url="http://kw.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ky" local="" language="Кыргызча" url="http://ky.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="la" local="" language="Latina" url="http://la.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lad" local="" language="Ladino" url="http://lad.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lb" local="" language="Lëtzebuergesch" url="http://lb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lbe" local="" language="Лакку" url="http://lbe.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lg" local="" language="Luganda" url="http://lg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="li" local="" language="Limburgs" url="http://li.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lij" local="" language="Ligure" url="http://lij.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="linuxwiki" url="http://www.linuxwiki.de/$1" wikiid="" api="" />
+      <iw prefix="linuxwikide" url="http://www.linuxwiki.de/$1" wikiid="" api="" />
+      <iw prefix="liswiki" url="http://liswiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="literateprograms" url="http://en.literateprograms.org/$1" wikiid="" api="" />
+      <iw prefix="livepedia" url="http://www.livepedia.gr/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="lmo" local="" language="Lumbaart" url="http://lmo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ln" local="" language="Lingála" url="http://ln.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lo" local="" language="ລາວ" url="http://lo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lojban" url="http://www.lojban.org/tiki/tiki-index.php?page=$1" wikiid="" api="" />
+      <iw prefix="lostpedia" url="http://lostpedia.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="lqwiki" url="http://wiki.linuxquestions.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lt" local="" language="Lietuvių" url="http://lt.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ltg" local="" language="Latgaļu" url="http://ltg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="lugkr" url="http://lug-kr.sourceforge.net/cgi-bin/lugwiki.pl?$1" wikiid="" api="" />
+      <iw prefix="lv" local="" language="Latviešu" url="http://lv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="m" local="" url="http://meta.wikimedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mail" local="" url="https://lists.wikimedia.org/mailman/listinfo/$1" wikiid="" api="" />
+      <iw prefix="mailarchive" local="" url="http://lists.wikimedia.org/pipermail/$1" wikiid="" api="" />
+      <iw prefix="map-bms" local="" language="Basa Banyumasan" url="http://map-bms.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mariowiki" url="http://www.mariowiki.com/$1" wikiid="" api="" />
+      <iw prefix="marveldatabase" url="http://www.marveldatabase.com/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="mdf" local="" language="Мокшень" url="http://mdf.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="meatball" url="http://meatballwiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mediazilla" local="" url="https://bugzilla.wikimedia.org/$1" wikiid="" api="" />
+      <iw prefix="memoryalpha" url="http://memory-alpha.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="meta" local="" url="http://meta.wikimedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="metawiki" url="http://sunir.org/apps/meta.pl?$1" wikiid="" api="" />
+      <iw prefix="mg" local="" language="Malagasy" url="http://mg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mh" local="" language="Ebon" url="http://mh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mhr" local="" language="Олык Марий" url="http://mhr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mi" local="" language="Māori" url="http://mi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mineralienatlas" url="http://www.mineralienatlas.de/lexikon/index.php/$1" wikiid="" api="" />
+      <iw prefix="minnan" local="" url="http://minnan.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mk" local="" language="Македонски" url="http://mk.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ml" local="" language="മലയാളം" url="http://ml.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mn" local="" language="Монгол" url="http://mn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mo" local="" language="Молдовеняскэ" url="http://mo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="moinmoin" url="http://moinmo.in/$1" wikiid="" api="" />
+      <iw prefix="monstropedia" url="http://www.monstropedia.org/?title=$1" wikiid="" api="" />
+      <iw prefix="mosapedia" url="http://mosapedia.de/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="mozcom" url="http://mozilla.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="mozillawiki" url="https://wiki.mozilla.org/$1" wikiid="" api="" />
+      <iw prefix="mozillazinekb" url="http://kb.mozillazine.org/$1" wikiid="" api="" />
+      <iw prefix="mr" local="" language="मराठी" url="http://mr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mrj" local="" language="Кырык мары" url="http://mrj.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ms" local="" language="Bahasa Melayu" url="http://ms.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mt" local="" language="Malti" url="http://mt.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mus" local="" language="Mvskoke" url="http://mus.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="musicbrainz" url="http://musicbrainz.org/doc/$1" wikiid="" api="" />
+      <iw prefix="mwl" local="" language="Mirandés" url="http://mwl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mwod" url="http://www.merriam-webster.com/cgi-bin/dictionary?book=Dictionary&amp;va=$1" wikiid="" api="" />
+      <iw prefix="mwot" url="http://www.merriam-webster.com/cgi-bin/thesaurus?book=Thesaurus&amp;va=$1" wikiid="" api="" />
+      <iw prefix="my" local="" language="မြန်မာဘာသာ" url="http://my.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="myv" local="" language="Эрзянь" url="http://myv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="mzn" local="" language="مازِرونی" url="http://mzn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="n" local="" url="http://en.wikinews.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="na" local="" language="Dorerin Naoero" url="http://na.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nah" local="" language="Nāhuatl" url="http://nah.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nan" local="" language="Bân-lâm-gú" url="http://nan.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nap" local="" language="Nnapulitano" url="http://nap.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nb" local="" language="‪Norsk (bokmål)‬" url="http://nb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nds" local="" language="Plattdüütsch" url="http://nds.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nds-nl" local="" language="Nedersaksisch" url="http://nds-nl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ne" local="" language="नेपाली" url="http://ne.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="new" local="" language="नेपाल भाषा" url="http://new.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ng" local="" language="Oshiwambo" url="http://ng.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nkcells" url="http://www.nkcells.info/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="nl" local="" language="Nederlands" url="http://nl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nn" local="" language="‪Norsk (nynorsk)‬" url="http://nn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="no" local="" language="‪Norsk (bokmål)‬" url="http://no.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nosmoke" url="http://no-smok.net/nsmk/$1" wikiid="" api="" />
+      <iw prefix="nov" local="" language="Novial" url="http://nov.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nrm" local="" language="Nouormand" url="http://nrm.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nso" local="" language="Sesotho sa Leboa" url="http://nso.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="nv" local="" language="Diné bizaad" url="http://nv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ny" local="" language="Chi-Chewa" url="http://ny.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="oc" local="" language="Occitan" url="http://oc.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="olpc" url="http://wiki.laptop.org/go/$1" wikiid="" api="" />
+      <iw prefix="om" local="" language="Oromoo" url="http://om.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="onelook" url="http://www.onelook.com/?ls=b&amp;w=$1" wikiid="" api="" />
+      <iw prefix="openfacts" url="http://openfacts.berlios.de/index-en.phtml?title=$1" wikiid="" api="" />
+      <iw prefix="openlibrary" url="http://openlibrary.org/$1" wikiid="" api="" />
+      <iw prefix="openwetware" url="http://openwetware.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="openwiki" url="http://openwiki.com/?$1" wikiid="" api="" />
+      <iw prefix="opera7wiki" url="http://operawiki.info/$1" wikiid="" api="" />
+      <iw prefix="or" local="" language="ଓଡ଼ିଆ" url="http://or.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="organicdesign" url="http://www.organicdesign.co.nz/$1" wikiid="" api="" />
+      <iw prefix="orthodoxwiki" url="http://orthodoxwiki.org/$1" wikiid="" api="" />
+      <iw prefix="os" local="" language="Ирон" url="http://os.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="osi reference model" url="http://wiki.tigma.ee/index.php/$1" wikiid="" api="" />
+      <iw prefix="otrs" local="" url="https://ticket.wikimedia.org/otrs/index.pl?Action=AgentTicketZoom&amp;TicketID=$1" wikiid="" api="" />
+      <iw prefix="ourmedia" url="https://www.socialtext.net/ourmedia/index.cgi?$1" wikiid="" api="" />
+      <iw prefix="pa" local="" language="ਪੰਜਾਬੀ" url="http://pa.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pag" local="" language="Pangasinan" url="http://pag.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pam" local="" language="Kapampangan" url="http://pam.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="panawiki" url="http://wiki.alairelibre.net/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="pap" local="" language="Papiamentu" url="http://pap.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="patwiki" url="http://gauss.ffii.org/$1" wikiid="" api="" />
+      <iw prefix="pcd" local="" language="Picard" url="http://pcd.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pdc" local="" language="Deitsch" url="http://pdc.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="perlnet" url="http://perl.net.au/wiki/$1" wikiid="" api="" />
+      <iw prefix="personaltelco" url="http://www.personaltelco.net/$1" wikiid="" api="" />
+      <iw prefix="pfl" local="" language="Pälzisch" url="http://pfl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="phpwiki" url="http://phpwiki.sourceforge.net/phpwiki/index.php?$1" wikiid="" api="" />
+      <iw prefix="phwiki" url="http://wiki.pocketheaven.com/$1" wikiid="" api="" />
+      <iw prefix="pi" local="" language="पािऴ" url="http://pi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pih" local="" language="Norfuk / Pitkern" url="http://pih.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pl" local="" language="Polski" url="http://pl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="planetmath" url="http://planetmath.org/?op=getobj&amp;from=objects&amp;id=$1" wikiid="" api="" />
+      <iw prefix="pmeg" url="http://www.bertilow.com/pmeg/$1" wikiid="" api="" />
+      <iw prefix="pms" local="" language="Piemontèis" url="http://pms.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pnb" local="" language="پنجابی" url="http://pnb.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pnt" local="" language="Ποντιακά" url="http://pnt.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ps" local="" language="پښتو" url="http://ps.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="psycle" url="http://psycle.sourceforge.net/wiki/$1" wikiid="" api="" />
+      <iw prefix="pt" local="" language="Português" url="http://pt.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="pythoninfo" url="http://www.python.org/cgi-bin/moinmoin/$1" wikiid="" api="" />
+      <iw prefix="pythonwiki" url="http://www.pythonwiki.de/$1" wikiid="" api="" />
+      <iw prefix="pywiki" url="http://c2.com/cgi/wiki?$1" wikiid="" api="" />
+      <iw prefix="q" local="" url="http://en.wikiquote.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="qu" local="" language="Runa Simi" url="http://qu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="reuterswiki" url="http://glossary.reuters.com/index.php/$1" wikiid="" api="" />
+      <iw prefix="revo" url="http://purl.org/NET/voko/revo/art/$1.html" wikiid="" api="" />
+      <iw prefix="rheinneckar" url="http://rhein-neckar-wiki.de/$1" wikiid="" api="" />
+      <iw prefix="rm" local="" language="Rumantsch" url="http://rm.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="rmy" local="" language="Romani" url="http://rmy.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="rn" local="" language="Kirundi" url="http://rn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ro" local="" language="Română" url="http://ro.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="roa-rup" local="" language="Armãneashce" url="http://roa-rup.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="roa-tara" local="" language="Tarandíne" url="http://roa-tara.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="robowiki" url="http://robowiki.net/?$1" wikiid="" api="" />
+      <iw prefix="rowiki" url="http://wiki.rennkuckuck.de/index.php/$1" wikiid="" api="" />
+      <iw prefix="ru" local="" language="Русский" url="http://ru.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="rue" local="" language="Русиньскый" url="http://rue.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="rw" local="" language="Kinyarwanda" url="http://rw.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="s" local="" url="http://en.wikisource.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="s23wiki" url="http://s23.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sa" local="" language="संस्कृतम्" url="http://sa.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sah" local="" language="Саха тыла" url="http://sah.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sc" local="" language="Sardu" url="http://sc.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="scholar" url="http://scholar.google.com/scholar?q=$1" wikiid="" api="" />
+      <iw prefix="schoolswp" local="" url="http://schools-wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="scn" local="" language="Sicilianu" url="http://scn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sco" local="" language="Scots" url="http://sco.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="scores" url="http://imslp.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="scoutwiki" url="http://en.scoutwiki.org/$1" wikiid="" api="" />
+      <iw prefix="scramble" url="http://www.scramble.nl/wiki/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="sd" local="" language="سنڌي" url="http://sd.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="se" local="" language="Sámegiella" url="http://se.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="seapig" url="http://www.seapig.org/$1" wikiid="" api="" />
+      <iw prefix="seattlewiki" url="http://seattlewiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="seattlewireless" url="http://seattlewireless.net/?$1" wikiid="" api="" />
+      <iw prefix="semantic-mw" local="" url="http://www.semantic-mediawiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="senseislibrary" url="http://senseis.xmp.net/?$1" wikiid="" api="" />
+      <iw prefix="sep11" local="" url="http://sep11.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sg" local="" language="Sängö" url="http://sg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sh" local="" language="Srpskohrvatski / Српскохрватски" url="http://sh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="si" local="" language="සිංහල" url="http://si.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="silcode" url="http://www.sil.org/iso639-3/documentation.asp?id=$1" wikiid="" api="" />
+      <iw prefix="simple" local="" language="Simple English" url="http://simple.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sk" local="" language="Slovenčina" url="http://sk.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sl" local="" language="Slovenščina" url="http://sl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="slashdot" url="http://slashdot.org/article.pl?sid=$1" wikiid="" api="" />
+      <iw prefix="slwiki" url="http://wiki.secondlife.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="sm" local="" language="Gagana Samoa" url="http://sm.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="smikipedia" url="http://www.smiki.de/$1" wikiid="" api="" />
+      <iw prefix="sn" local="" language="chiShona" url="http://sn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="so" local="" language="Soomaaliga" url="http://so.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sourceforge" url="http://sourceforge.net/$1" wikiid="" api="" />
+      <iw prefix="sq" local="" language="Shqip" url="http://sq.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="squeak" url="http://wiki.squeak.org/squeak/$1" wikiid="" api="" />
+      <iw prefix="sr" local="" language="Српски / Srpski" url="http://sr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="srn" local="" language="Sranantongo" url="http://srn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ss" local="" language="SiSwati" url="http://ss.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="st" local="" language="Sesotho" url="http://st.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="stable" url="http://stable.toolserver.org/$1" wikiid="" api="" />
+      <iw prefix="stats" local="" url="http://stats.wikimedia.org/$1" wikiid="" api="" />
+      <iw prefix="stq" local="" language="Seeltersk" url="http://stq.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="strategywiki" url="http://strategywiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="su" local="" language="Basa Sunda" url="http://su.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="sv" local="" language="Svenska" url="http://sv.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="svgwiki" url="http://wiki.svg.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="sw" local="" language="Kiswahili" url="http://sw.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="swinbrain" url="http://mercury.it.swin.edu.au/swinbrain/index.php/$1" wikiid="" api="" />
+      <iw prefix="swingwiki" url="http://www.swingwiki.org/$1" wikiid="" api="" />
+      <iw prefix="swtrain" url="http://train.spottingworld.com/$1" wikiid="" api="" />
+      <iw prefix="szl" local="" language="Ślůnski" url="http://szl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ta" local="" language="தமிழ்" url="http://ta.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tabwiki" url="http://www.tabwiki.com/index.php/$1" wikiid="" api="" />
+      <iw prefix="tavi" url="http://tavi.sourceforge.net/$1" wikiid="" api="" />
+      <iw prefix="tclerswiki" url="http://wiki.tcl.tk/$1" wikiid="" api="" />
+      <iw prefix="te" local="" language="తెలుగు" url="http://te.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="technorati" url="http://www.technorati.com/search/$1" wikiid="" api="" />
+      <iw prefix="tesoltaiwan" url="http://www.tesol-taiwan.org/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="tet" local="" language="Tetun" url="http://tet.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tg" local="" language="Тоҷикӣ" url="http://tg.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="th" local="" language="ไทย" url="http://th.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="thelemapedia" url="http://www.thelemapedia.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="theopedia" url="http://www.theopedia.com/$1" wikiid="" api="" />
+      <iw prefix="thinkwiki" url="http://www.thinkwiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ti" local="" language="ትግርኛ" url="http://ti.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tibiawiki" url="http://tibia.erig.net/$1" wikiid="" api="" />
+      <iw prefix="ticket" local="" url="https://ticket.wikimedia.org/otrs/index.pl?Action=AgentTicketZoom&amp;TicketNumber=$1" wikiid="" api="" />
+      <iw prefix="tk" local="" language="Türkmençe" url="http://tk.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tl" local="" language="Tagalog" url="http://tl.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tmbw" url="http://tmbw.net/wiki/$1" wikiid="" api="" />
+      <iw prefix="tmnet" url="http://www.technomanifestos.net/?$1" wikiid="" api="" />
+      <iw prefix="tmwiki" url="http://www.EasyTopicMaps.com/?page=$1" wikiid="" api="" />
+      <iw prefix="tn" local="" language="Setswana" url="http://tn.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="to" local="" language="lea faka-Tonga" url="http://to.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tpi" local="" language="Tok Pisin" url="http://tpi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tr" local="" language="Türkçe" url="http://tr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ts" local="" language="Xitsonga" url="http://ts.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tswiki" url="https://wiki.toolserver.org/view/$1" wikiid="" api="" />
+      <iw prefix="tt" local="" language="Татарча/Tatarça" url="http://tt.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tum" local="" language="chiTumbuka" url="http://tum.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="turismo" url="http://www.tejo.org/turismo/$1" wikiid="" api="" />
+      <iw prefix="tviv" url="http://tviv.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tvtropes" url="http://www.tvtropes.org/pmwiki/pmwiki.php/Main/$1" wikiid="" api="" />
+      <iw prefix="tw" local="" language="Twi" url="http://tw.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="twiki" url="http://twiki.org/cgi-bin/view/$1" wikiid="" api="" />
+      <iw prefix="ty" local="" language="Reo Mā`ohi" url="http://ty.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="tyvawiki" url="http://www.tyvawiki.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="udm" local="" language="Удмурт" url="http://udm.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="ug" local="" language="ئۇيغۇرچە / Uyghurche‎" url="http://ug.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="uk" local="" language="Українська" url="http://uk.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="unreal" url="http://wiki.beyondunreal.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="ur" local="" language="اردو" url="http://ur.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="urbandict" url="http://www.urbandictionary.com/define.php?term=$1" wikiid="" api="" />
+      <iw prefix="usej" url="http://www.tejo.org/usej/$1" wikiid="" api="" />
+      <iw prefix="usemod" url="http://www.usemod.com/cgi-bin/wiki.pl?$1" wikiid="" api="" />
+      <iw prefix="uz" local="" language="O&#039;zbek" url="http://uz.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="v" local="" url="http://en.wikiversity.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="valuewiki" url="http://www.valuewiki.com/w/$1" wikiid="" api="" />
+      <iw prefix="ve" local="" language="Tshivenda" url="http://ve.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="vec" local="" language="Vèneto" url="http://vec.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="vi" local="" language="Tiếng Việt" url="http://vi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="vinismo" url="http://vinismo.com/en/$1" wikiid="" api="" />
+      <iw prefix="vkol" url="http://kol.coldfront.net/thekolwiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="vlos" url="http://www.thuvienkhoahoc.com/tusach/$1" wikiid="" api="" />
+      <iw prefix="vls" local="" language="West-Vlams" url="http://vls.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="vo" local="" language="Volapük" url="http://vo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="voipinfo" url="http://www.voip-info.org/wiki/view/$1" wikiid="" api="" />
+      <iw prefix="w" local="" url="http://en.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="wa" local="" language="Walon" url="http://wa.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="war" local="" language="Winaray" url="http://war.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="webisodes" url="http://www.webisodes.org/$1" wikiid="" api="" />
+      <iw prefix="wiki" url="http://c2.com/cgi/wiki?$1" wikiid="" api="" />
+      <iw prefix="wikia" url="http://www.wikia.com/wiki/c:$1" wikiid="" api="" />
+      <iw prefix="wikiasite" url="http://www.wikia.com/wiki/c:$1" wikiid="" api="" />
+      <iw prefix="wikichat" url="http://www.wikichat.org/$1" wikiid="" api="" />
+      <iw prefix="wikichristian" url="http://www.wikichristian.org/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="wikicities" url="http://www.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="wikicity" url="http://www.wikia.com/wiki/c:$1" wikiid="" api="" />
+      <iw prefix="wikif1" url="http://www.wikif1.org/$1" wikiid="" api="" />
+      <iw prefix="wikifur" url="http://en.wikifur.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="wikihow" url="http://www.wikihow.com/$1" wikiid="" api="" />
+      <iw prefix="wikiindex" url="http://wikiindex.org/$1" wikiid="" api="" />
+      <iw prefix="wikilemon" url="http://wiki.illemonati.com/$1" wikiid="" api="" />
+      <iw prefix="wikilivres" url="http://wikilivres.info/wiki/$1" wikiid="" api="" />
+      <iw prefix="wikimac-de" url="http://apfelwiki.de/wiki/Main/$1" wikiid="" api="" />
+      <iw prefix="wikinfo" url="http://www.wikinfo.org/index.php/$1" wikiid="" api="" />
+      <iw prefix="wikinvest" url="http://www.wikinvest.com/$1" wikiid="" api="" />
+      <iw prefix="wikipaltz" url="http://www.wikipaltz.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="wikischool" url="http://www.wikischool.de/wiki/$1" wikiid="" api="" />
+      <iw prefix="wikiskripta" url="http://www.wikiskripta.eu/index.php/$1" wikiid="" api="" />
+      <iw prefix="wikisophia" url="http://wikisophia.org/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="wikispot" url="http://wikispot.org/?action=gotowikipage&amp;v=$1" wikiid="" api="" />
+      <iw prefix="wikitech" local="" url="http://wikitech.wikimedia.org/view/$1" wikiid="" api="" />
+      <iw prefix="wikiti" url="http://wikiti.denglend.net/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="wikitravel" url="http://wikitravel.org/en/$1" wikiid="" api="" />
+      <iw prefix="wikitree" url="http://wikitree.org/index.php?title=$1" wikiid="" api="" />
+      <iw prefix="wikiweet" url="http://wikiweet.nl/wiki/$1" wikiid="" api="" />
+      <iw prefix="wikiwikiweb" url="http://c2.com/cgi/wiki?$1" wikiid="" api="" />
+      <iw prefix="wikt" local="" url="http://en.wiktionary.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="wipipedia" url="http://www.londonfetishscene.com/wipi/index.php/$1" wikiid="" api="" />
+      <iw prefix="wlug" url="http://www.wlug.org.nz/$1" wikiid="" api="" />
+      <iw prefix="wmar" local="" url="http://www.wikimedia.org.ar/wiki/$1" wikiid="" api="" />
+      <iw prefix="wmau" local="" url="http://wikimedia.org.au/wiki/$1" wikiid="" api="" />
+      <iw prefix="wmca" url="http://wikimedia.ca/wiki/$1" wikiid="" api="" />
+      <iw prefix="wmch" url="http://www.wikimedia.ch/$1" wikiid="" api="" />
+      <iw prefix="wmdc" url="http://wikimediadc.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="wmfr" url="http://wikimedia.fr/$1" wikiid="" api="" />
+      <iw prefix="wmhk" url="http://wikimedia.hk/index.php/$1" wikiid="" api="" />
+      <iw prefix="wmhu" url="http://wiki.media.hu/wiki/$1" wikiid="" api="" />
+      <iw prefix="wmid" url="http://www.wikimedia.or.id/wiki/$1" wikiid="" api="" />
+      <iw prefix="wmil" local="" url="http://www.wikimedia.org.il/$1" wikiid="" api="" />
+      <iw prefix="wmin" url="http://wikimedia.in/wiki/$1" wikiid="" api="" />
+      <iw prefix="wmit" url="http://wikimedia.it/index.php/$1" wikiid="" api="" />
+      <iw prefix="wmtw" url="http://wikimedia.tw/wiki/index.php5/$1" wikiid="" api="" />
+      <iw prefix="wo" local="" language="Wolof" url="http://wo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="wookieepedia" url="http://starwars.wikia.com/wiki/$1" wikiid="" api="" />
+      <iw prefix="world66" url="http://www.world66.com/$1" wikiid="" api="" />
+      <iw prefix="wowwiki" url="http://www.wowwiki.com/$1" wikiid="" api="" />
+      <iw prefix="wqy" url="http://wqy.sourceforge.net/cgi-bin/index.cgi?$1" wikiid="" api="" />
+      <iw prefix="wurmpedia" url="http://www.wurmonline.com/wiki/index.php/$1" wikiid="" api="" />
+      <iw prefix="wuu" local="" language="吴语" url="http://wuu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="xal" local="" language="Хальмг" url="http://xal.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="xh" local="" language="isiXhosa" url="http://xh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="xmf" local="" language="მარგალური" url="http://xmf.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="yi" local="" language="ייִדיש" url="http://yi.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="yo" local="" language="Yorùbá" url="http://yo.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="za" local="" language="Vahcuengh" url="http://za.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zea" local="" language="Zeêuws" url="http://zea.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zh" local="" language="中文" url="http://zh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zh-cfr" local="" url="http://zh-cfr.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zh-classical" local="" language="文言" url="http://zh-classical.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zh-cn" local="" language="‪中文(中国大陆)‬" url="http://zh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zh-min-nan" local="" language="Bân-lâm-gú" url="http://zh-min-nan.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zh-tw" local="" language="‪中文(台灣)‬" url="http://zh.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zh-yue" local="" language="粵語" url="http://zh-yue.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zrhwiki" url="http://www.zrhwiki.ch/wiki/$1" wikiid="" api="" />
+      <iw prefix="zu" local="" language="isiZulu" url="http://zu.wikipedia.org/wiki/$1" wikiid="" api="" />
+      <iw prefix="zum" url="http://wiki.zum.de/$1" wikiid="" api="" />
+      <iw prefix="zwiki" url="http://www.zwiki.org/$1" wikiid="" api="" />
+      <iw prefix="zzz wiki" url="http://wiki.zzz.ee/index.php/$1" wikiid="" api="" />
+      <iw prefix="Ĉej" url="http://esperanto.blahus.cz/cxej/vikio/index.php/$1" wikiid="" api="" />
+    </interwikimap>
   </query>
 </api>
