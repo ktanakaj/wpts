@@ -120,6 +120,35 @@ namespace Honememo.Wptscs.Parsers
         #region 公開メソッドテストケース
 
         /// <summary>
+        /// IsSubpageメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestIsSubpage()
+        {
+            MediaWikiLink element = new MediaWikiLink();
+
+            // 通常の記事へのリンク
+            element.Title = "testtitle";
+            Assert.IsFalse(element.IsSubpage());
+
+            // 先頭が / で始まるサブページへのリンク
+            element.Title = "/testtitle";
+            Assert.IsTrue(element.IsSubpage());
+            element.Title = "/testtitle/";
+            Assert.IsTrue(element.IsSubpage());
+
+            // 先頭が ../ で始まるサブページへのリンク
+            element.Title = "../";
+            Assert.IsTrue(element.IsSubpage());
+            element.Title = "../../";
+            Assert.IsTrue(element.IsSubpage());
+            element.Title = "../testtitle";
+            Assert.IsTrue(element.IsSubpage());
+            element.Title = "../../testtitle";
+            Assert.IsTrue(element.IsSubpage());
+        }
+
+        /// <summary>
         /// GetLinkStringメソッドテストケース。
         /// </summary>
         [Test]

@@ -180,20 +180,19 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsTrue(parser.TryParse("{{testtitle/subpage}}", out element));
             template = (MediaWikiTemplate)element;
             Assert.AreEqual("testtitle/subpage", template.Title);
-            Assert.IsFalse(template.IsSubpage);
+            Assert.IsFalse(template.IsSubpage());
 
             // 記事名が省略されているケース
             Assert.IsTrue(parser.TryParse("{{/subpage}}", out element));
             template = (MediaWikiTemplate)element;
             Assert.AreEqual("/subpage", template.Title);
-            Assert.IsTrue(template.IsSubpage);
+            Assert.IsTrue(template.IsSubpage());
 
             // 記事名が省略されているケース2
-            // TODO: サブページの相対パスは2012年1月現在未対応、対応するなら方法から要検討
             Assert.IsTrue(parser.TryParse("{{../../subpage}}", out element));
             template = (MediaWikiTemplate)element;
             Assert.AreEqual("../../subpage", template.Title);
-            Assert.IsFalse(template.IsSubpage);
+            Assert.IsTrue(template.IsSubpage());
         }
 
         /// <summary>

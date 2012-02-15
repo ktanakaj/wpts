@@ -198,12 +198,7 @@ namespace Honememo.Wptscs.Parsers
             link.PipeTexts = pipeTexts;
 
             // 記事名から情報を抽出
-            if (link.Title.StartsWith("/"))
-            {
-                // サブページ（[[/サブページ]]みたいなの）
-                link.IsSubpage = true;
-            }
-            else if (link.Title.StartsWith(":"))
+            if (link.Title.StartsWith(":"))
             {
                 // 先頭が :（[[:en:他言語版記事名]]みたいなの）
                 link.IsColon = true;

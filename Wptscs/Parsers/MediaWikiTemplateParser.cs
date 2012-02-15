@@ -160,12 +160,7 @@ namespace Honememo.Wptscs.Parsers
             template.PipeTexts = pipeTexts;
 
             // 記事名から情報を抽出
-            if (template.Title.StartsWith("/") == true)
-            {
-                // サブページ（{{/サブページ}}みたいなの）
-                template.IsSubpage = true;
-            }
-            else if (template.Title.StartsWith(":"))
+            if (template.Title.StartsWith(":"))
             {
                 // 先頭が :（テンプレート名前空間ではなく標準名前空間となる）
                 template.IsColon = true;

@@ -103,27 +103,25 @@ namespace Honememo.Wptscs.Parsers
             set;
         }
 
-        /// <summary>
-        /// 記事名の先頭がサブページを示す / で始まるか？
-        /// </summary>
-        /// <remarks>※ 2011年5月現在、この処理には不足あり。</remarks>
-        public virtual bool IsSubpage
-        {
-            // TODO: サブページには相対パスで[[../～]]や[[../../～]]というような書き方もある模様。
-            //       この辺りの処理は[[Help:サブページ]]を元に全面的に見直す必要あり
-            get;
-            set;
-        }
-
         #endregion
 
         #region 公開メソッド
 
         /// <summary>
+        /// サブページ形式のリンクか？
+        /// </summary>
+        /// <returns>サブページ形式の場合<c>true</c>。</returns>
+        public virtual bool IsSubpage()
+        {
+            // 記事名部分が / または ../ で始まる場合サブページ形式と判定
+            return this.Title != null && (this.Title.StartsWith("/") || this.Title.StartsWith("../"));
+        }
+
+        /// <summary>
         /// この要素を書式化したリンク先部分のテキスト（先頭の:から言語コード, 記事名, セクションまで）を返す。
         /// </summary>
         /// <returns>記事名部分のテキスト。</returns>
-        public string GetLinkString()
+        public virtual string GetLinkString()
         {
             StringBuilder b = new StringBuilder();
 

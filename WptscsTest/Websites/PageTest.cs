@@ -3,7 +3,7 @@
 //      Pageのテストクラスソース。</summary>
 //
 // <copyright file="PageTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -22,6 +22,8 @@ namespace Honememo.Wptscs.Websites
     [TestFixture]
     public class PageTest
     {
+        #region モッククラス
+
         /// <summary>
         /// Pageテスト用のモッククラスです。
         /// </summary>
@@ -42,6 +44,8 @@ namespace Honememo.Wptscs.Websites
 
             #endregion
         }
+
+        #endregion
 
         #region コンストラクタテストケース
 
@@ -105,7 +109,7 @@ namespace Honememo.Wptscs.Websites
         [ExpectedException(typeof(ArgumentException))]
         public void TestConstructorTitleBlank()
         {
-            Page page = new Page(new DummySite(), "  ");
+            new Page(new DummySite(), "  ");
         }
 
         #endregion

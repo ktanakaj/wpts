@@ -121,21 +121,21 @@ namespace Honememo.Wptscs.Logics
 
             // 対象記事に言語間リンクが存在する場合、処理を継続するか確認
             // ※ 言語間リンク取得中は、処理状態を解析中に変更
-            string interWiki = null;
+            MediaWikiLink interlanguage = null;
             this.ChangeStatusInExecuting(
-                () => interWiki = article.GetInterlanguage(this.To.Language.Code),
+                () => interlanguage = article.GetInterlanguage(this.To.Language.Code),
                 Resources.StatusParsing);
-            if (!String.IsNullOrEmpty(interWiki))
+            if (interlanguage != null)
             {
                 // 確認処理の最中は処理時間をカウントしない（ダイアログ等を想定するため）
                 this.Stopwatch.Stop();
-                if (this.IsContinueAtInterwikiExisted != null && !this.IsContinueAtInterwikiExisted(interWiki))
+                if (this.IsContinueAtInterwikiExisted != null && !this.IsContinueAtInterwikiExisted(interlanguage.Title))
                 {
                     throw new ApplicationException("user canceled");
                 }
 
                 this.Stopwatch.Start();
-                this.Logger.AddResponse(Resources.LogMessageTargetArticleHadInterWiki, interWiki);
+                this.Logger.AddResponse(Resources.LogMessageTargetArticleHadInterWiki, interlanguage.Title);
             }
 
             // 冒頭部を作成
@@ -143,9 +143,9 @@ namespace Honememo.Wptscs.Logics
 
             // 言語間リンク・定型句の変換、実行中は処理状態を解析中に設定
             this.Logger.AddSeparator();
-            this.Logger.AddResponse(Resources.LogMessageStartParseAndReplace, interWiki);
+            this.Logger.AddResponse(Resources.LogMessageStartParseAndReplace);
             this.ChangeStatusInExecuting(
-                () => this.Text += this.ReplaceElement(new MediaWikiParser(this.From).Parse(article.Text), article.Title).ToString(),
+                () => this.Text += this.ReplaceElement(article.Element, article).ToString(),
                 Resources.StatusParsing);
 
             // 記事の末尾に新しい言語間リンクと、コメントを追記
@@ -244,9 +244,9 @@ namespace Honememo.Wptscs.Logics
         /// 渡されたページ要素の変換を行う。
         /// </summary>
         /// <param name="element">ページ要素。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換後のページ要素。</returns>
-        protected virtual IElement ReplaceElement(IElement element, string parent)
+        protected virtual IElement ReplaceElement(IElement element, MediaWikiPage parent)
         {
             // ユーザーからの中止要求をチェック
             this.ThrowExceptionIfCanceled();
@@ -286,20 +286,37 @@ namespace Honememo.Wptscs.Logics
         /// 内部リンクを解析し、変換先言語の記事へのリンクに変換する。
         /// </summary>
         /// <param name="link">変換元リンク。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換済みリンク。</returns>
-        protected virtual IElement ReplaceLink(MediaWikiLink link, string parent)
+        protected virtual IElement ReplaceLink(MediaWikiLink link, MediaWikiPage parent)
         {
             // 記事名が存在しないor自記事内の別セクションへのリンクの場合、記事名絡みの処理を飛ばす
-            if (!this.IsSectionLink(link, parent))
+            if (!this.IsSectionLink(link, parent.Title))
             {
                 // 記事名の種類に応じて処理を実施
                 MediaWikiPage article = new MediaWikiPage(this.From, link.Title);
 
-                if (link.IsSubpage)
+                bool child = false;
+                if (link.IsSubpage())
                 {
-                    // サブページの場合、記事名を補完
-                    link.Title = parent + link.Title;
+                    // サブページ（子）の場合だけ後で記事名を復元するので記録
+                    child = link.Title.StartsWith("/");
+                    
+                    // ページ名を完全な形に補完
+                    string title = parent.Normalize(link);
+                    if (parent.Title.StartsWith(title))
+                    {
+                        // サブページ（親）の場合、変換してもしょうがないのでセクションだけチェックして終了
+                        if (!String.IsNullOrEmpty(link.Section))
+                        {
+                            link.Section = this.ReplaceLinkSection(link.Section);
+                            link.ParsedString = null;
+                        }
+
+                        return link;
+                    }
+
+                    link.Title = title;
                 }
                 else if (!String.IsNullOrEmpty(link.Interwiki))
                 {
@@ -317,14 +334,6 @@ namespace Honememo.Wptscs.Logics
                     // カテゴリで記事へのリンクでない（[[:Category:xxx]]みたいなリンクでない）場合、
                     // カテゴリ用の変換を実施
                     return this.ReplaceLinkCategory(link);
-                }
-                else if (StringUtils.DefaultString(link.Title).StartsWith("../"))
-                {
-                    // ..形式のサブページが処理できない既知の不具合への対応、警告メッセージを出す
-                    // ※ 2012年2月現在、..形式のサブページはIsSubpageも立たない
-                    this.Logger.AddSource(link);
-                    this.Logger.AddResponse(Resources.LogMessageErrorPageName, link.Title);
-                    return link;
                 }
 
                 // 専用処理の無い内部リンクの場合、言語間リンクによる置き換えを行う
@@ -345,9 +354,10 @@ namespace Honememo.Wptscs.Logics
                     link.Title = this.From.Language.Code + ':' + link.Title;
                     link.IsColon = true;
                 }
-                else if (link.IsSubpage)
+                else if (child)
                 {
-                    // 言語間リンクが存在してサブページの場合、親ページ部分を消す
+                    // 言語間リンクが存在してサブページ（子）の場合、親ページ部分を消す
+                    // TODO: 兄弟や叔父のパターンも対処したい（ややこしいので現状未対応）
                     link.Title = StringUtils.Substring(interWiki, interWiki.IndexOf('/'));
                 }
                 else
@@ -380,9 +390,9 @@ namespace Honememo.Wptscs.Logics
         /// テンプレートを解析し、変換先言語の記事へのテンプレートに変換する。
         /// </summary>
         /// <param name="template">変換元テンプレート。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換済みテンプレート。</returns>
-        protected virtual IElement ReplaceTemplate(MediaWikiTemplate template, string parent)
+        protected virtual IElement ReplaceTemplate(MediaWikiTemplate template, MediaWikiPage parent)
         {
             // システム変数（{{PAGENAME}}とか）の場合は対象外
             if (this.From.IsMagicWord(template.Title))
@@ -431,9 +441,9 @@ namespace Honememo.Wptscs.Logics
         /// 指定された見出しに対して、対訳表による変換を行う。
         /// </summary>
         /// <param name="heading">見出し。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換後の見出し。</returns>
-        protected virtual IElement ReplaceHeading(MediaWikiHeading heading, string parent)
+        protected virtual IElement ReplaceHeading(MediaWikiHeading heading, MediaWikiPage parent)
         {
             // 変換元ログ出力
             this.Logger.AddSource(heading);
@@ -464,9 +474,9 @@ namespace Honememo.Wptscs.Logics
         /// 変数要素を再帰的に解析し、変換先言語の記事への要素に変換する。
         /// </summary>
         /// <param name="variable">変換元変数要素。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換済み変数要素。</returns>
-        protected virtual IElement ReplaceVariable(MediaWikiVariable variable, string parent)
+        protected virtual IElement ReplaceVariable(MediaWikiVariable variable, MediaWikiPage parent)
         {
             // 変数、これ自体は処理しないが、再帰的に探索
             string old = variable.Value.ToString();
@@ -484,9 +494,9 @@ namespace Honememo.Wptscs.Logics
         /// 要素を再帰的に解析し、変換先言語の記事への要素に変換する。
         /// </summary>
         /// <param name="listElement">変換元要素。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換済み要素。</returns>
-        protected virtual IElement ReplaceListElement(ListElement listElement, string parent)
+        protected virtual IElement ReplaceListElement(ListElement listElement, MediaWikiPage parent)
         {
             // 値を格納する要素、これ自体は処理しないが、再帰的に探索
             for (int i = 0; i < listElement.Count; i++)
@@ -628,15 +638,15 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 対訳表に存在しない場合は、普通に取得し表に記録
-            string interWiki = this.GetInterlanguageWithCreateCache(title, out item);
-            if (interWiki != null)
+            string interlanguage = this.GetInterlanguageWithCreateCache(title, out item);
+            if (interlanguage != null)
             {
                 // ページ自体が存在しない場合を除き、結果を対訳表に登録
                 // ※ キャッシュとしては登録すべきかもしれないが、一応"対訳表"であるので
                 this.PutValueAtItemTable(title, item);
             }
 
-            return interWiki;
+            return interlanguage;
         }
 
         /// <summary>
@@ -659,23 +669,27 @@ namespace Honememo.Wptscs.Logics
                 page = this.GetDestinationPage(page.Redirect.Title);
             }
 
-            // 記事があればその言語間リンクを取得
-            string interWiki = null;
-            if (page != null)
+            if (page == null)
             {
-                interWiki = page.GetInterlanguage(this.To.Language.Code);
-                item.Word = interWiki;
-                if (!String.IsNullOrEmpty(interWiki))
-                {
-                    this.Logger.AddDestination(new MediaWikiLink(interWiki));
-                }
-                else
-                {
-                    this.Logger.AddDestination(new TextElement(Resources.LogMessageInterWikiNotFound));
-                }
+                // ページ自体が存在しない場合はnull
+                return null;
             }
 
-            return interWiki;
+            // 記事があればその言語間リンクを取得
+            MediaWikiLink interlanguage = page.GetInterlanguage(this.To.Language.Code);
+            if (interlanguage != null)
+            {
+                item.Word = interlanguage.Title;
+                this.Logger.AddDestination(interlanguage);
+            }
+            else
+            {
+                // 見つからない場合は空
+                item.Word = String.Empty;
+                this.Logger.AddDestination(new TextElement(Resources.LogMessageInterWikiNotFound));
+            }
+
+            return item.Word;
         }
 
         /// <summary>
@@ -790,9 +804,9 @@ namespace Honememo.Wptscs.Logics
         /// ファイル指定の内部リンクを解析し、変換先言語で参照可能なファイルへのリンクに変換する。
         /// </summary>
         /// <param name="link">変換元リンク。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換済みリンク。</returns>
-        private IElement ReplaceLinkFile(MediaWikiLink link, string parent)
+        private IElement ReplaceLinkFile(MediaWikiLink link, MediaWikiPage parent)
         {
             // 名前空間を翻訳先言語の書式に変換、またパラメータ部を再帰的に処理
             link.Title = this.ReplaceLinkNamespace(link.Title, this.To.FileNamespace);
@@ -854,9 +868,9 @@ namespace Honememo.Wptscs.Logics
         /// 渡された要素リストに対して<see cref="ReplaceElement"/>による変換を行う。
         /// </summary>
         /// <param name="elements">変換元要素リスト。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>変換済み要素リスト。</returns>
-        private IList<IElement> ReplaceElements(IList<IElement> elements, string parent)
+        private IList<IElement> ReplaceElements(IList<IElement> elements, MediaWikiPage parent)
         {
             if (elements == null)
             {
@@ -876,41 +890,27 @@ namespace Honememo.Wptscs.Logics
         /// テンプレート名に必要に応じて名前空間を補完する。
         /// </summary>
         /// <param name="template">テンプレート。</param>
-        /// <param name="parent">サブページ用の親記事タイトル。</param>
+        /// <param name="parent">ページ要素を取得した変換元記事。</param>
         /// <returns>補完済みのテンプレート名。</returns>
-        private string FillTemplateName(MediaWikiTemplate template, string parent)
+        private string FillTemplateName(MediaWikiTemplate template, MediaWikiPage parent)
         {
-            if (template.IsColon || !new MediaWikiPage(this.From, template.Title).IsMain())
+            // プレフィックスが付いた記事名を作成
+            string filledTitle = parent.Normalize(template);
+            if (filledTitle == template.Title || template.IsSubpage())
             {
-                // 標準名前空間が指定されている（先頭にコロンが無い）
-                // または何かしらの名前空間が指定されている場合、補完不要
-                return template.Title;
-            }
-            else if (template.IsSubpage)
-            {
-                // サブページの場合、親記事名での補完のみ
-                return parent + template.Title;
-            }
-
-            // 補完する必要がある場合、名前空間のプレフィックス（Template等）を取得
-            string prefix = this.GetTemplatePrefix();
-            if (String.IsNullOrEmpty(prefix))
-            {
-                // 名前空間の設定が存在しない場合、何も出来ないため終了
-                return template.Title;
-            }
-
-            // 頭にプレフィックスを付けた記事名で実在するかをチェック
-            string filledTitle = prefix + ":" + template.Title;
-
-            // 既に対訳表にプレフィックス付きの記事名が確認されているか？
-            if (this.ContainsAtItemTable(filledTitle))
-            {
-                // 記事が存在する場合、プレフィックスをつけた名前を使用
+                // 補完が不要な場合、またはサブページだった場合、ここで終了
                 return filledTitle;
             }
 
-            // 未確認の場合、実際に頭にプレフィックスを付けた記事名でアクセスし、存在するかをチェック
+            // プレフィックスが付いた記事名が実際に存在するかを確認
+            // ※ 不要かもしれないが、マジックワードの漏れ等の誤検出を減らしたいので
+            if (this.ContainsAtItemTable(filledTitle))
+            {
+                // 対訳表に記事名が確認されている場合、既知の名前として確定
+                return filledTitle;
+            }
+
+            // 実際に頭にプレフィックスを付けた記事名でアクセスし、存在するかをチェック
             // TODO: GetInterWikiの方とあわせ、テンプレートでは2度GetPageが呼ばれている。可能であれば共通化する
             MediaWikiPage page = null;
             try
@@ -934,24 +934,9 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 // 続行する場合は、とりあえずプレフィックスをつけた名前で処理
-                this.Logger.AddMessage(Resources.LogMessageTemplateNameUnidentified, template.Title, prefix, e.Message);
+                this.Logger.AddMessage(Resources.LogMessageTemplateNameUnidentified, template.Title, filledTitle, e.Message);
                 return filledTitle;
             }
-        }
-
-        /// <summary>
-        /// テンプレート名前空間のプレフィックスを取得。
-        /// </summary>
-        /// <returns>プレフィックス。取得できない場合<c>null</c></returns>
-        private string GetTemplatePrefix()
-        {
-            ISet<string> prefixes = this.From.Namespaces[this.From.TemplateNamespace];
-            if (prefixes != null)
-            {
-                return prefixes.FirstOrDefault();
-            }
-
-            return null;
         }
 
         #endregion
