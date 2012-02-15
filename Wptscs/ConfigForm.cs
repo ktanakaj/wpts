@@ -152,7 +152,7 @@ namespace Honememo.Wptscs
                 catch (Exception ex)
                 {
                     // 異常時はエラーメッセージを表示
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
                     FormUtils.ErrorDialog(Resources.ErrorMessageConfigSaveFailed, ex.Message);
                 }
             }
@@ -466,7 +466,7 @@ namespace Honememo.Wptscs
         {
             Language.LanguageName name;
             if (lang.Names.TryGetValue(
-                System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName, out name))
+                System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName, out name))
             {
                 if (!String.IsNullOrEmpty(name.Name))
                 {

@@ -343,5 +343,17 @@ namespace Honememo.Wptscs.Properties {
                 return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiInterwikiPrefixs"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastSelectedLanguage {
+            get {
+                return ((string)(this["LastSelectedLanguage"]));
+            }
+            set {
+                this["LastSelectedLanguage"] = value;
+            }
+        }
     }
 }

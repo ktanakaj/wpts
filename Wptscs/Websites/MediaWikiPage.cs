@@ -399,7 +399,7 @@ namespace Honememo.Wptscs.Websites
             {
                 // 想定外の例外だが、ここではデバッグログを吐いて終了する
                 // ※ 他の処理と流れが違うため、うまい処理方法が思いつかないので
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
 
             if (subpage != null)
