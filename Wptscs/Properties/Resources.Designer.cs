@@ -314,7 +314,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {{{{0}}}} の名前空間の確認に失敗しました。{{{{0}}}} は {{1}}名前空間と仮定して処理します。（{{2}}） に類似しているローカライズされた文字列を検索します。
+        ///   {{{{0}}}} の名前空間の確認に失敗しました。{{1}}と仮定して処理します。（{{2}}） に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageTemplateNameUnidentified {
             get {

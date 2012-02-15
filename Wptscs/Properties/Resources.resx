@@ -225,7 +225,7 @@
     <comment>翻訳支援処理処理を中止した際のメッセージ</comment>
   </data>
   <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
-    <value>{{{{0}}}} の名前空間の確認に失敗しました。{{{{0}}}} は {{1}}名前空間と仮定して処理します。（{{2}}）</value>
+    <value>{{{{0}}}} の名前空間の確認に失敗しました。{{1}}と仮定して処理します。（{{2}}）</value>
     <comment>テンプレートの名前空間を補完する際に、想定外のエラーとなった場合のメッセージ</comment>
   </data>
   <data name="LogMessageNoteTranslation" xml:space="preserve">
