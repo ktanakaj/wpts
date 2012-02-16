@@ -22,6 +22,27 @@ namespace Honememo.Wptscs
     internal static class Program
     {
         /// <summary>
+        /// 設定ファイルから表示言語の設定を読み込む。
+        /// </summary>
+        /// <remarks>特に表示言語が指定されていない場合は何もしない。</remarks>
+        public static void LoadSelectedCulture()
+        {
+            if (!String.IsNullOrWhiteSpace(Settings.Default.LastSelectedLanguage))
+            {
+                try
+                {
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Settings.Default.LastSelectedLanguage);
+                    Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(Settings.Default.LastSelectedLanguage);
+                }
+                catch (Exception ex)
+                {
+                    // 設定ファイルに手で不正な値が設定された場合など、万が一エラーになった場合デバッグログ
+                    System.Diagnostics.Debug.WriteLine("Program.LoadSelectedCulture : " + ex.ToString());
+                }
+            }
+        }
+
+        /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
@@ -36,18 +57,7 @@ namespace Honememo.Wptscs
             }
 
             // 表示言語の設定が存在する場合、画面表示前にその設定を読み込み
-            if (!String.IsNullOrWhiteSpace(Settings.Default.LastSelectedLanguage))
-            {
-                try
-                {
-                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Settings.Default.LastSelectedLanguage);
-                }
-                catch (Exception ex)
-                {
-                    // 設定ファイルに手で不正な値が設定された場合など、万が一エラーになった場合デバッグログ
-                    System.Diagnostics.Debug.WriteLine("Program.Main : " + ex.ToString());
-                }
-            }
+            Program.LoadSelectedCulture();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

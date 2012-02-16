@@ -119,8 +119,8 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。
-        ///（{0}） に類似しているローカライズされた文字列を検索します。
+        ///   Connection failed. Please check network configuration or server status.
+        ///({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessageConnectionFailed {
             get {
@@ -160,7 +160,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   このバージョンは{0}には未対応です。 に類似しているローカライズされた文字列を検索します。
+        ///   {0} is not supported. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InformationMessageDevelopingMethod {
             get {
@@ -189,7 +189,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {0} は、現在のツールでは処理できないページ名です。 に類似しているローカライズされた文字列を検索します。
+        ///   {0} is not supported page name. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageErrorPageName {
             get {
@@ -218,7 +218,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {0} より [[{1}]] を取得。 に類似しているローカライズされた文字列を検索します。
+        ///   [[{1}]] from {0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageGetTargetArticle {
             get {
@@ -263,7 +263,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {0}, Date {1}
+        ///   {0}, {1:F}
         ///
         /// に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -274,7 +274,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語間リンクの探索、見出しの変換を行います に類似しているローカライズされた文字列を検索します。
+        ///   Find interlanguage and Convert heading start. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageStartParseAndReplace {
             get {
@@ -440,7 +440,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語コードは必須です。 に類似しているローカライズされた文字列を検索します。
+        ///   Language code may not be empty. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyCodeColumn {
             get {
@@ -467,7 +467,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   翻訳元言語、記事名、翻訳先言語は必須です。 に類似しているローカライズされた文字列を検索します。
+        ///   Source&apos;s code, title and Destination&apos;s code may not be empty. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyTranslationDictionary {
             get {
@@ -485,7 +485,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   キャッシュ有効期限には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Cache expire must be greater than or equal to 0. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreCacheExpire {
             get {
@@ -494,7 +494,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   ウェイト時間には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Connect retry time must be greater than or equal to 0. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreConnectRetryTime {
             get {
@@ -503,7 +503,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   リトライ回数には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Max connect retries must be greater than or equal to 0. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreMaxConnectRetries {
             get {
@@ -512,7 +512,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   名前空間のIDには数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Namespace&apos;s ID must be integer. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreNumericNamespace {
             get {
@@ -521,7 +521,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   出力先フォルダが存在しないか無効なパスです。出力先を確認してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Output folder is missing or invalid. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreSaveDirectory {
             get {
@@ -548,7 +548,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   略称を指定する場合、呼称も入力してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Name may not be empty. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageShortNameColumnOnly {
             get {
@@ -557,7 +557,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。 に類似しているローカライズされた文字列を検索します。
+        ///   Bracket style must be empty or contains string &quot;$1&quot;. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageUnformatedBracket {
             get {
@@ -566,8 +566,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   取得日時には日付または空欄を指定してください。
-        ///空欄の場合、この置き換えは無期限で有効になります。 に類似しているローカライズされた文字列を検索します。
+        ///   Timestamp must be empty or date. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageUnformatedTimestamp {
             get {

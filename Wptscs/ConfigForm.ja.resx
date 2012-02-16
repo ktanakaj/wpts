@@ -117,15 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="buttonCancel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonCancel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonCancel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>335, 461</value>
+  </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>624, 493</value>
+  </data>
+  <data name="labelItemsNote.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelItemsNote.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelItemsNote.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelItemsNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 399</value>
+  </data>
   <data name="labelItemsNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>426, 12</value>
   </data>
   <data name="labelItemsNote.Text" xml:space="preserve">
     <value>※ 一度に大量の行を削除すると、画面が長時間反応しなくなります（50行程度が限界）。</value>
+  </data>
+  <data name="labelItemsNote.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ColumnFromCode.HeaderText" xml:space="preserve">
     <value>翻訳元</value>
@@ -145,15 +177,80 @@
   <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
     <value>取得日時</value>
   </data>
+  <data name="dataGridViewItems.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridViewItems.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="dataGridViewItems.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 390</value>
+  </data>
+  <data name="dataGridViewItems.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageItems.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageItems.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tabPageItems.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 417</value>
+  </data>
   <data name="tabPageItems.Text" xml:space="preserve">
     <value>記事の置き換え</value>
+  </data>
+  <data name="tabPageItems.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridViewHeading.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridViewHeading.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="dataGridViewHeading.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="dataGridViewHeading.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageHeadings.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageHeadings.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tabPageHeadings.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageHeadings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 417</value>
   </data>
   <data name="tabPageHeadings.Text" xml:space="preserve">
     <value>見出しの置き換え</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabPageHeadings.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="buttonLanguageRemove.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="buttonLanguageRemove.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonLanguageRemove.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonLanguageRemove.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonLanguageRemove.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 11</value>
@@ -163,6 +260,15 @@
   </data>
   <data name="buttonLanguageRemove.Text" xml:space="preserve">
     <value>削除</value>
+  </data>
+  <data name="buttonLunguageAdd.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonLunguageAdd.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonLunguageAdd.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonLunguageAdd.Location" type="System.Drawing.Point, System.Drawing">
     <value>156, 11</value>
@@ -188,8 +294,53 @@
   <data name="ColumnShortName.Width" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
+  <data name="dataGridViewLanguageName.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridViewLanguageName.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="dataGridViewLanguageName.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="dataGridViewLanguageName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 299</value>
+  </data>
+  <data name="dataGridViewLanguageName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBoxLanguageName.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBoxLanguageName.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBoxLanguageName.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxLanguageName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 323</value>
+  </data>
   <data name="groupBoxLanguageName.Text" xml:space="preserve">
     <value>各言語での言語名</value>
+  </data>
+  <data name="textBoxBracket.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxBracket.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxBracket.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelBracket.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelBracket.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelBracket.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="labelBracket.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 12</value>
@@ -197,8 +348,50 @@
   <data name="labelBracket.Text" xml:space="preserve">
     <value>括弧のスタイル:</value>
   </data>
+  <data name="groupBoxLanguage.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBoxLanguage.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBoxLanguage.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 372</value>
+  </data>
   <data name="groupBoxLanguage.Text" xml:space="preserve">
     <value>言語の設定</value>
+  </data>
+  <data name="groupBoxLanguage.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxLangFormat.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxLangFormat.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxLangFormat.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxLangFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 344</value>
+  </data>
+  <data name="textBoxLangFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 19</value>
+  </data>
+  <data name="labelLangFormat.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelLangFormat.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelLangFormat.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelLangFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 347</value>
   </data>
   <data name="labelLangFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 12</value>
@@ -206,11 +399,65 @@
   <data name="labelLangFormat.Text" xml:space="preserve">
     <value>言語指定用フォーマット:</value>
   </data>
+  <data name="textBoxLinkInterwikiFormat.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxLinkInterwikiFormat.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxLinkInterwikiFormat.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxLinkInterwikiFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 316</value>
+  </data>
+  <data name="textBoxLinkInterwikiFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 19</value>
+  </data>
+  <data name="labelLinkInterwikiFormat.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelLinkInterwikiFormat.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelLinkInterwikiFormat.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelLinkInterwikiFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 319</value>
+  </data>
   <data name="labelLinkInterwikiFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 12</value>
   </data>
   <data name="labelLinkInterwikiFormat.Text" xml:space="preserve">
     <value>仮リンク用フォーマット:</value>
+  </data>
+  <data name="textBoxDocumentationTemplateDefaultPage.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxDocumentationTemplateDefaultPage.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxDocumentationTemplateDefaultPage.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxDocumentationTemplateDefaultPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 288</value>
+  </data>
+  <data name="textBoxDocumentationTemplateDefaultPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 19</value>
+  </data>
+  <data name="labelDocumentationTemplateDefaultPage.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelDocumentationTemplateDefaultPage.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelDocumentationTemplateDefaultPage.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelDocumentationTemplateDefaultPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 291</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 12</value>
@@ -218,14 +465,74 @@
   <data name="labelDocumentationTemplateDefaultPage.Text" xml:space="preserve">
     <value>デフォルトページ名:</value>
   </data>
+  <data name="textBoxDocumentationTemplate.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxDocumentationTemplate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxDocumentationTemplate.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxDocumentationTemplate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 241</value>
+  </data>
+  <data name="textBoxDocumentationTemplate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 39</value>
+  </data>
+  <data name="labelDocumentationTemplate.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelDocumentationTemplate.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelDocumentationTemplate.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelDocumentationTemplate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 244</value>
+  </data>
   <data name="labelDocumentationTemplate.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 12</value>
   </data>
   <data name="labelDocumentationTemplate.Text" xml:space="preserve">
     <value>解説用テンプレート:</value>
   </data>
-  <data name="labelFileNamespace.Text" xml:space="preserve">
-    <value>ファイル名前空間のID:</value>
+  <data name="textBoxFileNamespace.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxFileNamespace.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxFileNamespace.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxFileNamespace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 185</value>
+  </data>
+  <data name="textBoxCategoryNamespace.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxCategoryNamespace.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxCategoryNamespace.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxCategoryNamespace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 160</value>
+  </data>
+  <data name="labelCategoryNamespace.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelCategoryNamespace.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelCategoryNamespace.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelCategoryNamespace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 163</value>
   </data>
   <data name="labelCategoryNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 12</value>
@@ -233,11 +540,59 @@
   <data name="labelCategoryNamespace.Text" xml:space="preserve">
     <value>カテゴリ名前空間のID:</value>
   </data>
+  <data name="textBoxTemplateNamespace.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxTemplateNamespace.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxTemplateNamespace.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxTemplateNamespace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 135</value>
+  </data>
+  <data name="labelTemplateNamespace.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelTemplateNamespace.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelTemplateNamespace.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelTemplateNamespace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 138</value>
+  </data>
   <data name="labelTemplateNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 12</value>
   </data>
   <data name="labelTemplateNamespace.Text" xml:space="preserve">
     <value>テンプレート名前空間のID:</value>
+  </data>
+  <data name="textBoxRedirect.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxRedirect.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxRedirect.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxRedirect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 214</value>
+  </data>
+  <data name="labelRedirect.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelRedirect.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelRedirect.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelRedirect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 217</value>
   </data>
   <data name="labelRedirect.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 12</value>
@@ -245,11 +600,59 @@
   <data name="labelRedirect.Text" xml:space="preserve">
     <value>リダイレクトの文字列:</value>
   </data>
+  <data name="textBoxExportPath.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxExportPath.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxExportPath.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxExportPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 66</value>
+  </data>
+  <data name="labelExportPath.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelExportPath.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelExportPath.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelExportPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 51</value>
+  </data>
   <data name="labelExportPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 12</value>
   </data>
   <data name="labelExportPath.Text" xml:space="preserve">
     <value>XMLエクスポート用のAPIパス:</value>
+  </data>
+  <data name="textBoxMetaApi.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxMetaApi.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxMetaApi.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxMetaApi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 109</value>
+  </data>
+  <data name="labelMetaApi.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelMetaApi.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelMetaApi.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelMetaApi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 94</value>
   </data>
   <data name="labelMetaApi.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 12</value>
@@ -257,17 +660,83 @@
   <data name="labelMetaApi.Text" xml:space="preserve">
     <value>メタ情報取得用のAPIパス:</value>
   </data>
+  <data name="textBoxLocation.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxLocation.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxLocation.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelLocation.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelLocation.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelLocation.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="labelLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 12</value>
   </data>
   <data name="labelLocation.Text" xml:space="preserve">
     <value>サーバーURL:</value>
   </data>
+  <data name="labelFileNamespace.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelFileNamespace.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelFileNamespace.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelFileNamespace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 188</value>
+  </data>
+  <data name="labelFileNamespace.Text" xml:space="preserve">
+    <value>ファイル名前空間のID:</value>
+  </data>
+  <data name="groupBoxServer.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBoxServer.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBoxServer.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxServer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 372</value>
+  </data>
   <data name="groupBoxServer.Text" xml:space="preserve">
     <value>MediaWikiの設定</value>
   </data>
+  <data name="groupBoxServer.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="comboBoxLanguage.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="comboBoxLanguage.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="comboBoxLanguage.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="comboBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 13</value>
+  </data>
+  <data name="labelLanguage.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelLanguage.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelLanguage.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="labelLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 12</value>
@@ -275,8 +744,32 @@
   <data name="labelLanguage.Text" xml:space="preserve">
     <value>言語:</value>
   </data>
+  <data name="tabPageServer.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageServer.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tabPageServer.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageServer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 417</value>
+  </data>
   <data name="tabPageServer.Text" xml:space="preserve">
     <value>サーバー／言語</value>
+  </data>
+  <data name="tabPageServer.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelWebsite.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelWebsite.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelWebsite.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="labelWebsite.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 12</value>
@@ -284,8 +777,86 @@
   <data name="labelWebsite.Text" xml:space="preserve">
     <value>配布元:</value>
   </data>
+  <data name="labelWebsite.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabelWebsite.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabelWebsite.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="linkLabelWebsite.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="linkLabelWebsite.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelCopyright.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelCopyright.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelCopyright.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelCopyright.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelApplicationName.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelApplicationName.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelApplicationName.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelApplicationName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBoxInformation.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBoxInformation.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBoxInformation.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxInformation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 145</value>
+  </data>
   <data name="groupBoxInformation.Text" xml:space="preserve">
     <value>バージョン情報</value>
+  </data>
+  <data name="groupBoxInformation.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxConnectRetryTime.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxConnectRetryTime.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxConnectRetryTime.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxConnectRetryTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 125</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelConnectRetryTimeNote.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelConnectRetryTimeNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 128</value>
   </data>
   <data name="labelConnectRetryTimeNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 12</value>
@@ -293,11 +864,41 @@
   <data name="labelConnectRetryTimeNote.Text" xml:space="preserve">
     <value>（0:ウェイトしない）</value>
   </data>
+  <data name="labelConnectRetryTimeNote.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelConnectRetryTime.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelConnectRetryTime.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelConnectRetryTime.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="labelConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 12</value>
   </data>
   <data name="labelConnectRetryTime.Text" xml:space="preserve">
     <value>リトライ時のウェイト時間（ミリ秒）:</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxMaxConnectRetries.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxMaxConnectRetries.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelMaxConnectRetriesNote.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelMaxConnectRetriesNote.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelMaxConnectRetriesNote.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="labelMaxConnectRetriesNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 12</value>
@@ -305,11 +906,32 @@
   <data name="labelMaxConnectRetriesNote.Text" xml:space="preserve">
     <value>（0:リトライしない）</value>
   </data>
+  <data name="labelMaxConnectRetriesNote.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelMaxConnectRetries.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelMaxConnectRetries.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelMaxConnectRetries.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="labelMaxConnectRetries.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 12</value>
   </data>
   <data name="labelMaxConnectRetries.Text" xml:space="preserve">
     <value>通信エラー時のリトライ回数:</value>
+  </data>
+  <data name="checkBoxIgnoreError.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="checkBoxIgnoreError.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="checkBoxIgnoreError.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="checkBoxIgnoreError.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 16</value>
@@ -317,11 +939,32 @@
   <data name="checkBoxIgnoreError.Text" xml:space="preserve">
     <value>エラーを可能な限り無視して続行する</value>
   </data>
+  <data name="labelRefererNote.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelRefererNote.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelRefererNote.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="labelRefererNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 12</value>
   </data>
   <data name="labelRefererNote.Text" xml:space="preserve">
     <value>（空欄:なし）</value>
+  </data>
+  <data name="labelRefererNote.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelUserAgentNote.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelUserAgentNote.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelUserAgentNote.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="labelUserAgentNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 12</value>
@@ -329,11 +972,68 @@
   <data name="labelUserAgentNote.Text" xml:space="preserve">
     <value>（空欄:アプリケーション独自のUA）</value>
   </data>
+  <data name="labelUserAgentNote.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelChaceNote.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelChaceNote.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelChaceNote.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelChaceNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>183, 18</value>
+  </data>
   <data name="labelChaceNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 12</value>
   </data>
   <data name="labelChaceNote.Text" xml:space="preserve">
     <value>（0:無効）</value>
+  </data>
+  <data name="labelChaceNote.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxCacheExpire.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxCacheExpire.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxCacheExpire.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textBoxCacheExpire.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 15</value>
+  </data>
+  <data name="textBoxReferer.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxReferer.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxReferer.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelReferer.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelReferer.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelReferer.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelCacheExpire.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelCacheExpire.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelCacheExpire.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="labelCacheExpire.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 12</value>
@@ -341,13 +1041,88 @@
   <data name="labelCacheExpire.Text" xml:space="preserve">
     <value>キャッシュ有効期限（日）:</value>
   </data>
+  <data name="textBoxUserAgent.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBoxUserAgent.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="textBoxUserAgent.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelUserAgent.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="labelUserAgent.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="labelUserAgent.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxApplicationConfig.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBoxApplicationConfig.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="groupBoxApplicationConfig.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="groupBoxApplicationConfig.Text" xml:space="preserve">
     <value>アプリケーションの設定</value>
+  </data>
+  <data name="groupBoxApplicationConfig.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageApplication.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPageApplication.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tabPageApplication.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPageApplication.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 417</value>
   </data>
   <data name="tabPageApplication.Text" xml:space="preserve">
     <value>その他</value>
   </data>
+  <data name="tabControl.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabControl.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tabControl.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 443</value>
+  </data>
+  <data name="tabControl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>640, 530</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>設定</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonOk.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonOk.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonOk.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 461</value>
   </data>
 </root>

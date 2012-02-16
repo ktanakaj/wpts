@@ -15,7 +15,6 @@ namespace Honememo.Wptscs
     using System.ComponentModel;
     using System.Data;
     using System.Drawing;
-    using System.Globalization;
     using System.IO;
     using System.Net;
     using System.Text;
@@ -306,10 +305,11 @@ namespace Honememo.Wptscs
         {
             try
             {
-                // 初期化と開始メッセージ
+                // 初期化と開始メッセージ、別スレッドになるので表示言語も再度設定
+                Program.LoadSelectedCulture();
                 this.textBoxLog.Clear();
                 this.logLength = 0;
-                this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now.ToString("F")));
+                this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now));
 
                 // 翻訳支援処理ロジックのオブジェクトを生成
                 try
@@ -419,18 +419,29 @@ namespace Honememo.Wptscs
         private void ToolStripMenuItemJapanese_Click(object sender, EventArgs e)
         {
             // 表示言語を日本語に設定し再起動する
-            this.ChangeCultureAndRestart("ja");
+            this.ChangeCultureAndRestart("ja-JP");
         }
 
         /// <summary>
-        /// 表示言語選択メニュー英語クリック時の処理。
+        /// 表示言語選択メニュー英語(US)クリック時の処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
         /// <param name="e">発生したイベント。</param>
-        private void ToolStripMenuItemEnglish_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemEnglishUS_Click(object sender, EventArgs e)
         {
-            // 表示言語を英語に設定し再起動する
-            this.ChangeCultureAndRestart("en");
+            // 表示言語を英語(US)に設定し再起動する
+            this.ChangeCultureAndRestart("en-US");
+        }
+
+        /// <summary>
+        /// 表示言語選択メニュー英語(GB)クリック時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ToolStripMenuItemEnglishGB_Click(object sender, EventArgs e)
+        {
+            // 表示言語を英語(GB)に設定し再起動する
+            this.ChangeCultureAndRestart("en-GB");
         }
 
         /// <summary>
@@ -474,10 +485,13 @@ namespace Honememo.Wptscs
             ToolStripMenuItem item;
             switch (Settings.Default.LastSelectedLanguage)
             {
-                case "en":
-                    item = this.toolStripMenuItemEnglish;
+                case "en-US":
+                    item = this.toolStripMenuItemEnglishUS;
                     break;
-                case "ja":
+                case "en-GB":
+                    item = this.toolStripMenuItemEnglishGB;
+                    break;
+                case "ja-JP":
                     item = this.toolStripMenuItemJapanese;
                     break;
                 default:
@@ -488,6 +502,11 @@ namespace Honememo.Wptscs
             // 選択中の項目をチェック状態＆押下不能とする
             item.Checked = true;
             item.Enabled = false;
+            if (item != this.toolStripMenuItemAuto)
+            {
+                // 自動以外の場合、ステータスバーの表示も更新
+                this.toolStripDropDownButtonLanguage.Text = item.Text;
+            }
         }
 
         /// <summary>

@@ -213,7 +213,7 @@
     <comment>記事がリダイレクトの場合のメッセージ</comment>
   </data>
   <data name="LogMessageStart" xml:space="preserve">
-    <value>{0}、実行日時 {1}
+    <value>{0}、実行日時 {1:F}
 
 </value>
     <comment>翻訳支援処理処理を開始した際のメッセージ</comment>
@@ -332,8 +332,7 @@
     <value>略称を指定する場合、呼称も入力してください。</value>
   </data>
   <data name="WarningMessageUnformatedBracket" xml:space="preserve">
-    <value>括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。</value>
-    <comment>この{0}はそのまま表示する。</comment>
+    <value>括弧の書式は、内部に $1 を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。</value>
   </data>
   <data name="WarningMessageUnformatedTimestamp" xml:space="preserve">
     <value>取得日時には日付または空欄を指定してください。

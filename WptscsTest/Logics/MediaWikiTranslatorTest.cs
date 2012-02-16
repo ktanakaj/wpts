@@ -85,6 +85,40 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
+        #region private変数
+
+        /// <summary>
+        /// テスト実施中カルチャを変更し後で戻すため、そのバックアップ。
+        /// </summary>
+        System.Globalization.CultureInfo backupCulture;
+
+        #endregion
+
+        #region 前処理・後処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestFixtureSetUp]
+        public void SetUp()
+        {
+            // トランスレータの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
+            this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("ja-JP");
+        }
+
+        /// <summary>
+        /// テストの後処理。
+        /// </summary>
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            // カルチャーを元に戻す
+            System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
+        }
+
+        #endregion
+
         #region 各処理のメソッドテストケース
 
         /// <summary>

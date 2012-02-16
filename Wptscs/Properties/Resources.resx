@@ -142,8 +142,8 @@
     <comment>設定ファイルの保存時にエラーが発生した場合のメッセージ</comment>
   </data>
   <data name="ErrorMessageConnectionFailed" xml:space="preserve">
-    <value>サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。
-（{0}）</value>
+    <value>Connection failed. Please check network configuration or server status.
+({0})</value>
     <comment>サーバーへの接続失敗</comment>
   </data>
   <data name="ErrorMessageDevelopmentError" xml:space="preserve">
@@ -159,7 +159,7 @@
     <comment>エラーダイアログのタイトル</comment>
   </data>
   <data name="InformationMessageDevelopingMethod" xml:space="preserve">
-    <value>このバージョンは{0}には未対応です。</value>
+    <value>{0} is not supported.</value>
     <comment>未実装の機能が呼ばれた際のメッセージ</comment>
   </data>
   <data name="InformationTitle" xml:space="preserve">
@@ -175,7 +175,7 @@
     <comment>翻訳支援対象の記事が存在しない場合のエラーメッセージ</comment>
   </data>
   <data name="LogMessageStartParseAndReplace" xml:space="preserve">
-    <value>言語間リンクの探索、見出しの変換を行います</value>
+    <value>Find interlanguage and Convert heading start.</value>
     <comment>翻訳支援処理本体を開始する際のメッセージ</comment>
   </data>
   <data name="LogMessageEnd" xml:space="preserve">
@@ -195,7 +195,7 @@
     <comment>通信エラー発生時のURLを示すメッセージ</comment>
   </data>
   <data name="LogMessageGetTargetArticle" xml:space="preserve">
-    <value>{0} より [[{1}]] を取得。</value>
+    <value>[[{1}]] from {0}</value>
     <comment>翻訳支援対象の記事を取得する際のメッセージ</comment>
   </data>
   <data name="LogMessageInterWikiNotFound" xml:space="preserve">
@@ -211,7 +211,7 @@
     <comment>記事がリダイレクトの場合のメッセージ</comment>
   </data>
   <data name="LogMessageStart" xml:space="preserve">
-    <value>{0}, Date {1}
+    <value>{0}, {1:F}
 
 </value>
     <comment>翻訳支援処理処理を開始した際のメッセージ</comment>
@@ -243,8 +243,7 @@
     <comment>右矢印</comment>
   </data>
   <data name="WarningMessageUnformatedBracket" xml:space="preserve">
-    <value>括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。</value>
-    <comment>この{0}はそのまま表示する。</comment>
+    <value>Bracket style must be empty or contains string "$1".</value>
   </data>
   <data name="WarningMessageNotSelectedSource" xml:space="preserve">
     <value>Please select source.</value>
@@ -259,20 +258,20 @@
     <value>翻訳元／先に同じ言語コードが指定されています。</value>
   </data>
   <data name="WarningMessageShortNameColumnOnly" xml:space="preserve">
-    <value>略称を指定する場合、呼称も入力してください。</value>
+    <value>Name may not be empty.</value>
   </data>
   <data name="WarningMessageEmptyCodeColumn" xml:space="preserve">
-    <value>言語コードは必須です。</value>
+    <value>Language code may not be empty.</value>
   </data>
   <data name="WarningMessageIgnoreSaveDirectory" xml:space="preserve">
-    <value>出力先フォルダが存在しないか無効なパスです。出力先を確認してください。</value>
+    <value>Output folder is missing or invalid.</value>
   </data>
   <data name="WarningMessageIgnoreCacheExpire" xml:space="preserve">
-    <value>キャッシュ有効期限には0以上の数値を指定してください。</value>
+    <value>Cache expire must be greater than or equal to 0.</value>
     <comment>キャッシュ有効期限に不正な値を入れられた場合のメッセージ</comment>
   </data>
   <data name="WarningMessageIgnoreNumericNamespace" xml:space="preserve">
-    <value>名前空間のIDには数値を指定してください。</value>
+    <value>Namespace's ID must be integer.</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Warning</value>
@@ -288,12 +287,11 @@
     <comment>見出しの対訳表の表ヘッダー書式</comment>
   </data>
   <data name="WarningMessageUnformatedTimestamp" xml:space="preserve">
-    <value>取得日時には日付または空欄を指定してください。
-空欄の場合、この置き換えは無期限で有効になります。</value>
+    <value>Timestamp must be empty or date.</value>
     <comment>対訳表 取得日時のバリデートNGメッセージ</comment>
   </data>
   <data name="WarningMessageEmptyTranslationDictionary" xml:space="preserve">
-    <value>翻訳元言語、記事名、翻訳先言語は必須です。</value>
+    <value>Source's code, title and Destination's code may not be empty.</value>
     <comment>対訳表 翻訳元、記事名、翻訳先のバリデートNGメッセージ</comment>
   </data>
   <data name="WarningMessageEmptyArticle" xml:space="preserve">
@@ -339,15 +337,15 @@
     <comment>言語追加でのコード未入力バリデートNGメッセージ</comment>
   </data>
   <data name="WarningMessageIgnoreConnectRetryTime" xml:space="preserve">
-    <value>ウェイト時間には0以上の数値を指定してください。</value>
+    <value>Connect retry time must be greater than or equal to 0.</value>
     <comment>ウェイト時間に不正な値を入れられた場合のメッセージ</comment>
   </data>
   <data name="WarningMessageIgnoreMaxConnectRetries" xml:space="preserve">
-    <value>リトライ回数には0以上の数値を指定してください。</value>
+    <value>Max connect retries must be greater than or equal to 0.</value>
     <comment>リトライ回数に不正な値を入れられた場合のメッセージ</comment>
   </data>
   <data name="LogMessageErrorPageName" xml:space="preserve">
-    <value>{0} は、現在のツールでは処理できないページ名です。</value>
+    <value>{0} is not supported page name.</value>
     <comment>ページ名絡みの既知の不具合用の暫定メッセージ</comment>
   </data>
 </root>

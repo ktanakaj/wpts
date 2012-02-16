@@ -592,6 +592,22 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
+        /// 括弧のスタイルボックスバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxBracket_Validating(object sender, CancelEventArgs e)
+        {
+            // 空か$1が含まれる文字列のみ許可
+            TextBox box = (TextBox)sender;
+            if (!String.IsNullOrEmpty(box.Text) && !box.Text.Contains("$1"))
+            {
+                this.errorProvider.SetError(box, Resources.WarningMessageUnformatedBracket);
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
         /// 言語の設定表の行編集時のバリデート処理。
         /// </summary>
         /// <param name="sender">イベント発生オブジェクト。</param>
