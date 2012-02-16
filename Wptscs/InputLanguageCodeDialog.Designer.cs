@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputLanguageCodeDialog));
             this.textBoxCode = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -36,47 +37,34 @@
             // 
             // textBoxCode
             // 
-            this.textBoxCode.Location = new System.Drawing.Point(52, 40);
-            this.textBoxCode.MaxLength = 255;
+            resources.ApplyResources(this.textBoxCode, "textBoxCode");
             this.textBoxCode.Name = "textBoxCode";
-            this.textBoxCode.Size = new System.Drawing.Size(73, 19);
-            this.textBoxCode.TabIndex = 0;
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(12, 66);
+            resources.ApplyResources(this.buttonOk, "buttonOk");
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 1;
-            this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(93, 66);
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "キャンセル";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // labelCode
             // 
-            this.labelCode.Location = new System.Drawing.Point(11, 9);
+            resources.ApplyResources(this.labelCode, "labelCode");
             this.labelCode.Name = "labelCode";
-            this.labelCode.Size = new System.Drawing.Size(157, 30);
-            this.labelCode.TabIndex = 3;
-            this.labelCode.Text = "追加する言語のコード値を入力してください:";
             // 
             // InputLanguageCodeDialog
             // 
             this.AcceptButton = this.buttonOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(180, 98);
             this.Controls.Add(this.labelCode);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -85,7 +73,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InputLanguageCodeDialog";
-            this.Text = "言語の追加";
             this.ResumeLayout(false);
             this.PerformLayout();
 

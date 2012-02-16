@@ -117,550 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonConfig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 61</value>
-  </data>
-  <data name="buttonConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
+  <data name="&gt;&gt;toolStripStatusLabelStatus.Name" xml:space="preserve">
+    <value>toolStripStatusLabelStatus</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="buttonConfig.Text" xml:space="preserve">
-    <value>設定</value>
-  </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>464, 17</value>
-  </metadata>
-  <data name="buttonConfig.ToolTip" xml:space="preserve">
-    <value>サーバーやツールの設定を行います。</value>
-  </data>
-  <data name="&gt;&gt;buttonConfig.Name" xml:space="preserve">
-    <value>buttonConfig</value>
-  </data>
-  <data name="&gt;&gt;buttonConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonConfig.Parent" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;buttonConfig.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="labelTarget.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 64</value>
-  </data>
-  <data name="labelTarget.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 21</value>
-  </data>
-  <data name="labelTarget.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="labelTarget.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="labelTarget.ToolTip" xml:space="preserve">
-    <value>翻訳先の言語です。</value>
-  </data>
-  <data name="&gt;&gt;labelTarget.Name" xml:space="preserve">
-    <value>labelTarget</value>
-  </data>
-  <data name="&gt;&gt;labelTarget.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTarget.Parent" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;labelTarget.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="comboBoxTarget.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 64</value>
-  </data>
-  <data name="comboBoxTarget.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 20</value>
-  </data>
-  <data name="comboBoxTarget.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="comboBoxTarget.ToolTip" xml:space="preserve">
-    <value>翻訳先の言語を選択、または入力します。
-入力の場合、Wikipediaで使用されている言語コードを入力してください。</value>
-  </data>
-  <data name="&gt;&gt;comboBoxTarget.Name" xml:space="preserve">
-    <value>comboBoxTarget</value>
-  </data>
-  <data name="&gt;&gt;comboBoxTarget.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxTarget.Parent" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;comboBoxTarget.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="labelArrow.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelArrow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 46</value>
-  </data>
-  <data name="labelArrow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
-  </data>
-  <data name="labelArrow.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="labelArrow.Text" xml:space="preserve">
-    <value>↓</value>
-  </data>
-  <data name="&gt;&gt;labelArrow.Name" xml:space="preserve">
-    <value>labelArrow</value>
-  </data>
-  <data name="&gt;&gt;labelArrow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelArrow.Parent" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;labelArrow.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="linkLabelSourceURL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 21</value>
-  </data>
-  <data name="linkLabelSourceURL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 20</value>
-  </data>
-  <data name="linkLabelSourceURL.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="linkLabelSourceURL.Text" xml:space="preserve">
-    <value>http://</value>
-  </data>
-  <data name="linkLabelSourceURL.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="linkLabelSourceURL.ToolTip" xml:space="preserve">
-    <value>翻訳元WikipediaのURLです。</value>
-  </data>
-  <data name="&gt;&gt;linkLabelSourceURL.Name" xml:space="preserve">
-    <value>linkLabelSourceURL</value>
-  </data>
-  <data name="&gt;&gt;linkLabelSourceURL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;linkLabelSourceURL.Parent" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;linkLabelSourceURL.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="labelSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 21</value>
-  </data>
-  <data name="labelSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 21</value>
-  </data>
   <data name="labelSource.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="labelSource.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="labelSource.ToolTip" xml:space="preserve">
-    <value>翻訳元の言語です。</value>
-  </data>
-  <data name="&gt;&gt;labelSource.Name" xml:space="preserve">
-    <value>labelSource</value>
-  </data>
-  <data name="&gt;&gt;labelSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelSource.Parent" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;labelSource.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="comboBoxSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 21</value>
-  </data>
-  <data name="comboBoxSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 20</value>
-  </data>
-  <data name="comboBoxSource.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="comboBoxSource.ToolTip" xml:space="preserve">
-    <value>翻訳元の言語を選択、または入力します。
-入力の場合、Wikipediaで使用されている言語コードを入力してください。</value>
-  </data>
-  <data name="&gt;&gt;comboBoxSource.Name" xml:space="preserve">
-    <value>comboBoxSource</value>
   </data>
   <data name="&gt;&gt;comboBoxSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxSource.Parent" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;comboBoxSource.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="groupBoxTransfer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
-  </data>
-  <data name="groupBoxTransfer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 96</value>
-  </data>
-  <data name="groupBoxTransfer.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBoxTransfer.Text" xml:space="preserve">
-    <value>翻訳元→先の言語を設定</value>
-  </data>
-  <data name="groupBoxTransfer.ToolTip" xml:space="preserve">
-    <value>翻訳元・先の言語を選択してください。
-コンボボックスに目的の言語コードが存在しない場合は、設定画面で登録を行ってください。</value>
-  </data>
-  <data name="&gt;&gt;groupBoxTransfer.Name" xml:space="preserve">
-    <value>groupBoxTransfer</value>
-  </data>
-  <data name="&gt;&gt;groupBoxTransfer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxTransfer.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxTransfer.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="textBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 18</value>
-  </data>
-  <data name="textBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 19</value>
-  </data>
-  <data name="textBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="textBoxSaveDirectory.ToolTip" xml:space="preserve">
-    <value>出力先フォルダはこちらに直接入力することもできます。</value>
-  </data>
-  <data name="&gt;&gt;textBoxSaveDirectory.Name" xml:space="preserve">
-    <value>textBoxSaveDirectory</value>
-  </data>
-  <data name="&gt;&gt;textBoxSaveDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxSaveDirectory.Parent" xml:space="preserve">
-    <value>groupBoxSaveDirectory</value>
-  </data>
-  <data name="&gt;&gt;textBoxSaveDirectory.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 16</value>
-  </data>
-  <data name="buttonSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
-  </data>
-  <data name="buttonSaveDirectory.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="buttonSaveDirectory.Text" xml:space="preserve">
-    <value>参照</value>
-  </data>
-  <data name="buttonSaveDirectory.ToolTip" xml:space="preserve">
-    <value>処理結果を出力するフォルダを選択します。</value>
-  </data>
-  <data name="&gt;&gt;buttonSaveDirectory.Name" xml:space="preserve">
-    <value>buttonSaveDirectory</value>
-  </data>
-  <data name="&gt;&gt;buttonSaveDirectory.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonSaveDirectory.Parent" xml:space="preserve">
-    <value>groupBoxSaveDirectory</value>
-  </data>
-  <data name="&gt;&gt;buttonSaveDirectory.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 114</value>
-  </data>
-  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 49</value>
-  </data>
-  <data name="groupBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
-    <value>処理結果を出力するフォルダの選択</value>
-  </data>
-  <data name="groupBoxSaveDirectory.ToolTip" xml:space="preserve">
-    <value>処理結果を出力するフォルダを選択してください。
-指定されたフォルダに記事テキストとログを出力します。</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.Name" xml:space="preserve">
-    <value>groupBoxSaveDirectory</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="groupBoxRun.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="textBoxLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="textBoxLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 56</value>
-  </data>
-  <data name="textBoxLog.MaxLength" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textBoxLog.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textBoxLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="textBoxLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 207</value>
-  </data>
-  <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;textBoxLog.Name" xml:space="preserve">
-    <value>textBoxLog</value>
-  </data>
-  <data name="&gt;&gt;textBoxLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxLog.Parent" xml:space="preserve">
-    <value>groupBoxRun</value>
-  </data>
-  <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonStop.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="buttonStop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 18</value>
-  </data>
-  <data name="buttonStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
-  </data>
-  <data name="buttonStop.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="buttonStop.Text" xml:space="preserve">
-    <value>中止</value>
-  </data>
-  <data name="buttonStop.ToolTip" xml:space="preserve">
-    <value>処理を中断します。</value>
-  </data>
-  <data name="&gt;&gt;buttonStop.Name" xml:space="preserve">
-    <value>buttonStop</value>
-  </data>
-  <data name="&gt;&gt;buttonStop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonStop.Parent" xml:space="preserve">
-    <value>groupBoxRun</value>
-  </data>
-  <data name="&gt;&gt;buttonStop.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="buttonRun.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 18</value>
-  </data>
-  <data name="buttonRun.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
-  </data>
-  <data name="buttonRun.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="buttonRun.Text" xml:space="preserve">
-    <value>実行</value>
-  </data>
-  <data name="buttonRun.ToolTip" xml:space="preserve">
-    <value>記事にアクセスし、翻訳支援処理を行います。
-作成した翻訳支援ファイルとログは、出力先フォルダに出力されます。</value>
-  </data>
-  <data name="&gt;&gt;buttonRun.Name" xml:space="preserve">
-    <value>buttonRun</value>
-  </data>
-  <data name="&gt;&gt;buttonRun.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonRun.Parent" xml:space="preserve">
-    <value>groupBoxRun</value>
   </data>
   <data name="&gt;&gt;buttonRun.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="textBoxArticle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 20</value>
+  <data name="toolStripDropDownButtonLanguage.ToolTipText" xml:space="preserve">
+    <value>このツールの表示言語を選択します。</value>
   </data>
-  <data name="textBoxArticle.MaxLength" type="System.Int32, mscorlib">
-    <value>255</value>
+  <data name="labelArrow.Text" xml:space="preserve">
+    <value>↓</value>
   </data>
-  <data name="textBoxArticle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 19</value>
+  <data name="&gt;&gt;buttonSaveDirectory.Parent" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="labelSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 21</value>
+  </data>
+  <data name="textBoxLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>416, 207</value>
+  </data>
+  <data name="linkLabelSourceURL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 20</value>
   </data>
   <data name="textBoxArticle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="textBoxArticle.ToolTip" xml:space="preserve">
-    <value>翻訳元Wikipediaでの記事名を入力します。</value>
+  <data name="&gt;&gt;toolStripDropDownButtonLanguage.Name" xml:space="preserve">
+    <value>toolStripDropDownButtonLanguage</value>
   </data>
-  <data name="&gt;&gt;textBoxArticle.Name" xml:space="preserve">
-    <value>textBoxArticle</value>
+  <data name="&gt;&gt;labelTarget.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
   </data>
-  <data name="&gt;&gt;textBoxArticle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripMenuItemEnglish.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBoxArticle.Parent" xml:space="preserve">
+  <data name="comboBoxTarget.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 20</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Parent" xml:space="preserve">
     <value>groupBoxRun</value>
   </data>
-  <data name="&gt;&gt;textBoxArticle.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;toolStripMenuItemJapanese.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="labelArticle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelArticle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 23</value>
-  </data>
-  <data name="labelArticle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
-  </data>
-  <data name="labelArticle.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="labelArticle.Text" xml:space="preserve">
-    <value>記事名</value>
-  </data>
-  <data name="labelArticle.ToolTip" xml:space="preserve">
-    <value>翻訳元Wikipediaでの記事名を入力します。</value>
-  </data>
-  <data name="&gt;&gt;labelArticle.Name" xml:space="preserve">
-    <value>labelArticle</value>
-  </data>
-  <data name="&gt;&gt;labelArticle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelArticle.Parent" xml:space="preserve">
-    <value>groupBoxRun</value>
-  </data>
-  <data name="&gt;&gt;labelArticle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="groupBoxRun.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 169</value>
-  </data>
-  <data name="groupBoxRun.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 276</value>
-  </data>
-  <data name="groupBoxRun.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="groupBoxRun.Text" xml:space="preserve">
-    <value>翻訳する記事を指定して、実行</value>
-  </data>
-  <data name="groupBoxRun.ToolTip" xml:space="preserve">
-    <value>目的の記事の、翻訳元言語のWikipediaでの記事名を入力し、実行ボタンを押してください。</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.Name" xml:space="preserve">
-    <value>groupBoxRun</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="folderBrowserDialogSaveDirectory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="folderBrowserDialogSaveDirectory.Description" xml:space="preserve">
-    <value>処理結果を出力するフォルダを選択してください。</value>
-  </data>
-  <metadata name="backgroundWorkerRun.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>274, 17</value>
-  </metadata>
-  <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>557, 17</value>
-  </metadata>
-  <data name="toolStripStatusLabelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 19</value>
-  </data>
-  <data name="toolStripStatusLabelStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="toolStripStatusLabelStopwatch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 19</value>
-  </data>
-  <data name="toolStripStatusLabelStopwatch.Text" xml:space="preserve">
-    <value>実行時間 0:00</value>
-  </data>
-  <data name="toolStripMenuItemEnglish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 22</value>
-  </data>
-  <data name="toolStripMenuItemEnglish.Text" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="toolStripMenuItemJapanese.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 22</value>
-  </data>
-  <data name="toolStripMenuItemJapanese.Text" xml:space="preserve">
-    <value>日本語</value>
-  </data>
-  <data name="toolStripDropDownButtonLanguage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
-        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
-        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
-        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
-        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
-        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
-        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
-        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
-        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
-        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="toolStripDropDownButtonLanguage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripDropDownButtonLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 22</value>
-  </data>
-  <data name="toolStripDropDownButtonLanguage.Text" xml:space="preserve">
-    <value>日本語</value>
-  </data>
-  <data name="toolStripDropDownButtonLanguage.ToolTipText" xml:space="preserve">
-    <value>このツールの表示言語を選択します。</value>
-  </data>
-  <data name="toolStripDropDownButtonConfig.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;labelSource.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
   </data>
   <data name="toolStripDropDownButtonConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -677,372 +191,806 @@
         s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="toolStripDropDownButtonConfig.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>386, 49</value>
   </data>
-  <data name="toolStripDropDownButtonConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 22</value>
+  <data name="&gt;&gt;comboBoxTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripDropDownButtonConfig.Text" xml:space="preserve">
-    <value>Wikipedia</value>
+  <data name="textBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 18</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripDropDownButtonConfig.ToolTipText" xml:space="preserve">
     <value>このツールで処理する対象を選択します。</value>
   </data>
-  <data name="toolStripDropDownButtonConfig.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="groupBoxRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 276</value>
   </data>
-  <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 449</value>
+  <data name="&gt;&gt;textBoxSaveDirectory.Parent" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
   </data>
-  <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>464, 24</value>
+  <data name="groupBoxTransfer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelArticle.Text" xml:space="preserve">
+    <value>Title:</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="labelSource.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Name" xml:space="preserve">
+    <value>textBoxLog</value>
+  </data>
+  <data name="labelTarget.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 64</value>
+  </data>
+  <data name="comboBoxSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 21</value>
+  </data>
+  <data name="buttonRun.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBoxRun.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labelTarget.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveDirectory.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        AAAAAAAAAAAAAA3JicMNyYn/DcmJ/w3Jif8NyYl7AAAAAAAAAAAbG0sANzdiaDExXPwgIEr/FxdD/xUV
+        QP8WFkH/GxtI+B8fTGgRET0DERE9ARERPQYRET0AHx9MEhERPf8WFkH/FRVA/xcXQ/8gIEr/MTFc/Dc3
+        YmgAAAAAAAAAAAAAAAANyYm/DcmJ/w3Jif8NyYn/DcmJcQ3JiQANyYkwDcmJ+Q3Jif8NyYn/DcmJ2g3J
+        iTQAAAAAAAAAAAAAAAAAAAAAAAAAAA3JiYgNyYn/DcmJ/w3Jif8NyYm3AAAAAAAAAABAQHYmMTBd9yEh
+        Sv8WFkD/ExM//xMTP/8VFUH/FxdG/xcXR94XF0dcGBhJRRUVRY8XF0ciFxdHlhERPf8VFUH/ExM//xMT
+        P/8WFkD/ISFK/zEwXfdAQHYmAAAAAAAAAAANyYmGDcmJ/w3Jif8NyYn/DcmJqw3JiQANyYkADcmJSg3J
+        ie8NyYn/DcmJ/w3Jif8NyYnJDcmJiA3JiVgNyYk2DcmJGw3JiVQNyYn/DcmJ/w3Jif8NyYnwDcmJAgAA
+        AAA3N2fIJydR/xcXQf8SEj3/ERE9/xERPf8TEz//ExNA/xISP/0RET3/ERE9/xMTP/oRET3/EhI/+RMT
+        QP8TEz//ERE9/xERPf8SEj3/FxdB/ycnUf83N2fIAAAAAAAAAAANyYlMDcmJ/w3Jif8NyYn/DcmJ5A3J
+        iQANyYkADcmJAA3JiRcNyYmHDcmJ4g3Jif8NyYn/DcmJ/w3Jif8NyYn/DcmJ/w3Jif8NyYn/DcmJ/w3J
+        if8NyYn/DcmJLgAAAAAyMmL4Hh5I/xISPv8RET3/ERE9/xERPf8RET3/ERE9/xERPf8RET3/ERE9/xER
+        Pf8RET3/ERE9/xERPf8RET3/ERE9/xERPf8RET3/EhI+/x4eSP8yMmL4AAAAAAAAAAANyYkTDcmJ/w3J
+        if8NyYn/DcmJ/w3JiR4AAAAAAAAAAAAAAAAAAAAAAAAAAA3JiScNyYldDcmJiA3JiasNyYnIDcmJ3w3J
+        ifENyYn+DcmJ/w3Jif8NyYn/DcmJaQAAAAAuLlv9GxtF/xISPv8RET3/ERE9/xERPf8RET3/ERE9/xER
+        Pf8RET3/ERE9/xERPf8RET3/ERE9/xERPf8RET3/ERE9/xERPf8RET3/EhI+/xsbRf8uLlv9Ojl2CAAA
+        AAAAAAAADcmJ2Q3Jif8NyYn/DcmJ/w3JiVcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAANyYmBDcmJ/w3Jif8NyYn/DcmJnwAAAAAzM2PiHh5I/xISPv8RET3/ERE9/xER
+        Pf8RET3/ERE9/xERPf8RET3/ERE9/xERPf8RET3/ERE9/xERPf8RET3/ERE9/xERPf8RET3/EhI+/x4e
+        SP8zM2PiAAAAAAAAAAAAAAAADcmJnw3Jif8NyYn/DcmJ/w3JiZELsGAAC7BgAAuwYAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANyYmGDcmJ/w3Jif8NyYn/DcmJvwAAAAA8PG2cJydR/xcX
+        Qf8SEj3/ERE9/xERPf8TEz//ExNA/xISP/8TEj//ExM//xMTP/8TEj//EhI//xMTQP8TEz//ERE9/xER
+        Pf8SEj3/FxdB/ycnUf88PG2cAAAAAAAAAAAAAAAADcmJZQ3Jif8NyYn/DcmJ/w3JicoLsGAAC7BgAAuw
+        YAANyYnIDcmJpQ3JiWwNyYk7DcmJFw3JiQUNyYkGDcmJIw3JiW8NyYn1DcmJ/w3Jif8NyYn/DcmJtgAA
+        AABAQHYmMjFf5iEhSv8WFkD/ExM//xMTP/8VFUH/FxdG+xgYSMwYGEiLGBhJ6hYWRsgYGEikGBhIyxcX
+        RvsVFUH/ExM//xMTP/8WFkD/ISFK/zIxX+ZAQHYmAAAAAA3JiecNyYn/DcmJ/w3Jif8NyYn/DcmJ/w3J
+        ifoNyYkJC7BgAAuwYAANyYmiDcmJ/w3Jif8NyYn/DcmJ/w3Jif8NyYn/DcmJ/w3Jif8NyYn/DcmJ/w3J
+        if8NyYn/DcmJZwAAAAA6OnQAPj5tQDIyXewgIEr/FxdD/xUVQP8WFkH/GhpHyxkZSSMRET0CERE9PRER
+        PRIRET0GGRlJIhERPf8WFkH/FRVA/xcXQ/8gIEr/MjJd7D4+bUALsGAAC7BgAA3JibQNyYn/DcmJ/w3J
+        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
+        YAALsGAAC7BgAAAAAAAAAAAAC7BgAAuwYAALsGAAC7BgAAuwYAALsGAAC7BgAAuwYAALsGAAC7BgAAuw
+        YAALsGAAC7BgAAuwYAALsGAAC7BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGAAC7BgFguwYGwLsGCuC7Bg2guwYPALsGD8C7Bg9Quw
+        YNgLsGCqC7BgbAuwYCELsGAAC7BgAAuwYOMLsGD/C7Bg/wuwYP8LsGBUC7BgAAuwYAALsGAAC7BgAAuw
+        YAALsGAAC7Bg4wuwYP8LsGD/C7Bg/wuwYF0LsGAAC7BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYAMLsGB/C7Bg9guwYP8LsGD/C7Bg/wuw
+        YP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGBAAAAAAAuwYKkLsGD/C7Bg/wuwYP8LsGCNC7BgAAuw
+        YAALsGAAC7BgAAuwYAALsGAAC7BgqguwYP8LsGD/C7Bg/wuwYJkLsGAAC7BgAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYKcLsGD/C7Bg/wuw
+        YP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGB4AAAAAAuwYG8LsGD/C7Bg/wuw
+        YP8LsGDGC7BgAAuwYAALsGAAAAAAAAuwYAALsGAAC7BgcAuwYP8LsGD/C7Bg/wuwYNULsGAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgVguw
+        YP8LsGD/C7Bg/wuwYP8LsGDeC7BgaAuwYCYLsGAIC7BgBAuwYCMLsGBjC7BgwwuwYP8LsGCuAAAAAAuw
+        YDQLsGD/C7Bg/wuwYP8LsGD4C7BgBgAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgNwuwYP8LsGD/C7Bg/wuw
+        YP4LsGASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAC7BgvAuwYP8LsGD/C7Bg/wuwYNELsGAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuw
+        YD4LsGCyAAAAAAuwYAQLsGD1C7Bg/wuwYP8LsGD/C7BgOAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgBQuw
+        YPcLsGD/C7Bg/wuwYP8LsGBNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAC7Bg7wuwYP8LsGD/C7Bg/wuwYEsAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGDAC7Bg/wuwYP8LsGD/C7BgcQAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAuwYMMLsGD/C7Bg/wuwYP8LsGCJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7Bg/QuwYP8LsGD/C7Bg/wuwYA4AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGCGC7Bg/wuwYP8LsGD/C7BgqgAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYIoLsGD/C7Bg/wuwYP8LsGDFAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7Bg8QuwYP8LsGD/C7Bg/wuw
+        YAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGBLC7Bg/wuw
+        YP8LsGD/C7Bg4wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYFALsGD/C7Bg/wuwYP8LsGD5C7BgCAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgzQuw
+        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
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////8AAP//Af///wAA//8A////
+        AAD//4B///8AAP//+D///wAA///8H///AAD///4f//8AAP///h8DDwAA///+HgAHAAD///4MAAcAAP3+
+        /wwfBwAA8Pw/DD+HAADg/B8MP4cAAMD8Dw4fgwAAgGgHBwPDAAAAAAOHgAMAAAAAA4f4AwAAAAADh//B
+        AAAAAAOD/8EAAAAAA8OfwQAAgAAGA4ADAADA/A4DwAMAAOD8HgPgDwAA8Pw/////AAD9/v////8AAP//
+        /+D//wAA////4P//AAD////w//8AAP////D//wAA////////AAD///////8AAPwHh/D//wAA8AGD8H//
+        AADAAcP4f/8AAMH4w/h//wAAg/7D+H//AACH/8P4P/8AAIf/wfg//wAAh//h/D//AACAAGH8P/8AAIAA
+        Yfw//wAAw/hg/B//AADD+HD8H/8AAODwcHwf/wAA8ADwAD//AAD4APAAP/8AAP4D+GB//wAA////////
+        AAA=
+</value>
+  </data>
+  <data name="textBoxLog.MaxLength" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelTarget.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 21</value>
+  </data>
+  <data name="comboBoxSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 20</value>
+  </data>
+  <data name="textBoxLog.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;labelArrow.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="linkLabelSourceURL.ToolTip" xml:space="preserve">
+    <value>翻訳元WikipediaのURLです。</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="buttonSaveDirectory.ToolTip" xml:space="preserve">
+    <value>処理結果を出力するフォルダを選択します。</value>
+  </data>
+  <data name="statusStrip.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;buttonRun.Name" xml:space="preserve">
+    <value>buttonRun</value>
+  </data>
+  <data name="labelArrow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 46</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labelTarget.ToolTip" xml:space="preserve">
+    <value>翻訳先の言語です。</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSource.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="textBoxSaveDirectory.ToolTip" xml:space="preserve">
+    <value>出力先フォルダはこちらに直接入力することもできます。</value>
+  </data>
+  <data name="toolStripMenuItemEnglish.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="textBoxLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="toolStripDropDownButtonLanguage.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="buttonRun.ToolTip" xml:space="preserve">
+    <value>記事にアクセスし、翻訳支援処理を行います。
+作成した翻訳支援ファイルとログは、出力先フォルダに出力されます。</value>
+  </data>
+  <data name="buttonConfig.ToolTip" xml:space="preserve">
+    <value>サーバーやツールの設定を行います。</value>
+  </data>
+  <data name="groupBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.Name" xml:space="preserve">
+    <value>buttonConfig</value>
+  </data>
+  <data name="buttonStop.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="labelArticle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelArticle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelArticle.ToolTip" xml:space="preserve">
+    <value>翻訳元Wikipediaでの記事名を入力します。</value>
+  </data>
+  <data name="buttonStop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 18</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="toolStripDropDownButtonConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 22</value>
+  </data>
+  <data name="linkLabelSourceURL.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;timerStatusStopwatch.Name" xml:space="preserve">
+    <value>timerStatusStopwatch</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labelArticle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 23</value>
   </data>
   <data name="statusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="&gt;&gt;labelArticle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>480, 480</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Name" xml:space="preserve">
+    <value>labelTarget</value>
+  </data>
+  <data name="buttonSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 16</value>
+  </data>
+  <data name="toolStripStatusLabelStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="groupBoxTransfer.ToolTip" xml:space="preserve">
+    <value>翻訳元・先の言語を選択してください。
+コンボボックスに目的の言語コードが存在しない場合は、設定画面で登録を行ってください。</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="buttonSaveDirectory.Text" xml:space="preserve">
+    <value>Select folder...</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Name" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="buttonRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 23</value>
+  </data>
+  <data name="textBoxLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 56</value>
+  </data>
+  <data name="buttonSaveDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="linkLabelSourceURL.Text" xml:space="preserve">
+    <value>http://</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Name" xml:space="preserve">
+    <value>labelSource</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Name" xml:space="preserve">
+    <value>comboBoxSource</value>
+  </data>
+  <data name="linkLabelSourceURL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 21</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Name" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="buttonRun.Text" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="toolStripDropDownButtonLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 22</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Name" xml:space="preserve">
+    <value>textBoxArticle</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;toolStripDropDownButtonConfig.Name" xml:space="preserve">
+    <value>toolStripDropDownButtonConfig</value>
+  </data>
+  <data name="buttonConfig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 61</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Name" xml:space="preserve">
+    <value>buttonStop</value>
+  </data>
+  <data name="textBoxArticle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 20</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="toolStripMenuItemAuto.Text" xml:space="preserve">
+    <value>(auto)</value>
+  </data>
+  <data name="groupBoxRun.ToolTip" xml:space="preserve">
+    <value>目的の記事の、翻訳元言語のWikipediaでの記事名を入力し、実行ボタンを押してください。</value>
+  </data>
+  <data name="labelArrow.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="labelArrow.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemJapanese.Name" xml:space="preserve">
+    <value>toolStripMenuItemJapanese</value>
+  </data>
+  <data name="comboBoxTarget.ToolTip" xml:space="preserve">
+    <value>翻訳先の言語を選択、または入力します。
+入力の場合、Wikipediaで使用されている言語コードを入力してください。</value>
+  </data>
+  <data name="&gt;&gt;folderBrowserDialogSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textBoxLog.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textBoxArticle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 19</value>
+  </data>
+  <data name="toolStripDropDownButtonConfig.Text" xml:space="preserve">
+    <value>Wikipedia</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labelTarget.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="groupBoxTransfer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>432, 96</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
+    <value>Select Output folder</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="buttonSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 23</value>
+  </data>
+  <data name="groupBoxTransfer.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;toolStripStatusLabelStopwatch.Name" xml:space="preserve">
+    <value>toolStripStatusLabelStopwatch</value>
+  </data>
+  <data name="buttonConfig.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="toolStripDropDownButtonLanguage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="buttonConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 23</value>
+  </data>
+  <data name="toolStripMenuItemJapanese.Text" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="&gt;&gt;toolStripDropDownButtonLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 114</value>
+  </data>
+  <data name="comboBoxSource.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="comboBoxTarget.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxLog.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 449</value>
+  </data>
+  <data name="groupBoxRun.Text" xml:space="preserve">
+    <value>Input Title then Run</value>
+  </data>
+  <data name="toolStripMenuItemAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 22</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;folderBrowserDialogSaveDirectory.Name" xml:space="preserve">
+    <value>folderBrowserDialogSaveDirectory</value>
+  </data>
+  <data name="comboBoxSource.ToolTip" xml:space="preserve">
+    <value>翻訳元の言語を選択、または入力します。
+入力の場合、Wikipediaで使用されている言語コードを入力してください。</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labelSource.ToolTip" xml:space="preserve">
+    <value>翻訳元の言語です。</value>
+  </data>
+  <data name="labelArticle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 12</value>
+  </data>
+  <data name="labelArrow.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Translation Support for Wikipedia</value>
+  </data>
+  <data name="toolStripDropDownButtonConfig.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Name" xml:space="preserve">
+    <value>comboBoxTarget</value>
+  </data>
   <data name="&gt;&gt;statusStrip.Name" xml:space="preserve">
     <value>statusStrip</value>
-  </data>
-  <data name="&gt;&gt;statusStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;statusStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="textBoxArticle.ToolTip" xml:space="preserve">
+    <value>翻訳元Wikipediaでの記事名を入力します。</value>
+  </data>
+  <data name="labelSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 21</value>
+  </data>
+  <data name="textBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="toolStripMenuItemEnglish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 22</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemAuto.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonStop.Text" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="toolStripMenuItemJapanese.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 22</value>
+  </data>
+  <data name="linkLabelSourceURL.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Name" xml:space="preserve">
+    <value>linkLabelSourceURL</value>
+  </data>
+  <data name="comboBoxTarget.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 64</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonStop.ToolTip" xml:space="preserve">
+    <value>処理を中断します。</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerRun.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textBoxLog.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Name" xml:space="preserve">
+    <value>labelArrow</value>
+  </data>
   <data name="&gt;&gt;statusStrip.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="textBoxArticle.MaxLength" type="System.Int32, mscorlib">
+    <value>255</value>
+  </data>
+  <data name="toolStripStatusLabelStopwatch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="buttonConfig.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="buttonConfig.Text" xml:space="preserve">
+    <value>Settings...</value>
+  </data>
+  <data name="textBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 19</value>
+  </data>
+  <data name="&gt;&gt;toolStripStatusLabelStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>464, 473</value>
+  </data>
+  <data name="buttonSaveDirectory.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="groupBoxRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 169</value>
+  </data>
+  <data name="folderBrowserDialogSaveDirectory.Description" xml:space="preserve">
+    <value>Select Output folder</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Name" xml:space="preserve">
+    <value>labelArticle</value>
+  </data>
+  <data name="toolStripDropDownButtonConfig.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemAuto.Name" xml:space="preserve">
+    <value>toolStripMenuItemAuto</value>
+  </data>
+  <data name="buttonStop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 23</value>
+  </data>
+  <data name="&gt;&gt;toolStripStatusLabelStopwatch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.Name" xml:space="preserve">
+    <value>textBoxSaveDirectory</value>
+  </data>
+  <data name="buttonRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 18</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Name" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
+  </data>
+  <data name="groupBoxTransfer.Text" xml:space="preserve">
+    <value>Select Source and Destination</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;statusStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSaveDirectory.Name" xml:space="preserve">
+    <value>buttonSaveDirectory</value>
+  </data>
+  <data name="groupBoxRun.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonStop.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>464, 24</value>
+  </data>
+  <data name="toolStripDropDownButtonLanguage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
+        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
+        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
+        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
+        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
+        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
+        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
+        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
+        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
+        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorkerRun.Name" xml:space="preserve">
+    <value>backgroundWorkerRun</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;timerStatusStopwatch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="labelArrow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="toolStripDropDownButtonConfig.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripStatusLabelStopwatch.Text" xml:space="preserve">
+    <value>Time 0:00</value>
+  </data>
+  <data name="&gt;&gt;toolStripDropDownButtonConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripStatusLabelStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 19</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnglish.Name" xml:space="preserve">
+    <value>toolStripMenuItemEnglish</value>
+  </data>
+  <data name="groupBoxSaveDirectory.ToolTip" xml:space="preserve">
+    <value>処理結果を出力するフォルダを選択してください。
+指定されたフォルダに記事テキストとログを出力します。</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="backgroundWorkerRun.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>274, 17</value>
+  </metadata>
+  <metadata name="folderBrowserDialogSaveDirectory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="timerStatusStopwatch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>673, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>464, 473</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAMkYAAAEAIAAIOQAAFgAAACgAAAAyAAAAjAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANyYmnDcmJ3g3JifENyYn8DcmJ9A3JidANyYmHDcmJGwAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzJi7ENyYn/DcmJ/w3J
-        if8NyYn/DcmJ/w3Jif8NyYnzDcmJXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/AQAAfwQAAH8IAAB/BQAA
-        fwIAAAAAC86UcA3Jif8NyYn/DcmJ/w3Jif8NyYn/DcmJ/w3Jif8NyYn+DcmJWQAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/AQAA
-        fwEAAH8CAAB/BAAAfwYAAH8HAAB/AwAAfwEAAAAAAAAAAAAAAAANyYkHDcmJMw3JibgNyYn/DcmJ/w3J
-        if8NyYnyDcmJFwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAH8BAAB/AQAAfwIAAH8DAAB/AQAAfwEAAAAAAAAAAAAAfwEAAAAAAAAAAAAA
-        AAAAAAAADcmJBg3JidkNyYn/DcmJ/w3Jif8NyYmEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/AQAAfwIAAAAAAAB/AQAAfwIAAH8BAAAAAAAA
-        AAAAAAAAAAB/AQAAAAAAAAAAAAAAAAAAAAAAAAAADcmJbg3Jif8NyYn/DcmJ/w3JidgAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/AQAA
-        fwFQUHIDSEhzCktLchJISGsVUFByCVBQcgMAAAAAAAB/AQAAAAAAAAAAAAAAAAAAAAANyYkfDcmJ/w3J
-        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
-        VfQ1NWHYQUFyekZGfRoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAaGkYHMzNiOjMzYoU0NGK0ODhosD4+cHtFRXwsRkaKAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAA3JieQNyYn/DcmJ/w3Jif8NyYmjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABKSn8JPj51Ij8/dTRISIQsR0eFG0ZGigcAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADcmJrA3Jif8NyYn/DcmJ/w3JidoAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARkaKAkZG
-        igIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANyYl0DcmJ/w3J
-        if8NyYn/DcmJ/w3JiRIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAA3JiTwNyYn/DcmJ/w3Jif8NyYn/DcmJSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGAWC7BgbAuwYK4LsGDaC7Bg8Auw
-        YPwLsGD1C7Bg2AuwYKoLsGBsC7BgIQAAAAAAAAAAC7Bg4wuwYP8LsGD/C7Bg/wuwYFQAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAALsGDjC7Bg/wuwYP8LsGD/C7BgXQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGADC7Bgfwuw
-        YPYLsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7BgQAAAAAALsGCpC7Bg/wuw
-        YP8LsGD/C7BgjQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYKoLsGD/C7Bg/wuwYP8LsGCZAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAuwYKcLsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuw
-        YP8LsGB4AAAAAAuwYG8LsGD/C7Bg/wuwYP8LsGDGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgcAuw
-        YP8LsGD/C7Bg/wuwYNUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGBWC7Bg/wuwYP8LsGD/C7Bg/wuwYN4LsGBoC7BgJguw
-        YAgLsGAEC7BgIwuwYGMLsGDDC7Bg/wuwYK4AAAAAC7BgNAuwYP8LsGD/C7Bg/wuwYPgLsGAGAAAAAAAA
-        AAAAAAAAAAAAAAAAAAALsGA3C7Bg/wuwYP8LsGD/C7Bg/guwYBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYLwLsGD/C7Bg/wuw
-        YP8LsGDRC7BgDwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGA+C7BgsgAAAAALsGAEC7Bg9Quw
-        YP8LsGD/C7Bg/wuwYDgAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYAULsGD3C7Bg/wuwYP8LsGD/C7BgTQAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAC7Bg7wuwYP8LsGD/C7Bg/wuwYEsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAALsGDAC7Bg/wuwYP8LsGD/C7BgcQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuw
-        YMMLsGD/C7Bg/wuwYP8LsGCJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGD9C7Bg/wuwYP8LsGD/C7BgDgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYIYLsGD/C7Bg/wuwYP8LsGCqAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAC7BgiguwYP8LsGD/C7Bg/wuwYMUAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYPELsGD/C7Bg/wuw
-        YP8LsGAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgSwuw
-        YP8LsGD/C7Bg/wuwYOMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGBQC7Bg/wuwYP8LsGD/C7Bg+Quw
-        YAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAC7BgzQuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuw
-        YP8LsGD/C7BgqAAAAAALsGASC7Bg/guwYP8LsGD/C7Bg/wuwYBwAAAAAAAAAAAAAAAAAAAAAAAAAAAuw
-        YBgLsGD/C7Bg/wuwYP8LsGD/C7BgPQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALsGCPC7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuw
-        YP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGDaAAAAAAAAAAALsGDXC7Bg/wuwYP8LsGD/C7BgVQAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYOYLsGD/C7Bg/wuwYP8LsGB3AAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYDILsGD/C7Bg/wuw
-        YP8LsGCtAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgCwuwYP8LsGD/C7Bg/wuwYPgAAAAAAAAAAAuw
-        YJ0LsGD/C7Bg/wuwYP8LsGCOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgwwuwYP8LsGD/C7Bg/wuw
-        YKUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAuwYK8LsGD/C7Bg/wuwYP8LsGBbAAAAAAAAAAAAAAAAAAAAAAAAAAALsGAaC7Bg/wuw
-        YP8LsGD/C7Bg8QAAAAAAAAAAC7BgYguwYP8LsGD/C7Bg/wuwYMcAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAALsGDHC7Bg/wuwYP8LsGD/C7BgugAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgGAuwYOYLsGD/C7Bg/wuwYP4LsGCbC7BgNguw
-        YAkLsGAGC7BgMguwYL0LsGD/C7Bg/wuwYP8LsGDEAAAAAAAAAAALsGAoC7Bg/wuwYP8LsGD/C7Bg/wuw
-        YMYLsGBvC7BgLwuwYAkLsGALC7BgYQuwYP4LsGD/C7Bg/wuwYP8LsGCrAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgLQuw
-        YOgLsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYFwAAAAAAAAAAAuw
-        YAELsGDsC7Bg/wuwYP8LsGD/C7Bg+QuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuw
-        YGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAC7BgGwuwYLULsGD/C7Bg/wuwYP8LsGD/C7Bg/wuwYP8LsGD/C7Bg/wuw
-        YP8LsGCOAAAAAAAAAAAAAAAAAAAAAAuwYLQLsGD/C7Bg/wuwYP8LsGCMC7BgkAuwYPwLsGD/C7Bg/wuw
-        YP8LsGD/C7Bg/wuwYP8LsGDMC7BgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuwYDgLsGCTC7Bg0Auw
-        YPILsGD8C7Bg8guwYNQLsGCcC7BgOQAAAAAAAAAAAAAAAAAAAAAAAAAAC7BgeQuwYP8LsGD/C7Bg/wuw
-        YL4AAAAAC7BgKguwYJwLsGDZC7Bg9AuwYPsLsGDfC7BgjAuwYA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///////8AA////////wAD////////AAP///////8AA////////
-        wAD////////AAP///////8AA////////wAD////////AAP///////8AA//8B////wAD//wD////AAP//
-        gH///8AA///4P///wAD///wf///AAP///h///8AA///+HwMPwAD///4eAAfAAP/x/gwAB8AA/+D/DB8H
-        wAD/4H8MP4fAAP/gfww/h8AA/+A/Dh+DwAD/8B8HA8PAAOAAD4eAA8AAwAAPh/gDwADAAA+H/8HAAMAA
-        D4P/wcAAwAAPw5/BwADwAB4DgAPAAP/wHgPAA8AA/+A+A+APwAD/4H/////AAP/w/////8AA//H/4P//
-        wAD////g///AAP////D//8AA////8P//wAD////////AAP///////8AA/AeH8P//wADwAYPwf//AAMAB
-        w/h//8AAwfjD+H//wACD/sP4f//AAIf/w/g//8AAh//B+D//wACH/+H8P//AAIAAYfw//8AAgABh/D//
-        wADD+GD8H//AAMP4cPwf/8AA4PBwfB//wADwAPAAP//AAPgA8AA//8AA/gP4YH//wAD////////AAP//
-        /////8AA////////wAD////////AAP///////8AA////////wAD////////AAP///////8AA////////
-        wAD////////AAP///////8AA////////wAD////////AAP///////8AA
-</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>480, 480</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Wikipedia 翻訳支援ツール</value>
-  </data>
-  <data name="&gt;&gt;folderBrowserDialogSaveDirectory.Name" xml:space="preserve">
-    <value>folderBrowserDialogSaveDirectory</value>
-  </data>
-  <data name="&gt;&gt;folderBrowserDialogSaveDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerRun.Name" xml:space="preserve">
-    <value>backgroundWorkerRun</value>
-  </data>
-  <data name="&gt;&gt;backgroundWorkerRun.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
-    <value>toolTip</value>
-  </data>
-  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripStatusLabelStatus.Name" xml:space="preserve">
-    <value>toolStripStatusLabelStatus</value>
-  </data>
-  <data name="&gt;&gt;toolStripStatusLabelStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripStatusLabelStopwatch.Name" xml:space="preserve">
-    <value>toolStripStatusLabelStopwatch</value>
-  </data>
-  <data name="&gt;&gt;toolStripStatusLabelStopwatch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonLanguage.Name" xml:space="preserve">
-    <value>toolStripDropDownButtonLanguage</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemEnglish.Name" xml:space="preserve">
-    <value>toolStripMenuItemEnglish</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemEnglish.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemJapanese.Name" xml:space="preserve">
-    <value>toolStripMenuItemJapanese</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemJapanese.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonConfig.Name" xml:space="preserve">
-    <value>toolStripDropDownButtonConfig</value>
-  </data>
-  <data name="&gt;&gt;toolStripDropDownButtonConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;timerStatusStopwatch.Name" xml:space="preserve">
-    <value>timerStatusStopwatch</value>
-  </data>
-  <data name="&gt;&gt;timerStatusStopwatch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>MainForm</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>557, 17</value>
+  </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>464, 17</value>
+  </metadata>
 </root>

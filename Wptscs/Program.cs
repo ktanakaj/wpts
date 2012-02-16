@@ -3,7 +3,7 @@
 //      アプリケーション起動用クラスソース</summary>
 //
 // <copyright file="Program.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -11,7 +11,10 @@
 namespace Honememo.Wptscs
 {
     using System;
+    using System.Globalization;
+    using System.Threading;
     using System.Windows.Forms;
+    using Honememo.Wptscs.Properties;
 
     /// <summary>
     /// アプリケーション起動時に最初に呼ばれるクラスです。
@@ -25,11 +28,25 @@ namespace Honememo.Wptscs
         private static void Main()
         {
             // 初回実行時は古いバージョンの設定があればバージョンアップ
-            if (!Properties.Settings.Default.IsUpgraded)
+            if (!Settings.Default.IsUpgraded)
             {
                 // 現バージョンを上書きしてしまうため一度だけ実施
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.IsUpgraded = true;
+                Settings.Default.Upgrade();
+                Settings.Default.IsUpgraded = true;
+            }
+
+            // 表示言語の設定が存在する場合、画面表示前にその設定を読み込み
+            if (!String.IsNullOrWhiteSpace(Settings.Default.LastSelectedLanguage))
+            {
+                try
+                {
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Settings.Default.LastSelectedLanguage);
+                }
+                catch (Exception ex)
+                {
+                    // 設定ファイルに手で不正な値が設定された場合など、万が一エラーになった場合デバッグログ
+                    System.Diagnostics.Debug.WriteLine("Program.Main : " + ex.ToString());
+                }
             }
 
             Application.EnableVisualStyles();

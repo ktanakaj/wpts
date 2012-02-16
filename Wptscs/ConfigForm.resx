@@ -166,7 +166,7 @@
     <value>3</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>Cancel</value>
   </data>
   <data name="buttonCancel.ToolTip" xml:space="preserve">
     <value>設定を更新せず、この画面を閉じます。</value>
@@ -196,13 +196,13 @@
     <value>9, 399</value>
   </data>
   <data name="labelItemsNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>426, 12</value>
+    <value>281, 12</value>
   </data>
   <data name="labelItemsNote.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="labelItemsNote.Text" xml:space="preserve">
-    <value>※ 一度に大量の行を削除すると、画面が長時間反応しなくなります（50行程度が限界）。</value>
+    <value>* Don't remove many rows by one operation. (max 50)</value>
   </data>
   <data name="&gt;&gt;labelItemsNote.Name" xml:space="preserve">
     <value>labelItemsNote</value>
@@ -223,7 +223,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnFromCode.HeaderText" xml:space="preserve">
-    <value>翻訳元</value>
+    <value>Source</value>
   </data>
   <data name="ColumnFromCode.ToolTipText" xml:space="preserve">
     <value>記事の置き換えパターンの翻訳元言語です。</value>
@@ -235,7 +235,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
+    <value>Title</value>
   </data>
   <data name="ColumnFromTitle.ToolTipText" xml:space="preserve">
     <value>記事の置き換えパターンの翻訳元記事名です。</value>
@@ -247,7 +247,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnAlias.HeaderText" xml:space="preserve">
-    <value>リダイレクト</value>
+    <value>Redirect</value>
   </data>
   <data name="ColumnAlias.ToolTipText" xml:space="preserve">
     <value>翻訳元記事名がリダイレクトの場合の、リダイレクト先の記事名です。</value>
@@ -268,7 +268,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnToCode.HeaderText" xml:space="preserve">
-    <value>翻訳先</value>
+    <value>Destination</value>
   </data>
   <data name="ColumnToCode.ToolTipText" xml:space="preserve">
     <value>記事の置き換えパターンの翻訳先言語です。</value>
@@ -280,7 +280,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnToTitle.HeaderText" xml:space="preserve">
-    <value>記事名</value>
+    <value>Title</value>
   </data>
   <data name="ColumnToTitle.ToolTipText" xml:space="preserve">
     <value>記事の置き換えパターンの翻訳先記事名です。
@@ -293,7 +293,7 @@
     <value>True</value>
   </metadata>
   <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
-    <value>取得日時</value>
+    <value>Timestamp</value>
   </data>
   <data name="ColumnTimestamp.ToolTipText" xml:space="preserve">
     <value>置き換えパターンを言語間リンクから取得した場合の取得日時です。
@@ -337,7 +337,7 @@
     <value>0</value>
   </data>
   <data name="tabPageItems.Text" xml:space="preserve">
-    <value>記事の置き換え</value>
+    <value>Item table</value>
   </data>
   <data name="tabPageItems.ToolTipText" xml:space="preserve">
     <value>記事の置き換えパターンです。
@@ -394,7 +394,7 @@
     <value>1</value>
   </data>
   <data name="tabPageHeadings.Text" xml:space="preserve">
-    <value>見出しの置き換え</value>
+    <value>Heading table</value>
   </data>
   <data name="tabPageHeadings.ToolTipText" xml:space="preserve">
     <value>見出しの置き換えパターンです。
@@ -412,6 +412,9 @@
   <data name="&gt;&gt;tabPageHeadings.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="buttonLanguageRemove.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="buttonLanguageRemove.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -419,16 +422,16 @@
     <value>NoControl</value>
   </data>
   <data name="buttonLanguageRemove.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 11</value>
+    <value>233, 11</value>
   </data>
   <data name="buttonLanguageRemove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 23</value>
+    <value>56, 23</value>
   </data>
   <data name="buttonLanguageRemove.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="buttonLanguageRemove.Text" xml:space="preserve">
-    <value>削除</value>
+    <value>Remove</value>
   </data>
   <data name="buttonLanguageRemove.ToolTip" xml:space="preserve">
     <value>選択されている言語を削除します。</value>
@@ -446,7 +449,7 @@
     <value>0</value>
   </data>
   <data name="buttonLunguageAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 11</value>
+    <value>180, 11</value>
   </data>
   <data name="buttonLunguageAdd.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 23</value>
@@ -455,7 +458,7 @@
     <value>2</value>
   </data>
   <data name="buttonLunguageAdd.Text" xml:space="preserve">
-    <value>追加</value>
+    <value>Add...</value>
   </data>
   <data name="buttonLunguageAdd.ToolTip" xml:space="preserve">
     <value>言語を追加するダイアログを表示します。</value>
@@ -485,37 +488,37 @@
     <value>True</value>
   </metadata>
   <data name="ColumnCode.HeaderText" xml:space="preserve">
-    <value>コード</value>
+    <value>Code</value>
   </data>
   <data name="ColumnCode.ToolTipText" xml:space="preserve">
     <value>表記先の言語です。</value>
   </data>
   <data name="ColumnCode.Width" type="System.Int32, mscorlib">
-    <value>53</value>
+    <value>56</value>
   </data>
   <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnName.HeaderText" xml:space="preserve">
-    <value>名称（記事名）</value>
+    <value>Name (Article)</value>
   </data>
   <data name="ColumnName.ToolTipText" xml:space="preserve">
     <value>表記先の言語での名称です。Wikipedia記事名が望ましいです。</value>
   </data>
   <data name="ColumnName.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>97</value>
   </data>
   <metadata name="ColumnShortName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ColumnShortName.HeaderText" xml:space="preserve">
-    <value>略称</value>
+    <value>Abbr</value>
   </data>
   <data name="ColumnShortName.ToolTipText" xml:space="preserve">
     <value>表記先の言語での略称です。特に不要な場合空欄です。</value>
   </data>
   <data name="ColumnShortName.Width" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>54</value>
   </data>
   <data name="dataGridViewLanguageName.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 18</value>
@@ -548,7 +551,7 @@
     <value>2</value>
   </data>
   <data name="groupBoxLanguageName.Text" xml:space="preserve">
-    <value>各言語での言語名</value>
+    <value>Language name</value>
   </data>
   <data name="groupBoxLanguageName.ToolTip" xml:space="preserve">
     <value>その言語が、各言語でなんと表記されるかを登録します。
@@ -601,13 +604,13 @@
     <value>6, 21</value>
   </data>
   <data name="labelBracket.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
+    <value>76, 12</value>
   </data>
   <data name="labelBracket.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelBracket.Text" xml:space="preserve">
-    <value>括弧のスタイル:</value>
+    <value>Bracket style:</value>
   </data>
   <data name="labelBracket.ToolTip" xml:space="preserve">
     <value>各言語での括弧書きのスタイルを入力します。
@@ -638,7 +641,7 @@
     <value>5</value>
   </data>
   <data name="groupBoxLanguage.Text" xml:space="preserve">
-    <value>言語の設定</value>
+    <value>Language</value>
   </data>
   <data name="&gt;&gt;groupBoxLanguage.Name" xml:space="preserve">
     <value>groupBoxLanguage</value>
@@ -691,13 +694,13 @@
     <value>6, 347</value>
   </data>
   <data name="labelLangFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 12</value>
+    <value>68, 12</value>
   </data>
   <data name="labelLangFormat.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
   <data name="labelLangFormat.Text" xml:space="preserve">
-    <value>言語指定用フォーマット:</value>
+    <value>Lang format:</value>
   </data>
   <data name="labelLangFormat.ToolTip" xml:space="preserve">
     <value>言語コードを明示的に指定した記述で使用するフォーマットを入力します。
@@ -752,13 +755,13 @@
     <value>6, 319</value>
   </data>
   <data name="labelLinkInterwikiFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 12</value>
+    <value>114, 12</value>
   </data>
   <data name="labelLinkInterwikiFormat.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="labelLinkInterwikiFormat.Text" xml:space="preserve">
-    <value>仮リンク用フォーマット:</value>
+    <value>Link-interwiki format:</value>
   </data>
   <data name="labelLinkInterwikiFormat.ToolTip" xml:space="preserve">
     <value>言語間リンクが見つからない場合に置き換えるフォーマットを入力します。
@@ -811,13 +814,13 @@
     <value>6, 291</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 12</value>
+    <value>150, 12</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.Text" xml:space="preserve">
-    <value>デフォルトページ名:</value>
+    <value>Default documentation page:</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.ToolTip" xml:space="preserve">
     <value>その言語での [[Template:Documentation]] の [[/doc]] に相当する、デフォルトの解説ページ名を入力します。</value>
@@ -875,13 +878,13 @@
     <value>6, 244</value>
   </data>
   <data name="labelDocumentationTemplate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 12</value>
+    <value>137, 12</value>
   </data>
   <data name="labelDocumentationTemplate.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="labelDocumentationTemplate.Text" xml:space="preserve">
-    <value>解説用テンプレート:</value>
+    <value>Documentation templates:</value>
   </data>
   <data name="labelDocumentationTemplate.ToolTip" xml:space="preserve">
     <value>その言語での [[Template:Documentation]] に相当するテンプレート名を入力します。
@@ -942,7 +945,7 @@
     <value>14</value>
   </data>
   <data name="labelFileNamespace.Text" xml:space="preserve">
-    <value>ファイル名前空間のID:</value>
+    <value>File namespace's ID:</value>
   </data>
   <data name="labelFileNamespace.ToolTip" xml:space="preserve">
     <value>上記APIで取得した名前空間のうち、ファイルに該当する番号を入力します。</value>
@@ -996,13 +999,13 @@
     <value>6, 162</value>
   </data>
   <data name="labelCategoryNamespace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 12</value>
+    <value>137, 12</value>
   </data>
   <data name="labelCategoryNamespace.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="labelCategoryNamespace.Text" xml:space="preserve">
-    <value>カテゴリ名前空間のID:</value>
+    <value>Category namespace's ID:</value>
   </data>
   <data name="labelCategoryNamespace.ToolTip" xml:space="preserve">
     <value>上記APIで取得した名前空間のうち、カテゴリに該当する番号を入力します。</value>
@@ -1056,13 +1059,13 @@
     <value>6, 137</value>
   </data>
   <data name="labelTemplateNamespace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 12</value>
+    <value>138, 12</value>
   </data>
   <data name="labelTemplateNamespace.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="labelTemplateNamespace.Text" xml:space="preserve">
-    <value>テンプレート名前空間のID:</value>
+    <value>Template namespace's ID:</value>
   </data>
   <data name="labelTemplateNamespace.ToolTip" xml:space="preserve">
     <value>上記APIで取得した名前空間のうち、テンプレートに該当する番号を入力します。</value>
@@ -1114,13 +1117,13 @@
     <value>6, 217</value>
   </data>
   <data name="labelRedirect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 12</value>
+    <value>50, 12</value>
   </data>
   <data name="labelRedirect.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="labelRedirect.Text" xml:space="preserve">
-    <value>リダイレクトの文字列:</value>
+    <value>Redirect:</value>
   </data>
   <data name="labelRedirect.ToolTip" xml:space="preserve">
     <value>その言語でのリダイレクトの書式（例 #転送 ）を入力します。
@@ -1177,13 +1180,13 @@
     <value>6, 51</value>
   </data>
   <data name="labelExportPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 12</value>
+    <value>88, 12</value>
   </data>
   <data name="labelExportPath.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="labelExportPath.Text" xml:space="preserve">
-    <value>XMLエクスポート用のAPIパス:</value>
+    <value>Export XML API:</value>
   </data>
   <data name="labelExportPath.ToolTip" xml:space="preserve">
     <value>サーバーから記事をXMLでダウンロードするためのパスを入力します。
@@ -1243,13 +1246,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja
     <value>6, 94</value>
   </data>
   <data name="labelMetaApi.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 12</value>
+    <value>54, 12</value>
   </data>
   <data name="labelMetaApi.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="labelMetaApi.Text" xml:space="preserve">
-    <value>メタ情報取得用のAPIパス:</value>
+    <value>Meta API:</value>
   </data>
   <data name="labelMetaApi.ToolTip" xml:space="preserve">
     <value>サーバーから名前空間やウィキ間リンクといったメタ情報をXMLでダウンロードするためのパスを入力します。
@@ -1303,13 +1306,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>6, 22</value>
   </data>
   <data name="labelLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 12</value>
+    <value>40, 12</value>
   </data>
   <data name="labelLocation.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelLocation.Text" xml:space="preserve">
-    <value>サーバーURL:</value>
+    <value>Server:</value>
   </data>
   <data name="labelLocation.ToolTip" xml:space="preserve">
     <value>サーバーのURLを入力します。</value>
@@ -1339,7 +1342,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>4</value>
   </data>
   <data name="groupBoxServer.Text" xml:space="preserve">
-    <value>MediaWikiの設定</value>
+    <value>MediaWiki</value>
   </data>
   <data name="&gt;&gt;groupBoxServer.Name" xml:space="preserve">
     <value>groupBoxServer</value>
@@ -1354,7 +1357,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>3</value>
   </data>
   <data name="comboBoxLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 13</value>
+    <value>81, 13</value>
   </data>
   <data name="comboBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 20</value>
@@ -1384,13 +1387,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>20, 16</value>
   </data>
   <data name="labelLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 12</value>
+    <value>55, 12</value>
   </data>
   <data name="labelLanguage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="labelLanguage.Text" xml:space="preserve">
-    <value>言語:</value>
+    <value>Language:</value>
   </data>
   <data name="labelLanguage.ToolTip" xml:space="preserve">
     <value>設定を変更したい言語を選択します。</value>
@@ -1420,7 +1423,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>2</value>
   </data>
   <data name="tabPageServer.Text" xml:space="preserve">
-    <value>サーバー／言語</value>
+    <value>Server/Language</value>
   </data>
   <data name="tabPageServer.ToolTipText" xml:space="preserve">
     <value>各言語ごとのサーバー／書式等の設定です。</value>
@@ -1447,13 +1450,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>12, 67</value>
   </data>
   <data name="labelWebsite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 12</value>
+    <value>47, 12</value>
   </data>
   <data name="labelWebsite.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="labelWebsite.Text" xml:space="preserve">
-    <value>配布元:</value>
+    <value>Website:</value>
   </data>
   <data name="&gt;&gt;labelWebsite.Name" xml:space="preserve">
     <value>labelWebsite</value>
@@ -1561,7 +1564,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>2</value>
   </data>
   <data name="groupBoxInformation.Text" xml:space="preserve">
-    <value>バージョン情報</value>
+    <value>About</value>
   </data>
   <data name="&gt;&gt;groupBoxInformation.Name" xml:space="preserve">
     <value>groupBoxInformation</value>
@@ -1620,13 +1623,10 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>237, 128</value>
   </data>
   <data name="labelConnectRetryTimeNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 12</value>
+    <value>0, 12</value>
   </data>
   <data name="labelConnectRetryTimeNote.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.Text" xml:space="preserve">
-    <value>（0:ウェイトしない）</value>
   </data>
   <data name="&gt;&gt;labelConnectRetryTimeNote.Name" xml:space="preserve">
     <value>labelConnectRetryTimeNote</value>
@@ -1647,13 +1647,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>6, 128</value>
   </data>
   <data name="labelConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 12</value>
+    <value>130, 12</value>
   </data>
   <data name="labelConnectRetryTime.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="labelConnectRetryTime.Text" xml:space="preserve">
-    <value>リトライ時のウェイト時間（ミリ秒）:</value>
+    <value>Connect retry time (ms):</value>
   </data>
   <data name="labelConnectRetryTime.ToolTip" xml:space="preserve">
     <value>通信エラー時にリトライする際の待機時間です。
@@ -1711,13 +1711,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>198, 102</value>
   </data>
   <data name="labelMaxConnectRetriesNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 12</value>
+    <value>63, 12</value>
   </data>
   <data name="labelMaxConnectRetriesNote.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="labelMaxConnectRetriesNote.Text" xml:space="preserve">
-    <value>（0:リトライしない）</value>
+    <value>(0: Disable)</value>
   </data>
   <data name="&gt;&gt;labelMaxConnectRetriesNote.Name" xml:space="preserve">
     <value>labelMaxConnectRetriesNote</value>
@@ -1738,13 +1738,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>6, 102</value>
   </data>
   <data name="labelMaxConnectRetries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 12</value>
+    <value>109, 12</value>
   </data>
   <data name="labelMaxConnectRetries.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="labelMaxConnectRetries.Text" xml:space="preserve">
-    <value>通信エラー時のリトライ回数:</value>
+    <value>Max connect retries:</value>
   </data>
   <data name="labelMaxConnectRetries.ToolTip" xml:space="preserve">
     <value>通信エラー時にリトライする回数です。
@@ -1769,13 +1769,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>8, 157</value>
   </data>
   <data name="checkBoxIgnoreError.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 16</value>
+    <value>83, 16</value>
   </data>
   <data name="checkBoxIgnoreError.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="checkBoxIgnoreError.Text" xml:space="preserve">
-    <value>エラーを可能な限り無視して続行する</value>
+    <value>Ignore error</value>
   </data>
   <data name="checkBoxIgnoreError.ToolTip" xml:space="preserve">
     <value>エラーが発生した際に処理を中止せず、無視して可能な限り処理を続行したい場合、チェックします。</value>
@@ -1802,13 +1802,10 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>342, 71</value>
   </data>
   <data name="labelRefererNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 12</value>
+    <value>0, 12</value>
   </data>
   <data name="labelRefererNote.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
-  </data>
-  <data name="labelRefererNote.Text" xml:space="preserve">
-    <value>（空欄:なし ※現在のバージョンでは空）</value>
   </data>
   <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
     <value>labelRefererNote</value>
@@ -1832,13 +1829,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>342, 46</value>
   </data>
   <data name="labelUserAgentNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 12</value>
+    <value>152, 12</value>
   </data>
   <data name="labelUserAgentNote.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="labelUserAgentNote.Text" xml:space="preserve">
-    <value>（空欄:デフォルト値）</value>
+    <value>(Empty: Itself by application)</value>
   </data>
   <data name="&gt;&gt;labelUserAgentNote.Name" xml:space="preserve">
     <value>labelUserAgentNote</value>
@@ -1859,13 +1856,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>183, 18</value>
   </data>
   <data name="labelChaceNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 12</value>
+    <value>63, 12</value>
   </data>
   <data name="labelChaceNote.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="labelChaceNote.Text" xml:space="preserve">
-    <value>（0:無効）</value>
+    <value>(0: Disable)</value>
   </data>
   <data name="&gt;&gt;labelChaceNote.Name" xml:space="preserve">
     <value>labelChaceNote</value>
@@ -1980,13 +1977,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>6, 18</value>
   </data>
   <data name="labelCacheExpire.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 12</value>
+    <value>108, 12</value>
   </data>
   <data name="labelCacheExpire.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="labelCacheExpire.Text" xml:space="preserve">
-    <value>キャッシュ有効期限（日）:</value>
+    <value>Cache expire (day) :</value>
   </data>
   <data name="labelCacheExpire.ToolTip" xml:space="preserve">
     <value>記事の置き換えで取得済みの内容をキャッシュとして使用する有効期限です。
@@ -2073,7 +2070,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>1</value>
   </data>
   <data name="groupBoxApplicationConfig.Text" xml:space="preserve">
-    <value>アプリケーションの設定</value>
+    <value>Application</value>
   </data>
   <data name="&gt;&gt;groupBoxApplicationConfig.Name" xml:space="preserve">
     <value>groupBoxApplicationConfig</value>
@@ -2100,7 +2097,10 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>3</value>
   </data>
   <data name="tabPageApplication.Text" xml:space="preserve">
-    <value>その他</value>
+    <value>etc</value>
+  </data>
+  <data name="tabPageApplication.ToolTip" xml:space="preserve">
+    <value>その他の設定・情報です。</value>
   </data>
   <data name="&gt;&gt;tabPageApplication.Name" xml:space="preserve">
     <value>tabPageApplication</value>
@@ -2126,9 +2126,6 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tabControl.ToolTip" xml:space="preserve">
-    <value>その他の設定・情報です。</value>
-  </data>
   <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
     <value>tabControl</value>
   </data>
@@ -2153,33 +2150,11 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>624, 493</value>
   </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAIAICAQAAAABADoAgAAJgAAABAQEAAAAAQAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAAAC
-        AAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAgAAAgAAAAICAAIAAAACAAIAAgIAAAICAgADAwMAAAAD/AAD/
-        AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAC7sAAAAAAAAAAAAAAAAAAAu7sAAAAAAAAAAAAAAAAAAAC7AAAAAAAAAAAAABEAAAAAuwAAu7sLsAAA
-        AAAREAAAALsAC7u7u7AAAAAAAREAAAC7AAuwAAuwAREREREREAAAuwALsAALsAERERERERAAALsAALsA
-        C7AAAAAAAREAAAC7AAALu7uwAAAAABEQAAAAuwAAsAALsAAAAAARAAAAu7sAALu7u7AAAAAAAAAAALu7
-        AAC7u7sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC7AAAAAAAAAAAAAAAA
-        AAAAuwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAu7uwALsAALsAAAAAAAAAC7
-        u7uwC7AAC7AAAAAAAAALuwAAsAuwAAuwAAAAAAAAC7AAAAALsAALsAAAAAAAAAu7u7uwC7AAC7AAAAAA
-        AAALsAALsAuwAAuwAAAAAAAAC7sAC7ALsAALsAAAAAAAAAC7u7sAC7u7u7AAAAAAAAAAC7uwAAuwu7sA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////
-        /////x////8P////z///P88J/x/OAf+PznmAB855gAfPOf+Pz4H/H895/z8PAf//DwP/////////////
-        z////8/////////////g55//wGef/49nn/+f55//gGef/55nn/+OZ5//wOAf/+HkP///////////////
-        //8oAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAICAAIAA
-        AACAAIAAgIAAAICAgADAwMAAAAD/AAD/AAAA//8A/wAAAP8A/wD//wAA////AAAAAAAAAAAAB3d3d3d3
-        d3dERERERERER0////////hHT///////+EdP///////4R0////////hHT///////+EdP///////4R0//
-        //////hHT///////+EdIiIiIiIiIR0zMzMzMzMxHxERERERERMAAAAAAAAAAAAAAAAAAAAAA//8AAIAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAD//wAA//8AAA==
-</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>640, 530</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>設定</value>
+    <value>Settings</value>
   </data>
   <data name="&gt;&gt;ColumnFromCode.Name" xml:space="preserve">
     <value>ColumnFromCode</value>

@@ -148,7 +148,6 @@
             this.tabControl.Controls.Add(this.tabPageApplication);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.toolTip.SetToolTip(this.tabControl, resources.GetString("tabControl.ToolTip"));
             // 
             // tabPageItems
             // 
@@ -523,6 +522,7 @@
             this.tabPageApplication.Controls.Add(this.groupBoxApplicationConfig);
             resources.ApplyResources(this.tabPageApplication, "tabPageApplication");
             this.tabPageApplication.Name = "tabPageApplication";
+            this.toolTip.SetToolTip(this.tabPageApplication, resources.GetString("tabPageApplication.ToolTip"));
             this.tabPageApplication.UseVisualStyleBackColor = true;
             // 
             // groupBoxInformation
@@ -781,9 +781,6 @@
         private System.Windows.Forms.TextBox textBoxDocumentationTemplate;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
         private System.Windows.Forms.Label labelLinkInterwikiFormat;
         private System.Windows.Forms.TextBox textBoxLinkInterwikiFormat;
         private System.Windows.Forms.Button buttonLanguageRemove;
@@ -796,6 +793,7 @@
         private System.Windows.Forms.Label labelMaxConnectRetriesNote;
         private System.Windows.Forms.Label labelConnectRetryTimeNote;
         private System.Windows.Forms.TextBox textBoxConnectRetryTime;
+        private System.Windows.Forms.Label labelItemsNote;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnFromTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAlias;
@@ -803,6 +801,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
-        private System.Windows.Forms.Label labelItemsNote;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
     }
 }
