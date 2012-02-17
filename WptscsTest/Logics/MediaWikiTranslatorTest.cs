@@ -14,14 +14,14 @@ namespace Honememo.Wptscs.Logics
     using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
-    using NUnit.Framework;
-    using Honememo.Tests;
     using Honememo.Parsers;
+    using Honememo.Tests;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Parsers;
     using Honememo.Wptscs.Utilities;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiTranslatorのテストクラスです。
@@ -29,53 +29,6 @@ namespace Honememo.Wptscs.Logics
     [TestFixture]
     public class MediaWikiTranslatorTest
     {
-        #region テスト用クラス
-
-        /// <summary>
-        /// MediaWikiTranslatorテスト用のクラスです。
-        /// </summary>
-        public class TestMediaWikiTranslator : MediaWikiTranslator
-        {
-            #region 非公開メソッドテスト用のオーラーライドメソッド
-
-            /// <summary>
-            /// 内部リンクを解析し、変換先言語の記事へのリンクに変換する。
-            /// </summary>
-            /// <param name="link">変換元リンク。</param>
-            /// <param name="parent">ページ要素を取得した変換元記事。</param>
-            /// <returns>変換済みリンク。</returns>
-            public new IElement ReplaceLink(MediaWikiLink link, MediaWikiPage parent)
-            {
-                return base.ReplaceLink(link, parent);
-            }
-
-            /// <summary>
-            /// テンプレートを解析し、変換先言語の記事へのテンプレートに変換する。
-            /// </summary>
-            /// <param name="template">変換元テンプレート。</param>
-            /// <param name="parent">ページ要素を取得した変換元記事。</param>
-            /// <returns>変換済みテンプレート。</returns>
-            public new IElement ReplaceTemplate(MediaWikiTemplate template, MediaWikiPage parent)
-            {
-                return base.ReplaceTemplate(template, parent);
-            }
-
-            /// <summary>
-            /// 指定された見出しに対して、対訳表による変換を行う。
-            /// </summary>
-            /// <param name="heading">見出し。</param>
-            /// <param name="parent">ページ要素を取得した変換元記事。</param>
-            /// <returns>変換後の見出し。</returns>
-            public new IElement ReplaceHeading(MediaWikiHeading heading, MediaWikiPage parent)
-            {
-                return base.ReplaceHeading(heading, parent);
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region 定数
 
         /// <summary>
@@ -90,7 +43,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テスト実施中カルチャを変更し後で戻すため、そのバックアップ。
         /// </summary>
-        System.Globalization.CultureInfo backupCulture;
+        private System.Globalization.CultureInfo backupCulture;
 
         #endregion
 
@@ -100,21 +53,23 @@ namespace Honememo.Wptscs.Logics
         /// テストの前処理。
         /// </summary>
         [TestFixtureSetUp]
-        public void SetUp()
+        public void SetUpBeforeClass()
         {
-            // トランスレータの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
+            // ロガーの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
             this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("ja-JP");
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
         }
 
         /// <summary>
         /// テストの後処理。
         /// </summary>
         [TestFixtureTearDown]
-        public void TearDown()
+        public void TearDownAfterClass()
         {
             // カルチャーを元に戻す
             System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = this.backupCulture;
         }
 
         #endregion
@@ -613,14 +568,12 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleIgnoreHeading Text > " + translate.Text);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example_定型句なし.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleIgnoreHeading Log > " + translate.Log);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example_定型句なし.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translator.Log);
@@ -653,14 +606,12 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Text > " + translate.Text);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Log > " + translate.Log);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
                 translator.Log);
@@ -713,14 +664,12 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleWithCache Text > " + translate.Text);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example_キャッシュ使用.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExampleWithCache Log > " + translate.Log);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example_キャッシュ使用.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translator.Log);
@@ -750,14 +699,12 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Text > " + translate.Text);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example_仮リンク有効.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Log > " + translate.Log);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
                 translator.Log);
@@ -799,14 +746,12 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Text > " + translate.Text);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "スペースシップツー.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            //System.Diagnostics.Debug.WriteLine("TranslateMediaWikiTest.TestExample Log > " + translate.Log);
             Assert.AreEqual(
                 File.ReadAllText(Path.Combine(resultDir, "スペースシップツー.log")).Replace("http://ja.wikipedia.org", from.Location),
                 translator.Log);
@@ -868,6 +813,53 @@ namespace Honememo.Wptscs.Logics
                     translator.Log);
             }
         }
+        #endregion
+
+        #region テスト用クラス
+
+        /// <summary>
+        /// MediaWikiTranslatorテスト用のクラスです。
+        /// </summary>
+        public class TestMediaWikiTranslator : MediaWikiTranslator
+        {
+            #region 非公開メソッドテスト用のオーラーライドメソッド
+
+            /// <summary>
+            /// 内部リンクを解析し、変換先言語の記事へのリンクに変換する。
+            /// </summary>
+            /// <param name="link">変換元リンク。</param>
+            /// <param name="parent">ページ要素を取得した変換元記事。</param>
+            /// <returns>変換済みリンク。</returns>
+            public new IElement ReplaceLink(MediaWikiLink link, MediaWikiPage parent)
+            {
+                return base.ReplaceLink(link, parent);
+            }
+
+            /// <summary>
+            /// テンプレートを解析し、変換先言語の記事へのテンプレートに変換する。
+            /// </summary>
+            /// <param name="template">変換元テンプレート。</param>
+            /// <param name="parent">ページ要素を取得した変換元記事。</param>
+            /// <returns>変換済みテンプレート。</returns>
+            public new IElement ReplaceTemplate(MediaWikiTemplate template, MediaWikiPage parent)
+            {
+                return base.ReplaceTemplate(template, parent);
+            }
+
+            /// <summary>
+            /// 指定された見出しに対して、対訳表による変換を行う。
+            /// </summary>
+            /// <param name="heading">見出し。</param>
+            /// <param name="parent">ページ要素を取得した変換元記事。</param>
+            /// <returns>変換後の見出し。</returns>
+            public new IElement ReplaceHeading(MediaWikiHeading heading, MediaWikiPage parent)
+            {
+                return base.ReplaceHeading(heading, parent);
+            }
+
+            #endregion
+        }
+
         #endregion
     }
 }

@@ -122,21 +122,21 @@
     <comment>アプリケーション名メジャーバージョン.マイナーバージョン付き</comment>
   </data>
   <data name="ArticleFooter" xml:space="preserve">
-    <value>&lt;!-- {0}、[[:{1}:{2}]] ({3}(UTC)) --&gt;</value>
+    <value>&lt;!-- {0}, [[:{1}:{2}]] ({3}(UTC)) --&gt;</value>
     <comment>変換した記事の末尾に付けるフッター</comment>
   </data>
   <data name="ErrorMessageConfigLordFailed" xml:space="preserve">
-    <value>設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。
+    <value>Load settings failed.
 
 {0}</value>
     <comment>設定ファイルの読み込み時にエラーが発生した場合のメッセージ</comment>
   </data>
   <data name="ErrorMessageConfigNotFound" xml:space="preserve">
-    <value>設定ファイル{0}が見つかりません。インストールファイルを確認してください。</value>
+    <value>{0} is not found. Please check installed file.</value>
     <comment>プログラム付属の設定ファイルが存在しない場合のメッセージ</comment>
   </data>
   <data name="ErrorMessageConfigSaveFailed" xml:space="preserve">
-    <value>設定ファイル保存時にエラーが発生しました。現在の設定は保存されていません。
+    <value>Save settings failed.
 
 {0}</value>
     <comment>設定ファイルの保存時にエラーが発生した場合のメッセージ</comment>
@@ -167,26 +167,26 @@
     <comment>お知らせダイアログのタイトル</comment>
   </data>
   <data name="LogMessageTargetArticleHadInterWiki" xml:space="preserve">
-    <value>注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。</value>
+    <value>Warning: This page have interlanguage to [[{0}]].</value>
     <comment>翻訳支援対象の記事が言語間リンクを持っている場合の警告メッセージ</comment>
   </data>
   <data name="LogMessageTargetArticleNotFound" xml:space="preserve">
-    <value>翻訳元として指定された記事は存在しません。記事名を確認してください。</value>
+    <value>Page is not found. Please check title.</value>
     <comment>翻訳支援対象の記事が存在しない場合のエラーメッセージ</comment>
   </data>
   <data name="LogMessageStartParseAndReplace" xml:space="preserve">
-    <value>Find interlanguage and Convert heading start.</value>
+    <value>Find interlanguage start.</value>
     <comment>翻訳支援処理本体を開始する際のメッセージ</comment>
   </data>
   <data name="LogMessageEnd" xml:space="preserve">
     <value>
-処理結果を {0} に出力しました。このログは {1} に保存されます。
+Completed. Result: {0}, Log: {1}
 </value>
     <comment>翻訳支援処理処理を完了した際のメッセージ</comment>
   </data>
   <data name="LogMessageFileSaveFailed" xml:space="preserve">
     <value>
-ファイル {0} の保存に失敗しました。（{1}）
+Output {0} failed. ({1})
 </value>
     <comment>ファイルの出力に失敗した場合のエラーメッセージ</comment>
   </data>
@@ -218,12 +218,12 @@
   </data>
   <data name="LogMessageStop" xml:space="preserve">
     <value>
-処理を中止しました。このログは {0} に保存されます。
+Process stopped. Log: {0}
 </value>
     <comment>翻訳支援処理処理を中止した際のメッセージ</comment>
   </data>
   <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
-    <value>{{{{0}}}} の名前空間の確認に失敗しました。{{1}}と仮定して処理します。（{{2}}）</value>
+    <value>Identify {{{{0}}}}'s namespace failed. {{1}} is guessed. ({{2}})</value>
     <comment>テンプレートの名前空間を補完する際に、想定外のエラーとなった場合のメッセージ</comment>
   </data>
   <data name="LogMessageNoteTranslation" xml:space="preserve">
@@ -231,7 +231,7 @@
     <comment>対訳表使用時の注釈</comment>
   </data>
   <data name="QuestionMessageArticleExisted" xml:space="preserve">
-    <value>対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？</value>
+    <value>This page have interlanguage to [[{0}]]. Does it continue?</value>
     <comment>指定された記事が既に翻訳先に存在する場合の確認メッセージ</comment>
   </data>
   <data name="QuestionTitle" xml:space="preserve">
@@ -252,10 +252,10 @@
     <value>Please select destination.</value>
   </data>
   <data name="WarningMessageDuplicateCodeColumn" xml:space="preserve">
-    <value>言語コードが重複しています。</value>
+    <value>Language code is already.</value>
   </data>
   <data name="WarningMessageEqualsSourceAndTarget" xml:space="preserve">
-    <value>翻訳元／先に同じ言語コードが指定されています。</value>
+    <value>Source and Destination may not be same.</value>
   </data>
   <data name="WarningMessageShortNameColumnOnly" xml:space="preserve">
     <value>Name may not be empty.</value>
@@ -278,7 +278,7 @@
     <comment>警告ダイアログのタイトル</comment>
   </data>
   <data name="WarningMessageCacheSaveFailed" xml:space="preserve">
-    <value>キャッシュの保存に失敗しました。今回参照したページの情報は、アプリケーション終了まで有効です。
+    <value>Output caches failed.
 
 {0}</value>
   </data>
@@ -329,7 +329,7 @@
     <comment>ステータスバー処理時間のフォーマット</comment>
   </data>
   <data name="WarningMessageDuplicateLanguageCode" xml:space="preserve">
-    <value>指定された言語は既に登録されています。</value>
+    <value>Language code is already.</value>
     <comment>言語コード追加でのコード重複バリデートNGメッセージ</comment>
   </data>
   <data name="WarningMessageEmptyLanguageCode" xml:space="preserve">
