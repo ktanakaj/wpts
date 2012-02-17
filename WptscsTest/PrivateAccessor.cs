@@ -3,7 +3,7 @@
 //      NUnitテスト支援用クラスソース。</summary>
 //
 // <copyright file="PrivateAccessor.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -330,8 +330,8 @@ namespace Honememo.Tests
         /// テストするクラスのオブジェクトで、指定されたプロパティに値を設定する。
         /// </summary>
         /// <param name="name">プロパティ名。</param>
-        /// <param name="index">インデックスプロパティの場合のインデックス。</param>
         /// <param name="value">新しいプロパティ値。</param>
+        /// <param name="index">インデックスプロパティの場合のインデックス。</param>
         /// <remarks>
         /// 設定先オブジェクトには <c>NewInstance()</c> または <c> SetInstance()</c>
         /// で指定されたオブジェクトを用いる。

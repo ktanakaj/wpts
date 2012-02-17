@@ -59,7 +59,7 @@
     <Compile Include="Parsers\MediaWikiVariableTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
-    <Compile Include="Models\MockFoctory.cs" />
+    <Compile Include="Models\MockFactory.cs" />
     <Compile Include="Models\LanguageTest.cs" />
     <Compile Include="Websites\MediaWikiTest.cs" />
     <Compile Include="Models\TranslationDictionaryTest.cs" />

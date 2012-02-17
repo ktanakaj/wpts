@@ -3,7 +3,7 @@
 //      TranslationDictionaryのテストクラスソース。</summary>
 //
 // <copyright file="TranslationDictionaryTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -24,8 +24,6 @@ namespace Honememo.Wptscs.Models
     [TestFixture]
     public class TranslationDictionaryTest
     {
-
-
         #region XMLシリアライズ用メソッドテストケース
 
         /// <summary>
@@ -34,14 +32,16 @@ namespace Honememo.Wptscs.Models
         [Test]
         public void TestReadXml()
         {
-            //TODO: リダイレクトとタイムスタンプも
+            // TODO: リダイレクトとタイムスタンプも
             TranslationDictionary dic;
             using (XmlReader r = XmlReader.Create(
-                new StringReader("<TranslationDictionary From=\"en\" To=\"ja\"><Item From=\".example\" To=\"。さんぷる\" />"
+                new StringReader(
+                    "<TranslationDictionary From=\"en\" To=\"ja\"><Item From=\".example\" To=\"。さんぷる\" />"
                     + "<Item From=\"Template:Disambig\" To=\"Template:曖昧さ回避\" /></TranslationDictionary>")))
             {
                 dic = new XmlSerializer(typeof(TranslationDictionary)).Deserialize(r) as TranslationDictionary;
             }
+
             Assert.AreEqual(2, dic.Count);
             Assert.AreEqual("。さんぷる", dic[".example"].Word);
             Assert.AreEqual("Template:曖昧さ回避", dic["Template:Disambig"].Word);
@@ -54,7 +54,7 @@ namespace Honememo.Wptscs.Models
         [Test]
         public void TestWriteXml()
         {
-            //TODO: リダイレクトとタイムスタンプも
+            // TODO: リダイレクトとタイムスタンプも
             TranslationDictionary dic = new TranslationDictionary("en", "ja");
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.OmitXmlDeclaration = true;
@@ -76,8 +76,10 @@ namespace Honememo.Wptscs.Models
                 new XmlSerializer(typeof(TranslationDictionary)).Serialize(w, dic);
             }
 
-            Assert.AreEqual("<TranslationDictionary From=\"en\" To=\"ja\"><Item From=\".example\" To=\"。さんぷる\" />"
-                    + "<Item From=\"Template:Disambig\" To=\"Template:曖昧さ回避\" /></TranslationDictionary>", b2.ToString());
+            Assert.AreEqual(
+                "<TranslationDictionary From=\"en\" To=\"ja\"><Item From=\".example\" To=\"。さんぷる\" />"
+                + "<Item From=\"Template:Disambig\" To=\"Template:曖昧さ回避\" /></TranslationDictionary>",
+                b2.ToString());
         }
 
         #endregion

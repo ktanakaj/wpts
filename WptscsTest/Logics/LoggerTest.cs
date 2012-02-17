@@ -12,8 +12,8 @@ namespace Honememo.Wptscs.Logics
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
     using Honememo.Parsers;
+    using NUnit.Framework;
 
     /// <summary>
     /// Loggerのテストクラスです。
@@ -21,67 +21,12 @@ namespace Honememo.Wptscs.Logics
     [TestFixture]
     public class LoggerTest
     {
-        #region モッククラス
-
-        /// <summary>
-        /// Loggerテスト用のモッククラスです。
-        /// </summary>
-        public class LoggerMock : Logger
-        {
-            #region コンストラクタ
-
-            /// <summary>
-            /// テスト用コンストラクタ。
-            /// </summary>
-            public LoggerMock()
-            {
-                this.LogUpdate += new EventHandler((object sender, EventArgs e) => { ++Count; });
-            }
-
-            #endregion
-
-            #region テスト用プロパティ
-
-            /// <summary>
-            /// LogUpdateイベントが呼ばれた回数のカウンタ。
-            /// </summary>
-            public int Count
-            {
-                get;
-                set;
-            }
-
-            #endregion
-
-            #region 非公開プロパティテスト用のオーラーライドプロパティ
-
-            /// <summary>
-            /// ログテキスト。
-            /// </summary>
-            public new string Log
-            {
-                get
-                {
-                    return base.Log;
-                }
-
-                set
-                {
-                    base.Log = value;
-                }
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region private変数
 
         /// <summary>
         /// テスト実施中カルチャを変更し後で戻すため、そのバックアップ。
         /// </summary>
-        System.Globalization.CultureInfo backupCulture;
+        private System.Globalization.CultureInfo backupCulture;
 
         #endregion
 
@@ -91,7 +36,7 @@ namespace Honememo.Wptscs.Logics
         /// テストの前処理。
         /// </summary>
         [TestFixtureSetUp]
-        public void SetUp()
+        public void SetUpBeforeClass()
         {
             // ロガーの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
             this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
@@ -102,7 +47,7 @@ namespace Honememo.Wptscs.Logics
         /// テストの後処理。
         /// </summary>
         [TestFixtureTearDown]
-        public void TearDown()
+        public void TearDownAfterClass()
         {
             // カルチャーを元に戻す
             System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
@@ -316,6 +261,61 @@ namespace Honememo.Wptscs.Logics
             Assert.AreEqual("テストログ", logger.ToString());
             logger.Clear();
             Assert.IsEmpty(logger.ToString());
+        }
+
+        #endregion
+
+        #region モッククラス
+
+        /// <summary>
+        /// Loggerテスト用のモッククラスです。
+        /// </summary>
+        public class LoggerMock : Logger
+        {
+            #region コンストラクタ
+
+            /// <summary>
+            /// テスト用コンストラクタ。
+            /// </summary>
+            public LoggerMock()
+            {
+                this.LogUpdate += new EventHandler((object sender, EventArgs e) => { ++Count; });
+            }
+
+            #endregion
+
+            #region テスト用プロパティ
+
+            /// <summary>
+            /// LogUpdateイベントが呼ばれた回数のカウンタ。
+            /// </summary>
+            public int Count
+            {
+                get;
+                set;
+            }
+
+            #endregion
+
+            #region 非公開プロパティテスト用のオーラーライドプロパティ
+
+            /// <summary>
+            /// ログテキスト。
+            /// </summary>
+            public new string Log
+            {
+                get
+                {
+                    return base.Log;
+                }
+
+                set
+                {
+                    base.Log = value;
+                }
+            }
+
+            #endregion
         }
 
         #endregion

@@ -343,7 +343,7 @@ namespace Honememo.Models
         public void TestTryGetValue()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
-            String value;
+            string value;
 
             Assert.IsFalse(d.TryGetValue("TestKey", out value));
             Assert.IsNull(value);

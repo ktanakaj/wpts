@@ -12,9 +12,9 @@ namespace Honememo.Wptscs.Logics
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Parsers;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiLoggerのテストクラスです。
@@ -22,67 +22,12 @@ namespace Honememo.Wptscs.Logics
     [TestFixture]
     public class MediaWikiLoggerTest
     {
-        #region モッククラス
-
-        /// <summary>
-        /// Loggerテスト用のモッククラスです。
-        /// </summary>
-        public class LoggerMock : MediaWikiLogger
-        {
-            #region コンストラクタ
-
-            /// <summary>
-            /// テスト用コンストラクタ。
-            /// </summary>
-            public LoggerMock()
-            {
-                this.LogUpdate += new EventHandler((object sender, EventArgs e) => { ++Count; });
-            }
-
-            #endregion
-
-            #region テスト用プロパティ
-
-            /// <summary>
-            /// LogUpdateイベントが呼ばれた回数のカウンタ。
-            /// </summary>
-            public int Count
-            {
-                get;
-                set;
-            }
-
-            #endregion
-
-            #region 非公開プロパティテスト用のオーラーライドプロパティ
-
-            /// <summary>
-            /// ログテキスト。
-            /// </summary>
-            public new string Log
-            {
-                get
-                {
-                    return base.Log;
-                }
-
-                set
-                {
-                    base.Log = value;
-                }
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region private変数
 
         /// <summary>
         /// テスト実施中カルチャを変更し後で戻すため、そのバックアップ。
         /// </summary>
-        System.Globalization.CultureInfo backupCulture;
+        private System.Globalization.CultureInfo backupCulture;
 
         #endregion
 
@@ -92,7 +37,7 @@ namespace Honememo.Wptscs.Logics
         /// テストの前処理。
         /// </summary>
         [TestFixtureSetUp]
-        public void SetUp()
+        public void SetUpBeforeClass()
         {
             // ロガーの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
             this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
@@ -103,7 +48,7 @@ namespace Honememo.Wptscs.Logics
         /// テストの後処理。
         /// </summary>
         [TestFixtureTearDown]
-        public void TearDown()
+        public void TearDownAfterClass()
         {
             // カルチャーを元に戻す
             System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
@@ -143,7 +88,7 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの場合、右矢印が出ない＆直前に空行が入る
             logger.Clear();
-            logger.AddSource(new MediaWikiHeading {ParsedString = "==見出し==" });
+            logger.AddSource(new MediaWikiHeading { ParsedString = "==見出し==" });
             Assert.AreEqual(Environment.NewLine + "==見出し==", logger.ToString());
 
             // いずれのケースでも、親クラスにある改行されていなければ改行は行われる
@@ -225,6 +170,61 @@ namespace Honememo.Wptscs.Logics
             logger.AddSource(new MediaWikiHeading { ParsedString = "==見出し1==" });
             logger.AddDestination(new MediaWikiHeading { ParsedString = "==見出し2==" });
             Assert.AreEqual(Environment.NewLine + "==見出し1== → ==見出し2==" + Environment.NewLine, logger.ToString());
+        }
+
+        #endregion
+
+        #region モッククラス
+
+        /// <summary>
+        /// Loggerテスト用のモッククラスです。
+        /// </summary>
+        public class LoggerMock : MediaWikiLogger
+        {
+            #region コンストラクタ
+
+            /// <summary>
+            /// テスト用コンストラクタ。
+            /// </summary>
+            public LoggerMock()
+            {
+                this.LogUpdate += new EventHandler((object sender, EventArgs e) => { ++Count; });
+            }
+
+            #endregion
+
+            #region テスト用プロパティ
+
+            /// <summary>
+            /// LogUpdateイベントが呼ばれた回数のカウンタ。
+            /// </summary>
+            public int Count
+            {
+                get;
+                set;
+            }
+
+            #endregion
+
+            #region 非公開プロパティテスト用のオーラーライドプロパティ
+
+            /// <summary>
+            /// ログテキスト。
+            /// </summary>
+            public new string Log
+            {
+                get
+                {
+                    return base.Log;
+                }
+
+                set
+                {
+                    base.Log = value;
+                }
+            }
+
+            #endregion
         }
 
         #endregion

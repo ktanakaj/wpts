@@ -11,10 +11,10 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiRedirectParserのテストクラスです。
@@ -37,7 +37,7 @@ namespace Honememo.Wptscs.Parsers
             // 通常のリダイレクト
             Assert.IsTrue(parser.TryParse("#redirect [[Test]]", out element));
             Assert.IsInstanceOf(typeof(MediaWikiLink), element);
-            link = (MediaWikiLink) element;
+            link = (MediaWikiLink)element;
             Assert.AreEqual("Test", link.Title);
             Assert.IsNull(link.Section);
 

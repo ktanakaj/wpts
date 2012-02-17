@@ -2,7 +2,7 @@
 // <summary>
 //      Configのテストクラスソース。</summary>
 //
-// <copyright file="ConfigTest.cs.cs" company="honeplusのメモ帳">
+// <copyright file="ConfigTest.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -17,10 +17,10 @@ namespace Honememo.Wptscs.Models
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using NUnit.Framework;
     using Honememo.Utilities;
     using Honememo.Wptscs.Logics;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// Configのテストクラスです。
@@ -28,18 +28,6 @@ namespace Honememo.Wptscs.Models
     [TestFixture]
     public class ConfigTest
     {
-        #region モッククラス
-
-        /// <summary>
-        /// Configテスト用のモッククラスです。
-        /// </summary>
-        /// <remarks>そのままではnewすることができないため。</remarks>
-        public class DummyConfig : Config
-        {
-        }
-
-        #endregion
-
         #region 定数
 
         /// <summary>
@@ -70,6 +58,7 @@ namespace Honememo.Wptscs.Models
             Assert.IsNotNull(en);
             Assert.AreEqual("http://en.wikipedia.org", en.Location);
             Assert.IsTrue(en.Language.Names.ContainsKey("ja"));
+
             // TODO: この辺も、内容の確認が必要
             Assert.IsTrue(config.ItemTables.Count > 0);
             Assert.IsTrue(config.HeadingTable.Count > 0);
@@ -92,6 +81,7 @@ namespace Honememo.Wptscs.Models
             IDictionary<string, string> record = new SortedDictionary<string, string>();
             record["recordKey"] = "recordValue";
             config.HeadingTable.Add(record);
+
             // TODO: 全然未実装
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.OmitXmlDeclaration = true;
@@ -102,9 +92,11 @@ namespace Honememo.Wptscs.Models
                 new XmlSerializer(typeof(Config)).Serialize(w, config);
             }
 
-            Assert.AreEqual("<Config><Translator>MediaWikiTranslator</Translator><Websites />"
+            Assert.AreEqual(
+                "<Config><Translator>MediaWikiTranslator</Translator><Websites />"
                 + "<ItemTables><ItemTable From=\"en\" To=\"ja\"><Item From=\"dicKey\" To=\"dicTest\" /></ItemTable></ItemTables>"
-                + "<HeadingTable><Group><Word Lang=\"recordKey\">recordValue</Word></Group></HeadingTable></Config>", b.ToString());
+                + "<HeadingTable><Group><Word Lang=\"recordKey\">recordValue</Word></Group></HeadingTable></Config>",
+                b.ToString());
         }
 
         /// <summary>
@@ -129,6 +121,18 @@ namespace Honememo.Wptscs.Models
             }
 
             Assert.AreEqual(File.ReadAllText(resultXml), b.ToString());
+        }
+
+        #endregion
+
+        #region モッククラス
+
+        /// <summary>
+        /// Configテスト用のモッククラスです。
+        /// </summary>
+        /// <remarks>そのままではnewすることができないため。</remarks>
+        public class DummyConfig : Config
+        {
         }
 
         #endregion

@@ -12,12 +12,12 @@ namespace Honememo.Wptscs.Websites
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Tests;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Parsers;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiPageのテストクラスです。
@@ -25,52 +25,6 @@ namespace Honememo.Wptscs.Websites
     [TestFixture]
     public class MediaWikiPageTest
     {
-        #region モッククラス
-
-        /// <summary>
-        /// Websiteテスト用のモッククラスです。
-        /// </summary>
-        public class DummySite : MediaWiki
-        {
-            #region コンストラクタ
-
-            /// <summary>
-            /// コンストラクタ。
-            /// </summary>
-            /// <param name="lang">ウェブサイトの言語。</param>
-            public DummySite(Language lang)
-                : base(lang)
-            {
-            }
-
-            #endregion
-            
-            #region ダミーメソッド
-
-            /// <summary>
-            /// ページを取得。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <returns>取得したページ。</returns>
-            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
-            public override Page GetPage(string title)
-            {
-                if (title == "Template:Test/doc")
-                {
-                    return new MediaWikiPage(
-                        this,
-                        title,
-                        "[[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
-                }
-
-                return base.GetPage(title);
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region コンストラクタテストケース
 
         /// <summary>
@@ -211,8 +165,10 @@ namespace Honememo.Wptscs.Websites
         public void TestGetInterlanguage()
         {
             // 普通のページ
-            MediaWikiPage page = new MediaWikiPage(new DummySite(new Language("en")), "TestTitle", "TestText\n"
-                + " [[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
+            MediaWikiPage page = new MediaWikiPage(
+                new DummySite(new Language("en")),
+                "TestTitle",
+                "TestText\n [[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
             Assert.AreEqual("[[ja:テストページ]]", page.GetInterlanguage("ja").ToString());
             Assert.AreEqual("[[fr:Test_Fr]]", page.GetInterlanguage("fr").ToString());
             Assert.IsNull(page.GetInterlanguage("de"));
@@ -356,6 +312,52 @@ namespace Honememo.Wptscs.Websites
                 new MediaWikiPage(new MediaWiki(new Language("en")), "TestTitle"));
             acc.SetMethod("ValidateIncomplete");
             acc.Invoke();
+        }
+
+        #endregion
+
+        #region モッククラス
+
+        /// <summary>
+        /// MediaWikiテスト用のモッククラスです。
+        /// </summary>
+        public class DummySite : MediaWiki
+        {
+            #region コンストラクタ
+
+            /// <summary>
+            /// コンストラクタ。
+            /// </summary>
+            /// <param name="lang">ウェブサイトの言語。</param>
+            public DummySite(Language lang)
+                : base(lang)
+            {
+            }
+
+            #endregion
+
+            #region ダミーメソッド
+
+            /// <summary>
+            /// ページを取得。
+            /// </summary>
+            /// <param name="title">ページタイトル。</param>
+            /// <returns>取得したページ。</returns>
+            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+            public override Page GetPage(string title)
+            {
+                if (title == "Template:Test/doc")
+                {
+                    return new MediaWikiPage(
+                        this,
+                        title,
+                        "[[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
+                }
+
+                return base.GetPage(title);
+            }
+
+            #endregion
         }
 
         #endregion

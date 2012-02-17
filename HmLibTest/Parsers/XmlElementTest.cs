@@ -3,7 +3,7 @@
 //      XmlElementのテストクラスソース。</summary>
 //
 // <copyright file="XmlElementTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -120,7 +120,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("<form />", element.ToString());
             element.Attributes.Add("action", "/test.html");
             Assert.AreEqual("<form action=\"/test.html\" />", element.ToString());
-            element.Attributes.Add("disabled", "");
+            element.Attributes.Add("disabled", String.Empty);
             Assert.AreEqual("<form action=\"/test.html\" disabled=\"\" />", element.ToString());
             element.Add(new TextElement("フォーム内のテキスト"));
             Assert.AreEqual("<form action=\"/test.html\" disabled=\"\">フォーム内のテキスト</form>", element.ToString());

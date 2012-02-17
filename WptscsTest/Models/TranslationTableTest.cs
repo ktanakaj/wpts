@@ -3,7 +3,7 @@
 //      TranslationTableのテストクラスソース。</summary>
 //
 // <copyright file="TranslationTableTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -105,11 +105,13 @@ namespace Honememo.Wptscs.Models
         {
             TranslationTable table;
             using (XmlReader r = XmlReader.Create(
-                new StringReader("<TranslationTable><Group><Word Lang=\"en\">See Also</Word><Word Lang=\"ja\">関連項目</Word></Group>"
+                new StringReader(
+                    "<TranslationTable><Group><Word Lang=\"en\">See Also</Word><Word Lang=\"ja\">関連項目</Word></Group>"
                     + "<Group><Word Lang=\"en\">History</Word><Word Lang=\"fr\">Histoire</Word></Group></TranslationTable>")))
             {
                 table = new XmlSerializer(typeof(TranslationTable)).Deserialize(r) as TranslationTable;
             }
+
             Assert.AreEqual(2, table.Count);
             Assert.AreEqual("See Also", table[0]["en"]);
             Assert.AreEqual("関連項目", table[0]["ja"]);
@@ -152,8 +154,10 @@ namespace Honememo.Wptscs.Models
                 new XmlSerializer(typeof(TranslationTable)).Serialize(w, table);
             }
 
-            Assert.AreEqual("<TranslationTable><Group><Word Lang=\"en\">See Also</Word><Word Lang=\"ja\">関連項目</Word></Group>"
-                    + "<Group><Word Lang=\"en\">History</Word><Word Lang=\"fr\">Histoire</Word></Group></TranslationTable>", b2.ToString());
+            Assert.AreEqual(
+                "<TranslationTable><Group><Word Lang=\"en\">See Also</Word><Word Lang=\"ja\">関連項目</Word></Group>"
+                + "<Group><Word Lang=\"en\">History</Word><Word Lang=\"fr\">Histoire</Word></Group></TranslationTable>",
+                b2.ToString());
         }
 
         #endregion

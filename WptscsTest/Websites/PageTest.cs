@@ -12,9 +12,9 @@ namespace Honememo.Wptscs.Websites
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
     using Honememo.Tests;
     using Honememo.Utilities;
+    using NUnit.Framework;
 
     /// <summary>
     /// Pageのテストクラスです。
@@ -22,31 +22,6 @@ namespace Honememo.Wptscs.Websites
     [TestFixture]
     public class PageTest
     {
-        #region モッククラス
-
-        /// <summary>
-        /// Pageテスト用のモッククラスです。
-        /// </summary>
-        public class DummySite : Website
-        {
-            #region ダミーメソッド
-
-            /// <summary>
-            /// ページを取得。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <returns>取得したページ。</returns>
-            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
-            public override Page GetPage(string title)
-            {
-                return null;
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region コンストラクタテストケース
 
         /// <summary>
@@ -197,6 +172,31 @@ namespace Honememo.Wptscs.Websites
             DateTime t = DateTime.Now;
             acc.SetProperty("Timestamp", t);
             Assert.AreEqual(t, page.Timestamp);
+        }
+
+        #endregion
+
+        #region モッククラス
+
+        /// <summary>
+        /// Pageテスト用のモッククラスです。
+        /// </summary>
+        public class DummySite : Website
+        {
+            #region ダミーメソッド
+
+            /// <summary>
+            /// ページを取得。
+            /// </summary>
+            /// <param name="title">ページタイトル。</param>
+            /// <returns>取得したページ。</returns>
+            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+            public override Page GetPage(string title)
+            {
+                return null;
+            }
+
+            #endregion
         }
 
         #endregion
