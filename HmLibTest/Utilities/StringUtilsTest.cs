@@ -87,15 +87,15 @@ namespace Honememo.Utilities
         {
             // null
             Assert.IsTrue(StringUtils.StartsWith(null, null, 3));
-            Assert.IsFalse(StringUtils.StartsWith(null, "", 2));
-            Assert.IsFalse(StringUtils.StartsWith("", null, 5));
+            Assert.IsFalse(StringUtils.StartsWith(null, String.Empty, 2));
+            Assert.IsFalse(StringUtils.StartsWith(String.Empty, null, 5));
 
             // 空、文字数
-            Assert.IsFalse(StringUtils.StartsWith("", "", 0));
-            Assert.IsTrue(StringUtils.StartsWith("a", "", 0));
-            Assert.IsTrue(StringUtils.StartsWith("abcedf0123あいうえお", "", 14));
-            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", "", 15));
-            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", "", -1));
+            Assert.IsFalse(StringUtils.StartsWith(String.Empty, String.Empty, 0));
+            Assert.IsTrue(StringUtils.StartsWith("a", String.Empty, 0));
+            Assert.IsTrue(StringUtils.StartsWith("abcedf0123あいうえお", String.Empty, 14));
+            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", String.Empty, 15));
+            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", String.Empty, -1));
 
             // 通常
             Assert.IsTrue(StringUtils.StartsWith("abcedf0123あいうえお", "bc", 1));
@@ -115,7 +115,7 @@ namespace Honememo.Utilities
             int span = 0x7D - 0x20;
             for (int i = 0; i < 100000; i++)
             {
-                b.Append(Char.ConvertFromUtf32(i % span + 0x20));
+                b.Append(Char.ConvertFromUtf32((i % span) + 0x20));
             }
 
             // 先頭から最後までひたすら実行して時間がかかりすぎないかをチェック

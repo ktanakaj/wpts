@@ -2,8 +2,8 @@
 // <summary>
 //      Websiteのテストクラスソース。</summary>
 //
-// <copyright file="WebsiteTest.cs.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+// <copyright file="WebsiteTest.cs" company="honeplusのメモ帳">
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -16,9 +16,9 @@ namespace Honememo.Wptscs.Websites
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using NUnit.Framework;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
+    using NUnit.Framework;
 
     /// <summary>
     /// Websiteのテストクラスです。
@@ -26,6 +26,107 @@ namespace Honememo.Wptscs.Websites
     [TestFixture]
     public class WebsiteTest
     {
+        #region プロパティテストケース
+
+        /// <summary>
+        /// Locationプロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestLocation()
+        {
+            DummySite site = new DummySite();
+            site.Location = "test";
+            Assert.AreEqual("test", site.Location);
+        }
+
+        /// <summary>
+        /// Locationプロパティテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLocationNull()
+        {
+            new DummySite().Location = null;
+        }
+
+        /// <summary>
+        /// Locationプロパティテストケース（空）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestLocationBlank()
+        {
+            new DummySite().Location = " ";
+        }
+
+        /// <summary>
+        /// Languageプロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestLanguage()
+        {
+            DummySite site = new DummySite();
+            site.Language = new Language("ja");
+            Assert.AreEqual("ja", site.Language.Code);
+        }
+
+        /// <summary>
+        /// Languageプロパティテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestLanguageNull()
+        {
+            new DummySite().Language = null;
+        }
+
+        #endregion
+
+        #region メソッドテストケース
+
+        /// <summary>
+        /// XMLデシリアライズテストケース。
+        /// </summary>
+        [Test]
+        public void TestReadXml()
+        {
+            DummySite site;
+            using (XmlReader r = XmlReader.Create(
+                new StringReader("<DummySite><Location>http://ja.wikipedia.org</Location>"
+                    + "<Language Code=\"ja\"><Names /></Language></DummySite>")))
+            {
+                site = new XmlSerializer(typeof(DummySite)).Deserialize(r) as DummySite;
+            }
+
+            Assert.IsNotNull(site);
+            Assert.AreEqual("http://ja.wikipedia.org", site.Location);
+            Assert.AreEqual("ja", site.Language.Code);
+        }
+
+        /// <summary>
+        /// XMLシリアライズテストケース。
+        /// </summary>
+        [Test]
+        public void TestWriteXml()
+        {
+            Language lang = new Language("ja");
+            DummySite site = new DummySite();
+            site.Location = "http://ja.wikipedia.org";
+            site.Language = lang;
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.OmitXmlDeclaration = true;
+
+            StringBuilder b = new StringBuilder();
+            using (XmlWriter w = XmlWriter.Create(b, settings))
+            {
+                new XmlSerializer(typeof(DummySite)).Serialize(w, site);
+            }
+
+            Assert.AreEqual("<DummySite><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language></DummySite>", b.ToString());
+        }
+
+        #endregion
+
         #region モッククラス
 
         /// <summary>
@@ -128,107 +229,6 @@ namespace Honememo.Wptscs.Websites
             }
 
             #endregion
-        }
-
-        #endregion
-
-        #region プロパティテストケース
-
-        /// <summary>
-        /// Locationプロパティテストケース。
-        /// </summary>
-        [Test]
-        public void TestLocation()
-        {
-            DummySite site = new DummySite();
-            site.Location = "test";
-            Assert.AreEqual("test", site.Location);
-        }
-
-        /// <summary>
-        /// Locationプロパティテストケース（null）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestLocationNull()
-        {
-            new DummySite().Location = null;
-        }
-
-        /// <summary>
-        /// Locationプロパティテストケース（空）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestLocationBlank()
-        {
-            new DummySite().Location = " ";
-        }
-
-        /// <summary>
-        /// Languageプロパティテストケース。
-        /// </summary>
-        [Test]
-        public void TestLanguage()
-        {
-            DummySite site = new DummySite();
-            site.Language = new Language("ja");
-            Assert.AreEqual("ja", site.Language.Code);
-        }
-
-        /// <summary>
-        /// Languageプロパティテストケース（null）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestLanguageNull()
-        {
-            new DummySite().Language = null;
-        }
-
-        #endregion
-
-        #region メソッドテストケース
-
-        /// <summary>
-        /// XMLデシリアライズテストケース。
-        /// </summary>
-        [Test]
-        public void TestReadXml()
-        {
-            DummySite site;
-            using (XmlReader r = XmlReader.Create(
-                new StringReader("<DummySite><Location>http://ja.wikipedia.org</Location>"
-                    + "<Language Code=\"ja\"><Names /></Language></DummySite>")))
-            {
-                site = new XmlSerializer(typeof(DummySite)).Deserialize(r) as DummySite;
-            }
-
-            Assert.IsNotNull(site);
-            Assert.AreEqual("http://ja.wikipedia.org", site.Location);
-            Assert.AreEqual("ja", site.Language.Code);
-        }
-
-        /// <summary>
-        /// XMLシリアライズテストケース。
-        /// </summary>
-        [Test]
-        public void TestWriteXml()
-        {
-            Language lang = new Language("ja");
-            DummySite site = new DummySite();
-            site.Location = "http://ja.wikipedia.org";
-            site.Language = lang;
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.OmitXmlDeclaration = true;
-
-            StringBuilder b = new StringBuilder();
-            using (XmlWriter w = XmlWriter.Create(b, settings))
-            {
-                new XmlSerializer(typeof(DummySite)).Serialize(w, site);
-            }
-
-            Assert.AreEqual("<DummySite><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language></DummySite>", b.ToString());
         }
 
         #endregion

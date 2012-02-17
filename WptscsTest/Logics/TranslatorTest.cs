@@ -12,9 +12,9 @@ namespace Honememo.Wptscs.Logics
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// Translatorのテストクラスです。
@@ -22,130 +22,6 @@ namespace Honememo.Wptscs.Logics
     [TestFixture]
     public class TranslatorTest
     {
-        #region モッククラス
-
-        /// <summary>
-        /// Translatorテスト用のモッククラスです。
-        /// </summary>
-        public class TranslatorMock : Translator
-        {
-            #region テスト支援用パラメータ
-
-            /// <summary>
-            /// <see cref="RunBody"/>で例外を投げるか？
-            /// </summary>
-            public bool exception = false;
-
-            #endregion
-
-            #region 非公開プロパティテスト用のオーラーライドプロパティ
-
-            /// <summary>
-            /// ログテキスト生成用ロガー。
-            /// </summary>
-            public new Logger Logger
-            {
-                get
-                {
-                    return base.Logger;
-                }
-
-                set
-                {
-                    base.Logger = value;
-                }
-            }
-
-            /// <summary>
-            /// 変換後テキスト。
-            /// </summary>
-            public new string Text
-            {
-                get
-                {
-                    return base.Text;
-                }
-
-                set
-                {
-                    base.Text = value;
-                }
-            }
-
-            #endregion
-
-            #region ダミーメソッド
-
-            /// <summary>
-            /// 翻訳支援処理実行部の本体。
-            /// </summary>
-            /// <param name="name">記事名。</param>
-            /// <returns><c>true</c> 処理成功</returns>
-            protected override void RunBody(string name)
-            {
-                if (exception)
-                {
-                    throw new ApplicationException("Dummy");
-                }
-            }
-
-            #endregion
-        }
-
-        /// <summary>
-        /// Translatorテスト用のモッククラスです。
-        /// </summary>
-        public class TranslatorIgnoreMock : Translator
-        {
-            #region コンストラクタ
-
-            /// <summary>
-            /// デフォルトコンストラクタを隠すためのダミーコンストラクタ。
-            /// </summary>
-            /// <param name="dummy">ダミー。</param>
-            public TranslatorIgnoreMock(string dummy)
-            {
-            }
-
-            #endregion
-
-            #region ダミーメソッド
-
-            /// <summary>
-            /// 翻訳支援処理実行部の本体。
-            /// </summary>
-            /// <param name="name">記事名。</param>
-            /// <returns><c>true</c> 処理成功</returns>
-            protected override void RunBody(string name)
-            {
-            }
-
-            #endregion
-        }
-
-        /// <summary>
-        /// Websiteテスト用のモッククラスです。
-        /// </summary>
-        public class WebsiteMock : Website
-        {
-            #region ダミーメソッド
-
-            /// <summary>
-            /// ページを取得。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <returns>取得したページ。</returns>
-            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
-            public override Page GetPage(string title)
-            {
-                return null;
-            }
-
-            #endregion
-        }
-
-        #endregion
-
         #region プロパティテストケース
 
         /// <summary>
@@ -341,7 +217,7 @@ namespace Honememo.Wptscs.Logics
             // 失敗はApplicationExceptionで表現、RunBodyから例外が投げられること
             translator.Logger.AddMessage("testlog");
             translator.Text = "testtext";
-            translator.exception = true;
+            translator.Exception = true;
             try
             {
                 translator.Run("test");
@@ -396,6 +272,132 @@ namespace Honememo.Wptscs.Logics
             // Fromにホストが指定されている場合、pingチェックが行われる
             translator.From.Location = "http://xxx.invalid";
             translator.Run("test");
+        }
+
+        #endregion
+
+        #region モッククラス
+
+        /// <summary>
+        /// Translatorテスト用のモッククラスです。
+        /// </summary>
+        public class TranslatorMock : Translator
+        {
+            #region テスト支援用プロパティ
+
+            /// <summary>
+            /// <see cref="RunBody"/>で例外を投げるか？
+            /// </summary>
+            public bool Exception
+            {
+                get;
+                set;
+            }
+
+            #endregion
+
+            #region 非公開プロパティテスト用のオーラーライドプロパティ
+
+            /// <summary>
+            /// ログテキスト生成用ロガー。
+            /// </summary>
+            public new Logger Logger
+            {
+                get
+                {
+                    return base.Logger;
+                }
+
+                set
+                {
+                    base.Logger = value;
+                }
+            }
+
+            /// <summary>
+            /// 変換後テキスト。
+            /// </summary>
+            public new string Text
+            {
+                get
+                {
+                    return base.Text;
+                }
+
+                set
+                {
+                    base.Text = value;
+                }
+            }
+
+            #endregion
+
+            #region ダミーメソッド
+
+            /// <summary>
+            /// 翻訳支援処理実行部の本体。
+            /// </summary>
+            /// <param name="name">記事名。</param>
+            protected override void RunBody(string name)
+            {
+                if (this.Exception)
+                {
+                    throw new ApplicationException("Dummy");
+                }
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Translatorテスト用のモッククラスです。
+        /// </summary>
+        public class TranslatorIgnoreMock : Translator
+        {
+            #region コンストラクタ
+
+            /// <summary>
+            /// デフォルトコンストラクタを隠すためのダミーコンストラクタ。
+            /// </summary>
+            /// <param name="dummy">ダミー。</param>
+            public TranslatorIgnoreMock(string dummy)
+            {
+            }
+
+            #endregion
+
+            #region ダミーメソッド
+
+            /// <summary>
+            /// 翻訳支援処理実行部の本体。
+            /// </summary>
+            /// <param name="name">記事名。</param>
+            protected override void RunBody(string name)
+            {
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Translatorテスト用のモッククラスです。
+        /// </summary>
+        public class WebsiteMock : Website
+        {
+            #region ダミーメソッド
+
+            /// <summary>
+            /// ページを取得。
+            /// </summary>
+            /// <param name="title">ページタイトル。</param>
+            /// <returns>取得したページ。</returns>
+            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+            public override Page GetPage(string title)
+            {
+                return null;
+            }
+
+            #endregion
         }
 
         #endregion

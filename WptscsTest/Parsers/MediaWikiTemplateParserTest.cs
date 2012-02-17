@@ -11,10 +11,10 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiTemplateParserのテストクラスです。
@@ -154,7 +154,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(1, template.PipeTexts.Count);
             Assert.AreEqual("test=[[innerlink]]{{innertemplate}}", template.PipeTexts[0].ToString());
             Assert.IsInstanceOf(typeof(ListElement), template.PipeTexts[0]);
-            ListElement list = ((ListElement)template.PipeTexts[0]);
+            ListElement list = (ListElement)template.PipeTexts[0];
             Assert.AreEqual(3, list.Count);
             Assert.AreEqual("test=", list[0].ToString());
             Assert.AreEqual("[[innerlink]]", list[1].ToString());

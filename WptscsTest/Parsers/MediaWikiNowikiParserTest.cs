@@ -11,9 +11,9 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiNowikiParserのテストクラスです。

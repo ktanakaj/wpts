@@ -12,8 +12,8 @@ namespace Honememo.Wptscs.Parsers
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
     using Honememo.Parsers;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiLinkのテストクラスです。

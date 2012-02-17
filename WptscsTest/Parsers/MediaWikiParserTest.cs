@@ -3,7 +3,7 @@
 //      MediaWikiParserのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiParserTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -11,10 +11,10 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiParserのテストクラスです。
@@ -22,7 +22,7 @@ namespace Honememo.Wptscs.Parsers
     [TestFixture]
     public class MediaWikiParserTest
     {
-        // TODO: いっぱい足りない
+        //// TODO: いっぱい足りない
 
         #region インスタンス実装メソッドテストケース
 

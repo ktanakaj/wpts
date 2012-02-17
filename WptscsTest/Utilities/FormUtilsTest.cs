@@ -25,17 +25,6 @@ namespace Honememo.Wptscs.Utilities
     [TestFixture]
     public class FormUtilsTest
     {
-        #region モッククラス
-
-        /// <summary>
-        /// Websiteテスト用のモッククラスです。
-        /// </summary>
-        public class DummyCell : DataGridViewCell 
-        {
-        }
-
-        #endregion
-
         #region リソース関連テストケース
 
         /// <summary>
@@ -47,8 +36,7 @@ namespace Honememo.Wptscs.Utilities
             // ※ バージョンが変わるごとにバージョン表記の部分を書き換えるのは面倒なので置換
             Assert.AreEqual(
                 "Wikipedia 翻訳支援ツール VerX.XX",
-                new System.Text.RegularExpressions.Regex("Ver[0-9]+\\.[0-9]+")
-                .Replace(FormUtils.ApplicationName(), "VerX.XX"));
+                new System.Text.RegularExpressions.Regex("Ver[0-9]+\\.[0-9]+").Replace(FormUtils.ApplicationName(), "VerX.XX"));
         }
 
         /// <summary>
@@ -88,6 +76,17 @@ namespace Honememo.Wptscs.Utilities
             Assert.AreEqual(String.Empty, FormUtils.ToString(new DummyCell()));
             Assert.AreEqual("not null", FormUtils.ToString(new DummyCell { Value = "not null" }));
             Assert.IsNotEmpty(FormUtils.ToString(new DummyCell { Value = new object() }));
+        }
+
+        #endregion
+
+        #region モッククラス
+
+        /// <summary>
+        /// DataGridViewCellテスト用のモッククラスです。
+        /// </summary>
+        public class DummyCell : DataGridViewCell
+        {
         }
 
         #endregion

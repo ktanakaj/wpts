@@ -11,8 +11,8 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiHeadingのテストクラスです。

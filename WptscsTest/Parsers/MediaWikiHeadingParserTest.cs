@@ -11,10 +11,10 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiHeadingParserのテストクラスです。
@@ -30,9 +30,9 @@ namespace Honememo.Wptscs.Parsers
         [Test]
         public void TestConstructor()
         {
+            // TODO: ちゃんと設定されているかも確認する？
             MediaWikiHeadingParser parser = new MediaWikiHeadingParser(
                 new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
-            // TODO: ちゃんと設定されているかも確認する？
         }
 
         #endregion

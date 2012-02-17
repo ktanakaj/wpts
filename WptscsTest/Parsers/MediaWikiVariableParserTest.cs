@@ -11,10 +11,10 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiVariableParserのテストクラスです。
@@ -104,7 +104,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("変数名", variable.Variable);
             Assert.AreEqual("[[内部リンク]]{{ref-en}}", variable.Value.ToString());
             Assert.IsInstanceOf(typeof(ListElement), variable.Value);
-            ListElement list = ((ListElement)variable.Value);
+            ListElement list = (ListElement)variable.Value;
             Assert.AreEqual(2, list.Count);
             Assert.IsInstanceOf(typeof(MediaWikiLink), list[0]);
             Assert.AreEqual("[[内部リンク]]", list[0].ToString());

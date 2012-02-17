@@ -219,7 +219,6 @@ namespace Honememo.Parsers
             Assert.AreEqual(0, xmlElement.Attributes.Count);
         }
 
-
         /// <summary>
         /// TryParseメソッドテストケース（不正でNG）。
         /// </summary>

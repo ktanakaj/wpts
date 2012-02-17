@@ -11,10 +11,10 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
-    using NUnit.Framework;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiLinkParserのテストクラスです。
@@ -185,7 +185,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("100px", link.PipeTexts[1].ToString());
             Assert.AreEqual("テスト[[画像]]", link.PipeTexts[2].ToString());
             Assert.IsInstanceOf(typeof(ListElement), link.PipeTexts[2]);
-            ListElement list = ((ListElement)link.PipeTexts[2]);
+            ListElement list = (ListElement)link.PipeTexts[2];
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual("テスト", list[0].ToString());
             Assert.AreEqual("[[画像]]", list[1].ToString());

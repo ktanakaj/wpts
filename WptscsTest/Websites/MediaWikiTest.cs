@@ -17,10 +17,10 @@ namespace Honememo.Wptscs.Websites
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using NUnit.Framework;
     using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
+    using NUnit.Framework;
 
     /// <summary>
     /// MediaWikiのテストクラスです。
@@ -42,12 +42,14 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// テスト用の値を設定したMediaWikiオブジェクトを返す。
         /// </summary>
+        /// <param name="language">言語コード。</param>
+        /// <returns>テスト用の値を設定したオブジェクト。</returns>
         public MediaWiki GetTestServer(string language)
         {
             // ※ 下記URL生成時は、きちんとパス区切り文字を入れてやら無いとフォルダが認識されない。
             //    また、httpで取得した場合とfileで取得した場合では先頭の大文字小文字が異なることが
             //    あるため、それについては随時期待値を調整して対処。
-            UriBuilder b = new UriBuilder("file", "");
+            UriBuilder b = new UriBuilder("file", String.Empty);
             b.Path = Path.GetFullPath(testDir) + "\\";
             MediaWiki server = new MediaWiki(new Language(language), new Uri(b.Uri, language + "/").ToString());
             server.ExportPath = "$1.xml";
@@ -351,7 +353,7 @@ namespace Honememo.Wptscs.Websites
             Assert.IsNullOrEmpty(site.LinkInterwikiFormat);
 
             // 値を設定するとその値が返る
-            site.LinkInterwikiFormat = ("{{仮リンク|$1|$2|$3|label=$4}}");
+            site.LinkInterwikiFormat = "{{仮リンク|$1|$2|$3|label=$4}}";
             Assert.AreEqual("{{仮リンク|$1|$2|$3|label=$4}}", site.LinkInterwikiFormat);
             site.LinkInterwikiFormat = null;
             Assert.IsNullOrEmpty(site.LinkInterwikiFormat);
@@ -369,7 +371,7 @@ namespace Honememo.Wptscs.Websites
             Assert.IsNullOrEmpty(site.LangFormat);
 
             // 値を設定するとその値が返る
-            site.LangFormat = ("{{Lang|$1|$2}}");
+            site.LangFormat = "{{Lang|$1|$2}}";
             Assert.AreEqual("{{Lang|$1|$2}}", site.LangFormat);
             site.LangFormat = null;
             Assert.IsNullOrEmpty(site.LangFormat);
@@ -539,8 +541,9 @@ namespace Honememo.Wptscs.Websites
             Assert.IsNotNull(site);
             Assert.AreEqual("http://ja.wikipedia.org", site.Location);
             Assert.AreEqual("ja", site.Language.Code);
-            // TODO: プロパティに値が設定されたパターンを追加すべき
-            // TODO: プロパティが空の場合、きちんとデフォルト値が参照されることも確認すべき
+
+            //// TODO: プロパティに値が設定されたパターンを追加すべき
+            //// TODO: プロパティが空の場合、きちんとデフォルト値が参照されることも確認すべき
         }
 
         /// <summary>
@@ -562,7 +565,8 @@ namespace Honememo.Wptscs.Websites
 
             // プロパティはデフォルト値の場合出力しないという動作あり
             Assert.AreEqual("<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language><MetaApi /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace /><MagicWords /><InterwikiPrefixs /><DocumentationTemplates /><LinkInterwikiFormat /><LangFormat /></MediaWiki>", b.ToString());
-            // TODO: プロパティに値が設定されたパターンを追加すべき
+
+            //// TODO: プロパティに値が設定されたパターンを追加すべき
         }
 
         #endregion

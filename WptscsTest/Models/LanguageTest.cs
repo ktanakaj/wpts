@@ -16,8 +16,8 @@ namespace Honememo.Wptscs.Models
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using NUnit.Framework;
     using Honememo.Utilities;
+    using NUnit.Framework;
 
     /// <summary>
     /// Languageのテストクラスです。
@@ -104,7 +104,7 @@ namespace Honememo.Wptscs.Models
             // 消すとデフォルトが有効になること
             lang.Bracket = null;
             Assert.AreEqual(" ($1) ", lang.Bracket);
-            lang.Bracket = "";
+            lang.Bracket = String.Empty;
             Assert.AreEqual(" ($1) ", lang.Bracket);
         }
 
@@ -144,13 +144,15 @@ namespace Honememo.Wptscs.Models
         {
             Language lang;
             using (XmlReader r = XmlReader.Create(
-                new StringReader("<Language Code=\"ja\"><Names>"
+                new StringReader(
+                    "<Language Code=\"ja\"><Names>"
                     + "<LanguageName Code=\"en\"><Name>Japanese language</Name><ShortName>Japanese</ShortName></LanguageName>"
                     + "<LanguageName Code=\"zh\"><Name>日语</Name><ShortName /></LanguageName>"
                     + "</Names><Bracket>（{0}）</Bracket></Language>")))
             {
                 lang = new XmlSerializer(typeof(Language)).Deserialize(r) as Language;
             }
+
             Assert.IsNotNull(lang);
             Assert.AreEqual("ja", lang.Code);
             Assert.AreEqual("Japanese language", lang.Names["en"].Name);
@@ -189,10 +191,12 @@ namespace Honememo.Wptscs.Models
                 new XmlSerializer(typeof(Language)).Serialize(w, lang);
             }
 
-            Assert.AreEqual("<Language Code=\"ja\"><Names>"
-                    + "<LanguageName Code=\"en\"><Name>Japanese language</Name><ShortName>Japanese</ShortName></LanguageName>"
-                    + "<LanguageName Code=\"zh\"><Name>日语</Name><ShortName /></LanguageName>"
-                    + "</Names><Bracket>（{0}）</Bracket></Language>", b2.ToString());
+            Assert.AreEqual(
+                "<Language Code=\"ja\"><Names>"
+                + "<LanguageName Code=\"en\"><Name>Japanese language</Name><ShortName>Japanese</ShortName></LanguageName>"
+                + "<LanguageName Code=\"zh\"><Name>日语</Name><ShortName /></LanguageName>"
+                + "</Names><Bracket>（{0}）</Bracket></Language>",
+                b2.ToString());
         }
 
         #endregion
