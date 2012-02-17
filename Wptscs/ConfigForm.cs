@@ -152,7 +152,7 @@ namespace Honememo.Wptscs
                 catch (Exception ex)
                 {
                     // 異常時はエラーメッセージを表示
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
                     FormUtils.ErrorDialog(Resources.ErrorMessageConfigSaveFailed, ex.Message);
                 }
             }
@@ -466,7 +466,7 @@ namespace Honememo.Wptscs
         {
             Language.LanguageName name;
             if (lang.Names.TryGetValue(
-                System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName, out name))
+                System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName, out name))
             {
                 if (!String.IsNullOrEmpty(name.Name))
                 {
@@ -587,6 +587,22 @@ namespace Honememo.Wptscs
             if (!String.IsNullOrEmpty(box.Text) && !int.TryParse(box.Text, out value))
             {
                 this.errorProvider.SetError(box, Resources.WarningMessageIgnoreNumericNamespace);
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// 括弧のスタイルボックスバリデート処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void TextBoxBracket_Validating(object sender, CancelEventArgs e)
+        {
+            // 空か$1が含まれる文字列のみ許可
+            TextBox box = (TextBox)sender;
+            if (!String.IsNullOrEmpty(box.Text) && !box.Text.Contains("$1"))
+            {
+                this.errorProvider.SetError(box, Resources.WarningMessageUnformatedBracket);
                 e.Cancel = true;
             }
         }

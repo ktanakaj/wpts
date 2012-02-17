@@ -61,7 +61,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Wikipedia 翻訳支援ツール Ver{0}.{1:D2} に類似しているローカライズされた文字列を検索します。
+        ///   Translation Support for Wikipedia Ver{0}.{1:D2} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ApplicationName {
             get {
@@ -70,7 +70,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   &lt;!-- {0}、[[:{1}:{2}]]（{3}(UTC)）より --&gt; に類似しているローカライズされた文字列を検索します。
+        ///   &lt;!-- {0}, [[:{1}:{2}]] ({3}(UTC)) --&gt; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ArticleFooter {
             get {
@@ -79,7 +79,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   実行時間: {0:m\:ss} に類似しているローカライズされた文字列を検索します。
+        ///   Time: {0:m\:ss} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ElapsedTime {
             get {
@@ -88,7 +88,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   設定ファイル読み込み時にエラーが発生しました。ファイルが破損している可能性があります。
+        ///   Load settings failed.
         ///
         ///{0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -99,7 +99,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   設定ファイル{0}が見つかりません。インストールファイルを確認してください。 に類似しているローカライズされた文字列を検索します。
+        ///   {0} is not found. Please check installed file. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessageConfigNotFound {
             get {
@@ -108,7 +108,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   設定ファイル保存時にエラーが発生しました。現在の設定は保存されていません。
+        ///   Save settings failed.
         ///
         ///{0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -119,8 +119,8 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   サーバーへの接続に失敗しました。ネットワークの設定、またはサーバーの状態を確認してください。
-        ///（{0}） に類似しているローカライズされた文字列を検索します。
+        ///   Connection failed. Please check network configuration or server status.
+        ///({0}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorMessageConnectionFailed {
             get {
@@ -129,11 +129,9 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   想定外のエラーが発生しました。正常に処理が続けられない状態になった可能性があります。プログラムを再起動してください。
+        ///   Unexpected exception.
         ///
-        ///問題が再発する場合は、設定ファイルを削除するなどしてから、プログラムを再起動してください。また、手順や現在の設定を確認し、開発者にご連絡ください。
-        ///
-        ///＜エラーの内容＞
+        ///&lt;Error detail&gt;
         ///{0}
         ///{1} に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -144,7 +142,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   エラー に類似しているローカライズされた文字列を検索します。
+        ///   Error に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ErrorTitle {
             get {
@@ -162,7 +160,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   このバージョンは{0}には未対応です。 に類似しているローカライズされた文字列を検索します。
+        ///   {0} is not supported. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InformationMessageDevelopingMethod {
             get {
@@ -171,7 +169,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   お知らせ に類似しているローカライズされた文字列を検索します。
+        ///   Information に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InformationTitle {
             get {
@@ -181,7 +179,7 @@ namespace Honememo.Wptscs.Properties {
         
         /// <summary>
         ///   
-        ///処理結果を {0} に出力しました。このログは {1} に保存されます。
+        ///Completed. Result: {0}, Log: {1}
         /// に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageEnd {
@@ -191,7 +189,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {0} は、現在のツールでは処理できないページ名です。 に類似しているローカライズされた文字列を検索します。
+        ///   {0} is not supported page name. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageErrorPageName {
             get {
@@ -200,7 +198,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   要求したURLは {0} です。 に類似しているローカライズされた文字列を検索します。
+        ///   URL : {0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageErrorURL {
             get {
@@ -210,7 +208,7 @@ namespace Honememo.Wptscs.Properties {
         
         /// <summary>
         ///   
-        ///ファイル {0} の保存に失敗しました。（{1}）
+        ///Output {0} failed. ({1})
         /// に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageFileSaveFailed {
@@ -220,7 +218,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {0} より [[{1}]] を取得。 に類似しているローカライズされた文字列を検索します。
+        ///   [[{1}]] from {0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageGetTargetArticle {
             get {
@@ -229,7 +227,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語間リンク無し に類似しているローカライズされた文字列を検索します。
+        ///   Interlanguage is not found に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageInterWikiNotFound {
             get {
@@ -238,7 +236,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   記事無し に類似しているローカライズされた文字列を検索します。
+        ///   Page is not found に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageLinkArticleNotFound {
             get {
@@ -247,7 +245,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///    ※キャッシュ に類似しているローカライズされた文字列を検索します。
+        ///    *cache に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageNoteTranslation {
             get {
@@ -256,7 +254,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   リダイレクト に類似しているローカライズされた文字列を検索します。
+        ///   Redirect に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageRedirect {
             get {
@@ -265,7 +263,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {0}、実行日時 {1}
+        ///   {0}, {1:F}
         ///
         /// に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -276,7 +274,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語間リンクの探索、見出しの変換を行います に類似しているローカライズされた文字列を検索します。
+        ///   Find interlanguage start. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageStartParseAndReplace {
             get {
@@ -286,7 +284,7 @@ namespace Honememo.Wptscs.Properties {
         
         /// <summary>
         ///   
-        ///処理を中止しました。このログは {0} に保存されます。
+        ///Process stopped. Log: {0}
         /// に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageStop {
@@ -296,7 +294,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   注意：この記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。 に類似しているローカライズされた文字列を検索します。
+        ///   Warning: This page have interlanguage to [[{0}]]. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageTargetArticleHadInterWiki {
             get {
@@ -305,7 +303,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   翻訳元として指定された記事は存在しません。記事名を確認してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Page is not found. Please check title. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageTargetArticleNotFound {
             get {
@@ -314,7 +312,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   {{{{0}}}} の名前空間の確認に失敗しました。{{1}}と仮定して処理します。（{{2}}） に類似しているローカライズされた文字列を検索します。
+        ///   Identify {{{{0}}}}&apos;s namespace failed. {{1}} is guessed. ({{2}}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageTemplateNameUnidentified {
             get {
@@ -323,7 +321,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   対象の記事には、翻訳先言語の記事 [[{0}]] への言語間リンクが存在します。処理を続けますか？ に類似しているローカライズされた文字列を検索します。
+        ///   This page have interlanguage to [[{0}]]. Does it continue? に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string QuestionMessageArticleExisted {
             get {
@@ -332,7 +330,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   確認 に類似しているローカライズされた文字列を検索します。
+        ///   Question に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string QuestionTitle {
             get {
@@ -350,7 +348,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   キャッシュ更新中... に類似しているローカライズされた文字列を検索します。
+        ///   Updating caches... に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StatusCacheUpdating {
             get {
@@ -359,7 +357,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   設定ファイル読込中... に類似しているローカライズされた文字列を検索します。
+        ///   Loading settings... に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StatusConfigReading {
             get {
@@ -368,7 +366,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   ページ取得中... に類似しているローカライズされた文字列を検索します。
+        ///   Downloading... に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StatusDownloading {
             get {
@@ -377,7 +375,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   ファイル出力中... に類似しているローカライズされた文字列を検索します。
+        ///   Writing file... に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StatusFileWriting {
             get {
@@ -386,7 +384,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   ページ解析中... に類似しているローカライズされた文字列を検索します。
+        ///   Parsing... に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StatusParsing {
             get {
@@ -395,7 +393,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   サーバー接続中... に類似しているローカライズされた文字列を検索します。
+        ///   Connecting... に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StatusPinging {
             get {
@@ -404,7 +402,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   キャッシュの保存に失敗しました。今回参照したページの情報は、アプリケーション終了まで有効です。
+        ///   Output caches failed.
         ///
         ///{0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -415,7 +413,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語コードが重複しています。 に類似しているローカライズされた文字列を検索します。
+        ///   Language code is already. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageDuplicateCodeColumn {
             get {
@@ -424,7 +422,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   指定された言語は既に登録されています。 に類似しているローカライズされた文字列を検索します。
+        ///   Language code is already. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageDuplicateLanguageCode {
             get {
@@ -433,7 +431,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   記事名を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Please input title. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyArticle {
             get {
@@ -442,7 +440,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語コードは必須です。 に類似しているローカライズされた文字列を検索します。
+        ///   Language code may not be empty. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyCodeColumn {
             get {
@@ -451,7 +449,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   言語コードを入力してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Please input language code. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyLanguageCode {
             get {
@@ -460,7 +458,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   出力先フォルダを指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Please select output folder. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptySaveDirectory {
             get {
@@ -469,7 +467,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   翻訳元言語、記事名、翻訳先言語は必須です。 に類似しているローカライズされた文字列を検索します。
+        ///   Source&apos;s code, title and Destination&apos;s code may not be empty. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEmptyTranslationDictionary {
             get {
@@ -478,7 +476,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   翻訳元／先に同じ言語コードが指定されています。 に類似しているローカライズされた文字列を検索します。
+        ///   Source and Destination may not be same. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEqualsSourceAndTarget {
             get {
@@ -487,7 +485,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   キャッシュ有効期限には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Cache expire must be greater than or equal to 0. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreCacheExpire {
             get {
@@ -496,7 +494,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   ウェイト時間には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Connect retry time must be greater than or equal to 0. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreConnectRetryTime {
             get {
@@ -505,7 +503,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   リトライ回数には0以上の数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Max connect retries must be greater than or equal to 0. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreMaxConnectRetries {
             get {
@@ -514,7 +512,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   名前空間のIDには数値を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Namespace&apos;s ID must be integer. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreNumericNamespace {
             get {
@@ -523,7 +521,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   出力先フォルダが存在しないか無効なパスです。出力先を確認してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Output folder is missing or invalid. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreSaveDirectory {
             get {
@@ -532,7 +530,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   翻訳元の言語を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Please select source. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageNotSelectedSource {
             get {
@@ -541,7 +539,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   翻訳先の言語を指定してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Please select destination. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageNotSelectedTarget {
             get {
@@ -550,7 +548,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   略称を指定する場合、呼称も入力してください。 に類似しているローカライズされた文字列を検索します。
+        ///   Name may not be empty. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageShortNameColumnOnly {
             get {
@@ -559,7 +557,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   括弧の書式は、内部に {0} を含む必要があります。また、括弧書きを使用しない場合は、この項目を空欄にしてください。 に類似しているローカライズされた文字列を検索します。
+        ///   Bracket style must be empty or contains string &quot;$1&quot;. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageUnformatedBracket {
             get {
@@ -568,8 +566,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   取得日時には日付または空欄を指定してください。
-        ///空欄の場合、この置き換えは無期限で有効になります。 に類似しているローカライズされた文字列を検索します。
+        ///   Timestamp must be empty or date. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageUnformatedTimestamp {
             get {
@@ -578,7 +575,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   警告 に類似しているローカライズされた文字列を検索します。
+        ///   Warning に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningTitle {
             get {

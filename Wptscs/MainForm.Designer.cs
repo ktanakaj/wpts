@@ -66,7 +66,13 @@ namespace Honememo.Wptscs
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelStopwatch = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripDropDownButtonLanguage = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripMenuItemEnglishUS = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemJapanese = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemAuto = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButtonConfig = new System.Windows.Forms.ToolStripDropDownButton();
             this.timerStatusStopwatch = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItemEnglishGB = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxTransfer.SuspendLayout();
             this.groupBoxSaveDirectory.SuspendLayout();
             this.groupBoxRun.SuspendLayout();
@@ -111,7 +117,6 @@ namespace Honememo.Wptscs
             this.comboBoxTarget.Sorted = true;
             this.toolTip.SetToolTip(this.comboBoxTarget, resources.GetString("comboBoxTarget.ToolTip"));
             this.comboBoxTarget.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTarget_SelectedIndexChanged);
-            this.comboBoxTarget.Leave += new System.EventHandler(this.ComboBoxTarget_Leave);
             // 
             // labelArrow
             // 
@@ -143,7 +148,6 @@ namespace Honememo.Wptscs
             this.comboBoxSource.Sorted = true;
             this.toolTip.SetToolTip(this.comboBoxSource, resources.GetString("comboBoxSource.ToolTip"));
             this.comboBoxSource.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSource_SelectedIndexChanged);
-            this.comboBoxSource.Leave += new System.EventHandler(this.ComboBoxSource_Leave);
             // 
             // groupBoxSaveDirectory
             // 
@@ -239,7 +243,9 @@ namespace Honememo.Wptscs
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelStatus,
-            this.toolStripStatusLabelStopwatch});
+            this.toolStripStatusLabelStopwatch,
+            this.toolStripDropDownButtonLanguage,
+            this.toolStripDropDownButtonConfig});
             resources.ApplyResources(this.statusStrip, "statusStrip");
             this.statusStrip.Name = "statusStrip";
             // 
@@ -254,10 +260,51 @@ namespace Honememo.Wptscs
             this.toolStripStatusLabelStopwatch.Name = "toolStripStatusLabelStopwatch";
             resources.ApplyResources(this.toolStripStatusLabelStopwatch, "toolStripStatusLabelStopwatch");
             // 
+            // toolStripDropDownButtonLanguage
+            // 
+            this.toolStripDropDownButtonLanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButtonLanguage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemEnglishUS,
+            this.toolStripMenuItemEnglishGB,
+            this.toolStripMenuItemJapanese,
+            this.toolStripMenuItemAuto});
+            resources.ApplyResources(this.toolStripDropDownButtonLanguage, "toolStripDropDownButtonLanguage");
+            this.toolStripDropDownButtonLanguage.Name = "toolStripDropDownButtonLanguage";
+            // 
+            // toolStripMenuItemEnglishUS
+            // 
+            this.toolStripMenuItemEnglishUS.Name = "toolStripMenuItemEnglishUS";
+            resources.ApplyResources(this.toolStripMenuItemEnglishUS, "toolStripMenuItemEnglishUS");
+            this.toolStripMenuItemEnglishUS.Click += new System.EventHandler(this.ToolStripMenuItemEnglishUS_Click);
+            // 
+            // toolStripMenuItemJapanese
+            // 
+            this.toolStripMenuItemJapanese.Name = "toolStripMenuItemJapanese";
+            resources.ApplyResources(this.toolStripMenuItemJapanese, "toolStripMenuItemJapanese");
+            this.toolStripMenuItemJapanese.Click += new System.EventHandler(this.ToolStripMenuItemJapanese_Click);
+            // 
+            // toolStripMenuItemAuto
+            // 
+            this.toolStripMenuItemAuto.Name = "toolStripMenuItemAuto";
+            resources.ApplyResources(this.toolStripMenuItemAuto, "toolStripMenuItemAuto");
+            this.toolStripMenuItemAuto.Click += new System.EventHandler(this.ToolStripMenuItemAuto_Click);
+            // 
+            // toolStripDropDownButtonConfig
+            // 
+            this.toolStripDropDownButtonConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripDropDownButtonConfig, "toolStripDropDownButtonConfig");
+            this.toolStripDropDownButtonConfig.Name = "toolStripDropDownButtonConfig";
+            // 
             // timerStatusStopwatch
             // 
             this.timerStatusStopwatch.Interval = 1000;
             this.timerStatusStopwatch.Tick += new System.EventHandler(this.TimerStatusStopwatch_Tick);
+            // 
+            // toolStripMenuItemEnglishGB
+            // 
+            this.toolStripMenuItemEnglishGB.Name = "toolStripMenuItemEnglishGB";
+            resources.ApplyResources(this.toolStripMenuItemEnglishGB, "toolStripMenuItemEnglishGB");
+            this.toolStripMenuItemEnglishGB.Click += new System.EventHandler(this.ToolStripMenuItemEnglishGB_Click);
             // 
             // MainForm
             // 
@@ -309,6 +356,12 @@ namespace Honememo.Wptscs
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStatus;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStopwatch;
         private System.Windows.Forms.Timer timerStatusStopwatch;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonLanguage;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEnglishUS;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemJapanese;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonConfig;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAuto;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEnglishGB;
     }
 }
 

@@ -18,6 +18,7 @@ namespace Honememo.Wptscs
     using System.IO;
     using System.Net;
     using System.Text;
+    using System.Threading;
     using System.Windows.Forms;
     using Honememo.Utilities;
     using Honememo.Wptscs.Logics;
@@ -82,17 +83,14 @@ namespace Honememo.Wptscs
             this.translator = null;
             Control.CheckForIllegalCrossThreadCalls = false;
 
-            // コンボボックス設定
-            this.Initialize();
+            // コンボボックス・表示言語選択メニューの初期設定
+            this.InitializeComboBox();
+            this.InitializeDropDownButtonLanguage();
 
             // 前回の処理状態を復元
             this.textBoxSaveDirectory.Text = Settings.Default.SaveDirectory;
             this.comboBoxSource.SelectedItem = Settings.Default.LastSelectedSource;
             this.comboBoxTarget.SelectedItem = Settings.Default.LastSelectedTarget;
-
-            // コンボボックス変更時の処理をコール
-            this.ComboBoxSource_SelectedIndexChanged(sender, e);
-            this.ComboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -102,11 +100,8 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // 現在の作業フォルダ、絞込み文字列を保存
-            Settings.Default.SaveDirectory = this.textBoxSaveDirectory.Text;
-            Settings.Default.LastSelectedSource = this.comboBoxSource.Text;
-            Settings.Default.LastSelectedTarget = this.comboBoxTarget.Text;
-            Settings.Default.Save();
+            // 現在の出力先フォルダ、翻訳元／先言語、また必要であれば表示言語を保存
+            this.SaveSettings();
         }
 
         /// <summary>
@@ -127,7 +122,7 @@ namespace Honememo.Wptscs
                 this.labelSource.Text = String.Empty;
                 if (this.config.GetWebsite(this.comboBoxSource.Text) != null &&
                     this.config.GetWebsite(this.comboBoxSource.Text).Language.Names.TryGetValue(
-                    System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
+                    Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName,
                     out name))
                 {
                     this.labelSource.Text = name.Name;
@@ -137,17 +132,6 @@ namespace Honememo.Wptscs
                 this.linkLabelSourceURL.Text = this.config.GetWebsite(
                     this.comboBoxSource.Text).Location;
             }
-        }
-
-        /// <summary>
-        /// 翻訳元コンボボックスフォーカス喪失時の処理。
-        /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void ComboBoxSource_Leave(object sender, EventArgs e)
-        {
-            // 直接入力された場合の対策、変更時の処理をコール
-            this.ComboBoxSource_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -178,21 +162,10 @@ namespace Honememo.Wptscs
                 // （日本語環境だったら日本語を、英語だったら英語を）
                 if (this.config.GetWebsite(this.comboBoxTarget.Text) != null)
                 {
-                    this.labelTarget.Text = this.config.GetWebsite(
-                        this.comboBoxTarget.Text).Language.Names[System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName].Name;
+                    this.labelTarget.Text = this.config.GetWebsite(this.comboBoxTarget.Text)
+                        .Language.Names[Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName].Name;
                 }
             }
-        }
-
-        /// <summary>
-        /// 翻訳先コンボボックスフォーカス喪失時の処理。
-        /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void ComboBoxTarget_Leave(object sender, EventArgs e)
-        {
-            // 直接入力された場合の対策、変更時の処理をコール
-            this.ComboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -213,13 +186,9 @@ namespace Honememo.Wptscs
             // コンボボックス設定
             string backupSourceSelected = this.comboBoxSource.Text;
             string backupSourceTarget = this.comboBoxTarget.Text;
-            this.Initialize();
+            this.InitializeComboBox();
             this.comboBoxSource.SelectedItem = backupSourceSelected;
             this.comboBoxTarget.SelectedItem = backupSourceTarget;
-
-            // コンボボックス変更時の処理をコール
-            this.ComboBoxSource_SelectedIndexChanged(sender, e);
-            this.ComboBoxTarget_SelectedIndexChanged(sender, e);
         }
 
         /// <summary>
@@ -336,10 +305,11 @@ namespace Honememo.Wptscs
         {
             try
             {
-                // 初期化と開始メッセージ
+                // 初期化と開始メッセージ、別スレッドになるので表示言語も再度設定
+                Program.LoadSelectedCulture();
                 this.textBoxLog.Clear();
                 this.logLength = 0;
-                this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now.ToString("F")));
+                this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now));
 
                 // 翻訳支援処理ロジックのオブジェクトを生成
                 try
@@ -441,14 +411,58 @@ namespace Honememo.Wptscs
             this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, this.translator.Stopwatch.Elapsed);
         }
 
+        /// <summary>
+        /// 表示言語選択メニュー日本語クリック時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ToolStripMenuItemJapanese_Click(object sender, EventArgs e)
+        {
+            // 表示言語を日本語に設定し再起動する
+            this.ChangeCultureAndRestart("ja-JP");
+        }
+
+        /// <summary>
+        /// 表示言語選択メニュー英語(US)クリック時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ToolStripMenuItemEnglishUS_Click(object sender, EventArgs e)
+        {
+            // 表示言語を英語(US)に設定し再起動する
+            this.ChangeCultureAndRestart("en-US");
+        }
+
+        /// <summary>
+        /// 表示言語選択メニュー英語(GB)クリック時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ToolStripMenuItemEnglishGB_Click(object sender, EventArgs e)
+        {
+            // 表示言語を英語(GB)に設定し再起動する
+            this.ChangeCultureAndRestart("en-GB");
+        }
+
+        /// <summary>
+        /// 表示言語選択メニュー自動クリック時の処理。
+        /// </summary>
+        /// <param name="sender">イベント発生オブジェクト。</param>
+        /// <param name="e">発生したイベント。</param>
+        private void ToolStripMenuItemAuto_Click(object sender, EventArgs e)
+        {
+            // 表示言語を空欄に設定し再起動する
+            this.ChangeCultureAndRestart(String.Empty);
+        }
+
         #endregion
 
         #region それ以外のメソッド
 
         /// <summary>
-        /// 画面初期化処理。
+        /// 翻訳元／先言語コンボボックスの初期化処理。
         /// </summary>
-        private void Initialize()
+        private void InitializeComboBox()
         {
             // コンボボックス設定
             this.comboBoxSource.Items.Clear();
@@ -459,6 +473,39 @@ namespace Honememo.Wptscs
             {
                 this.comboBoxSource.Items.Add(site.Language.Code);
                 this.comboBoxTarget.Items.Add(site.Language.Code);
+            }
+        }
+
+        /// <summary>
+        /// 表示言語選択メニューの初期化処理。
+        /// </summary>
+        private void InitializeDropDownButtonLanguage()
+        {
+            // 選択中の言語のメニュー項目を抽出
+            ToolStripMenuItem item;
+            switch (Settings.Default.LastSelectedLanguage)
+            {
+                case "en-US":
+                    item = this.toolStripMenuItemEnglishUS;
+                    break;
+                case "en-GB":
+                    item = this.toolStripMenuItemEnglishGB;
+                    break;
+                case "ja-JP":
+                    item = this.toolStripMenuItemJapanese;
+                    break;
+                default:
+                    item = this.toolStripMenuItemAuto;
+                    break;
+            }
+
+            // 選択中の項目をチェック状態＆押下不能とする
+            item.Checked = true;
+            item.Enabled = false;
+            if (item != this.toolStripMenuItemAuto)
+            {
+                // 自動以外の場合、ステータスバーの表示も更新
+                this.toolStripDropDownButtonLanguage.Text = item.Text;
             }
         }
 
@@ -496,7 +543,7 @@ namespace Honememo.Wptscs
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(
-                    "MainForm.LoadConfig > 設定ファイル読み込み時エラー : " + ex.StackTrace);
+                    "MainForm.LoadConfig > 設定ファイル読み込み時エラー : " + ex.ToString());
                 FormUtils.ErrorDialog(
                     Resources.ErrorMessageConfigLordFailed,
                     ex.Message);
@@ -505,6 +552,19 @@ namespace Honememo.Wptscs
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// アプリケーション設定保存。
+        /// </summary>
+        private void SaveSettings()
+        {
+            // 現在の出力先フォルダ、翻訳元／先言語を保存
+            // ※ 表示言語については必要な場合のみ更新するため、変更したタイミングで更新、ここでは反映だけ
+            Settings.Default.SaveDirectory = this.textBoxSaveDirectory.Text;
+            Settings.Default.LastSelectedSource = this.comboBoxSource.Text;
+            Settings.Default.LastSelectedTarget = this.comboBoxTarget.Text;
+            Settings.Default.Save();
         }
 
         /// <summary>
@@ -517,6 +577,8 @@ namespace Honememo.Wptscs
             this.groupBoxSaveDirectory.Enabled = false;
             this.textBoxArticle.Enabled = false;
             this.buttonRun.Enabled = false;
+            this.toolStripDropDownButtonLanguage.Enabled = false;
+            this.toolStripDropDownButtonConfig.Enabled = false;
 
             // 中止ボタンを有効に変更
             this.buttonStop.Enabled = true;
@@ -535,6 +597,8 @@ namespace Honememo.Wptscs
             this.groupBoxSaveDirectory.Enabled = true;
             this.textBoxArticle.Enabled = true;
             this.buttonRun.Enabled = true;
+            this.toolStripDropDownButtonLanguage.Enabled = true;
+            this.toolStripDropDownButtonConfig.Enabled = true;
         }
 
         /// <summary>
@@ -649,6 +713,19 @@ namespace Honememo.Wptscs
         {
             // 処理状態をステータスバーに通知
             this.toolStripStatusLabelStatus.Text = this.translator.Status;
+        }
+
+        /// <summary>
+        /// アプリケーションの現在の表示言語を変更、再起動する。
+        /// </summary>
+        /// <param name="name">変更先カルチャ名。</param>
+        private void ChangeCultureAndRestart(string name)
+        {
+            // 表示言語設定を保存した後、アプリケーションを再起動
+            Settings.Default.LastSelectedLanguage = name;
+            this.SaveSettings();
+            Application.Restart();
+            this.Close();
         }
 
         #endregion

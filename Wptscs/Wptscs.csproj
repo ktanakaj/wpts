@@ -94,12 +94,21 @@
     <Compile Include="Utilities\AppDefaultWebProxy.cs" />
     <Compile Include="Utilities\IWebProxy.cs" />
     <Compile Include="Parsers\MediaWikiParser.cs" />
+    <EmbeddedResource Include="ConfigForm.ja.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConfigForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InputLanguageCodeDialog.ja.resx">
+      <DependentUpon>InputLanguageCodeDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InputLanguageCodeDialog.resx">
       <DependentUpon>InputLanguageCodeDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.ja.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
@@ -116,6 +125,7 @@
       <DesignTime>True</DesignTime>
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.ja.resx" />
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
