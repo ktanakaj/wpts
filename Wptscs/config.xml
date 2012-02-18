@@ -159,6 +159,7 @@
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
         <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
+        <DocumentationTemplate DefaultPage="/doc">Template:Template doc</DocumentationTemplate>
       </DocumentationTemplates>
       <LinkInterwikiFormat>{{link-interwiki|en=$1|en_text=$4|lang=$2|lang_title=$3}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
@@ -481,6 +482,7 @@
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
         <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
+        <DocumentationTemplate DefaultPage="/doc">Template:Template doc</DocumentationTemplate>
       </DocumentationTemplates>
       <LinkInterwikiFormat>{{仮リンク|$1|$2|$3|label=$4}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
@@ -714,7 +716,9 @@
       <MagicWords />
       <InterwikiPrefixs />
       <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
+        <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
+        <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
+        <DocumentationTemplate DefaultPage="/doc">Template:Template doc</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
     </MediaWiki>
@@ -723,10 +727,23 @@
     <ItemTable From="en" To="ja">
       <Item From="Template:Refend" To="Template:Refend" />
       <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:Multicol-break" To="Template:Multicol-break" />
+      <Item From="Template:Multicol-end" To="Template:Multicol-end" />
     </ItemTable>
     <ItemTable From="ja" To="en">
       <Item From="Template:Refend" To="Template:Refend" />
       <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:Multicol-break" To="Template:Multicol-break" />
+      <Item From="Template:Multicol-end" To="Template:Multicol-end" />
+      <Item From="Template:Col-begin-small" To="Template:Col-begin-small" />
+      <Item From="Template:Col-break" To="Template:Col-break" />
+      <Item From="Template:Col-end" To="Template:Col-end" />
+      <Item From="Template:Col-2" To="Template:Col-2" />
+      <Item From="Template:Col-3" To="Template:Col-3" />
+      <Item From="Template:Col-4" To="Template:Col-4" />
+      <Item From="Template:Col-5" To="Template:Col-5" />
+      <Item From="Template:Column" To="Template:Column" />
+      <Item From="Template:Columns-end" To="Template:Columns-end" />
     </ItemTable>
   </ItemTables>
   <HeadingTable>

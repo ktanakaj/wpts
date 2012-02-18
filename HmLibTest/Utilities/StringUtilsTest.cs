@@ -171,5 +171,35 @@ namespace Honememo.Utilities
         }
 
         #endregion
+
+        #region 比較メソッドテストケース
+
+        /// <summary>
+        /// CompareNullsLastメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestCompareNullsLast()
+        {
+            // 通常のString.Compareと同じ動作
+            Assert.AreEqual(-1, StringUtils.CompareNullsLast("abc", "abd"));
+            Assert.AreEqual(1, StringUtils.CompareNullsLast("abd", "abc"));
+            Assert.AreEqual(0, StringUtils.CompareNullsLast("abc", "abc"));
+            Assert.AreEqual(-1, StringUtils.CompareNullsLast("ab", "abc"));
+            Assert.AreEqual(1, StringUtils.CompareNullsLast("abc", "ab"));
+            Assert.AreEqual(0, StringUtils.CompareNullsLast(null, null));
+            Assert.AreEqual(0, StringUtils.CompareNullsLast(String.Empty, String.Empty));
+
+            // 独自の拡張部分、nullや空の値が大きいと判断される
+            Assert.AreEqual(-1, StringUtils.CompareNullsLast("abc", null));
+            Assert.AreEqual(1, StringUtils.CompareNullsLast(null, "abc"));
+            Assert.AreEqual(-1, StringUtils.CompareNullsLast("abc", String.Empty));
+            Assert.AreEqual(1, StringUtils.CompareNullsLast(String.Empty, "abc"));
+
+            // nullと空の場合nullの方が大きいと判定
+            Assert.AreEqual(1, StringUtils.CompareNullsLast(null, String.Empty));
+            Assert.AreEqual(-1, StringUtils.CompareNullsLast(String.Empty, null));
+        }
+
+        #endregion
     }
 }

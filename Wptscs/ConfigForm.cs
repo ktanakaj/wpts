@@ -722,6 +722,9 @@ namespace Honememo.Wptscs
                 this.dataGridViewLanguageName["ColumnName", index].Value = name.Value.Name;
                 this.dataGridViewLanguageName["ColumnShortName", index].Value = name.Value.ShortName;
             }
+
+            // 言語コードの昇順でソート
+            this.dataGridViewLanguageName.Sort(this.dataGridViewLanguageName.Columns["ColumnCode"], ListSortDirection.Ascending);
         }
 
         /// <summary>
@@ -784,7 +787,6 @@ namespace Honememo.Wptscs
             }
 
             // 表から呼称の情報も保存
-            this.dataGridViewLanguageName.Sort(this.dataGridViewLanguageName.Columns["ColumnCode"], ListSortDirection.Ascending);
             lang.Names.Clear();
             for (int y = 0; y < this.dataGridViewLanguageName.RowCount - 1; y++)
             {
@@ -1021,33 +1023,43 @@ namespace Honememo.Wptscs
         /// <summary>
         /// 記事の置き換え対訳表の日付並び替え用クラスです。
         /// </summary>
-        /// <remarks>取得日時の降順でソート、空の列は先頭にします。</remarks>
+        /// <remarks>
+        /// 取得日時の降順でソート、空の列は先頭にします。
+        /// 取得日時が同じ場合、先頭の列から順に昇順でソート。
+        /// </remarks>
         public class TranslationDictionaryViewComparer : System.Collections.IComparer
         {
             /// <summary>
             /// 2行を比較し、一方が他方より小さいか、等しいか、大きいかを示す値を返します。
             /// </summary>
-            /// <param name="y">比較する最初の行です。</param>
-            /// <param name="x">比較する 2 番目の行。</param>
-            /// <returns>1以下:xはyより小さい, 0:等しい, 1以上:xはyより大きい</returns>
-            public int Compare(object y, object x)
+            /// <param name="x">比較する最初の行です。</param>
+            /// <param name="y">比較する2番目の行。</param>
+            /// <returns>0未満:xはyより小さい, 0:xとyは等しい, 0より大きい:xはyより大きい。</returns>
+            public int Compare(object x, object y)
             {
-                string xstr = ObjectUtils.ToString(((DataGridViewRow)x).Cells["ColumnTimestamp"].Value);
-                string ystr = ObjectUtils.ToString(((DataGridViewRow)y).Cells["ColumnTimestamp"].Value);
-                if (String.IsNullOrWhiteSpace(xstr) && String.IsNullOrWhiteSpace(ystr))
+                DataGridViewRow xrow = (DataGridViewRow)x;
+                DataGridViewRow yrow = (DataGridViewRow)y;
+
+                // 取得日時列の降順でソート、ただし空の列は先頭にする
+                int compare = StringUtils.CompareNullsLast(
+                    FormUtils.ToString(xrow.Cells["ColumnTimestamp"]),
+                    FormUtils.ToString(yrow.Cells["ColumnTimestamp"]));
+                if (compare != 0)
                 {
-                    return 0;
-                }
-                else if (String.IsNullOrWhiteSpace(xstr))
-                {
-                    return 1;
-                }
-                else if (String.IsNullOrWhiteSpace(ystr))
-                {
-                    return -1;
+                    return compare * -1;
                 }
 
-                return xstr.CompareTo(ystr);
+                // 取得日時列が同じ場合、以下先頭の列から順に昇順にソート
+                for (int i = 0; i < xrow.Cells.Count - 1; i++)
+                {
+                    compare = String.Compare(FormUtils.ToString(xrow.Cells[i]), FormUtils.ToString(yrow.Cells[i]));
+                    if (compare != 0)
+                    {
+                        return compare;
+                    }
+                }
+
+                return 0;
             }
         }
 
