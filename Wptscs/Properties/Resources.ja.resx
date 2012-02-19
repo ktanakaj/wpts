@@ -237,7 +237,7 @@
     <comment>翻訳支援対象の記事が存在しない場合のエラーメッセージ</comment>
   </data>
   <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
-    <value>{{{{0}}}} の名前空間の確認に失敗しました。{{1}}と仮定して処理します。（{{2}}）</value>
+    <value>{{{{{0}}}}} の名前空間の確認に失敗しました。{1}と仮定して処理します。（{2}）</value>
     <comment>テンプレートの名前空間を補完する際に、想定外のエラーとなった場合のメッセージ</comment>
   </data>
   <data name="QuestionMessageArticleExisted" xml:space="preserve">

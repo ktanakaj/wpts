@@ -143,6 +143,32 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
+        /// AddErrorメソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestAddError()
+        {
+            LoggerMock logger = new LoggerMock();
+
+            // 通常は例外内のメッセージだけが出力される
+            Assert.IsEmpty(logger.ToString());
+            logger.AddError(new ArgumentException("this is exception"));
+            Assert.AreEqual("→ this is exception" + Environment.NewLine, logger.ToString());
+            Assert.AreEqual(1, logger.Count);
+
+            // WebExceptionの場合、レスポンスがあればURLまで出力する
+            // ※ WebResponseが簡単にnewできないので現在テスト未実装
+            logger.AddError(new System.Net.WebException("通信エラー"));
+            Assert.AreEqual("→ this is exception" + Environment.NewLine + "→ 通信エラー" + Environment.NewLine, logger.ToString());
+            Assert.AreEqual(2, logger.Count);
+
+            // 直前のログが改行されていない場合、改行して出力される
+            logger.Log += "3rd ";
+            logger.AddError(new ArgumentException("this is exception2"));
+            Assert.AreEqual("→ this is exception" + Environment.NewLine + "→ 通信エラー" + Environment.NewLine + "3rd " + Environment.NewLine + "→ this is exception2" + Environment.NewLine, logger.ToString());
+        }
+
+        /// <summary>
         /// AddSeparatorメソッドテストケース。
         /// </summary>
         [Test]

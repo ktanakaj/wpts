@@ -727,12 +727,24 @@
     <ItemTable From="en" To="ja">
       <Item From="Template:Refend" To="Template:Refend" />
       <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
+      <Item From="Template:Yes-No" To="Template:Yes-No" />
+      <Item From="Template:Won" To="Template:Won" />
+      <Item From="Template:Nom" To="Template:Nom" />
+      <Item From="Template:Partial" To="Template:Partial" />
+      <Item From="Template:Free" To="Template:Free" />
+      <Item From="Template:Nonfree" To="Template:Nonfree" />
+      <Item From="Template:?" To="Template:?" />
+      <Item From="Template:Pending" To="Template:Pending" />
     </ItemTable>
     <ItemTable From="ja" To="en">
       <Item From="Template:Refend" To="Template:Refend" />
       <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
       <Item From="Template:Col-begin-small" To="Template:Col-begin-small" />
@@ -744,6 +756,9 @@
       <Item From="Template:Col-5" To="Template:Col-5" />
       <Item From="Template:Column" To="Template:Column" />
       <Item From="Template:Columns-end" To="Template:Columns-end" />
+      <Item From="Template:Won" To="Template:Won" />
+      <Item From="Template:Nom" To="Template:Nom" />
+      <Item From="Template:Pending" To="Template:Pending" />
     </ItemTable>
   </ItemTables>
   <HeadingTable>
