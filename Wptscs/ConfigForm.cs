@@ -410,6 +410,18 @@ namespace Honememo.Wptscs
                 }
             }
 
+            // 可能であれば現在表示中の言語の列の昇順でソートする
+            // ※ 無ければenで試みる
+            string code = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            if (view.Columns.Contains(code))
+            {
+                view.Sort(view.Columns[code], ListSortDirection.Ascending);
+            }
+            else if (view.Columns.Contains("en"))
+            {
+                view.Sort(view.Columns["en"], ListSortDirection.Ascending);
+            }
+
             // 列幅をデータ長に応じて自動調整
             // ※ 常に行ってしまうと、読み込みに時間がかかるため
             view.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
@@ -1030,6 +1042,11 @@ namespace Honememo.Wptscs
         public class TranslationDictionaryViewComparer : System.Collections.IComparer
         {
             /// <summary>
+            /// 取得日時が同じ場合にソートに用いる列名。
+            /// </summary>
+            private static readonly string[] sortOrder = new string[] { "ColumnFromCode", "ColumnToCode", "ColumnFromTitle" };
+
+            /// <summary>
             /// 2行を比較し、一方が他方より小さいか、等しいか、大きいかを示す値を返します。
             /// </summary>
             /// <param name="x">比較する最初の行です。</param>
@@ -1049,10 +1066,12 @@ namespace Honememo.Wptscs
                     return compare * -1;
                 }
 
-                // 取得日時列が同じ場合、以下先頭の列から順に昇順にソート
-                for (int i = 0; i < xrow.Cells.Count - 1; i++)
+                // 取得日時列が同じ場合、残りの列の昇順でソート
+                foreach (string column in sortOrder)
                 {
-                    compare = String.Compare(FormUtils.ToString(xrow.Cells[i]), FormUtils.ToString(yrow.Cells[i]));
+                    compare = String.Compare(
+                        FormUtils.ToString(xrow.Cells[column]),
+                        FormUtils.ToString(yrow.Cells[column]));
                     if (compare != 0)
                     {
                         return compare;
