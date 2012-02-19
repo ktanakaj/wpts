@@ -179,5 +179,57 @@ namespace Honememo.Utilities
         }
 
         #endregion
+
+        #region 比較メソッド
+
+        /// <summary>
+        /// 指定した2つのStringオブジェクトを比較し、並べ替え順序におけるそれらの相対位置を示す整数を返します。
+        /// </summary>
+        /// <param name="strA">比較対象の第1文字列。</param>
+        /// <param name="strB">比較対象の第2文字列。</param>
+        /// <returns>
+        /// 0未満: <para>strA</para>が<para>strB</para>より小さい,
+        /// 0: <para>strA</para>と<para>strB</para>は等しい,
+        /// 0より大きい: <para>strA</para>が<para>strB</para>より大きい。
+        /// </returns>
+        /// <remarks>
+        /// パラメータには<c>null</c>が指定可能です。<c>null</c>または空文字列は最も大きい値とみなします。
+        /// <c>null</c>と空文字列を比較した場合、<c>null</c>を大きい値とみなします。
+        /// </remarks>
+        public static int CompareNullsLast(string strA, string strB)
+        {
+            // まずnullの判定
+            if (strA == null && strB == null)
+            {
+                return 0;
+            }
+            else if (strA == null)
+            {
+                return 1;
+            }
+            else if (strB == null)
+            {
+                return -1;
+            }
+
+            // 次に空文字列の判定（nullと空文字列は一応区別）
+            if (String.IsNullOrEmpty(strA) && String.IsNullOrEmpty(strB))
+            {
+                return 0;
+            }
+            else if (String.IsNullOrEmpty(strA))
+            {
+                return 1;
+            }
+            else if (String.IsNullOrEmpty(strB))
+            {
+                return -1;
+            }
+
+            // どちらもnull or 空で無い場合は普通に判定
+            return String.Compare(strA, strB);
+        }
+
+        #endregion
     }
 }

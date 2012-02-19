@@ -223,7 +223,7 @@ Process stopped. Log: {0}
     <comment>翻訳支援処理処理を中止した際のメッセージ</comment>
   </data>
   <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
-    <value>Identify {{{{0}}}}'s namespace failed. {{1}} is guessed. ({{2}})</value>
+    <value>Identify {{{{{0}}}}}'s namespace failed. {1} is guessed. ({2})</value>
     <comment>テンプレートの名前空間を補完する際に、想定外のエラーとなった場合のメッセージ</comment>
   </data>
   <data name="LogMessageNoteTranslation" xml:space="preserve">

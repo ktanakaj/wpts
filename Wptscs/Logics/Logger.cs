@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Logics
 {
     using System;
+    using System.Net;
     using System.Text;
     using Honememo.Parsers;
     using Honememo.Utilities;
@@ -106,6 +107,21 @@ namespace Honememo.Wptscs.Logics
         {
             // 書式化してオーバーロードメソッドをコール
             this.AddResponse(String.Format(format, args));
+        }
+
+        /// <summary>
+        /// 例外メッセージ（「→ 通信エラー」のようなメッセージ）を登録する。
+        /// </summary>
+        /// <param name="e">例外。</param>
+        public virtual void AddError(Exception e)
+        {
+            // 応答形式で例外メッセージを出力
+            this.AddResponse(e.Message);
+            if (e is WebException && ((WebException)e).Response != null)
+            {
+                // 出せるならエラーとなったURLも出力
+                this.AddResponse(Resources.LogMessageErrorURL, ((WebException)e).Response.ResponseUri);
+            }
         }
 
         /// <summary>

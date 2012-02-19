@@ -473,12 +473,7 @@ namespace Honememo.Wptscs.Logics
             catch (Exception e)
             {
                 // その他例外の場合、まずエラー情報を出力
-                this.Logger.AddResponse(e.Message);
-                if (e is WebException && ((WebException)e).Response != null)
-                {
-                    // 出せるならエラーとなったURLも出力
-                    this.Logger.AddResponse(Resources.LogMessageErrorURL, ((WebException)e).Response.ResponseUri);
-                }
+                this.Logger.AddError(e);
 
                 // エラーを無視しない場合、ここで翻訳支援処理を中断する
                 if (!Settings.Default.IgnoreError)

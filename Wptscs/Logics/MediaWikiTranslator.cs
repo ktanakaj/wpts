@@ -930,11 +930,12 @@ namespace Honememo.Wptscs.Logics
                 if (!Settings.Default.IgnoreError)
                 {
                     // エラーを無視しない場合、ここで翻訳支援処理を中断する
+                    this.Logger.AddError(e);
                     throw new ApplicationException(e.Message, e);
                 }
 
                 // 続行する場合は、とりあえずプレフィックスをつけた名前で処理
-                this.Logger.AddMessage(Resources.LogMessageTemplateNameUnidentified, template.Title, filledTitle, e.Message);
+                this.Logger.AddResponse(Resources.LogMessageTemplateNameUnidentified, template.Title, filledTitle, e.Message);
                 return filledTitle;
             }
         }

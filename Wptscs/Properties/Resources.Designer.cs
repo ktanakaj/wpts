@@ -312,7 +312,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Identify {{{{0}}}}&apos;s namespace failed. {{1}} is guessed. ({{2}}) に類似しているローカライズされた文字列を検索します。
+        ///   Identify {{{{{0}}}}}&apos;s namespace failed. {1} is guessed. ({2}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageTemplateNameUnidentified {
             get {
