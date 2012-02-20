@@ -158,10 +158,6 @@
     <value>Error</value>
     <comment>エラーダイアログのタイトル</comment>
   </data>
-  <data name="InformationMessageDevelopingMethod" xml:space="preserve">
-    <value>{0} is not supported.</value>
-    <comment>未実装の機能が呼ばれた際のメッセージ</comment>
-  </data>
   <data name="InformationTitle" xml:space="preserve">
     <value>Information</value>
     <comment>お知らせダイアログのタイトル</comment>
@@ -347,5 +343,23 @@ Process stopped. Log: {0}
   <data name="LogMessageErrorPageName" xml:space="preserve">
     <value>{0} is not supported page name.</value>
     <comment>ページ名絡みの既知の不具合用の暫定メッセージ</comment>
+  </data>
+  <data name="DropDownConfigLoadConfigFailed" xml:space="preserve">
+    <value>(load failed)</value>
+    <comment>設定ファイル読み込み失敗時の状態</comment>
+  </data>
+  <data name="WarningMessageDuplicateConfigName" xml:space="preserve">
+    <value>Name is already.</value>
+    <comment>設定の追加で設定名が重複している場合のバリデートNGメッセージ</comment>
+  </data>
+  <data name="WarningMessageEmptyConfigName" xml:space="preserve">
+    <value>Name may not be empty.</value>
+    <comment>設定の追加で設定名が空の場合のバリデートNGメッセージ</comment>
+  </data>
+  <data name="WarningMessageInvalidConfigName" xml:space="preserve">
+    <value>Name is invalid.
+
+Invalid chars : {0}</value>
+    <comment>設定の追加で設定名に使用できない文字が含まれる場合のバリデートNGメッセージ</comment>
   </data>
 </root>

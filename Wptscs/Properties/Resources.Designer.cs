@@ -79,6 +79,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   (load failed) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DropDownConfigLoadConfigFailed {
+            get {
+                return ResourceManager.GetString("DropDownConfigLoadConfigFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Time: {0:m\:ss} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ElapsedTime {
@@ -156,15 +165,6 @@ namespace Honememo.Wptscs.Properties {
         internal static string HeadingViewHeaderText {
             get {
                 return ResourceManager.GetString("HeadingViewHeaderText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} is not supported. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string InformationMessageDevelopingMethod {
-            get {
-                return ResourceManager.GetString("InformationMessageDevelopingMethod", resourceCulture);
             }
         }
         
@@ -422,6 +422,15 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
+        ///   Name is already. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageDuplicateConfigName {
+            get {
+                return ResourceManager.GetString("WarningMessageDuplicateConfigName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Language code is already. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageDuplicateLanguageCode {
@@ -445,6 +454,15 @@ namespace Honememo.Wptscs.Properties {
         internal static string WarningMessageEmptyCodeColumn {
             get {
                 return ResourceManager.GetString("WarningMessageEmptyCodeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Name may not be empty. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageEmptyConfigName {
+            get {
+                return ResourceManager.GetString("WarningMessageEmptyConfigName", resourceCulture);
             }
         }
         
@@ -526,6 +544,17 @@ namespace Honememo.Wptscs.Properties {
         internal static string WarningMessageIgnoreSaveDirectory {
             get {
                 return ResourceManager.GetString("WarningMessageIgnoreSaveDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Name is invalid.
+        ///
+        ///Invalid chars : {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string WarningMessageInvalidConfigName {
+            get {
+                return ResourceManager.GetString("WarningMessageInvalidConfigName", resourceCulture);
             }
         }
         

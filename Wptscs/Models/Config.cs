@@ -49,10 +49,10 @@ namespace Honememo.Wptscs.Models
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ。
+        /// 空のインスタンスを生成する。
         /// </summary>
-        /// <remarks>通常は<see cref="GetInstance(string)"/>を使用する。</remarks>
-        protected Config()
+        /// <remarks>通常は<see cref="GetInstance(string)"/>で設定ファイルから読み込む。</remarks>
+        public Config()
         {
         }
 
@@ -145,6 +145,7 @@ namespace Honememo.Wptscs.Models
         /// </summary>
         /// <param name="file">設定ファイル名。</param>
         /// <returns>作成したインスタンス。</returns>
+        /// <exception cref="FileNotFoundException">指定されたファイルがどこにも存在しない場合。</exception>
         public static Config GetInstance(string file)
         {
             // ユーザーごと・または初期設定用の設定ファイルを読み込み
@@ -152,7 +153,6 @@ namespace Honememo.Wptscs.Models
             if (String.IsNullOrEmpty(path))
             {
                 // どこにも無い場合は例外を投げる
-                // （空でnewしてもよいが、ユーザーが勘違いすると思うので。）
                 throw new FileNotFoundException(file + " is not found");
             }
 

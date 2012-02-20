@@ -117,11 +117,123 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;buttonConfig.Name" xml:space="preserve">
+    <value>buttonConfig</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;buttonConfig.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Name" xml:space="preserve">
+    <value>labelTarget</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;labelTarget.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Name" xml:space="preserve">
+    <value>comboBoxTarget</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTarget.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Name" xml:space="preserve">
+    <value>labelArrow</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;labelArrow.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Name" xml:space="preserve">
+    <value>linkLabelSourceURL</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;linkLabelSourceURL.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Name" xml:space="preserve">
+    <value>labelSource</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSource.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;labelSource.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Name" xml:space="preserve">
+    <value>comboBoxSource</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.Parent" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;comboBoxSource.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="groupBoxTransfer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="groupBoxTransfer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>432, 96</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBoxTransfer.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBoxTransfer.Text" xml:space="preserve">
+    <value>Select Source and Destination</value>
+  </data>
+  <data name="groupBoxTransfer.ToolTip" xml:space="preserve">
+    <value>翻訳元・先の言語を選択してください。
+コンボボックスに目的の言語コードが存在しない場合は、設定画面で登録を行ってください。</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Name" xml:space="preserve">
+    <value>groupBoxTransfer</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxTransfer.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="buttonConfig.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonConfig.Location" type="System.Drawing.Point, System.Drawing">
     <value>226, 61</value>
   </data>
@@ -313,33 +425,57 @@
   <data name="&gt;&gt;comboBoxSource.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="groupBoxTransfer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+  <data name="&gt;&gt;textBoxSaveDirectory.Name" xml:space="preserve">
+    <value>textBoxSaveDirectory</value>
   </data>
-  <data name="groupBoxTransfer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>432, 96</value>
+  <data name="&gt;&gt;textBoxSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBoxTransfer.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;textBoxSaveDirectory.Parent" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;textBoxSaveDirectory.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="groupBoxTransfer.Text" xml:space="preserve">
-    <value>Select Source and Destination</value>
+  <data name="&gt;&gt;buttonSaveDirectory.Name" xml:space="preserve">
+    <value>buttonSaveDirectory</value>
   </data>
-  <data name="groupBoxTransfer.ToolTip" xml:space="preserve">
-    <value>翻訳元・先の言語を選択してください。
-コンボボックスに目的の言語コードが存在しない場合は、設定画面で登録を行ってください。</value>
+  <data name="&gt;&gt;buttonSaveDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxTransfer.Name" xml:space="preserve">
-    <value>groupBoxTransfer</value>
+  <data name="&gt;&gt;buttonSaveDirectory.Parent" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
   </data>
-  <data name="&gt;&gt;groupBoxTransfer.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonSaveDirectory.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 114</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>386, 49</value>
+  </data>
+  <data name="groupBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
+    <value>Select Output folder</value>
+  </data>
+  <data name="groupBoxSaveDirectory.ToolTip" xml:space="preserve">
+    <value>処理結果を出力するフォルダを選択してください。
+指定されたフォルダに記事テキストとログを出力します。</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Name" xml:space="preserve">
+    <value>groupBoxSaveDirectory</value>
+  </data>
+  <data name="&gt;&gt;groupBoxSaveDirectory.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBoxTransfer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupBoxSaveDirectory.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBoxTransfer.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;groupBoxSaveDirectory.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="textBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
     <value>103, 18</value>
@@ -395,37 +531,96 @@
   <data name="&gt;&gt;buttonSaveDirectory.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 114</value>
-  </data>
-  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 49</value>
-  </data>
-  <data name="groupBoxSaveDirectory.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
-    <value>Select Output folder</value>
-  </data>
-  <data name="groupBoxSaveDirectory.ToolTip" xml:space="preserve">
-    <value>処理結果を出力するフォルダを選択してください。
-指定されたフォルダに記事テキストとログを出力します。</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.Name" xml:space="preserve">
-    <value>groupBoxSaveDirectory</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxSaveDirectory.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupBoxRun.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Name" xml:space="preserve">
+    <value>textBoxLog</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;textBoxLog.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Name" xml:space="preserve">
+    <value>buttonStop</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;buttonStop.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Name" xml:space="preserve">
+    <value>buttonRun</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;buttonRun.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Name" xml:space="preserve">
+    <value>textBoxArticle</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;textBoxArticle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Name" xml:space="preserve">
+    <value>labelArticle</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.Parent" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;labelArticle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupBoxRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 169</value>
+  </data>
+  <data name="groupBoxRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 276</value>
+  </data>
+  <data name="groupBoxRun.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="groupBoxRun.Text" xml:space="preserve">
+    <value>Input Title then Run</value>
+  </data>
+  <data name="groupBoxRun.ToolTip" xml:space="preserve">
+    <value>目的の記事の、翻訳元言語のWikipediaでの記事名を入力し、実行ボタンを押してください。</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Name" xml:space="preserve">
+    <value>groupBoxRun</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxRun.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="textBoxLog.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -575,33 +770,6 @@
   <data name="&gt;&gt;labelArticle.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="groupBoxRun.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 169</value>
-  </data>
-  <data name="groupBoxRun.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 276</value>
-  </data>
-  <data name="groupBoxRun.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="groupBoxRun.Text" xml:space="preserve">
-    <value>Input Title then Run</value>
-  </data>
-  <data name="groupBoxRun.ToolTip" xml:space="preserve">
-    <value>目的の記事の、翻訳元言語のWikipediaでの記事名を入力し、実行ボタンを押してください。</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.Name" xml:space="preserve">
-    <value>groupBoxRun</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBoxRun.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="folderBrowserDialogSaveDirectory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -626,45 +794,6 @@
   <data name="toolStripStatusLabelStopwatch.Text" xml:space="preserve">
     <value>Time 0:00</value>
   </data>
-  <data name="toolStripMenuItemEnglishUS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="toolStripMenuItemEnglishUS.Text" xml:space="preserve">
-    <value>English (US)</value>
-  </data>
-  <data name="toolStripMenuItemEnglishGB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="toolStripMenuItemEnglishGB.Text" xml:space="preserve">
-    <value>English (GB)</value>
-  </data>
-  <data name="toolStripMenuItemJapanese.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="toolStripMenuItemJapanese.Text" xml:space="preserve">
-    <value>日本語</value>
-  </data>
-  <data name="toolStripMenuItemAuto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="toolStripMenuItemAuto.Text" xml:space="preserve">
-    <value>(auto)</value>
-  </data>
-  <data name="toolStripDropDownButtonLanguage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
-        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
-        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
-        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
-        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
-        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
-        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
-        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
-        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
-        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="toolStripDropDownButtonLanguage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -677,23 +806,11 @@
   <data name="toolStripDropDownButtonLanguage.ToolTipText" xml:space="preserve">
     <value>このツールの表示言語を選択します。</value>
   </data>
-  <data name="toolStripDropDownButtonConfig.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="toolStripMenuItemNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
   </data>
-  <data name="toolStripDropDownButtonConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
-        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
-        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
-        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
-        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
-        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
-        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
-        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
-        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
-        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
-</value>
+  <data name="toolStripMenuItemNew.Text" xml:space="preserve">
+    <value>(New...)</value>
   </data>
   <data name="toolStripDropDownButtonConfig.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -706,9 +823,6 @@
   </data>
   <data name="toolStripDropDownButtonConfig.ToolTipText" xml:space="preserve">
     <value>このツールで処理する対象を選択します。</value>
-  </data>
-  <data name="toolStripDropDownButtonConfig.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 449</value>
@@ -730,6 +844,30 @@
   </data>
   <data name="&gt;&gt;statusStrip.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="toolStripMenuItemEnglishUS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="toolStripMenuItemEnglishUS.Text" xml:space="preserve">
+    <value>English (US)</value>
+  </data>
+  <data name="toolStripMenuItemEnglishGB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="toolStripMenuItemEnglishGB.Text" xml:space="preserve">
+    <value>English (GB)</value>
+  </data>
+  <data name="toolStripMenuItemJapanese.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="toolStripMenuItemJapanese.Text" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="toolStripMenuItemAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="toolStripMenuItemAuto.Text" xml:space="preserve">
+    <value>(auto)</value>
   </data>
   <metadata name="timerStatusStopwatch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>673, 17</value>
@@ -957,6 +1095,12 @@
   <data name="&gt;&gt;toolStripMenuItemEnglishUS.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemEnglishGB.Name" xml:space="preserve">
+    <value>toolStripMenuItemEnglishGB</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemEnglishGB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripMenuItemJapanese.Name" xml:space="preserve">
     <value>toolStripMenuItemJapanese</value>
   </data>
@@ -975,17 +1119,17 @@
   <data name="&gt;&gt;toolStripDropDownButtonConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripMenuItemNew.Name" xml:space="preserve">
+    <value>toolStripMenuItemNew</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemNew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;timerStatusStopwatch.Name" xml:space="preserve">
     <value>timerStatusStopwatch</value>
   </data>
   <data name="&gt;&gt;timerStatusStopwatch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemEnglishGB.Name" xml:space="preserve">
-    <value>toolStripMenuItemEnglishGB</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItemEnglishGB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

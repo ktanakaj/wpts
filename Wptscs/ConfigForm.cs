@@ -18,6 +18,7 @@ namespace Honememo.Wptscs
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading;
     using System.Windows.Forms;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
@@ -147,7 +148,7 @@ namespace Honememo.Wptscs
 
                     // 全部成功なら画面を閉じる
                     // ※ エラーの場合、どうしても駄目ならキャンセルボタンで閉じてもらう
-                    this.Close();
+                    this.DialogResult = DialogResult.OK;
                 }
                 catch (Exception ex)
                 {
@@ -412,7 +413,7 @@ namespace Honememo.Wptscs
 
             // 可能であれば現在表示中の言語の列の昇順でソートする
             // ※ 無ければenで試みる
-            string code = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            string code = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (view.Columns.Contains(code))
             {
                 view.Sort(view.Columns[code], ListSortDirection.Ascending);
@@ -478,7 +479,7 @@ namespace Honememo.Wptscs
         {
             Language.LanguageName name;
             if (lang.Names.TryGetValue(
-                System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName, out name))
+                Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName, out name))
             {
                 if (!String.IsNullOrEmpty(name.Name))
                 {
@@ -548,17 +549,16 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ButtonLunguageAdd_Click(object sender, EventArgs e)
         {
-            // 言語追加用ダイアログを表示
-            InputLanguageCodeDialog form = new InputLanguageCodeDialog(this.config);
-            form.ShowDialog();
-
-            // 値が登録された場合
-            if (!String.IsNullOrWhiteSpace(form.LanguageCode))
+            // 言語追加用ダイアログで言語コードを入力
+            using (AddLanguageDialog form = new AddLanguageDialog(this.config))
             {
-                // 値を一覧・見出しの対訳表に追加、登録した値を選択状態に変更
-                this.comboBoxLanguage.Items.Add(form.LanguageCode);
-                this.dataGridViewHeading.Columns.Add(form.LanguageCode, form.LanguageCode);
-                this.comboBoxLanguage.SelectedItem = form.LanguageCode;
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    // 値をコンボボックスと見出しの対訳表に追加、登録した値を選択状態に変更
+                    this.comboBoxLanguage.Items.Add(form.LanguageCode);
+                    this.dataGridViewHeading.Columns.Add(form.LanguageCode, form.LanguageCode);
+                    this.comboBoxLanguage.SelectedItem = form.LanguageCode;
+                }
             }
         }
 
@@ -579,8 +579,9 @@ namespace Honememo.Wptscs
                 }
             }
 
-            // コンボボックスからも削除し、表示を更新する
+            // 値を見出しの対訳表とコンボボックスからも削除し、表示を更新する
             this.comboBoxLanguageSelectedText = null;
+            this.dataGridViewHeading.Columns.Remove(this.comboBoxLanguage.Text);
             this.comboBoxLanguage.Items.Remove(this.comboBoxLanguage.Text);
             this.ComboBoxLanguuage_SelectedIndexChanged(sender, e);
         }

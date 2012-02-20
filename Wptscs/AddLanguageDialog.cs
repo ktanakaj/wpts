@@ -2,7 +2,7 @@
 // <summary>
 //      Wikipedia翻訳支援ツールコード入力ダイアログクラスソース</summary>
 //
-// <copyright file="InputLanguageCodeDialog.cs" company="honeplusのメモ帳">
+// <copyright file="AddLanguageDialog.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
@@ -11,11 +11,6 @@
 namespace Honememo.Wptscs
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.Text;
     using System.Windows.Forms;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
@@ -24,7 +19,7 @@ namespace Honememo.Wptscs
     /// <summary>
     /// Wikipedia翻訳支援ツールコード入力ダイアログのクラスです。
     /// </summary>
-    public partial class InputLanguageCodeDialog : Form
+    public partial class AddLanguageDialog : Form
     {
         #region private変数
 
@@ -41,7 +36,8 @@ namespace Honememo.Wptscs
         /// コンストラクタ。初期化メソッド呼び出しのみ。
         /// </summary>
         /// <param name="config">設定対象のConfig。</param>
-        public InputLanguageCodeDialog(Config config)
+        /// <exception cref="ArgumentNullException"><para>config</para>が<c>null</c>。</exception>
+        public AddLanguageDialog(Config config)
         {
             // Windows フォーム デザイナで生成されたコード
             this.InitializeComponent();
@@ -75,13 +71,14 @@ namespace Honememo.Wptscs
         private void ButtonOk_Click(object sender, EventArgs e)
         {
             // 入力値チェック
-            if (String.IsNullOrWhiteSpace(this.textBoxCode.Text))
+            this.LanguageCode = this.textBoxCode.Text.Trim();
+            if (String.IsNullOrEmpty(this.LanguageCode))
             {
                 FormUtils.WarningDialog(Resources.WarningMessageEmptyLanguageCode);
                 this.textBoxCode.Focus();
                 return;
             }
-            else if (this.config.GetWebsite(this.textBoxCode.Text.Trim()) != null)
+            else if (this.config.GetWebsite(this.LanguageCode) != null)
             {
                 FormUtils.WarningDialog(Resources.WarningMessageDuplicateLanguageCode);
                 this.textBoxCode.Focus();
@@ -89,8 +86,7 @@ namespace Honememo.Wptscs
             }
 
             // テキストボックスの言語コードを保存して画面を閉じる
-            this.LanguageCode = this.textBoxCode.Text.Trim();
-            this.Close();
+            this.DialogResult = DialogResult.OK;
         }
 
         #endregion
