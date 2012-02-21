@@ -135,9 +135,9 @@
   <data name="buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>148, 17</value>
-  </data>
+  </metadata>
   <data name="buttonOk.ToolTip" xml:space="preserve">
     <value>設定を入力された内容で更新し、この画面を閉じます。</value>
   </data>
@@ -219,9 +219,9 @@
   <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnFromCode.HeaderText" xml:space="preserve">
     <value>Source</value>
   </data>
@@ -231,9 +231,9 @@
   <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
     <value>Title</value>
   </data>
@@ -243,9 +243,9 @@
   <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnAlias.HeaderText" xml:space="preserve">
     <value>Redirect</value>
   </data>
@@ -255,18 +255,18 @@
   <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <data name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnArrow.HeaderText" xml:space="preserve">
     <value />
   </data>
   <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnToCode.HeaderText" xml:space="preserve">
     <value>Destination</value>
   </data>
@@ -276,9 +276,9 @@
   <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnToTitle.HeaderText" xml:space="preserve">
     <value>Title</value>
   </data>
@@ -289,9 +289,9 @@
   <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
     <value>Timestamp</value>
   </data>
@@ -485,9 +485,9 @@
   <data name="dataGridViewLanguageName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="ColumnCode.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnCode.HeaderText" xml:space="preserve">
     <value>Code</value>
   </data>
@@ -497,9 +497,9 @@
   <data name="ColumnCode.Width" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
-  <data name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnName.HeaderText" xml:space="preserve">
     <value>Name (Article)</value>
   </data>
@@ -509,9 +509,9 @@
   <data name="ColumnName.Width" type="System.Int32, mscorlib">
     <value>97</value>
   </data>
-  <data name="ColumnShortName.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="ColumnShortName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="ColumnShortName.HeaderText" xml:space="preserve">
     <value>Abbr</value>
   </data>
@@ -1582,6 +1582,30 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="groupBoxApplicationConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="labelApplicationConfigNote.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelApplicationConfigNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 188</value>
+  </data>
+  <data name="labelApplicationConfigNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 12</value>
+  </data>
+  <data name="labelApplicationConfigNote.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationConfigNote.Name" xml:space="preserve">
+    <value>labelApplicationConfigNote</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationConfigNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationConfigNote.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
+  <data name="&gt;&gt;labelApplicationConfigNote.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="textBoxConnectRetryTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
   </data>
@@ -1612,7 +1636,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxConnectRetryTime.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="labelConnectRetryTimeNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1639,7 +1663,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelConnectRetryTimeNote.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="labelConnectRetryTime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1671,7 +1695,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelConnectRetryTime.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="textBoxMaxConnectRetries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
@@ -1703,7 +1727,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxMaxConnectRetries.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="labelMaxConnectRetriesNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1730,7 +1754,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelMaxConnectRetriesNote.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="labelMaxConnectRetries.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1761,7 +1785,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelMaxConnectRetries.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="checkBoxIgnoreError.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1791,7 +1815,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;checkBoxIgnoreError.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="labelRefererNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1818,7 +1842,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelRefererNote.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="labelUserAgentNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1848,7 +1872,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelUserAgentNote.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="labelChaceNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1875,7 +1899,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelChaceNote.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="textBoxCacheExpire.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
@@ -1906,7 +1930,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxCacheExpire.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="textBoxReferer.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 68</value>
@@ -1936,7 +1960,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxReferer.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="labelReferer.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1969,7 +1993,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="labelCacheExpire.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2000,7 +2024,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelCacheExpire.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="textBoxUserAgent.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 43</value>
@@ -2028,7 +2052,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;textBoxUserAgent.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="labelUserAgent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2059,7 +2083,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxApplicationConfig</value>
   </data>
   <data name="&gt;&gt;labelUserAgent.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="groupBoxApplicationConfig.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -2139,12 +2163,12 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 12</value>
   </data>

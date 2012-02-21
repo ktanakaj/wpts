@@ -89,6 +89,7 @@
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelApplicationName = new System.Windows.Forms.Label();
             this.groupBoxApplicationConfig = new System.Windows.Forms.GroupBox();
+            this.labelApplicationConfigNote = new System.Windows.Forms.Label();
             this.textBoxConnectRetryTime = new System.Windows.Forms.TextBox();
             this.labelConnectRetryTimeNote = new System.Windows.Forms.Label();
             this.labelConnectRetryTime = new System.Windows.Forms.Label();
@@ -571,6 +572,7 @@
             // groupBoxApplicationConfig
             // 
             resources.ApplyResources(this.groupBoxApplicationConfig, "groupBoxApplicationConfig");
+            this.groupBoxApplicationConfig.Controls.Add(this.labelApplicationConfigNote);
             this.groupBoxApplicationConfig.Controls.Add(this.textBoxConnectRetryTime);
             this.groupBoxApplicationConfig.Controls.Add(this.labelConnectRetryTimeNote);
             this.groupBoxApplicationConfig.Controls.Add(this.labelConnectRetryTime);
@@ -589,6 +591,11 @@
             this.groupBoxApplicationConfig.Controls.Add(this.labelUserAgent);
             this.groupBoxApplicationConfig.Name = "groupBoxApplicationConfig";
             this.groupBoxApplicationConfig.TabStop = false;
+            // 
+            // labelApplicationConfigNote
+            // 
+            resources.ApplyResources(this.labelApplicationConfigNote, "labelApplicationConfigNote");
+            this.labelApplicationConfigNote.Name = "labelApplicationConfigNote";
             // 
             // textBoxConnectRetryTime
             // 
@@ -815,5 +822,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
+        private System.Windows.Forms.Label labelApplicationConfigNote;
     }
 }
