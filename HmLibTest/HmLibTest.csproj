@@ -56,6 +56,7 @@
     <Compile Include="Utilities\StringUtilsTest.cs" />
     <Compile Include="Utilities\ValidateTest.cs" />
     <Compile Include="Utilities\XmlUtilsTest.cs" />
+    <Compile Include="Utilities\CollectionUtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HmLib\HmLib.csproj">
@@ -63,6 +64,7 @@
       <Name>HmLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(ProgramFiles)\MSBuild\Microsoft\StyleCop\v4.4\Microsoft.StyleCop.Targets" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -236,7 +237,17 @@
             // dataGridViewHeading
             // 
             resources.ApplyResources(this.dataGridViewHeading, "dataGridViewHeading");
+            this.dataGridViewHeading.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewHeading.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewHeading.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewHeading.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewHeading.Name = "dataGridViewHeading";
             this.dataGridViewHeading.RowTemplate.Height = 21;
             // 
@@ -288,6 +299,7 @@
             // dataGridViewLanguageName
             // 
             resources.ApplyResources(this.dataGridViewLanguageName, "dataGridViewLanguageName");
+            this.dataGridViewLanguageName.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewLanguageName.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLanguageName.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnCode,
@@ -302,21 +314,18 @@
             // 
             // ColumnCode
             // 
-            this.ColumnCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnCode, "ColumnCode");
             this.ColumnCode.MaxInputLength = 10;
             this.ColumnCode.Name = "ColumnCode";
             // 
             // ColumnName
             // 
-            this.ColumnName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnName, "ColumnName");
             this.ColumnName.MaxInputLength = 255;
             this.ColumnName.Name = "ColumnName";
             // 
             // ColumnShortName
             // 
-            this.ColumnShortName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             resources.ApplyResources(this.ColumnShortName, "ColumnShortName");
             this.ColumnShortName.MaxInputLength = 20;
             this.ColumnShortName.Name = "ColumnShortName";

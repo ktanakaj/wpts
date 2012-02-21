@@ -130,6 +130,9 @@
   <data name="labelTarget.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 21</value>
   </data>
+  <data name="labelArrow.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="linkLabelSourceURL.Location" type="System.Drawing.Point, System.Drawing">
     <value>193, 21</value>
   </data>
@@ -142,12 +145,6 @@
   <data name="groupBoxTransfer.Text" xml:space="preserve">
     <value>翻訳元→先の言語を設定</value>
   </data>
-  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 49</value>
-  </data>
-  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
-    <value>処理結果を出力するフォルダの選択</value>
-  </data>
   <data name="textBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
     <value>64, 18</value>
   </data>
@@ -157,8 +154,14 @@
   <data name="buttonSaveDirectory.Text" xml:space="preserve">
     <value>参照...</value>
   </data>
-  <data name="groupBoxRun.Text" xml:space="preserve">
-    <value>翻訳する記事を指定して、実行</value>
+  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 49</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
+    <value>処理結果を出力するフォルダの選択</value>
+  </data>
+  <data name="textBoxLog.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonStop.Text" xml:space="preserve">
     <value>中止</value>
@@ -178,11 +181,14 @@
   <data name="labelArticle.Text" xml:space="preserve">
     <value>記事名</value>
   </data>
+  <data name="groupBoxRun.Text" xml:space="preserve">
+    <value>翻訳する記事を指定して、実行</value>
+  </data>
   <data name="folderBrowserDialogSaveDirectory.Description" xml:space="preserve">
     <value>処理結果を出力するフォルダを選択してください。</value>
   </data>
   <data name="toolStripStatusLabelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 19</value>
+    <value>229, 19</value>
   </data>
   <data name="toolStripStatusLabelStopwatch.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 19</value>
@@ -190,26 +196,29 @@
   <data name="toolStripStatusLabelStopwatch.Text" xml:space="preserve">
     <value>実行時間 0:00</value>
   </data>
+  <data name="toolStripMenuItemEnglishUS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripMenuItemEnglishGB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripMenuItemJapanese.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripMenuItemAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
   <data name="toolStripDropDownButtonLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 22</value>
   </data>
   <data name="toolStripDropDownButtonLanguage.Text" xml:space="preserve">
     <value>日本語</value>
   </data>
-  <data name="toolStripMenuItemEnglishUS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
-  <data name="toolStripMenuItemEnglishGB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
-  <data name="toolStripMenuItemJapanese.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
-  <data name="toolStripMenuItemAuto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
   <data name="toolStripMenuItemNew.Text" xml:space="preserve">
     <value>(追加...)</value>
+  </data>
+  <data name="statusStrip.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -379,5 +388,8 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Wikipedia 翻訳支援ツール</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

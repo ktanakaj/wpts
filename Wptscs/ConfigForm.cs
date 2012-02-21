@@ -394,12 +394,12 @@ namespace Honememo.Wptscs
             }
 
             // 各行にデータを取り込み
-            foreach (IDictionary<string, string> record in table)
+            foreach (IDictionary<string, string[]> record in table)
             {
                 // 行を追加しその行を取得
                 DataGridViewRow row = view.Rows[view.Rows.Add()];
 
-                foreach (KeyValuePair<string, string> cell in record)
+                foreach (KeyValuePair<string, string[]> cell in record)
                 {
                     // 上で登録した列では足りなかった場合、その都度生成する
                     if (!view.Columns.Contains(cell.Key))
@@ -407,7 +407,8 @@ namespace Honememo.Wptscs
                         this.AddTranslationTableColumn(view.Columns, cell.Key, cell.Key);
                     }
 
-                    row.Cells[cell.Key].Value = cell.Value;
+                    // 改行区切りで表示
+                    row.Cells[cell.Key].Value = String.Join("\n", cell.Value);
                 }
             }
 
@@ -422,10 +423,6 @@ namespace Honememo.Wptscs
             {
                 view.Sort(view.Columns["en"], ListSortDirection.Ascending);
             }
-
-            // 列幅をデータ長に応じて自動調整
-            // ※ 常に行ってしまうと、読み込みに時間がかかるため
-            view.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         /// <summary>
@@ -438,14 +435,15 @@ namespace Honememo.Wptscs
             TranslationTable table = new TranslationTable();
             foreach (DataGridViewRow row in view.Rows)
             {
-                IDictionary<string, string> record = new SortedDictionary<string, string>();
+                IDictionary<string, string[]> record = new SortedDictionary<string, string[]>();
                 foreach (DataGridViewCell cell in row.Cells)
                 {
                     // 空のセルは格納しない、該当の組み合わせは消える
                     string value = FormUtils.ToString(cell);
                     if (!String.IsNullOrWhiteSpace(value))
                     {
-                        record[cell.OwningColumn.Name] = value;
+                        // 改行区切りの配列で格納
+                        record[cell.OwningColumn.Name] = CollectionUtils.Trim(value.Split('\n'));
                     }
                 }
 

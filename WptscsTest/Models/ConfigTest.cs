@@ -130,7 +130,7 @@ namespace Honememo.Wptscs.Models
             // 初期状態では空のオブジェクト、設定すれば設定した値が返る
             Config config = new Config();
             Assert.AreEqual(0, config.HeadingTable.Count);
-            config.HeadingTable.Add(new Dictionary<string, string>());
+            config.HeadingTable.Add(new Dictionary<string, string[]>());
             Assert.AreEqual(1, config.HeadingTable.Count);
             TranslationTable table = new TranslationTable();
             config.HeadingTable = table;
@@ -192,8 +192,8 @@ namespace Honememo.Wptscs.Models
             dic.Add("dicKey", new TranslationDictionary.Item { Word = "dicTest" });
             config.ItemTables.Add(dic);
             config.HeadingTable = new TranslationTable();
-            IDictionary<string, string> record = new SortedDictionary<string, string>();
-            record["recordKey"] = "recordValue";
+            IDictionary<string, string[]> record = new SortedDictionary<string, string[]>();
+            record["recordKey"] = new string[] { "recordValue" };
             config.HeadingTable.Add(record);
 
             // TODO: 全然未実装
