@@ -13,6 +13,7 @@ namespace Honememo.Wptscs.Models
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
@@ -33,14 +34,15 @@ namespace Honememo.Wptscs.Models
         public void TestGetWord()
         {
             TranslationTable table = new TranslationTable();
-            IDictionary<string, string> record = new Dictionary<string, string>();
-            record["en"] = "See also";
-            record["ja"] = "関連項目";
+            IDictionary<string, string[]> record = new Dictionary<string, string[]>();
+            record["en"] = new string[] { "See also", "See" };
+            record["ja"] = new string[] { "関連項目" };
             table.Add(record);
             table.From = "en";
             table.To = "ja";
             Assert.AreEqual("関連項目", table.GetWord("See also"));
             Assert.AreEqual("関連項目", table.GetWord("see also"));
+            Assert.AreEqual("関連項目", table.GetWord("see"));
             Assert.IsNull(table.GetWord("test"));
             Assert.IsNull(table.GetWord(String.Empty));
             Assert.AreEqual("See also", table.GetWord("ja", "en", "関連項目"));
@@ -106,18 +108,19 @@ namespace Honememo.Wptscs.Models
             TranslationTable table;
             using (XmlReader r = XmlReader.Create(
                 new StringReader(
-                    "<TranslationTable><Group><Word Lang=\"en\">See Also</Word><Word Lang=\"ja\">関連項目</Word></Group>"
+                    "<TranslationTable><Group><Word Lang=\"en\">See</Word><Word Lang=\"en\" Head=\"true\">See Also</Word><Word Lang=\"ja\">関連項目</Word></Group>"
                     + "<Group><Word Lang=\"en\">History</Word><Word Lang=\"fr\">Histoire</Word></Group></TranslationTable>")))
             {
                 table = new XmlSerializer(typeof(TranslationTable)).Deserialize(r) as TranslationTable;
             }
 
             Assert.AreEqual(2, table.Count);
-            Assert.AreEqual("See Also", table[0]["en"]);
-            Assert.AreEqual("関連項目", table[0]["ja"]);
+            Assert.AreEqual("See Also", table[0]["en"].FirstOrDefault());
+            Assert.AreEqual("See", table[0]["en"].ElementAtOrDefault(1));
+            Assert.AreEqual("関連項目", table[0]["ja"].FirstOrDefault());
             Assert.IsFalse(table[0].ContainsKey("fr"));
-            Assert.AreEqual("History", table[1]["en"]);
-            Assert.AreEqual("Histoire", table[1]["fr"]);
+            Assert.AreEqual("History", table[1]["en"].FirstOrDefault());
+            Assert.AreEqual("Histoire", table[1]["fr"].FirstOrDefault());
             Assert.IsFalse(table[1].ContainsKey("ja"));
         }
 
@@ -139,13 +142,13 @@ namespace Honememo.Wptscs.Models
 
             Assert.AreEqual("<TranslationTable />", b.ToString());
 
-            IDictionary<string, string> record = new SortedDictionary<string, string>();
-            record["en"] = "See Also";
-            record["ja"] = "関連項目";
+            IDictionary<string, string[]> record = new SortedDictionary<string, string[]>();
+            record["en"] = new string[] { "See Also", "See" };
+            record["ja"] = new string[] { "関連項目" };
             table.Add(record);
-            record = new SortedDictionary<string, string>();
-            record["en"] = "History";
-            record["fr"] = "Histoire";
+            record = new SortedDictionary<string, string[]>();
+            record["en"] = new string[] { "History" };
+            record["fr"] = new string[] { "Histoire" };
             table.Add(record);
 
             StringBuilder b2 = new StringBuilder();
@@ -155,7 +158,7 @@ namespace Honememo.Wptscs.Models
             }
 
             Assert.AreEqual(
-                "<TranslationTable><Group><Word Lang=\"en\">See Also</Word><Word Lang=\"ja\">関連項目</Word></Group>"
+                "<TranslationTable><Group><Word Lang=\"en\" Head=\"True\">See Also</Word><Word Lang=\"en\">See</Word><Word Lang=\"ja\">関連項目</Word></Group>"
                 + "<Group><Word Lang=\"en\">History</Word><Word Lang=\"fr\">Histoire</Word></Group></TranslationTable>",
                 b2.ToString());
         }

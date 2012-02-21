@@ -18,6 +18,7 @@ namespace Honememo.Wptscs
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using System.Threading;
     using System.Windows.Forms;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
@@ -147,7 +148,7 @@ namespace Honememo.Wptscs
 
                     // 全部成功なら画面を閉じる
                     // ※ エラーの場合、どうしても駄目ならキャンセルボタンで閉じてもらう
-                    this.Close();
+                    this.DialogResult = DialogResult.OK;
                 }
                 catch (Exception ex)
                 {
@@ -393,12 +394,12 @@ namespace Honememo.Wptscs
             }
 
             // 各行にデータを取り込み
-            foreach (IDictionary<string, string> record in table)
+            foreach (IDictionary<string, string[]> record in table)
             {
                 // 行を追加しその行を取得
                 DataGridViewRow row = view.Rows[view.Rows.Add()];
 
-                foreach (KeyValuePair<string, string> cell in record)
+                foreach (KeyValuePair<string, string[]> cell in record)
                 {
                     // 上で登録した列では足りなかった場合、その都度生成する
                     if (!view.Columns.Contains(cell.Key))
@@ -406,13 +407,14 @@ namespace Honememo.Wptscs
                         this.AddTranslationTableColumn(view.Columns, cell.Key, cell.Key);
                     }
 
-                    row.Cells[cell.Key].Value = cell.Value;
+                    // 改行区切りで表示
+                    row.Cells[cell.Key].Value = String.Join("\n", cell.Value);
                 }
             }
 
             // 可能であれば現在表示中の言語の列の昇順でソートする
             // ※ 無ければenで試みる
-            string code = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            string code = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (view.Columns.Contains(code))
             {
                 view.Sort(view.Columns[code], ListSortDirection.Ascending);
@@ -421,10 +423,6 @@ namespace Honememo.Wptscs
             {
                 view.Sort(view.Columns["en"], ListSortDirection.Ascending);
             }
-
-            // 列幅をデータ長に応じて自動調整
-            // ※ 常に行ってしまうと、読み込みに時間がかかるため
-            view.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         /// <summary>
@@ -437,14 +435,15 @@ namespace Honememo.Wptscs
             TranslationTable table = new TranslationTable();
             foreach (DataGridViewRow row in view.Rows)
             {
-                IDictionary<string, string> record = new SortedDictionary<string, string>();
+                IDictionary<string, string[]> record = new SortedDictionary<string, string[]>();
                 foreach (DataGridViewCell cell in row.Cells)
                 {
                     // 空のセルは格納しない、該当の組み合わせは消える
                     string value = FormUtils.ToString(cell);
                     if (!String.IsNullOrWhiteSpace(value))
                     {
-                        record[cell.OwningColumn.Name] = value;
+                        // 改行区切りの配列で格納
+                        record[cell.OwningColumn.Name] = CollectionUtils.Trim(value.Split('\n'));
                     }
                 }
 
@@ -478,7 +477,7 @@ namespace Honememo.Wptscs
         {
             Language.LanguageName name;
             if (lang.Names.TryGetValue(
-                System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName, out name))
+                Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName, out name))
             {
                 if (!String.IsNullOrEmpty(name.Name))
                 {
@@ -548,17 +547,16 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ButtonLunguageAdd_Click(object sender, EventArgs e)
         {
-            // 言語追加用ダイアログを表示
-            InputLanguageCodeDialog form = new InputLanguageCodeDialog(this.config);
-            form.ShowDialog();
-
-            // 値が登録された場合
-            if (!String.IsNullOrWhiteSpace(form.LanguageCode))
+            // 言語追加用ダイアログで言語コードを入力
+            using (AddLanguageDialog form = new AddLanguageDialog(this.config))
             {
-                // 値を一覧・見出しの対訳表に追加、登録した値を選択状態に変更
-                this.comboBoxLanguage.Items.Add(form.LanguageCode);
-                this.dataGridViewHeading.Columns.Add(form.LanguageCode, form.LanguageCode);
-                this.comboBoxLanguage.SelectedItem = form.LanguageCode;
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    // 値をコンボボックスと見出しの対訳表に追加、登録した値を選択状態に変更
+                    this.comboBoxLanguage.Items.Add(form.LanguageCode);
+                    this.dataGridViewHeading.Columns.Add(form.LanguageCode, form.LanguageCode);
+                    this.comboBoxLanguage.SelectedItem = form.LanguageCode;
+                }
             }
         }
 
@@ -579,8 +577,9 @@ namespace Honememo.Wptscs
                 }
             }
 
-            // コンボボックスからも削除し、表示を更新する
+            // 値を見出しの対訳表とコンボボックスからも削除し、表示を更新する
             this.comboBoxLanguageSelectedText = null;
+            this.dataGridViewHeading.Columns.Remove(this.comboBoxLanguage.Text);
             this.comboBoxLanguage.Items.Remove(this.comboBoxLanguage.Text);
             this.ComboBoxLanguuage_SelectedIndexChanged(sender, e);
         }

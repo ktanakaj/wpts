@@ -207,6 +207,10 @@
             <Name>French language</Name>
             <ShortName>French</ShortName>
           </LanguageName>
+          <LanguageName Code="de">
+            <Name>Französische Sprache</Name>
+            <ShortName>Französisch</ShortName>
+          </LanguageName>
           <LanguageName Code="fr">
             <Name>Français</Name>
             <ShortName />
@@ -694,6 +698,10 @@
       <Location>http://zh.wikipedia.org</Location>
       <Language Code="zh">
         <Names>
+          <LanguageName Code="de">
+            <Name>Chinesische Sprachen</Name>
+            <ShortName>Chinesische</ShortName>
+          </LanguageName>
           <LanguageName Code="en">
             <Name>Chinese language</Name>
             <ShortName>Chinese</ShortName>
@@ -724,41 +732,61 @@
     </MediaWiki>
   </Websites>
   <ItemTables>
+    <ItemTable From="en" To="de">
+      <Item From="Template:Doc" To="Vorlage:Dokumentation" Redirect="Template:Documentation" />
+      <Item From="Template:Documentation" To="Vorlage:Dokumentation" />
+      <Item From="Template:Template doc" To="Vorlage:Dokumentation" Redirect="Template:Documentation" />
+    </ItemTable>
+    <ItemTable From="en" To="fr">
+      <Item From="Template:Doc" To="Modèle:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Documentation" To="Modèle:Documentation" />
+      <Item From="Template:Template doc" To="Modèle:Documentation" Redirect="Template:Documentation" />
+    </ItemTable>
     <ItemTable From="en" To="ja">
-      <Item From="Template:Refend" To="Template:Refend" />
-      <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:?" To="Template:?" />
       <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:Free" To="Template:Free" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
-      <Item From="Template:Yes-No" To="Template:Yes-No" />
-      <Item From="Template:Won" To="Template:Won" />
       <Item From="Template:Nom" To="Template:Nom" />
-      <Item From="Template:Partial" To="Template:Partial" />
-      <Item From="Template:Free" To="Template:Free" />
       <Item From="Template:Nonfree" To="Template:Nonfree" />
-      <Item From="Template:?" To="Template:?" />
+      <Item From="Template:Partial" To="Template:Partial" />
       <Item From="Template:Pending" To="Template:Pending" />
+      <Item From="Template:Refend" To="Template:Refend" />
+      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Won" To="Template:Won" />
+      <Item From="Template:Yes-No" To="Template:Yes-No" />
+    </ItemTable>
+    <ItemTable From="en" To="ru">
+      <Item From="Template:Doc" To="Шаблон:Doc" Redirect="Template:Documentation" />
+      <Item From="Template:Documentation" To="Шаблон:Doc" />
+      <Item From="Template:Template doc" To="Шаблон:Doc" Redirect="Template:Documentation" />
+    </ItemTable>
+    <ItemTable From="en" To="zh">
+      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
     </ItemTable>
     <ItemTable From="ja" To="en">
-      <Item From="Template:Refend" To="Template:Refend" />
-      <Item From="Template:Documentation" To="Template:Documentation" />
-      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Multicol-break" To="Template:Multicol-break" />
-      <Item From="Template:Multicol-end" To="Template:Multicol-end" />
-      <Item From="Template:Col-begin-small" To="Template:Col-begin-small" />
-      <Item From="Template:Col-break" To="Template:Col-break" />
-      <Item From="Template:Col-end" To="Template:Col-end" />
       <Item From="Template:Col-2" To="Template:Col-2" />
       <Item From="Template:Col-3" To="Template:Col-3" />
       <Item From="Template:Col-4" To="Template:Col-4" />
       <Item From="Template:Col-5" To="Template:Col-5" />
+      <Item From="Template:Col-begin-small" To="Template:Col-begin-small" />
+      <Item From="Template:Col-break" To="Template:Col-break" />
+      <Item From="Template:Col-end" To="Template:Col-end" />
       <Item From="Template:Column" To="Template:Column" />
       <Item From="Template:Columns-end" To="Template:Columns-end" />
-      <Item From="Template:Won" To="Template:Won" />
+      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Documentation" To="Template:Documentation" />
+      <Item From="Template:Multicol-break" To="Template:Multicol-break" />
+      <Item From="Template:Multicol-end" To="Template:Multicol-end" />
       <Item From="Template:Nom" To="Template:Nom" />
       <Item From="Template:Pending" To="Template:Pending" />
+      <Item From="Template:Refend" To="Template:Refend" />
+      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
+      <Item From="Template:Won" To="Template:Won" />
     </ItemTable>
   </ItemTables>
   <HeadingTable>
@@ -779,8 +807,19 @@
       <Word Lang="ja">批判</Word>
     </Group>
     <Group>
+      <Word Lang="de">Kultur</Word>
+      <Word Lang="en">Culture</Word>
+      <Word Lang="ja">文化</Word>
+      <Word Lang="zh">文化</Word>
+    </Group>
+    <Group>
       <Word Lang="en">Disadvantages</Word>
       <Word Lang="ja">欠点</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Economy</Word>
+      <Word Lang="ja">経済</Word>
+      <Word Lang="zh">經濟</Word>
     </Group>
     <Group>
       <Word Lang="en">Example</Word>
@@ -800,6 +839,13 @@
       <Word Lang="zh">外部連結</Word>
     </Group>
     <Group>
+      <Word Lang="en">Further reading</Word>
+      <Word Lang="ja" Head="True">関連文献</Word>
+      <Word Lang="ja">推薦文献</Word>
+      <Word Lang="ja">推奨文献</Word>
+      <Word Lang="ja">関連資料</Word>
+    </Group>
+    <Group>
       <Word Lang="en">History</Word>
       <Word Lang="es">Historia</Word>
       <Word Lang="fr">Histoire</Word>
@@ -813,18 +859,23 @@
       <Word Lang="en">Notes</Word>
       <Word Lang="es">Notas</Word>
       <Word Lang="fr">Notes</Word>
-      <Word Lang="ja">脚注</Word>
+      <Word Lang="ja" Head="True">脚注</Word>
+      <Word Lang="ja">注釈</Word>
+      <Word Lang="ja">注</Word>
       <Word Lang="pl">Przypisy</Word>
       <Word Lang="ru">Примечания</Word>
       <Word Lang="zh">注釋</Word>
     </Group>
     <Group>
       <Word Lang="de">Literatur</Word>
-      <Word Lang="en">References</Word>
+      <Word Lang="en" Head="True">References</Word>
+      <Word Lang="en">Bibliography</Word>
       <Word Lang="es">Referencias</Word>
       <Word Lang="fr">Bibliographie</Word>
       <Word Lang="it">Bibliografia</Word>
-      <Word Lang="ja">参考文献</Word>
+      <Word Lang="ja" Head="True">参考文献</Word>
+      <Word Lang="ja">参照文献</Word>
+      <Word Lang="ja">出典</Word>
       <Word Lang="ko">참고 자료</Word>
       <Word Lang="pl">Bibliografia</Word>
       <Word Lang="ru">Ссылки</Word>

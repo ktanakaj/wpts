@@ -90,9 +90,9 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
-            dic["en"] = "External links";
-            dic["ja"] = "外部リンク";
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "External links" };
+            dic["ja"] = new string[] { "外部リンク" };
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "ja";
             translator.HeadingTable.To = "en";
@@ -321,9 +321,9 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
-            dic["en"] = "External links";
-            dic["ja"] = "外部リンク";
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "External links" };
+            dic["ja"] = new string[] { "外部リンク" };
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "en";
             translator.HeadingTable.To = "ja";
@@ -475,9 +475,9 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
-            dic["en"] = "External links";
-            dic["ja"] = "外部リンク";
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "External links" };
+            dic["ja"] = new string[] { "外部リンク" };
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "en";
             translator.HeadingTable.To = "ja";
@@ -517,7 +517,7 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "ja";
             translator.HeadingTable.To = "en";
@@ -535,8 +535,8 @@ namespace Honememo.Wptscs.Logics
             Assert.AreEqual("=== [[Space tourism|宇宙旅行]]{{En icon}} ===", translator.ReplaceHeading(heading, parent).ToString());
 
             // 対訳表に登録されている見出しの場合、入れ子は処理されない
-            dic["ja"] = "[[宇宙旅行]]{{ref-en}}";
-            dic["en"] = "[[弾道飛行]]{{ref-en}}";
+            dic["ja"] = new string[] { "[[宇宙旅行]]{{ref-en}}" };
+            dic["en"] = new string[] { "[[弾道飛行]]{{ref-en}}" };
             heading.Clear();
             heading.Add(new TextElement(" "));
             heading.Add(new MediaWikiLink("宇宙旅行"));
@@ -596,9 +596,9 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
-            dic["en"] = "See also";
-            dic["ja"] = "関連項目";
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "See also" };
+            dic["ja"] = new string[] { "関連項目" };
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "en";
             translator.HeadingTable.To = "ja";
@@ -632,9 +632,9 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
-            dic["en"] = "See also";
-            dic["ja"] = "関連項目";
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "See also" };
+            dic["ja"] = new string[] { "関連項目" };
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "en";
             translator.HeadingTable.To = "ja";
@@ -689,9 +689,9 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
-            dic["en"] = "See also";
-            dic["ja"] = "関連項目";
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "See also" };
+            dic["ja"] = new string[] { "関連項目" };
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "en";
             translator.HeadingTable.To = "ja";
@@ -728,17 +728,17 @@ namespace Honememo.Wptscs.Logics
 
             // 見出しの変換パターンを設定
             translator.HeadingTable = new TranslationTable();
-            IDictionary<string, string> dic = new Dictionary<string, string>();
-            dic["en"] = "See Also";
-            dic["ja"] = "関連項目";
+            IDictionary<string, string[]> dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "See Also" };
+            dic["ja"] = new string[] { "関連項目" };
             translator.HeadingTable.Add(dic);
-            dic = new Dictionary<string, string>();
-            dic["en"] = "External links";
-            dic["ja"] = "外部リンク";
+            dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "External links" };
+            dic["ja"] = new string[] { "外部リンク" };
             translator.HeadingTable.Add(dic);
-            dic = new Dictionary<string, string>();
-            dic["en"] = "Notes";
-            dic["ja"] = "脚注";
+            dic = new Dictionary<string, string[]>();
+            dic["en"] = new string[] { "Notes" };
+            dic["ja"] = new string[] { "脚注" };
             translator.HeadingTable.Add(dic);
             translator.HeadingTable.From = "ja";
             translator.HeadingTable.To = "en";

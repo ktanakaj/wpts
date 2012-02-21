@@ -130,6 +130,9 @@
   <data name="labelTarget.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 21</value>
   </data>
+  <data name="labelArrow.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="linkLabelSourceURL.Location" type="System.Drawing.Point, System.Drawing">
     <value>193, 21</value>
   </data>
@@ -142,12 +145,6 @@
   <data name="groupBoxTransfer.Text" xml:space="preserve">
     <value>翻訳元→先の言語を設定</value>
   </data>
-  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 49</value>
-  </data>
-  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
-    <value>処理結果を出力するフォルダの選択</value>
-  </data>
   <data name="textBoxSaveDirectory.Location" type="System.Drawing.Point, System.Drawing">
     <value>64, 18</value>
   </data>
@@ -157,8 +154,14 @@
   <data name="buttonSaveDirectory.Text" xml:space="preserve">
     <value>参照...</value>
   </data>
-  <data name="groupBoxRun.Text" xml:space="preserve">
-    <value>翻訳する記事を指定して、実行</value>
+  <data name="groupBoxSaveDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 49</value>
+  </data>
+  <data name="groupBoxSaveDirectory.Text" xml:space="preserve">
+    <value>処理結果を出力するフォルダの選択</value>
+  </data>
+  <data name="textBoxLog.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonStop.Text" xml:space="preserve">
     <value>中止</value>
@@ -178,11 +181,14 @@
   <data name="labelArticle.Text" xml:space="preserve">
     <value>記事名</value>
   </data>
+  <data name="groupBoxRun.Text" xml:space="preserve">
+    <value>翻訳する記事を指定して、実行</value>
+  </data>
   <data name="folderBrowserDialogSaveDirectory.Description" xml:space="preserve">
     <value>処理結果を出力するフォルダを選択してください。</value>
   </data>
   <data name="toolStripStatusLabelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 19</value>
+    <value>229, 19</value>
   </data>
   <data name="toolStripStatusLabelStopwatch.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 19</value>
@@ -190,20 +196,17 @@
   <data name="toolStripStatusLabelStopwatch.Text" xml:space="preserve">
     <value>実行時間 0:00</value>
   </data>
-  <data name="toolStripDropDownButtonLanguage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
-        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
-        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
-        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
-        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
-        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
-        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
-        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
-        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
-        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
-</value>
+  <data name="toolStripMenuItemEnglishUS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripMenuItemEnglishGB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripMenuItemJapanese.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="toolStripMenuItemAuto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
   </data>
   <data name="toolStripDropDownButtonLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 22</value>
@@ -211,20 +214,11 @@
   <data name="toolStripDropDownButtonLanguage.Text" xml:space="preserve">
     <value>日本語</value>
   </data>
-  <data name="toolStripDropDownButtonConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
-        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
-        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
-        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
-        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
-        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
-        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
-        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
-        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
-        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
-</value>
+  <data name="toolStripMenuItemNew.Text" xml:space="preserve">
+    <value>(追加...)</value>
+  </data>
+  <data name="statusStrip.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -394,5 +388,8 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Wikipedia 翻訳支援ツール</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

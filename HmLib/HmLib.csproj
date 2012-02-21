@@ -58,6 +58,7 @@
     <Compile Include="Parsers\AbstractTextParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\XmlParser.cs" />
+    <Compile Include="Utilities\CollectionUtils.cs" />
     <Compile Include="Utilities\ObjectUtils.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
     <Compile Include="Utilities\Validate.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace Honememo.Wptscs
 {
-    partial class InputLanguageCodeDialog
+    partial class AddConfigDialog
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputLanguageCodeDialog));
-            this.textBoxCode = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddConfigDialog));
+            this.labelName = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.labelCode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBoxCode
+            // labelName
             // 
-            resources.ApplyResources(this.textBoxCode, "textBoxCode");
-            this.textBoxCode.Name = "textBoxCode";
+            resources.ApplyResources(this.labelName, "labelName");
+            this.labelName.Name = "labelName";
+            // 
+            // textBoxName
+            // 
+            resources.ApplyResources(this.textBoxName, "textBoxName");
+            this.textBoxName.Name = "textBoxName";
             // 
             // buttonOk
             // 
@@ -49,30 +54,27 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // labelCode
-            // 
-            resources.ApplyResources(this.labelCode, "labelCode");
-            this.labelCode.Name = "labelCode";
-            // 
-            // InputLanguageCodeDialog
+            // InputConfigDialog
             // 
             this.AcceptButton = this.buttonOk;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.Controls.Add(this.labelCode);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
-            this.Controls.Add(this.textBoxCode);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.labelName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "InputLanguageCodeDialog";
+            this.Name = "InputConfigDialog";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,9 +82,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxCode;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Label labelCode;
     }
 }

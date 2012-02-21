@@ -25,15 +25,6 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("config.xml")]
-        public string ConfigurationFile {
-            get {
-                return ((string)(this["ConfigurationFile"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("WikipediaTranslationSupportTool/{0}.{1:D2}")]
         public string DefaultUserAgent {
             get {
@@ -234,7 +225,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.11.0.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.20.0.0")]
         public string ConfigurationCompatible {
             get {
                 return ((string)(this["ConfigurationCompatible"]));
@@ -353,6 +344,27 @@ namespace Honememo.Wptscs.Properties {
             }
             set {
                 this["LastSelectedLanguage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Wikipedia")]
+        public string LastSelectedConfiguration {
+            get {
+                return ((string)(this["LastSelectedConfiguration"]));
+            }
+            set {
+                this["LastSelectedConfiguration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".xml")]
+        public string ConfigurationExtension {
+            get {
+                return ((string)(this["ConfigurationExtension"]));
             }
         }
     }

@@ -37,6 +37,120 @@ namespace Honememo.Wptscs.Models
 
         #endregion
 
+        #region プロパティテストケース
+
+        /// <summary>
+        /// Fileプロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestFile()
+        {
+            // 初期状態ではnull、設定すれば設定した値が返る
+            Config config = new Config();
+            Assert.IsNull(config.File);
+            config.File = "text.xml";
+            Assert.AreEqual("text.xml", config.File);
+            config.File = null;
+            Assert.IsNull(config.File);
+        }
+
+        /// <summary>
+        /// Translatorプロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestTranslator()
+        {
+            // 初期状態ではnull、設定すれば設定した値が返る
+            Config config = new Config();
+            Assert.IsNull(config.Translator);
+            config.Translator = typeof(Translator);
+            Assert.AreEqual(typeof(Translator), config.Translator);
+            config.Translator = null;
+            Assert.IsNull(config.Translator);
+        }
+
+        /// <summary>
+        /// Websitesプロパティテストケース（正常系）。
+        /// </summary>
+        [Test]
+        public void TestWebsites()
+        {
+            // 初期状態では空のリスト、設定すれば設定した値が返る
+            Config config = new Config();
+            Assert.AreEqual(0, config.Websites.Count);
+            config.Websites.Add(new MediaWiki(new Language("en")));
+            Assert.AreEqual(1, config.Websites.Count);
+            IList<Website> list = new Website[] { new MediaWiki(new Language("ja")) };
+            config.Websites = list;
+            Assert.AreSame(list, config.Websites);
+        }
+
+        /// <summary>
+        /// Websitesプロパティテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestWebsitesNull()
+        {
+            new Config() { Websites = null };
+        }
+
+        /// <summary>
+        /// ItemTablesプロパティテストケース（正常系）。
+        /// </summary>
+        [Test]
+        public void TestItemTables()
+        {
+            // 初期状態では空のリスト、設定すれば設定した値が返る
+            Config config = new Config();
+            Assert.AreEqual(0, config.ItemTables.Count);
+            config.ItemTables.Add(new TranslationDictionary("en", "ja"));
+            Assert.AreEqual(1, config.ItemTables.Count);
+            IList<TranslationDictionary> list = new TranslationDictionary[] { new TranslationDictionary("ja", "en") };
+            config.ItemTables = list;
+            Assert.AreSame(list, config.ItemTables);
+        }
+
+        /// <summary>
+        /// ItemTablesプロパティテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestItemTablesNull()
+        {
+            new Config() { ItemTables = null };
+        }
+
+        /// <summary>
+        /// HeadingTableプロパティテストケース（正常系）。
+        /// </summary>
+        [Test]
+        public void TestHeadingTable()
+        {
+            // 初期状態では空のオブジェクト、設定すれば設定した値が返る
+            Config config = new Config();
+            Assert.AreEqual(0, config.HeadingTable.Count);
+            config.HeadingTable.Add(new Dictionary<string, string[]>());
+            Assert.AreEqual(1, config.HeadingTable.Count);
+            TranslationTable table = new TranslationTable();
+            config.HeadingTable = table;
+            Assert.AreSame(table, config.HeadingTable);
+        }
+
+        /// <summary>
+        /// HeadingTableプロパティテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestHeadingTableNull()
+        {
+            new Config() { HeadingTable = null };
+        }
+
+        #endregion
+
+        //// TODO: メソッドのテストケースが未実装
+
         #region XMLシリアライズ用メソッドケース
 
         /// <summary>
@@ -72,14 +186,14 @@ namespace Honememo.Wptscs.Models
         public void TestWriteXml()
         {
             // TODO: シリアライズでも細かい動作の差異があるので、もう少しテストケースが必要
-            Config config = new DummyConfig();
+            Config config = new Config();
             config.Translator = typeof(MediaWikiTranslator);
             TranslationDictionary dic = new TranslationDictionary("en", "ja");
             dic.Add("dicKey", new TranslationDictionary.Item { Word = "dicTest" });
             config.ItemTables.Add(dic);
             config.HeadingTable = new TranslationTable();
-            IDictionary<string, string> record = new SortedDictionary<string, string>();
-            record["recordKey"] = "recordValue";
+            IDictionary<string, string[]> record = new SortedDictionary<string, string[]>();
+            record["recordKey"] = new string[] { "recordValue" };
             config.HeadingTable.Add(record);
 
             // TODO: 全然未実装
@@ -121,18 +235,6 @@ namespace Honememo.Wptscs.Models
             }
 
             Assert.AreEqual(File.ReadAllText(resultXml), b.ToString());
-        }
-
-        #endregion
-
-        #region モッククラス
-
-        /// <summary>
-        /// Configテスト用のモッククラスです。
-        /// </summary>
-        /// <remarks>そのままではnewすることができないため。</remarks>
-        public class DummyConfig : Config
-        {
         }
 
         #endregion

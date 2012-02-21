@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Honememo.Wptscs.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ConfigurationFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">config.xml</Value>
-    </Setting>
     <Setting Name="DefaultUserAgent" Type="System.String" Scope="Application">
       <Value Profile="(Default)">WikipediaTranslationSupportTool/{0}.{1:D2}</Value>
     </Setting>
@@ -168,7 +165,7 @@
       <Value Profile="(Default)">15.00:00:00</Value>
     </Setting>
     <Setting Name="ConfigurationCompatible" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">1.11.0.0</Value>
+      <Value Profile="(Default)">1.20.0.0</Value>
     </Setting>
     <Setting Name="MediaWikiMetaApi" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/w/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|namespacealiases|interwikimap</Value>
@@ -287,6 +284,12 @@
     </Setting>
     <Setting Name="LastSelectedLanguage" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastSelectedConfiguration" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Wikipedia</Value>
+    </Setting>
+    <Setting Name="ConfigurationExtension" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.xml</Value>
     </Setting>
   </Settings>
 </SettingsFile>

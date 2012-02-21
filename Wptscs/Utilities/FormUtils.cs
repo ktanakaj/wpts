@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Utilities
     using System.IO;
     using System.Reflection;
     using System.Windows.Forms;
+    using Honememo.Models;
 
     // ※ プロパティを含むので、そのまま他のプロジェクトに流用することはできない
     using Honememo.Wptscs.Properties;
@@ -50,6 +51,7 @@ namespace Honememo.Wptscs.Utilities
         /// <remarks>アセンブリ名が変わっている場合、旧バージョンは探索不可。</remarks>
         public static string SearchUserAppData(string fileName, string compatible)
         {
+            // ※ 以下GetFilesAtUserAppDataと共通化してもよいが、性能に影響あるかと考え自前で処理
             // 現在の UserAppDataPath を探索
             string path = Path.Combine(Application.UserAppDataPath, fileName);
             if (File.Exists(path))
@@ -60,32 +62,13 @@ namespace Honememo.Wptscs.Utilities
             // 可能であれば、旧バージョンの UserAppDataPath を探索
             if (!String.IsNullOrEmpty(compatible))
             {
-                // UserAppDataPath は
-                // <ベースパス>\<CompanyName>\<ProductName>\<ProductVersion>
-                // という構成のはずなので、一つ上のフォルダから自分より前のフォルダを探索
-                string parent = Path.GetDirectoryName(Application.UserAppDataPath);
-                if (!String.IsNullOrEmpty(parent))
+                // ファイルが見つかるまで探索
+                foreach (string dir in FormUtils.GetCompatibleUserAppDataPaths(compatible))
                 {
-                    // 現在のバージョンのフォルダ名
-                    string now = Path.GetFileName(Application.UserAppDataPath);
-
-                    // 同じ階層のフォルダをすべて取得し、降順にソート
-                    string[] directories = Directory.GetDirectories(parent);
-                    Array.Sort(directories);
-                    Array.Reverse(directories);
-
-                    // ファイルが見つかるまで探索
-                    foreach (string dir in directories)
+                    path = Path.Combine(dir, fileName);
+                    if (File.Exists(path))
                     {
-                        string ver = Path.GetFileName(dir);
-                        if (compatible.CompareTo(ver) <= 0 && ver.CompareTo(now) < 0)
-                        {
-                            path = Path.Combine(dir, fileName);
-                            if (File.Exists(path))
-                            {
-                                return path;
-                            }
-                        }
+                        return path;
                     }
                 }
             }
@@ -110,6 +93,78 @@ namespace Honememo.Wptscs.Utilities
         {
             // オーバーロードメソッドをコール
             return FormUtils.SearchUserAppData(fileName, null);
+        }
+
+        /// <summary>
+        /// UserAppDataPath
+        /// → 旧バージョンのUserAppDataPath
+        /// → StartupPath から、指定した検索パターンに一致するファイル名を返す。
+        /// </summary>
+        /// <param name="searchPattern">ファイル名と対応させる検索文字列。</param>
+        /// <param name="compatible">探索する旧バージョンの最大。</param>
+        /// <returns>
+        /// 指定した検索パターンに一致するファイル名を格納するString配列。ファイル名には完全パスを含む。
+        /// 同名のファイルが複数のパスに存在する場合、最初に発見したもののみを返す。
+        /// </returns>
+        /// <exception cref="ArgumentException"><para>searchPattern</para>に有効なパターンが含まれていない場合。</exception>
+        /// <exception cref="ArgumentNullException"><para>searchPattern</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="UnauthorizedAccessException">呼び出し元に、必要なアクセス許可がない場合。</exception>
+        /// <remarks>アセンブリ名が変わっている場合、旧バージョンは探索不可。</remarks>
+        public static string[] GetFilesAtUserAppData(string searchPattern, string compatible)
+        {
+            // 現在の UserAppDataPath を探索
+            List<string> files = new List<string>();
+            IgnoreCaseSet names = new IgnoreCaseSet();
+            if (Directory.Exists(Application.UserAppDataPath))
+            {
+                FormUtils.MergeFiles(files, names, Directory.GetFiles(Application.UserAppDataPath, searchPattern));
+            }
+
+            // 可能であれば、旧バージョンの UserAppDataPath を探索
+            if (!String.IsNullOrEmpty(compatible))
+            {
+                // 各ディレクトリのファイル名を取得
+                foreach (string dir in FormUtils.GetCompatibleUserAppDataPaths(compatible))
+                {
+                    FormUtils.MergeFiles(files, names, Directory.GetFiles(dir, searchPattern));
+                }
+            }
+
+            // 最後に、exeと同じフォルダを探索
+            FormUtils.MergeFiles(files, names, Directory.GetFiles(Application.StartupPath, searchPattern));
+            return files.ToArray();
+        }
+
+        /// <summary>
+        /// UserAppDataPath
+        /// → StartupPath から、指定した検索パターンに一致するファイル名を返す。
+        /// </summary>
+        /// <param name="searchPattern">ファイル名と対応させる検索文字列。</param>
+        /// <returns>
+        /// 指定した検索パターンに一致するファイル名を格納するString配列。ファイル名には完全パスを含む。
+        /// 同名のファイルが複数のパスに存在する場合、最初に発見したもののみを返す。
+        /// </returns>
+        /// <exception cref="ArgumentException"><para>searchPattern</para>に有効なパターンが含まれていない場合。</exception>
+        /// <exception cref="ArgumentNullException"><para>searchPattern</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="UnauthorizedAccessException">呼び出し元に、必要なアクセス許可がない場合。</exception>
+        public static string[] GetFilesAtUserAppData(string searchPattern)
+        {
+            // オーバーロードメソッドをコール
+            return FormUtils.GetFilesAtUserAppData(searchPattern, null);
+        }
+
+        /// <summary>
+        /// UserAppDataPath → StartupPath から、全ファイル名を返す。
+        /// </summary>
+        /// <returns>
+        /// フォルダ内の全ファイル名を格納するString配列。ファイル名には完全パスを含む。
+        /// 同名のファイルが複数のパスに存在する場合、最初に発見したもののみを返す。
+        /// </returns>
+        /// <exception cref="UnauthorizedAccessException">呼び出し元に、必要なアクセス許可がない場合。</exception>
+        public static string[] GetFilesAtUserAppData()
+        {
+            // オーバーロードメソッドをコール
+            return FormUtils.GetFilesAtUserAppData("*", null);
         }
 
         /// <summary>
@@ -265,6 +320,70 @@ namespace Honememo.Wptscs.Utilities
             }
 
             return true;
+        }
+
+        #endregion
+
+        #region 内部メソッド
+
+        /// <summary>
+        /// 指定されたバージョン以上の旧バージョンのUserAppDataPathを取得する。
+        /// </summary>
+        /// <param name="compatible">探索する旧バージョンの最大。</param>
+        /// <returns>旧バージョンと自バージョンの間のフォルダ名を格納するString配列。フォルダ名には完全パスを含む。</returns>
+        /// <remarks>
+        /// フォルダが異なる同じファイル名のパスが存在する場合、登録しない。
+        /// アセンブリ名が変わっている場合、旧バージョンは探索不可。
+        /// </remarks>
+        private static string[] GetCompatibleUserAppDataPaths(string compatible)
+        {
+            // UserAppDataPath は
+            // <ベースパス>\<CompanyName>\<ProductName>\<ProductVersion>
+            // という構成のはずなので、一つ上のフォルダから自分より前のフォルダを探索
+            List<string> paths = new List<string>();
+            string parent = Path.GetDirectoryName(Application.UserAppDataPath);
+            if (!String.IsNullOrEmpty(parent))
+            {
+                // 現在のバージョンのフォルダ名
+                string now = Path.GetFileName(Application.UserAppDataPath);
+
+                // 同じ階層のフォルダをすべて取得し、降順にソート
+                string[] directories = Directory.GetDirectories(parent);
+                Array.Sort(directories);
+                Array.Reverse(directories);
+
+                // 指定された互換バージョンと自バージョンの間のパスのみを取得
+                foreach (string dir in directories)
+                {
+                    string ver = Path.GetFileName(dir);
+                    if (compatible.CompareTo(ver) <= 0 && ver.CompareTo(now) < 0)
+                    {
+                        paths.Add(dir);
+                    }
+                }
+            }
+
+            return paths.ToArray();
+        }
+
+        /// <summary>
+        /// <see cref="GetFilesAtUserAppData(string, string)"/>用のファイル名リストのマージを行う。
+        /// </summary>
+        /// <param name="mergeto">マージ先ファイル名リスト。</param>
+        /// <param name="names">比較高速化用のパスを含まないファイル名セット。</param>
+        /// <param name="mergefrom">マージ元ファイル名リスト。</param>
+        /// <remarks>フォルダが異なる同じファイル名のパスが存在する場合、登録しない。</remarks>
+        private static void MergeFiles(IList<string> mergeto, IgnoreCaseSet names, IList<string> mergefrom)
+        {
+            foreach (string file in mergefrom)
+            {
+                string name = Path.GetFileName(file);
+                if (!names.Contains(name))
+                {
+                    mergeto.Add(file);
+                    names.Add(name);
+                }
+            }
         }
 
         #endregion

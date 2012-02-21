@@ -135,9 +135,9 @@
   <data name="buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>148, 17</value>
-  </metadata>
+  </data>
   <data name="buttonOk.ToolTip" xml:space="preserve">
     <value>設定を入力された内容で更新し、この画面を閉じます。</value>
   </data>
@@ -219,9 +219,9 @@
   <data name="dataGridViewItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnFromCode.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnFromCode.HeaderText" xml:space="preserve">
     <value>Source</value>
   </data>
@@ -231,9 +231,9 @@
   <data name="ColumnFromCode.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnFromTitle.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnFromTitle.HeaderText" xml:space="preserve">
     <value>Title</value>
   </data>
@@ -243,9 +243,9 @@
   <data name="ColumnFromTitle.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnAlias.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnAlias.HeaderText" xml:space="preserve">
     <value>Redirect</value>
   </data>
@@ -255,18 +255,18 @@
   <data name="ColumnAlias.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <metadata name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnArrow.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnArrow.HeaderText" xml:space="preserve">
     <value />
   </data>
   <data name="ColumnArrow.Width" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnToCode.HeaderText" xml:space="preserve">
     <value>Destination</value>
   </data>
@@ -276,9 +276,9 @@
   <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnToTitle.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnToTitle.HeaderText" xml:space="preserve">
     <value>Title</value>
   </data>
@@ -289,9 +289,9 @@
   <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnTimestamp.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnTimestamp.HeaderText" xml:space="preserve">
     <value>Timestamp</value>
   </data>
@@ -398,7 +398,8 @@
   </data>
   <data name="tabPageHeadings.ToolTipText" xml:space="preserve">
     <value>見出しの置き換えパターンです。
-見出しを置き換える場合、こちらに各言語での語句を登録してください。</value>
+見出しを置き換える場合、こちらに各言語での語句を登録してください。
+複数の語句が同じ用途で使用されている場合、改行で区切って登録してください。</value>
   </data>
   <data name="&gt;&gt;tabPageHeadings.Name" xml:space="preserve">
     <value>tabPageHeadings</value>
@@ -484,9 +485,9 @@
   <data name="dataGridViewLanguageName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="ColumnCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnCode.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnCode.HeaderText" xml:space="preserve">
     <value>Code</value>
   </data>
@@ -496,9 +497,9 @@
   <data name="ColumnCode.Width" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
-  <metadata name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnName.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnName.HeaderText" xml:space="preserve">
     <value>Name (Article)</value>
   </data>
@@ -508,9 +509,9 @@
   <data name="ColumnName.Width" type="System.Int32, mscorlib">
     <value>97</value>
   </data>
-  <metadata name="ColumnShortName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="ColumnShortName.UserAddedColumn" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="ColumnShortName.HeaderText" xml:space="preserve">
     <value>Abbr</value>
   </data>
@@ -2138,12 +2139,12 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 12</value>
   </data>
