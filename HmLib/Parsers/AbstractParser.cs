@@ -25,7 +25,9 @@ namespace Honememo.Parsers
         /// <param name="s">解析対象の文字列。</param>
         /// <returns>解析結果。</returns>
         /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
-        /// <remarks><see cref="TryParse"/>を呼び出し。解析に失敗した場合は、各種例外を投げる。</remarks>
+        /// <remarks>
+        /// <see cref="TryParse"/>を呼び出す。<c>TryParse</c>の結果が<c>false</c>の場合、例外として返す。
+        /// </remarks>
         public virtual IElement Parse(string s)
         {
             IElement result;

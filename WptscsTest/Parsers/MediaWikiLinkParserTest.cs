@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
+    using System.Collections.Generic;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
@@ -22,6 +23,45 @@ namespace Honememo.Wptscs.Parsers
     [TestFixture]
     public class MediaWikiLinkParserTest
     {
+        #region private変数
+
+        /// <summary>
+        /// 前処理・後処理で生成／解放される言語別のMediaWikiParser。
+        /// </summary>
+        private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
+
+        #endregion
+
+        #region 前処理・後処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestFixtureSetUp]
+        public void SetUpBeforeClass()
+        {
+            // Disposeが必要なMediaWikiParserの生成／解放
+            this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
+            this.mediaWikiParsers["ja"] = new MediaWikiParser(new MockFactory().GetMediaWiki("ja"));
+        }
+
+        /// <summary>
+        /// テストの後処理。
+        /// </summary>
+        [TestFixtureTearDown]
+        public void TearDownAfterClass()
+        {
+            // Disposeが必要なMediaWikiParserの生成／解放
+            foreach (MediaWikiParser parser in this.mediaWikiParsers.Values)
+            {
+                parser.Dispose();
+            }
+
+            this.mediaWikiParsers.Clear();
+        }
+
+        #endregion
+
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
@@ -32,7 +72,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiLink link;
-            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(this.mediaWikiParsers["en"]);
 
             // タイトルのみ
             Assert.IsTrue(parser.TryParse("[[testtitle]]", out element));
@@ -90,7 +130,7 @@ namespace Honememo.Wptscs.Parsers
         public void TestTryParseNg()
         {
             IElement element;
-            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(this.mediaWikiParsers["en"]);
 
             // 開始タグが無い
             Assert.IsFalse(parser.TryParse("testtitle]]", out element));
@@ -126,7 +166,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiLink link;
-            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(this.mediaWikiParsers["en"]);
 
             // テンプレートはパイプ以後にある分には全てOK
             Assert.IsTrue(parser.TryParse("[[ロシア語|{{lang|ru|русский язык}}]]", out element));
@@ -149,7 +189,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiLink link;
-            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("ja")));
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(this.mediaWikiParsers["ja"]);
 
             // カテゴリ標準
             Assert.IsTrue(parser.TryParse("[[Category:test]]", out element));
@@ -200,7 +240,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiLink link;
-            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(this.mediaWikiParsers["en"]);
 
             // 全て指定されているケースは通常の記事と同じ扱い
             Assert.IsTrue(parser.TryParse("[[testtitle/subpage]]", out element));
@@ -229,7 +269,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiLink link;
-            MediaWikiLinkParser parser = new MediaWikiLinkParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiLinkParser parser = new MediaWikiLinkParser(this.mediaWikiParsers["en"]);
 
             // タイトルとセクションとパイプ後の文字列とウィキ間リンクとコロンの全部入り
             Assert.IsTrue(parser.TryParse("[[:en:testtitle#testsection|testpipe1|testpipe2]]", out element));

@@ -104,6 +104,9 @@
     <Content Include="Data\MediaWiki\en\Template_Citation needed_doc.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\MediaWiki\en\Template_context.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\MediaWiki\en\Template_Planetbox begin.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

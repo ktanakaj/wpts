@@ -1,0 +1,100 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.5/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.5/ http://www.mediawiki.org/xml/export-0.5.xsd" version="0.5" xml:lang="en">
+  <siteinfo>
+    <sitename>Wiktionary</sitename>
+    <base>http://en.wiktionary.org/wiki/Wiktionary:Main_Page</base>
+    <generator>MediaWiki 1.18wmf1</generator>
+    <case>case-sensitive</case>
+    <namespaces>
+      <namespace key="-2" case="case-sensitive">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="case-sensitive" />
+      <namespace key="1" case="case-sensitive">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="case-sensitive">Wiktionary</namespace>
+      <namespace key="5" case="case-sensitive">Wiktionary talk</namespace>
+      <namespace key="6" case="case-sensitive">File</namespace>
+      <namespace key="7" case="case-sensitive">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="case-sensitive">Template</namespace>
+      <namespace key="11" case="case-sensitive">Template talk</namespace>
+      <namespace key="12" case="case-sensitive">Help</namespace>
+      <namespace key="13" case="case-sensitive">Help talk</namespace>
+      <namespace key="14" case="case-sensitive">Category</namespace>
+      <namespace key="15" case="case-sensitive">Category talk</namespace>
+      <namespace key="90" case="case-sensitive">Thread</namespace>
+      <namespace key="91" case="case-sensitive">Thread talk</namespace>
+      <namespace key="92" case="case-sensitive">Summary</namespace>
+      <namespace key="93" case="case-sensitive">Summary talk</namespace>
+      <namespace key="100" case="case-sensitive">Appendix</namespace>
+      <namespace key="101" case="case-sensitive">Appendix talk</namespace>
+      <namespace key="102" case="case-sensitive">Concordance</namespace>
+      <namespace key="103" case="case-sensitive">Concordance talk</namespace>
+      <namespace key="104" case="case-sensitive">Index</namespace>
+      <namespace key="105" case="case-sensitive">Index talk</namespace>
+      <namespace key="106" case="case-sensitive">Rhymes</namespace>
+      <namespace key="107" case="case-sensitive">Rhymes talk</namespace>
+      <namespace key="108" case="case-sensitive">Transwiki</namespace>
+      <namespace key="109" case="case-sensitive">Transwiki talk</namespace>
+      <namespace key="110" case="case-sensitive">Wikisaurus</namespace>
+      <namespace key="111" case="case-sensitive">Wikisaurus talk</namespace>
+      <namespace key="114" case="case-sensitive">Citations</namespace>
+      <namespace key="115" case="case-sensitive">Citations talk</namespace>
+      <namespace key="116" case="case-sensitive">Sign gloss</namespace>
+      <namespace key="117" case="case-sensitive">Sign gloss talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Template:context</title>
+    <id>279373</id>
+    <restrictions>edit=sysop:move=sysop</restrictions>
+    <revision>
+      <id>13743405</id>
+      <timestamp>2011-08-29T20:15:35Z</timestamp>
+      <contributor>
+        <username>Bequw</username>
+        <id>36224</id>
+      </contributor>
+      <comment>hopefully fix script2</comment>
+      <text xml:space="preserve" bytes="5069">&lt;includeonly&gt;&lt;!--
+ if not in a sub call, open paren, content span
+--&gt;{{#if:{{{sub|}}}||&lt;span class=&quot;ib-brac&quot;&gt;&lt;span class=&quot;qualifier-brac&quot;&gt;(&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;ib-content&quot;&gt;&lt;span class=&quot;qualifier-content&quot;&gt;}}&lt;!--
+ if label, generate it
+--&gt;{{#if:{{{label|}}}|{{{label}}}}}&lt;!--
+ if special follows, generate it, no space at end or before explicit comma
+--&gt;{{#switch:{{{1|x}}}|,=&lt;span class=&quot;ib-comma&quot;&gt;&lt;span class=&quot;qualifier-comma&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&amp;#32;|or=&amp;#32;or&amp;#32;|and=&amp;#32;and&amp;#32;|_={{#switch:{{{2|x}}}|,|=|&amp;#32;}}}}&lt;!--
+ do cats before recursion, so in order given; if in namespace 0, if topic category
+--&gt;{{#switch:{{NAMESPACE}}|Appendix|={{#if:{{{topcat|}}}|{{#if:{{{skey|}}}|
+[[Category:{{#if:{{{lang|}}}|{{{lang}}}:|en:}}{{{topcat|}}}|{{{skey}}} {{SUBPAGENAME}}]]{{#if:{{{script|}}}|[[Category:{{#if:{{{lang|}}}|{{{lang}}}:|en:}}{{{topcat|}}} in {{{script}}} script|{{{skey}}} {{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{#if:{{{lang|}}}|{{{lang}}}:|en:}}{{{topcat|}}} in {{{script2}}} script|{{{skey2}}} {{SUBPAGENAME}}]]}}|
+[[Category:{{#if:{{{lang|}}}|{{{lang}}}:|en:}}{{{topcat|}}}|{{SUBPAGENAME}}]]{{#if:{{{script|}}}|[[Category:{{#if:{{{lang|}}}|{{{lang}}}:|en:}}{{{topcat|}}} in {{{script}}} script|{{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{#if:{{{lang|}}}|{{{lang}}}:|en:}}{{{topcat|}}} in {{{script2}}} script|{{SUBPAGENAME}}]]}}}}}}&lt;!--
+ if pos or pos-like cat
+--&gt;{{#if:{{{poscat|}}}|{{#if:{{{skey|}}}|
+[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}}|{{{skey}}} {{SUBPAGENAME}}]]{{#if:{{{script|}}}|[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}} in {{{script}}} script|{{{skey}}} {{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}} in {{{script2}}} script|{{{skey2}}} {{SUBPAGENAME}}]]}}|
+[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}}|{{SUBPAGENAME}}]]{{#if:{{{script|}}}|[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}} in {{{script}}} script|{{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}} in {{{script2}}} script|{{SUBPAGENAME}}]]}}}}}}&lt;!--
+ regional templates
+--&gt;{{#if:{{{regcat|}}}|{{#if:{{{skey|}}}|
+[[Category:{{{regcat}}} {{{{#if:{{{regcat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}}|{{{skey}}} {{SUBPAGENAME}}]]{{#if:{{{script|}}}|[[Category:{{{regcat}}} {{{{#if:{{{regcat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} in {{{script}}} script|{{{skey}}} {{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{{regcat}}} {{{{#if:{{{regcat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} in {{{script2}}} script|{{{skey2}}} {{SUBPAGENAME}}]]}}|
+[[Category:{{{regcat}}} {{{{#if:{{{regcat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}}|{{SUBPAGENAME}}]]{{#if:{{{script|}}}|[[Category:{{{regcat}}} {{{{#if:{{{regcat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} in {{{script}}} script|{{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{{regcat}}} {{{{#if:{{{regcat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} in {{{script2}}} script|{{SUBPAGENAME}}]]}}}}}}&lt;!--
+ fixed category
+--&gt;{{#if:{{{cat|}}}|{{#if:{{{skey|}}}|
+[[Category:{{{cat}}}|{{{skey}}} {{SUBPAGENAME}}]]|
+[[Category:{{{cat}}}|{{SUBPAGENAME}}]]}}}} }}&lt;!--
+ if something follows that is a special, recall on next parameter (ignore case of special on the end)
+--&gt;{{#if:{{{1|}}}| {{{{#switch:{{{1}}}|,|or|and|_=context {{#expr:{{{sub|0}}}+1}}|ns:0}}|sub={{#expr:{{{sub|0}}}+1}}|lang={{{lang|}}}|skey={{{skey|}}}|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}|{{{6|}}}|{{{7|}}}|{{{8|}}}|{{{9|}}} }}&lt;!--
+ default case(s) from switch, we have a template or string, generate comma if we had a label
+--&gt;{{#switch:{{{1}}}|,|or|and|_=|#default={{#if:{{{label|}}}|&lt;span class=&quot;ib-comma&quot;&gt;&lt;span class=&quot;qualifier-comma&quot;&gt;,&lt;/span&gt;&lt;/span&gt;&amp;#32;}}&lt;!--
+ if template exists and is a context template, else call it, else call ourselves, avoid extra expansion by conditional on name
+--&gt;{{ {{#if:{{{1|}}}|{{#if:{{#ifexist:Template:{{{1}}}|{{#ifeq:{{{{{1}}}|sub=}}|{{{{{1}}}|sub=1}}||+}}}}|{{{1}}}|context {{#expr:{{{sub|0}}}+1}}}}|ns:0}} |label={{{1}}}
+|sub={{#expr:{{{sub|0}}}+1}}|lang={{{lang|}}}|skey={{{skey|}}}|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}|{{{6|}}}|{{{7|}}}|{{{8|}}}|{{{9|}}} }}&lt;!--
+--&gt;}}}}&lt;!-- end switch, if {1}
+ if not in sub, close content span, paren
+--&gt;{{#if:{{{sub||}}}||&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;ib-brac&quot;&gt;&lt;span class=&quot;qualifier-brac&quot;&gt;)&lt;/span&gt;&lt;/span&gt;}}&lt;!--
+ now cat templates themselves, trick for only when sub is blank
+--&gt;{{#ifeq:{{NAMESPACE}}{{{sub|}}}|{{ns:template}}|[[Category:{{ucfirst:{{{tcat|{{#if:{{{topcat|}}}|topical|
+{{#if:{{{poscat|}}}|usage|
+{{#if:{{{regcat|}}}|regional|
+{{#ifeq:{{{1|}}}{{{2|}}}|_|qualifier}}}}}}}} }}} context labels}}|{{PAGENAME}}]]}}&lt;/includeonly&gt;&lt;noinclude&gt;{{documentation}}&lt;noinclude&gt;</text>
+    </revision>
+  </page>
+</mediawiki>

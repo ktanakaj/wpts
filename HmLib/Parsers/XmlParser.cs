@@ -20,7 +20,7 @@ namespace Honememo.Parsers
     /// XML/HTMLテキストを解析するためのクラスです。
     /// </summary>
     /// <remarks>HTMLについては、解析はできるもののほぼXml用のElementで結果が返されます。</remarks>
-    public class XmlParser : AbstractTextParser
+    public class XmlParser : AbstractTextParser, IDisposable
     {
         #region private変数
 
@@ -44,6 +44,19 @@ namespace Honememo.Parsers
                 new XmlCommentElementParser(),
                 new XmlElementParser(this)
             };
+        }
+
+        #endregion
+        
+        #region デストラクタ
+
+        /// <summary>
+        /// オブジェクトのリソースを破棄する。
+        /// </summary>
+        /// <remarks><see cref="Dispose"/>の呼び出しのみ。</remarks>
+        ~XmlParser()
+        {
+            this.Dispose();
         }
 
         #endregion
@@ -86,7 +99,27 @@ namespace Honememo.Parsers
         }
 
         #endregion
-        
+
+        #region IDisposableインタフェース実装メソッド
+
+        /// <summary>
+        /// このパーサーで使用する子パーサーを解放する。
+        /// </summary>
+        public virtual void Dispose()
+        {
+            // 子パーサーを解放
+            // ※ 循環参照のため、明示的に解放しないとGCされない可能性がある
+            if (this.parsers != null)
+            {
+                this.parsers = null;
+            }
+
+            // ファイナライザ（このクラスではDisposeを呼ぶだけ）が不要であることを通知
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
         #region XmlParser, XmlElementPaser共通メソッド
 
         /// <summary>

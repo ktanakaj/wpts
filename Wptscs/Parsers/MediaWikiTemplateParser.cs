@@ -19,6 +19,11 @@ namespace Honememo.Wptscs.Parsers
     /// <summary>
     /// MediaWikiのテンプレート要素を解析するパーサークラスです。
     /// </summary>
+    /// <remarks>
+    /// テンプレート呼び出しを対象とするため、テンプレート以外の
+    /// マジックナンバー（{{PAGENAME}}等）やスクリプト（{{#if:xxx|}}）
+    /// 等もこのパーサーで解析する。
+    /// </remarks>
     public class MediaWikiTemplateParser : AbstractParser
     {
         #region private変数
