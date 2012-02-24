@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Models\IgnoreCaseDictionaryTest.cs" />
     <Compile Include="Models\IgnoreCaseSetTest.cs" />
+    <Compile Include="Models\MemoryCacheTest.cs" />
     <Compile Include="Parsers\XmlCommentElementTest.cs" />
     <Compile Include="Parsers\ListElementTest.cs" />
     <Compile Include="Parsers\TextElementTest.cs" />
@@ -58,7 +59,7 @@
     <Compile Include="Utilities\ValidateTest.cs" />
     <Compile Include="Utilities\XmlUtilsTest.cs" />
     <Compile Include="Utilities\CollectionUtilsTest.cs" />
-    <Compile Include="Utilities\HashLockTest.cs" />
+    <Compile Include="Utilities\LockObjectTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HmLib\HmLib.csproj">

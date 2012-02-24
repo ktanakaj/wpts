@@ -35,7 +35,7 @@ namespace Honememo.Models
     /// <see cref="IDictionary&lt;TKey, TValue&gt;"/>にあわせています。
     /// </para>
     /// <para>
-    /// このオブジェクトはスレッドセーフです。
+    /// このクラスはスレッドセーフです。
     /// ただしキャッシュという目的上、各々のメソッドとしての原子性は実現しますが、
     /// 複数のメソッド間でのタイミング等までは重視しません
     /// （例、キャッシュの登録と読み取り、さらにもう一つ登録を3スレッドから同時に行った場合、
@@ -126,9 +126,9 @@ namespace Honememo.Models
 
             set
             {
-                if (value < 0)
+                if (value <= 0)
                 {
-                    throw new ArgumentException("value < 0");
+                    throw new ArgumentException("value <= 0");
                 }
 
                 this.capacity = value;
@@ -222,8 +222,8 @@ namespace Honememo.Models
         /// <exception cref="ArgumentNullException"><paramref name="key"/>が<c>null</c>の場合。</exception>
         public virtual bool ContainsKey(TKey key)
         {
-            // ※ ConcurrentDictionaryを使用しており、キャッシュ全体に関わるアクセスは
-            //    一箇所だけのため、特に読み取りロック等は行わない
+            // ※ ConcurrentDictionaryを使用しており、更新処理では各キャッシュ単位では
+            //    一回の処理で更新しているため、特に読み取りロック等は行わない
             return this.Caches.ContainsKey(key);
         }
 
@@ -259,8 +259,8 @@ namespace Honememo.Models
         /// <exception cref="ArgumentNullException"><paramref name="key"/>が<c>null</c>の場合。</exception>
         public virtual bool TryGetValue(TKey key, out TValue value)
         {
-            // ※ ConcurrentDictionaryを使用しており、キャッシュ全体に関わるアクセスは
-            //    一箇所だけのため、特に読み取りロック等は行わない
+            // ※ ConcurrentDictionaryを使用しており、更新処理では各キャッシュ単位では
+            //    一回の処理で更新しているため、特に読み取りロック等は行わない
             
             // 返り値をそのクラスのデフォルト値で初期化
             value = default(TValue);
@@ -337,7 +337,7 @@ namespace Honememo.Models
                 return value;
             }
 
-            // 存在しない場合、まず更新準備の同期を取りつつキャッシュを再確認
+            // 存在しない場合、ロックを行い念のため再度キャッシュを確認
             lock (this.Caches)
             {
                 if (this.TryGetValue(key, out value))
@@ -345,8 +345,7 @@ namespace Honememo.Models
                     return value;
                 }
 
-                // それでも無ければ、書き込みの同期を取りつつ渡されたメソッドを実行。
-                // 返された値をキャッシュに登録。
+                // それでも無ければ、渡されたメソッドで値を取得
                 value = function(key);
                 this[key] = value;
             }
@@ -367,17 +366,18 @@ namespace Honememo.Models
         /// <remarks>キャッシュを更新するため、呼び出し元で必要なロックを行うこと。</remarks>
         protected virtual void RemoveCachesIfOverCapacity(TKey key, TValue value)
         {
-            int count = this.Caches.Count;
-            if (count >= this.Capacity)
+            // 上書き以外で、追加後に最大件数を超過する場合
+            if (!this.ContainsKey(key) && this.Caches.Count >= this.Capacity)
             {
                 // 指定された空きパーセントに件数が減るまで削除する
+                int count = this.Caches.Count;
                 int newMax = this.Capacity - (this.Capacity * CacheCapacityPercentage / 100);
                 IList<TKey> removes = new List<TKey>();
                 foreach (KeyValuePair<TKey, CacheItem<TValue>> pair in this.Caches.OrderBy(pair => pair.Value.LastAccessTime))
                 {
                     // 削除予定リストに登録
                     removes.Add(pair.Key);
-                    if (--count < newMax)
+                    if (--count <= newMax)
                     {
                         break;
                     }

@@ -62,10 +62,10 @@
     <Compile Include="Parsers\XmlParser.cs" />
     <Compile Include="Utilities\CollectionUtils.cs" />
     <Compile Include="Utilities\ObjectUtils.cs" />
-    <Compile Include="Utilities\HashLock.cs" />
     <Compile Include="Utilities\StringUtils.cs" />
     <Compile Include="Utilities\Validate.cs" />
     <Compile Include="Utilities\XmlUtils.cs" />
+    <Compile Include="Utilities\LockObject.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
