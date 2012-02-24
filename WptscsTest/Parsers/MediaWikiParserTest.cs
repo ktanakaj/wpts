@@ -65,10 +65,11 @@ namespace Honememo.Wptscs.Parsers
             IElement element;
             using (MediaWikiParser parser = new MediaWikiParser(new MockFactory().GetMediaWiki("en")))
             {
-                Assert.IsTrue(parser.TryParse(parser.Website.GetPage("Template:context").Text, out element));
+                string text = parser.Website.GetPage("Template:context").Text;
+                Assert.IsTrue(parser.TryParse(text, out element));
+                Assert.IsInstanceOf(typeof(ListElement), element);
+                Assert.AreEqual(text, element.ToString());
             }
-
-            Assert.IsInstanceOf(typeof(ListElement), element);
         }
 
         #endregion

@@ -14,8 +14,6 @@ namespace Honememo.Models
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.InteropServices;
-    using System.Threading;
     using Honememo.Utilities;
 
     /// <summary>
@@ -70,6 +68,11 @@ namespace Honememo.Models
         /// キャッシュ最大件数。
         /// </summary>
         private int capacity;
+
+        /// <summary>
+        /// <see cref="GetAndAddIfEmpty"/>用ロックオブジェクト。
+        /// </summary>
+        private LockObject lockObject = new LockObject();
 
         #endregion
 
@@ -251,7 +254,7 @@ namespace Honememo.Models
         /// <param name="key">キャッシュを取得する対象のキー。</param>
         /// <param name="value">
         /// キーが見つかった場合は、指定した対応するキャッシュ。
-        /// それ以外の場合は<c>value</c>パラメーターの型に対する既定の値。</param>
+        /// それ以外の場合は<paramref name="value"/>パラメーターの型に対する既定の値。</param>
         /// <returns>
         /// 指定したキーに対応するキャッシュが格納されている場合は<c>true</c>。
         /// それ以外の場合は<c>false</c>。
@@ -337,15 +340,19 @@ namespace Honememo.Models
                 return value;
             }
 
-            // 存在しない場合、ロックを行い念のため再度キャッシュを確認
-            lock (this.Caches)
+            // 存在しない場合、function呼び出し用のロックを行いパラメータ取得
+            // ※ ここで行っているロックは実行に時間がかかる可能性のある
+            //    functionの呼び出しを同時に行ってしまわないようキー単位で行うもの。
+            //    キャッシュ更新用のロックとは別物。
+            lock (this.lockObject.GetObject(key))
             {
+                // 一応もう一度キャッシュを確認
                 if (this.TryGetValue(key, out value))
                 {
                     return value;
                 }
 
-                // それでも無ければ、渡されたメソッドで値を取得
+                // それでも無ければ、渡されたfunctionで値を取得
                 value = function(key);
                 this[key] = value;
             }

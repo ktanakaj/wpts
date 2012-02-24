@@ -31,6 +31,15 @@ namespace Honememo.Wptscs.Logics
     /// </summary>
     public class MediaWikiTranslator : Translator
     {
+        #region private変数
+
+        /// <summary>
+        /// <see cref="Translator.ItemTable"/>用ロックオブジェクト。
+        /// </summary>
+        private LockObject itemTableLock = new LockObject();
+
+        #endregion
+
         #region コンストラクタ
 
         /// <summary>
@@ -531,52 +540,15 @@ namespace Honememo.Wptscs.Logics
             }
 
             // 以下マルチスレッドで使われることも想定して対訳表へのアクセス時はロック
-            lock (this.ItemTable)
+            // ※ 対訳表へのアクセス時は記事名をデコードしておく
+            string decodedTitle = WebUtility.HtmlDecode(title);
+            lock (this.itemTableLock.GetObject(decodedTitle.ToLower()))
             {
                 // 対訳表へのキーとしてはHTMLデコードした記事名を使用する
-                return this.ItemTable.ContainsKey(WebUtility.HtmlDecode(title));
+                return this.ItemTable.ContainsKey(decodedTitle);
             }
         }
-
-        /// <summary>
-        /// 対訳表から指定された記事名の情報を取得する。
-        /// </summary>
-        /// <param name="title">記事名。</param>
-        /// <param name="item">翻訳先情報。</param>
-        /// <returns>指定した記事の情報が登録されている場合<c>true</c>。</returns>
-        /// <remarks>複数スレッドからのアクセスに対応する。</remarks>
-        protected bool TryGetValueAtItemTable(string title, out TranslationDictionary.Item item)
-        {
-            // 以下マルチスレッドで使われることも想定して対訳表へのアクセス時はロック
-            // ※ 同時アクセスを防いでいるだけで、更新処理とは同期していない。
-            //    現状では同じページを同時に解析してしまう可能性があり、効率が良いソースではない。
-            //    また、効率を目指すならItemTableではなく記事名ごとに一意なオブジェクトをロックすべき
-            lock (this.ItemTable)
-            {
-                // 対訳表へのキーとしてはHTMLデコードした記事名を使用する
-                return this.ItemTable.TryGetValue(WebUtility.HtmlDecode(title), out item);
-            }
-        }
-
-        /// <summary>
-        /// 対訳表に指定された記事名の情報を登録する。
-        /// </summary>
-        /// <param name="title">記事名。</param>
-        /// <param name="item">翻訳先情報。</param>
-        /// <remarks>複数スレッドからのアクセスに対応する。</remarks>
-        protected void PutValueAtItemTable(string title, TranslationDictionary.Item item)
-        {
-            // 以下マルチスレッドで使われることも想定して対訳表へのアクセス時はロック
-            // ※ 同時アクセスを防いでいるだけで、読込処理とは同期していない。
-            //    現状では同じページを同時に解析してしまう可能性があり、効率が良いソースではない。
-            //    また、効率を目指すならItemTableではなく記事名ごとに一意なオブジェクトをロックすべき
-            lock (this.ItemTable)
-            {
-                // 対訳表へのキーとしてはHTMLデコードした記事名を使用する
-                this.ItemTable[WebUtility.HtmlDecode(title)] = item;
-            }
-        }
-
+        
         /// <summary>
         /// 指定されたコードでの見出しに相当する、別の言語での見出しを取得。
         /// </summary>
@@ -615,38 +587,45 @@ namespace Honememo.Wptscs.Logics
                 return this.GetInterlanguageWithCreateCache(title, out item);
             }
 
-            // 対訳表を使用して言語間リンクを探索
-            if (this.TryGetValueAtItemTable(title, out item))
+            // 対訳表を使用して言語間リンクを探索。
+            // 以下マルチスレッドで使われることも想定して対訳表へのアクセス時はロック（記事名単位）。
+            // また、対訳表へのアクセス時は記事名をデコードしておく。
+            string decodedTitle = WebUtility.HtmlDecode(title);
+            lock (this.itemTableLock.GetObject(decodedTitle.ToLower()))
             {
-                // 存在する場合はその値を使用
-                if (!String.IsNullOrWhiteSpace(item.Alias))
+                if (this.ItemTable.TryGetValue(decodedTitle, out item))
                 {
-                    // リダイレクトがあれば、そのメッセージも表示
-                    this.Logger.AddAlias(new MediaWikiLink(item.Alias));
+                    // 存在する場合はその値を使用
+                    if (!String.IsNullOrWhiteSpace(item.Alias))
+                    {
+                        // リダイレクトがあれば、そのメッセージも表示
+                        this.Logger.AddAlias(new MediaWikiLink(item.Alias));
+                    }
+
+                    if (!String.IsNullOrEmpty(item.Word))
+                    {
+                        this.Logger.AddDestination(new MediaWikiLink(item.Word), true);
+                        return item.Word;
+                    }
+                    else
+                    {
+                        this.Logger.AddDestination(new TextElement(Resources.LogMessageInterWikiNotFound), true);
+                        return String.Empty;
+                    }
                 }
 
-                if (!String.IsNullOrEmpty(item.Word))
+                // 対訳表に存在しない場合は、普通に取得し表に記録
+                // ※ こちらは内部でデコードしているためデコードした記事名を渡してはならない
+                string interlanguage = this.GetInterlanguageWithCreateCache(title, out item);
+                if (interlanguage != null)
                 {
-                    this.Logger.AddDestination(new MediaWikiLink(item.Word), true);
-                    return item.Word;
+                    // ページ自体が存在しない場合を除き、結果を対訳表に登録
+                    // ※ キャッシュとしては登録すべきかもしれないが、一応"対訳表"であるので
+                    this.ItemTable[decodedTitle] = item;
                 }
-                else
-                {
-                    this.Logger.AddDestination(new TextElement(Resources.LogMessageInterWikiNotFound), true);
-                    return String.Empty;
-                }
+
+                return interlanguage;
             }
-
-            // 対訳表に存在しない場合は、普通に取得し表に記録
-            string interlanguage = this.GetInterlanguageWithCreateCache(title, out item);
-            if (interlanguage != null)
-            {
-                // ページ自体が存在しない場合を除き、結果を対訳表に登録
-                // ※ キャッシュとしては登録すべきかもしれないが、一応"対訳表"であるので
-                this.PutValueAtItemTable(title, item);
-            }
-
-            return interlanguage;
         }
 
         /// <summary>
