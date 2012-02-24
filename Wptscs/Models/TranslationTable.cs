@@ -55,8 +55,8 @@ namespace Honememo.Wptscs.Models
         /// <param name="to">翻訳先言語コード。</param>
         /// <param name="word">翻訳元語句。</param>
         /// <returns>対訳語句。登録されていない場合 <c>null</c>。</returns>
-        /// <exception cref="ArgumentNullException"><para>from</para>, <para>to</para>, <para>word</para>のいずれかが<c>null</c>の場合。</exception>
-        /// <remarks><para>word</para>の大文字小文字は区別しない。</remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="from"/>, <paramref name="to"/>, <paramref name="word"/>のいずれかが<c>null</c>の場合。</exception>
+        /// <remarks><paramref name="word"/>の大文字小文字は区別しない。</remarks>
         public string GetWord(string from, string to, string word)
         {
             // nullは不可。以降でエラーになるためここでチェック
@@ -108,7 +108,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// シリアライズするXMLのスキーマ定義を返す。
         /// </summary>
-        /// <returns>XML表現を記述するXmlSchema。</returns>
+        /// <returns>XML表現を記述する<see cref="System.Xml.Schema.XmlSchema"/>。</returns>
         public System.Xml.Schema.XmlSchema GetSchema()
         {
             return null;
@@ -117,7 +117,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLからオブジェクトをデシリアライズする。
         /// </summary>
-        /// <param name="reader">デシリアライズ元のXmlReader</param>
+        /// <param name="reader">デシリアライズ元の<see cref="XmlReader"/></param>
         public void ReadXml(XmlReader reader)
         {
             XmlDocument xml = new XmlDocument();
@@ -165,7 +165,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// オブジェクトをXMLにシリアライズする。
         /// </summary>
-        /// <param name="writer">シリアライズ先のXmlWriter</param>
+        /// <param name="writer">シリアライズ先の<see cref="XmlWriter"/></param>
         public void WriteXml(XmlWriter writer)
         {
             // 各対訳の出力

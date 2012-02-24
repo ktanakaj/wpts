@@ -13,7 +13,7 @@ namespace Honememo.Parsers
     using System;
 
     /// <summary>
-    /// IParserを実装するための実装支援用抽象クラスです。
+    /// <see cref="IParser"/>を実装するための実装支援用抽象クラスです。
     /// </summary>
     public abstract class AbstractParser : IParser
     {        

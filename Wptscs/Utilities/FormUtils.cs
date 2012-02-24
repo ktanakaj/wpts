@@ -1,6 +1,6 @@
 // ================================================================================================
 // <summary>
-//      Windows処理に関するユーティリティクラスソース。</summary>
+//      フォーム処理に関するユーティリティクラスソース。</summary>
 //
 // <copyright file="FormUtils.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
@@ -21,7 +21,7 @@ namespace Honememo.Wptscs.Utilities
     using Honememo.Wptscs.Properties;
 
     /// <summary>
-    /// Windows処理に関するユーティリティクラスです。
+    /// フォーム処理に関するユーティリティクラスです。
     /// </summary>
     public static class FormUtils
     {
@@ -106,8 +106,8 @@ namespace Honememo.Wptscs.Utilities
         /// 指定した検索パターンに一致するファイル名を格納するString配列。ファイル名には完全パスを含む。
         /// 同名のファイルが複数のパスに存在する場合、最初に発見したもののみを返す。
         /// </returns>
-        /// <exception cref="ArgumentException"><para>searchPattern</para>に有効なパターンが含まれていない場合。</exception>
-        /// <exception cref="ArgumentNullException"><para>searchPattern</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="searchPattern"/>に有効なパターンが含まれていない場合。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="searchPattern"/>が<c>null</c>の場合。</exception>
         /// <exception cref="UnauthorizedAccessException">呼び出し元に、必要なアクセス許可がない場合。</exception>
         /// <remarks>アセンブリ名が変わっている場合、旧バージョンは探索不可。</remarks>
         public static string[] GetFilesAtUserAppData(string searchPattern, string compatible)
@@ -144,8 +144,8 @@ namespace Honememo.Wptscs.Utilities
         /// 指定した検索パターンに一致するファイル名を格納するString配列。ファイル名には完全パスを含む。
         /// 同名のファイルが複数のパスに存在する場合、最初に発見したもののみを返す。
         /// </returns>
-        /// <exception cref="ArgumentException"><para>searchPattern</para>に有効なパターンが含まれていない場合。</exception>
-        /// <exception cref="ArgumentNullException"><para>searchPattern</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="searchPattern"/>に有効なパターンが含まれていない場合。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="searchPattern"/>が<c>null</c>の場合。</exception>
         /// <exception cref="UnauthorizedAccessException">呼び出し元に、必要なアクセス許可がない場合。</exception>
         public static string[] GetFilesAtUserAppData(string searchPattern)
         {
@@ -192,21 +192,21 @@ namespace Honememo.Wptscs.Utilities
         #region null値許容メソッド
 
         /// <summary>
-        /// <seealso cref="DataGridViewCell"/>が<c>null</c>の場合に空の文字列を返す<c>ToString</c>。
+        /// <see cref="DataGridViewCell"/>が<c>null</c>の場合に空の文字列を返す<see cref="Object.ToString"/>。
         /// </summary>
-        /// <param name="obj"><c>ToString</c>するオブジェクト。<c>null</c>も可。</param>
-        /// <returns>渡されたオブジェクトの<c>Value</c>を<c>ToString</c>した結果。<c>null</c>の場合には空の文字列。</returns>
+        /// <param name="obj">値を<see cref="Object.ToString"/>するセル。<c>null</c>も可。</param>
+        /// <returns>渡されたセルの<see cref="DataGridViewCell.Value"/>を<see cref="Object.ToString"/>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string ToString(DataGridViewCell obj)
         {
             return FormUtils.ToString(obj, String.Empty);
         }
 
         /// <summary>
-        /// <seealso cref="DataGridViewCell"/>が<c>null</c>の場合に指定された文字列を返す<c>ToString</c>。
+        /// <see cref="DataGridViewCell"/>が<c>null</c>の場合に指定された文字列を返す<see cref="Object.ToString"/>。
         /// </summary>
-        /// <param name="obj"><c>ToString</c>するオブジェクト。<c>null</c>も可。</param>
-        /// <param name="nullStr">渡されたオブジェクトが<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>
-        /// <returns>渡されたオブジェクトの<c>Value</c>を<c>ToString</c>した結果。<c>null</c>の場合には指定された文字列。</returns>
+        /// <param name="obj">値を<see cref="Object.ToString"/>するセル。<c>null</c>も可。</param>
+        /// <param name="nullStr">渡されたセルが<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>
+        /// <returns>渡されたセルの<see cref="DataGridViewCell.Value"/>を<see cref="Object.ToString"/>した結果。<c>null</c>の場合には指定された文字列。</returns>
         public static string ToString(DataGridViewCell obj, string nullStr)
         {
             if (obj == null)
@@ -305,7 +305,7 @@ namespace Honememo.Wptscs.Utilities
         #region テーブル処理
 
         /// <summary>
-        /// <seealso cref="DataGridViewRow"/>が空行かを判定する。
+        /// <see cref="DataGridViewRow"/>が空行かを判定する。
         /// </summary>
         /// <param name="row">1行。</param>
         /// <returns>空行の場合<c>true</c>。</returns>

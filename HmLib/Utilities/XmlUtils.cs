@@ -1,6 +1,6 @@
 // ================================================================================================
 // <summary>
-//      Xmlの処理に関するユーティリティクラスソース。</summary>
+//      XMLの処理に関するユーティリティクラスソース。</summary>
 //
 // <copyright file="XmlUtils.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
@@ -15,28 +15,28 @@ namespace Honememo.Utilities
     using System.Xml;
 
     /// <summary>
-    /// Xmlの処理に関するユーティリティクラスです。
+    /// XMLの処理に関するユーティリティクラスです。
     /// </summary>
     public static class XmlUtils
     {
         #region null値許容メソッド
 
         /// <summary>
-        /// ノードが<c>null</c>の場合に空の文字列を返す<c>InnerText</c>。
+        /// ノードが<c>null</c>の場合に空の文字列を返す<see cref="XmlNode.InnerText"/>。
         /// </summary>
-        /// <param name="node"><c>InnerText</c>するノード。<c>null</c>も可。</param>
-        /// <returns>渡されたノードを<c>InnerText</c>した結果。<c>null</c>の場合には空の文字列。</returns>
+        /// <param name="node"><see cref="XmlNode.InnerText"/>するノード。<c>null</c>も可。</param>
+        /// <returns>渡されたノードを<see cref="XmlNode.InnerText"/>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string InnerText(XmlNode node)
         {
             return XmlUtils.InnerText(node, String.Empty);
         }
 
         /// <summary>
-        /// ノードが<c>null</c>の場合に指定された文字列を返す<c>InnerText</c>。
+        /// ノードが<c>null</c>の場合に指定された文字列を返す<see cref="XmlNode.InnerText"/>。
         /// </summary>
-        /// <param name="node"><c>InnerText</c>するノード。<c>null</c>も可。</param>
+        /// <param name="node"><see cref="XmlNode.InnerText"/>するノード。<c>null</c>も可。</param>
         /// <param name="nullStr">渡されたノードが<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>
-        /// <returns>渡されたノードを<c>InnerText</c>した結果。<c>null</c>の場合には指定された文字列。</returns>
+        /// <returns>渡されたノードを<see cref="XmlNode.InnerText"/>した結果。<c>null</c>の場合には指定された文字列。</returns>
         public static string InnerText(XmlNode node, string nullStr)
         {
             if (node == null)
@@ -48,21 +48,21 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// ノードが<c>null</c>の場合に空の文字列を返す<c>InnerXml</c>。
+        /// ノードが<c>null</c>の場合に空の文字列を返す<see cref="XmlNode.InnerXml"/>。
         /// </summary>
-        /// <param name="node"><c>InnerXml</c>するノード。<c>null</c>も可。</param>
-        /// <returns>渡されたノードを<c>InnerXml</c>した結果。<c>null</c>の場合には空の文字列。</returns>
+        /// <param name="node"><see cref="XmlNode.InnerXml"/>するノード。<c>null</c>も可。</param>
+        /// <returns>渡されたノードを<see cref="XmlNode.InnerXml"/>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string InnerXml(XmlNode node)
         {
             return XmlUtils.InnerXml(node, String.Empty);
         }
 
         /// <summary>
-        /// ノードが<c>null</c>の場合に指定された文字列を返す<c>InnerXml</c>。
+        /// ノードが<c>null</c>の場合に指定された文字列を返す<see cref="XmlNode.InnerXml"/>。
         /// </summary>
-        /// <param name="node"><c>InnerXml</c>するノード。<c>null</c>も可。</param>
+        /// <param name="node"><see cref="XmlNode.InnerXml"/>するノード。<c>null</c>も可。</param>
         /// <param name="nullStr">渡されたノードが<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>
-        /// <returns>渡されたノードを<c>InnerXml</c>した結果。<c>null</c>の場合には指定された文字列。</returns>
+        /// <returns>渡されたノードを<see cref="XmlNode.InnerXml"/>した結果。<c>null</c>の場合には指定された文字列。</returns>
         public static string InnerXml(XmlNode node, string nullStr)
         {
             if (node == null)
@@ -74,21 +74,21 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// ノードが<c>null</c>の場合に空の文字列を返す<c>OuterXml</c>。
+        /// ノードが<c>null</c>の場合に空の文字列を返す<see cref="XmlNode.OuterXml"/>。
         /// </summary>
-        /// <param name="node"><c>OuterXml</c>するノード。<c>null</c>も可。</param>
-        /// <returns>渡されたノードを<c>OuterXml</c>した結果。<c>null</c>の場合には空の文字列。</returns>
+        /// <param name="node"><see cref="XmlNode.OuterXml"/>するノード。<c>null</c>も可。</param>
+        /// <returns>渡されたノードを<see cref="XmlNode.OuterXml"/>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string OuterXml(XmlNode node)
         {
             return XmlUtils.OuterXml(node, String.Empty);
         }
 
         /// <summary>
-        /// ノードが<c>null</c>の場合に指定された文字列を返す<c>OuterXml</c>。
+        /// ノードが<c>null</c>の場合に指定された文字列を返す<see cref="XmlNode.OuterXml"/>。
         /// </summary>
-        /// <param name="node"><c>OuterXml</c>するノード。<c>null</c>も可。</param>
+        /// <param name="node"><see cref="XmlNode.OuterXml"/>するノード。<c>null</c>も可。</param>
         /// <param name="nullStr">渡されたノードが<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>
-        /// <returns>渡されたノードを<c>OuterXml</c>した結果。<c>null</c>の場合には指定された文字列。</returns>
+        /// <returns>渡されたノードを<see cref="XmlNode.OuterXml"/>した結果。<c>null</c>の場合には指定された文字列。</returns>
         public static string OuterXml(XmlNode node, string nullStr)
         {
             if (node == null)

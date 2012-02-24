@@ -1,9 +1,9 @@
 // ================================================================================================
 // <summary>
-//      Apache Commons Lang の ObjectUtilsを参考にしたユーティリティクラスソース。</summary>
+//      Apache Commons LangのObjectUtilsを参考にしたユーティリティクラスソース。</summary>
 //
 // <copyright file="ObjectUtils.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -13,9 +13,12 @@ namespace Honememo.Utilities
     using System;
 
     /// <summary>
-    /// Apache Commons Lang の ObjectUtilsを参考にしたユーティリティクラスです。
+    /// Apache Commons LangのObjectUtilsを参考にしたユーティリティクラスです。
     /// </summary>
-    /// <remarks>http://commons.apache.org/lang/api/org/apache/commons/lang/ObjectUtils.html</remarks>
+    /// <remarks>
+    /// Apache Commons Lang - ObjectUtils
+    /// http://commons.apache.org/lang/api/org/apache/commons/lang/ObjectUtils.html
+    /// </remarks>
     public static class ObjectUtils
     {
         #region 初期化メソッド
@@ -62,7 +65,7 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// オブジェクトが<c>null</c>の場合に空の文字列を返す<c>ToString</c>。
+        /// オブジェクトが<c>null</c>の場合に空の文字列を返す<see cref="Object.ToString"/>。
         /// </summary>
         /// <param name="obj"><c>ToString</c>するオブジェクト。<c>null</c>も可。</param>
         /// <returns>渡されたオブジェクトを<c>ToString</c>した結果。<c>null</c>の場合には空の文字列。</returns>
@@ -72,7 +75,7 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// オブジェクトが<c>null</c>の場合に指定された文字列を返す<c>ToString</c>。
+        /// オブジェクトが<c>null</c>の場合に指定された文字列を返す<see cref="Object.ToString"/>。
         /// </summary>
         /// <param name="obj"><c>ToString</c>するオブジェクト。<c>null</c>も可。</param>
         /// <param name="nullStr">渡されたオブジェクトが<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>

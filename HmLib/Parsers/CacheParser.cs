@@ -11,17 +11,24 @@
 namespace Honememo.Parsers
 {
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Threading;
+    using Honememo.Models;
     using Honememo.Utilities;
 
     /// <summary>
     /// <see cref="IParser"/>の結果をキャッシュするラッパークラスです。
     /// </summary>
     /// <remarks>キャッシュは同じインスタンス内のみで有効。</remarks>
-    public class CacheParser : IParser, IDisposable
+    public class CacheParser : IParser
     {
+        #region 定数
+
+        /// <summary>
+        /// デフォルトのキャッシュ最大件数。
+        /// </summary>
+        private static readonly int DefaultCacheCapacity = 30;
+
+        #endregion
+
         #region private変数
 
         /// <summary>
@@ -32,50 +39,34 @@ namespace Honememo.Parsers
         /// <summary>
         /// キャッシュ。
         /// </summary>
-        private IDictionary<string, IElement> caches = new ConcurrentDictionary<string, IElement>();
-
-        /// <summary>
-        /// ロックオブジェクト。
-        /// </summary>
-        private HashLock cacheLock = new HashLock();
+        private MemoryCache<string, IElement> caches;
 
         #endregion
 
         #region コンストラクタ
-
+        
         /// <summary>
-        /// 指定されたパーサーをラップするインスタンスを作成。
+        /// 指定されたキャッシュ最大件数で、渡されたパーサーをラップするインスタンスを作成。
         /// </summary>
         /// <param name="parser">ラップするインスタンス。</param>
-        /// <exception cref="ArgumentNullException"><para>parser</para>が<c>null</c>。</exception>
-        public CacheParser(IParser parser)
+        /// <param name="capacity">キャッシュ最大件数。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="parser"/>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentException"><paramref name="capacity"/>が0以下の値。</exception>
+        public CacheParser(IParser parser, int capacity)
         {
             this.parser = Validate.NotNull(parser);
+            this.caches = new MemoryCache<string, IElement>(capacity);
         }
 
-        #endregion
-
-        #region デストラクタ
-
         /// <summary>
-        /// オブジェクトのリソースを破棄する。
+        /// デフォルトのキャッシュ最大件数（30件）で、渡されたパーサーをラップするインスタンスを作成。
         /// </summary>
-        /// <remarks><see cref="Dispose"/>の呼び出しのみ。</remarks>
-        ~CacheParser()
+        /// <param name="parser">ラップするインスタンス。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="parser"/>が<c>null</c>。</exception>
+        public CacheParser(IParser parser)
+            : this(parser, DefaultCacheCapacity)
         {
-            this.Dispose();
         }
-
-        #endregion
-
-        #region デリゲート
-
-        /// <summary>
-        /// <see cref="GetSetCache"/>でキャッシュが存在しない場合に解析に用いる処理。
-        /// </summary>
-        /// <param name="s">解析対象の文字列。</param>
-        /// <returns>解析結果。解析失敗時は<c>null</c>。</returns>
-        private delegate IElement ReturnElement(string s);
 
         #endregion
 
@@ -96,7 +87,9 @@ namespace Honememo.Parsers
         /// </remarks>
         public IElement Parse(string s)
         {
-            IElement result = this.GetSetCache(s, (string str) => this.parser.Parse(str));
+            IElement result = this.caches.GetAndAddIfEmpty(
+                s,
+                (string str) => this.parser.Parse(str));
             if (result == null)
             {
                 throw new FormatException("cache is null");
@@ -113,7 +106,7 @@ namespace Honememo.Parsers
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         /// <remarks>
         /// 指定された文字列に対するキャッシュが存在する場合、ラップしているパーサーを呼び出さずに結果を返す。
-        /// もしラップしているパーサーが解析成功で<para>result</para>が<c>null</c>
+        /// もしラップしているパーサーが解析成功で<paramref name="result"/>が<c>null</c>
         /// や、失敗で<c>null</c>以外の値を返す場合、このメソッドの結果は元のパーサーと一致しない。
         /// </remarks>
         public bool TryParse(string s, out IElement result)
@@ -122,7 +115,7 @@ namespace Honememo.Parsers
             // キャッシュの場合キャッシュに値があれば成功と返す。
             bool called = false;
             bool success = false;
-            result = this.GetSetCache(
+            result = this.caches.GetAndAddIfEmpty(
                 s,
                 (string str)
                     =>
@@ -145,86 +138,6 @@ namespace Honememo.Parsers
         public bool IsPossibleParse(char c)
         {
             return this.parser.IsPossibleParse(c);
-        }
-
-        #endregion
-
-        #region IDisposableインタフェース実装メソッド
-
-        /// <summary>
-        /// ロックオブジェクトを解放する。
-        /// </summary>
-        public virtual void Dispose()
-        {
-            // ロックオブジェクトを解放
-            if (this.cacheLock != null)
-            {
-                this.cacheLock.Dispose();
-            }
-
-            // ファイナライザ（このクラスではDisposeを呼ぶだけ）が不要であることを通知
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
-
-        #region 内部処理用メソッド
-
-        /// <summary>
-        /// キャッシュされた要素の取得を行う。
-        /// もし存在しない場合指定された処理を用いて解析を行い、
-        /// その結果をキャッシュに登録して返す。
-        /// </summary>
-        /// <param name="s">解析対象の文字列。</param>
-        /// <param name="function">キャッシュが存在しない場合に解析に用いる処理。</param>
-        /// <returns>キャッシュから取得した、または解析した結果の要素。</returns>
-        /// <remarks>キャッシュアクセスのロックは解析対象の文字列単位で行う。</remarks>
-        private IElement GetSetCache(string s, ReturnElement function)
-        {
-            // 読み取りの同期を取りつつ、キャッシュされた要素を取得
-            IElement element;
-            ReaderWriterLockSlim lockObject = this.cacheLock.GetReaderWriterLock(s);
-            lockObject.EnterReadLock();
-            try
-            {
-                if (this.caches.TryGetValue(s, out element))
-                {
-                    return element;
-                }
-            }
-            finally
-            {
-                lockObject.ExitReadLock();
-            }
-
-            // 存在しない場合、まず更新準備の同期を取りつつキャッシュを再確認
-            lockObject.EnterUpgradeableReadLock();
-            try
-            {
-                if (this.caches.TryGetValue(s, out element))
-                {
-                    return element;
-                }
-
-                // それでも無ければ、更新の同期を取りつつラップメソッドを呼び出し、
-                // 取得した要素をキャッシュに登録
-                lockObject.EnterWriteLock();
-                try
-                {
-                    element = function(s);
-                    this.caches[s] = element;
-                }
-                finally
-                {
-                    lockObject.ExitWriteLock();
-                }
-            }
-            finally
-            {
-                lockObject.ExitUpgradeableReadLock();
-            }
-
-            return element;
         }
 
         #endregion

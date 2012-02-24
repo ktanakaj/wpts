@@ -18,8 +18,13 @@ namespace Honememo.Utilities
     /// パラメータのハッシュ単位でのロックを提供するクラスです。
     /// </summary>
     /// <remarks>
+    /// <para>
     /// パラメータのハッシュ取得には<see cref="Object.GetHashCode"/>
     /// を、ロック処理には<see cref="ReaderWriterLockSlim"/>を使用します。
+    /// </para>
+    /// <para>
+    /// このオブジェクトはスレッドセーフです。
+    /// </para>
     /// </remarks>
     public class HashLock : IDisposable
     {
@@ -83,7 +88,7 @@ namespace Honememo.Utilities
         /// パラメータのハッシュ単位で<see cref="ReaderWriterLockSlim.EnterReadLock"/>を行う。
         /// </summary>
         /// <param name="param">ロックの単位となるパラメータ。</param>
-        /// <exception cref="ArgumentNullException"><para>param</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/>が<c>null</c>。</exception>
         /// <exception cref="LockRecursionException">
         /// ロック再帰ポリシーが<see cref="LockRecursionPolicy.NoRecursion"/>
         /// で再帰的にロックが行われた場合、または再帰が深すぎる場合。
@@ -97,7 +102,7 @@ namespace Honememo.Utilities
         /// パラメータのハッシュ単位で<see cref="ReaderWriterLockSlim.EnterUpgradeableReadLock"/>を行う。
         /// </summary>
         /// <param name="param">ロックの単位となるパラメータ。</param>
-        /// <exception cref="ArgumentNullException"><para>param</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/>が<c>null</c>。</exception>
         /// <exception cref="LockRecursionException">
         /// ロック再帰ポリシーが<see cref="LockRecursionPolicy.NoRecursion"/>
         /// で再帰的にロックが行われた場合、
@@ -113,7 +118,7 @@ namespace Honememo.Utilities
         /// パラメータのハッシュ単位で<see cref="ReaderWriterLockSlim.EnterWriteLock"/>を行う。
         /// </summary>
         /// <param name="param">ロックの単位となるパラメータ。</param>
-        /// <exception cref="ArgumentNullException"><para>param</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/>が<c>null</c>。</exception>
         /// <exception cref="LockRecursionException">
         /// ロック再帰ポリシーが<see cref="LockRecursionPolicy.NoRecursion"/>
         /// で再帰的にロックが行われた場合、
@@ -129,7 +134,7 @@ namespace Honememo.Utilities
         /// パラメータのハッシュ単位で<see cref="ReaderWriterLockSlim.ExitReadLock"/>を行う。
         /// </summary>
         /// <param name="param">ロックの単位となるパラメータ。</param>
-        /// <exception cref="ArgumentNullException"><para>param</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/>が<c>null</c>。</exception>
         /// <exception cref="SynchronizationLockException">
         /// 現在のスレッドが読み取りモードでロックに入っていない場合。
         /// </exception>
@@ -142,7 +147,7 @@ namespace Honememo.Utilities
         /// パラメータのハッシュ単位で<see cref="ReaderWriterLockSlim.ExitUpgradeableReadLock"/>を行う。
         /// </summary>
         /// <param name="param">ロックの単位となるパラメータ。</param>
-        /// <exception cref="ArgumentNullException"><para>param</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/>が<c>null</c>。</exception>
         /// <exception cref="SynchronizationLockException">
         /// 現在のスレッドがアップグレード可能モードでロックに入っていない場合。
         /// </exception>
@@ -155,7 +160,7 @@ namespace Honememo.Utilities
         /// パラメータのハッシュ単位で<see cref="ReaderWriterLockSlim.ExitWriteLock"/>を行う。
         /// </summary>
         /// <param name="param">ロックの単位となるパラメータ。</param>
-        /// <exception cref="ArgumentNullException"><para>param</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/>が<c>null</c>。</exception>
         /// <exception cref="SynchronizationLockException">
         /// 現在のスレッドが書き込みモードでロックに入っていない場合。
         /// </exception>
@@ -164,18 +169,21 @@ namespace Honememo.Utilities
             this.GetReaderWriterLock(param).ExitWriteLock();
         }
 
-        #endregion
-
-        #region その他のメソッド
-
         /// <summary>
         /// パラメータのハッシュに対応する<see cref="ReaderWriterLockSlim"/>を返す。
         /// </summary>
         /// <param name="param">ロックの単位となるパラメータ。</param>
         /// <returns>対応するロックオブジェクト。</returns>
-        /// <exception cref="ArgumentNullException"><para>param</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="param"/>が<c>null</c>。</exception>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/>が実行済みの場合。</exception>
         public ReaderWriterLockSlim GetReaderWriterLock(object param)
         {
+            // ロックオブジェクトが解放済みかのチェック（同時にnullになるので代表でhashLock）
+            if (this.hashLock == null)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+
             // 読み取りの同期を取りつつ、ハッシュに対応するロックオブジェクトを取得
             int hashcode = Validate.NotNull(param).GetHashCode();
             ReaderWriterLockSlim lockObject;
@@ -221,24 +229,35 @@ namespace Honememo.Utilities
             return lockObject;
         }
 
+        #endregion
+
+        #region IDisposableインタフェース実装メソッド
+
         /// <summary>
         /// 全てのロックオブジェクトを解放する。
         /// </summary>
         public virtual void Dispose()
         {
             // 全てのロックオブジェクトのDisposeを呼び出し
-            foreach (ReaderWriterLockSlim lockObject in this.locks.Values)
-            {
-                if (lockObject != null)
-                {
-                    lockObject.Dispose();
-                }
-            }
-
-            this.locks.Clear();
+            // ※ Disposeは通常、何度呼ばれてもよいはずだが、.net 4.0現在
+            //    ReaderWriterLockSlimのDisposeが二度呼んだときに例外を投げるため、nullも代入
             if (this.hashLock != null)
             {
                 this.hashLock.Dispose();
+                this.hashLock = null;
+            }
+
+            if (this.locks != null)
+            {
+                foreach (ReaderWriterLockSlim lockObject in this.locks.Values)
+                {
+                    if (lockObject != null)
+                    {
+                        lockObject.Dispose();
+                    }
+                }
+
+                this.locks = null;
             }
 
             // ファイナライザ（このクラスではDisposeを呼ぶだけ）が不要であることを通知

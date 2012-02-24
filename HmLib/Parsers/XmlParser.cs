@@ -38,11 +38,15 @@ namespace Honememo.Parsers
         /// </summary>
         public XmlParser()
         {
+            // 子パーサーのうち、再帰的に処理を行うXmlElementParserについては
+            // 結果をキャッシュするようにする
+            // ※ 通常は意味が無いが、複雑なHTML等で解析失敗が多発し、
+            //    何度も同じ文字列を解析してしまうときに時間がかかるため
             this.IgnoreCase = true;
             this.parsers = new IParser[]
             {
                 new XmlCommentElementParser(),
-                new XmlElementParser(this)
+                new CacheParser(new XmlElementParser(this))
             };
         }
 
@@ -154,8 +158,14 @@ namespace Honememo.Parsers
         /// <param name="index">処理インデックス。</param>
         /// <param name="result">解析した結果要素。</param>
         /// <returns>解析できた場合<c>true</c>。</returns>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/>が実行済みの場合。</exception>
         protected override bool TryParseElementAt(string s, int index, out IElement result)
         {
+            if (this.parsers == null)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+
             return this.TryParseAt(s, index, out result, this.parsers);
         }
 

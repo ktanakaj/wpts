@@ -206,8 +206,15 @@ namespace Honememo.Wptscs.Parsers
         /// <param name="result">解析結果。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         /// <remarks>指定された終了条件を満たさない場合、最終位置まで解析を行う。</remarks>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/>が実行済みの場合。</exception>
         public override bool TryParseToEndCondition(string s, IsEndCondition condition, out IElement result)
         {
+            // 子パーサーが解放済みかのチェック（同時にnullになるので代表でNowikiParser）
+            if (this.NowikiParser == null)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+
             // 文字列を1文字ずつチェックし、その内容に応じた要素のリストを作成する
             ListElement list = new ListElement();
             StringBuilder b = new StringBuilder();

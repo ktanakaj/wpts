@@ -26,7 +26,7 @@ namespace Honememo.Utilities
         /// <param name="collection">探索するコレクション。</param>
         /// <param name="item">含まれるか判定する文字列。</param>
         /// <returns>指定された文字列が含まれる場合<c>true</c>。</returns>
-        /// <exception cref="ArgumentNullException"><para>collection</para>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="collection"/>が<c>null</c>の場合。</exception>
         public static bool ContainsIgnoreCase(IEnumerable<string> collection, string item)
         {
             foreach (string s in Validate.NotNull(collection))
@@ -45,12 +45,12 @@ namespace Honememo.Utilities
         #region 加工メソッド
 
         /// <summary>
-        /// 渡された文字列配列の中の要素を全て<see cref="String.Trim()"/>した配列を返す。
+        /// 渡された文字列配列中の全ての要素を<see cref="String.Trim()"/>した配列を返す。
         /// </summary>
         /// <param name="array"><c>Trim</c>する文字列配列。</param>
         /// <returns><c>Trim</c>された文字列配列。</returns>
-        /// <exception cref="ArgumentNullException"><para>array</para>が<c>null</c>の場合。</exception>
-        /// <remarks><para>array</para>中に<c>null</c>要素が存在するのは可。</remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="array"/>が<c>null</c>の場合。</exception>
+        /// <remarks><paramref name="array"/>中に<c>null</c>要素が存在するのは可。</remarks>
         public static string[] Trim(string[] array)
         {
             string[] result = new string[Validate.NotNull(array).Length];
