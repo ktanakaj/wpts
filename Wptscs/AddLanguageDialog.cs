@@ -36,7 +36,7 @@ namespace Honememo.Wptscs
         /// コンストラクタ。初期化メソッド呼び出しのみ。
         /// </summary>
         /// <param name="config">設定対象のConfig。</param>
-        /// <exception cref="ArgumentNullException"><para>config</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="config"/>が<c>null</c>。</exception>
         public AddLanguageDialog(Config config)
         {
             // Windows フォーム デザイナで生成されたコード

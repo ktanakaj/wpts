@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
+    using System.Collections.Generic;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
@@ -22,6 +23,44 @@ namespace Honememo.Wptscs.Parsers
     [TestFixture]
     public class MediaWikiHeadingParserTest
     {
+        #region private変数
+
+        /// <summary>
+        /// 前処理・後処理で生成／解放される言語別のMediaWikiParser。
+        /// </summary>
+        private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
+
+        #endregion
+
+        #region 前処理・後処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestFixtureSetUp]
+        public void SetUpBeforeClass()
+        {
+            // Disposeが必要なMediaWikiParserの生成／解放
+            this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
+        }
+
+        /// <summary>
+        /// テストの後処理。
+        /// </summary>
+        [TestFixtureTearDown]
+        public void TearDownAfterClass()
+        {
+            // Disposeが必要なMediaWikiParserの生成／解放
+            foreach (MediaWikiParser parser in this.mediaWikiParsers.Values)
+            {
+                parser.Dispose();
+            }
+
+            this.mediaWikiParsers.Clear();
+        }
+
+        #endregion
+
         #region コンストラクタテストケース
 
         /// <summary>
@@ -47,8 +86,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiHeading heading;
-            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(
-                new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(this.mediaWikiParsers["en"]);
 
             // 基本形
             Assert.IsTrue(parser.TryParse("==test==", out element));
@@ -122,8 +160,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiHeading heading;
-            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(
-                new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(this.mediaWikiParsers["en"]);
 
             // ↓1.01以前のバージョンで対応していたコメント、中のコメントが認識されなかった
             // // こんな無茶なコメントも一応対応

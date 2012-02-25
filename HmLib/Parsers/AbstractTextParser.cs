@@ -15,7 +15,7 @@ namespace Honememo.Parsers
     using Honememo.Utilities;
 
     /// <summary>
-    /// ITextParserを実装するための実装支援用抽象クラスです。
+    /// <see cref="ITextParser"/>を実装するための実装支援用抽象クラスです。
     /// </summary>
     public abstract class AbstractTextParser : AbstractParser, ITextParser
     {        
@@ -136,7 +136,7 @@ namespace Honememo.Parsers
         /// <exception cref="NotImplementedException">このクラスでは未実装。</exception>
         /// <remarks>
         /// このクラスの<see cref="TryParseToEndCondition"/>実装を用いる場合、
-        /// ここで<c>TryParseAt</c>等を用いてそのParserで必要な解析処理呼び出しを列挙する。
+        /// ここで<see cref="AbstractParser.TryParseAt"/>等を用いてそのParserで必要な解析処理呼び出しを列挙する。
         /// </remarks>
         protected virtual bool TryParseElementAt(string s, int index, out IElement result)
         {
@@ -144,7 +144,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// 文字列が空でない場合、リストにTextエレメントを追加して、文字列をリセットする。
+        /// 文字列が空でない場合、リストにText要素を追加して、文字列をリセットする。
         /// </summary>
         /// <param name="list">追加されるリスト。</param>
         /// <param name="b">追加する文字列。</param>

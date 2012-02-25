@@ -116,9 +116,12 @@ namespace Honememo.Wptscs.Websites
                 if (!String.IsNullOrEmpty(base.Text))
                 {
                     IElement element;
-                    if (new MediaWikiRedirectParser(this.Website).TryParse(base.Text, out element))
+                    using (MediaWikiRedirectParser parser = new MediaWikiRedirectParser(this.Website))
                     {
-                        this.redirect = element as MediaWikiLink;
+                        if (parser.TryParse(base.Text, out element))
+                        {
+                            this.redirect = element as MediaWikiLink;
+                        }
                     }
                 }
             }
@@ -157,7 +160,10 @@ namespace Honememo.Wptscs.Websites
                 if (this.element == null)
                 {
                     // ページサイズによっては時間がかかるので、必要な場合だけ実施
-                    this.element = new MediaWikiParser(this.Website).Parse(this.Text);
+                    using (MediaWikiParser parser = new MediaWikiParser(this.Website))
+                    {
+                        this.element = parser.Parse(this.Text);
+                    }
                 }
 
                 return this.element;

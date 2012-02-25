@@ -3,7 +3,7 @@
 //      ページや文字列の各要素をあらわすモデルインタフェースソース</summary>
 //
 // <copyright file="IElement.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -18,7 +18,7 @@ namespace Honememo.Parsers
         #region プロパティ
 
         /// <summary>
-        /// 要素がParse等により生成された場合の解析元文字列。
+        /// 要素が<see cref="IParser.Parse"/>等により生成された場合の解析元文字列。
         /// </summary>
         /// <remarks>
         /// <see cref="ToString"/>に生成した値を返して欲しい場合、この値を明示的に<c>null</c>にすべき。
@@ -39,7 +39,7 @@ namespace Honememo.Parsers
         /// </summary>
         /// <returns>書式化したテキスト。<c>null</c>は返さないこと。</returns>
         /// <remarks>
-        /// Parse系の処理を実装する上で元の文字列が必要なため、
+        /// <see cref="IParser.Parse"/>系の処理を実装する上で元の文字列が必要なため、
         /// <see cref="ParsedString"/>が設定されている場合は、その値を返すべき。
         /// </remarks>
         string ToString();

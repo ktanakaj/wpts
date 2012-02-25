@@ -11,6 +11,7 @@
 namespace Honememo.Wptscs.Parsers
 {
     using System;
+    using System.Collections.Generic;
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
@@ -22,6 +23,45 @@ namespace Honememo.Wptscs.Parsers
     [TestFixture]
     public class MediaWikiTemplateParserTest
     {
+        #region private変数
+
+        /// <summary>
+        /// 前処理・後処理で生成／解放される言語別のMediaWikiParser。
+        /// </summary>
+        private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
+
+        #endregion
+
+        #region 前処理・後処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestFixtureSetUp]
+        public void SetUpBeforeClass()
+        {
+            // Disposeが必要なMediaWikiParserの生成／解放
+            this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
+            this.mediaWikiParsers["ja"] = new MediaWikiParser(new MockFactory().GetMediaWiki("ja"));
+        }
+
+        /// <summary>
+        /// テストの後処理。
+        /// </summary>
+        [TestFixtureTearDown]
+        public void TearDownAfterClass()
+        {
+            // Disposeが必要なMediaWikiParserの生成／解放
+            foreach (MediaWikiParser parser in this.mediaWikiParsers.Values)
+            {
+                parser.Dispose();
+            }
+
+            this.mediaWikiParsers.Clear();
+        }
+
+        #endregion
+
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
@@ -32,7 +72,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiTemplate template;
-            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(this.mediaWikiParsers["en"]);
 
             // タイトルのみ
             Assert.IsTrue(parser.TryParse("{{testtitle}}", out element));
@@ -107,7 +147,7 @@ namespace Honememo.Wptscs.Parsers
         public void TestTryParseNg()
         {
             IElement element;
-            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(this.mediaWikiParsers["en"]);
 
             // 開始タグが無い
             Assert.IsFalse(parser.TryParse("testtitle}}", out element));
@@ -145,7 +185,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiTemplate template;
-            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(new MediaWikiParser(new MockFactory().GetMediaWiki("ja")));
+            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(this.mediaWikiParsers["ja"]);
 
             // 入れ子もあり
             Assert.IsTrue(parser.TryParse("{{outertemplate|test=[[innerlink]]{{innertemplate}}}}", out element));
@@ -174,7 +214,7 @@ namespace Honememo.Wptscs.Parsers
         {
             IElement element;
             MediaWikiTemplate template;
-            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(this.mediaWikiParsers["en"]);
 
             // 全て指定されているケースは通常の記事と同じ扱い
             Assert.IsTrue(parser.TryParse("{{testtitle/subpage}}", out element));
@@ -198,15 +238,15 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// TryParseメソッドテストケース（実データ複雑なinfobox）。
         /// </summary>
+        /// <remarks>使用データは[[:en:Discovery Channel]]（2012年1月17日 14:07:11(UTC)）より抜粋。</remarks>
         [Test]
         public void TestTryParseInfoboxTvChannel()
         {
             IElement element;
             MediaWikiTemplate template;
-            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(new MediaWikiParser(new MockFactory().GetMediaWiki("en")));
+            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(this.mediaWikiParsers["en"]);
 
             // 全て指定されているケースは通常の記事と同じ扱い
-            // ※ 以下、[[:en:Discovery Channel]]（2012年1月17日 14:07:11(UTC)）より
             Assert.IsTrue(parser.TryParse(
                 "{{Infobox TV channel\n"
                 + "| name             = '''Discovery Channel'''\n"
@@ -260,6 +300,44 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsTrue(template.NewLine);
 
             // TODO: パイプ後の部分を入れ子も含めてちゃんと動いているかもうちょい検証する
+        }
+
+        /// <summary>
+        /// TryParseメソッドテストケース（実データ複雑なテンプレートの一部）。
+        /// </summary>
+        /// <remarks>
+        /// 使用データはWiktionaryの[[:en:Template:context]]（2011-08-29T20:15:35Z）より抜粋。
+        /// Ver 1.11にて無限ループの不具合が発生していたデータ。
+        /// 中身についてはほぼ処理できない類のものだが、無限ループにならないことだけ検証。
+        /// </remarks>
+        [Test, Timeout(10000)]
+        public void TestTryParseTemplateContext()
+        {
+            IElement element;
+            MediaWikiTemplate template;
+            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(this.mediaWikiParsers["en"]);
+
+            // テンプレートではなくスクリプトだが、このパーサーで解析される対象ではあるため
+            Assert.IsTrue(parser.TryParse(
+                "{{#if:{{{poscat|}}}|{{#if:{{{skey|}}}|\n"
+                + "[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}}|{{{skey}}} "
+                + "{{SUBPAGENAME}}]]{{#if:{{{script|}}}|[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} "
+                + "{{{poscat|}}} in {{{script}}} script|{{{skey}}} {{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{{{#if:{{{poscat|}}}|"
+                + "languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}} in {{{script2}}} script|{{{skey2}}} {{SUBPAGENAME}}]]}}|\n"
+                + "[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}}|{{SUBPAGENAME}}]]"
+                + "{{#if:{{{script|}}}|[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}|{{{lang}}}|en}}}} {{{poscat|}}} in "
+                + "{{{script}}} script|{{SUBPAGENAME}}]]}}{{#if:{{{script2|}}}|[[Category:{{{{#if:{{{poscat|}}}|languagex|ns:0}}|{{#if:{{{lang|}}}"
+                + "|{{{lang}}}|en}}}} {{{poscat|}}} in {{{script2}}} script|{{SUBPAGENAME}}]]}}}}}}",
+                out element));
+            template = (MediaWikiTemplate)element;
+            Assert.AreEqual("#if:{{{poscat|}}}", template.Title);
+
+            // ※ 解析結果の詳細はちょっとややこしすぎてテストできない・・・
+            Assert.IsTrue(template.PipeTexts.Count > 0);
+            Assert.IsNull(template.Interwiki);
+            Assert.IsFalse(template.IsColon);
+            Assert.IsFalse(template.IsMsgnw);
+            Assert.IsFalse(template.NewLine);
         }
 
         #endregion

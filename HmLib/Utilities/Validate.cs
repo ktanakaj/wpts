@@ -1,9 +1,9 @@
 ﻿// ================================================================================================
 // <summary>
-//      Apache Commons Lang の Validateを参考にしたユーティリティクラスソース。</summary>
+//      Apache Commons LangのValidateを参考にしたユーティリティクラスソース。</summary>
 //
 // <copyright file="Validate.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -13,9 +13,12 @@ namespace Honememo.Utilities
     using System;
 
     /// <summary>
-    /// Apache Commons Lang の Validateを参考にしたユーティリティクラスです。
+    /// Apache Commons LangのValidateを参考にしたユーティリティクラスです。
     /// </summary>
-    /// <remarks>http://commons.apache.org/lang/api/org/apache/commons/lang/Validate.html</remarks>
+    /// <remarks>
+    /// Apache Commons Lang - Validate
+    /// http://commons.apache.org/lang/api/org/apache/commons/lang/Validate.html
+    /// </remarks>
     public static class Validate
     {
         #region NotNullメソッド

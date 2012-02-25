@@ -112,8 +112,8 @@ namespace Honememo.Utilities
         /// <param name="str">チェックを行う対象となる文字列。</param>
         /// <param name="prefix">接頭辞。</param>
         /// <param name="toffset">この文字列の比較を開始する位置。</param>
-        /// <returns>始まる場合<c>true</c>。<c>toffset</c>が負の値の場合、<c>str</c>の長さより大きい場合<c>false</c>。それ以外で<c>prefix</c>が空の場合は<c>true</c>。</returns>
-        /// <remarks>引数の<c>null</c>は許容、<c>str</c>のみまたは<c>prefix</c>のみ<c>null</c>は<c>false</c>、<c>prefix</c>も<c>null</c>は<c>true</c>を返す。</remarks>
+        /// <returns>始まる場合<c>true</c>。<paramref name="toffset"/>が負の値の場合、<paramref name="str"/>の長さより大きい場合<c>false</c>。それ以外で<paramref name="prefix"/>が空の場合は<c>true</c>。</returns>
+        /// <remarks>引数の<c>null</c>は許容、<paramref name="str"/>のみまたは<paramref name="prefix"/>のみ<c>null</c>は<c>false</c>、<paramref name="prefix"/>も<c>null</c>は<c>true</c>を返す。</remarks>
         public static bool StartsWith(string str, string prefix, int toffset)
         {
             // nullチェック
@@ -157,8 +157,8 @@ namespace Honememo.Utilities
         /// </summary>
         /// <param name="format">$1～$数値の形式でパラメータを指定する書式指定文字列。</param>
         /// <param name="args">書式設定対象オブジェクト。</param>
-        /// <returns>書式項目が <para>args</para> の対応するオブジェクトの文字列形式に置換された <para>format</para> のコピー。</returns>
-        /// <exception cref="ArgumentNullException"><para>format</para>または<para>args</para>が<c>null</c>の場合。</exception>
+        /// <returns>書式項目が<paramref name="args"/>の対応するオブジェクトの文字列形式に置換された<paramref name="format"/>のコピー。</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="format"/>または<paramref name="args"/>が<c>null</c>の場合。</exception>
         /// <remarks>.netではなくPerl等で見かける$～形式のフォーマットを行う。</remarks>
         public static string FormatDollarVariable(string format, params object[] args)
         {
@@ -188,9 +188,9 @@ namespace Honememo.Utilities
         /// <param name="strA">比較対象の第1文字列。</param>
         /// <param name="strB">比較対象の第2文字列。</param>
         /// <returns>
-        /// 0未満: <para>strA</para>が<para>strB</para>より小さい,
-        /// 0: <para>strA</para>と<para>strB</para>は等しい,
-        /// 0より大きい: <para>strA</para>が<para>strB</para>より大きい。
+        /// 0未満: <paramref name="strA"/>が<paramref name="strB"/>より小さい,
+        /// 0: <paramref name="strA"/>と<paramref name="strB"/>は等しい,
+        /// 0より大きい: <paramref name="strA"/>が<paramref name="strB"/>より大きい。
         /// </returns>
         /// <remarks>
         /// パラメータには<c>null</c>が指定可能です。<c>null</c>または空文字列は最も大きい値とみなします。

@@ -597,7 +597,7 @@ namespace Honememo.Wptscs.Websites
         /// <param name="text">文字列。</param>
         /// <returns>書式化した文字列。<see cref="LangFormat"/>が未設定の場合<c>null</c>。</returns>
         /// <remarks>
-        /// この<para>lang</para>と<see cref="Language"/>のコードは、厳密には一致しないケースがあるが
+        /// この<paramref name="lang"/>と<see cref="Language"/>のコードは、厳密には一致しないケースがあるが
         /// （例、simple→en）、2012年2月現在の実装ではそこまで正確さは要求していない。
         /// </remarks>
         public string FormatLang(string lang, string text)

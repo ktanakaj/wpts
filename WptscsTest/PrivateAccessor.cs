@@ -76,7 +76,7 @@ namespace Honememo.Tests
         /// テストするクラスのコンストラクタを指定する。
         /// </summary>
         /// <param name="parameterTypes">パラメータ配列。</param>
-        /// <remarks>コンストラクタの確保に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。</remarks>
+        /// <remarks>コンストラクタの確保に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。</remarks>
         public void SetConstructor(params Type[] parameterTypes)
         {
             try
@@ -106,9 +106,9 @@ namespace Honememo.Tests
         /// <param name="initargs">コンストラクタ呼び出しに引数として渡すオブジェクトの配列。</param>
         /// <returns>このオブジェクトが表すコンストラクタを呼び出すことで作成される新規オブジェクト。</returns>
         /// <remarks>
-        /// コンストラクタには、<c>SetConstructor()</c> で指定されたメソッドを用いる。
+        /// コンストラクタには、<see cref="SetConstructor"/>で指定されたメソッドを用いる。
         /// 指定されていない場合は、デフォルトコンストラクタを使用する。
-        /// オブジェクトの生成に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。
+        /// オブジェクトの生成に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。
         /// </remarks>
         public T NewInstance(params object[] initargs)
         {
@@ -148,7 +148,7 @@ namespace Honememo.Tests
         /// </summary>
         /// <param name="name">メソッドの名前。</param>
         /// <param name="parameterTypes">パラメータ配列。</param>
-        /// <remarks>メソッドの確保に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。</remarks>
+        /// <remarks>メソッドの確保に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。</remarks>
         public void SetMethod(string name, params Type[] parameterTypes)
         {
             try
@@ -177,13 +177,13 @@ namespace Honememo.Tests
         /// 指定されているメソッドを実行する。
         /// </summary>
         /// <param name="args">メソッド呼び出しに使用される引数。</param>
-        /// <returns>このオブジェクトが表すメソッドを、パラメータ<para>args</para>を使用して実行した結果。</returns>
+        /// <returns>このオブジェクトが表すメソッドを、パラメータ<paramref name="args"/>を使用して実行した結果。</returns>
         /// <remarks>
         /// staticメソッド以外の場合必要な呼び出し元オブジェクトには、
-        /// <c>NewInstance()</c> または <c> SetInstance()</c>
+        /// <see cref="NewInstance"/>または<see cref="Instance"/>
         /// で指定されたオブジェクトを用いる。
         /// 指定されていない場合は、可能であればデフォルトコンストラクタでオブジェクトを生成する。
-        /// メソッドの実行に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。
+        /// メソッドの実行に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。
         /// </remarks>
         public object Invoke(params object[] args)
         {
@@ -220,7 +220,7 @@ namespace Honememo.Tests
         /// </summary>
         /// <param name="name">フィールド名。</param>
         /// <returns>フィールドの値。</returns>
-        /// <remarks>値の取得に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。</remarks>
+        /// <remarks>値の取得に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。</remarks>
         public object GetField(string name)
         {
             try
@@ -255,10 +255,10 @@ namespace Honememo.Tests
         /// <param name="value">新しいフィールド値。</param>
         /// <remarks>
         /// staticフィールド以外の場合に必要な設定先オブジェクトには、
-        /// <c>NewInstance()</c> または <c> SetInstance()</c>
+        /// <see cref="NewInstance"/>または<see cref="Instance"/>
         /// で指定されたオブジェクトを用いる。
         /// 指定されていない場合は、可能であればデフォルトコンストラクタでオブジェクトを生成する。
-        /// 値の設定に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。
+        /// 値の設定に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。
         /// </remarks>
         public void SetField(string name, object value)
         {
@@ -298,7 +298,7 @@ namespace Honememo.Tests
         /// <param name="name">プロパティ名。</param>
         /// <param name="index">インデックスプロパティの場合のインデックス。</param>
         /// <returns>プロパティの値。</returns>
-        /// <remarks>値の取得に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。</remarks>
+        /// <remarks>値の取得に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。</remarks>
         public object GetProperty(string name, params object[] index)
         {
             try
@@ -333,10 +333,10 @@ namespace Honememo.Tests
         /// <param name="value">新しいプロパティ値。</param>
         /// <param name="index">インデックスプロパティの場合のインデックス。</param>
         /// <remarks>
-        /// 設定先オブジェクトには <c>NewInstance()</c> または <c> SetInstance()</c>
+        /// 設定先オブジェクトには<see cref="NewInstance"/>または<see cref="Instance"/>
         /// で指定されたオブジェクトを用いる。
         /// 指定されていない場合は、可能であればデフォルトコンストラクタでオブジェクトを生成する。
-        /// 値の設定に失敗した場合は、<c>Assert.Fail()</c> にてテストを失敗させる。
+        /// 値の設定に失敗した場合は、<see cref="Assert.Fail()"/>にてテストを失敗させる。
         /// </remarks>
         public void SetProperty(string name, object value, params object[] index)
         {

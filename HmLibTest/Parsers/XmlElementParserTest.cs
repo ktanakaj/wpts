@@ -21,6 +21,42 @@ namespace Honememo.Parsers
     [TestFixture]
     public class XmlElementParserTest
     {
+        #region private変数
+
+        /// <summary>
+        /// 前処理・後処理で毎回生成／解放されるXmlParser。
+        /// </summary>
+        private XmlParser xmlParser;
+
+        #endregion
+
+        #region 前処理・後処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [SetUp]
+        public void SetUp()
+        {
+            // Disposeが必要なXmlParserの生成／解放
+            this.xmlParser = new XmlParser();
+        }
+
+        /// <summary>
+        /// テストの後処理。
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            // Disposeが必要なXmlParserの生成／解放
+            if (this.xmlParser != null)
+            {
+                this.xmlParser.Dispose();
+            }
+        }
+
+        #endregion
+
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
@@ -31,8 +67,7 @@ namespace Honememo.Parsers
         {
             IElement element;
             XmlElement xmlElement;
-            XmlParser xmlParser = new XmlParser();
-            XmlElementParser parser = new XmlElementParser(xmlParser);
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsTrue(parser.TryParse("<h1>test</h1>", out element));
             xmlElement = (XmlElement)element;
@@ -87,7 +122,7 @@ namespace Honememo.Parsers
         {
             IElement element;
             XmlElement xmlElement;
-            XmlElementParser parser = new XmlElementParser(new XmlParser());
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsTrue(parser.TryParse("<testtag></testtag>", out element));
             xmlElement = (XmlElement)element;
@@ -130,7 +165,7 @@ namespace Honememo.Parsers
         public void TestTryParseNormalNg()
         {
             IElement element;
-            XmlElementParser parser = new XmlElementParser(new XmlParser());
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsFalse(parser.TryParse(" <testtag></testtag>", out element));
             Assert.IsNull(element);
@@ -146,7 +181,7 @@ namespace Honememo.Parsers
         {
             IElement element;
             XmlElement xmlElement;
-            XmlElementParser parser = new XmlElementParser(new XmlParser());
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsTrue(parser.TryParse("<testtag />", out element));
             xmlElement = (XmlElement)element;
@@ -190,7 +225,7 @@ namespace Honememo.Parsers
         {
             IElement element;
             XmlElement xmlElement;
-            XmlElementParser parser = new XmlElementParser(new XmlParser());
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsTrue(parser.TryParse("<p>", out element));
             xmlElement = (XmlElement)element;
@@ -226,7 +261,7 @@ namespace Honememo.Parsers
         public void TestTryParseLazyNg()
         {
             IElement element;
-            XmlElementParser parser = new XmlElementParser(new XmlParser());
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsFalse(parser.TryParse("< testtag></testtag>", out element));
             Assert.IsNull(element);
@@ -252,7 +287,8 @@ namespace Honememo.Parsers
         {
             IElement element;
             HtmlElement htmlElement;
-            XmlElementParser parser = new XmlElementParser(new XmlParser { IsHtml = true });
+            this.xmlParser.IsHtml = true;
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsTrue(parser.TryParse("<testtag />", out element));
             htmlElement = (HtmlElement)element;
@@ -302,8 +338,8 @@ namespace Honememo.Parsers
         {
             IElement element;
             XmlElement xmlElement;
-            XmlParser xmlParser = new XmlParser { IgnoreCase = false };
-            XmlElementParser parser = new XmlElementParser(xmlParser);
+            this.xmlParser.IgnoreCase = false;
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
             Assert.IsTrue(parser.TryParse("<testtag></testtag></Testtag>", out element));
             xmlElement = (XmlElement)element;
@@ -317,7 +353,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("testtag", xmlElement.Name);
             Assert.AreEqual(0, xmlElement.Attributes.Count);
 
-            xmlParser.IgnoreCase = true;
+            this.xmlParser.IgnoreCase = true;
             Assert.IsTrue(parser.TryParse("<testtag></Testtag></testtag>", out element));
             xmlElement = (XmlElement)element;
             Assert.AreEqual("<testtag></Testtag>", xmlElement.ToString());

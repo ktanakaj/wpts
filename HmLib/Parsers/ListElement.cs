@@ -3,7 +3,7 @@
 //      ページ要素を複数格納する要素をあらわすモデルクラスソース</summary>
 //
 // <copyright file="ListElement.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -23,7 +23,7 @@ namespace Honememo.Parsers
         #region インタフェース実装プロパティ
         
         /// <summary>
-        /// 要素がParse等により生成された場合の解析元文字列。
+        /// 要素が<see cref="IParser.Parse"/>等により生成された場合の解析元文字列。
         /// </summary>
         /// <remarks>
         /// <see cref="ToString"/>に生成した値を返して欲しい場合、この値を明示的に<c>null</c>にすべき。

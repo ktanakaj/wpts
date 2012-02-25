@@ -13,11 +13,8 @@ namespace Honememo.Wptscs
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
     using System.IO;
     using System.Net;
-    using System.Text;
     using System.Threading;
     using System.Windows.Forms;
     using Honememo.Utilities;
@@ -394,6 +391,11 @@ namespace Honememo.Wptscs
                 // 想定外のエラー
                 this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + Environment.NewLine);
             }
+            finally
+            {
+                // トランスレータを解放
+                this.translator = null;
+            }
         }
 
         /// <summary>
@@ -522,7 +524,7 @@ namespace Honememo.Wptscs
         /// <param name="logName">出力ログファイル名。</param>
         /// <param name="text">出力する結果テキスト。</param>
         /// <param name="dir">出力先ディレクトリ。</param>
-        /// <returns><c>true</c> 出力成功</returns>
+        /// <returns>出力成功の場合<c>true</c>。</returns>
         private bool MakeFileName(out string fileName, out string logName, string text, string dir)
         {
             // 出力先フォルダに存在しないファイル名（の拡張子より前）を作成
@@ -796,8 +798,8 @@ namespace Honememo.Wptscs
         /// 設定ファイルによる初期化処理。
         /// </summary>
         /// <remarks>
-        /// 読み込みに失敗した場合、空の設定を登録し、操作の大半をロックする。
-        /// （設定変更メニューから正しい設定に変更されることを期待。）
+        /// 読み込みに失敗した場合、空の設定を登録し、操作の大半をロックする
+        /// （設定変更メニューから正しい設定に変更されることを期待）。
         /// </remarks>
         private void InitializeByConfig()
         {

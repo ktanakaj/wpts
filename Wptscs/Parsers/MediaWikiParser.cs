@@ -30,7 +30,7 @@ namespace Honememo.Wptscs.Parsers
         private MediaWiki website;
 
         #endregion
-        
+
         #region コンストラクタ
 
         /// <summary>
@@ -39,13 +39,67 @@ namespace Honememo.Wptscs.Parsers
         /// <param name="site">このパーサーが対応するMediaWiki</param>
         public MediaWikiParser(MediaWiki site)
         {
+            // 子パーサーのうち、再帰的に処理を行ういくつかのパーサーについては
+            // 結果をキャッシュするようにする
+            // ※ 通常は意味が無いが、複雑なテンプレート等で解析失敗が多発し、
+            //    何度も同じ文字列を解析してしまうときに非常に時間がかかるため
             this.Website = site;
+            this.IncludeType = IncludeTypeEnum.None;
             this.CommentParser = new XmlCommentElementParser();
             this.NowikiParser = new MediaWikiNowikiParser(this);
-            this.LinkParser = new MediaWikiLinkParser(this);
-            this.TemplateParser = new MediaWikiTemplateParser(this);
-            this.VariableParser = new MediaWikiVariableParser(this);
-            this.HeadingParser = new MediaWikiHeadingParser(this);
+            this.LinkParser = new CacheParser(new MediaWikiLinkParser(this));
+            this.TemplateParser = new CacheParser(new MediaWikiTemplateParser(this));
+            this.VariableParser = new CacheParser(new MediaWikiVariableParser(this));
+            this.HeadingParser = new CacheParser(new MediaWikiHeadingParser(this));
+        }
+
+        #endregion
+        
+        #region デストラクタ
+
+        /// <summary>
+        /// オブジェクトのリソースを破棄する。
+        /// </summary>
+        /// <remarks><see cref="Dispose"/>の呼び出しのみ。</remarks>
+        ~MediaWikiParser()
+        {
+            this.Dispose();
+        }
+
+        #endregion
+
+        #region 列挙型
+
+        /// <summary>
+        /// インクルードとして解析するか非インクルードとして解析するかを指定する列挙型です。
+        /// </summary>
+        public enum IncludeTypeEnum
+        {
+            /// <summary>
+            /// インクルードされたページとして解析します。
+            /// </summary>
+            /// <remarks>
+            /// &lt;includeonly&gt;タグのブロックが存在する場合、その中身が展開されます。
+            /// &lt;noinclude&gt;タグのブロックは存在しないものとして扱います。
+            /// </remarks>
+            Include,
+
+            /// <summary>
+            /// インクルードではないページとして解析します。
+            /// </summary>
+            /// <remarks>
+            /// &lt;noinclude&gt;タグが存在する場合、その中身が展開されます。
+            /// &lt;includeonly&gt;タグのブロックは存在しないものとして扱います。
+            /// </remarks>
+            Noinclude,
+
+            /// <summary>
+            /// インクルードの判断を行いません。
+            /// </summary>
+            /// <remarks>
+            /// &lt;includeonly&gt;, &lt;noinclude&gt;いずれのタグもただの文字列として扱います。
+            /// </remarks>
+            None
         }
 
         #endregion
@@ -67,6 +121,16 @@ namespace Honememo.Wptscs.Parsers
             {
                 this.website = Validate.NotNull(value);
             }
+        }
+
+        /// <summary>
+        /// インクルードとして解析するか非インクルードとして解析するかの指定。
+        /// </summary>
+        /// <remarks>初期値は <see cref="IncludeTypeEnum.None"/>。</remarks>
+        public IncludeTypeEnum IncludeType
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -132,7 +196,7 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region インタフェース実装メソッド
+        #region ITextParserインタフェース実装メソッド
 
         /// <summary>
         /// 渡されたMediaWikiページに対して、指定された終了条件を満たすまで解析を行う。
@@ -142,8 +206,15 @@ namespace Honememo.Wptscs.Parsers
         /// <param name="result">解析結果。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
         /// <remarks>指定された終了条件を満たさない場合、最終位置まで解析を行う。</remarks>
+        /// <exception cref="ObjectDisposedException"><see cref="Dispose"/>が実行済みの場合。</exception>
         public override bool TryParseToEndCondition(string s, IsEndCondition condition, out IElement result)
         {
+            // 子パーサーが解放済みかのチェック（同時にnullになるので代表でNowikiParser）
+            if (this.NowikiParser == null)
+            {
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+
             // 文字列を1文字ずつチェックし、その内容に応じた要素のリストを作成する
             ListElement list = new ListElement();
             StringBuilder b = new StringBuilder();
@@ -236,6 +307,49 @@ namespace Honememo.Wptscs.Parsers
             }
 
             return true;
+        }
+
+        #endregion
+
+        #region IDisposableインタフェース実装メソッド
+
+        /// <summary>
+        /// このパーサーで使用する子パーサーを解放する。
+        /// </summary>
+        public override void Dispose()
+        {
+            // 子パーサーを解放
+            // ※ 以下は循環参照のため、明示的に解放しないとGCされない可能性がある
+            if (this.NowikiParser != null)
+            {
+                this.NowikiParser = null;
+            }
+
+            if (this.LinkParser != null)
+            {
+                this.LinkParser = null;
+            }
+
+            if (this.TemplateParser != null)
+            {
+                this.TemplateParser = null;
+            }
+
+            if (this.VariableParser != null)
+            {
+                this.VariableParser = null;
+            }
+
+            if (this.HeadingParser != null)
+            {
+                this.HeadingParser = null;
+            }
+
+            // 親クラスもIDisposableなため呼び出し
+            base.Dispose();
+
+            // ファイナライザ（このクラスではDisposeを呼ぶだけ）が不要であることを通知
+            GC.SuppressFinalize(this);
         }
 
         #endregion

@@ -40,7 +40,7 @@ namespace Honememo.Wptscs
         /// コンストラクタ。初期化メソッド呼び出しのみ。
         /// </summary>
         /// <param name="configNames">登録済みの設定ファイル名。</param>
-        /// <exception cref="ArgumentNullException"><para>configNames</para>が<c>null</c>。</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="configNames"/>が<c>null</c>。</exception>
         public AddConfigDialog(IEnumerable<string> configNames)
         {
             // Windows フォーム デザイナで生成されたコード

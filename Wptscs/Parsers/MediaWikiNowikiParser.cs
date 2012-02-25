@@ -42,6 +42,8 @@ namespace Honememo.Wptscs.Parsers
             // nowikiブロックではMediaWikiの各種構文やコメントも含むhtmlタグも全て無効なため、
             // 親クラスにそうした処理を含まない空のXMLParserを指定する。
             // ※ HTML/XMLの扱い等に関する設定はMediaWiki全体のものを引き継ぐ
+            // ※ XmlParserの仕様に依存するため良くないが、XmlParser.Disposeで行う
+            //    Parsersの解放が結果的に不要になっているので、このクラスではIDisposableを実装していない
             this.Parser = new XmlParser();
             this.Parser.Parsers = new IParser[0];
             this.Parser.IgnoreCase = parser.IgnoreCase;
