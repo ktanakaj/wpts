@@ -419,7 +419,7 @@ namespace Honememo.Wptscs.Websites
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。</returns>
         /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
-        /// <exception cref="NotSupportedException">末尾がピリオドのページの場合（既知の不具合への対応）。</exception>
+        /// <exception cref="EndPeriodException">末尾がピリオドのページの場合（既知の不具合への対応）。</exception>
         /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         public override Page GetPage(string title)
         {
@@ -437,7 +437,7 @@ namespace Honememo.Wptscs.Websites
             {
                 // 末尾がピリオドのページが取得できない既知の不具合への暫定対応
                 // 対処方法が不明なため、せめて例外を投げて検知する
-                throw new NotSupportedException(title + " is not suppoted");
+                throw new EndPeriodException(title + " is not suppoted");
             }
 
             // ページのXMLデータをMediaWikiサーバーから取得

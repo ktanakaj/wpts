@@ -1,6 +1,6 @@
 // ================================================================================================
 // <summary>
-//      翻訳支援処理を実装するための共通クラスソース</summary>
+//      翻訳支援処理を実装するための抽象クラスソース</summary>
 //
 // <copyright file="Translator.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
@@ -16,22 +16,19 @@ namespace Honememo.Wptscs.Logics
     using System.Net;
     using System.Net.NetworkInformation;
     using System.Reflection;
+    using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Utilities;
     using Honememo.Wptscs.Websites;
 
     /// <summary>
-    /// 翻訳支援処理を実装するための共通クラスです。
+    /// 翻訳支援処理を実装するための抽象クラスです。
     /// </summary>
     public abstract class Translator
     {
         #region private変数
-
-        /// <summary>
-        /// 処理状態メッセージ。
-        /// </summary>
-        private string status = String.Empty;
 
         /// <summary>
         /// 変換後テキスト。
@@ -48,22 +45,23 @@ namespace Honememo.Wptscs.Logics
         #region コンストラクタ
 
         /// <summary>
-        /// インスタンスを生成する。
+        /// トランスレータを作成。
         /// </summary>
         public Translator()
         {
+            // ステータス管理については更新イベントを連鎖させる
             this.Stopwatch = new Stopwatch();
             this.Logger = new Logger();
+            this.StatusManager = new StatusManager<string>();
+            this.StatusManager.Changed += new EventHandler(
+                delegate
+                {
+                    if (this.StatusUpdated != null)
+                    {
+                        this.StatusUpdated(this, EventArgs.Empty);
+                    }
+                });
         }
-
-        #endregion
-
-        #region デリゲート
-
-        /// <summary>
-        /// <see cref="ChangeStatusInExecuting"/> で実行する処理のためのデリゲート。
-        /// </summary>
-        protected delegate void MethodWithChangeStatus();
 
         #endregion
 
@@ -72,16 +70,34 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// ログ更新伝達イベント。
         /// </summary>
-        public event EventHandler LogUpdate;
+        public event EventHandler LogUpdated;
 
         /// <summary>
         /// 処理状態更新伝達イベント。
         /// </summary>
-        public event EventHandler StatusUpdate;
+        public event EventHandler StatusUpdated;
 
         #endregion
 
-        #region プロパティ
+        #region 公開プロパティ
+
+        /// <summary>
+        /// 翻訳元言語のサイト。
+        /// </summary>
+        public Website From
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 翻訳先言語のサイト。
+        /// </summary>
+        public Website To
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// 言語間の項目の対訳表。
@@ -119,16 +135,8 @@ namespace Honememo.Wptscs.Logics
         {
             get
             {
-                return this.status;
-            }
-
-            protected set
-            {
-                this.status = StringUtils.DefaultString(value);
-                if (this.StatusUpdate != null)
-                {
-                    this.StatusUpdate(this, EventArgs.Empty);
-                }
+                // 内部的に実際に管理しているのはStatusManager
+                return StringUtils.DefaultString(this.StatusManager.Status);
             }
         }
 
@@ -166,27 +174,14 @@ namespace Honememo.Wptscs.Logics
             set;
         }
 
-        /// <summary>
-        /// 翻訳元言語のサイト。
-        /// </summary>
-        public Website From
-        {
-            get;
-            set;
-        }
+        #endregion
 
-        /// <summary>
-        /// 翻訳先言語のサイト。
-        /// </summary>
-        public Website To
-        {
-            get;
-            set;
-        }
+        #region 実装支援用プロパティ
 
         /// <summary>
         /// ログテキスト生成用ロガー。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         protected Logger Logger
         {
             get
@@ -198,8 +193,25 @@ namespace Honememo.Wptscs.Logics
             {
                 // nullは不可。また、ロガー変更後はイベントを設定
                 this.logger = Validate.NotNull(value);
-                this.logger.LogUpdate += this.GetLogUpdate;
+                this.logger.LogUpdate += new EventHandler(
+                    delegate
+                    {
+                        if (this.LogUpdated != null)
+                        {
+                            this.LogUpdated(this, EventArgs.Empty);
+                        }
+                    });
             }
+        }
+
+        /// <summary>
+        /// ステータス管理用オブジェクト。
+        /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        protected StatusManager<string> StatusManager
+        {
+            get;
+            private set;
         }
 
         #endregion
@@ -246,7 +258,7 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
-        #region publicメソッド
+        #region 公開メソッド
 
         /// <summary>
         /// 翻訳支援処理実行。
@@ -288,14 +300,14 @@ namespace Honememo.Wptscs.Logics
             finally
             {
                 // 終了後は処理状態をクリア、処理時間を測定終了
-                this.Status = String.Empty;
+                this.StatusManager.Clear();
                 this.Stopwatch.Stop();
             }
         }
         
         #endregion
 
-        #region protectedメソッド
+        #region 実装が必要なテンプレートメソッド
 
         /// <summary>
         /// 翻訳支援処理実行部の本体。
@@ -304,6 +316,10 @@ namespace Honememo.Wptscs.Logics
         /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Logger"/>に出力する。</exception>
         /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
         protected abstract void RunBody(string name);
+
+        #endregion
+
+        #region 実装支援用メソッド
 
         /// <summary>
         /// ログ出力によるエラー処理を含んだページ取得処理。
@@ -329,12 +345,11 @@ namespace Honememo.Wptscs.Logics
             this.ThrowExceptionIfCanceled();
 
             // ページ取得処理、実行中は処理状態を変更
-            bool success = false;
-            Page result = null;
-            this.ChangeStatusInExecuting(
-                () => success = this.TryGetPageBody(title, out result),
-                Resources.StatusDownloading);
-            page = result;
+            bool success;
+            using (var sm = this.StatusManager.Switch(Resources.StatusDownloading))
+            {
+                success = this.TryGetPageBody(title, out page);
+            }
 
             // 通信終了後にも再度終了要求を確認
             this.ThrowExceptionIfCanceled();
@@ -353,31 +368,9 @@ namespace Honememo.Wptscs.Logics
             }
         }
 
-        /// <summary>
-        /// 指定された処理を実行する間、処理状態を渡された値に更新する。
-        /// 処理終了後は以前の処理状態に戻す。
-        /// </summary>
-        /// <param name="method">実行する処理。</param>
-        /// <param name="status">処理状態。</param>
-        protected void ChangeStatusInExecuting(MethodWithChangeStatus method, string status)
-        {
-            // 現在の処理状態を保存、新しい処理状態をセットし、処理を実行する
-            string oldStatus = this.Status;
-            this.Status = status;
-            try
-            {
-                method();
-            }
-            finally
-            {
-                // 処理状態を以前の状態に戻す
-                this.Status = oldStatus;
-            }
-        }
-
         #endregion
 
-        #region privateメソッド
+        #region 内部処理用メソッド
 
         /// <summary>
         /// 翻訳支援処理実行時の初期化処理。
@@ -386,7 +379,7 @@ namespace Honememo.Wptscs.Logics
         {
             // 変数を初期化
             this.Logger.Clear();
-            this.Status = String.Empty;
+            this.StatusManager.Clear();
             this.Stopwatch.Reset();
             this.Text = String.Empty;
             this.CancellationPending = false;
@@ -401,38 +394,27 @@ namespace Honememo.Wptscs.Logics
         private bool Ping(string server)
         {
             // サーバー接続チェック、実行中は処理状態を変更
-            bool result = false;
-            this.ChangeStatusInExecuting(
-                () => result = this.PingBody(server),
-                Resources.StatusPinging);
-            return result;
-        }
-
-        /// <summary>
-        /// サーバー接続チェック本体。
-        /// </summary>
-        /// <param name="server">サーバー名。</param>
-        /// <returns><c>true</c> 接続成功。</returns>
-        private bool PingBody(string server)
-        {
-            // サーバー接続チェック
-            Ping ping = new Ping();
-            try
+            using (var sm = this.StatusManager.Switch(Resources.StatusPinging))
             {
-                PingReply reply = ping.Send(server);
-                if (reply.Status != IPStatus.Success)
+                // サーバー接続チェック
+                Ping ping = new Ping();
+                try
                 {
-                    this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
+                    PingReply reply = ping.Send(server);
+                    if (reply.Status != IPStatus.Success)
+                    {
+                        this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, reply.Status.ToString());
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
                     return false;
                 }
-            }
-            catch (Exception e)
-            {
-                this.Logger.AddMessage(Resources.ErrorMessageConnectionFailed, e.InnerException.Message);
-                return false;
-            }
 
-            return true;
+                return true;
+            }
         }
 
         /// <summary>
@@ -464,7 +446,7 @@ namespace Honememo.Wptscs.Logics
                 // ページ無しによる例外も正常終了
                 return true;
             }
-            catch (NotSupportedException)
+            catch (EndPeriodException)
             {
                 // 末尾がピリオドで終わるページが処理できない既知の不具合への対応、警告メッセージを出す
                 this.Logger.AddResponse(Resources.LogMessageErrorPageName, title);
@@ -482,20 +464,6 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 return false;
-            }
-        }
-
-        /// <summary>
-        /// ロガーのログ状態更新イベント用。
-        /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void GetLogUpdate(object sender, EventArgs e)
-        {
-            // もともとこのクラスにあったログ通知イベントをロガーに移動したため、入れ子で呼び出す
-            if (this.LogUpdate != null)
-            {
-                this.LogUpdate(this, EventArgs.Empty);
             }
         }
 
