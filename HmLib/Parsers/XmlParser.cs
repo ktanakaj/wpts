@@ -158,6 +158,8 @@ namespace Honememo.Parsers
         /// <param name="index">処理インデックス。</param>
         /// <param name="result">解析した結果要素。</param>
         /// <returns>解析できた場合<c>true</c>。</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="s"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentOutOfRangeException">インデックスがテキストの範囲外の場合。</exception>
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/>が実行済みの場合。</exception>
         protected override bool TryParseElementAt(string s, int index, out IElement result)
         {
@@ -174,14 +176,15 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="list">追加されるリスト。</param>
         /// <param name="b">追加する文字列。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
         protected override void FlashText(ref ListElement list, ref StringBuilder b)
         {
-            if (b.Length > 0)
+            if (Validate.NotNull(b).Length > 0)
             {
                 string s = b.ToString();
                 XmlTextElement e = new XmlTextElement(this.Decode(s));
                 e.ParsedString = s;
-                list.Add(e);
+                Validate.NotNull(list).Add(e);
                 b.Clear();
             }
         }

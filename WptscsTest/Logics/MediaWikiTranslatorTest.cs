@@ -13,9 +13,7 @@ namespace Honememo.Wptscs.Logics
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Reflection;
     using Honememo.Parsers;
-    using Honememo.Tests;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Parsers;
@@ -24,10 +22,10 @@ namespace Honememo.Wptscs.Logics
     using NUnit.Framework;
 
     /// <summary>
-    /// MediaWikiTranslatorのテストクラスです。
+    /// <see cref="MediaWikiTranslator"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class MediaWikiTranslatorTest
+    class MediaWikiTranslatorTest
     {
         #region 定数
 
@@ -77,7 +75,7 @@ namespace Honememo.Wptscs.Logics
         #region 各処理のメソッドテストケース
 
         /// <summary>
-        /// ReplaceLinkメソッドテストケース。
+        /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestReplaceLink()
@@ -185,7 +183,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ReplaceLinkメソッドテストケース（サブページ）。
+        /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（サブページ）。
         /// </summary>
         [Test]
         public void TestReplaceLinkSubpage()
@@ -199,15 +197,15 @@ namespace Honememo.Wptscs.Logics
 
             // 全て指定したサブページ
             // ※ 以下オブジェクトを毎回作り直しているのは、更新されてしまうケースがあるため
-            parent = new MediaWikiPage(translator.From, "Template:Citation needed");
+            parent = new MediaWikiPage(translator.From, "Template:Table cell templates");
             link = new MediaWikiLink();
-            link.Title = "Template:Citation needed/Doc";
-            Assert.AreEqual("[[Template:要出典|Template:Citation needed/Doc]]", translator.ReplaceLink(link, parent).ToString());
+            link.Title = "Template:Table cell templates/doc";
+            Assert.AreEqual("[[Template:Table cell templates|Template:Table cell templates/doc]]", translator.ReplaceLink(link, parent).ToString());
 
             // サブページ（子）
             link = new MediaWikiLink();
             link.Title = "/Doc";
-            Assert.AreEqual("[[Template:要出典|/Doc]]", translator.ReplaceLink(link, parent).ToString());
+            Assert.AreEqual("[[Template:Table cell templates|/Doc]]", translator.ReplaceLink(link, parent).ToString());
 
             // サブページ（親）、処理対象外
             link = new MediaWikiLink();
@@ -215,14 +213,14 @@ namespace Honememo.Wptscs.Logics
             Assert.AreEqual("[[../]]", translator.ReplaceLink(link, parent).ToString());
 
             // サブページ（兄弟）
-            parent = new MediaWikiPage(translator.From, "Template:Citation needed/xxx");
+            parent = new MediaWikiPage(translator.From, "Template:Table cell templates/xxx");
             link = new MediaWikiLink();
             link.Title = "../Doc";
-            Assert.AreEqual("[[Template:要出典|../Doc]]", translator.ReplaceLink(link, parent).ToString());
+            Assert.AreEqual("[[Template:Table cell templates|../Doc]]", translator.ReplaceLink(link, parent).ToString());
         }
 
         /// <summary>
-        /// ReplaceLinkメソッドテストケース（カテゴリ）。
+        /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（カテゴリ）。
         /// </summary>
         [Test]
         public void TestReplaceLinkCategory()
@@ -271,7 +269,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ReplaceLinkメソッドテストケース（ファイル）。
+        /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（ファイル）。
         /// </summary>
         [Test]
         public void TestReplaceLinkFile()
@@ -309,7 +307,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ReplaceLinkメソッドテストケース（仮リンク）。
+        /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（仮リンク）。
         /// </summary>
         [Test]
         public void TestReplaceLinkLinkInterwiki()
@@ -367,7 +365,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ReplaceTemplateメソッドテストケース。
+        /// <see cref="MediaWikiTranslator.ReplaceTemplate"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestReplaceTemplate()
@@ -413,7 +411,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ReplaceTemplateメソッドテストケース（入れ子）。
+        /// <see cref="MediaWikiTranslator.ReplaceTemplate"/>メソッドテストケース（入れ子）。
         /// </summary>
         [Test]
         public void TestReplaceTemplateNested()
@@ -463,7 +461,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ReplaceHeadingメソッドテストケース。
+        /// <see cref="MediaWikiTranslator.ReplaceHeading"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestReplaceHeading()
@@ -505,7 +503,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// ReplaceHeadingメソッドテストケース（入れ子）。
+        /// <see cref="MediaWikiTranslator.ReplaceHeading"/>メソッドテストケース（入れ子）。
         /// </summary>
         [Test]
         public void TestReplaceHeadingNested()
@@ -818,9 +816,9 @@ namespace Honememo.Wptscs.Logics
         #region テスト用クラス
 
         /// <summary>
-        /// MediaWikiTranslatorテスト用のクラスです。
+        /// <see cref="MediaWikiTranslator"/>テスト用のクラスです。
         /// </summary>
-        public class TestMediaWikiTranslator : MediaWikiTranslator
+        private class TestMediaWikiTranslator : MediaWikiTranslator
         {
             #region 非公開メソッドテスト用のオーラーライドメソッド
 

@@ -76,6 +76,13 @@ namespace Honememo.Parsers
         /// <remarks>指定された終了条件を満たさない場合、最終位置まで解析を行う。</remarks>
         public virtual bool TryParseToEndCondition(string s, IsEndCondition condition, out IElement result)
         {
+            if (s == null)
+            {
+                // nullの場合だけは解析失敗とする
+                result = null;
+                return false;
+            }
+
             // 文字列を1文字ずつチェックし、その内容に応じた要素のリストを作成する
             ListElement list = new ListElement();
             StringBuilder b = new StringBuilder();
@@ -148,11 +155,12 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="list">追加されるリスト。</param>
         /// <param name="b">追加する文字列。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
         protected virtual void FlashText(ref ListElement list, ref StringBuilder b)
         {
-            if (b.Length > 0)
+            if (Validate.NotNull(b).Length > 0)
             {
-                list.Add(new TextElement(b.ToString()));
+                Validate.NotNull(list).Add(new TextElement(b.ToString()));
                 b.Clear();
             }
         }

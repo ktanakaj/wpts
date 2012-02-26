@@ -44,7 +44,6 @@ namespace Honememo.Wptscs.Parsers
             // ※ 通常は意味が無いが、複雑なテンプレート等で解析失敗が多発し、
             //    何度も同じ文字列を解析してしまうときに非常に時間がかかるため
             this.Website = site;
-            this.IncludeType = IncludeTypeEnum.None;
             this.CommentParser = new XmlCommentElementParser();
             this.NowikiParser = new MediaWikiNowikiParser(this);
             this.LinkParser = new CacheParser(new MediaWikiLinkParser(this));
@@ -68,42 +67,6 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region 列挙型
-
-        /// <summary>
-        /// インクルードとして解析するか非インクルードとして解析するかを指定する列挙型です。
-        /// </summary>
-        public enum IncludeTypeEnum
-        {
-            /// <summary>
-            /// インクルードされたページとして解析します。
-            /// </summary>
-            /// <remarks>
-            /// &lt;includeonly&gt;タグのブロックが存在する場合、その中身が展開されます。
-            /// &lt;noinclude&gt;タグのブロックは存在しないものとして扱います。
-            /// </remarks>
-            Include,
-
-            /// <summary>
-            /// インクルードではないページとして解析します。
-            /// </summary>
-            /// <remarks>
-            /// &lt;noinclude&gt;タグが存在する場合、その中身が展開されます。
-            /// &lt;includeonly&gt;タグのブロックは存在しないものとして扱います。
-            /// </remarks>
-            Noinclude,
-
-            /// <summary>
-            /// インクルードの判断を行いません。
-            /// </summary>
-            /// <remarks>
-            /// &lt;includeonly&gt;, &lt;noinclude&gt;いずれのタグもただの文字列として扱います。
-            /// </remarks>
-            None
-        }
-
-        #endregion
-
         #region 公開プロパティ
 
         /// <summary>
@@ -121,16 +84,6 @@ namespace Honememo.Wptscs.Parsers
             {
                 this.website = Validate.NotNull(value);
             }
-        }
-
-        /// <summary>
-        /// インクルードとして解析するか非インクルードとして解析するかの指定。
-        /// </summary>
-        /// <remarks>初期値は <see cref="IncludeTypeEnum.None"/>。</remarks>
-        public IncludeTypeEnum IncludeType
-        {
-            get;
-            set;
         }
 
         #endregion

@@ -20,6 +20,15 @@ namespace Honememo.Wptscs.Parsers
     /// <summary>
     /// MediaWikiのnowikiブロックを解析するパーサークラスです。
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// nowikiブロックでは、MediaWikiの各種構文やコメントも含めたhtmlタグが全て無効化されます。
+    /// </para>
+    /// <para>
+    /// ブロック内の再帰解析を行わないパーサーというだけなので、
+    /// 使おうと思えばMediaWiki以外のページに対しても使用可能です。
+    /// </para>
+    /// </remarks>
     public class MediaWikiNowikiParser : XmlElementParser
     {
         #region 定数宣言
@@ -27,7 +36,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// nowikiタグ。
         /// </summary>
-        private static readonly string nowikiTag = "nowiki";
+        public static readonly string NowikiTag = "nowiki";
 
         #endregion
 
@@ -36,8 +45,8 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// MediaWikiのnowikiブロックを解析するためのパーサーを作成する。
         /// </summary>
-        /// <param name="parser">このパーサーが参照する<see cref="MediaWikiParser"/>。</param>
-        public MediaWikiNowikiParser(MediaWikiParser parser)
+        /// <param name="parser">このパーサーが参照する<see cref="XmlParser"/>。</param>
+        public MediaWikiNowikiParser(XmlParser parser)
         {
             // nowikiブロックではMediaWikiの各種構文やコメントも含むhtmlタグも全て無効なため、
             // 親クラスにそうした処理を含まない空のXMLParserを指定する。
@@ -71,7 +80,7 @@ namespace Honememo.Wptscs.Parsers
             if (base.TryParse(s, out element))
             {
                 XmlElement xmlElement = (XmlElement)element;
-                if (xmlElement.Name.ToLower() == MediaWikiNowikiParser.nowikiTag)
+                if (xmlElement.Name.ToLower() == MediaWikiNowikiParser.NowikiTag)
                 {
                     // nowiki区間は内部要素を全てテキストとして扱う
                     XmlTextElement innerElement = new XmlTextElement();

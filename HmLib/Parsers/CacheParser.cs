@@ -74,6 +74,7 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="s">解析対象の文字列。</param>
         /// <returns>解析結果。</returns>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <exception cref="FormatException">
         /// 文字列が解析できないフォーマットの場合。
         /// <see cref="TryParse"/>にて解析失敗がキャッシュされている場合もこの例外を返す。
@@ -108,6 +109,13 @@ namespace Honememo.Parsers
         /// </remarks>
         public bool TryParse(string s, out IElement result)
         {
+            if (s == null)
+            {
+                // nullだけ先にチェック
+                result = null;
+                return false;
+            }
+
             // TryParseが呼ばれた場合その処理結果を返す。
             // キャッシュの場合キャッシュに値があれば成功と返す。
             bool called = false;

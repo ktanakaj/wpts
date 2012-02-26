@@ -57,6 +57,7 @@
     <Compile Include="Parsers\MediaWikiTemplateTest.cs" />
     <Compile Include="Parsers\MediaWikiHeadingTest.cs" />
     <Compile Include="Parsers\MediaWikiVariableTest.cs" />
+    <Compile Include="Parsers\MediaWikiPreparserTest.cs" />
     <Compile Include="Websites\MediaWikiPageTest.cs" />
     <Compile Include="Websites\PageTest.cs" />
     <Compile Include="Models\MockFactory.cs" />

@@ -45,9 +45,16 @@ namespace Honememo.Wptscs.Parsers
         /// <remarks>MediaWikiのページ全体を渡す必要がある。</remarks>
         public override bool TryParse(string s, out IElement result)
         {
+            // 入力値確認、空の場合は即終了
+            result = null;
+            if (String.IsNullOrEmpty(s))
+            {
+                return false;
+            }
+
             // 日本語版みたいに、#REDIRECTと言語固有の#転送みたいなのがあると思われるので、
             // 翻訳元言語とデフォルトの設定でチェック
-            result = null;
+            string lower = s.ToLower();
             for (int i = 0; i < 2; i++)
             {
                 string format = this.Website.Redirect;
@@ -57,7 +64,7 @@ namespace Honememo.Wptscs.Parsers
                 }
 
                 if (!String.IsNullOrEmpty(format)
-                    && s.ToLower().StartsWith(format.ToLower()))
+                    && lower.StartsWith(format.ToLower()))
                 {
                     if (this.LinkParser.TryParse(s.Substring(format.Length).TrimStart(), out result))
                     {

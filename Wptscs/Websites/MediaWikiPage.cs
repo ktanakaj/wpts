@@ -31,11 +31,6 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         private MediaWikiLink redirect;
 
-        /// <summary>
-        /// ページの本文をパーサーで要素単位に解析した結果。
-        /// </summary>
-        private IElement element;
-
         #endregion
 
         #region コンストラクタ
@@ -110,7 +105,6 @@ namespace Honememo.Wptscs.Websites
                 // 本文は普通に格納
                 base.Text = value;
                 this.redirect = null;
-                this.element = null;
 
                 // 本文格納のタイミングでリダイレクトページ（#REDIRECT等）かを判定
                 if (!String.IsNullOrEmpty(base.Text))
@@ -146,35 +140,6 @@ namespace Honememo.Wptscs.Websites
             }
         }
 
-        /// <summary>
-        /// ページの本文をパーサーで要素単位に解析した結果。
-        /// </summary>
-        /// <exception cref="InvalidOperationException"><see cref="Text"/>が<c>null</c>の場合。</exception>
-        /// <remarks>get時にページの解析を行う。</remarks>
-        public IElement Element
-        {
-            get
-            {
-                // Textが設定されている場合のみ有効
-                this.ValidateIncomplete();
-                if (this.element == null)
-                {
-                    // ページサイズによっては時間がかかるので、必要な場合だけ実施
-                    using (MediaWikiParser parser = new MediaWikiParser(this.Website))
-                    {
-                        this.element = parser.Parse(this.Text);
-                    }
-                }
-
-                return this.element;
-            }
-
-            protected set
-            {
-                this.element = value;
-            }
-        }
-
         #endregion
         
         #region 公開メソッド
@@ -186,13 +151,14 @@ namespace Honememo.Wptscs.Websites
         /// <returns>言語間リンク。見つからない場合は<c>null</c>。</returns>
         /// <exception cref="InvalidOperationException"><see cref="Text"/>が<c>null</c>の場合。</exception>
         /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        public MediaWikiLink GetInterlanguage(string code)
+        public virtual MediaWikiLink GetInterlanguage(string code)
         {
             // Textが設定されている場合のみ有効
             this.ValidateIncomplete();
 
-            // 記事を解析し、その結果から言語間リンクを探索
-            return this.GetInterlanguage(code, this.Element);
+            // ページ本文から言語間リンクを探索
+            // ※ 自ページの解析なのでnoincludeとして前処理を行う
+            return this.GetInterlanguage(code, MediaWikiPreparser.PreprocessByNoinclude(this.Text));
         }
 
         /// <summary>
@@ -251,7 +217,7 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         /// <param name="link">このページ内のリンク。</param>
         /// <returns>変換した記事名。</returns>
-        public string Normalize(MediaWikiLink link)
+        public virtual string Normalize(MediaWikiLink link)
         {
             string title = StringUtils.DefaultString(link.Title);
             if (link.IsSubpage())
@@ -297,13 +263,32 @@ namespace Honememo.Wptscs.Websites
         /// 不完全な場合、例外をスローする。
         /// </summary>
         /// <exception cref="InvalidOperationException">オブジェクトは不完全。</exception>
-        protected void ValidateIncomplete()
+        protected virtual void ValidateIncomplete()
         {
             if (String.IsNullOrEmpty(this.Text))
             {
                 // ページ本文が設定されていない場合不完全と判定
                 throw new InvalidOperationException("Text is unset");
             }
+        }
+
+        /// <summary>
+        /// 指定されたページテキストから言語間リンクを取得。
+        /// </summary>
+        /// <param name="code">言語コード。</param>
+        /// <param name="text">ページテキスト。</param>
+        /// <returns>言語間リンク。見つからない場合は<c>null</c>。</returns>
+        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
+        private MediaWikiLink GetInterlanguage(string code, string text)
+        {
+            // 渡されたテキストを要素単位に解析し、その結果から言語間リンクを探索する
+            IElement element;
+            using (MediaWikiParser parser = new MediaWikiParser(this.Website))
+            {
+                element = parser.Parse(text);
+            }
+
+            return this.GetInterlanguage(code, element);
         }
 
         /// <summary>
@@ -411,7 +396,10 @@ namespace Honememo.Wptscs.Websites
             if (subpage != null)
             {
                 // サブページの言語間リンクを返す
-                return subpage.GetInterlanguage(code);
+                // ※ テンプレート呼び出しなのでincludeとして前処理を行う
+                return subpage.GetInterlanguage(
+                    code,
+                    MediaWikiPreparser.PreprocessByInclude(subpage.Text));
             }
 
             // 未発見の場合null

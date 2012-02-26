@@ -125,34 +125,6 @@ namespace Honememo.Wptscs.Websites
             MediaWikiLink dummy = new MediaWikiPage(new MockFactory().GetMediaWiki("en"), "TestTitle").Redirect;
         }
 
-        /// <summary>
-        /// <see cref="MediaWikiPage.Element"/>プロパティテストケース（正常系）。
-        /// </summary>
-        [Test]
-        public void TestElement()
-        {
-            IElement element = new MediaWikiPage(new MockFactory().GetMediaWiki("en"), "TestTitle", "'''Title''' is [[xxx]].").Element;
-            Assert.IsNotNull(element);
-            Assert.AreEqual("'''Title''' is [[xxx]].", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
-            ListElement list = (ListElement)element;
-            Assert.AreEqual(3, list.Count);
-            Assert.AreEqual("'''Title''' is ", list[0].ToString());
-            Assert.AreEqual("[[xxx]]", list[1].ToString());
-            Assert.IsInstanceOf(typeof(MediaWikiLink), list[1]);
-            Assert.AreEqual(".", list[2].ToString());
-        }
-
-        /// <summary>
-        /// <see cref="MediaWikiPage.Element"/>プロパティテストケース（Text未設定）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void TestElementTextNull()
-        {
-            IElement dummy = new MediaWikiPage(new MockFactory().GetMediaWiki("en"), "TestTitle").Element;
-        }
-
         #endregion
 
         #region 公開メソッドテストケース

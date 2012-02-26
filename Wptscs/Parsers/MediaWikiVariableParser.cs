@@ -57,7 +57,7 @@ namespace Honememo.Wptscs.Parsers
             result = null;
 
             // 開始条件 {{{ のチェック
-            if (!s.StartsWith(MediaWikiVariable.DelimiterStart))
+            if (s == null || !s.StartsWith(MediaWikiVariable.DelimiterStart))
             {
                 return false;
             }
