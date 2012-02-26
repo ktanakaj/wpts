@@ -17,15 +17,15 @@ namespace Honememo.Wptscs.Parsers
     using NUnit.Framework;
 
     /// <summary>
-    /// MediaWikiRedirectParserのテストクラスです。
+    /// <see cref="MediaWikiRedirectParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class MediaWikiRedirectParserTest
+    class MediaWikiRedirectParserTest
     {
         #region インスタンス実装メソッドテストケース
 
         /// <summary>
-        /// TryParseメソッドテストケース。
+        /// <see cref="MediaWikiRedirectParser.TryParse"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestTryParse()
@@ -54,6 +54,12 @@ namespace Honememo.Wptscs.Parsers
 
                 // enで日本語の転送書式
                 Assert.IsFalse(parser.TryParse("#転送 [[Test]]", out element));
+                Assert.IsNull(element);
+
+                // 空文字列・null
+                Assert.IsFalse(parser.TryParse(String.Empty, out element));
+                Assert.IsNull(element);
+                Assert.IsFalse(parser.TryParse(null, out element));
                 Assert.IsNull(element);
             }
 

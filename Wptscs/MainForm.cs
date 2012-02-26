@@ -46,6 +46,11 @@ namespace Honememo.Wptscs
         /// </summary>
         private int logLength;
 
+        /// <summary>
+        /// ステータス管理用オブジェクト。
+        /// </summary>
+        private StatusManager<string> statusManager;
+
         #endregion
 
         #region コンストラクタ
@@ -71,7 +76,9 @@ namespace Honememo.Wptscs
         private void MainForm_Load(object sender, EventArgs e)
         {
             // フォームの初期設定
-            Control.CheckForIllegalCrossThreadCalls = false;
+            this.statusManager = new StatusManager<string>();
+            this.statusManager.Changed += new EventHandler(
+                delegate { this.toolStripStatusLabelStatus.Text = StringUtils.DefaultString(this.statusManager.Status); });
 
             // 表示言語選択メニュー、設定選択メニューの初期設定
             this.InitializeDropDownButtonLanguage();
@@ -307,6 +314,13 @@ namespace Honememo.Wptscs
             // 画面をロック
             this.LockOperation();
 
+            // 表示領域を初期化、処理時間更新用にタイマーを起動
+            this.textBoxLog.Clear();
+            this.logLength = 0;
+            this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now));
+            this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, TimeSpan.Zero);
+            this.timerStatusStopwatch.Start();
+
             // バックグラウンド処理を実行
             this.backgroundWorkerRun.RunWorkerAsync();
         }
@@ -320,8 +334,10 @@ namespace Honememo.Wptscs
         {
             // 処理を中断
             this.buttonStop.Enabled = false;
-            if (this.backgroundWorkerRun.IsBusy == true)
+            if (this.backgroundWorkerRun.IsBusy)
             {
+                // ※ CancelAsyncだけにしたいが、それをTranslatorに伝播させる方法
+                //    がないため直接そちらにも設定
                 System.Diagnostics.Debug.WriteLine("MainForm.-Stop_Click > 処理中断");
                 this.backgroundWorkerRun.CancelAsync();
                 if (this.translator != null)
@@ -338,64 +354,46 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void BackgroundWorkerRun_DoWork(object sender, DoWorkEventArgs e)
         {
+            // 戻り値を失敗で初期化
+            e.Result = false;
+
+            // 別スレッドになるので表示言語を再度設定
+            Program.LoadSelectedCulture();
+
+            // フォーム要素から必要なパラメータ一式を取得
+            string source = null;
+            string target = null;
+            string title = null;
+            this.Invoke((MethodInvoker)delegate
+            {
+                source = this.comboBoxSource.Text;
+                target = this.comboBoxTarget.Text;
+                title = this.textBoxArticle.Text.Trim();
+            });
+
+            // 翻訳支援処理ロジックのオブジェクトを生成
+            this.translator = Translator.Create(this.config, source, target);
+
+            // ログ・処理状態更新通知を受け取るためのイベント登録
+            this.translator.LogUpdated += new EventHandler(
+                delegate { this.Invoke((MethodInvoker)delegate { this.UpdateLog(); }); });
+            this.translator.StatusUpdated += new EventHandler(
+                delegate { this.Invoke((MethodInvoker)delegate { this.statusManager.Status = this.translator.Status; }); });
+
+            // 翻訳支援処理を実行
             try
             {
-                // 初期化と開始メッセージ、別スレッドになるので表示言語も再度設定
-                Program.LoadSelectedCulture();
-                this.textBoxLog.Clear();
-                this.logLength = 0;
-                this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now));
-
-                // 翻訳支援処理ロジックのオブジェクトを生成
-                this.translator = Translator.Create(this.config, this.comboBoxSource.Text, this.comboBoxTarget.Text);
-
-                // ログ・処理状態更新通知を受け取るためのイベント登録
-                // 処理時間更新用にタイマーを起動
-                this.translator.LogUpdate += new EventHandler(this.GetLogUpdate);
-                this.translator.StatusUpdate += new EventHandler(this.GetStatusUpdate);
-                this.Invoke((MethodInvoker)delegate { this.timerStatusStopwatch.Start(); });
-
-                // 翻訳支援処理を実行
-                bool success = true;
-                try
-                {
-                    this.translator.Run(this.textBoxArticle.Text.Trim());
-                }
-                catch (ApplicationException)
-                {
-                    // 中止要求で停止した場合、その旨イベントに格納する
-                    e.Cancel = this.backgroundWorkerRun.CancellationPending;
-                    success = false;
-                }
-                finally
-                {
-                    // 処理時間更新用のタイマーを終了
-                    this.Invoke((MethodInvoker)delegate { this.timerStatusStopwatch.Stop(); });
-                }
-
-                // 実行結果から、ログと変換後テキストをファイル出力
-                this.WriteResult(success);
+                this.translator.Run(title);
             }
-            catch (WebException ex)
+            catch (ApplicationException)
             {
-                // 想定外の通信エラー（↓とまとめてもよいが、こちらはサーバーの状況などで発生しやすいので）
-                this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageConnectionFailed, ex.Message) + Environment.NewLine);
-                if (ex.Response != null)
-                {
-                    // 出せるならエラーとなったURLも出力
-                    this.textBoxLog.AppendText(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, ex.Response.ResponseUri) + Environment.NewLine);
-                }
+                // 中止要求で停止した場合、その旨イベントに格納する
+                e.Cancel = this.backgroundWorkerRun.CancellationPending;
+                return;
             }
-            catch (Exception ex)
-            {
-                // 想定外のエラー
-                this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageDevelopmentError, ex.Message, ex.StackTrace) + Environment.NewLine);
-            }
-            finally
-            {
-                // トランスレータを解放
-                this.translator = null;
-            }
+
+            // ここまで成功した場合のみ処理結果を成功とする
+            e.Result = true;
         }
 
         /// <summary>
@@ -405,29 +403,53 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void BackgroundWorkerRun_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // 設定ファイルのキャッシュ情報を更新
-            // ※ 微妙に時間がかかるので、ステータスバーに通知
-            try
+            // 中止ボタンをロック、処理時間更新用のタイマーを終了
+            this.buttonStop.Enabled = false;
+            this.timerStatusStopwatch.Stop();
+
+            if (e.Error != null)
             {
-                this.toolStripStatusLabelStatus.Text = Resources.StatusCacheUpdating;
+                // 処理中で想定外のエラーが発生していた場合ここで通知
+                if (e.Error is WebException)
+                {
+                    // 想定外の通信エラー（↓とまとめてもよいが、こちらはサーバーの状況などで発生しやすいので）
+                    WebException ex = (WebException)e.Error;
+                    this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageConnectionFailed, ex.Message) + Environment.NewLine);
+                    if (ex.Response != null)
+                    {
+                        // 出せるならエラーとなったURLも出力
+                        this.textBoxLog.AppendText(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, ex.Response.ResponseUri) + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    // 想定外のエラー
+                    this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageDevelopmentError, e.Error.Message, e.Error.StackTrace) + Environment.NewLine);
+                }
+            }
+            else
+            {
+                // 実行結果から、ログと変換後テキストをファイル出力
+                this.WriteResult(!e.Cancelled && (bool)e.Result);
+
+                // 設定ファイルのキャッシュ情報を更新
                 try
                 {
-                    this.config.Save();
+                    // ※ 微妙に時間がかかるので、ステータスバーに通知
+                    using (var sm = this.statusManager.Switch(Resources.StatusCacheUpdating))
+                    {
+                        this.config.Save();
+                    }
                 }
-                finally
+                catch (Exception ex)
                 {
-                    this.toolStripStatusLabelStatus.Text = String.Empty;
+                    FormUtils.WarningDialog(Resources.WarningMessageCacheSaveFailed, ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                FormUtils.WarningDialog(
-                    Resources.WarningMessageCacheSaveFailed,
-                    ex.Message);
             }
 
-            // 画面をロック中から解放
+            // 画面をロック中から戻す、トランスレータを解放
             this.Release();
+            this.translator = null;
         }
 
         #region イベント実装支援用メソッド
@@ -473,8 +495,7 @@ namespace Honememo.Wptscs
         private void WriteResult(bool success)
         {
             // 若干時間がかかるのでステータスバーに通知
-            this.toolStripStatusLabelStatus.Text = Resources.StatusFileWriting;
-            try
+            using (var sm = this.statusManager.Switch(Resources.StatusFileWriting))
             {
                 // 使用可能な出力ファイル名を生成
                 string fileName;
@@ -509,11 +530,6 @@ namespace Honememo.Wptscs
                 {
                     this.textBoxLog.AppendText(String.Format(Resources.LogMessageFileSaveFailed, Path.Combine(this.textBoxSaveDirectory.Text, logName), ex.Message));
                 }
-            }
-            finally
-            {
-                // ステータスバーをクリア
-                this.toolStripStatusLabelStatus.Text = String.Empty;
             }
         }
 
@@ -553,11 +569,9 @@ namespace Honememo.Wptscs
         }
 
         /// <summary>
-        /// 翻訳支援処理クラスのログ更新イベント用。
+        /// 翻訳支援処理クラスのログ更新反映。
         /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void GetLogUpdate(object sender, EventArgs e)
+        private void UpdateLog()
         {
             // 前回以降に追加されたログをテキストボックスに出力
             int length = this.translator.Log.Length;
@@ -567,17 +581,6 @@ namespace Honememo.Wptscs
             }
 
             this.logLength = length;
-        }
-
-        /// <summary>
-        /// 翻訳支援処理クラスの処理状態更新イベント用。
-        /// </summary>
-        /// <param name="sender">イベント発生オブジェクト。</param>
-        /// <param name="e">発生したイベント。</param>
-        private void GetStatusUpdate(object sender, EventArgs e)
-        {
-            // 処理状態をステータスバーに通知
-            this.toolStripStatusLabelStatus.Text = this.translator.Status;
         }
 
         #endregion
@@ -593,8 +596,11 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void TimerStatusStopwatch_Tick(object sender, EventArgs e)
         {
-            // 処理時間をステータスバーに反映
-            this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, this.translator.Stopwatch.Elapsed);
+            if (this.translator != null)
+            {
+                // 処理時間をステータスバーに反映
+                this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, this.translator.Stopwatch.Elapsed);
+            }
         }
 
         /// <summary>
@@ -844,18 +850,13 @@ namespace Honememo.Wptscs
         private void LoadConfig()
         {
             // 設定ファイルの読み込み
-            // ※ 微妙に時間がかかるので、ステータスバーに通知
             string file = Settings.Default.LastSelectedConfiguration + Settings.Default.ConfigurationExtension;
             try
             {
-                this.toolStripStatusLabelStatus.Text = Resources.StatusConfigReading;
-                try
+                // ※ 微妙に時間がかかるので、ステータスバーに通知
+                using (var sm = this.statusManager.Switch(Resources.StatusConfigReading))
                 {
                     this.config = Config.GetInstance(file);
-                }
-                finally
-                {
-                    this.toolStripStatusLabelStatus.Text = String.Empty;
                 }
             }
             catch (FileNotFoundException ex)

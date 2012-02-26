@@ -18,15 +18,15 @@ namespace Honememo.Wptscs.Parsers
     using NUnit.Framework;
 
     /// <summary>
-    /// MediaWikiHeadingParserのテストクラスです。
+    /// <see cref="MediaWikiHeadingParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class MediaWikiHeadingParserTest
+    class MediaWikiHeadingParserTest
     {
         #region private変数
 
         /// <summary>
-        /// 前処理・後処理で生成／解放される言語別のMediaWikiParser。
+        /// 前処理・後処理で生成／解放される言語別の<see cref="MediaWikiParser"/>。
         /// </summary>
         private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
 
@@ -37,21 +37,21 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テストの前処理。
         /// </summary>
+        /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の生成。</remarks>
         [TestFixtureSetUp]
         public void SetUpBeforeClass()
         {
-            // Disposeが必要なMediaWikiParserの生成／解放
             this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
         }
 
         /// <summary>
         /// テストの後処理。
         /// </summary>
+        /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の解放。</remarks>
         [TestFixtureTearDown]
         public void TearDownAfterClass()
         {
-            // Disposeが必要なMediaWikiParserの生成／解放
-            foreach (MediaWikiParser parser in this.mediaWikiParsers.Values)
+            foreach (IDisposable parser in this.mediaWikiParsers.Values)
             {
                 parser.Dispose();
             }
@@ -79,7 +79,7 @@ namespace Honememo.Wptscs.Parsers
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
-        /// TryParseメソッドテストケース。
+        /// <see cref="MediaWikiHeadingParser.TryParse"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestTryParse()
@@ -150,10 +150,16 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("{{lang\n|ja|見出し}}", heading[1].ToString());
             Assert.IsInstanceOf(typeof(MediaWikiTemplate), heading[1]);
             Assert.AreEqual(" ", heading[2].ToString());
+
+            // 空・null
+            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsNull(element);
+            Assert.IsFalse(parser.TryParse(null, out element));
+            Assert.IsNull(element);
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（コメント）。
+        /// <see cref="MediaWikiHeadingParser.TryParse"/>メソッドテストケース（コメント）。
         /// </summary>
         [Test]
         public void TestTryParseComment()

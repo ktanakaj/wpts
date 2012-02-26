@@ -17,7 +17,7 @@ namespace Honememo.Utilities
     /// </summary>
     /// <remarks>
     /// Apache Commons Lang - ObjectUtils
-    /// http://commons.apache.org/lang/api/org/apache/commons/lang/ObjectUtils.html
+    /// http://commons.apache.org/lang/api-2.6/org/apache/commons/lang/ObjectUtils.html
     /// </remarks>
     public static class ObjectUtils
     {

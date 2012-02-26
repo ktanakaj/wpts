@@ -89,6 +89,8 @@
     <Compile Include="Parsers\MediaWikiVariable.cs" />
     <Compile Include="Parsers\MediaWikiVariableParser.cs" />
     <Compile Include="Parsers\MediaWikiRedirectParser.cs" />
+    <Compile Include="Parsers\MediaWikiPreparser.cs" />
+    <Compile Include="Utilities\EndPeriodException.cs" />
     <Compile Include="Websites\MediaWiki.cs" />
     <Compile Include="Parsers\MediaWikiLink.cs" />
     <Compile Include="Websites\MediaWikiPage.cs" />

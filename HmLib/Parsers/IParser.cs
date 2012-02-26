@@ -24,6 +24,7 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="s">解析対象の文字列。</param>
         /// <returns>解析結果。</returns>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
         /// <remarks>解析に失敗した場合は、各種例外を投げる。</remarks>
         IElement Parse(string s);

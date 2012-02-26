@@ -30,6 +30,11 @@ namespace Honememo.Parsers
         /// </summary>
         private XmlParser parser;
 
+        /// <summary>
+        /// 特定のXML/HTMLタグのみを解析対象とする場合そのタグ名。
+        /// </summary>
+        private IList<string> targets = new List<string>();
+
         #endregion
         
         #region コンストラクタ
@@ -54,7 +59,37 @@ namespace Honememo.Parsers
 
         #endregion
 
-        #region プロパティ
+        #region 公開プロパティ
+
+        /// <summary>
+        /// 特定のXML/HTMLタグのみを解析対象とする場合そのタグ名。
+        /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        /// <remarks>
+        /// <para>
+        /// 空の場合、全てのXML/HTMLタグを解析対象とする。
+        /// </para>
+        /// <para>
+        /// &lt;br&gt;タグのように閉じタグが存在しないケースで時間がかかってしまうケースが存在するため、
+        /// 必要なタグのみを処理するための機能として実装。
+        /// </para>
+        /// </remarks>
+        public virtual IList<string> Targets
+        {
+            get
+            {
+                return this.targets;
+            }
+
+            set
+            {
+                this.targets = Validate.NotNull(value);
+            }
+        }
+
+        #endregion
+
+        #region protectedプロパティ
 
         /// <summary>
         /// このパーサーが参照する<see cref="XmlParser"/>。
@@ -103,9 +138,13 @@ namespace Honememo.Parsers
                 return false;
             }
 
-            // タグ名確認、コメント（<!--）やちゃんと始まっていないもの（< tag>とか）もここで除外
+            // タグ名確認、コメント（<!--）やちゃんと始まっていないもの（< tag>とか）もここで除外。
+            // 処理対象のタグが限定されている場合で、それ以外のものもここで除外。
             string name = s.Substring(1, index - 1);
-            if (!this.ValidateName(name))
+            if (!this.ValidateName(name)
+                || (this.targets.Count > 0
+                && !(!this.parser.IgnoreCase && this.targets.Contains(name))
+                && !(this.parser.IgnoreCase && CollectionUtils.ContainsIgnoreCase(this.targets, name))))
             {
                 return false;
             }

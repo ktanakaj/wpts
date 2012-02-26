@@ -3,7 +3,7 @@
 //      XMLの処理に関するユーティリティクラスソース。</summary>
 //
 // <copyright file="XmlUtils.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -115,8 +115,7 @@ namespace Honememo.Utilities
         /// </remarks>
         public static string XmlEncode(string s)
         {
-            Validate.NotNull(s);
-            return s.Replace("&", "&amp;").Replace("<", "&lt;")
+            return Validate.NotNull(s, "s").Replace("&", "&amp;").Replace("<", "&lt;")
                 .Replace(">", "&gt;").Replace("\"", "&quot;").Replace("\'", "&apos;");
         }
 
@@ -131,8 +130,7 @@ namespace Honememo.Utilities
         /// </remarks>
         public static string XmlDecode(string s)
         {
-            Validate.NotNull(s);
-            return s.Replace("&lt;", "<").Replace("&gt;", ">")
+            return Validate.NotNull(s, "s").Replace("&lt;", "<").Replace("&gt;", ">")
                 .Replace("&quot;", "\"").Replace("&apos;", "\'").Replace("&amp;", "&");
         }
 

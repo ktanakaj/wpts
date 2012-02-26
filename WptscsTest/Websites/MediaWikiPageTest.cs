@@ -13,17 +13,16 @@ namespace Honememo.Wptscs.Websites
     using System;
     using System.Collections.Generic;
     using Honememo.Parsers;
-    using Honememo.Tests;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Parsers;
     using NUnit.Framework;
 
     /// <summary>
-    /// MediaWikiPageのテストクラスです。
+    /// <see cref="MediaWikiPage"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class MediaWikiPageTest
+    class MediaWikiPageTest
     {
         #region コンストラクタテストケース
 
@@ -34,7 +33,7 @@ namespace Honememo.Wptscs.Websites
         public void TestConstructorWebsiteTitleTextTimestamp()
         {
             DateTime t = DateTime.Now;
-            MediaWiki s = new DummySite(new Language("en"));
+            MediaWiki s = new MediaWiki(new Language("en"));
             MediaWikiPage page = new MediaWikiPage(s, "TestTitle", "TestText", t);
             Assert.AreSame(s, page.Website);
             Assert.AreEqual("TestTitle", page.Title);
@@ -48,7 +47,7 @@ namespace Honememo.Wptscs.Websites
         [Test]
         public void TestConstructorWebsiteTitleText()
         {
-            MediaWiki s = new DummySite(new Language("en"));
+            MediaWiki s = new MediaWiki(new Language("en"));
             MediaWikiPage page = new MediaWikiPage(s, "TestTitle", "TestText");
             Assert.AreEqual(s, page.Website);
             Assert.AreEqual("TestTitle", page.Title);
@@ -62,7 +61,7 @@ namespace Honememo.Wptscs.Websites
         [Test]
         public void TestConstructorWebsiteTitle()
         {
-            MediaWiki s = new DummySite(new Language("en"));
+            MediaWiki s = new MediaWiki(new Language("en"));
             MediaWikiPage page = new MediaWikiPage(s, "TestTitle");
             Assert.AreEqual(s, page.Website);
             Assert.AreEqual("TestTitle", page.Title);
@@ -87,7 +86,7 @@ namespace Honememo.Wptscs.Websites
         [ExpectedException(typeof(ArgumentException))]
         public void TestConstructorTitleBlank()
         {
-            new MediaWikiPage(new DummySite(new Language("en")), "  ");
+            new MediaWikiPage(new MediaWiki(new Language("en")), "  ");
         }
 
         #endregion
@@ -95,7 +94,7 @@ namespace Honememo.Wptscs.Websites
         #region プロパティテストケース
 
         /// <summary>
-        /// Redirectプロパティテストケース（正常系）。
+        /// <see cref="MediaWikiPage.Redirect"/>プロパティテストケース（正常系）。
         /// </summary>
         [Test]
         public void TestRedirect()
@@ -117,7 +116,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Redirectプロパティテストケース（Text未設定）。
+        /// <see cref="MediaWikiPage.Redirect"/>プロパティテストケース（Text未設定）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -126,47 +125,19 @@ namespace Honememo.Wptscs.Websites
             MediaWikiLink dummy = new MediaWikiPage(new MockFactory().GetMediaWiki("en"), "TestTitle").Redirect;
         }
 
-        /// <summary>
-        /// Elementプロパティテストケース（正常系）。
-        /// </summary>
-        [Test]
-        public void TestElement()
-        {
-            IElement element = new MediaWikiPage(new MockFactory().GetMediaWiki("en"), "TestTitle", "'''Title''' is [[xxx]].").Element;
-            Assert.IsNotNull(element);
-            Assert.AreEqual("'''Title''' is [[xxx]].", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
-            ListElement list = (ListElement)element;
-            Assert.AreEqual(3, list.Count);
-            Assert.AreEqual("'''Title''' is ", list[0].ToString());
-            Assert.AreEqual("[[xxx]]", list[1].ToString());
-            Assert.IsInstanceOf(typeof(MediaWikiLink), list[1]);
-            Assert.AreEqual(".", list[2].ToString());
-        }
-
-        /// <summary>
-        /// Elementプロパティテストケース（Text未設定）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void TestElementTextNull()
-        {
-            IElement dummy = new MediaWikiPage(new MockFactory().GetMediaWiki("en"), "TestTitle").Element;
-        }
-
         #endregion
 
         #region 公開メソッドテストケース
 
         /// <summary>
-        /// GetInterlanguageメソッドテストケース（通常ページ）。
+        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（通常ページ）。
         /// </summary>
         [Test]
         public void TestGetInterlanguage()
         {
             // 普通のページ
             MediaWikiPage page = new MediaWikiPage(
-                new DummySite(new Language("en")),
+                new MediaWiki(new Language("en")),
                 "TestTitle",
                 "TestText\n [[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
             Assert.AreEqual("[[ja:テストページ]]", page.GetInterlanguage("ja").ToString());
@@ -177,7 +148,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// GetInterlanguageメソッドテストケース（通常ページ実データ使用）。
+        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（通常ページ実データ使用）。
         /// </summary>
         [Test, Timeout(20000)]
         public void TestGetInterlanguageDiscoveryChannel()
@@ -191,7 +162,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// GetInterlanguageメソッドテストケース（テンプレートページ実データ使用）。
+        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（テンプレートページ実データ使用）。
         /// </summary>
         [Test, Timeout(20000)]
         public void TestGetInterlanguagePlanetboxBegin()
@@ -203,7 +174,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// GetInterlanguageメソッドテストケース（Template:Documentation使用ページ）。
+        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（Template:Documentation使用ページ）。
         /// </summary>
         [Test]
         public void TestGetInterlanguageDocumentation()
@@ -222,12 +193,23 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// IsRedirectメソッドテストケース。
+        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（Template:Documentationにnoincludeで囲まれた言語間リンクが存在）。
+        /// </summary>
+        [Test]
+        public void TestGetInterlanguagePartial()
+        {
+            MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Template:Partial");
+            Assert.AreEqual("[[ja:Template:Partial]]", page.GetInterlanguage("ja").ToString());
+            Assert.IsNull(page.GetInterlanguage("ru"));
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiPage.IsRedirect"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestIsRedirect()
         {
-            MediaWiki site = new DummySite(new Language("en"));
+            MediaWiki site = new MediaWiki(new Language("en"));
             MediaWikiPage page = new MediaWikiPage(site, "TestTitle", "#REDIRECT [[Test Redirect]]");
             Assert.IsTrue(page.IsRedirect());
             Assert.AreEqual("Test Redirect", page.Redirect.Title);
@@ -250,12 +232,12 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Normalizeメソッドテストケース。
+        /// <see cref="MediaWikiPage.Normalize"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestNormalize()
         {
-            MediaWiki site = new DummySite(new Language("en"));
+            MediaWiki site = new MediaWiki(new Language("en"));
             MediaWikiPage page = new MediaWikiPage(site, "A/b/c");
 
             // サブページの正規化
@@ -285,33 +267,26 @@ namespace Honememo.Wptscs.Websites
         // 非公開メソッドについてはprotected以上、またはやりたい部分だけ実施
 
         /// <summary>
-        /// ValidateIncompleteメソッドテストケース（正常系）。
+        /// <see cref="MediaWikiPage.ValidateIncomplete"/>メソッドテストケース（正常系）。
         /// </summary>
         [Test]
         public void TestValidateIncomplete()
         {
-            // 正常系は例外が発生しなければOK
-            PrivateAccessor<MediaWikiPage> acc = new PrivateAccessor<MediaWikiPage>(
-                new MediaWikiPage(
-                    new MediaWiki(new Language("en")),
-                    "TestTitle",
-                    "TestText"));
-            acc.SetMethod("ValidateIncomplete", new Type[0]);
-            acc.Invoke(new object[0]);
+            // Textが空の場合例外発生、正常系は例外が発生しなければOK
+            MediaWikiPageMock page = new MediaWikiPageMock(new MediaWiki(new Language("en")), "TestTitle");
+            page.Text = "TestText";
+            page.ValidateIncomplete();
         }
 
         /// <summary>
-        /// ValidateIncompleteメソッドテストケース（異常系）。
+        /// <see cref="MediaWikiPage.ValidateIncomplete"/>メソッドテストケース（異常系）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestValidateIncompleteNg()
         {
-            // 正常系は例外が発生しなければOK
-            PrivateAccessor<MediaWikiPage> acc = new PrivateAccessor<MediaWikiPage>(
-                new MediaWikiPage(new MediaWiki(new Language("en")), "TestTitle"));
-            acc.SetMethod("ValidateIncomplete");
-            acc.Invoke();
+            // Textが空の場合例外発生
+            new MediaWikiPageMock(new MediaWiki(new Language("en")), "TestTitle").ValidateIncomplete();
         }
 
         #endregion
@@ -319,9 +294,9 @@ namespace Honememo.Wptscs.Websites
         #region モッククラス
 
         /// <summary>
-        /// MediaWikiテスト用のモッククラスです。
+        /// <see cref="MediaWikiPage"/>テスト用のモッククラスです。
         /// </summary>
-        public class DummySite : MediaWiki
+        private class DummySite : MediaWiki
         {
             #region コンストラクタ
 
@@ -339,7 +314,7 @@ namespace Honememo.Wptscs.Websites
             #region ダミーメソッド
 
             /// <summary>
-            /// ページを取得。
+            /// ページを取得。<paramref name="title"/>に応じてテスト用の結果を返す。
             /// </summary>
             /// <param name="title">ページタイトル。</param>
             /// <returns>取得したページ。</returns>
@@ -355,6 +330,61 @@ namespace Honememo.Wptscs.Websites
                 }
 
                 return base.GetPage(title);
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiPage"/>テスト用のモッククラスです。
+        /// </summary>
+        private class MediaWikiPageMock : MediaWikiPage
+        {
+            #region コンストラクタ
+
+            /// <summary>
+            /// コンストラクタ。
+            /// ページの本文, タイムスタンプには<c>null</c>を設定。
+            /// </summary>
+            /// <param name="website">ページが所属するウェブサイト。</param>
+            /// <param name="title">ページタイトル。</param>
+            public MediaWikiPageMock(MediaWiki website, string title)
+                : base(website, title)
+            {
+            }
+
+            #endregion
+
+            #region 非公開プロパティテスト用のオーラーライドプロパティ
+
+            /// <summary>
+            /// ページの本文。
+            /// </summary>
+            public new string Text
+            {
+                get
+                {
+                    return base.Text;
+                }
+
+                set
+                {
+                    base.Text = value;
+                }
+            }
+
+            #endregion
+
+            #region 非公開メソッドテスト用のオーラーライドメソッド
+
+            /// <summary>
+            /// オブジェクトがメソッドの実行に不完全な状態でないか検証する。
+            /// 不完全な場合、例外をスローする。
+            /// </summary>
+            /// <exception cref="InvalidOperationException">オブジェクトは不完全。</exception>
+            public new void ValidateIncomplete()
+            {
+                base.ValidateIncomplete();
             }
 
             #endregion

@@ -20,6 +20,15 @@ namespace Honememo.Wptscs.Parsers
     /// <summary>
     /// MediaWikiのnowikiブロックを解析するパーサークラスです。
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// nowikiブロックでは、MediaWikiの各種構文やコメントも含めたhtmlタグが全て無効化されます。
+    /// </para>
+    /// <para>
+    /// ブロック内の再帰解析を行わないパーサーというだけなので、
+    /// 使おうと思えばMediaWiki以外のページに対しても使用可能です。
+    /// </para>
+    /// </remarks>
     public class MediaWikiNowikiParser : XmlElementParser
     {
         #region 定数宣言
@@ -27,7 +36,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// nowikiタグ。
         /// </summary>
-        private static readonly string nowikiTag = "nowiki";
+        private static readonly string NowikiTag = "nowiki";
 
         #endregion
 
@@ -36,8 +45,8 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// MediaWikiのnowikiブロックを解析するためのパーサーを作成する。
         /// </summary>
-        /// <param name="parser">このパーサーが参照する<see cref="MediaWikiParser"/>。</param>
-        public MediaWikiNowikiParser(MediaWikiParser parser)
+        /// <param name="parser">このパーサーが参照する<see cref="XmlParser"/>。</param>
+        public MediaWikiNowikiParser(XmlParser parser)
         {
             // nowikiブロックではMediaWikiの各種構文やコメントも含むhtmlタグも全て無効なため、
             // 親クラスにそうした処理を含まない空のXMLParserを指定する。
@@ -48,10 +57,39 @@ namespace Honememo.Wptscs.Parsers
             this.Parser.Parsers = new IParser[0];
             this.Parser.IgnoreCase = parser.IgnoreCase;
             this.Parser.IsHtml = parser.IsHtml;
+
+            // nowikiタグ専用に設定。変更されると困るので読み取り専用リストに
+            List<string> list = new List<string>();
+            list.Add(NowikiTag);
+            base.Targets = list.AsReadOnly();
         }
 
         #endregion
-        
+
+        #region 公開プロパティ
+
+        /// <summary>
+        /// このパーサーの解析対象のタグ。
+        /// </summary>
+        /// <exception cref="NotSupportedException">値を更新しようとした場合。</exception>
+        /// <remarks>
+        /// このパーサーはnowikiタグ専用です。値の変更・追加はできません。
+        /// </remarks>
+        public override IList<string> Targets
+        {
+            get
+            {
+                return base.Targets;
+            }
+
+            set
+            {
+                throw new NotSupportedException(NowikiTag + " only");
+            }
+        }
+
+        #endregion
+
         #region インタフェース実装メソッド
         
         /// <summary>
@@ -70,24 +108,21 @@ namespace Honememo.Wptscs.Parsers
             IElement element;
             if (base.TryParse(s, out element))
             {
+                // nowiki区間は内部要素を全てテキストとして扱う
                 XmlElement xmlElement = (XmlElement)element;
-                if (xmlElement.Name.ToLower() == MediaWikiNowikiParser.nowikiTag)
+                XmlTextElement innerElement = new XmlTextElement();
+                StringBuilder b = new StringBuilder();
+                foreach (IElement e in xmlElement)
                 {
-                    // nowiki区間は内部要素を全てテキストとして扱う
-                    XmlTextElement innerElement = new XmlTextElement();
-                    StringBuilder b = new StringBuilder();
-                    foreach (IElement e in xmlElement)
-                    {
-                        b.Append(e.ToString());
-                    }
-
-                    innerElement.Raw = b.ToString();
-                    innerElement.ParsedString = b.ToString();
-                    xmlElement.Clear();
-                    xmlElement.Add(innerElement);
-                    result = xmlElement;
-                    return true;
+                    b.Append(e.ToString());
                 }
+
+                innerElement.Raw = b.ToString();
+                innerElement.ParsedString = b.ToString();
+                xmlElement.Clear();
+                xmlElement.Add(innerElement);
+                result = xmlElement;
+                return true;
             }
 
             return false;

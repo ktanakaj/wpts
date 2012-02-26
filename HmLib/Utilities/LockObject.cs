@@ -44,7 +44,7 @@ namespace Honememo.Utilities
         {
             // ロックオブジェクトを取得、この時点では特にロック不要
             // ※ ConcurrentDictionaryを使用しており、一回の処理で更新しているため
-            int hashcode = Validate.NotNull(param).GetHashCode();
+            int hashcode = Validate.NotNull(param, "param").GetHashCode();
             object lockObject;
             if (this.locks.TryGetValue(hashcode, out lockObject))
             {

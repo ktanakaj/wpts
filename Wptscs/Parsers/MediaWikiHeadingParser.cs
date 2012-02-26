@@ -57,8 +57,12 @@ namespace Honememo.Wptscs.Parsers
         /// </remarks>
         public override bool TryParse(string s, out IElement result)
         {
-            // 出力値初期化
+            // 入力値確認、空の場合は即終了
             result = null;
+            if (String.IsNullOrEmpty(s))
+            {
+                return false;
+            }
 
             // 始まりの = の数を数える
             // ※ 構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・

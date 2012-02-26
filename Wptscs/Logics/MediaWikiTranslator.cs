@@ -27,7 +27,7 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Wptscs.Websites;
 
     /// <summary>
-    /// Wikipedia用の翻訳支援処理実装クラスです。
+    /// MediaWiki用の翻訳支援処理実装クラスです。
     /// </summary>
     public class MediaWikiTranslator : Translator
     {
@@ -43,8 +43,12 @@ namespace Honememo.Wptscs.Logics
         #region コンストラクタ
 
         /// <summary>
-        /// インスタンスを生成する。
+        /// MediaWikiでの翻訳支援処理を行うトランスレータを作成。
         /// </summary>
+        /// <remarks>
+        /// 別途プロパティに必要なパラメータを設定する必要あり。
+        /// 通常は<see cref="Translator.Create"/>にて設定ファイルから作成する。
+        /// </remarks>
         public MediaWikiTranslator()
         {
             // このクラス用のロガーと、デフォルトの確認処理としてメッセージダイアログ版を設定
@@ -130,10 +134,12 @@ namespace Honememo.Wptscs.Logics
 
             // 対象記事に言語間リンクが存在する場合、処理を継続するか確認
             // ※ 言語間リンク取得中は、処理状態を解析中に変更
-            MediaWikiLink interlanguage = null;
-            this.ChangeStatusInExecuting(
-                () => interlanguage = article.GetInterlanguage(this.To.Language.Code),
-                Resources.StatusParsing);
+            MediaWikiLink interlanguage;
+            using (var sm = this.StatusManager.Switch(Resources.StatusParsing))
+            {
+                interlanguage = article.GetInterlanguage(this.To.Language.Code);
+            }
+
             if (interlanguage != null)
             {
                 // 確認処理の最中は処理時間をカウントしない（ダイアログ等を想定するため）
@@ -153,9 +159,16 @@ namespace Honememo.Wptscs.Logics
             // 言語間リンク・定型句の変換、実行中は処理状態を解析中に設定
             this.Logger.AddSeparator();
             this.Logger.AddResponse(Resources.LogMessageStartParseAndReplace);
-            this.ChangeStatusInExecuting(
-                () => this.Text += this.ReplaceElement(article.Element, article).ToString(),
-                Resources.StatusParsing);
+            using (var sm = this.StatusManager.Switch(Resources.StatusParsing))
+            {
+                IElement element;
+                using (MediaWikiParser parser = new MediaWikiParser(this.From))
+                {
+                    element = parser.Parse(article.Text);
+                }
+
+                this.Text += this.ReplaceElement(element, article).ToString();
+            }
 
             // 記事の末尾に新しい言語間リンクと、コメントを追記
             this.Text += this.CreateEnding(article);

@@ -11,20 +11,18 @@
 namespace Honememo.Parsers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using NUnit.Framework;
 
     /// <summary>
-    /// XmlElementParserのテストクラスです。
+    /// <see cref="XmlElementParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class XmlElementParserTest
+    class XmlElementParserTest
     {
         #region private変数
 
         /// <summary>
-        /// 前処理・後処理で毎回生成／解放されるXmlParser。
+        /// 前処理・後処理で毎回生成／解放される<see cref="XmlParser"/>。
         /// </summary>
         private XmlParser xmlParser;
 
@@ -35,24 +33,55 @@ namespace Honememo.Parsers
         /// <summary>
         /// テストの前処理。
         /// </summary>
+        /// <remarks><see cref="XmlParser.Dispose"/>が必要な<see cref="XmlParser"/>の生成。</remarks>
         [SetUp]
         public void SetUp()
         {
-            // Disposeが必要なXmlParserの生成／解放
             this.xmlParser = new XmlParser();
         }
 
         /// <summary>
         /// テストの後処理。
         /// </summary>
+        /// <remarks><see cref="XmlParser.Dispose"/>が必要な<see cref="XmlParser"/>の解放。</remarks>
         [TearDown]
         public void TearDown()
         {
-            // Disposeが必要なXmlParserの生成／解放
-            if (this.xmlParser != null)
-            {
-                this.xmlParser.Dispose();
-            }
+            this.xmlParser.Dispose();
+        }
+
+        #endregion
+
+        #region 公開プロパティテストケース
+
+        /// <summary>
+        /// <see cref="XmlElementParser.Targets"/>プロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestTargets()
+        {
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
+
+            // 初期状態でオブジェクトが存在すること
+            Assert.IsNotNull(parser.Targets);
+            Assert.AreEqual(0, parser.Targets.Count);
+            parser.Targets.Add("span");
+            Assert.AreEqual("span", parser.Targets[0]);
+
+            // 設定すればそのオブジェクトが入ること
+            string[] targets = new string[] { "div", "p" };
+            parser.Targets = targets;
+            Assert.AreSame(targets, parser.Targets);
+        }
+
+        /// <summary>
+        /// <see cref="XmlElementParser.Targets"/>プロパティテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestTargetsNull()
+        {
+            new XmlElementParser(this.xmlParser).Targets = null;
         }
 
         #endregion
@@ -60,7 +89,7 @@ namespace Honememo.Parsers
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
-        /// TryParseメソッドテストケース（実例）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（実例）。
         /// </summary>
         [Test]
         public void TestTryParse()
@@ -115,7 +144,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（基本形）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（基本形）。
         /// </summary>
         [Test]
         public void TestTryParseNormal()
@@ -159,7 +188,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（普通でNGパターン）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（普通でNGパターン）。
         /// </summary>
         [Test]
         public void TestTryParseNormalNg()
@@ -171,10 +200,14 @@ namespace Honememo.Parsers
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse("<!-- comment -->", out element));
             Assert.IsNull(element);
+            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsNull(element);
+            Assert.IsFalse(parser.TryParse(null, out element));
+            Assert.IsNull(element);
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（単一のパターン）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（単一のパターン）。
         /// </summary>
         [Test]
         public void TestTryParseSingle()
@@ -218,7 +251,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（不正な構文）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（不正な構文）。
         /// </summary>
         [Test]
         public void TestTryParseLazy()
@@ -255,7 +288,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（不正でNG）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（不正でNG）。
         /// </summary>
         [Test]
         public void TestTryParseLazyNg()
@@ -280,7 +313,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（HTML）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（HTML）。
         /// </summary>
         [Test]
         public void TestTryParseHtml()
@@ -331,7 +364,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（大文字小文字）。
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（大文字小文字）。
         /// </summary>
         [Test]
         public void TestTryParseIgnoreCase()
@@ -361,12 +394,35 @@ namespace Honememo.Parsers
             Assert.AreEqual(0, xmlElement.Attributes.Count);
         }
 
-        #endregion
+        /// <summary>
+        /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（タグ限定）。
+        /// </summary>
+        [Test]
+        public void TestTryParseTargets()
+        {
+            IElement element;
+            XmlElementParser parser = new XmlElementParser(this.xmlParser);
 
-        #region 公開メソッドテストケース
+            // 特定のタグのみを処理対象とするよう指定する
+            parser.Targets = new string[] { "div", "span" };
+            Assert.IsFalse(parser.TryParse("<h1>test</h1>", out element));
+            Assert.IsFalse(parser.TryParse("<br />", out element));
+            Assert.IsTrue(parser.TryParse("<div>test</div>", out element));
+            Assert.AreEqual("<div>test</div>", element.ToString());
+
+            // XmlParserに大文字小文字無視が指定されている場合、ここも無視する
+            Assert.IsTrue(parser.TryParse("<sPan>test</span>", out element));
+            Assert.AreEqual("<sPan>test</span>", element.ToString());
+
+            // 指定されていない場合、区別する
+            this.xmlParser.IgnoreCase = false;
+            Assert.IsFalse(parser.TryParse("<sPan>test</span>", out element));
+            Assert.IsTrue(parser.TryParse("<span>test</span>", out element));
+            Assert.AreEqual("<span>test</span>", element.ToString());
+        }
 
         /// <summary>
-        /// IsElementPossibleメソッドテストケース。
+        /// <see cref="XmlElementParser.IsPossibleParse"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestIsElementPossible()

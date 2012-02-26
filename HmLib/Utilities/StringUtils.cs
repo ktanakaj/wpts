@@ -16,7 +16,7 @@ namespace Honememo.Utilities
     /// <summary>
     /// 文字列処理に関するユーティリティクラスです。
     /// </summary>
-    /// <remarks>一部メソッドは、Apache Commons Lang の StringUtils やJava標準の String を参考にしています。</remarks>
+    /// <remarks>一部メソッドは、Apache Commons LangのStringUtilsやJava標準のStringを参考にしています。</remarks>
     public static class StringUtils
     {
         #region 定数
@@ -163,8 +163,8 @@ namespace Honememo.Utilities
         public static string FormatDollarVariable(string format, params object[] args)
         {
             // nullチェック
-            Validate.NotNull(format);
-            Validate.NotNull(args);
+            Validate.NotNull(format, "format");
+            Validate.NotNull(args, "args");
 
             // 正規表現で$1～$数値のパラメータ部分を抜き出し、対応するパラメータに置き換える
             // 対応するパラメータが存在しない場合、空文字列となる

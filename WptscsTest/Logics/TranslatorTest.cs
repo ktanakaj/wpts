@@ -17,15 +17,15 @@ namespace Honememo.Wptscs.Logics
     using NUnit.Framework;
 
     /// <summary>
-    /// Translatorのテストクラスです。
+    /// <see cref="Translator"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class TranslatorTest
+    class TranslatorTest
     {
         #region プロパティテストケース
 
         /// <summary>
-        /// ItemTableプロパティテストケース。
+        /// <see cref="Translator.ItemTable"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestItemTable()
@@ -39,7 +39,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// HeadingTableプロパティテストケース。
+        /// <see cref="Translator.HeadingTable"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestHeadingTable()
@@ -53,7 +53,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Logプロパティテストケース。
+        /// <see cref="Translator.Log"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestLog()
@@ -64,7 +64,7 @@ namespace Honememo.Wptscs.Logics
 
             // 更新時にLogUpdateイベントが実行されること
             int count = 0;
-            translator.LogUpdate += new EventHandler((object sender, EventArgs e) => { ++count; });
+            translator.LogUpdated += new EventHandler((object sender, EventArgs e) => { ++count; });
             Assert.AreEqual(0, count);
             translator.Logger.AddMessage("ログ");
             Assert.AreEqual(1, count);
@@ -75,7 +75,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Textプロパティテストケース。
+        /// <see cref="Translator.Text"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestText()
@@ -92,7 +92,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// CancellationPendingプロパティテストケース。
+        /// <see cref="Translator.CancellationPending"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestCancellationPending()
@@ -107,7 +107,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Fromプロパティテストケース。
+        /// <see cref="Translator.From"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestFrom()
@@ -121,7 +121,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Toプロパティテストケース。
+        /// <see cref="Translator.To"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestTo()
@@ -139,7 +139,7 @@ namespace Honememo.Wptscs.Logics
         #region 静的メソッドテストケース
 
         /// <summary>
-        /// Createメソッドテストケース。
+        /// <see cref="Translator.Create"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestCreate()
@@ -161,7 +161,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Createメソッドテストケース（未対応のトランスレータクラス）。
+        /// <see cref="Translator.Create"/>メソッドテストケース（未対応のトランスレータクラス）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(NotImplementedException))]
@@ -175,7 +175,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Createメソッドテストケース（トランスレータクラス以外の指定）。
+        /// <see cref="Translator.Create"/>メソッドテストケース（トランスレータクラス以外の指定）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
@@ -193,7 +193,7 @@ namespace Honememo.Wptscs.Logics
         #region publicメソッドテストケース
 
         /// <summary>
-        /// Runメソッドテストケース。
+        /// <see cref="Translator.Run"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestRun()
@@ -233,7 +233,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Runメソッドテストケース（必須パラメータ未設定）。
+        /// <see cref="Translator.Run"/>メソッドテストケース（必須パラメータ未設定）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -244,7 +244,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Runメソッドテストケース（ping成功）。
+        /// <see cref="Translator.Run"/>メソッドテストケース（ping成功）。
         /// </summary>
         [Test]
         public void TestRunPing()
@@ -259,7 +259,7 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Runメソッドテストケース（ping失敗）。
+        /// <see cref="Translator.Run"/>メソッドテストケース（ping失敗）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ApplicationException))]
@@ -279,9 +279,9 @@ namespace Honememo.Wptscs.Logics
         #region モッククラス
 
         /// <summary>
-        /// Translatorテスト用のモッククラスです。
+        /// <see cref="Translator"/>テスト用のモッククラスです。
         /// </summary>
-        public class TranslatorMock : Translator
+        private class TranslatorMock : Translator
         {
             #region テスト支援用プロパティ
 
@@ -350,9 +350,9 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Translatorテスト用のモッククラスです。
+        /// <see cref="Translator"/>テスト用のモッククラスです。
         /// </summary>
-        public class TranslatorIgnoreMock : Translator
+        private class TranslatorIgnoreMock : Translator
         {
             #region コンストラクタ
 
@@ -380,9 +380,9 @@ namespace Honememo.Wptscs.Logics
         }
 
         /// <summary>
-        /// Translatorテスト用のモッククラスです。
+        /// <see cref="Translator"/>テスト用のモッククラスです。
         /// </summary>
-        public class WebsiteMock : Website
+        private class WebsiteMock : Website
         {
             #region ダミーメソッド
 

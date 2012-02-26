@@ -11,6 +11,7 @@
 namespace Honememo.Parsers
 {
     using System;
+    using Honememo.Utilities;
 
     /// <summary>
     /// <see cref="IParser"/>を実装するための実装支援用抽象クラスです。
@@ -24,14 +25,15 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="s">解析対象の文字列。</param>
         /// <returns>解析結果。</returns>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <exception cref="FormatException">文字列が解析できないフォーマットの場合。</exception>
         /// <remarks>
-        /// <see cref="TryParse"/>を呼び出す。<c>TryParse</c>の結果が<c>false</c>の場合、例外として返す。
+        /// <see cref="TryParse"/>を呼び出す。<see cref="TryParse"/>の結果が<c>false</c>の場合、例外として返す。
         /// </remarks>
         public virtual IElement Parse(string s)
         {
             IElement result;
-            if (this.TryParse(s, out result))
+            if (this.TryParse(Validate.NotNull(s, "s"), out result))
             {
                 return result;
             }
@@ -70,12 +72,14 @@ namespace Honememo.Parsers
         /// <param name="result">解析した結果要素。</param>
         /// <param name="parsers">解析に用いるパーサー。指定された順に使用。</param>
         /// <returns>いずれかのパーサーで解析できた場合<c>true</c>。</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="s"/>または<paramref name="parsers"/>が<c>null</c>の場合。</exception>
         /// <exception cref="ArgumentOutOfRangeException">インデックスが文字列の範囲外の場合。</exception>
         protected virtual bool TryParseAt(string s, int index, out IElement result, params IParser[] parsers)
         {
+            Validate.InRange(s, index, "s", "index");
             char c = s[index];
             string substr = null;
-            foreach (IParser parser in parsers)
+            foreach (IParser parser in Validate.NotNull(parsers, "parsers"))
             {
                 if (parser.IsPossibleParse(c))
                 {

@@ -58,7 +58,7 @@ namespace Honememo.Wptscs.Parsers
             result = null;
 
             // 開始条件 [[ のチェック
-            if (!s.StartsWith(MediaWikiLink.DelimiterStart))
+            if (s == null || !s.StartsWith(MediaWikiLink.DelimiterStart))
             {
                 return false;
             }
@@ -118,7 +118,8 @@ namespace Honememo.Wptscs.Parsers
                     }
 
                     // 変数・コメント以外で { } または < > [ ] \n が含まれている場合、リンクは無効
-                    // TODO: <noinclude>も含まれていてOKだが、2012年1月現在未対応
+                    // ※ <noinclude>等も含まれていてOKだが、そちらはこの処理では対応しない
+                    //    （というかこのクラスとしては対応できない。必要なら前処理で展開／除去する）
                     if ((c == '<') || (c == '>') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '\n'))
                     {
                         break;

@@ -68,7 +68,7 @@ namespace Honememo.Models
         /// <exception cref="ArgumentNullException"><paramref name="collection"/>が<c>null</c>の場合。</exception>
         public IgnoreCaseSet(IEnumerable<string> collection) : this()
         {
-            foreach (string s in Validate.NotNull(collection))
+            foreach (string s in Validate.NotNull(collection, "collection"))
             {
                 this.Add(s);
             }
@@ -163,7 +163,7 @@ namespace Honememo.Models
         public bool Add(string item)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            string k = Validate.NotNull(item).ToLower();
+            string k = Validate.NotNull(item, "item").ToLower();
             string orgItem;
             bool contains = this.KeyMap.TryGetValue(k, out orgItem);
             if (contains)
@@ -197,7 +197,7 @@ namespace Honememo.Models
         public bool Contains(string item)
         {
             // 同期が取れていることを前提に、キーマップのみ確認する
-            return this.KeyMap.ContainsKey(Validate.NotNull(item).ToLower());
+            return this.KeyMap.ContainsKey(Validate.NotNull(item, "item").ToLower());
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace Honememo.Models
         public void CopyTo(string[] array, int arrayIndex)
         {
             // 入力値チェック
-            Validate.NotNull(array);
+            Validate.NotNull(array, "array");
             if (arrayIndex < 0)
             {
                 throw new ArgumentOutOfRangeException("arrayIndex");
@@ -246,7 +246,7 @@ namespace Honememo.Models
         /// <exception cref="ArgumentNullException"><paramref name="other"/>が<c>null</c>の場合。</exception>
         public void ExceptWith(IEnumerable<string> other)
         {
-            foreach (string s in Validate.NotNull(other))
+            foreach (string s in Validate.NotNull(other, "other"))
             {
                 this.Remove(s);
             }
@@ -295,7 +295,7 @@ namespace Honememo.Models
         public bool IsProperSupersetOf(IEnumerable<string> other)
         {
             int count = 0;
-            foreach (string s in Validate.NotNull(other))
+            foreach (string s in Validate.NotNull(other, "other"))
             {
                 ++count;
                 if (!this.Contains(s))
@@ -327,7 +327,7 @@ namespace Honememo.Models
         public bool IsSupersetOf(IEnumerable<string> other)
         {
             int count = 0;
-            foreach (string s in Validate.NotNull(other))
+            foreach (string s in Validate.NotNull(other, "other"))
             {
                 ++count;
                 if (!this.Contains(s))
@@ -347,7 +347,7 @@ namespace Honememo.Models
         /// <exception cref="ArgumentNullException"><paramref name="other"/>が<c>null</c>の場合。</exception>
         public bool Overlaps(IEnumerable<string> other)
         {
-            foreach (string s in Validate.NotNull(other))
+            foreach (string s in Validate.NotNull(other, "other"))
             {
                 if (this.Contains(s))
                 {
@@ -370,7 +370,7 @@ namespace Honememo.Models
         public bool Remove(string item)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            string k = Validate.NotNull(item).ToLower();
+            string k = Validate.NotNull(item, "item").ToLower();
             string orgItem;
             bool removed = false;
             if (this.KeyMap.TryGetValue(k, out orgItem))
@@ -433,7 +433,7 @@ namespace Honememo.Models
         public void UnionWith(IEnumerable<string> other)
         {
             // 重複は上書きされるだけなので単純に全部追加
-            foreach (string s in Validate.NotNull(other))
+            foreach (string s in Validate.NotNull(other, "other"))
             {
                 this.Add(s);
             }

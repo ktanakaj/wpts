@@ -50,7 +50,7 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentException"><paramref name="capacity"/>が0以下の値。</exception>
         public CacheParser(IParser parser, int capacity)
         {
-            this.parser = Validate.NotNull(parser);
+            this.parser = Validate.NotNull(parser, "parser");
             this.caches = new MemoryCache<int, IElement>(capacity);
         }
 
@@ -61,7 +61,7 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentNullException"><paramref name="parser"/>が<c>null</c>。</exception>
         public CacheParser(IParser parser)
         {
-            this.parser = Validate.NotNull(parser);
+            this.parser = Validate.NotNull(parser, "parser");
             this.caches = new MemoryCache<int, IElement>();
         }
 
@@ -74,6 +74,7 @@ namespace Honememo.Parsers
         /// </summary>
         /// <param name="s">解析対象の文字列。</param>
         /// <returns>解析結果。</returns>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <exception cref="FormatException">
         /// 文字列が解析できないフォーマットの場合。
         /// <see cref="TryParse"/>にて解析失敗がキャッシュされている場合もこの例外を返す。
@@ -108,6 +109,13 @@ namespace Honememo.Parsers
         /// </remarks>
         public bool TryParse(string s, out IElement result)
         {
+            if (s == null)
+            {
+                // nullだけ先にチェック
+                result = null;
+                return false;
+            }
+
             // TryParseが呼ばれた場合その処理結果を返す。
             // キャッシュの場合キャッシュに値があれば成功と返す。
             bool called = false;
@@ -153,7 +161,7 @@ namespace Honememo.Parsers
         private IElement GetAndAddIfEmpty(string s, MemoryCache<string, IElement>.ReturnCacheValue function)
         {
             // まずキャッシュを確認
-            int hashCode = Validate.NotNull(s).GetHashCode();
+            int hashCode = Validate.NotNull(s, "s").GetHashCode();
             IElement element;
             if (this.TryGetValue(hashCode, s, out element))
             {

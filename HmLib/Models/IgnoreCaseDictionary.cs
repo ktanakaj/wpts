@@ -171,13 +171,13 @@ namespace Honememo.Models
             get
             {
                 // 小文字に変換し、マップを経てラップインスタンスにアクセス
-                return this.Dictionary[this.KeyMap[Validate.NotNull(key).ToLower()]];
+                return this.Dictionary[this.KeyMap[Validate.NotNull(key, "key").ToLower()]];
             }
 
             set
             {
                 // 小文字に変換し、マップを経てラップインスタンスにアクセス
-                string k = Validate.NotNull(key).ToLower();
+                string k = Validate.NotNull(key, "key").ToLower();
                 string orgKey;
                 if (this.KeyMap.TryGetValue(k, out orgKey))
                 {
@@ -206,7 +206,7 @@ namespace Honememo.Models
         public void Add(string key, TValue value)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            string k = Validate.NotNull(key).ToLower();
+            string k = Validate.NotNull(key, "key").ToLower();
             this.KeyMap.Add(k, key);
             this.Dictionary.Add(key, value);
         }
@@ -221,7 +221,7 @@ namespace Honememo.Models
         {
             // 同期が取れていることを前提に、キーマップのみ確認する
             // （ラップインスタンスまで見ると、他の例外が起こりえて面倒なため）
-            return this.KeyMap.ContainsKey(Validate.NotNull(key).ToLower());
+            return this.KeyMap.ContainsKey(Validate.NotNull(key, "key").ToLower());
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace Honememo.Models
         public bool Remove(string key)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            string k = Validate.NotNull(key).ToLower();
+            string k = Validate.NotNull(key, "key").ToLower();
             string orgKey;
             bool removed = false;
             if (this.KeyMap.TryGetValue(k, out orgKey))
@@ -268,7 +268,7 @@ namespace Honememo.Models
             value = default(TValue);
 
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            string k = Validate.NotNull(key).ToLower();
+            string k = Validate.NotNull(key, "key").ToLower();
             string orgKey;
             if (this.KeyMap.TryGetValue(k, out orgKey))
             {
@@ -287,7 +287,7 @@ namespace Honememo.Models
         public void Add(KeyValuePair<string, TValue> item)
         {
             // 小文字に変換し、マップを経てラップインスタンスにアクセス
-            string k = Validate.NotNull(item.Key).ToLower();
+            string k = Validate.NotNull(item.Key, "item.key").ToLower();
             this.KeyMap.Add(k, item.Key);
             this.Dictionary.Add(item);
         }
@@ -340,7 +340,7 @@ namespace Honememo.Models
         public void CopyTo(KeyValuePair<string, TValue>[] array, int arrayIndex)
         {
             // 入力値チェック
-            Validate.NotNull(array);
+            Validate.NotNull(array, "array");
             if (arrayIndex < 0)
             {
                 throw new ArgumentOutOfRangeException("arrayIndex");
