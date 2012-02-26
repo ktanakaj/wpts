@@ -36,7 +36,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// nowikiタグ。
         /// </summary>
-        public static readonly string NowikiTag = "nowiki";
+        private static readonly string NowikiTag = "nowiki";
 
         #endregion
 
@@ -57,10 +57,39 @@ namespace Honememo.Wptscs.Parsers
             this.Parser.Parsers = new IParser[0];
             this.Parser.IgnoreCase = parser.IgnoreCase;
             this.Parser.IsHtml = parser.IsHtml;
+
+            // nowikiタグ専用に設定。変更されると困るので読み取り専用リストに
+            List<string> list = new List<string>();
+            list.Add(NowikiTag);
+            base.Targets = list.AsReadOnly();
         }
 
         #endregion
-        
+
+        #region 公開プロパティ
+
+        /// <summary>
+        /// このパーサーの解析対象のタグ。
+        /// </summary>
+        /// <exception cref="NotSupportedException">値を更新しようとした場合。</exception>
+        /// <remarks>
+        /// このパーサーはnowikiタグ専用です。値の変更・追加はできません。
+        /// </remarks>
+        public override IList<string> Targets
+        {
+            get
+            {
+                return base.Targets;
+            }
+
+            set
+            {
+                throw new NotSupportedException(NowikiTag + " only");
+            }
+        }
+
+        #endregion
+
         #region インタフェース実装メソッド
         
         /// <summary>
@@ -79,24 +108,21 @@ namespace Honememo.Wptscs.Parsers
             IElement element;
             if (base.TryParse(s, out element))
             {
+                // nowiki区間は内部要素を全てテキストとして扱う
                 XmlElement xmlElement = (XmlElement)element;
-                if (xmlElement.Name.ToLower() == MediaWikiNowikiParser.NowikiTag)
+                XmlTextElement innerElement = new XmlTextElement();
+                StringBuilder b = new StringBuilder();
+                foreach (IElement e in xmlElement)
                 {
-                    // nowiki区間は内部要素を全てテキストとして扱う
-                    XmlTextElement innerElement = new XmlTextElement();
-                    StringBuilder b = new StringBuilder();
-                    foreach (IElement e in xmlElement)
-                    {
-                        b.Append(e.ToString());
-                    }
-
-                    innerElement.Raw = b.ToString();
-                    innerElement.ParsedString = b.ToString();
-                    xmlElement.Clear();
-                    xmlElement.Add(innerElement);
-                    result = xmlElement;
-                    return true;
+                    b.Append(e.ToString());
                 }
+
+                innerElement.Raw = b.ToString();
+                innerElement.ParsedString = b.ToString();
+                xmlElement.Clear();
+                xmlElement.Add(innerElement);
+                result = xmlElement;
+                return true;
             }
 
             return false;

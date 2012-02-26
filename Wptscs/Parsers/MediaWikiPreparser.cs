@@ -55,9 +55,13 @@ namespace Honememo.Wptscs.Parsers
         /// </summary>
         public MediaWikiPreparser()
         {
-            List<IParser> parsers = new List<IParser>(this.Parsers);
-            parsers.Insert(0, new MediaWikiNowikiParser(this));
-            this.Parsers = parsers.ToArray();
+            // コメント, nowiki, includeonly, noincludeのみを処理対象とする
+            this.Parsers = new IParser[]
+            {
+                new XmlCommentElementParser(),
+                new MediaWikiNowikiParser(this),
+                new XmlElementParser(this) { Targets = new string[] { IncludeonlyTag, NoincludeTag } }
+            };
         }
 
         #endregion
@@ -122,40 +126,6 @@ namespace Honememo.Wptscs.Parsers
         public void FilterByInclude(ref IElement element)
         {
             this.FilterTag(ref element, true);
-        }
-
-        #endregion
-
-        #region 実装支援用メソッド拡張
-
-        /// <summary>
-        /// 渡されたテキストを各種解析処理で解析する。
-        /// </summary>
-        /// <param name="s">解析するテキスト。</param>
-        /// <param name="index">処理インデックス。</param>
-        /// <param name="result">解析した結果要素。</param>
-        /// <returns>解析できた場合<c>true</c>。</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="s"/>が<c>null</c>の場合。</exception>
-        /// <exception cref="ArgumentOutOfRangeException">インデックスがテキストの範囲外の場合。</exception>
-        /// <exception cref="ObjectDisposedException"><see cref="XmlParser.Dispose"/>が実行済みの場合。</exception>
-        protected override bool TryParseElementAt(string s, int index, out IElement result)
-        {
-            // まずは登録されているパーサー一式で解析
-            bool success = base.TryParseElementAt(s, index, out result);
-            if (success && result is XmlElement)
-            {
-                // XML/HTML要素の場合、includeonly, noinclude, nowikiいずれかのタグでなければ無視する
-                XmlElement xml = (XmlElement)result;
-                string name = xml.Name.ToLower();
-                if (name != IncludeonlyTag && name != NoincludeTag && name != MediaWikiNowikiParser.NowikiTag)
-                {
-                    // 解析失敗扱い
-                    result = null;
-                    return false;
-                }
-            }
-
-            return success;
         }
 
         #endregion
