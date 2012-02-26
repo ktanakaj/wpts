@@ -29,7 +29,7 @@ namespace Honememo.Utilities
         /// <exception cref="ArgumentNullException"><paramref name="collection"/>が<c>null</c>の場合。</exception>
         public static bool ContainsIgnoreCase(IEnumerable<string> collection, string item)
         {
-            foreach (string s in Validate.NotNull(collection))
+            foreach (string s in Validate.NotNull(collection, "collection"))
             {
                 if (s == item || (s != null && item != null && s.ToLower() == item.ToLower()))
                 {
@@ -53,7 +53,7 @@ namespace Honememo.Utilities
         /// <remarks><paramref name="array"/>中に<c>null</c>要素が存在するのは可。</remarks>
         public static string[] Trim(string[] array)
         {
-            string[] result = new string[Validate.NotNull(array).Length];
+            string[] result = new string[Validate.NotNull(array, "array").Length];
             for (int i = 0; i < array.Length; i++)
             {
                 string s = array[i];

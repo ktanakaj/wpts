@@ -194,7 +194,7 @@ namespace Honememo.Wptscs.Parsers
         /// <exception cref="ArgumentNullException"><paramref name="element"/>が<c>null</c>の場合。</exception>
         private void FilterTag(ref IElement element, bool include)
         {
-            if (Validate.NotNull(element) is XmlCommentElement)
+            if (Validate.NotNull(element, "element") is XmlCommentElement)
             {
                 // XMLコメントは除去
                 element = null;

@@ -38,6 +38,9 @@ namespace Honememo.Wptscs.Parsers
 
         #region IParserインタフェーステストケース
 
+        // ※ 2012年2月現在、IParser, ITextParserの各メソッド実装は親クラス側で行われており、
+        //    改造部分はどこかでやればテストされるのでそれで割愛
+
         /// <summary>
         /// <see cref="IParser.Parse"/>メソッドテストトケース。
         /// </summary>
@@ -142,6 +145,20 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
+        /// <see cref="MediaWikiPreparser.FilterByInclude"/>メソッドテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestFilterByIncludeNull()
+        {
+            IElement element = null;
+            using (MediaWikiPreparser parser = new MediaWikiPreparser())
+            {
+                parser.FilterByInclude(ref element);
+            }
+        }
+
+        /// <summary>
         /// <see cref="MediaWikiPreparser.FilterByNoinclude"/>メソッドテストケース。
         /// </summary>
         /// <remarks>
@@ -181,6 +198,20 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(1, list.Count);
         }
 
+        /// <summary>
+        /// <see cref="MediaWikiPreparser.FilterByNoinclude"/>メソッドテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestFilterByNoincludeNull()
+        {
+            IElement element = null;
+            using (MediaWikiPreparser parser = new MediaWikiPreparser())
+            {
+                parser.FilterByNoinclude(ref element);
+            }
+        }
+
         #endregion
 
         #region 静的メソッドテストケース
@@ -200,6 +231,16 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
+        /// <see cref="MediaWikiPreparser.PreprocessByInclude"/>メソッドテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestPreprocessByIncludeNull()
+        {
+            MediaWikiPreparser.PreprocessByInclude(null);
+        }
+
+        /// <summary>
         /// <see cref="MediaWikiPreparser.PreprocessByNoinclude"/>メソッドテストケース。
         /// </summary>
         [Test]
@@ -211,6 +252,16 @@ namespace Honememo.Wptscs.Parsers
                 + "[[ja:Template:sample/doc]]\r\n",
                 MediaWikiPreparser.PreprocessByNoinclude(TestData));
             Assert.AreEqual(String.Empty, MediaWikiPreparser.PreprocessByNoinclude(String.Empty));
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiPreparser.PreprocessByNoinclude"/>メソッドテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestPreprocessByNoincludeNull()
+        {
+            MediaWikiPreparser.PreprocessByNoinclude(null);
         }
 
         #endregion

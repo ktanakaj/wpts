@@ -52,6 +52,9 @@
     <Compile Include="Parsers\XmlElementParserTest.cs" />
     <Compile Include="Parsers\XmlCommentElementParserTest.cs" />
     <Compile Include="Parsers\CacheParserTest.cs" />
+    <Compile Include="Parsers\AbstractParserTest.cs" />
+    <Compile Include="Parsers\AbstractElementTest.cs" />
+    <Compile Include="Parsers\AbstractTextParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\XmlParserTest.cs" />
     <Compile Include="Utilities\ObjectUtilsTest.cs" />

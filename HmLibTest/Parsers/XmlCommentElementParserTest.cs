@@ -3,7 +3,7 @@
 //      XmlCommentElementParserのテストクラスソース。</summary>
 //
 // <copyright file="XmlCommentElementParserTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -14,15 +14,15 @@ namespace Honememo.Parsers
     using NUnit.Framework;
 
     /// <summary>
-    /// XmlCommentElementParserのテストクラスです。
+    /// <see cref="XmlCommentElementParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class XmlCommentElementParserTest
+    class XmlCommentElementParserTest
     {
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
-        /// TryParseメソッドテストケース。
+        /// <see cref="XmlCommentElementParser.TryParse"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestTryParse()
@@ -49,10 +49,14 @@ namespace Honememo.Parsers
             Assert.IsNull(comment);
             Assert.IsFalse(parser.TryParse("<! --test-->", out comment));
             Assert.IsNull(comment);
+            Assert.IsFalse(parser.TryParse(String.Empty, out comment));
+            Assert.IsNull(comment);
+            Assert.IsFalse(parser.TryParse(null, out comment));
+            Assert.IsNull(comment);
         }
 
         /// <summary>
-        /// IsPossibleParseメソッドテストケース。
+        /// <see cref="XmlCommentElementParser.IsPossibleParse"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestIsPossibleParse()

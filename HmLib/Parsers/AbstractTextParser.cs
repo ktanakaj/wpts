@@ -44,10 +44,12 @@ namespace Honememo.Parsers
         /// <param name="result">解析結果。</param>
         /// <param name="delimiters">解析を終了する文字列（複数指定可）。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="delimiters"/>が<c>null</c>の場合。</exception>
         /// <remarks>指定された文字列が出現しない場合、最終位置まで解析を行う。</remarks>
         public virtual bool TryParseToDelimiter(string s, out IElement result, params string[] delimiters)
         {
             // 終了条件のデリゲートに置き換え、そちらの処理にまとめる
+            Validate.NotNull(delimiters, "delimiters");
             return this.TryParseToEndCondition(
                 s,
                 (string str, int index)
@@ -158,9 +160,10 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
         protected virtual void FlashText(ref ListElement list, ref StringBuilder b)
         {
-            if (Validate.NotNull(b).Length > 0)
+            Validate.NotNull(list, "list");
+            if (Validate.NotNull(b, "b").Length > 0)
             {
-                Validate.NotNull(list).Add(new TextElement(b.ToString()));
+                list.Add(new TextElement(b.ToString()));
                 b.Clear();
             }
         }

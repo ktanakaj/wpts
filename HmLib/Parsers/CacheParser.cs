@@ -50,7 +50,7 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentException"><paramref name="capacity"/>が0以下の値。</exception>
         public CacheParser(IParser parser, int capacity)
         {
-            this.parser = Validate.NotNull(parser);
+            this.parser = Validate.NotNull(parser, "parser");
             this.caches = new MemoryCache<int, IElement>(capacity);
         }
 
@@ -61,7 +61,7 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentNullException"><paramref name="parser"/>が<c>null</c>。</exception>
         public CacheParser(IParser parser)
         {
-            this.parser = Validate.NotNull(parser);
+            this.parser = Validate.NotNull(parser, "parser");
             this.caches = new MemoryCache<int, IElement>();
         }
 
@@ -161,7 +161,7 @@ namespace Honememo.Parsers
         private IElement GetAndAddIfEmpty(string s, MemoryCache<string, IElement>.ReturnCacheValue function)
         {
             // まずキャッシュを確認
-            int hashCode = Validate.NotNull(s).GetHashCode();
+            int hashCode = Validate.NotNull(s, "s").GetHashCode();
             IElement element;
             if (this.TryGetValue(hashCode, s, out element))
             {

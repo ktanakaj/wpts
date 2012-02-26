@@ -18,15 +18,15 @@ namespace Honememo.Wptscs.Parsers
     using NUnit.Framework;
 
     /// <summary>
-    /// MediaWikiTemplateParserのテストクラスです。
+    /// <see cref="MediaWikiTemplateParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class MediaWikiTemplateParserTest
+    class MediaWikiTemplateParserTest
     {
         #region private変数
 
         /// <summary>
-        /// 前処理・後処理で生成／解放される言語別のMediaWikiParser。
+        /// 前処理・後処理で生成／解放される言語別の<see cref="MediaWikiParser"/>。
         /// </summary>
         private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
 
@@ -37,10 +37,10 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テストの前処理。
         /// </summary>
+        /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の生成。</remarks>
         [TestFixtureSetUp]
         public void SetUpBeforeClass()
         {
-            // Disposeが必要なMediaWikiParserの生成／解放
             this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
             this.mediaWikiParsers["ja"] = new MediaWikiParser(new MockFactory().GetMediaWiki("ja"));
         }
@@ -48,11 +48,11 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テストの後処理。
         /// </summary>
+        /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の解放。</remarks>
         [TestFixtureTearDown]
         public void TearDownAfterClass()
         {
-            // Disposeが必要なMediaWikiParserの生成／解放
-            foreach (MediaWikiParser parser in this.mediaWikiParsers.Values)
+            foreach (IDisposable parser in this.mediaWikiParsers.Values)
             {
                 parser.Dispose();
             }
@@ -65,7 +65,7 @@ namespace Honememo.Wptscs.Parsers
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
-        /// TryParseメソッドテストケース（基本的な構文）。
+        /// <see cref="MediaWikiTemplateParser.TryParse"/>メソッドテストケース（基本的な構文）。
         /// </summary>
         [Test]
         public void TestTryParseBasic()
@@ -141,7 +141,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（NGパターン）。
+        /// <see cref="MediaWikiTemplateParser.TryParse"/>メソッドテストケース（NGパターン）。
         /// </summary>
         [Test]
         public void TestTryParseNg()
@@ -175,10 +175,14 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsFalse(parser.TryParse("{{test]title}}", out element));
             Assert.IsFalse(parser.TryParse("{{test{title}}", out element));
             Assert.IsFalse(parser.TryParse("{{test}title}}", out element));
+
+            // 空・null
+            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsFalse(parser.TryParse(null, out element));
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（入れ子）。
+        /// <see cref="MediaWikiTemplateParser.TryParse"/>メソッドテストケース（入れ子）。
         /// </summary>
         [Test]
         public void TestTryParseNested()
@@ -207,7 +211,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（サブページ）。
+        /// <see cref="MediaWikiTemplateParser.TryParse"/>メソッドテストケース（サブページ）。
         /// </summary>
         [Test]
         public void TestTryParseSubpage()
@@ -236,7 +240,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（実データ複雑なinfobox）。
+        /// <see cref="MediaWikiTemplateParser.TryParse"/>メソッドテストケース（実データ複雑なinfobox）。
         /// </summary>
         /// <remarks>使用データは[[:en:Discovery Channel]]（2012年1月17日 14:07:11(UTC)）より抜粋。</remarks>
         [Test]
@@ -303,7 +307,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（実データ複雑なテンプレートの一部）。
+        /// <see cref="MediaWikiTemplateParser.TryParse"/>メソッドテストケース（実データ複雑なテンプレートの一部）。
         /// </summary>
         /// <remarks>
         /// 使用データはWiktionaryの[[:en:Template:context]]（2011-08-29T20:15:35Z）より抜粋。

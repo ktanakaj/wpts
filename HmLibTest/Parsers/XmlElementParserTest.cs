@@ -11,15 +11,13 @@
 namespace Honememo.Parsers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using NUnit.Framework;
 
     /// <summary>
-    /// XmlElementParserのテストクラスです。
+    /// <see cref="XmlElementParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class XmlElementParserTest
+    class XmlElementParserTest
     {
         #region private変数
 
@@ -170,6 +168,10 @@ namespace Honememo.Parsers
             Assert.IsFalse(parser.TryParse(" <testtag></testtag>", out element));
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse("<!-- comment -->", out element));
+            Assert.IsNull(element);
+            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsNull(element);
+            Assert.IsFalse(parser.TryParse(null, out element));
             Assert.IsNull(element);
         }
 

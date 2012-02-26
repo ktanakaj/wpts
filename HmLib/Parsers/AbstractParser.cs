@@ -33,7 +33,7 @@ namespace Honememo.Parsers
         public virtual IElement Parse(string s)
         {
             IElement result;
-            if (this.TryParse(Validate.NotNull(s), out result))
+            if (this.TryParse(Validate.NotNull(s, "s"), out result))
             {
                 return result;
             }
@@ -76,9 +76,10 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentOutOfRangeException">インデックスが文字列の範囲外の場合。</exception>
         protected virtual bool TryParseAt(string s, int index, out IElement result, params IParser[] parsers)
         {
-            char c = Validate.NotNull(s)[index];
+            Validate.InRange(s, index, "s", "index");
+            char c = s[index];
             string substr = null;
-            foreach (IParser parser in Validate.NotNull(parsers))
+            foreach (IParser parser in Validate.NotNull(parsers, "parsers"))
             {
                 if (parser.IsPossibleParse(c))
                 {

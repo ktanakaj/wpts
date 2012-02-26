@@ -162,9 +162,15 @@ namespace Honememo.Wptscs.Parsers
         /// <exception cref="ObjectDisposedException"><see cref="Dispose"/>が実行済みの場合。</exception>
         public override bool TryParseToEndCondition(string s, IsEndCondition condition, out IElement result)
         {
-            // 子パーサーが解放済みかのチェック（同時にnullになるので代表でNowikiParser）
-            if (this.NowikiParser == null)
+            if (s == null)
             {
+                // nullの場合だけは解析失敗とする
+                result = null;
+                return false;
+            }
+            else if (this.NowikiParser == null)
+            {
+                // 子パーサーが解放済みの場合Dispose済みで処理不可（同時にnullになるので代表でNowikiParser）
                 throw new ObjectDisposedException(this.GetType().Name);
             }
 

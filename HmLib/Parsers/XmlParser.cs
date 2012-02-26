@@ -179,12 +179,13 @@ namespace Honememo.Parsers
         /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
         protected override void FlashText(ref ListElement list, ref StringBuilder b)
         {
-            if (Validate.NotNull(b).Length > 0)
+            Validate.NotNull(list, "list");
+            if (Validate.NotNull(b, "b").Length > 0)
             {
                 string s = b.ToString();
                 XmlTextElement e = new XmlTextElement(this.Decode(s));
                 e.ParsedString = s;
-                Validate.NotNull(list).Add(e);
+                list.Add(e);
                 b.Clear();
             }
         }

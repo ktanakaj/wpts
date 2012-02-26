@@ -746,17 +746,10 @@
       <Item From="Template:?" To="Template:?" />
       <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
       <Item From="Template:Documentation" To="Template:Documentation" />
-      <Item From="Template:Free" To="Template:Free" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
-      <Item From="Template:Nom" To="Template:Nom" />
-      <Item From="Template:Nonfree" To="Template:Nonfree" />
-      <Item From="Template:Partial" To="Template:Partial" />
-      <Item From="Template:Pending" To="Template:Pending" />
       <Item From="Template:Refend" To="Template:Refend" />
       <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Won" To="Template:Won" />
-      <Item From="Template:Yes-No" To="Template:Yes-No" />
     </ItemTable>
     <ItemTable From="en" To="ru">
       <Item From="Template:Doc" To="Шаблон:Doc" Redirect="Template:Documentation" />
@@ -769,6 +762,7 @@
       <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
     </ItemTable>
     <ItemTable From="ja" To="en">
+      <Item From="Template:?" To="Template:?" />
       <Item From="Template:Col-2" To="Template:Col-2" />
       <Item From="Template:Col-3" To="Template:Col-3" />
       <Item From="Template:Col-4" To="Template:Col-4" />
@@ -782,11 +776,8 @@
       <Item From="Template:Documentation" To="Template:Documentation" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
-      <Item From="Template:Nom" To="Template:Nom" />
-      <Item From="Template:Pending" To="Template:Pending" />
       <Item From="Template:Refend" To="Template:Refend" />
       <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Won" To="Template:Won" />
     </ItemTable>
   </ItemTables>
   <HeadingTable>

@@ -14,10 +14,10 @@ namespace Honememo.Parsers
     using NUnit.Framework;
 
     /// <summary>
-    /// CacheParserのテストクラスです。
+    /// <see cref="CacheParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class CacheParserTest
+    class CacheParserTest
     {
         #region コンストラクタテストケース
 
@@ -37,7 +37,7 @@ namespace Honememo.Parsers
         #region IParserインタフェース実装メソッドテストケース
 
         /// <summary>
-        /// Parseメソッドテストケース（正常系）。
+        /// <see cref="CacheParser.Parse"/>メソッドテストケース（正常系）。
         /// </summary>
         [Test]
         public void TestParse()
@@ -68,7 +68,18 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// Parseメソッドテストケース（異常系）。
+        /// <see cref="CacheParser.Parse"/>メソッドテストケース（null）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestParseNull()
+        {
+            // nullはどのParserをラップしている場合も自前で例外
+            new CacheParser(new XmlCommentElementParser()).Parse(null);
+        }
+
+        /// <summary>
+        /// <see cref="CacheParser.Parse"/>メソッドテストケース（解析失敗）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(FormatException))]
@@ -79,7 +90,7 @@ namespace Honememo.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース。
+        /// <see cref="CacheParser.TryParse"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestTryParse()
@@ -117,10 +128,16 @@ namespace Honememo.Parsers
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse(text, out element));
             Assert.IsNull(element);
+
+            text = null;
+            Assert.IsFalse(parser.TryParse(text, out element));
+            Assert.IsNull(element);
+            Assert.IsFalse(parser.TryParse(text, out element));
+            Assert.IsNull(element);
         }
 
         /// <summary>
-        /// IsPossibleParseメソッドテストケース。
+        /// <see cref="CacheParser.IsPossibleParse"/>メソッドテストケース。
         /// </summary>
         [Test]
         public void TestIsPossibleParse()

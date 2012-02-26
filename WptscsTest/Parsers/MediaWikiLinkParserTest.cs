@@ -18,15 +18,15 @@ namespace Honememo.Wptscs.Parsers
     using NUnit.Framework;
 
     /// <summary>
-    /// MediaWikiLinkParserのテストクラスです。
+    /// <see cref="MediaWikiLinkParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class MediaWikiLinkParserTest
+    class MediaWikiLinkParserTest
     {
         #region private変数
 
         /// <summary>
-        /// 前処理・後処理で生成／解放される言語別のMediaWikiParser。
+        /// 前処理・後処理で生成／解放される言語別の<see cref="MediaWikiParser"/>。
         /// </summary>
         private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
 
@@ -37,10 +37,10 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テストの前処理。
         /// </summary>
+        /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の生成。</remarks>
         [TestFixtureSetUp]
         public void SetUpBeforeClass()
         {
-            // Disposeが必要なMediaWikiParserの生成／解放
             this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
             this.mediaWikiParsers["ja"] = new MediaWikiParser(new MockFactory().GetMediaWiki("ja"));
         }
@@ -48,11 +48,11 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テストの後処理。
         /// </summary>
+        /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の解放。</remarks>
         [TestFixtureTearDown]
         public void TearDownAfterClass()
         {
-            // Disposeが必要なMediaWikiParserの生成／解放
-            foreach (MediaWikiParser parser in this.mediaWikiParsers.Values)
+            foreach (IDisposable parser in this.mediaWikiParsers.Values)
             {
                 parser.Dispose();
             }
@@ -65,7 +65,7 @@ namespace Honememo.Wptscs.Parsers
         #region インタフェース実装メソッドテストケース
 
         /// <summary>
-        /// TryParseメソッドテストケース（基本的な構文）。
+        /// <see cref="MediaWikiLinkParser.TryParse"/>メソッドテストケース（基本的な構文）。
         /// </summary>
         [Test]
         public void TestTryParseBasic()
@@ -124,7 +124,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（NGパターン）。
+        /// <see cref="MediaWikiLinkParser.TryParse"/>メソッドテストケース（NGパターン）。
         /// </summary>
         [Test]
         public void TestTryParseNg()
@@ -156,10 +156,14 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsFalse(parser.TryParse("[[test{title]]", out element));
             Assert.IsFalse(parser.TryParse("[[test}title]]", out element));
             Assert.IsFalse(parser.TryParse("[[testtitle\n]]", out element));
+
+            // 空・null
+            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsFalse(parser.TryParse(null, out element));
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（入れ子）。
+        /// <see cref="MediaWikiLinkParser.TryParse"/>メソッドテストケース（入れ子）。
         /// </summary>
         [Test]
         public void TestTryParseNested()
@@ -182,7 +186,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（名前空間）。
+        /// <see cref="MediaWikiLinkParser.TryParse"/>メソッドテストケース（名前空間）。
         /// </summary>
         [Test]
         public void TestTryParseNamespace()
@@ -233,7 +237,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（サブページ）。
+        /// <see cref="MediaWikiLinkParser.TryParse"/>メソッドテストケース（サブページ）。
         /// </summary>
         [Test]
         public void TestTryParseSubpage()
@@ -262,7 +266,7 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// TryParseメソッドテストケース（ウィキ間リンク）。
+        /// <see cref="MediaWikiLinkParser.TryParse"/>メソッドテストケース（ウィキ間リンク）。
         /// </summary>
         [Test]
         public void TestTryParseInterwiki()
