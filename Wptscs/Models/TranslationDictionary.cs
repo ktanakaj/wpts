@@ -3,7 +3,7 @@
 //      言語間の翻訳パターンをあらわすモデルクラスソース</summary>
 //
 // <copyright file="TranslationDictionary.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -41,10 +41,12 @@ namespace Honememo.Wptscs.Models
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ（通常）。
+        /// 指定された翻訳元→先言語用の翻訳パターンインスタンスを生成する。
         /// </summary>
         /// <param name="from">翻訳元言語コード。</param>
         /// <param name="to">翻訳先言語コード。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="from"/>または<paramref name="to"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="from"/>または<paramref name="to"/>が空の文字列の場合。</exception>
         public TranslationDictionary(string from, string to)
         {
             // メンバ変数の初期設定
@@ -53,7 +55,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// コンストラクタ（シリアライズ or 拡張用）。
+        /// 空のインスタンスを生成する（シリアライズ or 拡張用）。
         /// </summary>
         protected TranslationDictionary()
         {
@@ -66,6 +68,8 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 翻訳元言語コード。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        /// <exception cref="ArgumentException">空文字列が指定された場合。</exception>
         public string From
         {
             get
@@ -75,14 +79,15 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.from = Validate.NotBlank(value, "from");
+                this.from = Validate.NotBlank(value);
             }
         }
 
         /// <summary>
         /// 翻訳先言語コード。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        /// <exception cref="ArgumentException">空文字列が指定された場合。</exception>
         public string To
         {
             get
@@ -92,8 +97,7 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.to = Validate.NotBlank(value, "to");
+                this.to = Validate.NotBlank(value);
             }
         }
 
@@ -134,7 +138,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// シリアライズするXMLのスキーマ定義を返す。
         /// </summary>
-        /// <returns>XML表現を記述するXmlSchema。</returns>
+        /// <returns>XML表現を記述する<see cref="System.Xml.Schema.XmlSchema"/>。</returns>
         public System.Xml.Schema.XmlSchema GetSchema()
         {
             return null;
@@ -143,7 +147,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLからオブジェクトをデシリアライズする。
         /// </summary>
-        /// <param name="reader">デシリアライズ元のXmlReader</param>
+        /// <param name="reader">デシリアライズ元の<see cref="XmlReader"/>。</param>
         public void ReadXml(XmlReader reader)
         {
             XmlDocument xml = new XmlDocument();
@@ -180,7 +184,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// オブジェクトをXMLにシリアライズする。
         /// </summary>
-        /// <param name="writer">シリアライズ先のXmlWriter</param>
+        /// <param name="writer">シリアライズ先の<see cref="XmlWriter"/>。</param>
         public void WriteXml(XmlWriter writer)
         {
             writer.WriteAttributeString("From", this.From);

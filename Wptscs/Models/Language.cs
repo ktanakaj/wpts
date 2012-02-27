@@ -44,9 +44,11 @@ namespace Honememo.Wptscs.Models
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ（通常）。
+        /// 指定された言語コードの言語インスタンスを作成する。
         /// </summary>
         /// <param name="code">言語のコード。</param>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        /// <exception cref="ArgumentException">空文字列が指定された場合。</exception>
         public Language(string code)
         {
             // メンバ変数の初期設定
@@ -54,7 +56,7 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// コンストラクタ（シリアライズ or 拡張用）。
+        /// 空のインスタンスを作成する（シリアライズ or 拡張用）。
         /// </summary>
         protected Language()
         {
@@ -67,6 +69,8 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// 言語のコード。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        /// <exception cref="ArgumentException">空文字列が指定された場合。</exception>
         public string Code
         {
             get
@@ -76,7 +80,6 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
                 this.code = Validate.NotBlank(value, "code").ToLower();
             }
         }
@@ -84,6 +87,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// この言語の、各言語での名称。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <remarks>空でもオブジェクトは存在。</remarks>
         public IDictionary<string, LanguageName> Names
         {
@@ -94,8 +98,7 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.names = Validate.NotNull(value, "names");
+                this.names = Validate.NotNull(value);
             }
         }
 
@@ -142,7 +145,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// シリアライズするXMLのスキーマ定義を返す。
         /// </summary>
-        /// <returns>XML表現を記述するXmlSchema。</returns>
+        /// <returns>XML表現を記述する<see cref="System.Xml.Schema.XmlSchema"/>。</returns>
         public System.Xml.Schema.XmlSchema GetSchema()
         {
             return null;
@@ -151,7 +154,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLからオブジェクトをデシリアライズする。
         /// </summary>
-        /// <param name="reader">デシリアライズ元のXmlReader</param>
+        /// <param name="reader">デシリアライズ元の<see cref="XmlReader"/>。</param>
         public void ReadXml(XmlReader reader)
         {
             XmlDocument xml = new XmlDocument();
@@ -178,7 +181,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// オブジェクトをXMLにシリアライズする。
         /// </summary>
-        /// <param name="writer">シリアライズ先のXmlWriter</param>
+        /// <param name="writer">シリアライズ先の<see cref="XmlWriter"/>。</param>
         public void WriteXml(XmlWriter writer)
         {
             // Webサイトの言語情報

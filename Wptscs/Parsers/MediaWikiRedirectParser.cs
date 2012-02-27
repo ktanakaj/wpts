@@ -26,7 +26,8 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 指定されたMediaWikiサーバーのページを解析するためのパーサーを作成する。
         /// </summary>
-        /// <param name="site">このパーサーが対応するMediaWiki</param>
+        /// <param name="site">このパーサーが対応するMediaWiki。</param>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         public MediaWikiRedirectParser(MediaWiki site)
             : base(site)
         {
@@ -34,21 +35,32 @@ namespace Honememo.Wptscs.Parsers
 
         #endregion
 
-        #region インタフェース実装メソッド
+        #region ITextParserインタフェース実装メソッド
 
         /// <summary>
-        /// 渡されたテキストをMediaWikiのリダイレクトページとして解析する。
+        /// 渡されたMediaWikiページをMediaWikiのリダイレクトページとして解析する。
         /// </summary>
-        /// <param name="s">解析対象の文字列。</param>
+        /// <param name="s">解析対象のMediaWikiページ本文。</param>
+        /// <param name="condition">解析を終了するかの判定を行うデリゲート。本クラスでは無視されます。</param>
         /// <param name="result">解析したリダイレクトリンク。</param>
         /// <returns>解析に成功した場合<c>true</c>。</returns>
-        /// <remarks>MediaWikiのページ全体を渡す必要がある。</remarks>
-        public override bool TryParse(string s, out IElement result)
+        /// <remarks>
+        /// このメソッドへはMediaWikiのページ全体を渡す必要があります。
+        /// また、ページ全体を解析する必要があることから、
+        /// <paramref name="condition"/>が指定されていても無視します。
+        /// </remarks>
+        /// <exception cref="ObjectDisposedException"><see cref="MediaWikiParser.Dispose"/>が実行済みの場合。</exception>
+        public override bool TryParseToEndCondition(string s, IsEndCondition condition, out IElement result)
         {
-            // 入力値確認、空の場合は即終了
             result = null;
-            if (String.IsNullOrEmpty(s))
+            if (this.LinkParser == null)
             {
+                // 子パーサーが解放済みの場合Dispose済みで処理不可
+                throw new ObjectDisposedException(this.GetType().Name);
+            }
+            else if (String.IsNullOrEmpty(s))
+            {
+                // 入力値が空の場合は即終了
                 return false;
             }
 

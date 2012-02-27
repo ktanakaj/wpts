@@ -82,6 +82,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ウェブサイトの情報。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <remarks>空でもオブジェクトは存在。</remarks>
         public IList<Website> Websites
         {
@@ -92,14 +93,14 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.websites = Validate.NotNull(value, "websites");
+                this.websites = Validate.NotNull(value);
             }
         }
 
         /// <summary>
         /// 言語間の項目の対訳表。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <remarks>空でもオブジェクトは存在。</remarks>
         public IList<TranslationDictionary> ItemTables
         {
@@ -110,14 +111,14 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.itemTables = Validate.NotNull(value, "itemTables");
+                this.itemTables = Validate.NotNull(value);
             }
         }
 
         /// <summary>
         /// 言語間の見出しの対訳表。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <remarks>空でもオブジェクトは存在。</remarks>
         public TranslationTable HeadingTable
         {
@@ -128,8 +129,7 @@ namespace Honememo.Wptscs.Models
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.headingTable = Validate.NotNull(value, "headingTable");
+                this.headingTable = Validate.NotNull(value);
             }
         }
 
@@ -242,7 +242,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// シリアライズするXMLのスキーマ定義を返す。
         /// </summary>
-        /// <returns>XML表現を記述するXmlSchema。</returns>
+        /// <returns>XML表現を記述する<see cref="System.Xml.Schema.XmlSchema"/>。</returns>
         public System.Xml.Schema.XmlSchema GetSchema()
         {
             return null;
@@ -251,7 +251,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLからオブジェクトを読み込む。
         /// </summary>
-        /// <param name="reader">読込元のXmlReader</param>
+        /// <param name="reader">読込元の<see cref="XmlReader"/>。</param>
         public void ReadXml(XmlReader reader)
         {
             XmlDocument xml = new XmlDocument();
@@ -294,7 +294,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// オブジェクトをXMLに出力する。
         /// </summary>
-        /// <param name="writer">出力先のXmlWriter</param>
+        /// <param name="writer">出力先の<see cref="XmlWriter"/>。</param>
         public void WriteXml(XmlWriter writer)
         {
             // ロジッククラス
@@ -340,10 +340,10 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// 指定されたXML値からTranslatorのクラスを取得するる。
+        /// 指定されたXML値から<see cref="Translator"/>のクラスを取得する。
         /// </summary>
         /// <param name="name">XMLのクラス名情報。</param>
-        /// <returns>Translatorクラス。</returns>
+        /// <returns><see cref="Translator"/>クラス。</returns>
         /// <remarks>クラスは動的に判定する。クラスが存在しない場合などは随時状況に応じた例外を投げる。</remarks>
         private Type ParseTranslator(string name)
         {
@@ -359,9 +359,9 @@ namespace Honememo.Wptscs.Models
         }
 
         /// <summary>
-        /// XMLノードからWebSiteインスタンスをデシリアライズする。
+        /// XMLノードから<see cref="Website"/>インスタンスをデシリアライズする。
         /// </summary>
-        /// <param name="node">WebSiteをシリアライズしたノード。</param>
+        /// <param name="node"><see cref="Website"/>をシリアライズしたノード。</param>
         /// <param name="setting">XML読み込み時の設定。</param>
         /// <returns>デシリアライズしたインスタンス。</returns>
         /// <remarks>クラスはノード名から動的に判定する。クラスが存在しない場合などは随時状況に応じた例外を投げる。</remarks>

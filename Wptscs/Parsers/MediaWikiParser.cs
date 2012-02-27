@@ -36,7 +36,8 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 指定されたMediaWikiサーバーのページを解析するためのパーサーを作成する。
         /// </summary>
-        /// <param name="site">このパーサーが対応するMediaWiki</param>
+        /// <param name="site">このパーサーが対応するMediaWiki。</param>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         public MediaWikiParser(MediaWiki site)
         {
             // 子パーサーのうち、再帰的に処理を行ういくつかのパーサーについては
