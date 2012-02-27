@@ -3,7 +3,7 @@
 //      ページ（Wikipediaの記事など）をあらわすモデルクラスソース</summary>
 //
 // <copyright file="Page.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2010 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -11,8 +11,6 @@
 namespace Honememo.Wptscs.Websites
 {
     using System;
-    using System.Linq;
-    using System.Text;
     using Honememo.Utilities;
 
     /// <summary>
@@ -37,41 +35,49 @@ namespace Honememo.Wptscs.Websites
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ。
+        /// 指定されたウェブサイトの渡されたタイトル, 本文, タイムスタンプのページを作成。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
         /// <param name="timestamp">ページのタイムスタンプ。</param>
-        public Page(Website website, string title, string text, DateTime? timestamp)
+        /// <param name="uri">ページのURI。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="website"/>または<paramref name="title"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="title"/>が空の文字列の場合。</exception>
+        public Page(Website website, string title, string text, DateTime? timestamp, Uri uri)
         {
-            // 初期値設定、基本的に以後外から変更されることを想定しない
+            // 初期値設定、基本的に以降外から変更されることを想定しない
             this.Website = website;
             this.Title = title;
             this.Text = text;
             this.Timestamp = timestamp;
+            this.Uri = uri;
         }
 
         /// <summary>
-        /// コンストラクタ。
-        /// ページのタイムスタンプには<c>null</c>を設定。
+        /// 指定されたウェブサイトの渡されたタイトル, 本文のページを作成。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
+        /// <remarks>ページのタイムスタンプ, URIには<c>null</c>を設定。</remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="website"/>または<paramref name="title"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="title"/>が空の文字列の場合。</exception>
         public Page(Website website, string title, string text)
-            : this(website, title, text, null)
+            : this(website, title, text, null, null)
         {
         }
 
         /// <summary>
-        /// コンストラクタ。
-        /// ページの本文, タイムスタンプには<c>null</c>を設定。
+        /// 指定されたウェブサイトの渡されたタイトルのページを作成。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
+        /// <remarks>ページの本文, タイムスタンプ, URIには<c>null</c>を設定。</remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="website"/>または<paramref name="title"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="title"/>が空の文字列の場合。</exception>
         public Page(Website website, string title)
-            : this(website, title, null, null)
+            : this(website, title, null, null, null)
         {
         }
 
@@ -82,6 +88,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// ページが所属するウェブサイト。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         public virtual Website Website
         {
             get
@@ -91,14 +98,15 @@ namespace Honememo.Wptscs.Websites
 
             protected set
             {
-                // ウェブサイトは必須
-                this.website = Validate.NotNull(value, "website");
+                this.website = Validate.NotNull(value);
             }
         }
 
         /// <summary>
         /// ページタイトル。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        /// <exception cref="ArgumentException">空文字列が指定された場合。</exception>
         public virtual string Title
         {
             get
@@ -108,8 +116,7 @@ namespace Honememo.Wptscs.Websites
 
             protected set
             {
-                // ページタイトルは必須
-                this.title = Validate.NotBlank(value, "title");
+                this.title = Validate.NotBlank(value);
             }
         }
         
@@ -126,6 +133,15 @@ namespace Honememo.Wptscs.Websites
         /// ページのタイムスタンプ。
         /// </summary>
         public virtual DateTime? Timestamp
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// ページのURI。
+        /// </summary>
+        public virtual Uri Uri
         {
             get;
             protected set;

@@ -33,12 +33,14 @@ namespace Honememo.Wptscs.Websites
         public void TestConstructorWebsiteTitleTextTimestamp()
         {
             DateTime t = DateTime.Now;
+            Uri uri = new Uri("http://wikipedia.example");
             MediaWiki s = new MediaWiki(new Language("en"));
-            MediaWikiPage page = new MediaWikiPage(s, "TestTitle", "TestText", t);
+            MediaWikiPage page = new MediaWikiPage(s, "TestTitle", "TestText", t, uri);
             Assert.AreSame(s, page.Website);
             Assert.AreEqual("TestTitle", page.Title);
             Assert.AreEqual("TestText", page.Text);
             Assert.AreEqual(t, page.Timestamp);
+            Assert.AreSame(uri, page.Uri);
         }
 
         /// <summary>
@@ -53,6 +55,7 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("TestTitle", page.Title);
             Assert.AreEqual("TestText", page.Text);
             Assert.IsNull(page.Timestamp);
+            Assert.IsNull(page.Uri);
         }
 
         /// <summary>
@@ -67,6 +70,7 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("TestTitle", page.Title);
             Assert.IsNull(page.Text);
             Assert.IsNull(page.Timestamp);
+            Assert.IsNull(page.Uri);
         }
 
         /// <summary>

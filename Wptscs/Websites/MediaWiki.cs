@@ -84,41 +84,44 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         private object lockLoadMetaApi = new object();
 
+        /// <summary>
+        /// Template:Documentation（言語間リンク等を別ページに記述するためのテンプレート）に相当するページ名。
+        /// </summary>
+        private IList<string> documentationTemplates = new List<string>();
+
         #endregion
 
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ（MediaWiki全般）。
+        /// 指定された言語, サーバーのMediaWikiを表すインスタンスを作成。
         /// </summary>
         /// <param name="language">ウェブサイトの言語。</param>
         /// <param name="location">ウェブサイトの場所。</param>
-        public MediaWiki(Language language, string location) : this()
+        /// <exception cref="ArgumentNullException"><paramref name="language"/>または<paramref name="location"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="location"/>が空の文字列の場合。</exception>
+        public MediaWiki(Language language, string location)
+            : base(language, location)
         {
-            // メンバ変数の初期設定
-            this.Language = language;
-            this.Location = location;
         }
 
         /// <summary>
-        /// コンストラクタ（Wikipedia用）。
+        /// 指定された言語のWikipediaを表すインスタンスを作成。
         /// </summary>
         /// <param name="language">ウェブサイトの言語。</param>
-        public MediaWiki(Language language) : this()
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        public MediaWiki(Language language)
         {
-            // メンバ変数の初期設定
-            // ※ オーバーロードメソッドを呼んでいないのは、languageがnullのときに先にエラーになるから
+            // 親で初期化していないのは、languageのnullチェックの前にnull参照でエラーになってしまうから
             this.Language = language;
             this.Location = String.Format(Settings.Default.WikipediaLocation, language.Code);
         }
 
         /// <summary>
-        /// コンストラクタ（シリアライズ or 拡張用）。
+        /// 空のインスタンスを作成（シリアライズ or 拡張用）。
         /// </summary>
         protected MediaWiki()
         {
-            this.WebProxy = new AppDefaultWebProxy();
-            this.DocumentationTemplates = new List<string>();
         }
 
         #endregion
@@ -362,8 +365,23 @@ namespace Honememo.Wptscs.Websites
         /// <remarks>空の場合、その言語版にはこれに相当する機能は無いものとして扱う。</remarks>
         public IList<string> DocumentationTemplates
         {
-            get;
-            protected set;
+            get
+            {
+                return this.documentationTemplates;
+            }
+
+            set
+            {
+                if (value == null)
+                {
+                    // nullの場合、空のリストを代入
+                    // ※ 例外にしてもよいが、このクラスにはnullで初期化としている
+                    //    プロパティが多数存在するので、動きをあわせる
+                    value = new List<string>();
+                }
+
+                this.documentationTemplates = value;
+            }
         }
 
         /// <summary>
@@ -400,12 +418,16 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// このクラスで使用するWebアクセス用Proxyインスタンス。
+        /// 言語名の記事が存在するようなサイトか？
         /// </summary>
-        /// <remarks>setterはユニットテスト用に公開。</remarks>
-        public IWebProxy WebProxy
+        /// <remarks>
+        /// そうした記事が存在する場合<c>true</c>。
+        /// Wikipediaには[[日本語]]といった記事が存在するが、Wikitravelであればそうした記事は存在し得ない。
+        /// 言語名をリンクにするかといった判断に用いる。
+        /// </remarks>
+        public bool HasLanguagePage
         {
-            protected get;
+            get;
             set;
         }
 
@@ -493,7 +515,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             // ページ情報を作成して返す
-            return new MediaWikiPage(this, pageTitle, text, time);
+            return new MediaWikiPage(this, pageTitle, text, time, uri);
         }
 
         /// <summary>
@@ -617,7 +639,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// シリアライズするXMLのスキーマ定義を返す。
         /// </summary>
-        /// <returns>XML表現を記述するXmlSchema。</returns>
+        /// <returns>XML表現を記述する<see cref="System.Xml.Schema.XmlSchema"/>。</returns>
         public System.Xml.Schema.XmlSchema GetSchema()
         {
             return null;
@@ -626,7 +648,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// XMLからオブジェクトをデシリアライズする。
         /// </summary>
-        /// <param name="reader">デシリアライズ元のXmlReader</param>
+        /// <param name="reader">デシリアライズ元の<see cref="XmlReader"/></param>
         public void ReadXml(XmlReader reader)
         {
             XmlDocument xml = new XmlDocument();
@@ -647,22 +669,20 @@ namespace Honememo.Wptscs.Websites
             this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
             this.Redirect = XmlUtils.InnerText(siteElement.SelectSingleNode("Redirect"));
 
-            string text = XmlUtils.InnerText(siteElement.SelectSingleNode("TemplateNamespace"));
-            if (!String.IsNullOrEmpty(text))
+            int namespaceId;
+            if (int.TryParse(XmlUtils.InnerText(siteElement.SelectSingleNode("TemplateNamespace")), out namespaceId))
             {
-                this.TemplateNamespace = int.Parse(text);
+                this.TemplateNamespace = namespaceId;
             }
 
-            text = XmlUtils.InnerText(siteElement.SelectSingleNode("CategoryNamespace"));
-            if (!String.IsNullOrEmpty(text))
+            if (int.TryParse(XmlUtils.InnerText(siteElement.SelectSingleNode("CategoryNamespace")), out namespaceId))
             {
-                this.CategoryNamespace = int.Parse(text);
+                this.CategoryNamespace = namespaceId;
             }
 
-            text = XmlUtils.InnerText(siteElement.SelectSingleNode("FileNamespace"));
-            if (!String.IsNullOrEmpty(text))
+            if (int.TryParse(XmlUtils.InnerText(siteElement.SelectSingleNode("FileNamespace")), out namespaceId))
             {
-                this.FileNamespace = int.Parse(text);
+                this.FileNamespace = namespaceId;
             }
 
             // システム定義変数
@@ -708,12 +728,17 @@ namespace Honememo.Wptscs.Websites
 
             this.LinkInterwikiFormat = XmlUtils.InnerText(siteElement.SelectSingleNode("LinkInterwikiFormat"));
             this.LangFormat = XmlUtils.InnerText(siteElement.SelectSingleNode("LangFormat"));
+            bool hasLanguagePage;
+            if (bool.TryParse(XmlUtils.InnerText(siteElement.SelectSingleNode("HasLanguagePage")), out hasLanguagePage))
+            {
+                this.HasLanguagePage = hasLanguagePage;
+            }
         }
 
         /// <summary>
         /// オブジェクトをXMLにシリアライズする。
         /// </summary>
-        /// <param name="writer">シリアライズ先のXmlWriter</param>
+        /// <param name="writer">シリアライズ先の<see cref="XmlWriter"/></param>
         public void WriteXml(XmlWriter writer)
         {
             writer.WriteElementString("Location", this.Location);
@@ -769,6 +794,7 @@ namespace Honememo.Wptscs.Websites
             writer.WriteEndElement();
             writer.WriteElementString("LinkInterwikiFormat", this.LinkInterwikiFormat);
             writer.WriteElementString("LangFormat", this.LangFormat);
+            writer.WriteElementString("HasLanguagePage", this.HasLanguagePage.ToString());
         }
 
         #endregion

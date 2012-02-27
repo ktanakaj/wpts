@@ -68,7 +68,7 @@
     <Compile Include="Websites\WebsiteTest.cs" />
     <Compile Include="PrivateAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\AppDefaultWebProxyTest.cs" />
+    <Compile Include="Utilities\AppConfigWebProxyTest.cs" />
     <Compile Include="Utilities\FormUtilsTest.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -58,6 +58,7 @@
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.checkBoxHasLanguagePage = new System.Windows.Forms.CheckBox();
             this.textBoxLangFormat = new System.Windows.Forms.TextBox();
             this.labelLangFormat = new System.Windows.Forms.Label();
             this.textBoxLinkInterwikiFormat = new System.Windows.Forms.TextBox();
@@ -348,6 +349,7 @@
             // groupBoxServer
             // 
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
+            this.groupBoxServer.Controls.Add(this.checkBoxHasLanguagePage);
             this.groupBoxServer.Controls.Add(this.textBoxLangFormat);
             this.groupBoxServer.Controls.Add(this.labelLangFormat);
             this.groupBoxServer.Controls.Add(this.textBoxLinkInterwikiFormat);
@@ -372,6 +374,13 @@
             this.groupBoxServer.Controls.Add(this.labelFileNamespace);
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
+            // 
+            // checkBoxHasLanguagePage
+            // 
+            resources.ApplyResources(this.checkBoxHasLanguagePage, "checkBoxHasLanguagePage");
+            this.checkBoxHasLanguagePage.Name = "checkBoxHasLanguagePage";
+            this.toolTip.SetToolTip(this.checkBoxHasLanguagePage, resources.GetString("checkBoxHasLanguagePage.ToolTip"));
+            this.checkBoxHasLanguagePage.UseVisualStyleBackColor = true;
             // 
             // textBoxLangFormat
             // 
@@ -823,5 +832,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
         private System.Windows.Forms.Label labelApplicationConfigNote;
+        private System.Windows.Forms.CheckBox checkBoxHasLanguagePage;
     }
 }

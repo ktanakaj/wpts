@@ -17,10 +17,10 @@ namespace Honememo.Wptscs.Websites
     using NUnit.Framework;
 
     /// <summary>
-    /// Pageのテストクラスです。
+    /// <see cref="Page"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class PageTest
+    class PageTest
     {
         #region コンストラクタテストケース
 
@@ -32,11 +32,13 @@ namespace Honememo.Wptscs.Websites
         {
             DateTime t = DateTime.Now;
             Website s = new DummySite();
-            Page page = new Page(s, "TestTitle", "TestText", t);
+            Uri uri = new Uri("http://example.com/TestTitle");
+            Page page = new Page(s, "TestTitle", "TestText", t, uri);
             Assert.AreEqual(s, page.Website);
             Assert.AreEqual("TestTitle", page.Title);
             Assert.AreEqual("TestText", page.Text);
             Assert.AreEqual(t, page.Timestamp);
+            Assert.AreSame(uri, page.Uri);
         }
 
         /// <summary>
@@ -51,6 +53,7 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("TestTitle", page.Title);
             Assert.AreEqual("TestText", page.Text);
             Assert.IsNull(page.Timestamp);
+            Assert.IsNull(page.Uri);
         }
 
         /// <summary>
@@ -65,6 +68,7 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("TestTitle", page.Title);
             Assert.IsNull(page.Text);
             Assert.IsNull(page.Timestamp);
+            Assert.IsNull(page.Uri);
         }
 
         /// <summary>
@@ -92,7 +96,7 @@ namespace Honememo.Wptscs.Websites
         #region プロパティ
 
         /// <summary>
-        /// Websiteプロパティテストケース（正常系）。
+        /// <see cref="Page.Website"/>プロパティテストケース（正常系）。
         /// </summary>
         [Test]
         public void TestWebsite()
@@ -105,7 +109,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Websiteプロパティテストケース（null値）。
+        /// <see cref="Page.Website"/>プロパティテストケース（null値）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -116,7 +120,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Titleプロパティテストケース（正常系）。
+        /// <see cref="Page.Title"/>プロパティテストケース（正常系）。
         /// </summary>
         [Test]
         public void TestTitle()
@@ -128,7 +132,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Titleプロパティテストケース（null値）。
+        /// <see cref="Page.Title"/>プロパティテストケース（null値）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -139,7 +143,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Titleプロパティテストケース（空）。
+        /// <see cref="Page.Title"/>プロパティテストケース（空）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentException))]
@@ -150,7 +154,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Textプロパティテストケース。
+        /// <see cref="Page.Text"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestText()
@@ -162,7 +166,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Timestampプロパティテストケース。
+        /// <see cref="Page.Timestamp"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestTimestamp()
@@ -174,23 +178,35 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual(t, page.Timestamp);
         }
 
+        /// <summary>
+        /// <see cref="Page.Uri"/>プロパティテストケース。
+        /// </summary>
+        [Test]
+        public void TestUri()
+        {
+            Page page = new Page(new DummySite(), "TestTitle");
+            PrivateAccessor<Page> acc = new PrivateAccessor<Page>(page);
+            Uri uri = new Uri("http://example.com/TestTitle");
+            acc.SetProperty("Uri", uri);
+            Assert.AreEqual(uri, page.Uri);
+        }
+
         #endregion
 
         #region モッククラス
 
         /// <summary>
-        /// Pageテスト用のモッククラスです。
+        /// <see cref="Page"/>テスト用のモッククラスです。
         /// </summary>
-        public class DummySite : Website
+        private class DummySite : Website
         {
             #region ダミーメソッド
 
             /// <summary>
-            /// ページを取得。
+            /// ページを取得。空実装。
             /// </summary>
             /// <param name="title">ページタイトル。</param>
-            /// <returns>取得したページ。</returns>
-            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+            /// <returns><c>null</c>。</returns>
             public override Page GetPage(string title)
             {
                 return null;

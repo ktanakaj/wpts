@@ -222,7 +222,7 @@ namespace Honememo.Wptscs.Logics
         protected virtual string CreateOpening(string title)
         {
             string langPart = String.Empty;
-            MediaWikiLink langLink = this.GetLanguageLink(this.From, this.To.Language.Code);
+            IElement langLink = this.GetLanguageLink();
             if (langLink != null)
             {
                 langPart = langLink.ToString() + ": ";
@@ -941,6 +941,12 @@ namespace Honememo.Wptscs.Logics
         /// </summary>
         /// <param name="title">翻訳支援対象の記事名。</param>
         /// <returns>取得したページ。取得失敗時は<c>null</c>。</returns>
+        /// <remarks>
+        /// ここで取得した記事のURIを、以後の翻訳支援処理で使用するRefererとして登録
+        /// （ここで処理しているのは、リダイレクトの場合のリダイレクト先への
+        /// アクセス時にもRefererを入れたかったから。
+        /// リダイレクトの場合は、最終的には転送先ページのURIとなる）。
+        /// </remarks>
         private MediaWikiPage GetTargetPage(string title)
         {
             // 指定された記事をWikipediaから取得、リダイレクトの場合その先まで探索
@@ -957,9 +963,14 @@ namespace Honememo.Wptscs.Logics
                     this.Logger.AddResponse(Resources.LogMessageTargetArticleNotFound);
                     break;
                 }
-                else if (!page.IsRedirect())
+
+                // 取得した記事のURIを以後のアクセスで用いるRefererとして登録
+                this.From.WebProxy.Referer = page.Uri.ToString();
+                this.To.WebProxy.Referer = page.Uri.ToString();
+
+                if (!page.IsRedirect())
                 {
-                    // リダイレクト以外もここで終了
+                    // リダイレクト以外ならこれで終了
                     break;
                 }
 
@@ -974,24 +985,48 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 指定した言語での言語名称を [[言語名称|略称]]の内部リンクで取得。
         /// </summary>
-        /// <param name="site">サイト。</param>
-        /// <param name="code">言語のコード。</param>
-        /// <returns>[[言語名称|略称]]の内部リンク。登録されていない場合<c>null</c>。</returns>
-        private MediaWikiLink GetLanguageLink(Website site, string code)
+        /// <returns>
+        /// [[言語名称|略称]]の内部リンク。登録されていない場合<c>null</c>。
+        /// サーバーにそうした記事が存在しない場合、リンクではなく言語名称or略称の文字列を返す。
+        /// </returns>
+        private IElement GetLanguageLink()
         {
-            if (!site.Language.Names.ContainsKey(code))
+            // 言語情報を取得
+            Language.LanguageName name;
+            if (!this.From.Language.Names.TryGetValue(this.To.Language.Code, out name))
             {
                 return null;
             }
 
-            Language.LanguageName name = site.Language.Names[code];
-            MediaWikiLink link = new MediaWikiLink(name.Name);
+            // 略称を取得
+            IElement shortName = null;
             if (!String.IsNullOrEmpty(name.ShortName))
             {
-                link.PipeTexts.Add(new TextElement(name.ShortName));
+                shortName = new TextElement(name.ShortName);
             }
 
-            return link;
+            if (this.To.HasLanguagePage)
+            {
+                // サーバーにこの言語の記事が存在することが期待される場合、
+                // 内部リンクとして返す
+                MediaWikiLink link = new MediaWikiLink(name.Name);
+                if (shortName != null)
+                {
+                    link.PipeTexts.Add(shortName);
+                }
+
+                return link;
+            }
+            else if (shortName != null)
+            {
+                // 存在しない場合、まずあれば略称を返す
+                return shortName;
+            }
+            else
+            {
+                // 無ければ言語名を返す
+                return new TextElement(name.Name);
+            }
         }
 
         /// <summary>

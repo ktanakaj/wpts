@@ -100,7 +100,7 @@
     <Compile Include="Websites\Website.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\AppDefaultWebProxy.cs" />
+    <Compile Include="Utilities\AppConfigWebProxy.cs" />
     <Compile Include="Utilities\IWebProxy.cs" />
     <Compile Include="Parsers\MediaWikiParser.cs" />
     <EmbeddedResource Include="ConfigForm.ja.resx">

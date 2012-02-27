@@ -5,7 +5,24 @@
     <MediaWiki>
       <Location>http://wikitravel.org</Location>
       <Language Code="de">
-        <Names />
+        <Names>
+          <LanguageName Code="de">
+            <Name>Deutsch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>German</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ドイツ語</Name>
+            <ShortName>独</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>德语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <MetaApi>/wiki/de/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|interwikimap</MetaApi>
       <ExportPath>/de/Spezial:Exportieren/$1</ExportPath>
@@ -17,7 +34,32 @@
     <MediaWiki>
       <Location>http://wikitravel.org</Location>
       <Language Code="en">
-        <Names />
+        <Names>
+          <LanguageName Code="de">
+            <Name>Englisch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>English</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>英語</Name>
+            <ShortName>英</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>英語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Anglais</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Английский язык</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <MetaApi>/wiki/en/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|interwikimap</MetaApi>
       <ExportPath>/en/Special:Export/$1</ExportPath>
@@ -29,7 +71,28 @@
     <MediaWiki>
       <Location>http://wikitravel.org</Location>
       <Language Code="fr">
-        <Names />
+        <Names>
+          <LanguageName Code="de">
+            <Name>Französisch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>French</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Français</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>フランス語</Name>
+            <ShortName>仏</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>法语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <MetaApi>/wiki/fr/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|interwikimap</MetaApi>
       <ExportPath>/fr/Special:Export/$1</ExportPath>
@@ -41,7 +104,24 @@
     <MediaWiki>
       <Location>http://wikitravel.org</Location>
       <Language Code="ja">
-        <Names />
+        <Names>
+          <LanguageName Code="de">
+            <Name>Japanisch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Japanese</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>日本語</Name>
+            <ShortName>日</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>日語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
         <Bracket>（$1）</Bracket>
       </Language>
       <MetaApi>/wiki/ja/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|interwikimap</MetaApi>
@@ -54,7 +134,24 @@
     <MediaWiki>
       <Location>http://wikitravel.org</Location>
       <Language Code="ru">
-        <Names />
+        <Names>
+          <LanguageName Code="en">
+            <Name>Russian</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ロシア語</Name>
+            <ShortName>露</ShortName>
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>русский язык</Name>
+            <ShortName>русский</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>俄语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <MetaApi>/wiki/ru/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|interwikimap</MetaApi>
       <ExportPath>/ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Export/$1</ExportPath>
@@ -66,7 +163,24 @@
     <MediaWiki>
       <Location>http://wikitravel.org</Location>
       <Language Code="zh">
-        <Names />
+        <Names>
+          <LanguageName Code="de">
+            <Name>Chinesisch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Chinese</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>中国語</Name>
+            <ShortName>中</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>中文</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
       </Language>
       <MetaApi>/wiki/zh/api.php?format=xml&amp;action=query&amp;meta=siteinfo&amp;siprop=namespaces|interwikimap</MetaApi>
       <ExportPath>/zh/Special:Export/$1</ExportPath>

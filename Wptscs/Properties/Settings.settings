@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="DefaultUserAgent" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">WikipediaTranslationSupportTool/{0}.{1:D2}</Value>
+      <Value Profile="(Default)">Translation Support for Wikipedia/{0}.{1:D2}</Value>
     </Setting>
     <Setting Name="WikipediaLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://{0}.wikipedia.org</Value>

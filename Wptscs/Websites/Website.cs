@@ -17,6 +17,7 @@ namespace Honememo.Wptscs.Websites
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Properties;
+    using Honememo.Wptscs.Utilities;
 
     /// <summary>
     /// ウェブサイトをあらわすモデルクラスです。
@@ -38,17 +39,38 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         private Language language;
 
+        /// <summary>
+        /// このウェブサイトへのアクセスで使用するProxyインスタンス。
+        /// </summary>
+        private Honememo.Wptscs.Utilities.IWebProxy webProxy = new AppConfigWebProxy();
+
         #endregion
 
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ。
+        /// 指定された言語, サーバーのウェブサイトを表すインスタンスを作成。
         /// </summary>
-        /// <remarks>継承クラスでは忘れずに
-        /// <see cref="Location"/>, <see cref="Language"/>
-        /// の設定を行ってください。</remarks>
-        public Website()
+        /// <param name="language">ウェブサイトの言語。</param>
+        /// <param name="location">ウェブサイトの場所。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="language"/>または<paramref name="location"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="location"/>が空の文字列の場合。</exception>
+        public Website(Language language, string location)
+        {
+            this.Language = language;
+            this.Location = location;
+        }
+
+        /// <summary>
+        /// 空のインスタンスを作成（シリアライズ or 拡張用）。
+        /// </summary>
+        /// <remarks>
+        /// <see cref="Language"/>, <see cref="Location"/>
+        /// はウェブサイトでは必須扱いのため、通常はチェックが行われる
+        /// <see cref="Website(Language, string)"/>
+        /// のコンストラクタを使用してください。
+        /// </remarks>
+        protected Website()
         {
         }
 
@@ -60,7 +82,8 @@ namespace Honememo.Wptscs.Websites
         /// ウェブサイトの場所。
         /// </summary>
         /// <example>http://en.wikipedia.org</example>
-        /// <remarks>動作確認はhttpとfileスキームのみ。</remarks>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        /// <exception cref="ArgumentException">空の文字列が指定された場合。</exception>
         public string Location
         {
             get
@@ -70,14 +93,14 @@ namespace Honememo.Wptscs.Websites
 
             set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.location = Validate.NotBlank(value, "location");
+                this.location = Validate.NotBlank(value);
             }
         }
 
         /// <summary>
         /// ウェブサイトの言語。
         /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         public Language Language
         {
             get
@@ -87,8 +110,24 @@ namespace Honememo.Wptscs.Websites
 
             protected set
             {
-                // ※必須な情報が設定されていない場合、例外を返す
-                this.language = Validate.NotNull(value, "language");
+                this.language = Validate.NotNull(value);
+            }
+        }
+
+        /// <summary>
+        /// このウェブサイトへのアクセスで使用するProxyインスタンス。
+        /// </summary>
+        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
+        public Honememo.Wptscs.Utilities.IWebProxy WebProxy
+        {
+            get
+            {
+                return this.webProxy;
+            }
+
+            set
+            {
+                this.webProxy = Validate.NotNull(value);
             }
         }
 
