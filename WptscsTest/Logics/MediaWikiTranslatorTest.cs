@@ -543,6 +543,75 @@ namespace Honememo.Wptscs.Logics
             Assert.AreEqual("===[[弾道飛行]]{{ref-en}}===", translator.ReplaceHeading(heading, parent).ToString());
         }
 
+        /// <summary>
+        /// <see cref="MediaWikiTranslator.CreateOpening"/>メソッドテストケース。
+        /// </summary>
+        [Test]
+        public void TestCreateOpening()
+        {
+            // From, Toの設定に応じて変換後記事の冒頭部を作り出す
+            TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
+            MockFactory mock = new MockFactory();
+            translator.From = mock.GetMediaWiki("en");
+            translator.To = mock.GetMediaWiki("ja");
+
+            // 完全な形
+            Assert.AreEqual(
+                "'''xxx'''（[[英語|英]]: '''{{Lang|en|English's title}}'''）\n\n",
+                translator.CreateOpening("English's title"));
+
+            // リンクなし・略称あり
+            translator.To.HasLanguagePage = false;
+            Assert.AreEqual(
+                "'''xxx'''（英: '''{{Lang|en|English's title}}'''）\n\n",
+                translator.CreateOpening("English's title"));
+
+            // リンクなし・略称なし
+            Language.LanguageName name = translator.From.Language.Names["ja"];
+            name.ShortName = null;
+            translator.From.Language.Names["ja"] = name;
+            Assert.AreEqual(
+                "'''xxx'''（英語: '''{{Lang|en|English's title}}'''）\n\n",
+                translator.CreateOpening("English's title"));
+
+            // リンクあり・略称なし
+            translator.To.HasLanguagePage = true;
+            Assert.AreEqual(
+                "'''xxx'''（[[英語]]: '''{{Lang|en|English's title}}'''）\n\n",
+                translator.CreateOpening("English's title"));
+
+            // 言語名なし・リンク有り
+            translator.From.Language.Names.Remove("ja");
+            Assert.AreEqual(
+                "'''xxx'''（'''{{Lang|en|English's title}}'''）\n\n",
+                translator.CreateOpening("English's title"));
+
+            // 言語名なし・リンクなし
+            translator.To.HasLanguagePage = false;
+            Assert.AreEqual(
+                "'''xxx'''（'''{{Lang|en|English's title}}'''）\n\n",
+                translator.CreateOpening("English's title"));
+
+            // 仮リンクフォーマットなし
+            translator.To.LangFormat = null;
+            Assert.AreEqual(
+                "'''xxx'''（'''English's title'''）\n\n",
+                translator.CreateOpening("English's title"));
+
+            // 括弧のフォーマット変更
+            // ※ パラメータ上なしには出来ない
+            translator.To.Language.Bracket = "「$1」";
+            Assert.AreEqual(
+                "'''xxx'''「'''English's title'''」\n\n",
+                translator.CreateOpening("English's title"));
+
+            // 括弧のフォーマットの$1なし
+            translator.To.Language.Bracket = "後で消す";
+            Assert.AreEqual(
+                "'''xxx'''後で消す\n\n",
+                translator.CreateOpening("English's title"));
+        }
+
         #endregion
 
         #region 全体テストケース
@@ -853,6 +922,16 @@ namespace Honememo.Wptscs.Logics
             public new IElement ReplaceHeading(MediaWikiHeading heading, MediaWikiPage parent)
             {
                 return base.ReplaceHeading(heading, parent);
+            }
+
+            /// <summary>
+            /// 変換後記事冒頭用の「'''日本語記事名'''（[[英語|英]]: '''{{Lang|en|英語記事名}}'''）」みたいなのを作成する。
+            /// </summary>
+            /// <param name="title">翻訳支援対象の記事名。</param>
+            /// <returns>冒頭部のテキスト。</returns>
+            public new string CreateOpening(string title)
+            {
+                return base.CreateOpening(title);
             }
 
             #endregion

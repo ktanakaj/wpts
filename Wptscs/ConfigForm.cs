@@ -780,6 +780,7 @@ namespace Honememo.Wptscs
             this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
             this.textBoxLinkInterwikiFormat.Text = StringUtils.DefaultString(site.LinkInterwikiFormat);
             this.textBoxLangFormat.Text = StringUtils.DefaultString(site.LangFormat);
+            this.checkBoxHasLanguagePage.Checked = site.HasLanguagePage;
         }
 
         /// <summary>
@@ -887,6 +888,8 @@ namespace Honememo.Wptscs
             {
                 site.LangFormat = str;
             }
+
+            site.HasLanguagePage = this.checkBoxHasLanguagePage.Checked;
 
             // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
             if (!String.IsNullOrWhiteSpace(this.textBoxTemplateNamespace.Text))

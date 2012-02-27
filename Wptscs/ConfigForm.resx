@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 491</value>
+    <value>215, 506</value>
   </data>
   <data name="buttonOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -157,7 +157,7 @@
     <value>Bottom</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 491</value>
+    <value>335, 506</value>
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -193,7 +193,7 @@
     <value>True</value>
   </data>
   <data name="labelItemsNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 429</value>
+    <value>9, 443</value>
   </data>
   <data name="labelItemsNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 12</value>
@@ -307,7 +307,7 @@
     <value>6, 6</value>
   </data>
   <data name="dataGridViewItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 420</value>
+    <value>580, 434</value>
   </data>
   <data name="dataGridViewItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -331,7 +331,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 447</value>
+    <value>592, 462</value>
   </data>
   <data name="tabPageItems.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -364,7 +364,7 @@
     <value>6, 6</value>
   </data>
   <data name="dataGridViewHeading.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 435</value>
+    <value>580, 450</value>
   </data>
   <data name="dataGridViewHeading.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -388,7 +388,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageHeadings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 447</value>
+    <value>592, 462</value>
   </data>
   <data name="tabPageHeadings.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -525,7 +525,7 @@
     <value>6, 18</value>
   </data>
   <data name="dataGridViewLanguageName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 329</value>
+    <value>260, 344</value>
   </data>
   <data name="dataGridViewLanguageName.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -546,7 +546,7 @@
     <value>8, 43</value>
   </data>
   <data name="groupBoxLanguageName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 353</value>
+    <value>272, 368</value>
   </data>
   <data name="groupBoxLanguageName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -636,7 +636,7 @@
     <value>300, 39</value>
   </data>
   <data name="groupBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 402</value>
+    <value>286, 417</value>
   </data>
   <data name="groupBoxLanguage.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -658,6 +658,36 @@
   </data>
   <data name="groupBoxServer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
+  </data>
+  <data name="checkBoxHasLanguagePage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxHasLanguagePage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 395</value>
+  </data>
+  <data name="checkBoxHasLanguagePage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 16</value>
+  </data>
+  <data name="checkBoxHasLanguagePage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="checkBoxHasLanguagePage.Text" xml:space="preserve">
+    <value>Wiki has language page</value>
+  </data>
+  <data name="checkBoxHasLanguagePage.ToolTip" xml:space="preserve">
+    <value>言語名のページが存在する場合、言語名を出力する際に内部リンクの形で出力します。</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHasLanguagePage.Name" xml:space="preserve">
+    <value>checkBoxHasLanguagePage</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHasLanguagePage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHasLanguagePage.Parent" xml:space="preserve">
+    <value>groupBoxServer</value>
+  </data>
+  <data name="&gt;&gt;checkBoxHasLanguagePage.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="textBoxLangFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 368</value>
@@ -686,7 +716,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxLangFormat.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="labelLangFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -718,7 +748,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelLangFormat.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="textBoxLinkInterwikiFormat.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 338</value>
@@ -747,7 +777,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxLinkInterwikiFormat.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="labelLinkInterwikiFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -779,7 +809,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelLinkInterwikiFormat.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="textBoxDocumentationTemplateDefaultPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 295</value>
@@ -806,7 +836,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxDocumentationTemplateDefaultPage.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -836,7 +866,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelDocumentationTemplateDefaultPage.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="textBoxDocumentationTemplate.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 232</value>
@@ -870,7 +900,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxDocumentationTemplate.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="labelDocumentationTemplate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -901,7 +931,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelDocumentationTemplate.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="textBoxFileNamespace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
@@ -931,7 +961,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxFileNamespace.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="textBoxCategoryNamespace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
@@ -961,7 +991,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxCategoryNamespace.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="labelCategoryNamespace.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -991,7 +1021,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelCategoryNamespace.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="textBoxTemplateNamespace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Disable</value>
@@ -1021,7 +1051,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxTemplateNamespace.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="labelTemplateNamespace.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1051,7 +1081,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelTemplateNamespace.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="textBoxRedirect.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 185</value>
@@ -1079,7 +1109,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxRedirect.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="labelRedirect.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1110,7 +1140,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelRedirect.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="textBoxExportPath.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 46</value>
@@ -1142,7 +1172,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxExportPath.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="labelExportPath.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1177,7 +1207,7 @@
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelExportPath.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="textBoxMetaApi.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 73</value>
@@ -1208,7 +1238,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxMetaApi.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="labelMetaApi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1241,7 +1271,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelMetaApi.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="textBoxLocation.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 18</value>
@@ -1268,7 +1298,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;textBoxLocation.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="labelLocation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1298,7 +1328,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelLocation.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="labelFileNamespace.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1328,7 +1358,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>groupBoxServer</value>
   </data>
   <data name="&gt;&gt;labelFileNamespace.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="groupBoxServer.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1337,7 +1367,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>6, 39</value>
   </data>
   <data name="groupBoxServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 402</value>
+    <value>288, 417</value>
   </data>
   <data name="groupBoxServer.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1418,7 +1448,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 447</value>
+    <value>592, 462</value>
   </data>
   <data name="tabPageServer.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1556,10 +1586,10 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>3</value>
   </data>
   <data name="groupBoxInformation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 266</value>
+    <value>6, 249</value>
   </data>
   <data name="groupBoxInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 175</value>
+    <value>580, 207</value>
   </data>
   <data name="groupBoxInformation.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1827,10 +1857,13 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>342, 71</value>
   </data>
   <data name="labelRefererNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 12</value>
+    <value>75, 12</value>
   </data>
   <data name="labelRefererNote.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
+  </data>
+  <data name="labelRefererNote.Text" xml:space="preserve">
+    <value>(Empty: Auto)</value>
   </data>
   <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
     <value>labelRefererNote</value>
@@ -1946,9 +1979,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   </data>
   <data name="textBoxReferer.ToolTip" xml:space="preserve">
     <value>Referer を固定で指定する場合、URLを入力します。
-空欄の場合、Refererは設定しません。
-
-※ 現状、Referer は動的には設定されません。</value>
+空欄の場合、Referer はアクセスしたページに応じて動的に設定されます。</value>
   </data>
   <data name="&gt;&gt;textBoxReferer.Name" xml:space="preserve">
     <value>textBoxReferer</value>
@@ -1979,9 +2010,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
   </data>
   <data name="labelReferer.ToolTip" xml:space="preserve">
     <value>Referer を固定で指定する場合、URLを入力します。
-空欄の場合、Refererは設定しません。
-
-※ 現状、Referer は動的には設定されません。</value>
+空欄の場合、Referer はアクセスしたページに応じて動的に設定されます。</value>
   </data>
   <data name="&gt;&gt;labelReferer.Name" xml:space="preserve">
     <value>labelReferer</value>
@@ -2089,7 +2118,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>6, 6</value>
   </data>
   <data name="groupBoxApplicationConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 254</value>
+    <value>580, 237</value>
   </data>
   <data name="groupBoxApplicationConfig.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2116,7 +2145,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageApplication.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 447</value>
+    <value>592, 462</value>
   </data>
   <data name="tabPageApplication.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2146,7 +2175,7 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>True</value>
   </data>
   <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 473</value>
+    <value>600, 488</value>
   </data>
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2173,10 +2202,10 @@ http://www.mediawiki.org/wiki/API:Main_page/ja</value>
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>624, 523</value>
+    <value>624, 538</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>640, 560</value>
+    <value>640, 575</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Settings</value>

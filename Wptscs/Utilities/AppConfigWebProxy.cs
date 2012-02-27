@@ -1,9 +1,9 @@
 ﻿// ================================================================================================
 // <summary>
-//      アプリケーションデフォルトの値を用いてウェブアクセスするプロキシクラスソース</summary>
+//      アプリケーション設定値を用いてウェブアクセスするプロキシクラスソース</summary>
 //
-// <copyright file="AppDefaultWebProxy.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+// <copyright file="AppConfigWebProxy.cs" company="honeplusのメモ帳">
+//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -13,13 +13,15 @@ namespace Honememo.Wptscs.Utilities
     using System;
     using System.IO;
     using System.Net;
+    using System.Reflection;
     using System.Threading;
+    using Honememo.Utilities;
     using Honememo.Wptscs.Properties;
     
     /// <summary>
-    /// アプリケーションデフォルトの値を用いてウェブアクセスするプロキシクラスです。
+    /// アプリケーション設定値を用いてウェブアクセスするプロキシクラスです。
     /// </summary>
-    public class AppDefaultWebProxy : IWebProxy
+    public class AppConfigWebProxy : IWebProxy
     {
         #region private変数
 
@@ -40,31 +42,27 @@ namespace Honememo.Wptscs.Utilities
         /// <summary>
         /// このプロキシで使用するUserAgent。
         /// </summary>
-        /// <returns>UserAgent。</returns>
-        /// <remarks>プロパティ→アプリ設定値→アプリデフォルト値を生成 の順にあるものを返す。</remarks>
+        /// <remarks>アプリ設定値→プロパティ→アプリデフォルト値を生成 の順に見つけたものを返す。</remarks>
         public string UserAgent
         {
             get
             {
-                // プロパティを確認
+                // アプリ設定値を確認
+                string ua = Settings.Default.UserAgent;
+                if (!String.IsNullOrEmpty(ua))
+                {
+                    return ua;
+                }
+
+                // 存在しない場合、このプロパティの値を確認
                 if (this.userAgent != null)
                 {
                     return this.userAgent;
                 }
 
-                // アプリ設定値を確認
-                string ua = Settings.Default.UserAgent;
-                if (String.IsNullOrEmpty(ua))
-                {
-                    // 特に設定が無い場合はデフォルトの値を設定
-                    Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-                    ua = String.Format(
-                        Settings.Default.DefaultUserAgent,
-                        ver.Major,
-                        ver.Minor);
-                }
-
-                return ua;
+                // いずれも存在しない場合は、デフォルトの値を生成して返す
+                Version ver = Assembly.GetExecutingAssembly().GetName().Version;
+                return String.Format(Settings.Default.DefaultUserAgent, ver.Major, ver.Minor);
             }
 
             set
@@ -76,26 +74,20 @@ namespace Honememo.Wptscs.Utilities
         /// <summary>
         /// このプロキシで使用するReferer。
         /// </summary>
-        /// <returns>Referer。</returns>
-        /// <remarks>プロパティ→アプリ設定値 の順にあるものを返す。</remarks>
+        /// <remarks>アプリ設定値→プロパティ の順に見つけたものを返す。</remarks>
         public string Referer
         {
             get
             {
-                // プロパティを確認
-                if (this.referer != null)
-                {
-                    return this.referer;
-                }
-
                 // アプリ設定値を確認
                 string r = Settings.Default.Referer;
                 if (String.IsNullOrEmpty(r))
                 {
-                    r = String.Empty;
+                    // 存在しない場合、このプロパティの値を返す
+                    r = this.referer;
                 }
 
-                return r;
+                return StringUtils.DefaultString(r);
             }
 
             set
@@ -138,7 +130,7 @@ namespace Honememo.Wptscs.Utilities
                     }
 
                     // 時間を置いてからリトライする（0はスレッド停止のため除外）
-                    System.Diagnostics.Debug.WriteLine("AppDefaultWebProxy.GetStream > retry : " + e.Message);
+                    System.Diagnostics.Debug.WriteLine("AppConfigWebProxy.GetStream > retry : " + e.Message);
                     if (wait > 0)
                     {
                         Thread.Sleep(wait);
@@ -179,9 +171,9 @@ namespace Honememo.Wptscs.Utilities
         }
 
         /// <summary>
-        /// HttpWebRequest用の設定を行う。
+        /// <see cref="HttpWebRequest"/>用の設定を行う。
         /// </summary>
-        /// <param name="req">設定対象のHttpWebRequest。</param>
+        /// <param name="req">設定対象の<see cref="HttpWebRequest"/>。</param>
         private void InitializeHttpWebRequest(HttpWebRequest req)
         {
             // UserAgent設定
@@ -197,7 +189,7 @@ namespace Honememo.Wptscs.Utilities
         /// <summary>
         /// 渡された<see cref="WebException"/>がリトライ可能なものか？
         /// </summary>
-        /// <param name="e">発生した<c>WebException</c>。</param>
+        /// <param name="e">発生した<see cref="WebException"/>。</param>
         /// <returns>リトライ可能な場合<c>true</c>。</returns>
         private bool IsRetryable(WebException e)
         {

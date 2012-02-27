@@ -274,40 +274,37 @@ namespace Honememo.Wptscs.Logics
                 throw new InvalidOperationException("From or To is null");
             }
 
-            // 変数を初期化、処理時間を測定開始
+            // 初期化やストップウォッチの起動といった前処理を実施
             this.Initialize();
-            this.Stopwatch.Start();
-
-            // サーバー接続チェック
-            string host = new Uri(this.From.Location).Host;
-            if (!String.IsNullOrEmpty(host) && !Settings.Default.IgnoreError)
-            {
-                if (!this.Ping(host))
-                {
-                    throw new ApplicationException("ping failed");
-                }
-            }
-
-            // ここまでの間に終了要求が出ているかを確認
-            this.ThrowExceptionIfCanceled();
-
-            // 翻訳支援処理実行部の本体を実行
-            // ※以降の処理は、継承クラスにて定義
             try
             {
+                // サーバー接続チェック
+                string host = new Uri(this.From.Location).Host;
+                if (!String.IsNullOrEmpty(host) && !Settings.Default.IgnoreError)
+                {
+                    if (!this.Ping(host))
+                    {
+                        throw new ApplicationException("ping failed");
+                    }
+                }
+
+                // ここまでの間に終了要求が出ているかを確認
+                this.ThrowExceptionIfCanceled();
+
+                // 翻訳支援処理実行部の本体を実行
+                // ※以降の処理は、継承クラスにて定義
                 this.RunBody(name);
             }
             finally
             {
-                // 終了後は処理状態をクリア、処理時間を測定終了
-                this.StatusManager.Clear();
-                this.Stopwatch.Stop();
+                // 状態のクリアやストップウォッチの停止といった後処理を実施
+                this.Terminate();
             }
         }
         
         #endregion
 
-        #region 実装が必要なテンプレートメソッド
+        #region テンプレートメソッド
 
         /// <summary>
         /// 翻訳支援処理実行部の本体。
@@ -316,6 +313,53 @@ namespace Honememo.Wptscs.Logics
         /// <exception cref="ApplicationException">処理を中断する場合。中断の理由は<see cref="Logger"/>に出力する。</exception>
         /// <remarks>テンプレートメソッド的な構造になっています。</remarks>
         protected abstract void RunBody(string name);
+
+        /// <summary>
+        /// 翻訳支援処理実行時の初期化処理。
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// <see cref="RunBody"/>実行前の初期化のタイミングでコールされる。
+        /// 本メソッドで例外が発生した場合、<see cref="RunBody"/>, <see cref="Terminate"/>はコールされない。
+        /// </para>
+        /// <para>
+        /// オーバーライド時は必ず親のメソッドもコールすること。
+        /// </para>
+        /// </remarks>
+        protected virtual void Initialize()
+        {
+            // ロガーや処理状態などを初期化、処理時間の測定を開始
+            this.Logger.Clear();
+            this.StatusManager.Clear();
+            this.Stopwatch.Reset();
+            this.Text = String.Empty;
+            this.CancellationPending = false;
+            this.From.WebProxy.Referer = null;
+            this.To.WebProxy.Referer = null;
+            this.Stopwatch.Start();
+        }
+
+        /// <summary>
+        /// 翻訳支援処理実行時の終了処理。
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// <see cref="RunBody"/>実行後の後処理のタイミングでコールされる。
+        /// ただし、サーバー接続チェックに失敗した場合などでは、
+        /// <see cref="RunBody"/>が実行されること無く本メソッドが呼ばれる場合もある。
+        /// </para>
+        /// <para>
+        /// オーバーライド時は必ず親のメソッドもコールすること。
+        /// </para>
+        /// </remarks>
+        protected virtual void Terminate()
+        {
+            // 終了後は処理状態やRefererをクリア、処理時間を測定終了
+            this.StatusManager.Clear();
+            this.From.WebProxy.Referer = null;
+            this.To.WebProxy.Referer = null;
+            this.Stopwatch.Stop();
+        }
 
         #endregion
 
@@ -371,19 +415,6 @@ namespace Honememo.Wptscs.Logics
         #endregion
 
         #region 内部処理用メソッド
-
-        /// <summary>
-        /// 翻訳支援処理実行時の初期化処理。
-        /// </summary>
-        private void Initialize()
-        {
-            // 変数を初期化
-            this.Logger.Clear();
-            this.StatusManager.Clear();
-            this.Stopwatch.Reset();
-            this.Text = String.Empty;
-            this.CancellationPending = false;
-        }
 
         /// <summary>
         /// サーバー接続チェック。

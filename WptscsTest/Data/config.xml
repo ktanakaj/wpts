@@ -29,6 +29,7 @@
       </DocumentationTemplates>
       <LinkInterwikiFormat>{{وإو|عر=$1|لغ=$2|تر=$3|نص=$4}}</LinkInterwikiFormat>
       <LangFormat>{{رمزلغة|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://bn.wikipedia.org</Location>
@@ -52,6 +53,7 @@
       <MagicWords />
       <InterwikiPrefixs />
       <DocumentationTemplates />
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://de.wikipedia.org</Location>
@@ -87,6 +89,7 @@
         <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://en.wikipedia.org</Location>
@@ -162,6 +165,7 @@
       </DocumentationTemplates>
       <LinkInterwikiFormat>{{link-interwiki|en=$1|en_text=$4|lang=$2|lang_title=$3}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://es.wikipedia.org</Location>
@@ -197,6 +201,7 @@
         <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://fr.wikipedia.org</Location>
@@ -233,6 +238,7 @@
       </DocumentationTemplates>
       <LinkInterwikiFormat>{{Lien|fr=$1|lang=$2|trad=$3|texte=$4}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://hi.wikipedia.org</Location>
@@ -257,6 +263,7 @@
       <InterwikiPrefixs />
       <DocumentationTemplates />
       <LangFormat>{{भाषा|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://it.wikipedia.org</Location>
@@ -292,6 +299,7 @@
         <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ja.wikipedia.org</Location>
@@ -484,6 +492,7 @@
       </DocumentationTemplates>
       <LinkInterwikiFormat>{{仮リンク|$1|$2|$3|label=$4}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ko.wikipedia.org</Location>
@@ -515,6 +524,7 @@
         <DocumentationTemplate DefaultPage="/설명문서">틀:틀 설명문서</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://nl.wikipedia.org</Location>
@@ -545,6 +555,7 @@
         <DocumentationTemplate DefaultPage="/doc">Sjabloon:Sjabdoc</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://pl.wikipedia.org</Location>
@@ -571,6 +582,7 @@
       <DocumentationTemplates>
         <DocumentationTemplate DefaultPage="/opis">Szablon:Dokumentacja</DocumentationTemplate>
       </DocumentationTemplates>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://pt.wikipedia.org</Location>
@@ -606,6 +618,7 @@
         <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ru.wikipedia.org</Location>
@@ -641,6 +654,7 @@
         <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://si.wikipedia.org</Location>
@@ -664,6 +678,7 @@
       <MagicWords />
       <InterwikiPrefixs />
       <DocumentationTemplates />
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://ta.wikipedia.org</Location>
@@ -687,6 +702,7 @@
       <MagicWords />
       <InterwikiPrefixs />
       <DocumentationTemplates />
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
       <Location>http://zh.wikipedia.org</Location>
@@ -717,6 +733,7 @@
         <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
       </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
+      <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
   </Websites>
   <ItemTables>

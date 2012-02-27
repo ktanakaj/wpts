@@ -11,25 +11,20 @@
 namespace Honememo.Wptscs.Websites
 {
     using System;
-    using System.IO;
-    using System.Reflection;
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Serialization;
-    using Honememo.Utilities;
     using Honememo.Wptscs.Models;
+    using Honememo.Wptscs.Utilities;
     using NUnit.Framework;
 
     /// <summary>
-    /// Websiteのテストクラスです。
+    /// <see cref="Website"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    public class WebsiteTest
+    class WebsiteTest
     {
         #region プロパティテストケース
 
         /// <summary>
-        /// Locationプロパティテストケース。
+        /// <see cref="Website.Location"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestLocation()
@@ -40,7 +35,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Locationプロパティテストケース（null）。
+        /// <see cref="Website.Location"/>プロパティテストケース（null）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -50,7 +45,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Locationプロパティテストケース（空）。
+        /// <see cref="Website.Location"/>プロパティテストケース（空）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentException))]
@@ -60,7 +55,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Languageプロパティテストケース。
+        /// <see cref="Website.Language"/>プロパティテストケース。
         /// </summary>
         [Test]
         public void TestLanguage()
@@ -71,7 +66,7 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// Languageプロパティテストケース（null）。
+        /// <see cref="Website.Language"/>プロパティテストケース（null）。
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -80,49 +75,31 @@ namespace Honememo.Wptscs.Websites
             new DummySite().Language = null;
         }
 
-        #endregion
-
-        #region メソッドテストケース
-
         /// <summary>
-        /// XMLデシリアライズテストケース。
+        /// <see cref="Website.WebProxy"/>プロパティテストケース。
         /// </summary>
         [Test]
-        public void TestReadXml()
+        public void TestWebProxy()
         {
-            DummySite site;
-            using (XmlReader r = XmlReader.Create(
-                new StringReader("<DummySite><Location>http://ja.wikipedia.org</Location>"
-                    + "<Language Code=\"ja\"><Names /></Language></DummySite>")))
-            {
-                site = new XmlSerializer(typeof(DummySite)).Deserialize(r) as DummySite;
-            }
+            DummySite site = new DummySite();
 
-            Assert.IsNotNull(site);
-            Assert.AreEqual("http://ja.wikipedia.org", site.Location);
-            Assert.AreEqual("ja", site.Language.Code);
+            // デフォルトでオブジェクトが格納されている
+            Assert.IsNotNull(site.WebProxy);
+
+            // 値を設定するとそのオブジェクトが返る
+            IWebProxy proxy = new AppConfigWebProxy();
+            site.WebProxy = proxy;
+            Assert.AreSame(proxy, site.WebProxy);
         }
 
         /// <summary>
-        /// XMLシリアライズテストケース。
+        /// <see cref="Website.WebProxy"/>プロパティテストケース（null）。
         /// </summary>
         [Test]
-        public void TestWriteXml()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestWebProxyNull()
         {
-            Language lang = new Language("ja");
-            DummySite site = new DummySite();
-            site.Location = "http://ja.wikipedia.org";
-            site.Language = lang;
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.OmitXmlDeclaration = true;
-
-            StringBuilder b = new StringBuilder();
-            using (XmlWriter w = XmlWriter.Create(b, settings))
-            {
-                new XmlSerializer(typeof(DummySite)).Serialize(w, site);
-            }
-
-            Assert.AreEqual("<DummySite><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language></DummySite>", b.ToString());
+            new DummySite().WebProxy = null;
         }
 
         #endregion
@@ -130,29 +107,12 @@ namespace Honememo.Wptscs.Websites
         #region モッククラス
 
         /// <summary>
-        /// Websiteテスト用のモッククラスです。
+        /// <see cref="Website"/>テスト用のモッククラスです。
         /// </summary>
-        public class DummySite : Website, IXmlSerializable
+        private class DummySite : Website
         {
-            #region テスト用プロパティ
-
-            /// <summary>
-            /// ウェブサイトの場所。
-            /// </summary>
-            /// <remarks>動作確認はhttpとfileスキームのみ。</remarks>
-            public new string Location
-            {
-                get
-                {
-                    return base.Location;
-                }
-
-                set
-                {
-                    base.Location = value;
-                }
-            }
-
+            #region 非公開プロパティテスト用のオーラーライドプロパティ
+            
             /// <summary>
             /// ウェブサイトの言語。
             /// </summary>
@@ -174,58 +134,13 @@ namespace Honememo.Wptscs.Websites
             #region ダミーメソッド
 
             /// <summary>
-            /// ページを取得。
+            /// ページを取得。空実装。
             /// </summary>
             /// <param name="title">ページタイトル。</param>
-            /// <returns>取得したページ。</returns>
-            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+            /// <returns><c>null</c>。</returns>
             public override Page GetPage(string title)
             {
                 return null;
-            }
-
-            #endregion
-
-            #region テスト用XMLシリアライズ用メソッド
-
-            /// <summary>
-            /// シリアライズするXMLのスキーマ定義を返す。
-            /// </summary>
-            /// <returns>XML表現を記述するXmlSchema。</returns>
-            public System.Xml.Schema.XmlSchema GetSchema()
-            {
-                return null;
-            }
-
-            /// <summary>
-            /// XMLからオブジェクトをデシリアライズする。
-            /// </summary>
-            /// <param name="reader">デシリアライズ元のXmlReader</param>
-            public void ReadXml(XmlReader reader)
-            {
-                XmlDocument xml = new XmlDocument();
-                xml.Load(reader);
-
-                // Webサイト
-                // ※ 以下、基本的に無かったらNGの部分はいちいちチェックしない。例外飛ばす
-                XmlElement siteElement = xml.SelectSingleNode("DummySite") as XmlElement;
-                this.Location = siteElement.SelectSingleNode("Location").InnerText;
-
-                using (XmlReader r = XmlReader.Create(
-                    new StringReader(siteElement.SelectSingleNode("Language").OuterXml), reader.Settings))
-                {
-                    this.Language = new XmlSerializer(typeof(Language)).Deserialize(r) as Language;
-                }
-            }
-
-            /// <summary>
-            /// オブジェクトをXMLにシリアライズする。
-            /// </summary>
-            /// <param name="writer">シリアライズ先のXmlWriter</param>
-            public void WriteXml(XmlWriter writer)
-            {
-                writer.WriteElementString("Location", this.Location);
-                new XmlSerializer(typeof(Language)).Serialize(writer, this.Language);
             }
 
             #endregion

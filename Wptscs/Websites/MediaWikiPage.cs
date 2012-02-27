@@ -36,35 +36,42 @@ namespace Honememo.Wptscs.Websites
         #region コンストラクタ
 
         /// <summary>
-        /// コンストラクタ。
+        /// 指定されたMediaWikiの渡されたタイトル, 本文, タイムスタンプのページを作成。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
         /// <param name="timestamp">ページのタイムスタンプ。</param>
-        public MediaWikiPage(MediaWiki website, string title, string text, DateTime? timestamp)
-            : base(website, title, text, timestamp)
+        /// <param name="uri">ページのURI。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="website"/>または<paramref name="title"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="title"/>が空の文字列の場合。</exception>
+        public MediaWikiPage(MediaWiki website, string title, string text, DateTime? timestamp, Uri uri)
+            : base(website, title, text, timestamp, uri)
         {
         }
 
         /// <summary>
-        /// コンストラクタ。
-        /// ページのタイムスタンプには<c>null</c>を設定。
+        /// 指定されたMediaWikiの渡されたタイトル, 本文のページを作成。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
         /// <param name="text">ページの本文。</param>
+        /// <remarks>ページのタイムスタンプ, URIには<c>null</c>を設定。</remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="website"/>または<paramref name="title"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="title"/>が空の文字列の場合。</exception>
         public MediaWikiPage(MediaWiki website, string title, string text)
             : base(website, title, text)
         {
         }
 
         /// <summary>
-        /// コンストラクタ。
-        /// ページの本文, タイムスタンプには<c>null</c>を設定。
+        /// 指定されたMediaWikiの渡されたタイトルのページを作成。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
         /// <param name="title">ページタイトル。</param>
+        /// <remarks>ページの本文, タイムスタンプ, URIには<c>null</c>を設定。</remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="website"/>または<paramref name="title"/>が<c>null</c>の場合。</exception>
+        /// <exception cref="ArgumentException"><paramref name="title"/>が空の文字列の場合。</exception>
         public MediaWikiPage(MediaWiki website, string title)
             : base(website, title)
         {
