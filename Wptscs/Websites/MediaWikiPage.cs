@@ -269,10 +269,10 @@ namespace Honememo.Wptscs.Websites
         /// オブジェクトがメソッドの実行に不完全な状態でないか検証する。
         /// 不完全な場合、例外をスローする。
         /// </summary>
-        /// <exception cref="InvalidOperationException">オブジェクトは不完全。</exception>
+        /// <exception cref="InvalidOperationException"><see cref="Text"/>が<c>null</c>の場合。</exception>
         protected virtual void ValidateIncomplete()
         {
-            if (String.IsNullOrEmpty(this.Text))
+            if (this.Text == null)
             {
                 // ページ本文が設定されていない場合不完全と判定
                 throw new InvalidOperationException("Text is unset");

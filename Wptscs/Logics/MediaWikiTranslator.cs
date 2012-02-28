@@ -965,8 +965,8 @@ namespace Honememo.Wptscs.Logics
                 }
 
                 // 取得した記事のURIを以後のアクセスで用いるRefererとして登録
-                this.From.WebProxy.Referer = page.Uri.ToString();
-                this.To.WebProxy.Referer = page.Uri.ToString();
+                this.From.WebProxy.Referer = page.Uri.AbsoluteUri;
+                this.To.WebProxy.Referer = page.Uri.AbsoluteUri;
 
                 if (!page.IsRedirect())
                 {
