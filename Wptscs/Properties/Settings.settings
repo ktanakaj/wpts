@@ -174,7 +174,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="IgnoreError" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="MaxConnectRetries" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>

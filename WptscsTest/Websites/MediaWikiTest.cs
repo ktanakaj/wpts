@@ -26,7 +26,7 @@ namespace Honememo.Wptscs.Websites
     /// <see cref="MediaWiki"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class MediaWikiTest
+    internal class MediaWikiTest
     {
         #region 定数
 

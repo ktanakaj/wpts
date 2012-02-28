@@ -285,9 +285,29 @@ namespace Honememo.Wptscs.Websites
         /// <param name="code">言語コード。</param>
         /// <param name="text">ページテキスト。</param>
         /// <returns>言語間リンク。見つからない場合は<c>null</c>。</returns>
-        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
+        /// <remarks>
+        /// <para>
+        /// 言語間リンクが複数存在する場合は、先に発見したものを返す。
+        /// </para>
+        /// <para>
+        /// 稀に障害なのか<see cref="MediaWiki.MetaApi"/>から<c>interwikimap</c>
+        /// が0件で返ってくることがある
+        /// （API構文ミスなどでなく、それまで動いていたはずのものが）。
+        /// その場合、そのままでは言語すら判別できないので、念のためこの処理では
+        /// 実行前に強制的に翻訳元／先のコードを
+        /// <see cref="MediaWiki.InterwikiPrefixs"/>に追加している
+        /// （一時的な追加。例外にした方がよいのかもしれないが、それだとその間全く
+        /// 処理が行えないため。かつトランスレータ側なら余計なログが出るぐらいで
+        /// あまり影響がなくても、こちらは解析自体が失敗してしまうため）。
+        /// </para>
+        /// </remarks>
         private MediaWikiLink GetInterlanguage(string code, string text)
         {
+            // interwikimapに強制的に翻訳元／先のコードを一時的に追加
+            // ※ 2012年2月現在、キャッシュのセットが返ってくるので単純にそこに追加
+            this.Website.InterwikiPrefixs.Add(this.Website.Language.Code);
+            this.Website.InterwikiPrefixs.Add(code);
+
             // 渡されたテキストを要素単位に解析し、その結果から言語間リンクを探索する
             IElement element;
             using (MediaWikiParser parser = new MediaWikiParser(this.Website))

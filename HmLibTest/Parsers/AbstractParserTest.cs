@@ -17,7 +17,7 @@ namespace Honememo.Parsers
     /// <see cref="AbstractParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class AbstractParserTest
+    internal class AbstractParserTest
     {
         #region インタフェース実装メソッドテストケース
 

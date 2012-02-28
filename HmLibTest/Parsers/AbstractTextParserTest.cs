@@ -20,7 +20,7 @@ namespace Honememo.Parsers
     /// <see cref="AbstractTextParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class AbstractTextParserTest
+    internal class AbstractTextParserTest
     {
         #region インタフェース実装メソッドテストケース
 
@@ -217,6 +217,21 @@ namespace Honememo.Parsers
 
             #endregion
 
+            #region 非公開メソッドテスト用のオーラーライドメソッド
+
+            /// <summary>
+            /// 文字列が空でない場合、リストにText要素を追加して、文字列をリセットする。
+            /// </summary>
+            /// <param name="list">追加されるリスト。</param>
+            /// <param name="b">追加する文字列。</param>
+            /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
+            public new void FlashText(ref ListElement list, ref StringBuilder b)
+            {
+                base.FlashText(ref list, ref b);
+            }
+
+            #endregion
+
             #region テスト用メソッド実装
 
             /// <summary>
@@ -230,21 +245,6 @@ namespace Honememo.Parsers
             {
                 result = new TextElement(s[index].ToString());
                 return this.Success;
-            }
-
-            #endregion
-
-            #region 非公開メソッドテスト用のオーラーライドメソッド
-
-            /// <summary>
-            /// 文字列が空でない場合、リストにText要素を追加して、文字列をリセットする。
-            /// </summary>
-            /// <param name="list">追加されるリスト。</param>
-            /// <param name="b">追加する文字列。</param>
-            /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
-            public new void FlashText(ref ListElement list, ref StringBuilder b)
-            {
-                base.FlashText(ref list, ref b);
             }
 
             #endregion

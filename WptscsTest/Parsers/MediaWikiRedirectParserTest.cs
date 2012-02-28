@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiRedirectParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class MediaWikiRedirectParserTest
+    internal class MediaWikiRedirectParserTest
     {
         #region ITextParserインタフェース実装メソッド
 
