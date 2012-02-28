@@ -17,7 +17,7 @@ namespace Honememo.Parsers
     /// <see cref="XmlCommentElementParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class XmlCommentElementParserTest
+    internal class XmlCommentElementParserTest
     {
         #region インタフェース実装メソッドテストケース
 

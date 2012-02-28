@@ -17,7 +17,7 @@ namespace Honememo.Utilities
     /// <see cref="StatusManager&lt;T&gt;"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class StatusManagerTest
+    internal class StatusManagerTest
     {
         #region プロパティテストケース
 

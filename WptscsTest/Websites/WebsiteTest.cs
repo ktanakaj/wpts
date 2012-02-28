@@ -19,7 +19,7 @@ namespace Honememo.Wptscs.Websites
     /// <see cref="Website"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class WebsiteTest
+    internal class WebsiteTest
     {
         #region プロパティテストケース
 

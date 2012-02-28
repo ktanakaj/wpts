@@ -52,9 +52,6 @@
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.groupBoxLanguageName = new System.Windows.Forms.GroupBox();
             this.dataGridViewLanguageName = new System.Windows.Forms.DataGridView();
-            this.ColumnCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
@@ -109,6 +106,9 @@
             this.labelUserAgent = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ColumnCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
@@ -313,24 +313,6 @@
             this.dataGridViewLanguageName.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridViewLanguageName_RowValidating);
             this.dataGridViewLanguageName.Validating += new System.ComponentModel.CancelEventHandler(this.DataGridViewLanguageName_Validating);
             this.dataGridViewLanguageName.Validated += new System.EventHandler(this.ResetErrorText_Validated);
-            // 
-            // ColumnCode
-            // 
-            resources.ApplyResources(this.ColumnCode, "ColumnCode");
-            this.ColumnCode.MaxInputLength = 10;
-            this.ColumnCode.Name = "ColumnCode";
-            // 
-            // ColumnName
-            // 
-            resources.ApplyResources(this.ColumnName, "ColumnName");
-            this.ColumnName.MaxInputLength = 255;
-            this.ColumnName.Name = "ColumnName";
-            // 
-            // ColumnShortName
-            // 
-            resources.ApplyResources(this.ColumnShortName, "ColumnShortName");
-            this.ColumnShortName.MaxInputLength = 20;
-            this.ColumnShortName.Name = "ColumnShortName";
             // 
             // textBoxBracket
             // 
@@ -715,6 +697,24 @@
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
+            // ColumnCode
+            // 
+            resources.ApplyResources(this.ColumnCode, "ColumnCode");
+            this.ColumnCode.MaxInputLength = 10;
+            this.ColumnCode.Name = "ColumnCode";
+            // 
+            // ColumnName
+            // 
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.MaxInputLength = 255;
+            this.ColumnName.Name = "ColumnName";
+            // 
+            // ColumnShortName
+            // 
+            resources.ApplyResources(this.ColumnShortName, "ColumnShortName");
+            this.ColumnShortName.MaxInputLength = 20;
+            this.ColumnShortName.Name = "ColumnShortName";
+            // 
             // ConfigForm
             // 
             this.AcceptButton = this.buttonOk;
@@ -828,10 +828,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnToTitle;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTimestamp;
+        private System.Windows.Forms.Label labelApplicationConfigNote;
+        private System.Windows.Forms.CheckBox checkBoxHasLanguagePage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
-        private System.Windows.Forms.Label labelApplicationConfigNote;
-        private System.Windows.Forms.CheckBox checkBoxHasLanguagePage;
     }
 }

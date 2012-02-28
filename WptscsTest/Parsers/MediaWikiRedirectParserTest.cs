@@ -20,57 +20,71 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiRedirectParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class MediaWikiRedirectParserTest
+    internal class MediaWikiRedirectParserTest
     {
-        #region インスタンス実装メソッドテストケース
+        #region ITextParserインタフェース実装メソッド
 
         /// <summary>
-        /// <see cref="MediaWikiRedirectParser.TryParse"/>メソッドテストケース。
+        /// <see cref="MediaWikiRedirectParser.TryParseToEndCondition"/>メソッドテストケース。
         /// </summary>
         [Test]
-        public void TestTryParse()
+        public void TestTryParseToEndCondition()
         {
             IElement element;
             MediaWikiLink link;
             using (MediaWikiRedirectParser parser = new MediaWikiRedirectParser(new MockFactory().GetMediaWiki("en")))
             {
                 // 通常のリダイレクト
-                Assert.IsTrue(parser.TryParse("#redirect [[Test]]", out element));
+                Assert.IsTrue(parser.TryParseToEndCondition("#redirect [[Test]]", null, out element));
                 Assert.IsInstanceOf(typeof(MediaWikiLink), element);
                 link = (MediaWikiLink)element;
                 Assert.AreEqual("Test", link.Title);
                 Assert.IsNull(link.Section);
 
                 // セクション指定付きのリダイレクト
-                Assert.IsTrue(parser.TryParse("#redirect [[Test#Section]]", out element));
+                Assert.IsTrue(parser.TryParseToEndCondition("#redirect [[Test#Section]]", null, out element));
                 Assert.IsInstanceOf(typeof(MediaWikiLink), element);
                 link = (MediaWikiLink)element;
                 Assert.AreEqual("Test", link.Title);
                 Assert.AreEqual("Section", link.Section);
 
                 // 普通の記事
-                Assert.IsFalse(parser.TryParse("'''Example''' may refer to:", out element));
+                Assert.IsFalse(parser.TryParseToEndCondition("'''Example''' may refer to:", null, out element));
                 Assert.IsNull(element);
 
                 // enで日本語の転送書式
-                Assert.IsFalse(parser.TryParse("#転送 [[Test]]", out element));
+                Assert.IsFalse(parser.TryParseToEndCondition("#転送 [[Test]]", null, out element));
                 Assert.IsNull(element);
 
                 // 空文字列・null
-                Assert.IsFalse(parser.TryParse(String.Empty, out element));
+                Assert.IsFalse(parser.TryParseToEndCondition(String.Empty, null, out element));
                 Assert.IsNull(element);
-                Assert.IsFalse(parser.TryParse(null, out element));
+                Assert.IsFalse(parser.TryParseToEndCondition(null, null, out element));
                 Assert.IsNull(element);
             }
 
             using (MediaWikiRedirectParser parser = new MediaWikiRedirectParser(new MockFactory().GetMediaWiki("ja")))
             {
                 // jaで日本語の転送書式
-                Assert.IsTrue(parser.TryParse("#転送 [[Test]]", out element));
+                Assert.IsTrue(parser.TryParseToEndCondition("#転送 [[Test]]", null, out element));
                 Assert.IsInstanceOf(typeof(MediaWikiLink), element);
                 link = (MediaWikiLink)element;
                 Assert.AreEqual("Test", link.Title);
             }
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiRedirectParser.TryParseToEndCondition"/>
+        /// メソッドテストケース（Dispose）。
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void TestTryParseToEndConditionDispose()
+        {
+            MediaWikiRedirectParser parser = new MediaWikiRedirectParser(new MockFactory().GetMediaWiki("en"));
+            parser.Dispose();
+            IElement result;
+            parser.TryParseToEndCondition(String.Empty, null, out result);
         }
 
         #endregion

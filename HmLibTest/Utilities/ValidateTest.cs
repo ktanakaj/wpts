@@ -18,7 +18,7 @@ namespace Honememo.Utilities
     /// <see cref="Validate"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class ValidateTest
+    internal class ValidateTest
     {
         #region NotNullメソッドテストケース
 

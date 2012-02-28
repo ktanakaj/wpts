@@ -193,88 +193,56 @@
   <ItemTables />
   <HeadingTable>
     <Group>
-      <Word Lang="en">By net</Word>
-      <Word Lang="ja">インターネット</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">By taxi</Word>
-      <Word Lang="ja">タクシーで</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">By bus</Word>
-      <Word Lang="ja">バスで</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Drink</Word>
-      <Word Lang="ja">飲む</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">See</Word>
-      <Word Lang="ja">観る</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Climate</Word>
-      <Word Lang="ja">気候</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Mobile phones</Word>
-      <Word Lang="ja">携帯電話</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Stay healthy</Word>
-      <Word Lang="ja">健康を保つ</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Highway buses</Word>
-      <Word Lang="ja">高速バス</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">By car</Word>
-      <Word Lang="ja">車で</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Get out</Word>
-      <Word Lang="ja">出かける</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Eat</Word>
-      <Word Lang="ja">食べる</Word>
+      <Word Lang="en">Buy</Word>
+      <Word Lang="ja">買う</Word>
     </Group>
     <Group>
       <Word Lang="en">By boat</Word>
       <Word Lang="ja">船で</Word>
     </Group>
     <Group>
-      <Word Lang="en">Get in</Word>
-      <Word Lang="ja">着く</Word>
+      <Word Lang="en">By bus</Word>
+      <Word Lang="ja">バスで</Word>
     </Group>
     <Group>
-      <Word Lang="en">Talk</Word>
-      <Word Lang="ja">喋る</Word>
+      <Word Lang="en">By car</Word>
+      <Word Lang="ja">車で</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">By mail</Word>
+      <Word Lang="ja">郵便</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">By net</Word>
+      <Word Lang="ja">インターネット</Word>
     </Group>
     <Group>
       <Word Lang="en">By phone</Word>
       <Word Lang="ja">電話</Word>
     </Group>
     <Group>
-      <Word Lang="en">Cities</Word>
-      <Word Lang="ja">都市</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Get around</Word>
-      <Word Lang="ja">動く</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Buy</Word>
-      <Word Lang="ja">買う</Word>
-    </Group>
-    <Group>
       <Word Lang="en">By plane</Word>
       <Word Lang="ja">飛行機で</Word>
     </Group>
     <Group>
-      <Word Lang="en">Understand</Word>
-      <Word Lang="ja">分かる</Word>
+      <Word Lang="en">By rail</Word>
+      <Word Lang="ja">列車で</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">By taxi</Word>
+      <Word Lang="ja">タクシーで</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Cities</Word>
+      <Word Lang="ja">都市</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Climate</Word>
+      <Word Lang="ja">気候</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Contact</Word>
+      <Word Lang="ja">連絡する</Word>
     </Group>
     <Group>
       <Word Lang="en">Culture</Word>
@@ -285,24 +253,60 @@
       <Word Lang="ja">遊ぶ</Word>
     </Group>
     <Group>
-      <Word Lang="en">By mail</Word>
-      <Word Lang="ja">郵便</Word>
+      <Word Lang="en">Drink</Word>
+      <Word Lang="ja">飲む</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Eat</Word>
+      <Word Lang="ja">食べる</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Get around</Word>
+      <Word Lang="ja">動く</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Get in</Word>
+      <Word Lang="ja">着く</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Get out</Word>
+      <Word Lang="ja">出かける</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Highway buses</Word>
+      <Word Lang="ja">高速バス</Word>
     </Group>
     <Group>
       <Word Lang="en">History</Word>
       <Word Lang="ja">歴史</Word>
     </Group>
     <Group>
-      <Word Lang="en">By rail</Word>
-      <Word Lang="ja">列車で</Word>
-    </Group>
-    <Group>
-      <Word Lang="en">Contact</Word>
-      <Word Lang="ja">連絡する</Word>
-    </Group>
-    <Group>
       <Word Lang="en">Local buses</Word>
       <Word Lang="ja">路線バス</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Mobile phones</Word>
+      <Word Lang="ja">携帯電話</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">See</Word>
+      <Word Lang="ja">観る</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Sleep</Word>
+      <Word Lang="ja">泊まる</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Stay healthy</Word>
+      <Word Lang="ja">健康を保つ</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Talk</Word>
+      <Word Lang="ja">喋る</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Understand</Word>
+      <Word Lang="ja">分かる</Word>
     </Group>
   </HeadingTable>
 </Config>

@@ -20,7 +20,7 @@ namespace Honememo.Models
     /// <see cref="MemoryCache&lt;TKey, TValue&gt;"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class MemoryCacheTest
+    internal class MemoryCacheTest
     {
         #region プロパティテストケース
 
@@ -35,8 +35,8 @@ namespace Honememo.Models
             Assert.AreEqual(1, cache.Capacity);
             cache.Capacity = 100;
             Assert.AreEqual(100, cache.Capacity);
-            cache.Capacity = Int32.MaxValue;
-            Assert.AreEqual(Int32.MaxValue, cache.Capacity);
+            cache.Capacity = int.MaxValue;
+            Assert.AreEqual(int.MaxValue, cache.Capacity);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Honememo.Models
             // キャッシュが100件を超えると最後にgetされたのが古い方から10件削除される
             for (int i = 4; i <= 100; i++)
             {
-                cache[i.ToString()] = i.ToString(); ;
+                cache[i.ToString()] = i.ToString();
                 Thread.Sleep(1);
             }
 
@@ -405,7 +405,7 @@ namespace Honememo.Models
                     if (cache.TryGetValue(key, out result))
                     {
                         // ※ 登録した直後でも、別スレッドからの登録でキャッシュがあふれて消えることもあるので
-                        Assert.AreEqual(key, Int32.Parse(result) % 200);
+                        Assert.AreEqual(key, int.Parse(result) % 200);
                     }
                 });
             cache.Clear();

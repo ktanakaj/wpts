@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class MediaWikiParserTest
+    internal class MediaWikiParserTest
     {
         #region 公開プロパティテストケース
 

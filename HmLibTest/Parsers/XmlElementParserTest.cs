@@ -17,7 +17,7 @@ namespace Honememo.Parsers
     /// <see cref="XmlElementParser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class XmlElementParserTest
+    internal class XmlElementParserTest
     {
         #region private変数
 
@@ -118,7 +118,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("testid", xmlElement.Attributes["id"]);
             Assert.AreEqual("testname", xmlElement.Attributes["name"]);
 
-            xmlParser.IsHtml = true;
+            this.xmlParser.IsHtml = true;
             Assert.IsTrue(parser.TryParse("<p>段落1<p>段落2", out element));
             xmlElement = (XmlElement)element;
             Assert.AreEqual("<p>", xmlElement.ToString());

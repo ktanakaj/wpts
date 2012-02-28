@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiPreparser"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class MediaWikiPreparserTest
+    internal class MediaWikiPreparserTest
     {
         #region 定数
 

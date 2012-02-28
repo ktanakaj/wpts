@@ -541,7 +541,7 @@
             <ShortName />
           </LanguageName>
           <LanguageName Code="en">
-            <Name>Dutch</Name>
+            <Name>Dutch language</Name>
             <ShortName />
           </LanguageName>
           <LanguageName Code="ja">
@@ -568,7 +568,7 @@
       <Language Code="pl">
         <Names>
           <LanguageName Code="en">
-            <Name>Polish_language</Name>
+            <Name>Polish language</Name>
             <ShortName>Polish</ShortName>
           </LanguageName>
           <LanguageName Code="ja">

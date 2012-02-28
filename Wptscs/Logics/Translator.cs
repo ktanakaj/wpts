@@ -45,7 +45,7 @@ namespace Honememo.Wptscs.Logics
         #region コンストラクタ
 
         /// <summary>
-        /// トランスレータを作成。
+        /// トランスレータインスタンスを生成する。
         /// </summary>
         public Translator()
         {
@@ -207,7 +207,6 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// ステータス管理用オブジェクト。
         /// </summary>
-        /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         protected StatusManager<string> StatusManager
         {
             get;
@@ -219,15 +218,18 @@ namespace Honememo.Wptscs.Logics
         #region 静的メソッド
 
         /// <summary>
-        /// 翻訳支援処理のインスタンスを作成。
+        /// 指定されたアプリケーション設定から翻訳支援処理のインスタンスを作成する。
         /// </summary>
         /// <param name="config">アプリケーション設定。</param>
         /// <param name="from">翻訳元言語。</param>
         /// <param name="to">翻訳先言語。</param>
         /// <returns>生成したインスタンス。</returns>
+        /// <exception cref="NotImplementedException">
+        /// アプリケーション設定に指定されているトランスレータに引数無しのコンストラクタが存在しない場合。
+        /// </exception>
         /// <remarks>
         /// 設定は設定クラスより取得、無ければ一部自動生成する。
-        /// インスタンス生成失敗時は例外を投げる。
+        /// インスタンス生成失敗時は各種例外を投げる。
         /// </remarks>
         public static Translator Create(Config config, string from, string to)
         {
@@ -371,14 +373,17 @@ namespace Honememo.Wptscs.Logics
         /// <param name="title">ページタイトル。</param>
         /// <param name="page">取得したページ。ページが存在しない場合は <c>null</c> を返す。</param>
         /// <returns>処理が成功した（404も含む）場合<c>true</c>、失敗した（通信エラーなど）の場合<c>false</c>。</returns>
-        /// <exception cref="ApplicationException"><see cref="CancellationPending"/>が<c>true</c>の場合。</exception>
+        /// <exception cref="ApplicationException">
+        /// 想定外の例外が発生した場合でかつアプリケーション設定の<c>IgnoreError</c>が<c>false</c>の場合、
+        /// または<see cref="CancellationPending"/>が<c>true</c>の場合。
+        /// </exception>
         /// <remarks>
         /// 本メソッドは、大きく3パターンの動作を行う。
         /// <list type="number">
         /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
         /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
         /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
-        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreErrorによる）。</description></item>
+        ///                    or <see cref="ApplicationException"/>で処理中断（アプリケーション設定の<c>IgnoreError</c>による）。</description></item>
         /// </list>
         /// また、実行中は処理状態をサーバー接続中に更新する。
         /// 実行前後には終了要求のチェックも行う。
@@ -420,7 +425,7 @@ namespace Honememo.Wptscs.Logics
         /// サーバー接続チェック。
         /// </summary>
         /// <param name="server">サーバー名。</param>
-        /// <returns><c>true</c> 接続成功。</returns>
+        /// <returns>接続成功の場合<c>true</c>。</returns>
         /// <remarks>実行中は処理状態をサーバー接続中に更新する。</remarks>
         private bool Ping(string server)
         {
@@ -452,15 +457,18 @@ namespace Honememo.Wptscs.Logics
         /// ログ出力によるエラー処理を含んだページ取得処理本体。
         /// </summary>
         /// <param name="title">ページタイトル。</param>
-        /// <param name="page">取得したページ。ページが存在しない場合は <c>null</c> を返す。</param>
+        /// <param name="page">取得したページ。ページが存在しない場合は<c>null</c>を返す。</param>
         /// <returns>処理が成功した（404も含む）場合<c>true</c>、失敗した（通信エラーなど）の場合<c>false</c>。</returns>
+        /// <exception cref="ApplicationException">
+        /// 想定外の例外が発生した場合でかつアプリケーション設定の<c>IgnoreError</c>が<c>false</c>の場合。
+        /// </exception>
         /// <remarks>
         /// 本メソッドは、大きく3パターンの動作を行う。
         /// <list type="number">
         /// <item><description>正常にページが取得できた → <c>true</c>でページを設定、ログ出力無し</description></item>
         /// <item><description>404など想定内の例外でページが取得できなかった → <c>true</c>でページ無し、ログ出力無し</description></item>
         /// <item><description>想定外の例外でページが取得できなかった → <c>false</c>でページ無し、ログ出力有り
-        ///                    or <c>ApplicationException</c>で処理中断（アプリケーション設定のIgnoreError等による）。</description></item>
+        ///                    or <see cref="ApplicationException"/>で処理中断（アプリケーション設定の<c>IgnoreError</c>による）。</description></item>
         /// </list>
         /// </remarks>
         private bool TryGetPageBody(string title, out Page page)

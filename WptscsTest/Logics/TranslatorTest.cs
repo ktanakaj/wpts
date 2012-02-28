@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Logics
     /// <see cref="Translator"/>のテストクラスです。
     /// </summary>
     [TestFixture]
-    class TranslatorTest
+    internal class TranslatorTest
     {
         #region プロパティテストケース
 
@@ -190,7 +190,7 @@ namespace Honememo.Wptscs.Logics
 
         #endregion
 
-        #region publicメソッドテストケース
+        #region 公開メソッドテストケース
 
         /// <summary>
         /// <see cref="Translator.Run"/>メソッドテストケース。
@@ -198,6 +198,8 @@ namespace Honememo.Wptscs.Logics
         [Test]
         public void TestRun()
         {
+            // ※ Runの処理ではpingも行っているが、そのテストについては2012年2月現在、
+            //    App.configのデフォルト値がpingを行わない設定なっているため行えない
             TranslatorMock translator = new TranslatorMock();
             translator.From = new WebsiteMock();
             translator.From.Location = "file://";
@@ -241,37 +243,6 @@ namespace Honememo.Wptscs.Logics
         {
             // From, To が未設定の場合処理不能
             new TranslatorMock().Run("test");
-        }
-
-        /// <summary>
-        /// <see cref="Translator.Run"/>メソッドテストケース（ping成功）。
-        /// </summary>
-        [Test]
-        public void TestRunPing()
-        {
-            TranslatorMock translator = new TranslatorMock();
-            translator.From = new WebsiteMock();
-            translator.To = new WebsiteMock();
-
-            // Fromにホストが指定されている場合、pingチェックが行われる
-            translator.From.Location = "http://localhost";
-            translator.Run("test");
-        }
-
-        /// <summary>
-        /// <see cref="Translator.Run"/>メソッドテストケース（ping失敗）。
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ApplicationException))]
-        public void TestRunPingFailed()
-        {
-            TranslatorMock translator = new TranslatorMock();
-            translator.From = new WebsiteMock();
-            translator.To = new WebsiteMock();
-
-            // Fromにホストが指定されている場合、pingチェックが行われる
-            translator.From.Location = "http://xxx.invalid";
-            translator.Run("test");
         }
 
         #endregion

@@ -163,7 +163,7 @@
       </DocumentationTemplates>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://zh.wikipedia.org</Location>
+      <Location>http://zh.wiktionary.org</Location>
       <Language Code="zh">
         <Names>
           <LanguageName Code="de">
