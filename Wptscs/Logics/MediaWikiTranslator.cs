@@ -449,8 +449,12 @@ namespace Honememo.Wptscs.Logics
             else
             {
                 // 言語間リンクが存在する場合、そちらを指すように置換
-                // : より前の部分を削除して出力（: が無いときは-1+1で0から）
-                template.Title = interWiki.Substring(interWiki.IndexOf(':') + 1);
+                template.Title = interWiki;
+                if (new MediaWikiPage(this.To, interWiki).IsTemplate())
+                {
+                    // 言語間リンク先がテンプレートの場合、: より前の部分を削除
+                    template.Title = interWiki.Substring(interWiki.IndexOf(':') + 1);
+                }
 
                 // | の後に内部リンクやテンプレートが書かれている場合があるので、再帰的に処理する
                 template.PipeTexts = this.ReplaceElements(template.PipeTexts, parent);
