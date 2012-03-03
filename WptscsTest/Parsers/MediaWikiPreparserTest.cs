@@ -25,14 +25,20 @@ namespace Honememo.Wptscs.Parsers
         #region 定数
 
         /// <summary>
-        /// 複数のテストケースで使用するテストテキスト。
+        /// 複数のテストケースで使用するテストテキスト（onlyinclude無し）。
         /// </summary>
         /// <remarks>タグの大文字小文字は区別されないはずのため、意図的に混入させている。</remarks>
-        private static readonly string TestData = "This template is [[xxx]]<br />\r\n"
+        private static readonly string TestDataWithoutOnlyinclude = "This template is [[xxx]]<br />\r\n"
             + "<noWiki><nowiki>sample</nowiki></nowiki>\r\n"
             + "<inclUdeonly><p>include text<nowiki><includeonly>sample</includeonly></nowiki></p></includeonly>\r\n"
             + "<noInclude>[[ja:Template:sample/doc]]<!--noinclude only--></noinclude>\r\n"
             + "<!-- <includeonly>include only comment</includeonly> -->";
+
+        /// <summary>
+        /// 複数のテストケースで使用するテストテキスト。
+        /// </summary>
+        private static readonly string TestData = TestDataWithoutOnlyinclude
+            + "<onlyinclude><noinclude>インクルード時は</noinclude>ここしか</onlyinclude>, <onlyinclude>有効にならない</onlyinclude>";
 
         #endregion
 
@@ -51,11 +57,11 @@ namespace Honememo.Wptscs.Parsers
             XmlElement xml;
             using (MediaWikiPreparser parser = new MediaWikiPreparser())
             {
-                element = parser.Parse(TestData);
+                element = parser.Parse(TestDataWithoutOnlyinclude);
             }
 
             // 解析だけであればincludeonly等の処理は行われない、元の文字列が保持される
-            Assert.AreEqual(TestData, element.ToString());
+            Assert.AreEqual(TestDataWithoutOnlyinclude, element.ToString());
 
             // includeonly, noinclude, nowiki, コメントのみ特別な要素として認識する
             Assert.IsInstanceOf(typeof(ListElement), element);
@@ -98,6 +104,38 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(2, xml.Count);
         }
 
+        /// <summary>
+        /// <see cref="IParser.Parse"/>メソッドテストトケース（onlyinclude）。
+        /// </summary>
+        [Test]
+        public void TestParseOnlyinclude()
+        {
+            IElement element;
+            XmlElement xml;
+            using (MediaWikiPreparser parser = new MediaWikiPreparser())
+            {
+                element = parser.Parse(TestData);
+            }
+
+            // onlyincludeが存在するケース、解析時点では特に他のタグと同じ扱い
+            // ※ 前半部分はTestParseと同じデータなので割愛
+            Assert.AreEqual(TestData, element.ToString());
+            Assert.IsInstanceOf(typeof(ListElement), element);
+            ListElement list = (ListElement)element;
+            Assert.AreEqual("<onlyinclude><noinclude>インクルード時は</noinclude>ここしか</onlyinclude>", list[8].ToString());
+            Assert.AreEqual(", ", list[9].ToString());
+            Assert.AreEqual("<onlyinclude>有効にならない</onlyinclude>", list[10].ToString());
+            Assert.AreEqual(11, list.Count);
+
+            // onlyincludeも再帰的に処理
+            Assert.IsInstanceOf(typeof(XmlElement), list[8]);
+            xml = (XmlElement)list[8];
+            Assert.AreEqual("<noinclude>インクルード時は</noinclude>", xml[0].ToString());
+            Assert.IsInstanceOf(typeof(XmlElement), xml[0]);
+            Assert.AreEqual("ここしか", xml[1].ToString());
+            Assert.AreEqual(2, xml.Count);
+        }
+
         #endregion
 
         #region 公開メソッドテストケース
@@ -115,7 +153,7 @@ namespace Honememo.Wptscs.Parsers
             ListElement list;
             using (MediaWikiPreparser parser = new MediaWikiPreparser())
             {
-                element = parser.Parse(TestData);
+                element = parser.Parse(TestDataWithoutOnlyinclude);
                 parser.FilterByInclude(ref element);
             }
 
@@ -145,6 +183,36 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
+        /// <see cref="MediaWikiPreparser.FilterByInclude"/>メソッドテストケース（onlyinclude）。
+        /// </summary>
+        /// <remarks>
+        /// <see cref="TestParseOnlyinclude"/>と同じデータを使うため、そちらのテストが通っていることを前提とする。
+        /// </remarks>
+        [Test]
+        public void TestFilterByIncludeOnlyinclude()
+        {
+            IElement element;
+            ListElement list;
+            using (MediaWikiPreparser parser = new MediaWikiPreparser())
+            {
+                element = parser.Parse(TestData);
+                parser.FilterByInclude(ref element);
+            }
+
+            // onlyincludeが存在する場合、その外側は全て削除され、タグが展開される
+            // ※ onlyincludeの内部にnoinclude等が存在する場合、それはそれで通常と同様処理される
+            Assert.IsInstanceOf(typeof(ListElement), element);
+            list = (ListElement)element;
+            Assert.AreEqual("ここしか", list[0].ToString());
+            Assert.AreEqual("有効にならない", list[1].ToString());
+            Assert.AreEqual(2, list.Count);
+
+            // onlyincludeはListElementに置き換わる
+            Assert.IsInstanceOf(typeof(ListElement), list[0]);
+            Assert.IsInstanceOf(typeof(ListElement), list[1]);
+        }
+
+        /// <summary>
         /// <see cref="MediaWikiPreparser.FilterByInclude"/>メソッドテストケース（null）。
         /// </summary>
         [Test]
@@ -168,34 +236,45 @@ namespace Honememo.Wptscs.Parsers
         public void TestFilterByNoinclude()
         {
             IElement element;
-            ListElement list;
+            ListElement innerList;
             using (MediaWikiPreparser parser = new MediaWikiPreparser())
             {
                 element = parser.Parse(TestData);
                 parser.FilterByNoinclude(ref element);
             }
 
-            // noincludeが展開され、includeonly, コメントが削除される
+            // noinclude, onlyincludeが展開され、includeonly, コメントが削除される
             Assert.IsInstanceOf(typeof(ListElement), element);
-            list = (ListElement)element;
+            ListElement list = (ListElement)element;
             Assert.AreEqual("This template is [[xxx]]<br />\r\n", list[0].ToString());
             Assert.AreEqual("<noWiki><nowiki>sample</nowiki>", list[1].ToString());
             Assert.AreEqual("</nowiki>\r\n", list[2].ToString());
             Assert.AreEqual("\r\n", list[3].ToString());
             Assert.AreEqual("[[ja:Template:sample/doc]]", list[4].ToString());
             Assert.AreEqual("\r\n", list[5].ToString());
-            Assert.AreEqual(6, list.Count);
+            Assert.AreEqual("インクルード時はここしか", list[6].ToString());
+            Assert.AreEqual(", ", list[7].ToString());
+            Assert.AreEqual("有効にならない", list[8].ToString());
+            Assert.AreEqual(9, list.Count);
 
             // 各要素の確認
             Assert.IsInstanceOf(typeof(TextElement), list[0]);
             Assert.IsInstanceOf(typeof(XmlElement), list[1]);
 
-            // noincludeはListElementに置き換わる
+            // noinclude, onlyincludeはListElementに置き換わる
             Assert.IsInstanceOf(typeof(ListElement), list[4]);
-            list = (ListElement)list[4];
-            Assert.AreEqual("[[ja:Template:sample/doc]]", list[0].ToString());
-            Assert.IsInstanceOf(typeof(TextElement), list[0]);
-            Assert.AreEqual(1, list.Count);
+            innerList = (ListElement)list[4];
+            Assert.AreEqual("[[ja:Template:sample/doc]]", innerList[0].ToString());
+            Assert.IsInstanceOf(typeof(TextElement), innerList[0]);
+            Assert.AreEqual(1, innerList.Count);
+
+            Assert.IsInstanceOf(typeof(ListElement), list[6]);
+            innerList = (ListElement)list[6];
+            Assert.AreEqual("インクルード時は", innerList[0].ToString());
+            Assert.IsInstanceOf(typeof(ListElement), innerList[0]);
+            Assert.AreEqual("ここしか", innerList[1].ToString());
+            Assert.IsInstanceOf(typeof(TextElement), innerList[1]);
+            Assert.AreEqual(2, innerList.Count);
         }
 
         /// <summary>
@@ -226,6 +305,9 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(
                 "This template is [[xxx]]<br />\r\n<noWiki><nowiki>sample</nowiki></nowiki>\r\n"
                 + "<p>include text<nowiki><includeonly>sample</includeonly></nowiki></p>\r\n\r\n",
+                MediaWikiPreparser.PreprocessByInclude(TestDataWithoutOnlyinclude));
+            Assert.AreEqual(
+                "ここしか有効にならない",
                 MediaWikiPreparser.PreprocessByInclude(TestData));
             Assert.AreEqual(String.Empty, MediaWikiPreparser.PreprocessByInclude(String.Empty));
         }
@@ -249,7 +331,7 @@ namespace Honememo.Wptscs.Parsers
             // Parse→FilterByNoincludeした結果をToStringしたものが返る
             Assert.AreEqual(
                 "This template is [[xxx]]<br />\r\n<noWiki><nowiki>sample</nowiki></nowiki>\r\n\r\n"
-                + "[[ja:Template:sample/doc]]\r\n",
+                + "[[ja:Template:sample/doc]]\r\nインクルード時はここしか, 有効にならない",
                 MediaWikiPreparser.PreprocessByNoinclude(TestData));
             Assert.AreEqual(String.Empty, MediaWikiPreparser.PreprocessByNoinclude(String.Empty));
         }
