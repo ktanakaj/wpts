@@ -128,9 +128,10 @@ namespace Honememo.Wptscs.Parsers
         /// </summary>
         /// <param name="element">
         /// 要素を展開／除去する解析結果。
+        /// noinclude, onlyincludeの<see cref="XmlElement"/>
+        /// の場合、内部要素の展開を、includeonlyまたは<see cref="XmlCommentElement"/>
+        /// 要素の場合、<c>null</c>への置き換えを行う。
         /// <see cref="ListElement"/>の場合その内部の上記要素が更新／除去される。
-        /// noincludeの<see cref="XmlElement"/>の場合、内部要素の展開を、
-        /// includeonlyまたは<see cref="XmlCommentElement"/>要素の場合、<c>null</c>への置き換えを行う。
         /// </param>
         /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <remarks>通常のページ解析を行う際はこの処理を用いる。</remarks>
@@ -145,9 +146,11 @@ namespace Honememo.Wptscs.Parsers
         /// </summary>
         /// <param name="element">
         /// 要素を展開／除去する解析結果。
+        /// onlyincludeの<see cref="XmlElement"/>が存在する場合、それ以外の要素を除去する。
+        /// 存在しない場合、includeonlyの<see cref="XmlElement"/>
+        /// であれば、内部要素の展開を、noincludeまたは<see cref="XmlCommentElement"/>
+        /// 要素の場合、<c>null</c>への置き換えを行う。
         /// <see cref="ListElement"/>の場合その内部の上記要素が更新／除去される。
-        /// includeonlyの<see cref="XmlElement"/>の場合、内部要素の展開を、
-        /// noincludeまたは<see cref="XmlCommentElement"/>要素の場合、<c>null</c>への置き換えを行う。
         /// </param>
         /// <exception cref="ArgumentNullException"><c>null</c>が指定された場合。</exception>
         /// <remarks>テンプレート呼び出しによるページ解析を行う際はこの処理を用いる。</remarks>
@@ -264,7 +267,8 @@ namespace Honememo.Wptscs.Parsers
         /// <param name="include">インクルードとして処理する場合<c>true</c>。</param>
         /// <remarks>
         /// onlyincludeでインクルードの場合その外側の要素は全て無効になるが、
-        /// その処理は<see cref="FilterOnlyincludeTagByInclude"/>で行い、このメソッドは展開のみを行う。
+        /// その処理は<see cref="FilterOnlyincludeTagByInclude"/>
+        /// で事前に行われるものと想定。このメソッドは展開のみを行う。
         /// </remarks>
         private void FilterTag(ref IElement element, bool include)
         {
