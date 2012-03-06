@@ -66,7 +66,8 @@ namespace Honememo.Wptscs.Parsers
 
             // 日本語版みたいに、#REDIRECTと言語固有の#転送みたいなのがあると思われるので、
             // 翻訳元言語とデフォルトの設定でチェック
-            string lower = s.ToLower();
+            string trim = s.TrimStart();
+            string lower = trim.ToLower();
             for (int i = 0; i < 2; i++)
             {
                 string format = this.Website.Redirect;
@@ -78,7 +79,8 @@ namespace Honememo.Wptscs.Parsers
                 if (!String.IsNullOrEmpty(format)
                     && lower.StartsWith(format.ToLower()))
                 {
-                    if (this.LinkParser.TryParse(s.Substring(format.Length).TrimStart(), out result))
+                    // "#REDIRECT "の部分をカットして後ろの[[～]]の部分のリンクを解析
+                    if (this.LinkParser.TryParse(trim.Substring(format.Length).TrimStart(), out result))
                     {
                         return true;
                     }
