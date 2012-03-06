@@ -48,6 +48,13 @@ namespace Honememo.Wptscs.Parsers
                 Assert.AreEqual("Test", link.Title);
                 Assert.AreEqual("Section", link.Section);
 
+                // リダイレクトの前にスペースや空行があってもOK
+                Assert.IsTrue(parser.TryParseToEndCondition(" \r\n \r\n#REDIRECT [[ Test2 ]] \r\n \r\n", null, out element));
+                Assert.IsInstanceOf(typeof(MediaWikiLink), element);
+                link = (MediaWikiLink)element;
+                Assert.AreEqual("Test2", link.Title);
+                Assert.IsNull(link.Section);
+
                 // 普通の記事
                 Assert.IsFalse(parser.TryParseToEndCondition("'''Example''' may refer to:", null, out element));
                 Assert.IsNull(element);
