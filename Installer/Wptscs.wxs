@@ -77,12 +77,19 @@
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
     <Upgrade Id="$(var.ProductUpgradeCode)">
-      <UpgradeVersion OnlyDetect="no" Property="PREVIOUSFOUND"
-                      Maximum="$(var.ProductVersion)" IncludeMaximum="no" />
+      <UpgradeVersion OnlyDetect="yes" Property="NEWERFOUND"
+                      Minimum="$(var.ProductVersion)" IncludeMinimum="no" />
+    </Upgrade>
+    <Upgrade Id='$(var.ProductUpgradeCode)'>
+      <UpgradeVersion OnlyDetect='no' Property='PREVIOUSFOUND'
+                      Maximum='$(var.ProductVersion)' IncludeMaximum='no' />
     </Upgrade>
 
     <CustomAction Id="NoDowngrade" Error="!(loc.NoDowngradeMsg)" />
 
+    <InstallUISequence>
+      <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERFOUND</Custom>
+    </InstallUISequence>
     <InstallExecuteSequence>
       <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERFOUND</Custom>
       <RemoveExistingProducts After="InstallFinalize" />

@@ -16,7 +16,7 @@
     <Name>Documentation</Name>
     <!-- SHFB properties -->
     <OutputPath>.\Help\</OutputPath>
-    <HtmlHelpName>Wikipedia翻訳支援ツール</HtmlHelpName>
+    <HtmlHelpName>Wikipedia 翻訳支援ツール</HtmlHelpName>
     <Language>ja-JP</Language>
     <HelpFileFormat>HtmlHelp1</HelpFileFormat>
     <IndentHtml>True</IndentHtml>
@@ -27,7 +27,7 @@
       <DocumentationSource sourceFile="Wptscs\bin\Release\wptscs.xml" />
     </DocumentationSources>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
-    <HelpTitle>Wikipedia翻訳支援ツール クラスライブラリ</HelpTitle>
+    <HelpTitle>Wikipedia 翻訳支援ツール クラスライブラリ</HelpTitle>
     <PresentationStyle>vs2005</PresentationStyle>
     <VisibleItems>InheritedMembers, Internals, Protected, SealedProtected</VisibleItems>
     <SandcastlePath>
