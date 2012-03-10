@@ -4,8 +4,7 @@ rem MSIインストーラビルドバッチ
 rem 
 rem Wikipedia 翻訳支援ツールのMSI形式のインストーラを作成する。
 rem 実行環境にはWiX並びにWindows SDK（binとサンプルスクリプト）がインストールされている必要がある。
-rem また、バッチ実行前に別途Visual Studioによるリリースビルドを行っておく必要があり、
-rem その他ソース一式をまとめた src.zip も事前に作成してこのフォルダに入れておかなければならない。
+rem また、バッチ実行前に別途Visual Studioによるリリースビルドを行っておく必要がある。
 rem 
 
 setlocal
