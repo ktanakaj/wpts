@@ -8,6 +8,7 @@
   <String Id="PackageKeywords" Overridable="yes">Installer</String>
   <String Id="PackageDescription" Overridable="yes">Translation Support for Wikipedia Ver1.20 Installer</String>
   <String Id="ExeShortcutName" Overridable="yes">Translation Support for Wikipedia</String>
+  <String Id="AppUrlInfoAbout" Overridable="yes">http://sourceforge.jp/projects/wptscs/</String>
   <String Id="NoDowngradeMsg" Overridable="yes">A later version of [ProductName] is already installed.</String>
   <String Id="NetFrameworkMsg" Overridable="yes">This setup requires the .NET Framework 4.0 client profile installed.</String>
 </WixLocalization>

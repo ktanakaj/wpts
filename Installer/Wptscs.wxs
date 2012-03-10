@@ -76,6 +76,11 @@
     <UIRef Id="WixUI_InstallDir" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
+    <Property Id='ARPURLINFOABOUT'>!(loc.AppUrlInfoAbout)</Property>
+    <Property Id='ARPPRODUCTICON'>App.ico</Property>
+
+    <Icon Id="App.ico" SourceFile="..\Wptscs\App.ico" />
+
     <Upgrade Id="$(var.ProductUpgradeCode)">
       <UpgradeVersion OnlyDetect="yes" Property="NEWERFOUND"
                       Minimum="$(var.ProductVersion)" IncludeMinimum="no" />

@@ -107,7 +107,7 @@ zip版の場合は展開したファイルを削除してください。
 ・ソースについて
 src.zipにソースファイルをまとめています。開発環境はVisual C# 2010 Expressです。
 その他外部ツールとしてテスト自動化ツールのNUnitと、コーディングスタイルチェック用のStyleCopを使用しています。
-また、インストーラの作成にはWiX並びにWindows SDK Components for Windows Installer Developersを使用しています。
+また、インストーラの作成にはWiX並びにWindows SDKを使用しています。
 
 
 
