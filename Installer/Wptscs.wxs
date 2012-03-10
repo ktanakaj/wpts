@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define ProductVersion="1.2.0" ?>
+  <?define ProductGUID="{2B16A3B8-F500-4c2f-888A-0BD08299D6E3}" ?>
+  <?define ProductUpgradeCode="{8A17447B-F484-4b42-98C4-317216CCEB78}" ?>
+  <?define MainExecutableGUID="{8771FF61-B4D9-4c35-A43D-946692E05E36}" ?>
+  <?define ResourceJAGUID="{A3DB3F56-B8EF-42ca-8891-26378B9A5DBE}" ?>
+  <?define DocumentGUID="{C703FEE3-D60F-476d-B5B0-3AAF157B506C}" ?>
+
+  <Product Name="!(loc.ProductName)"
+           Id="$(var.ProductGUID)"
+           UpgradeCode="$(var.ProductUpgradeCode)"
+           Language="!(loc.LanguageCode)"
+           Version="$(var.ProductVersion)" Manufacturer="!(loc.Manufacturer)">
+
+    <Package Id="*" Keywords="!(loc.PackageKeywords)"
+             Description="!(loc.PackageDescription)"
+             Manufacturer="!(loc.Manufacturer)" InstallerVersion="200"
+             Languages="!(loc.LanguageCode)" Compressed="yes" SummaryCodepage="!(loc.CodepageCode)" />
+
+    <Media Id="1" Cabinet="wptscs.cab" EmbedCab="yes" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="HonememoDir" Name="Honememo">
+          <Directory Id="INSTALLDIR" Name="Wptscs">
+            <Component Id="MainExecutable" Guid="$(var.MainExecutableGUID)">
+              <File Id="WptscsEXE" Name="wptscs.exe"
+                    Source="..\Wptscs\bin\Release\wptscs.exe"
+                    KeyPath="yes" Checksum="yes">
+                <Shortcut Id="startmenuWptscs" Directory="ProgramMenuFolder"
+                          Name="!(loc.ExeShortcutName)" WorkingDirectory="INSTALLDIR"
+                          Advertise="yes" />
+              </File>
+              <File Id="WptscsConfig" Name="wptscs.exe.config"
+                    Source="..\Wptscs\bin\Release\wptscs.exe.config" />
+              <File Id="HmlibDLL" Name="hmlib.dll"
+                    Source="..\Wptscs\bin\Release\hmlib.dll" Checksum="yes" />
+              <File Id="WikipediaXML" Name="Wikipedia.xml"
+                    Source="..\Wptscs\Wikipedia.xml" />
+              <File Id="WikitravelXML" Name="Wikitravel.xml"
+                    Source="..\Wptscs\Wikitravel.xml" Vital="no" />
+              <File Id="WiktionaryXML" Name="Wiktionary.xml"
+                    Source="..\Wptscs\Wiktionary.xml" Vital="no" />
+            </Component>
+
+            <Directory Id="ResourceDirJA" Name="ja">
+              <Component Id="ResourceJA" Guid="$(var.ResourceJAGUID)">
+                <File Id="WptscsResourcesDLLJA" Name="wptscs.resources.dll"
+                      Source="..\Wptscs\bin\Release\ja/wptscs.resources.dll"
+                      KeyPath="yes" Vital="no" />
+              </Component>
+            </Directory>
+
+            <Component Id="Document" Guid="$(var.DocumentGUID)">
+              <File Id="ReadmeTXT" Name="Readme.txt"
+                    Source="..\Wptscs\Readme.txt" KeyPath="yes" Vital="no" />
+              <File Id="LicenseTXT" Name="License.txt"
+                    Source="..\Wptscs\License.txt" Vital="no" />
+              <File Id="SrcZIP" Name="src.zip"
+                    Source="src.zip" Vital="no" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder" Name="Programs" />
+    </Directory>
+
+    <Feature Id="Complete" Level="1">
+      <ComponentRef Id="MainExecutable" />
+      <ComponentRef Id="ResourceJA" />
+      <ComponentRef Id="Document" />
+    </Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
+    <Property Id='ARPURLINFOABOUT'>!(loc.AppUrlInfoAbout)</Property>
+    <Property Id='ARPPRODUCTICON'>App.ico</Property>
+
+    <Icon Id="App.ico" SourceFile="..\Wptscs\App.ico" />
+
+    <Upgrade Id="$(var.ProductUpgradeCode)">
+      <UpgradeVersion OnlyDetect="yes" Property="NEWERFOUND"
+                      Minimum="$(var.ProductVersion)" IncludeMinimum="no" />
+    </Upgrade>
+    <Upgrade Id='$(var.ProductUpgradeCode)'>
+      <UpgradeVersion OnlyDetect='no' Property='PREVIOUSFOUND'
+                      Maximum='$(var.ProductVersion)' IncludeMaximum='no' />
+    </Upgrade>
+
+    <CustomAction Id="NoDowngrade" Error="!(loc.NoDowngradeMsg)" />
+
+    <InstallUISequence>
+      <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERFOUND</Custom>
+    </InstallUISequence>
+    <InstallExecuteSequence>
+      <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERFOUND</Custom>
+      <RemoveExistingProducts After="InstallFinalize" />
+    </InstallExecuteSequence>
+
+    <PropertyRef Id="NETFRAMEWORK40CLIENT"/>
+    <Condition Message="!(loc.NetFrameworkMsg)">
+      <![CDATA[Installed OR NETFRAMEWORK40CLIENT]]>
+    </Condition>
+  </Product>
+</Wix>
