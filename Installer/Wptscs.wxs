@@ -56,8 +56,6 @@
                     Source="..\Wptscs\Readme.txt" KeyPath="yes" Vital="no" />
               <File Id="LicenseTXT" Name="License.txt"
                     Source="..\Wptscs\License.txt" Vital="no" />
-              <File Id="SrcZIP" Name="src.zip"
-                    Source="src.zip" Vital="no" />
             </Component>
           </Directory>
         </Directory>
