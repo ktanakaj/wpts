@@ -29,7 +29,7 @@
                     KeyPath="yes" Checksum="yes">
                 <Shortcut Id="startmenuWptscs" Directory="ProgramMenuFolder"
                           Name="!(loc.ExeShortcutName)" WorkingDirectory="INSTALLDIR"
-                          Advertise="yes" />
+                          Icon="App.ico" IconIndex="0" Advertise="yes" />
               </File>
               <File Id="WptscsConfig" Name="wptscs.exe.config"
                     Source="..\Wptscs\bin\Release\wptscs.exe.config" />
