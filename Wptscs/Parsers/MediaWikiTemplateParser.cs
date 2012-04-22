@@ -125,7 +125,9 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 終了条件でループを抜けていない場合、解析失敗
-            if (lastIndex < 0)
+            // テンプレート名が無い場合も解析失敗
+            // ※ 内部リンクの場合ありえるが、テンプレートの場合2012年現在無いと認識されない
+            if (lastIndex < 0 || String.IsNullOrWhiteSpace(article.ToString()))
             {
                 return false;
             }
