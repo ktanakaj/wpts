@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WixLocalization Culture="ja-jp" Codepage="932" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-  <String Id="ProductName" Overridable="yes">Wikipedia 翻訳支援ツール Ver1.20</String>
+  <String Id="ProductName" Overridable="yes">Wikipedia 翻訳支援ツール Ver1.21</String>
   <String Id="LanguageCode" Overridable="yes">1041</String>
   <String Id="CodepageCode" Overridable="yes">932</String>
   <String Id="Culture" Overridable="yes">ja-jp</String>
   <String Id="Manufacturer" Overridable="yes">honeplus</String>
   <String Id="PackageKeywords" Overridable="yes">インストーラ</String>
-  <String Id="PackageDescription" Overridable="yes">Wikipedia 翻訳支援ツール Ver1.20 インストーラ</String>
+  <String Id="PackageDescription" Overridable="yes">Wikipedia 翻訳支援ツール Ver1.21 インストーラ</String>
   <String Id="ExeShortcutName" Overridable="yes">Wikipedia 翻訳支援ツール</String>
   <String Id="AppUrlInfoAbout" Overridable="yes">http://sourceforge.jp/projects/wptscs/</String>
   <String Id="NoDowngradeMsg" Overridable="yes">[ProductName] の新しいバージョンが既にインストールされています。</String>

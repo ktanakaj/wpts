@@ -179,6 +179,10 @@ namespace Honememo.Wptscs.Parsers
             // 空・null
             Assert.IsFalse(parser.TryParse(String.Empty, out element));
             Assert.IsFalse(parser.TryParse(null, out element));
+
+            // テンプレート名が無い
+            Assert.IsFalse(parser.TryParse("{{}}", out element));
+            Assert.IsFalse(parser.TryParse("{{|url=http://example.com/index.html}}", out element));
         }
 
         /// <summary>
