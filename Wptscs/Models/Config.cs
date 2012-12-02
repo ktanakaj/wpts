@@ -150,7 +150,7 @@ namespace Honememo.Wptscs.Models
         {
             // ユーザーごと・または初期設定用の設定ファイルを読み込み
             string path = FormUtils.SearchUserAppData(file, Settings.Default.ConfigurationCompatible);
-            if (String.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path))
             {
                 // どこにも無い場合は例外を投げる
                 throw new FileNotFoundException(file + " is not found");
@@ -179,7 +179,7 @@ namespace Honememo.Wptscs.Models
         public void Save()
         {
             // このインスタンスとファイルが紐付いていない場合、実行不可
-            if (String.IsNullOrWhiteSpace(this.File))
+            if (string.IsNullOrWhiteSpace(this.File))
             {
                 throw new InvalidOperationException("file is empty");
             }

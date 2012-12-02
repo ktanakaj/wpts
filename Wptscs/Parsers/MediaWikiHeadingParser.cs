@@ -59,7 +59,7 @@ namespace Honememo.Wptscs.Parsers
         {
             // 入力値確認、空の場合は即終了
             result = null;
-            if (String.IsNullOrEmpty(s))
+            if (string.IsNullOrEmpty(s))
             {
                 return false;
             }

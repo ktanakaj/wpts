@@ -106,7 +106,7 @@ namespace Honememo.Wptscs.Models
 
             // テスト用にサーバー設定を書き換え
             // ※ フルパスじゃないとURIで取得できないので、ここで書き換える必要有り
-            UriBuilder b = new UriBuilder("file", String.Empty);
+            UriBuilder b = new UriBuilder("file", string.Empty);
             b.Path = Path.GetFullPath(MockFactory.TestMediaWikiDir) + "\\";
             wiki.Location = new Uri(b.Uri, lang + "/").ToString();
             wiki.ExportPath = "$1.xml";

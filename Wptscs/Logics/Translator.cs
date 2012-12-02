@@ -33,7 +33,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// 変換後テキスト。
         /// </summary>
-        private string text = String.Empty;
+        private string text = string.Empty;
 
         /// <summary>
         /// ログテキスト生成用ロガー。
@@ -282,7 +282,7 @@ namespace Honememo.Wptscs.Logics
             {
                 // サーバー接続チェック
                 string host = new Uri(this.From.Location).Host;
-                if (!String.IsNullOrEmpty(host) && !Settings.Default.IgnoreError)
+                if (!string.IsNullOrEmpty(host) && !Settings.Default.IgnoreError)
                 {
                     if (!this.Ping(host))
                     {
@@ -334,7 +334,7 @@ namespace Honememo.Wptscs.Logics
             this.Logger.Clear();
             this.StatusManager.Clear();
             this.Stopwatch.Reset();
-            this.Text = String.Empty;
+            this.Text = string.Empty;
             this.CancellationPending = false;
             this.From.WebProxy.Referer = null;
             this.To.WebProxy.Referer = null;

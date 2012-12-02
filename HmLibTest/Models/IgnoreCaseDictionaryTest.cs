@@ -12,12 +12,12 @@ namespace Honememo.Models
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// IgnoreCaseDictionaryのテストクラスです。
+    /// <see cref="IgnoreCaseDictionary&lt;TValue&gt;"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class IgnoreCaseDictionaryTest
     {
         #region コンストラクタテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Models
         /// <summary>
         /// コンストラクタテストケース（引数なし）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
@@ -35,7 +35,7 @@ namespace Honememo.Models
         /// <summary>
         /// コンストラクタテストケース（引数Dictionary）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorDictionary()
         {
             IDictionary<string, string> inner = new Dictionary<string, string>();
@@ -48,7 +48,7 @@ namespace Honememo.Models
         /// <summary>
         /// コンストラクタテストケース（引数Dictionary、null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorDictionaryNull()
         {
@@ -62,7 +62,7 @@ namespace Honememo.Models
         /// <summary>
         /// Dictionaryプロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestDictionary()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
@@ -76,7 +76,7 @@ namespace Honememo.Models
         /// <summary>
         /// Dictionaryプロパティテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestDictionaryNull()
         {
@@ -91,7 +91,7 @@ namespace Honememo.Models
         /// <summary>
         /// Keysプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestKeys()
         {
             // ラップするIDictionaryと同じ値であること
@@ -104,7 +104,7 @@ namespace Honememo.Models
         /// <summary>
         /// Valuesプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestValues()
         {
             // ラップするIDictionaryと同じ値であること
@@ -117,7 +117,7 @@ namespace Honememo.Models
         /// <summary>
         /// Countプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCount()
         {
             // ラップするIDictionaryと同じ値であること
@@ -130,7 +130,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsReadOnlyプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsReadOnly()
         {
             // ラップするIDictionaryと同じ値であること
@@ -147,7 +147,7 @@ namespace Honememo.Models
         /// <summary>
         /// thisインデクサーテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestThis()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
@@ -163,7 +163,7 @@ namespace Honememo.Models
         /// <summary>
         /// thisインデクサーテストケース（get、null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestThisGetNull()
         {
@@ -174,7 +174,7 @@ namespace Honememo.Models
         /// <summary>
         /// thisインデクサーテストケース（set、null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestThisSetNull()
         {
@@ -185,7 +185,7 @@ namespace Honememo.Models
         /// <summary>
         /// thisインデクサーテストケース（get、値なし）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(KeyNotFoundException))]
         public void TestThisKeyNotFound()
         {
@@ -200,7 +200,7 @@ namespace Honememo.Models
         /// <summary>
         /// Addメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAdd()
         {
             // IDictionaryのAddメソッド
@@ -226,7 +226,7 @@ namespace Honememo.Models
         /// <summary>
         /// Addメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestAddNull()
         {
@@ -236,7 +236,7 @@ namespace Honememo.Models
         /// <summary>
         /// Addメソッドテストケース（KeyValuePairのKeyがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestAddKeyNull()
         {
@@ -246,7 +246,7 @@ namespace Honememo.Models
         /// <summary>
         /// Addメソッドテストケース（重複）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddDuplicate()
         {
@@ -259,7 +259,7 @@ namespace Honememo.Models
         /// <summary>
         /// Addメソッドテストケース（KeyValuePairのKeyが重複）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddKeyDuplicate()
         {
@@ -272,7 +272,7 @@ namespace Honememo.Models
         /// <summary>
         /// ContainsKeyメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestContainsKey()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
@@ -286,7 +286,7 @@ namespace Honememo.Models
         /// <summary>
         /// ContainsKeyメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestContainsKeyNull()
         {
@@ -296,7 +296,7 @@ namespace Honememo.Models
         /// <summary>
         /// Removeメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestRemove()
         {
             // IDictionaryのRemoveメソッド
@@ -329,7 +329,7 @@ namespace Honememo.Models
         /// <summary>
         /// Removeメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestRemoveNull()
         {
@@ -339,7 +339,7 @@ namespace Honememo.Models
         /// <summary>
         /// TryGetValueメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryGetValue()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
@@ -362,7 +362,7 @@ namespace Honememo.Models
         /// <summary>
         /// TryGetValueメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestTryGetValueNull()
         {
@@ -373,7 +373,7 @@ namespace Honememo.Models
         /// <summary>
         /// Clearメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestClear()
         {
             // 全データが削除されること、またラップしているオブジェクトは維持されること
@@ -392,7 +392,7 @@ namespace Honememo.Models
         /// <summary>
         /// Containsメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestContains()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
@@ -407,7 +407,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCopyTo()
         {
             IgnoreCaseDictionary<string> d = new IgnoreCaseDictionary<string>();
@@ -430,7 +430,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestCopyToNull()
         {
@@ -440,7 +440,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（インデックスがマイナス値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestCopyToOutOfRange()
         {
@@ -450,7 +450,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（領域不足）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestCopyToOverflow()
         {
@@ -467,7 +467,7 @@ namespace Honememo.Models
         /// <summary>
         /// GetEnumeratorメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetEnumerator()
         {
             // ラップするIDictionaryと同じ値であること

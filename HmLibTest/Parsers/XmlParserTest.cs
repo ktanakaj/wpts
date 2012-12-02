@@ -13,12 +13,12 @@ namespace Honememo.Parsers
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="XmlParser"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class XmlParserTest
     {
         #region プロパティテストケース
@@ -26,7 +26,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlParser.Parsers"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestParsers()
         {
             using (XmlParser parser = new XmlParser())
@@ -45,7 +45,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlParser.Parsers"/>プロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestParsersNull()
         {
@@ -58,7 +58,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlParser.IgnoreCase"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIgnoreCase()
         {
             using (XmlParser parser = new XmlParser())
@@ -75,7 +75,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlParser.IsHtml"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsHtml()
         {
             using (XmlParser parser = new XmlParser())
@@ -99,7 +99,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="IParser.Parse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestParse()
         {
             using (XmlParser parser = new XmlParser())
@@ -107,13 +107,13 @@ namespace Honememo.Parsers
                 Assert.AreEqual("test", parser.Parse("test").ToString());
 
                 IElement element = parser.Parse("testbefore<p>testinner</p><!--comment-->testafter");
-                Assert.IsInstanceOf(typeof(ICollection<IElement>), element);
+                Assert.IsInstanceOfType(element, typeof(ICollection<IElement>));
                 ICollection<IElement> collection = (ICollection<IElement>)element;
                 Assert.AreEqual(4, collection.Count);
                 Assert.AreEqual("testbefore", collection.ElementAt(0).ToString());
-                Assert.IsInstanceOf(typeof(XmlElement), collection.ElementAt(1));
+                Assert.IsInstanceOfType(collection.ElementAt(1), typeof(XmlElement));
                 Assert.AreEqual("<p>testinner</p>", collection.ElementAt(1).ToString());
-                Assert.IsInstanceOf(typeof(XmlCommentElement), collection.ElementAt(2));
+                Assert.IsInstanceOfType(collection.ElementAt(2), typeof(XmlCommentElement));
                 Assert.AreEqual("<!--comment-->", collection.ElementAt(2).ToString());
                 Assert.AreEqual("testafter", collection.ElementAt(3).ToString());
             }
@@ -122,7 +122,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="IParser.Parse"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestParseNull()
         {
@@ -135,7 +135,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="IParser.Parse"/>メソッドテストケース（Dispose）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void TestParseDispose()
         {
@@ -152,7 +152,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlParser.Dispose"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestDispose()
         {
             // 循環参照のあるParsersを解放する

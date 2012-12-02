@@ -11,12 +11,12 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// ListElementのテストクラスです。
+    /// <see cref="ListElement"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class ListElementTest
     {
         #region インタフェース実装プロパティテストケース
@@ -24,7 +24,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// ParsedStringプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestParsedString()
         {
             ListElement element = new ListElement();
@@ -41,12 +41,12 @@ namespace Honememo.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             ListElement element = new ListElement();
 
-            Assert.IsEmpty(element.ToString());
+            Assert.AreEqual(string.Empty, element.ToString());
 
             element.Add(new TextElement { Text = "test1" });
             Assert.AreEqual("test1", element.ToString());

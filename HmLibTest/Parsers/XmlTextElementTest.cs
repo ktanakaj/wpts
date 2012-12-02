@@ -11,12 +11,12 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// XmlTextElementのテストクラスです。
+    /// <see cref="XmlTextElement"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class XmlTextElementTest
     {
         #region コンストラクタテストケース
@@ -24,7 +24,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             XmlTextElement element = new XmlTextElement();
@@ -45,7 +45,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// Textプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestText()
         {
             XmlTextElement element = new XmlTextElement();
@@ -61,7 +61,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// Rawプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestRaw()
         {
             XmlTextElement element = new XmlTextElement();
@@ -81,12 +81,12 @@ namespace Honememo.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             XmlTextElement element = new XmlTextElement();
 
-            Assert.IsEmpty(element.ToString());
+            Assert.AreEqual(string.Empty, element.ToString());
             element.Text = "test";
             Assert.AreEqual("test", element.ToString());
             element.Text = "<test> & \"test'";

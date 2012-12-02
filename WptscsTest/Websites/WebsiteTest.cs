@@ -13,12 +13,12 @@ namespace Honememo.Wptscs.Websites
     using System;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Utilities;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="Website"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class WebsiteTest
     {
         #region プロパティテストケース
@@ -26,7 +26,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Website.Location"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestLocation()
         {
             DummySite site = new DummySite();
@@ -37,7 +37,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Website.Location"/>プロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestLocationNull()
         {
@@ -47,7 +47,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Website.Location"/>プロパティテストケース（空）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestLocationBlank()
         {
@@ -57,7 +57,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Website.Language"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestLanguage()
         {
             DummySite site = new DummySite();
@@ -68,7 +68,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Website.Language"/>プロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestLanguageNull()
         {
@@ -78,7 +78,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Website.WebProxy"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWebProxy()
         {
             DummySite site = new DummySite();
@@ -95,7 +95,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Website.WebProxy"/>プロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestWebProxyNull()
         {

@@ -72,7 +72,7 @@ namespace Honememo.Parsers
         {
             this.Name = name;
             this.Attributes = new Dictionary<string, string>();
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 this.Add(new TextElement(value));
             }

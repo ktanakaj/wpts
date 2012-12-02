@@ -72,7 +72,7 @@ namespace Honememo.Wptscs
         {
             // 入力値チェック
             this.LanguageCode = this.textBoxCode.Text.Trim();
-            if (String.IsNullOrEmpty(this.LanguageCode))
+            if (string.IsNullOrEmpty(this.LanguageCode))
             {
                 FormUtils.WarningDialog(Resources.WarningMessageEmptyLanguageCode);
                 this.textBoxCode.Focus();

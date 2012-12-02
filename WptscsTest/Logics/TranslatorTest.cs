@@ -14,12 +14,12 @@ namespace Honememo.Wptscs.Logics
     using System.Collections.Generic;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="Translator"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class TranslatorTest
     {
         #region プロパティテストケース
@@ -27,7 +27,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.ItemTable"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestItemTable()
         {
             // 初期状態がnull、設定すればそのオブジェクトが返されること
@@ -41,7 +41,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.HeadingTable"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestHeadingTable()
         {
             // 初期状態がnull、設定すればそのオブジェクトが返されること
@@ -55,12 +55,12 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.Log"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestLog()
         {
             // 初期状態は空
             TranslatorMock translator = new TranslatorMock();
-            Assert.IsEmpty(translator.Log);
+            Assert.AreEqual(string.Empty, translator.Log);
 
             // 更新時にLogUpdateイベントが実行されること
             int count = 0;
@@ -77,16 +77,16 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.Text"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestText()
         {
             // 初期状態は空
             TranslatorMock translator = new TranslatorMock();
-            Assert.IsEmpty(translator.Text);
+            Assert.AreEqual(string.Empty, translator.Text);
 
             // null設定時は空白が設定されること、それ以外はそのまま
             translator.Text = null;
-            Assert.IsEmpty(translator.Text);
+            Assert.AreEqual(string.Empty, translator.Text);
             translator.Text = "test";
             Assert.AreEqual("test", translator.Text);
         }
@@ -94,7 +94,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.CancellationPending"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCancellationPending()
         {
             // 初期状態はfalse、設定すればそのオブジェクトが返されること
@@ -109,7 +109,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.From"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFrom()
         {
             // 初期状態がnull、設定すればそのオブジェクトが返されること
@@ -123,7 +123,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.To"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTo()
         {
             // 初期状態がnull、設定すればそのオブジェクトが返されること
@@ -141,13 +141,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.Create"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCreate()
         {
             // コンフィグの情報から対応するトランスレータが生成されること
             Translator translator = Translator.Create(new MockFactory().GetConfig(), "en", "ja");
             Assert.IsNotNull(translator);
-            Assert.IsInstanceOf(typeof(MediaWikiTranslator), translator);
+            Assert.IsInstanceOfType(translator, typeof(MediaWikiTranslator));
             Assert.IsNotNull(translator.From);
             Assert.AreEqual("en", translator.From.Language.Code);
             Assert.IsNotNull(translator.To);
@@ -163,7 +163,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.Create"/>メソッドテストケース（未対応のトランスレータクラス）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(NotImplementedException))]
         public void TestCreateUnsupportedConstructor()
         {
@@ -177,7 +177,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.Create"/>メソッドテストケース（トランスレータクラス以外の指定）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(InvalidCastException))]
         public void TestCreateIgnoreConstructor()
         {
@@ -195,7 +195,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="Translator.Run"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestRun()
         {
             // ※ Runの処理ではpingも行っているが、そのテストについては2012年2月現在、
@@ -208,13 +208,13 @@ namespace Honememo.Wptscs.Logics
             // 正常に実行が行えること
             // また、実行ごとに結果が初期化されること
             translator.Run("test");
-            Assert.IsEmpty(translator.Log);
-            Assert.IsEmpty(translator.Text);
+            Assert.AreEqual(string.Empty, translator.Log);
+            Assert.AreEqual(string.Empty, translator.Text);
             translator.Logger.AddMessage("testlog");
             translator.Text = "testtext";
             translator.Run("test");
-            Assert.IsEmpty(translator.Log);
-            Assert.IsEmpty(translator.Text);
+            Assert.AreEqual(string.Empty, translator.Log);
+            Assert.AreEqual(string.Empty, translator.Text);
 
             // 失敗はApplicationExceptionで表現、RunBodyから例外が投げられること
             translator.Logger.AddMessage("testlog");
@@ -230,14 +230,14 @@ namespace Honememo.Wptscs.Logics
                 Assert.AreEqual("Dummy", e.Message);
             }
 
-            Assert.IsEmpty(translator.Log);
-            Assert.IsEmpty(translator.Text);
+            Assert.AreEqual(string.Empty, translator.Log);
+            Assert.AreEqual(string.Empty, translator.Text);
         }
 
         /// <summary>
         /// <see cref="Translator.Run"/>メソッドテストケース（必須パラメータ未設定）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestRunLangEmpty()
         {

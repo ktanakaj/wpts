@@ -12,12 +12,12 @@ namespace Honememo.Wptscs.Parsers
 {
     using System;
     using Honememo.Parsers;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// MediaWikiTemplateのテストクラスです。
+    /// <see cref="MediaWikiTemplate"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class MediaWikiTemplateTest
     {
         #region コンストラクタテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             MediaWikiTemplate element = new MediaWikiTemplate("テンプレート名");
@@ -36,7 +36,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// コンストラクタテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorNull()
         {
@@ -46,7 +46,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// コンストラクタテストケース（空白）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestConstructorBlank()
         {
@@ -60,7 +60,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Titleプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTitle()
         {
             MediaWikiTemplate element = new MediaWikiTemplate("テンプレート名");
@@ -73,7 +73,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Titleプロパティテストケース（空白）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestTitleBlank()
         {
@@ -84,7 +84,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// IsMsgnwプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsMsgnw()
         {
             MediaWikiTemplate element = new MediaWikiTemplate("テンプレート名");
@@ -99,7 +99,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// NewLineプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNewLine()
         {
             MediaWikiTemplate element = new MediaWikiTemplate("テンプレート名");
@@ -118,7 +118,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             MediaWikiTemplate element = new MediaWikiTemplate("テンプレート名");

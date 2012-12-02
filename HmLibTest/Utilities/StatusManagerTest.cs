@@ -11,12 +11,12 @@
 namespace Honememo.Utilities
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="StatusManager&lt;T&gt;"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class StatusManagerTest
     {
         #region プロパティテストケース
@@ -24,7 +24,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="StatusManager&lt;T&gt;.Status"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestStatus()
         {
             var sm = new StatusManager<string>();
@@ -60,7 +60,7 @@ namespace Honememo.Utilities
         /// <see cref="StatusManager&lt;T&gt;.Switch"/>,
         /// <see cref="StatusManager&lt;T&gt;.Dispose"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestSwitch()
         {
             var sm = new StatusManager<string>();
@@ -108,7 +108,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="StatusManager&lt;T&gt;.Clear"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestClear()
         {
             var sm = new StatusManager<int>();

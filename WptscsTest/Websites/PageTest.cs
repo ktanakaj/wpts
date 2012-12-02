@@ -14,12 +14,12 @@ namespace Honememo.Wptscs.Websites
     using System.Collections.Generic;
     using Honememo.Tests;
     using Honememo.Utilities;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="Page"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class PageTest
     {
         #region コンストラクタテストケース
@@ -27,7 +27,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorWebsiteTitleTextTimestamp()
         {
             DateTime t = DateTime.Now;
@@ -44,7 +44,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（タイムスタンプ無し）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorWebsiteTitleText()
         {
             Website s = new DummySite();
@@ -59,7 +59,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（本文・タイムスタンプ無し）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorWebsiteTitle()
         {
             Website s = new DummySite();
@@ -74,7 +74,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（ウェブサイトがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorWebsiteNull()
         {
@@ -84,7 +84,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（タイトルが空）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestConstructorTitleBlank()
         {
@@ -98,7 +98,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Website"/>プロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWebsite()
         {
             Page page = new Page(new DummySite(), "TestTitle");
@@ -111,7 +111,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Website"/>プロパティテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestWebsiteNull()
         {
@@ -122,7 +122,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Title"/>プロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTitle()
         {
             Page page = new Page(new DummySite(), "TestTitle");
@@ -134,7 +134,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Title"/>プロパティテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestTitleNull()
         {
@@ -145,7 +145,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Title"/>プロパティテストケース（空）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestTitleBlank()
         {
@@ -156,7 +156,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Text"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestText()
         {
             Page page = new Page(new DummySite(), "TestTitle");
@@ -168,7 +168,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Timestamp"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTimestamp()
         {
             Page page = new Page(new DummySite(), "TestTitle");
@@ -181,7 +181,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="Page.Uri"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestUri()
         {
             Page page = new Page(new DummySite(), "TestTitle");

@@ -12,12 +12,12 @@ namespace Honememo.Wptscs.Parsers
 {
     using System;
     using Honememo.Parsers;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// MediaWikiVariableのテストクラスです。
+    /// <see cref="MediaWikiVariable"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class MediaWikiVariableTest
     {
         #region コンストラクタテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             MediaWikiVariable element;
@@ -52,7 +52,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Variableプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestVariable()
         {
             MediaWikiVariable element = new MediaWikiVariable("変数名");
@@ -67,7 +67,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Valueプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestValue()
         {
             MediaWikiVariable element = new MediaWikiVariable("変数名");
@@ -87,7 +87,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             MediaWikiVariable element = new MediaWikiVariable("変数名");

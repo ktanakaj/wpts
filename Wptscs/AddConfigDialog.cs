@@ -76,7 +76,7 @@ namespace Honememo.Wptscs
         {
             // 入力値チェック
             this.ConfigName = this.textBoxName.Text.Trim();
-            if (String.IsNullOrEmpty(this.ConfigName))
+            if (string.IsNullOrEmpty(this.ConfigName))
             {
                 FormUtils.WarningDialog(Resources.WarningMessageEmptyConfigName);
                 this.textBoxName.Focus();
@@ -86,7 +86,7 @@ namespace Honememo.Wptscs
             {
                 FormUtils.WarningDialog(
                     Resources.WarningMessageInvalidConfigName,
-                    String.Join(", ", Path.GetInvalidFileNameChars()));
+                    string.Join(", ", Path.GetInvalidFileNameChars()));
                 this.textBoxName.Focus();
                 return;
             }

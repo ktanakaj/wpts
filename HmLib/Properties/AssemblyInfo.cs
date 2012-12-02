@@ -42,7 +42,7 @@ using System.Runtime.InteropServices;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.3.*")]
+[assembly: AssemblyVersion("0.4.*")]
 
 // 本ライブラリをC#以外の言語からも利用可能となるよう共通言語仕様準拠とする
 [assembly: System.CLSCompliant(true)]

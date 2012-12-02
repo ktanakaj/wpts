@@ -20,12 +20,12 @@ namespace Honememo.Wptscs.Models
     using Honememo.Utilities;
     using Honememo.Wptscs.Logics;
     using Honememo.Wptscs.Websites;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// Configのテストクラスです。
+    /// <see cref="Config"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class ConfigTest
     {
         #region 定数
@@ -33,7 +33,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// テスト結果が格納されているフォルダパス。
         /// </summary>
-        private static readonly string resultXml = Path.Combine(MockFactory.TestMediaWikiDir, "result\\config.xml");
+        private static readonly string ResultXml = Path.Combine(MockFactory.TestMediaWikiDir, "result\\config.xml");
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Fileプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFile()
         {
             // 初期状態ではnull、設定すれば設定した値が返る
@@ -57,7 +57,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Translatorプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTranslator()
         {
             // 初期状態ではnull、設定すれば設定した値が返る
@@ -72,7 +72,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Websitesプロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWebsites()
         {
             // 初期状態では空のリスト、設定すれば設定した値が返る
@@ -88,7 +88,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Websitesプロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestWebsitesNull()
         {
@@ -98,7 +98,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ItemTablesプロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestItemTables()
         {
             // 初期状態では空のリスト、設定すれば設定した値が返る
@@ -114,7 +114,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// ItemTablesプロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestItemTablesNull()
         {
@@ -124,7 +124,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// HeadingTableプロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestHeadingTable()
         {
             // 初期状態では空のオブジェクト、設定すれば設定した値が返る
@@ -140,7 +140,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// HeadingTableプロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestHeadingTableNull()
         {
@@ -156,7 +156,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLデシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReadXml()
         {
             // TODO: デシリアライズでも細かい動作の差異があるので、もう少しテストケースが必要
@@ -182,7 +182,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWriteXml()
         {
             // TODO: シリアライズでも細かい動作の差異があるので、もう少しテストケースが必要
@@ -216,7 +216,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLデシリアライズ→シリアライズの通しのテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReadXmlToWriteXml()
         {
             Config config;
@@ -234,7 +234,7 @@ namespace Honememo.Wptscs.Models
                 new XmlSerializer(typeof(Config)).Serialize(w, config);
             }
 
-            Assert.AreEqual(File.ReadAllText(resultXml), b.ToString());
+            Assert.AreEqual(File.ReadAllText(ResultXml), b.ToString());
         }
 
         #endregion

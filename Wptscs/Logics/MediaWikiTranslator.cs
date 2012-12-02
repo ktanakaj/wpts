@@ -221,7 +221,7 @@ namespace Honememo.Wptscs.Logics
         /// <returns>冒頭部のテキスト。</returns>
         protected virtual string CreateOpening(string title)
         {
-            string langPart = String.Empty;
+            string langPart = string.Empty;
             IElement langLink = this.GetLanguageLink();
             if (langLink != null)
             {
@@ -229,7 +229,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             string langBody = this.To.FormatLang(this.From.Language.Code, title);
-            if (String.IsNullOrEmpty(langBody))
+            if (string.IsNullOrEmpty(langBody))
             {
                 langBody = title;
             }
@@ -250,12 +250,12 @@ namespace Honememo.Wptscs.Logics
             MediaWikiLink link = new MediaWikiLink();
             link.Title = page.Title;
             link.Interwiki = this.From.Language.Code;
-            return "\n\n" + link.ToString() + "\n" + String.Format(
+            return "\n\n" + link.ToString() + "\n" + string.Format(
                 Resources.ArticleFooter,
                 FormUtils.ApplicationName(),
                 this.From.Language.Code,
                 page.Title,
-                page.Timestamp.HasValue ? page.Timestamp.Value.ToString("U") : String.Empty) + "\n";
+                page.Timestamp.HasValue ? page.Timestamp.Value.ToString("U") : string.Empty) + "\n";
         }
 
         #endregion
@@ -329,7 +329,7 @@ namespace Honememo.Wptscs.Logics
                     if (parent.Title.StartsWith(title))
                     {
                         // サブページ（親）の場合、変換してもしょうがないのでセクションだけチェックして終了
-                        if (!String.IsNullOrEmpty(link.Section))
+                        if (!string.IsNullOrEmpty(link.Section))
                         {
                             link.Section = this.ReplaceLinkSection(link.Section);
                             link.ParsedString = null;
@@ -340,7 +340,7 @@ namespace Honememo.Wptscs.Logics
 
                     link.Title = title;
                 }
-                else if (!String.IsNullOrEmpty(link.Interwiki))
+                else if (!string.IsNullOrEmpty(link.Interwiki))
                 {
                     // 言語間リンク・姉妹プロジェクトへのリンクの場合、変換対象外とする
                     // ただし、先頭が : でない、翻訳先言語への言語間リンクだけは削除
@@ -364,10 +364,10 @@ namespace Honememo.Wptscs.Logics
                 {
                     // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
                 }
-                else if (interWiki == String.Empty)
+                else if (interWiki == string.Empty)
                 {
                     // 言語間リンクが存在しない場合、可能なら{{仮リンク}}に置き換え
-                    if (!String.IsNullOrEmpty(this.To.LinkInterwikiFormat))
+                    if (!string.IsNullOrEmpty(this.To.LinkInterwikiFormat))
                     {
                         return this.ReplaceLinkLinkInterwiki(link);
                     }
@@ -399,7 +399,7 @@ namespace Honememo.Wptscs.Logics
             }
 
             // セクション部分（[[#関連項目]]とか）を変換
-            if (!String.IsNullOrEmpty(link.Section))
+            if (!string.IsNullOrEmpty(link.Section))
             {
                 link.Section = this.ReplaceLinkSection(link.Section);
             }
@@ -432,7 +432,7 @@ namespace Honememo.Wptscs.Logics
                 // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
                 return template;
             }
-            else if (interWiki == String.Empty)
+            else if (interWiki == string.Empty)
             {
                 // 言語間リンクが存在しない場合、[[:en:Template:xxx]]みたいな普通のリンクに置換
                 // おまけで、元のテンプレートの状態をコメントでつける
@@ -613,13 +613,13 @@ namespace Honememo.Wptscs.Logics
                 if (this.ItemTable.TryGetValue(decodedTitle, out item))
                 {
                     // 存在する場合はその値を使用
-                    if (!String.IsNullOrWhiteSpace(item.Alias))
+                    if (!string.IsNullOrWhiteSpace(item.Alias))
                     {
                         // リダイレクトがあれば、そのメッセージも表示
                         this.Logger.AddAlias(new MediaWikiLink(item.Alias));
                     }
 
-                    if (!String.IsNullOrEmpty(item.Word))
+                    if (!string.IsNullOrEmpty(item.Word))
                     {
                         this.Logger.AddDestination(new MediaWikiLink(item.Word), true);
                         return item.Word;
@@ -627,7 +627,7 @@ namespace Honememo.Wptscs.Logics
                     else
                     {
                         this.Logger.AddDestination(new TextElement(Resources.LogMessageInterWikiNotFound), true);
-                        return String.Empty;
+                        return string.Empty;
                     }
                 }
 
@@ -681,7 +681,7 @@ namespace Honememo.Wptscs.Logics
             else
             {
                 // 見つからない場合は空
-                item.Word = String.Empty;
+                item.Word = string.Empty;
                 this.Logger.AddDestination(new TextElement(Resources.LogMessageInterWikiNotFound));
             }
 
@@ -723,8 +723,8 @@ namespace Honememo.Wptscs.Logics
             // 言語コード等も特に無く、かつセクションが指定されている場合
             // （記事名もセクションも指定されていない・・・というケースもありえるが、
             //   その場合他に指定できるものも思いつかないので通す）
-            return String.IsNullOrEmpty(link.Title)
-                || (link.Title == parent && String.IsNullOrEmpty(link.Interwiki) && !String.IsNullOrEmpty(link.Section));
+            return string.IsNullOrEmpty(link.Title)
+                || (link.Title == parent && string.IsNullOrEmpty(link.Interwiki) && !string.IsNullOrEmpty(link.Section));
         }
 
         /// <summary>
@@ -770,7 +770,7 @@ namespace Honememo.Wptscs.Logics
                 // 記事自体が存在しない（赤リンク）場合、リンクはそのまま
                 return link;
             }
-            else if (interWiki == String.Empty)
+            else if (interWiki == string.Empty)
             {
                 // 言語間リンクが存在しない場合、コメントで元の文字列を保存した後
                 // [[:en:xxx]]みたいな形式に置換。また | 以降は削除する
@@ -842,7 +842,7 @@ namespace Honememo.Wptscs.Logics
             // ※ 渡されたlinkをそのまま使わないのは、余計なゴミが含まれる可能性があるため
             MediaWikiLink title = new MediaWikiLink { Title = link.Title, Section = link.Section };
             string langTitle = title.GetLinkString();
-            if (!String.IsNullOrEmpty(title.Section))
+            if (!string.IsNullOrEmpty(title.Section))
             {
                 // 変換先言語版のセクションは、セクションの変換を通したものにする
                 title.Section = this.ReplaceLinkSection(title.Section);
@@ -1004,7 +1004,7 @@ namespace Honememo.Wptscs.Logics
 
             // 略称を取得
             IElement shortName = null;
-            if (!String.IsNullOrEmpty(name.ShortName))
+            if (!string.IsNullOrEmpty(name.ShortName))
             {
                 shortName = new TextElement(name.ShortName);
             }
@@ -1042,7 +1042,7 @@ namespace Honememo.Wptscs.Logics
         {
             // 確認ダイアログを表示
             if (MessageBox.Show(
-                        String.Format(Resources.QuestionMessageArticleExisted, interwiki),
+                        string.Format(Resources.QuestionMessageArticleExisted, interwiki),
                         Resources.QuestionTitle,
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question)

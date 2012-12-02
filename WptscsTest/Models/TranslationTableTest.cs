@@ -17,12 +17,12 @@ namespace Honememo.Wptscs.Models
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// TranslationTableのテストクラスです。
+    /// <see cref="TranslationTable"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class TranslationTableTest
     {
         #region 公開メソッドテストケース
@@ -30,7 +30,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// GetWordメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetWord()
         {
             TranslationTable table = new TranslationTable();
@@ -44,17 +44,17 @@ namespace Honememo.Wptscs.Models
             Assert.AreEqual("関連項目", table.GetWord("see also"));
             Assert.AreEqual("関連項目", table.GetWord("see"));
             Assert.IsNull(table.GetWord("test"));
-            Assert.IsNull(table.GetWord(String.Empty));
+            Assert.IsNull(table.GetWord(string.Empty));
             Assert.AreEqual("See also", table.GetWord("ja", "en", "関連項目"));
-            Assert.IsNull(table.GetWord("ja", "en", String.Empty));
-            Assert.IsNull(table.GetWord("ja", String.Empty, String.Empty));
-            Assert.IsNull(table.GetWord(String.Empty, String.Empty, String.Empty));
+            Assert.IsNull(table.GetWord("ja", "en", string.Empty));
+            Assert.IsNull(table.GetWord("ja", string.Empty, string.Empty));
+            Assert.IsNull(table.GetWord(string.Empty, string.Empty, string.Empty));
         }
 
         /// <summary>
         /// GetWordメソッドテストケース（fromがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestGetWordFromNull()
         {
@@ -65,7 +65,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// GetWordメソッドテストケース（toがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestGetWordToNull()
         {
@@ -76,7 +76,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// GetWordメソッドテストケース（wordがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestGetWordWordNull()
         {
@@ -87,7 +87,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// GetWordメソッドテストケース（プロパティがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestGetWordPropertyNull()
         {
@@ -102,7 +102,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLデシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReadXml()
         {
             TranslationTable table;
@@ -127,7 +127,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWriteXml()
         {
             TranslationTable table = new TranslationTable();

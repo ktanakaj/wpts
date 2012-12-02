@@ -27,7 +27,7 @@ namespace Honememo.Wptscs
         /// <remarks>特に表示言語が指定されていない場合は何もしない。</remarks>
         public static void LoadSelectedCulture()
         {
-            if (!String.IsNullOrWhiteSpace(Settings.Default.LastSelectedLanguage))
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LastSelectedLanguage))
             {
                 try
                 {

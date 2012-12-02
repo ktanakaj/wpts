@@ -20,12 +20,12 @@ namespace Honememo.Wptscs.Websites
     using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="MediaWiki"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class MediaWikiTest
     {
         #region 定数
@@ -33,12 +33,12 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// テストデータが格納されているフォルダパス。
         /// </summary>
-        private static readonly string testDir = "Data\\MediaWiki";
+        private static readonly string TestDir = "Data\\MediaWiki";
 
         /// <summary>
         /// XMLインポート／エクスポートで用いるテストデータ。
         /// </summary>
-        private static readonly string testXml = "<MediaWiki><Location>http://ja.wikipedia.org</Location>"
+        private static readonly string TestXml = "<MediaWiki><Location>http://ja.wikipedia.org</Location>"
             + "<Language Code=\"ja\"><Names /><Bracket /></Language>"
             + "<MetaApi>_api.xml</MetaApi><ExportPath>/export/$1</ExportPath><Redirect>#飛ばす</Redirect>"
             + "<TemplateNamespace>100</TemplateNamespace><CategoryNamespace>101</CategoryNamespace><FileNamespace>200</FileNamespace>"
@@ -64,8 +64,8 @@ namespace Honememo.Wptscs.Websites
             // ※ 下記URL生成時は、きちんとパス区切り文字を入れてやら無いとフォルダが認識されない。
             //    また、httpで取得した場合とfileで取得した場合では先頭の大文字小文字が異なることが
             //    あるため、それについては随時期待値を調整して対処。
-            UriBuilder b = new UriBuilder("file", String.Empty);
-            b.Path = Path.GetFullPath(testDir) + "\\";
+            UriBuilder b = new UriBuilder("file", string.Empty);
+            b.Path = Path.GetFullPath(TestDir) + "\\";
             MediaWiki server = new MediaWiki(new Language(language), new Uri(b.Uri, language + "/").ToString());
             server.ExportPath = "$1.xml";
             server.MetaApi = "_api.xml";
@@ -79,7 +79,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタ（MediaWiki全般）テストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorLanguageLocation()
         {
             MediaWiki site = new MediaWiki(new Language("en"), "test");
@@ -90,7 +90,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタ（MediaWiki全般）テストケース（languageがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorLanguageLocationByLanguageNull()
         {
@@ -100,7 +100,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタ（MediaWiki全般）テストケース（locationがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorLanguageLocationByLocationNull()
         {
@@ -110,7 +110,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタ（Wikipedia用）テストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorLanguage()
         {
             MediaWiki site = new MediaWiki(new Language("en"));
@@ -121,7 +121,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタ（Wikipedia用）テストケース（languageがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorLanguageByLanguageNull()
         {
@@ -135,7 +135,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.MetaApi"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestMetaApi()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -150,14 +150,14 @@ namespace Honememo.Wptscs.Websites
             // 空またはnullの場合、再び設定ファイルの値が入る
             site.MetaApi = null;
             Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases|interwikimap", site.MetaApi);
-            site.MetaApi = String.Empty;
+            site.MetaApi = string.Empty;
             Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases|interwikimap", site.MetaApi);
         }
 
         /// <summary>
         /// <see cref="MediaWiki.ExportPath"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestExportPath()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -172,14 +172,14 @@ namespace Honememo.Wptscs.Websites
             // 空またはnullの場合、再び設定ファイルの値が入る
             site.ExportPath = null;
             Assert.AreEqual("/wiki/Special:Export/$1", site.ExportPath);
-            site.ExportPath = String.Empty;
+            site.ExportPath = string.Empty;
             Assert.AreEqual("/wiki/Special:Export/$1", site.ExportPath);
         }
 
         /// <summary>
         /// <see cref="MediaWiki.Redirect"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestRedirect()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -194,14 +194,14 @@ namespace Honememo.Wptscs.Websites
             // 空またはnullの場合、再び設定ファイルの値が入る
             site.Redirect = null;
             Assert.AreEqual("#REDIRECT", site.Redirect);
-            site.Redirect = String.Empty;
+            site.Redirect = string.Empty;
             Assert.AreEqual("#REDIRECT", site.Redirect);
         }
 
         /// <summary>
         /// <see cref="MediaWiki.TemplateNamespace"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTemplateNamespace()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -217,7 +217,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.CategoryNamespace"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCategoryNamespace()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -233,7 +233,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.FileNamespace"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFileNamespace()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -249,7 +249,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.MagicWords"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestMagicWords()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -273,7 +273,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.Namespaces"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNamespaces()
         {
             MediaWiki site = this.GetTestServer("en");
@@ -289,7 +289,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.InterwikiPrefixs"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestInterwikiPrefixs()
         {
             MediaWiki site = this.GetTestServer("en");
@@ -323,7 +323,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.DocumentationTemplates"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestDocumentationTemplates()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -348,61 +348,61 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.DocumentationTemplateDefaultPage"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestDocumentationTemplateDefaultPage()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
 
             // デフォルトでは空
-            Assert.IsNullOrEmpty(site.DocumentationTemplateDefaultPage);
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.DocumentationTemplateDefaultPage));
 
             // 値を設定するとその値が返る
             site.DocumentationTemplateDefaultPage = "/doc";
             Assert.AreEqual("/doc", site.DocumentationTemplateDefaultPage);
             site.DocumentationTemplateDefaultPage = null;
-            Assert.IsNullOrEmpty(site.DocumentationTemplateDefaultPage);
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.DocumentationTemplateDefaultPage));
         }
 
         /// <summary>
         /// <see cref="MediaWiki.LinkInterwikiFormat"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestLinkInterwikiFormat()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
 
             // デフォルトでは空
-            Assert.IsNullOrEmpty(site.LinkInterwikiFormat);
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LinkInterwikiFormat));
 
             // 値を設定するとその値が返る
             site.LinkInterwikiFormat = "{{仮リンク|$1|$2|$3|label=$4}}";
             Assert.AreEqual("{{仮リンク|$1|$2|$3|label=$4}}", site.LinkInterwikiFormat);
             site.LinkInterwikiFormat = null;
-            Assert.IsNullOrEmpty(site.LinkInterwikiFormat);
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LinkInterwikiFormat));
         }
 
         /// <summary>
         /// <see cref="MediaWiki.LangFormat"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestLangFormat()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
 
             // デフォルトでは空
-            Assert.IsNullOrEmpty(site.LangFormat);
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LangFormat));
 
             // 値を設定するとその値が返る
             site.LangFormat = "{{Lang|$1|$2}}";
             Assert.AreEqual("{{Lang|$1|$2}}", site.LangFormat);
             site.LangFormat = null;
-            Assert.IsNullOrEmpty(site.LangFormat);
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LangFormat));
         }
 
         /// <summary>
         /// <see cref="MediaWiki.HasLanguagePage"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestHasLanguagePage()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -424,22 +424,22 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.GetPage"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetPage()
         {
             MediaWiki site = this.GetTestServer("en");
             Page page = site.GetPage("example");
-            Assert.IsInstanceOf(typeof(MediaWikiPage), page);
+            Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
             Assert.AreEqual("Example", page.Title);
             Assert.AreEqual(DateTime.Parse("2010/07/13 09:49:18"), page.Timestamp);
-            Assert.IsNotEmpty(page.Text);
+            Assert.IsTrue(page.Text.Length > 0);
             Assert.AreEqual(site, page.Website);
         }
 
         /// <summary>
         /// <see cref="MediaWiki.IsMagicWord"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsMagicWord()
         {
             MediaWiki site = new MediaWiki(new Language("en"), "http://example.com");
@@ -464,7 +464,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.IsInterwiki"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsInterwiki()
         {
             MediaWiki site = this.GetTestServer("en");
@@ -494,7 +494,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.IsNamespace"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsNamespace()
         {
             MediaWiki site = this.GetTestServer("en");
@@ -509,7 +509,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.FormatLinkInterwiki"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFormatLinkInterwiki()
         {
             MediaWiki site = new MediaWiki(new Language("en"), "http://example.com");
@@ -517,7 +517,7 @@ namespace Honememo.Wptscs.Websites
             // LinkInterwikiFormatが空の場合、nullが返る
             site.LinkInterwikiFormat = null;
             Assert.IsNull(site.FormatLinkInterwiki("記事名", "言語", "他言語版記事名", "表示名"));
-            site.LinkInterwikiFormat = String.Empty;
+            site.LinkInterwikiFormat = string.Empty;
             Assert.IsNull(site.FormatLinkInterwiki("記事名", "言語", "他言語版記事名", "表示名"));
 
             // 値が設定されている場合、パラメータを埋め込んで書式化される
@@ -538,7 +538,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWiki.FormatLang"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFormatLang()
         {
             MediaWiki site = new MediaWiki(new Language("en"), "http://example.com");
@@ -546,7 +546,7 @@ namespace Honememo.Wptscs.Websites
             // LangFormatが空の場合、nullが返る
             site.LangFormat = null;
             Assert.IsNull(site.FormatLang("ja", "日本語テキスト"));
-            site.LangFormat = String.Empty;
+            site.LangFormat = string.Empty;
             Assert.IsNull(site.FormatLang("ja", "日本語テキスト"));
 
             // 値が設定されている場合、パラメータを埋め込んで書式化される
@@ -567,7 +567,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// XMLデシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReadXml()
         {
             // ほぼ空の状態での読み込み
@@ -583,9 +583,9 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("http://ja.wikipedia.org", site.Location);
             Assert.AreEqual("ja", site.Language.Code);
             Assert.AreEqual(0, site.DocumentationTemplates.Count);
-            Assert.IsNullOrEmpty(site.DocumentationTemplateDefaultPage);
-            Assert.IsNullOrEmpty(site.LinkInterwikiFormat);
-            Assert.IsNullOrEmpty(site.LangFormat);
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.DocumentationTemplateDefaultPage));
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LinkInterwikiFormat));
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LangFormat));
             Assert.IsFalse(site.HasLanguagePage);
 
             // 下記プロパティは、空の場合デフォルト値が返る
@@ -600,7 +600,7 @@ namespace Honememo.Wptscs.Websites
             Assert.IsTrue(site.MagicWords.Count > 10);
 
             // プロパティに値が設定された状態での読み込み
-            using (XmlReader r = XmlReader.Create(new StringReader(testXml)))
+            using (XmlReader r = XmlReader.Create(new StringReader(TestXml)))
             {
                 site = new XmlSerializer(typeof(MediaWiki)).Deserialize(r) as MediaWiki;
             }
@@ -630,7 +630,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// XMLシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWriteXml()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
@@ -674,7 +674,7 @@ namespace Honememo.Wptscs.Websites
                 new XmlSerializer(typeof(MediaWiki)).Serialize(w, site);
             }
 
-            Assert.AreEqual(testXml, b.ToString());
+            Assert.AreEqual(TestXml, b.ToString());
         }
 
         #endregion

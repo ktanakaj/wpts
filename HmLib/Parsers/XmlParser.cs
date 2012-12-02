@@ -135,7 +135,7 @@ namespace Honememo.Parsers
         {
             if (s == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
             else if (this.IsHtml)
             {

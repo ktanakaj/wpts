@@ -16,12 +16,12 @@ namespace Honememo.Wptscs.Models
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// TranslationDictionaryのテストクラスです。
+    /// <see cref="TranslationDictionary"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class TranslationDictionaryTest
     {
         #region XMLシリアライズ用メソッドテストケース
@@ -29,7 +29,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLデシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReadXml()
         {
             // TODO: リダイレクトとタイムスタンプも
@@ -51,7 +51,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWriteXml()
         {
             // TODO: リダイレクトとタイムスタンプも

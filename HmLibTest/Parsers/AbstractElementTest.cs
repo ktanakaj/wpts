@@ -11,13 +11,13 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="AbstractElement"/>のテストクラスです。
     /// </summary>
     /// <remarks>テストには最小実装の<see cref="TextElement"/>を使用。</remarks>
-    [TestFixture]
+    [TestClass]
     internal class AbstractElementTest
     {
         #region インタフェース実装プロパティテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractElement.ParsedString"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestParsedString()
         {
             // 値が普通に設定できること
@@ -44,7 +44,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractElement.ToString"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             // ParsedStringが設定されている場合その値が返ること

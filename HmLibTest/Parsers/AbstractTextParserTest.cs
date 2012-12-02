@@ -14,12 +14,12 @@ namespace Honememo.Parsers
     using System.Collections.Generic;
     using System.Text;
     using Honememo.Utilities;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="AbstractTextParser"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class AbstractTextParserTest
     {
         #region インタフェース実装メソッドテストケース
@@ -27,7 +27,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractTextParser.TryParseToEndCondition"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseToEndCondition()
         {
             IElement element;
@@ -38,18 +38,18 @@ namespace Honememo.Parsers
             Assert.IsFalse(parser.TryParseToEndCondition(null, null, out element));
             Assert.IsNull(element);
 
-            Assert.IsTrue(parser.TryParseToEndCondition(String.Empty, null, out element));
-            Assert.AreEqual(String.Empty, element.ToString());
-            Assert.IsInstanceOf(typeof(TextElement), element);
+            Assert.IsTrue(parser.TryParseToEndCondition(string.Empty, null, out element));
+            Assert.AreEqual(string.Empty, element.ToString());
+            Assert.IsInstanceOfType(element, typeof(TextElement));
 
             Assert.IsTrue(parser.TryParseToEndCondition("0123456789", null, out element));
             Assert.AreEqual("0123456789", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
+            Assert.IsInstanceOfType(element, typeof(ListElement));
             ListElement list = (ListElement)element;
             Assert.AreEqual(10, list.Count);
             foreach (IElement e in list)
             {
-                Assert.IsInstanceOf(typeof(TextElement), e);
+                Assert.IsInstanceOfType(e, typeof(TextElement));
             }
 
             // conditionが指定されている場合は、その条件を満たすまで
@@ -58,13 +58,13 @@ namespace Honememo.Parsers
                 (string s, int index) => s[index] == '5',
                 out element));
             Assert.AreEqual("01234", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
+            Assert.IsInstanceOfType(element, typeof(ListElement));
         }
 
         /// <summary>
         /// <see cref="AbstractTextParser.TryParseToDelimiter"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseToDelimiter()
         {
             IElement element;
@@ -75,35 +75,35 @@ namespace Honememo.Parsers
             Assert.IsFalse(parser.TryParseToDelimiter(null, out element));
             Assert.IsNull(element);
 
-            Assert.IsTrue(parser.TryParseToDelimiter(String.Empty, out element));
-            Assert.AreEqual(String.Empty, element.ToString());
-            Assert.IsInstanceOf(typeof(TextElement), element);
+            Assert.IsTrue(parser.TryParseToDelimiter(string.Empty, out element));
+            Assert.AreEqual(string.Empty, element.ToString());
+            Assert.IsInstanceOfType(element, typeof(TextElement));
 
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element));
-            Assert.AreEqual("[[test]] is good", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
+            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element));
+            Assert.AreEqual("[[TestMethod]] is good", element.ToString());
+            Assert.IsInstanceOfType(element, typeof(ListElement));
 
             // delimitersが指定されている場合は、その文字列まで
             // ※ 本当は "test]] is good" にした状態で用いる
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]"));
+            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element, "]]"));
             Assert.AreEqual("[[test", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
+            Assert.IsInstanceOfType(element, typeof(ListElement));
 
             // delimitersは複数指定可能、先に見つけたもの優先
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]", "s"));
+            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element, "]]", "s"));
             Assert.AreEqual("[[te", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
+            Assert.IsInstanceOfType(element, typeof(ListElement));
 
             // delimitersの指定があっても見つからないときは最後まで処理する
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "}}"));
-            Assert.AreEqual("[[test]] is good", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
+            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element, "}}"));
+            Assert.AreEqual("[[TestMethod]] is good", element.ToString());
+            Assert.IsInstanceOfType(element, typeof(ListElement));
         }
 
         /// <summary>
         /// <see cref="AbstractTextParser.TryParseToDelimiter"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestTryParseToDelimiterNull()
         {
@@ -115,7 +115,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractTextParser.TryParse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParse()
         {
             IElement element;
@@ -126,13 +126,13 @@ namespace Honememo.Parsers
             Assert.IsFalse(parser.TryParse(null, out element));
             Assert.IsNull(element);
 
-            Assert.IsTrue(parser.TryParse(String.Empty, out element));
-            Assert.AreEqual(String.Empty, element.ToString());
-            Assert.IsInstanceOf(typeof(TextElement), element);
+            Assert.IsTrue(parser.TryParse(string.Empty, out element));
+            Assert.AreEqual(string.Empty, element.ToString());
+            Assert.IsInstanceOfType(element, typeof(TextElement));
 
             Assert.IsTrue(parser.TryParse("0123456789", out element));
             Assert.AreEqual("0123456789", element.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), element);
+            Assert.IsInstanceOfType(element, typeof(ListElement));
             ListElement list = (ListElement)element;
         }
 
@@ -143,7 +143,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFlashText()
         {
             // ビルダーに値が詰まっている場合、その内容をリストに追加してクリアする
@@ -153,28 +153,28 @@ namespace Honememo.Parsers
 
             parser.FlashText(ref list, ref b);
             Assert.AreEqual(0, list.Count);
-            Assert.AreEqual(String.Empty, b.ToString());
+            Assert.AreEqual(string.Empty, b.ToString());
 
             b.Append("1st string");
             parser.FlashText(ref list, ref b);
             Assert.AreEqual(1, list.Count);
             Assert.AreEqual("1st string", list[0].ToString());
-            Assert.IsInstanceOf(typeof(TextElement), list[0]);
-            Assert.AreEqual(String.Empty, b.ToString());
+            Assert.IsInstanceOfType(list[0], typeof(TextElement));
+            Assert.AreEqual(string.Empty, b.ToString());
 
             b.Append("2nd string");
             parser.FlashText(ref list, ref b);
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual("1st string", list[0].ToString());
             Assert.AreEqual("2nd string", list[1].ToString());
-            Assert.IsInstanceOf(typeof(TextElement), list[1]);
-            Assert.AreEqual(String.Empty, b.ToString());
+            Assert.IsInstanceOfType(list[1], typeof(TextElement));
+            Assert.AreEqual(string.Empty, b.ToString());
         }
 
         /// <summary>
         /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（リストがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestFlashTextListNull()
         {
@@ -186,7 +186,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（ビルダーがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestFlashTextBNull()
         {

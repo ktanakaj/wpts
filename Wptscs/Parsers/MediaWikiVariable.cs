@@ -87,7 +87,7 @@ namespace Honememo.Wptscs.Parsers
             b.Append(MediaWikiVariable.DelimiterStart);
 
             // 変数
-            if (!String.IsNullOrEmpty(this.Variable))
+            if (!string.IsNullOrEmpty(this.Variable))
             {
                 b.Append(this.Variable);
             }

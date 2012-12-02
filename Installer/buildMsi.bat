@@ -10,8 +10,8 @@ rem
 setlocal
 
 rem WiXならびにWindows SDKインストールフォルダ
-set WIX=C:\Program Files (x86)\Windows Installer XML v3.5
-set WINSDK=C:\Program Files\Microsoft SDKs\Windows\v7.0
+set WIX=%ProgramFiles(x86)%WiX Toolset v3.6
+set WINSDK=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A
 set PATH=%WIX%\bin;%WINSDK%\Bin;%WINSDK%\Samples\sysmgmt\msi\scripts;%PATH%
 
 rem WiXビルドファイル（以下、ファイル名はこのバッチからの相対パス）

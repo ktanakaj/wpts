@@ -201,7 +201,7 @@ namespace Honememo.Wptscs
             // 空または日付として認識可能な値の場合OK
             string value = e.FormattedValue.ToString();
             DateTime dummy;
-            if (String.IsNullOrWhiteSpace(value) || DateTime.TryParse(value, out dummy))
+            if (string.IsNullOrWhiteSpace(value) || DateTime.TryParse(value, out dummy))
             {
                 return;
             }
@@ -222,7 +222,7 @@ namespace Honememo.Wptscs
             // ※ 他の列で消さないのは、エラーを出しているのがRowValidatingの場合もあるから
             if (this.dataGridViewItems.Columns[e.ColumnIndex].Name == "ColumnTimestamp")
             {
-                this.dataGridViewItems.Rows[e.RowIndex].ErrorText = String.Empty;
+                this.dataGridViewItems.Rows[e.RowIndex].ErrorText = string.Empty;
             }
         }
 
@@ -238,7 +238,7 @@ namespace Honememo.Wptscs
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridViewItems.Rows[e.RowIndex];
-                if (String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnTimestamp"]))
+                if (string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnTimestamp"]))
                     && !this.IsEmptyDataGridViewItemsRow(row))
                 {
                     // 背景色を変更
@@ -264,9 +264,9 @@ namespace Honememo.Wptscs
             // 翻訳元、記事名、翻訳先が未入力の場合、バリデートNGメッセージを表示
             // ※ ただし全列が空（新規行など）の場合は無視
             DataGridViewRow row = this.dataGridViewItems.Rows[e.RowIndex];
-            if ((String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromCode"]))
-                || String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToCode"]))
-                || String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromTitle"])))
+            if ((string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromCode"]))
+                || string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToCode"]))
+                || string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromTitle"])))
                 && !this.IsEmptyDataGridViewItemsRow(row))
             {
                 row.ErrorText = Resources.WarningMessageEmptyTranslationDictionary;
@@ -341,7 +341,7 @@ namespace Honememo.Wptscs
                 };
 
                 string timestamp = FormUtils.ToString(row.Cells["ColumnTimestamp"]);
-                if (!String.IsNullOrWhiteSpace(timestamp))
+                if (!string.IsNullOrWhiteSpace(timestamp))
                 {
                     item.Timestamp = DateTime.Parse(timestamp);
 
@@ -365,12 +365,12 @@ namespace Honememo.Wptscs
         /// <returns>空の場合<c>true</c>。</returns>
         private bool IsEmptyDataGridViewItemsRow(DataGridViewRow row)
         {
-            return String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromCode"]))
-                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromTitle"]))
-                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnAlias"]))
-                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToCode"]))
-                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToTitle"]))
-                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnTimestamp"]));
+            return string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromCode"]))
+                && string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnFromTitle"]))
+                && string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnAlias"]))
+                && string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToCode"]))
+                && string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnToTitle"]))
+                && string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnTimestamp"]));
         }
 
         #endregion
@@ -408,7 +408,7 @@ namespace Honememo.Wptscs
                     }
 
                     // 改行区切りで表示
-                    row.Cells[cell.Key].Value = String.Join("\n", cell.Value);
+                    row.Cells[cell.Key].Value = string.Join("\n", cell.Value);
                 }
             }
 
@@ -440,7 +440,7 @@ namespace Honememo.Wptscs
                 {
                     // 空のセルは格納しない、該当の組み合わせは消える
                     string value = FormUtils.ToString(cell);
-                    if (!String.IsNullOrWhiteSpace(value))
+                    if (!string.IsNullOrWhiteSpace(value))
                     {
                         // 改行区切りの配列で格納
                         record[cell.OwningColumn.Name] = CollectionUtils.Trim(value.Split('\n'));
@@ -479,9 +479,9 @@ namespace Honememo.Wptscs
             if (lang.Names.TryGetValue(
                 Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName, out name))
             {
-                if (!String.IsNullOrEmpty(name.Name))
+                if (!string.IsNullOrEmpty(name.Name))
                 {
-                    return String.Format(Resources.HeadingViewHeaderText, name.Name, lang.Code);
+                    return string.Format(Resources.HeadingViewHeaderText, name.Name, lang.Code);
                 }
             }
 
@@ -502,14 +502,14 @@ namespace Honememo.Wptscs
             try
             {
                 // 変更前の設定を保存
-                if (!String.IsNullOrEmpty(this.comboBoxLanguageSelectedText))
+                if (!string.IsNullOrEmpty(this.comboBoxLanguageSelectedText))
                 {
                     // 設定が存在しなければ自動生成される
                     this.SaveChangedValue(this.GetMediaWikiNeedCreate(this.config.Websites, this.comboBoxLanguageSelectedText));
                 }
 
                 // 変更後の値に応じて、画面表示を更新
-                if (!String.IsNullOrEmpty(this.comboBoxLanguage.Text))
+                if (!string.IsNullOrEmpty(this.comboBoxLanguage.Text))
                 {
                     // 設定が存在しなければ基本的に自動生成されるのでそのまま使用
                     this.LoadCurrentValue(this.GetMediaWikiNeedCreate(this.config.Websites, this.comboBoxLanguage.Text));
@@ -530,7 +530,7 @@ namespace Honememo.Wptscs
                     this.groupBoxLanguage.Enabled = false;
 
                     // 現在の選択値を更新
-                    this.comboBoxLanguageSelectedText = String.Empty;
+                    this.comboBoxLanguageSelectedText = string.Empty;
                 }
             }
             catch (Exception ex)
@@ -595,7 +595,7 @@ namespace Honememo.Wptscs
             TextBox box = (TextBox)sender;
             box.Text = StringUtils.DefaultString(box.Text).Trim();
             int value;
-            if (!String.IsNullOrEmpty(box.Text) && !int.TryParse(box.Text, out value))
+            if (!string.IsNullOrEmpty(box.Text) && !int.TryParse(box.Text, out value))
             {
                 this.errorProvider.SetError(box, Resources.WarningMessageIgnoreNumericNamespace);
                 e.Cancel = true;
@@ -611,7 +611,7 @@ namespace Honememo.Wptscs
         {
             // 空か$1が含まれる文字列のみ許可
             TextBox box = (TextBox)sender;
-            if (!String.IsNullOrEmpty(box.Text) && !box.Text.Contains("$1"))
+            if (!string.IsNullOrEmpty(box.Text) && !box.Text.Contains("$1"))
             {
                 this.errorProvider.SetError(box, Resources.WarningMessageUnformatedBracket);
                 e.Cancel = true;
@@ -636,7 +636,7 @@ namespace Honememo.Wptscs
             // 言語コードは必須、またトリムして小文字に変換
             string code = FormUtils.ToString(row.Cells["ColumnCode"]).Trim().ToLower();
             row.Cells["ColumnCode"].Value = code;
-            if (String.IsNullOrEmpty(code))
+            if (string.IsNullOrEmpty(code))
             {
                 row.ErrorText = Resources.WarningMessageEmptyCodeColumn;
                 e.Cancel = true;
@@ -644,8 +644,8 @@ namespace Honememo.Wptscs
             }
 
             // 略称を設定する場合、呼称を必須とする
-            if (!String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnShortName"]))
-                && String.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnName"])))
+            if (!string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnShortName"]))
+                && string.IsNullOrWhiteSpace(FormUtils.ToString(row.Cells["ColumnName"])))
             {
                 row.ErrorText = Resources.WarningMessageShortNameColumnOnly;
                 e.Cancel = true;
@@ -804,7 +804,7 @@ namespace Honememo.Wptscs
             {
                 // 値が入ってないとかはガードしているはずだが、一応チェック
                 string code = FormUtils.ToString(this.dataGridViewLanguageName["ColumnCode", y]).Trim();
-                if (!String.IsNullOrEmpty(code))
+                if (!string.IsNullOrEmpty(code))
                 {
                     Language.LanguageName name = new Language.LanguageName();
                     name.Name = FormUtils.ToString(this.dataGridViewLanguageName["ColumnName", y]).Trim();
@@ -865,7 +865,7 @@ namespace Honememo.Wptscs
             site.DocumentationTemplates.Clear();
             foreach (string s in StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Split('\n'))
             {
-                if (!String.IsNullOrWhiteSpace(s))
+                if (!string.IsNullOrWhiteSpace(s))
                 {
                     site.DocumentationTemplates.Add(s.Trim());
                 }
@@ -892,7 +892,7 @@ namespace Honememo.Wptscs
             site.HasLanguagePage = this.checkBoxHasLanguagePage.Checked;
 
             // 以下、数値へのparseは事前にチェックしてあるので、ここではチェックしない
-            if (!String.IsNullOrWhiteSpace(this.textBoxTemplateNamespace.Text))
+            if (!string.IsNullOrWhiteSpace(this.textBoxTemplateNamespace.Text))
             {
                 int num = int.Parse(this.textBoxTemplateNamespace.Text);
                 if (site.TemplateNamespace != num)
@@ -901,7 +901,7 @@ namespace Honememo.Wptscs
                 }
             }
 
-            if (!String.IsNullOrWhiteSpace(this.textBoxCategoryNamespace.Text))
+            if (!string.IsNullOrWhiteSpace(this.textBoxCategoryNamespace.Text))
             {
                 int num = int.Parse(this.textBoxCategoryNamespace.Text);
                 if (site.CategoryNamespace != num)
@@ -910,7 +910,7 @@ namespace Honememo.Wptscs
                 }
             }
 
-            if (!String.IsNullOrWhiteSpace(this.textBoxFileNamespace.Text))
+            if (!string.IsNullOrWhiteSpace(this.textBoxFileNamespace.Text))
             {
                 int num = int.Parse(this.textBoxFileNamespace.Text);
                 if (site.FileNamespace != num)
@@ -1013,7 +1013,7 @@ namespace Honememo.Wptscs
         /// <param name="e">発生したイベント。</param>
         private void ResetErrorText_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
-            ((DataGridView)sender).Rows[e.RowIndex].ErrorText = String.Empty;
+            ((DataGridView)sender).Rows[e.RowIndex].ErrorText = string.Empty;
         }
 
         /// <summary>
@@ -1026,7 +1026,7 @@ namespace Honememo.Wptscs
             // 全行のエラーメッセージを解除
             foreach (DataGridViewRow row in ((DataGridView)sender).Rows)
             {
-                row.ErrorText = String.Empty;
+                row.ErrorText = string.Empty;
             }
         }
 
@@ -1046,7 +1046,7 @@ namespace Honememo.Wptscs
             /// <summary>
             /// 取得日時が同じ場合にソートに用いる列名。
             /// </summary>
-            private static readonly string[] sortOrder = new string[] { "ColumnFromCode", "ColumnToCode", "ColumnFromTitle" };
+            private static readonly string[] SortOrder = new string[] { "ColumnFromCode", "ColumnToCode", "ColumnFromTitle" };
 
             /// <summary>
             /// 2行を比較し、一方が他方より小さいか、等しいか、大きいかを示す値を返します。
@@ -1069,9 +1069,9 @@ namespace Honememo.Wptscs
                 }
 
                 // 取得日時列が同じ場合、残りの列の昇順でソート
-                foreach (string column in sortOrder)
+                foreach (string column in SortOrder)
                 {
-                    compare = String.Compare(
+                    compare = string.Compare(
                         FormUtils.ToString(xrow.Cells[column]),
                         FormUtils.ToString(yrow.Cells[column]));
                     if (compare != 0)

@@ -53,7 +53,7 @@ namespace Honememo.Utilities
         /// <exception cref="ArgumentException">文字列が長さ0。</exception>
         public static string NotEmpty(string str, string paramName = "value")
         {
-            if (NotNull(str, paramName) == String.Empty)
+            if (NotNull(str, paramName) == string.Empty)
             {
                 throw new ArgumentException("The validated string is empty", paramName);
             }
@@ -75,7 +75,7 @@ namespace Honememo.Utilities
         /// <exception cref="ArgumentException">文字列が空か空白のみ。</exception>
         public static string NotBlank(string str, string paramName = "value")
         {
-            if (String.IsNullOrWhiteSpace(NotNull(str, paramName)))
+            if (string.IsNullOrWhiteSpace(NotNull(str, paramName)))
             {
                 throw new ArgumentException("The validated string is blank", paramName);
             }

@@ -110,7 +110,7 @@ namespace Honememo.Wptscs.Models
         {
             get
             {
-                if (String.IsNullOrWhiteSpace(this.bracket))
+                if (string.IsNullOrWhiteSpace(this.bracket))
                 {
                     return Settings.Default.Bracket;
                 }

@@ -12,12 +12,12 @@ namespace Honememo.Utilities
 {
     using System;
     using System.Threading.Tasks;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="LockObject"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class LockObjectTest
     {
         #region パラメータ単位のロック用メソッドテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="LockObject.GetObject"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetObject()
         {
             // 同じ入力に同じオブジェクトが、違う入力には違うオブジェクトが返ること
@@ -40,7 +40,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="LockObject.GetObject"/>メソッドテストケース（並列実行）。
         /// </summary>
-        [Test, Timeout(1500)]
+        [TestMethod, Timeout(1500)]
         public void TestGetObjectParallel()
         {
             // 同じ入力に同じオブジェクトが返ること
@@ -61,7 +61,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="LockObject.GetObject"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestGetObjectNull()
         {

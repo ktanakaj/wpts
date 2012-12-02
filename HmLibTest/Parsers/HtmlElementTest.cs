@@ -12,12 +12,12 @@ namespace Honememo.Parsers
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// HtmlElementのテストクラスです。
+    /// <see cref="HtmlElement"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class HtmlElementTest
     {
         #region コンストラクタテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             HtmlElement element = new HtmlElement("testname1");
@@ -37,7 +37,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("testname2", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
             Assert.AreEqual(1, element.Count);
-            Assert.IsInstanceOf(typeof(TextElement), element[0]);
+            Assert.IsInstanceOfType(element[0], typeof(TextElement));
             Assert.AreEqual("testvalue", element[0].ToString());
 
             IDictionary<string, string> attribute = new Dictionary<string, string>();
@@ -57,14 +57,14 @@ namespace Honememo.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             HtmlElement element = new HtmlElement("form");
             Assert.AreEqual("<form>", element.ToString());
             element.Attributes.Add("action", "/test.html");
             Assert.AreEqual("<form action=\"/test.html\">", element.ToString());
-            element.Attributes.Add("disabled", String.Empty);
+            element.Attributes.Add("disabled", string.Empty);
             Assert.AreEqual("<form action=\"/test.html\" disabled=\"\">", element.ToString());
             element.Add(new TextElement("フォーム内のテキスト"));
             Assert.AreEqual("<form action=\"/test.html\" disabled=\"\">フォーム内のテキスト</form>", element.ToString());

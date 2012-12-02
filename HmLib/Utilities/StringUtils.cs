@@ -38,7 +38,7 @@ namespace Honememo.Utilities
         /// <returns>渡された文字列、<c>null</c>の場合には空の文字列。</returns>
         public static string DefaultString(string str)
         {
-            return StringUtils.DefaultString(str, String.Empty);
+            return StringUtils.DefaultString(str, string.Empty);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Honememo.Utilities
         /// <returns>開始位置からの部分文字列。</returns>
         public static string Substring(string str, int startIndex)
         {
-            return StringUtils.Substring(str, startIndex, Int32.MaxValue);
+            return StringUtils.Substring(str, startIndex, int.MaxValue);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Honememo.Utilities
             int i = startIndex > 0 ? startIndex : 0;
             if (i > str.Length)
             {
-                return String.Empty;
+                return string.Empty;
             }
 
             int l = length > 0 ? length : 0;
@@ -173,8 +173,8 @@ namespace Honememo.Utilities
                 (Match match)
                 =>
                 {
-                    int index = Int32.Parse(match.Groups[1].Value) - 1;
-                    return args.Length > index ? ObjectUtils.ToString(args[index]) : String.Empty;
+                    int index = int.Parse(match.Groups[1].Value) - 1;
+                    return args.Length > index ? ObjectUtils.ToString(args[index]) : string.Empty;
                 });
         }
 
@@ -213,21 +213,21 @@ namespace Honememo.Utilities
             }
 
             // 次に空文字列の判定（nullと空文字列は一応区別）
-            if (String.IsNullOrEmpty(strA) && String.IsNullOrEmpty(strB))
+            if (string.IsNullOrEmpty(strA) && string.IsNullOrEmpty(strB))
             {
                 return 0;
             }
-            else if (String.IsNullOrEmpty(strA))
+            else if (string.IsNullOrEmpty(strA))
             {
                 return 1;
             }
-            else if (String.IsNullOrEmpty(strB))
+            else if (string.IsNullOrEmpty(strB))
             {
                 return -1;
             }
 
             // どちらもnull or 空で無い場合は普通に判定
-            return String.Compare(strA, strB);
+            return string.Compare(strA, strB);
         }
 
         #endregion
