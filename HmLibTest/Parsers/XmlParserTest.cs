@@ -19,7 +19,7 @@ namespace Honememo.Parsers
     /// <see cref="XmlParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class XmlParserTest
+    public class XmlParserTest
     {
         #region プロパティテストケース
 

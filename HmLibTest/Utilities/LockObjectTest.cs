@@ -18,7 +18,7 @@ namespace Honememo.Utilities
     /// <see cref="LockObject"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class LockObjectTest
+    public class LockObjectTest
     {
         #region パラメータ単位のロック用メソッドテストケース
 

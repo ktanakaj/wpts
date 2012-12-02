@@ -455,7 +455,7 @@ namespace Honememo.Wptscs.Websites
 
             // URIを生成
             Uri uri = new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle));
-            if (uri.OriginalString.EndsWith("."))
+            if (uri.OriginalString.EndsWith(".") || uri.OriginalString.EndsWith("?"))
             {
                 // 末尾がピリオドのページが取得できない既知の不具合への暫定対応
                 // 対処方法が不明なため、せめて例外を投げて検知する

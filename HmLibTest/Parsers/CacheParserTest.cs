@@ -17,7 +17,7 @@ namespace Honememo.Parsers
     /// <see cref="CacheParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class CacheParserTest
+    public class CacheParserTest
     {
         #region コンストラクタテストケース
 

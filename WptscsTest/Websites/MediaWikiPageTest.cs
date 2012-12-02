@@ -22,7 +22,7 @@ namespace Honememo.Wptscs.Websites
     /// <see cref="MediaWikiPage"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiPageTest
+    public class MediaWikiPageTest
     {
         #region コンストラクタテストケース
 

@@ -21,7 +21,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiVariableParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiVariableParserTest
+    public class MediaWikiVariableParserTest
     {
         #region private変数
 

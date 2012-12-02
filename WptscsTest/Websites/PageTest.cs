@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Websites
     /// <see cref="Page"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class PageTest
+    public class PageTest
     {
         #region コンストラクタテストケース
 

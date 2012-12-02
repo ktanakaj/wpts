@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiParserTest
+    public class MediaWikiParserTest
     {
         #region 公開プロパティテストケース
 
@@ -67,7 +67,7 @@ namespace Honememo.Wptscs.Parsers
         [TestMethod]
         public void TestTryParseToEndCondition()
         {
-            string text = "'''Article Name''' is [[xxx]]\r\n==test head==\r\n<p>test</p><nowiki>[[TestMethod]]</nowiki><!--comment-->{{reflist}}";
+            string text = "'''Article Name''' is [[xxx]]\r\n==test head==\r\n<p>test</p><nowiki>[[test]]</nowiki><!--comment-->{{reflist}}";
             IElement element;
             using (MediaWikiParser parser = new MediaWikiParser(new MockFactory().GetMediaWiki("en")))
             {
@@ -84,7 +84,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("\r\n", list[2].ToString());
             Assert.AreEqual("==test head==", list[3].ToString());
             Assert.AreEqual("\r\n<p>test</p>", list[4].ToString());
-            Assert.AreEqual("<nowiki>[[TestMethod]]</nowiki>", list[5].ToString());
+            Assert.AreEqual("<nowiki>[[test]]</nowiki>", list[5].ToString());
             Assert.AreEqual("<!--comment-->", list[6].ToString());
             Assert.AreEqual("{{reflist}}", list[7].ToString());
         }
@@ -118,7 +118,7 @@ namespace Honememo.Wptscs.Parsers
         public void TestTryParseToEndConditionCondition()
         {
             // 親クラスにあった終了条件で停止する動作が継承先でも動作していること
-            string text = "'''Article Name''' is [[xxx]]\r\n==test head==\r\n<p>test</p><nowiki>[[TestMethod]]</nowiki><!--comment-->{{reflist}}";
+            string text = "'''Article Name''' is [[xxx]]\r\n==test head==\r\n<p>test</p><nowiki>[[test]]</nowiki><!--comment-->{{reflist}}";
             IElement element;
             using (MediaWikiParser parser = new MediaWikiParser(new MockFactory().GetMediaWiki("en")))
             {

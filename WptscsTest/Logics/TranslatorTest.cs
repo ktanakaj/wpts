@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Logics
     /// <see cref="Translator"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class TranslatorTest
+    public class TranslatorTest
     {
         #region プロパティテストケース
 

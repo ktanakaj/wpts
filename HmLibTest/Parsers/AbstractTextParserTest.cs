@@ -20,7 +20,7 @@ namespace Honememo.Parsers
     /// <see cref="AbstractTextParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class AbstractTextParserTest
+    public class AbstractTextParserTest
     {
         #region インタフェース実装メソッドテストケース
 
@@ -79,24 +79,24 @@ namespace Honememo.Parsers
             Assert.AreEqual(string.Empty, element.ToString());
             Assert.IsInstanceOfType(element, typeof(TextElement));
 
-            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element));
-            Assert.AreEqual("[[TestMethod]] is good", element.ToString());
+            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element));
+            Assert.AreEqual("[[test]] is good", element.ToString());
             Assert.IsInstanceOfType(element, typeof(ListElement));
 
             // delimitersが指定されている場合は、その文字列まで
             // ※ 本当は "test]] is good" にした状態で用いる
-            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element, "]]"));
+            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]"));
             Assert.AreEqual("[[test", element.ToString());
             Assert.IsInstanceOfType(element, typeof(ListElement));
 
             // delimitersは複数指定可能、先に見つけたもの優先
-            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element, "]]", "s"));
+            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]", "s"));
             Assert.AreEqual("[[te", element.ToString());
             Assert.IsInstanceOfType(element, typeof(ListElement));
 
             // delimitersの指定があっても見つからないときは最後まで処理する
-            Assert.IsTrue(parser.TryParseToDelimiter("[[TestMethod]] is good", out element, "}}"));
-            Assert.AreEqual("[[TestMethod]] is good", element.ToString());
+            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "}}"));
+            Assert.AreEqual("[[test]] is good", element.ToString());
             Assert.IsInstanceOfType(element, typeof(ListElement));
         }
 

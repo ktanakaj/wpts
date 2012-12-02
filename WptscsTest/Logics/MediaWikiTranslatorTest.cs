@@ -25,7 +25,7 @@ namespace Honememo.Wptscs.Logics
     /// <see cref="MediaWikiTranslator"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiTranslatorTest
+    public class MediaWikiTranslatorTest
     {
         #region 定数
 

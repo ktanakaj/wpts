@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Utilities
     /// <see cref="AppConfigWebProxy"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class AppConfigWebProxyTest
+    public class AppConfigWebProxyTest
     {
         #region 定数
 

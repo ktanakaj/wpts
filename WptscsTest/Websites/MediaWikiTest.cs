@@ -26,7 +26,7 @@ namespace Honememo.Wptscs.Websites
     /// <see cref="MediaWiki"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiTest
+    public class MediaWikiTest
     {
         #region 定数
 
@@ -431,7 +431,7 @@ namespace Honememo.Wptscs.Websites
             Page page = site.GetPage("example");
             Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
             Assert.AreEqual("Example", page.Title);
-            Assert.AreEqual(DateTime.Parse("2010/07/13 09:49:18"), page.Timestamp);
+            Assert.AreEqual(DateTime.Parse("2010/07/13T00:49:18Z"), page.Timestamp);
             Assert.IsTrue(page.Text.Length > 0);
             Assert.AreEqual(site, page.Website);
         }
