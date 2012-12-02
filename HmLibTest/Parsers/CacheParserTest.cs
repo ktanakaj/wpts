@@ -11,12 +11,12 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="CacheParser"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class CacheParserTest
     {
         #region コンストラクタテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Parsers
         /// コンストラクタテストケース（異常系）。
         /// </summary>
         /// <remarks>正常系は他のメソッドのテストの中で実施。</remarks>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorNull()
         {
@@ -39,7 +39,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="CacheParser.Parse"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestParse()
         {
             // ラップしているパーサーと同じ結果を返すこと
@@ -70,7 +70,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="CacheParser.Parse"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestParseNull()
         {
@@ -81,7 +81,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="CacheParser.Parse"/>メソッドテストケース（解析失敗）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void TestParseIgnore()
         {
@@ -92,7 +92,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="CacheParser.TryParse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParse()
         {
             // ラップしているパーサーと同じ結果を返すこと
@@ -139,7 +139,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="CacheParser.IsPossibleParse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsPossibleParse()
         {
             // ラップしているパーサーと同じ結果を返すこと

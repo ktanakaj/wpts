@@ -12,12 +12,12 @@ namespace Honememo.Utilities
 {
     using System;
     using System.Text;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// StringUtilsのテストクラスです。
+    /// <see cref="StringUtils"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class StringUtilsTest
     {
         #region 初期化メソッドテストケース
@@ -25,18 +25,18 @@ namespace Honememo.Utilities
         /// <summary>
         /// DefaultStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestDefaultString()
         {
             // 引数一つ
-            Assert.IsEmpty(StringUtils.DefaultString(null));
-            Assert.IsEmpty(StringUtils.DefaultString(String.Empty));
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(null));
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(string.Empty));
             Assert.AreEqual(" ", StringUtils.DefaultString(" "));
             Assert.AreEqual("null以外の文字列", StringUtils.DefaultString("null以外の文字列"));
 
             // 引数二つ
             Assert.AreEqual("初期値", StringUtils.DefaultString(null, "初期値"));
-            Assert.IsEmpty(StringUtils.DefaultString(String.Empty, "初期値"));
+            Assert.AreEqual(string.Empty, StringUtils.DefaultString(string.Empty, "初期値"));
             Assert.AreEqual(" ", StringUtils.DefaultString(" ", "初期値"));
             Assert.AreEqual("null以外の文字列", StringUtils.DefaultString("null以外の文字列", "初期値"));
         }
@@ -48,31 +48,31 @@ namespace Honememo.Utilities
         /// <summary>
         /// Substringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestSubstring()
         {
             // 引数一つ
             Assert.IsNull(StringUtils.Substring(null, 0));
             Assert.AreEqual("abc", StringUtils.Substring("abc", 0));
             Assert.AreEqual("c", StringUtils.Substring("abc", 2));
-            Assert.IsEmpty(StringUtils.Substring("abc", 4));
+            Assert.AreEqual(string.Empty, StringUtils.Substring("abc", 4));
             Assert.AreEqual("abc", StringUtils.Substring("abc", -2));
             Assert.AreEqual("abc", StringUtils.Substring("abc", -4));
             Assert.AreEqual("3", StringUtils.Substring("0123", 3));
-            Assert.IsEmpty(StringUtils.Substring("0123", 4));
+            Assert.AreEqual(string.Empty, StringUtils.Substring("0123", 4));
 
             // 引数二つ
             Assert.IsNull(StringUtils.Substring(null, 0, 0));
-            Assert.IsEmpty(StringUtils.Substring(String.Empty, 0, 1));
+            Assert.AreEqual(string.Empty, StringUtils.Substring(string.Empty, 0, 1));
             Assert.AreEqual("ab", StringUtils.Substring("abc", 0, 2));
-            Assert.IsEmpty(StringUtils.Substring("abc", 2, 0));
+            Assert.AreEqual(string.Empty, StringUtils.Substring("abc", 2, 0));
             Assert.AreEqual("c", StringUtils.Substring("abc", 2, 2));
-            Assert.IsEmpty(StringUtils.Substring("abc", 4, 2));
-            Assert.IsEmpty(StringUtils.Substring("abc", -2, -1));
+            Assert.AreEqual(string.Empty, StringUtils.Substring("abc", 4, 2));
+            Assert.AreEqual(string.Empty, StringUtils.Substring("abc", -2, -1));
             Assert.AreEqual("ab", StringUtils.Substring("abc", -4, 2));
             Assert.AreEqual("3", StringUtils.Substring("0123", 3, 1));
             Assert.AreEqual("3", StringUtils.Substring("0123", 3, 2));
-            Assert.IsEmpty(StringUtils.Substring("0123", 4, 1));
+            Assert.AreEqual(string.Empty, StringUtils.Substring("0123", 4, 1));
         }
 
         #endregion
@@ -82,20 +82,20 @@ namespace Honememo.Utilities
         /// <summary>
         /// StartsWithメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestStartsWith()
         {
             // null
             Assert.IsTrue(StringUtils.StartsWith(null, null, 3));
-            Assert.IsFalse(StringUtils.StartsWith(null, String.Empty, 2));
-            Assert.IsFalse(StringUtils.StartsWith(String.Empty, null, 5));
+            Assert.IsFalse(StringUtils.StartsWith(null, string.Empty, 2));
+            Assert.IsFalse(StringUtils.StartsWith(string.Empty, null, 5));
 
             // 空、文字数
-            Assert.IsFalse(StringUtils.StartsWith(String.Empty, String.Empty, 0));
-            Assert.IsTrue(StringUtils.StartsWith("a", String.Empty, 0));
-            Assert.IsTrue(StringUtils.StartsWith("abcedf0123あいうえお", String.Empty, 14));
-            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", String.Empty, 15));
-            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", String.Empty, -1));
+            Assert.IsFalse(StringUtils.StartsWith(string.Empty, string.Empty, 0));
+            Assert.IsTrue(StringUtils.StartsWith("a", string.Empty, 0));
+            Assert.IsTrue(StringUtils.StartsWith("abcedf0123あいうえお", string.Empty, 14));
+            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", string.Empty, 15));
+            Assert.IsFalse(StringUtils.StartsWith("abcedf0123あいうえお", string.Empty, -1));
 
             // 通常
             Assert.IsTrue(StringUtils.StartsWith("abcedf0123あいうえお", "bc", 1));
@@ -107,7 +107,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// StartsWithメソッドテストケース（性能試験）。
         /// </summary>
-        [Test, Timeout(1500)]
+        [TestMethod, Timeout(1500)]
         public void TestStartsWithResponse()
         {
             // テストデータとして適当な、ただしある文字が定期的に出現する長い文字列を生成
@@ -115,7 +115,7 @@ namespace Honememo.Utilities
             int span = 0x7D - 0x20;
             for (int i = 0; i < 100000; i++)
             {
-                b.Append(Char.ConvertFromUtf32((i % span) + 0x20));
+                b.Append(char.ConvertFromUtf32((i % span) + 0x20));
             }
 
             // 先頭から最後までひたすら実行して時間がかかりすぎないかをチェック
@@ -133,12 +133,12 @@ namespace Honememo.Utilities
         /// <summary>
         /// FormatDollarVariableメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFormatDollarVariable()
         {
             // 空文字列
-            Assert.IsEmpty(StringUtils.FormatDollarVariable(String.Empty));
-            Assert.IsEmpty(StringUtils.FormatDollarVariable(String.Empty, String.Empty));
+            Assert.AreEqual(string.Empty, StringUtils.FormatDollarVariable(string.Empty));
+            Assert.AreEqual(string.Empty, StringUtils.FormatDollarVariable(string.Empty, string.Empty));
 
             // 通常
             Assert.AreEqual("test", StringUtils.FormatDollarVariable("test"));
@@ -153,7 +153,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// FormatDollarVariableメソッドテストケース（書式がnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestFormatDollarVariableFormatNull()
         {
@@ -163,11 +163,11 @@ namespace Honememo.Utilities
         /// <summary>
         /// FormatDollarVariableメソッドテストケース（パラメータがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestFormatDollarVariableArgsNull()
         {
-            StringUtils.FormatDollarVariable(String.Empty, null);
+            StringUtils.FormatDollarVariable(string.Empty, null);
         }
 
         #endregion
@@ -177,7 +177,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// CompareNullsLastメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCompareNullsLast()
         {
             // 通常のString.Compareと同じ動作
@@ -187,17 +187,17 @@ namespace Honememo.Utilities
             Assert.AreEqual(-1, StringUtils.CompareNullsLast("ab", "abc"));
             Assert.AreEqual(1, StringUtils.CompareNullsLast("abc", "ab"));
             Assert.AreEqual(0, StringUtils.CompareNullsLast(null, null));
-            Assert.AreEqual(0, StringUtils.CompareNullsLast(String.Empty, String.Empty));
+            Assert.AreEqual(0, StringUtils.CompareNullsLast(string.Empty, string.Empty));
 
             // 独自の拡張部分、nullや空の値が大きいと判断される
             Assert.AreEqual(-1, StringUtils.CompareNullsLast("abc", null));
             Assert.AreEqual(1, StringUtils.CompareNullsLast(null, "abc"));
-            Assert.AreEqual(-1, StringUtils.CompareNullsLast("abc", String.Empty));
-            Assert.AreEqual(1, StringUtils.CompareNullsLast(String.Empty, "abc"));
+            Assert.AreEqual(-1, StringUtils.CompareNullsLast("abc", string.Empty));
+            Assert.AreEqual(1, StringUtils.CompareNullsLast(string.Empty, "abc"));
 
             // nullと空の場合nullの方が大きいと判定
-            Assert.AreEqual(1, StringUtils.CompareNullsLast(null, String.Empty));
-            Assert.AreEqual(-1, StringUtils.CompareNullsLast(String.Empty, null));
+            Assert.AreEqual(1, StringUtils.CompareNullsLast(null, string.Empty));
+            Assert.AreEqual(-1, StringUtils.CompareNullsLast(string.Empty, null));
         }
 
         #endregion

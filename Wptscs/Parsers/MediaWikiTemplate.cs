@@ -129,14 +129,14 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 言語コード・他プロジェクトコードの付加
-            if (!String.IsNullOrEmpty(this.Interwiki))
+            if (!string.IsNullOrEmpty(this.Interwiki))
             {
                 b.Append(this.Interwiki);
                 b.Append(':');
             }
 
             // テンプレート名の付加
-            if (!String.IsNullOrEmpty(this.Title))
+            if (!string.IsNullOrEmpty(this.Title))
             {
                 b.Append(this.Title);
             }

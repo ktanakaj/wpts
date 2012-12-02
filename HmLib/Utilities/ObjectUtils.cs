@@ -71,7 +71,7 @@ namespace Honememo.Utilities
         /// <returns>渡されたオブジェクトを<c>ToString</c>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string ToString(object obj)
         {
-            return ObjectUtils.ToString(obj, String.Empty);
+            return ObjectUtils.ToString(obj, string.Empty);
         }
 
         /// <summary>

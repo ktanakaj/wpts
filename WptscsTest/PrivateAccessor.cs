@@ -1,6 +1,6 @@
 ﻿// ================================================================================================
 // <summary>
-//      NUnitテスト支援用クラスソース。</summary>
+//      ユニットテスト支援用クラスソース。</summary>
 //
 // <copyright file="PrivateAccessor.cs" company="honeplusのメモ帳">
 //      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
@@ -13,10 +13,10 @@ namespace Honememo.Tests
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// NUnitでのテスト用に private, protected といった外部からアクセスできないメソッドを実行するためのクラス。
+    /// ユニットテスト用に private, protected といった外部からアクセスできないメソッドを実行するためのクラス。
     /// クラス・オブジェクトに被せるように使用する。
     /// </summary>
     /// <typeparam name="T">ラップするオブジェクトのクラス。</typeparam>

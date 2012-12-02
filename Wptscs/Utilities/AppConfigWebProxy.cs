@@ -49,7 +49,7 @@ namespace Honememo.Wptscs.Utilities
             {
                 // アプリ設定値を確認
                 string ua = Settings.Default.UserAgent;
-                if (!String.IsNullOrEmpty(ua))
+                if (!string.IsNullOrEmpty(ua))
                 {
                     return ua;
                 }
@@ -62,7 +62,7 @@ namespace Honememo.Wptscs.Utilities
 
                 // いずれも存在しない場合は、デフォルトの値を生成して返す
                 Version ver = Assembly.GetExecutingAssembly().GetName().Version;
-                return String.Format(Settings.Default.DefaultUserAgent, ver.Major, ver.Minor);
+                return string.Format(Settings.Default.DefaultUserAgent, ver.Major, ver.Minor);
             }
 
             set
@@ -81,7 +81,7 @@ namespace Honememo.Wptscs.Utilities
             {
                 // アプリ設定値を確認
                 string r = Settings.Default.Referer;
-                if (String.IsNullOrEmpty(r))
+                if (string.IsNullOrEmpty(r))
                 {
                     // 存在しない場合、このプロパティの値を返す
                     r = this.referer;

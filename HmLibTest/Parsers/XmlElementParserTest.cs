@@ -11,12 +11,12 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="XmlElementParser"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class XmlElementParserTest
     {
         #region private変数
@@ -34,7 +34,7 @@ namespace Honememo.Parsers
         /// テストの前処理。
         /// </summary>
         /// <remarks><see cref="XmlParser.Dispose"/>が必要な<see cref="XmlParser"/>の生成。</remarks>
-        [SetUp]
+        [TestInitialize]
         public void SetUp()
         {
             this.xmlParser = new XmlParser();
@@ -44,7 +44,7 @@ namespace Honememo.Parsers
         /// テストの後処理。
         /// </summary>
         /// <remarks><see cref="XmlParser.Dispose"/>が必要な<see cref="XmlParser"/>の解放。</remarks>
-        [TearDown]
+        [TestCleanup]
         public void TearDown()
         {
             this.xmlParser.Dispose();
@@ -57,7 +57,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.Targets"/>プロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTargets()
         {
             XmlElementParser parser = new XmlElementParser(this.xmlParser);
@@ -77,7 +77,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.Targets"/>プロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestTargetsNull()
         {
@@ -91,7 +91,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（実例）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParse()
         {
             IElement element;
@@ -133,7 +133,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("checkbox", xmlElement.Attributes["type"]);
             Assert.AreEqual("param", xmlElement.Attributes["name"]);
             Assert.AreEqual("test", xmlElement.Attributes["value"]);
-            Assert.IsEmpty(xmlElement.Attributes["checked"]);
+            Assert.AreEqual(string.Empty, xmlElement.Attributes["checked"]);
 
             Assert.IsTrue(parser.TryParse("<div id=\"outer\">outertext<div id=\"inner\">innertext</div></div>", out element));
             xmlElement = (XmlElement)element;
@@ -146,7 +146,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（基本形）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseNormal()
         {
             IElement element;
@@ -180,7 +180,7 @@ namespace Honememo.Parsers
 
             Assert.IsTrue(parser.TryParse("<testtag5 testattr2='testvalue2'>testbody</testtag5 >testend", out element));
             xmlElement = (XmlElement)element;
-            Assert.IsInstanceOf(typeof(XmlTextElement), xmlElement[0]);
+            Assert.IsInstanceOfType(xmlElement[0], typeof(XmlTextElement));
             Assert.AreEqual("<testtag5 testattr2='testvalue2'>testbody</testtag5 >", xmlElement.ToString());
             Assert.AreEqual("testtag5", xmlElement.Name);
             Assert.AreEqual(1, xmlElement.Attributes.Count);
@@ -190,7 +190,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（普通でNGパターン）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseNormalNg()
         {
             IElement element;
@@ -200,7 +200,7 @@ namespace Honememo.Parsers
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse("<!-- comment -->", out element));
             Assert.IsNull(element);
-            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsFalse(parser.TryParse(string.Empty, out element));
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse(null, out element));
             Assert.IsNull(element);
@@ -209,7 +209,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（単一のパターン）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseSingle()
         {
             IElement element;
@@ -253,7 +253,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（不正な構文）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseLazy()
         {
             IElement element;
@@ -278,7 +278,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("testtag2", xmlElement.Name);
             Assert.AreEqual(2, xmlElement.Attributes.Count);
             Assert.AreEqual("test", xmlElement.Attributes["testattr"]);
-            Assert.IsEmpty(xmlElement.Attributes["value"]);
+            Assert.AreEqual(string.Empty, xmlElement.Attributes["value"]);
 
             Assert.IsTrue(parser.TryParse("<testtag3>test value2</ testtag3>testend", out element));
             xmlElement = (XmlElement)element;
@@ -290,7 +290,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（不正でNG）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseLazyNg()
         {
             IElement element;
@@ -315,7 +315,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（HTML）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseHtml()
         {
             IElement element;
@@ -366,7 +366,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（大文字小文字）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseIgnoreCase()
         {
             IElement element;
@@ -397,7 +397,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.TryParse"/>メソッドテストケース（タグ限定）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseTargets()
         {
             IElement element;
@@ -424,7 +424,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="XmlElementParser.IsPossibleParse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsElementPossible()
         {
             XmlElementParser parser = new XmlElementParser(new XmlParser());

@@ -11,12 +11,12 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="AbstractParser"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class AbstractParserTest
     {
         #region インタフェース実装メソッドテストケース
@@ -24,20 +24,20 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractParser.Parse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestParse()
         {
             // TryParseを呼んだ結果が返ること
             TestParser parser = new TestParser();
             parser.Success = true;
-            Assert.AreEqual(String.Empty, parser.Parse(String.Empty).ToString());
+            Assert.AreEqual(string.Empty, parser.Parse(string.Empty).ToString());
             Assert.AreEqual("test", parser.Parse("test").ToString());
         }
 
         /// <summary>
         /// <see cref="AbstractParser.Parse"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestParseNull()
         {
@@ -49,20 +49,20 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractParser.Parse"/>メソッドテストケース（解析失敗）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void TestParseFail()
         {
             // TryParseがfalseを返した場合、例外を投げる
             TestParser parser = new TestParser();
             parser.Success = false;
-            parser.Parse(String.Empty);
+            parser.Parse(string.Empty);
         }
 
         /// <summary>
         /// <see cref="AbstractParser.IsPossibleParse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsPossibleParse()
         {
             // このクラスでは何を渡してもtrueが返る
@@ -83,7 +83,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractParser.TryParseAt"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseAt()
         {
             // 指定したパーサーで該当のインデックスの文字を解析する
@@ -96,22 +96,22 @@ namespace Honememo.Parsers
             Assert.IsTrue(parser.TryParseAt("a", 0, out element, parser));
             Assert.AreEqual("a", element.ToString());
 
-            Assert.IsFalse(parser.TryParseAt("test[[test]]", 4, out element));
+            Assert.IsFalse(parser.TryParseAt("test[[TestMethod]]", 4, out element));
             Assert.IsNull(element);
-            Assert.IsTrue(parser.TryParseAt("test[[test]]", 4, out element, parser));
-            Assert.AreEqual("[[test]]", element.ToString());
+            Assert.IsTrue(parser.TryParseAt("test[[TestMethod]]", 4, out element, parser));
+            Assert.AreEqual("[[TestMethod]]", element.ToString());
 
             parser.Success = false;
             Assert.IsFalse(parser.TryParseAt("a", 0, out element, parser));
             Assert.IsNull(element);
-            Assert.IsFalse(parser.TryParseAt("test[[test]]", 4, out element, parser));
+            Assert.IsFalse(parser.TryParseAt("test[[TestMethod]]", 4, out element, parser));
             Assert.IsNull(element);
         }
 
         /// <summary>
         /// <see cref="AbstractParser.TryParseAt"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestTryParseAtNull()
         {
@@ -124,14 +124,14 @@ namespace Honememo.Parsers
         /// <summary>
         /// <see cref="AbstractParser.TryParseAt"/>メソッドテストケース（範囲外）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestTryParseAtOutOfRange()
         {
             IElement element;
             TestParser parser = new TestParser();
             parser.Success = true;
-            parser.TryParseAt(String.Empty, 1, out element);
+            parser.TryParseAt(string.Empty, 1, out element);
         }
 
         #endregion

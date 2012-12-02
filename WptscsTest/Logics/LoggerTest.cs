@@ -13,12 +13,12 @@ namespace Honememo.Wptscs.Logics
     using System;
     using System.Collections.Generic;
     using Honememo.Parsers;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// Loggerのテストクラスです。
+    /// <see cref="Logger"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class LoggerTest
     {
         #region private変数
@@ -35,8 +35,8 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テストの前処理。
         /// </summary>
-        [TestFixtureSetUp]
-        public void SetUpBeforeClass()
+        [TestInitialize]
+        public void SetUp()
         {
             // ロガーの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
             this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
@@ -46,8 +46,8 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テストの後処理。
         /// </summary>
-        [TestFixtureTearDown]
-        public void TearDownAfterClass()
+        [TestCleanup]
+        public void TearDown()
         {
             // カルチャーを元に戻す
             System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
@@ -60,16 +60,16 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// Logプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestLog()
         {
             // 初期状態は空
             LoggerMock logger = new LoggerMock();
-            Assert.IsEmpty(logger.Log);
+            Assert.AreEqual(string.Empty, logger.Log);
 
             // null設定時は空白が設定されること、それ以外はそのまま
             logger.Log = null;
-            Assert.IsEmpty(logger.Log);
+            Assert.AreEqual(string.Empty, logger.Log);
             logger.Log = "test";
             Assert.AreEqual("test", logger.Log);
 
@@ -91,13 +91,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddMessageメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddMessage()
         {
             LoggerMock logger = new LoggerMock();
             
             // 通常は一行が出力される
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddMessage("1st string");
             Assert.AreEqual("1st string" + Environment.NewLine, logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -118,13 +118,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddResponseメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddResponse()
         {
             LoggerMock logger = new LoggerMock();
 
             // 通常は一行が出力される
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddResponse("1st string");
             Assert.AreEqual("→ 1st string" + Environment.NewLine, logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -145,13 +145,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddErrorメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddError()
         {
             LoggerMock logger = new LoggerMock();
 
             // 通常は例外内のメッセージだけが出力される
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddError(new ArgumentException("this is exception"));
             Assert.AreEqual("→ this is exception" + Environment.NewLine, logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -171,13 +171,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddSeparatorメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddSeparator()
         {
             LoggerMock logger = new LoggerMock();
 
             // 空行が出力される
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddSeparator();
             Assert.AreEqual(Environment.NewLine, logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -198,13 +198,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddSourceメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddSource()
         {
             LoggerMock logger = new LoggerMock();
 
             // 直前のログが改行されていない場合、改行して出力
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddSource(new TextElement("1st string"));
             Assert.AreEqual("1st string → ", logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -216,13 +216,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddAliasメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddAlias()
         {
             LoggerMock logger = new LoggerMock();
 
             // 矢印付きの出力のみ
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddAlias(new TextElement("1st string"));
             Assert.AreEqual("1st string → ", logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -234,13 +234,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddDestinationメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddDestination()
         {
             LoggerMock logger = new LoggerMock();
 
             // 変換先の出力と改行、キャッシュの指定があればそのコメント
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddDestination(new TextElement("1st string"));
             Assert.AreEqual("1st string" + Environment.NewLine, logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -259,13 +259,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             LoggerMock logger = new LoggerMock();
 
             // ログテキストとして格納している内容がそのまま出力される
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.Log = "テストログ";
             Assert.AreEqual("テストログ", logger.ToString());
         }
@@ -277,7 +277,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// Clearメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestClear()
         {
             LoggerMock logger = new LoggerMock();
@@ -286,7 +286,7 @@ namespace Honememo.Wptscs.Logics
             logger.Log = "テストログ";
             Assert.AreEqual("テストログ", logger.ToString());
             logger.Clear();
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
         }
 
         #endregion

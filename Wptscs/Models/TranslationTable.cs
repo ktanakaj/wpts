@@ -93,7 +93,7 @@ namespace Honememo.Wptscs.Models
         /// <remarks>大文字小文字は区別しない。</remarks>
         public string GetWord(string word)
         {
-            if (String.IsNullOrEmpty(this.From) || String.IsNullOrEmpty(this.To))
+            if (string.IsNullOrEmpty(this.From) || string.IsNullOrEmpty(this.To))
             {
                 throw new InvalidOperationException("empty from or to");
             }

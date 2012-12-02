@@ -14,12 +14,12 @@ namespace Honememo.Wptscs.Logics
     using System.Collections.Generic;
     using Honememo.Parsers;
     using Honememo.Wptscs.Parsers;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// MediaWikiLoggerのテストクラスです。
+    /// <see cref="MediaWikiLogger"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class MediaWikiLoggerTest
     {
         #region private変数
@@ -36,8 +36,8 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テストの前処理。
         /// </summary>
-        [TestFixtureSetUp]
-        public void SetUpBeforeClass()
+        [TestInitialize]
+        public void SetUp()
         {
             // ロガーの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
             this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
@@ -47,8 +47,8 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テストの後処理。
         /// </summary>
-        [TestFixtureTearDown]
-        public void TearDownAfterClass()
+        [TestCleanup]
+        public void TearDown()
         {
             // カルチャーを元に戻す
             System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
@@ -61,14 +61,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddSourceメソッドテストケース。
         /// </summary>
-        [Test]
         public void TestAddSource()
         {
             LoggerMock logger = new LoggerMock();
             Logger diff = new Logger();
             
             // 通常の要素の場合、普通のロガーと同様に処理される
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddSource(new TextElement("1st string"));
             diff.AddSource(new TextElement("1st string"));
             Assert.AreEqual(diff.ToString(), logger.ToString());
@@ -103,13 +102,13 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddAliasメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddAlias()
         {
             LoggerMock logger = new LoggerMock();
 
             // リダイレクトとして出力
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddAlias(new TextElement("1st string"));
             Assert.AreEqual("リダイレクト 1st string → ", logger.ToString());
             Assert.AreEqual(1, logger.Count);
@@ -136,14 +135,14 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// AddDestinationメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAddDestination()
         {
             LoggerMock logger = new LoggerMock();
             Logger diff = new Logger();
 
             // 通常の要素の場合、普通のロガーと同様に処理される
-            Assert.IsEmpty(logger.ToString());
+            Assert.AreEqual(string.Empty, logger.ToString());
             logger.AddDestination(new TextElement("1st string"));
             diff.AddDestination(new TextElement("1st string"));
             Assert.AreEqual(diff.ToString(), logger.ToString());

@@ -126,7 +126,7 @@ namespace Honememo.Parsers
         {
             // 入力値確認。タグでない場合は即終了
             result = null;
-            if (String.IsNullOrEmpty(s) || s[0] != '<')
+            if (string.IsNullOrEmpty(s) || s[0] != '<')
             {
                 return false;
             }
@@ -251,7 +251,7 @@ namespace Honememo.Parsers
         /// </remarks>
         private bool ValidateName(string name)
         {
-            if (String.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 return false;
             }
@@ -314,7 +314,7 @@ namespace Honememo.Parsers
                     // 属性名を確認
                     // ※ 属性が無い場合0文字となる
                     key = s.Substring(i, index - i);
-                    if (!String.IsNullOrEmpty(key) && !this.ValidateName(key))
+                    if (!string.IsNullOrEmpty(key) && !this.ValidateName(key))
                     {
                         // 属性名の位置に出現し得ない記号が含まれているなど構文エラーも弾く
                         return false;
@@ -335,10 +335,10 @@ namespace Honememo.Parsers
                     else if (c == '>' || c == '/')
                     {
                         // ループ終了
-                        if (!String.IsNullOrEmpty(key))
+                        if (!string.IsNullOrEmpty(key))
                         {
                             // 属性名だけで値が無いパターン（<div disable>とか）
-                            a[this.parser.Decode(key)] = String.Empty;
+                            a[this.parser.Decode(key)] = string.Empty;
                             key = null;
                         }
 
@@ -353,7 +353,7 @@ namespace Honememo.Parsers
                     {
                         // 既にスペースが出現した状態で新たに普通の文字が出現した場合、
                         // キーだけで値が無いパターンだったと判定
-                        a[this.parser.Decode(key)] = String.Empty;
+                        a[this.parser.Decode(key)] = string.Empty;
                         key = null;
                         existedSpace = false;
                     }

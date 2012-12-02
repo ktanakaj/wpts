@@ -12,12 +12,12 @@ namespace Honememo.Parsers
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// XmlElementのテストクラスです。
+    /// <see cref="XmlElement"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class XmlElementTest
     {
         #region コンストラクタテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             XmlElement element = new XmlElement("testname1");
@@ -37,7 +37,7 @@ namespace Honememo.Parsers
             Assert.AreEqual("testname2", element.Name);
             Assert.AreEqual(0, element.Attributes.Count);
             Assert.AreEqual(1, element.Count);
-            Assert.IsInstanceOf(typeof(TextElement), element[0]);
+            Assert.IsInstanceOfType(element[0], typeof(TextElement));
             Assert.AreEqual("testvalue", element[0].ToString());
 
             IDictionary<string, string> attribute = new Dictionary<string, string>();
@@ -57,7 +57,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// Nameプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestName()
         {
             XmlElement element = new XmlElement("testname1");
@@ -69,7 +69,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// Nameプロパティテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestNameNull()
         {
@@ -79,17 +79,17 @@ namespace Honememo.Parsers
         /// <summary>
         /// Nameプロパティテストケース（空文字列）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestNameEmpty()
         {
-            XmlElement element = new XmlElement(String.Empty);
+            XmlElement element = new XmlElement(string.Empty);
         }
 
         /// <summary>
         /// Nameプロパティテストケース（空白文字列）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestNameBlank()
         {
@@ -99,7 +99,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// Attributesプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAttributes()
         {
             XmlElement element = new XmlElement("testname");
@@ -113,14 +113,14 @@ namespace Honememo.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             XmlElement element = new XmlElement("form");
             Assert.AreEqual("<form />", element.ToString());
             element.Attributes.Add("action", "/test.html");
             Assert.AreEqual("<form action=\"/test.html\" />", element.ToString());
-            element.Attributes.Add("disabled", String.Empty);
+            element.Attributes.Add("disabled", string.Empty);
             Assert.AreEqual("<form action=\"/test.html\" disabled=\"\" />", element.ToString());
             element.Add(new TextElement("フォーム内のテキスト"));
             Assert.AreEqual("<form action=\"/test.html\" disabled=\"\">フォーム内のテキスト</form>", element.ToString());

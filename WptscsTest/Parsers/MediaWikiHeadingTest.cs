@@ -12,12 +12,12 @@ namespace Honememo.Wptscs.Parsers
 {
     using System;
     using Honememo.Parsers;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// MediaWikiHeadingのテストクラスです。
+    /// <see cref="MediaWikiHeading"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class MediaWikiHeadingTest
     {
         #region プロパティテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Levelプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestLevel()
         {
             MediaWikiHeading element = new MediaWikiHeading();
@@ -44,13 +44,13 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             MediaWikiHeading element = new MediaWikiHeading();
 
             // 初期状態
-            Assert.IsEmpty(element.ToString());
+            Assert.AreEqual(string.Empty, element.ToString());
 
             // 見出し1階層
             element.Level = 1;

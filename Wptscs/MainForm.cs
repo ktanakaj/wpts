@@ -206,7 +206,7 @@ namespace Honememo.Wptscs
         private void SetLanguageNameLabel(Label label, Website site)
         {
             // ラベルを初期化
-            label.Text = String.Empty;
+            label.Text = string.Empty;
             if (site == null)
             {
                 return;
@@ -237,7 +237,7 @@ namespace Honememo.Wptscs
         private void ButtonSaveDirectory_Click(object sender, EventArgs e)
         {
             // フォルダ名が入力されている場合、それを初期位置に設定
-            if (!String.IsNullOrEmpty(this.textBoxSaveDirectory.Text))
+            if (!string.IsNullOrEmpty(this.textBoxSaveDirectory.Text))
             {
                 this.folderBrowserDialogSaveDirectory.SelectedPath = this.textBoxSaveDirectory.Text;
             }
@@ -273,26 +273,26 @@ namespace Honememo.Wptscs
         private void ButtonRun_Click(object sender, EventArgs e)
         {
             // フォーム入力値をチェック
-            if (String.IsNullOrWhiteSpace(this.comboBoxSource.Text))
+            if (string.IsNullOrWhiteSpace(this.comboBoxSource.Text))
             {
                 FormUtils.WarningDialog(Resources.WarningMessageNotSelectedSource);
                 this.comboBoxSource.Focus();
                 return;
             }
-            else if (String.IsNullOrWhiteSpace(this.comboBoxTarget.Text))
+            else if (string.IsNullOrWhiteSpace(this.comboBoxTarget.Text))
             {
                 FormUtils.WarningDialog(Resources.WarningMessageNotSelectedTarget);
                 this.comboBoxTarget.Focus();
                 return;
             }
-            else if (!String.IsNullOrWhiteSpace(this.comboBoxSource.Text)
+            else if (!string.IsNullOrWhiteSpace(this.comboBoxSource.Text)
                 && this.comboBoxSource.Text == this.comboBoxTarget.Text)
             {
                 FormUtils.WarningDialog(Resources.WarningMessageEqualsSourceAndTarget);
                 this.comboBoxTarget.Focus();
                 return;
             }
-            else if (String.IsNullOrWhiteSpace(this.textBoxSaveDirectory.Text))
+            else if (string.IsNullOrWhiteSpace(this.textBoxSaveDirectory.Text))
             {
                 FormUtils.WarningDialog(Resources.WarningMessageEmptySaveDirectory);
                 this.textBoxSaveDirectory.Focus();
@@ -304,7 +304,7 @@ namespace Honememo.Wptscs
                 this.textBoxSaveDirectory.Focus();
                 return;
             }
-            else if (String.IsNullOrWhiteSpace(this.textBoxArticle.Text))
+            else if (string.IsNullOrWhiteSpace(this.textBoxArticle.Text))
             {
                 FormUtils.WarningDialog(Resources.WarningMessageEmptyArticle);
                 this.textBoxArticle.Focus();
@@ -317,8 +317,8 @@ namespace Honememo.Wptscs
             // 表示領域を初期化、処理時間更新用にタイマーを起動
             this.textBoxLog.Clear();
             this.logLength = 0;
-            this.textBoxLog.AppendText(String.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now));
-            this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, TimeSpan.Zero);
+            this.textBoxLog.AppendText(string.Format(Resources.LogMessageStart, FormUtils.ApplicationName(), DateTime.Now));
+            this.toolStripStatusLabelStopwatch.Text = string.Format(Resources.ElapsedTime, TimeSpan.Zero);
             this.timerStatusStopwatch.Start();
 
             // バックグラウンド処理を実行
@@ -414,17 +414,17 @@ namespace Honememo.Wptscs
                 {
                     // 想定外の通信エラー（↓とまとめてもよいが、こちらはサーバーの状況などで発生しやすいので）
                     WebException ex = (WebException)e.Error;
-                    this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageConnectionFailed, ex.Message) + Environment.NewLine);
+                    this.textBoxLog.AppendText(Environment.NewLine + string.Format(Resources.ErrorMessageConnectionFailed, ex.Message) + Environment.NewLine);
                     if (ex.Response != null)
                     {
                         // 出せるならエラーとなったURLも出力
-                        this.textBoxLog.AppendText(Resources.RightArrow + " " + String.Format(Resources.LogMessageErrorURL, ex.Response.ResponseUri) + Environment.NewLine);
+                        this.textBoxLog.AppendText(Resources.RightArrow + " " + string.Format(Resources.LogMessageErrorURL, ex.Response.ResponseUri) + Environment.NewLine);
                     }
                 }
                 else
                 {
                     // 想定外のエラー
-                    this.textBoxLog.AppendText(Environment.NewLine + String.Format(Resources.ErrorMessageDevelopmentError, e.Error.Message, e.Error.StackTrace) + Environment.NewLine);
+                    this.textBoxLog.AppendText(Environment.NewLine + string.Format(Resources.ErrorMessageDevelopmentError, e.Error.Message, e.Error.StackTrace) + Environment.NewLine);
                 }
             }
             else
@@ -508,17 +508,17 @@ namespace Honememo.Wptscs
                     try
                     {
                         File.WriteAllText(Path.Combine(this.textBoxSaveDirectory.Text, fileName), this.translator.Text);
-                        this.textBoxLog.AppendText(String.Format(Resources.LogMessageEnd, fileName, logName));
+                        this.textBoxLog.AppendText(string.Format(Resources.LogMessageEnd, fileName, logName));
                     }
                     catch (Exception ex)
                     {
-                        this.textBoxLog.AppendText(String.Format(Resources.LogMessageFileSaveFailed, Path.Combine(this.textBoxSaveDirectory.Text, fileName), ex.Message));
-                        this.textBoxLog.AppendText(String.Format(Resources.LogMessageStop, logName));
+                        this.textBoxLog.AppendText(string.Format(Resources.LogMessageFileSaveFailed, Path.Combine(this.textBoxSaveDirectory.Text, fileName), ex.Message));
+                        this.textBoxLog.AppendText(string.Format(Resources.LogMessageStop, logName));
                     }
                 }
                 else
                 {
-                    this.textBoxLog.AppendText(String.Format(Resources.LogMessageStop, logName));
+                    this.textBoxLog.AppendText(string.Format(Resources.LogMessageStop, logName));
                 }
 
                 // ログを出力
@@ -528,7 +528,7 @@ namespace Honememo.Wptscs
                 }
                 catch (Exception ex)
                 {
-                    this.textBoxLog.AppendText(String.Format(Resources.LogMessageFileSaveFailed, Path.Combine(this.textBoxSaveDirectory.Text, logName), ex.Message));
+                    this.textBoxLog.AppendText(string.Format(Resources.LogMessageFileSaveFailed, Path.Combine(this.textBoxSaveDirectory.Text, logName), ex.Message));
                 }
             }
         }
@@ -599,7 +599,7 @@ namespace Honememo.Wptscs
             if (this.translator != null)
             {
                 // 処理時間をステータスバーに反映
-                this.toolStripStatusLabelStopwatch.Text = String.Format(Resources.ElapsedTime, this.translator.Stopwatch.Elapsed);
+                this.toolStripStatusLabelStopwatch.Text = string.Format(Resources.ElapsedTime, this.translator.Stopwatch.Elapsed);
             }
         }
 
@@ -644,7 +644,7 @@ namespace Honememo.Wptscs
         private void ToolStripMenuItemAuto_Click(object sender, EventArgs e)
         {
             // 表示言語を空欄に設定し再起動する
-            this.ChangeCultureAndRestart(String.Empty);
+            this.ChangeCultureAndRestart(string.Empty);
         }
 
         /// <summary>

@@ -114,7 +114,7 @@ namespace Honememo.Wptscs.Websites
         {
             // 親で初期化していないのは、languageのnullチェックの前にnull参照でエラーになってしまうから
             this.Language = language;
-            this.Location = String.Format(Settings.Default.WikipediaLocation, language.Code);
+            this.Location = string.Format(Settings.Default.WikipediaLocation, language.Code);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Honememo.Wptscs.Websites
         {
             get
             {
-                if (String.IsNullOrEmpty(this.metaApi))
+                if (string.IsNullOrEmpty(this.metaApi))
                 {
                     return Settings.Default.MediaWikiMetaApi;
                 }
@@ -158,7 +158,7 @@ namespace Honememo.Wptscs.Websites
         {
             get
             {
-                if (String.IsNullOrEmpty(this.exportPath))
+                if (string.IsNullOrEmpty(this.exportPath))
                 {
                     return Settings.Default.MediaWikiExportPath;
                 }
@@ -180,7 +180,7 @@ namespace Honememo.Wptscs.Websites
         {
             get
             {
-                if (String.IsNullOrEmpty(this.redirect))
+                if (string.IsNullOrEmpty(this.redirect))
                 {
                     return Settings.Default.MediaWikiRedirect;
                 }
@@ -604,7 +604,7 @@ namespace Honememo.Wptscs.Websites
         /// <returns>書式化した文字列。<see cref="LinkInterwikiFormat"/>が未設定の場合<c>null</c>。</returns>
         public string FormatLinkInterwiki(string title, string lang, string langTitle, string label)
         {
-            if (String.IsNullOrEmpty(this.LinkInterwikiFormat))
+            if (string.IsNullOrEmpty(this.LinkInterwikiFormat))
             {
                 return null;
             }
@@ -624,7 +624,7 @@ namespace Honememo.Wptscs.Websites
         /// </remarks>
         public string FormatLang(string lang, string text)
         {
-            if (String.IsNullOrEmpty(this.LangFormat))
+            if (string.IsNullOrEmpty(this.LangFormat))
             {
                 return null;
             }
@@ -751,13 +751,13 @@ namespace Honememo.Wptscs.Websites
             writer.WriteElementString("Redirect", this.redirect);
             writer.WriteElementString(
                 "TemplateNamespace",
-                this.templateNamespace.HasValue ? this.templateNamespace.ToString() : String.Empty);
+                this.templateNamespace.HasValue ? this.templateNamespace.ToString() : string.Empty);
             writer.WriteElementString(
                 "CategoryNamespace",
-                this.templateNamespace.HasValue ? this.categoryNamespace.ToString() : String.Empty);
+                this.templateNamespace.HasValue ? this.categoryNamespace.ToString() : string.Empty);
             writer.WriteElementString(
                 "FileNamespace",
-                this.templateNamespace.HasValue ? this.fileNamespace.ToString() : String.Empty);
+                this.templateNamespace.HasValue ? this.fileNamespace.ToString() : string.Empty);
 
             // システム定義変数
             writer.WriteStartElement("MagicWords");
@@ -871,14 +871,14 @@ namespace Honememo.Wptscs.Websites
                 {
                     try
                     {
-                        int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
+                        int id = decimal.ToInt16(decimal.Parse(namespaceElement.GetAttribute("id")));
                         IgnoreCaseSet values = new IgnoreCaseSet();
                         values.Add(namespaceElement.InnerText);
                         namespaces[id] = values;
 
                         // あれば標準名も設定
                         string canonical = namespaceElement.GetAttribute("canonical");
-                        if (!String.IsNullOrEmpty(canonical))
+                        if (!string.IsNullOrEmpty(canonical))
                         {
                             values.Add(canonical);
                         }
@@ -903,7 +903,7 @@ namespace Honememo.Wptscs.Websites
                     {
                         try
                         {
-                            int id = Decimal.ToInt16(Decimal.Parse(namespaceElement.GetAttribute("id")));
+                            int id = decimal.ToInt16(decimal.Parse(namespaceElement.GetAttribute("id")));
                             ISet<string> values = new HashSet<string>();
                             if (namespaces.ContainsKey(id))
                             {
@@ -948,7 +948,7 @@ namespace Honememo.Wptscs.Websites
                 if (interwikiElement != null)
                 {
                     string prefix = interwikiElement.GetAttribute("prefix");
-                    if (!String.IsNullOrWhiteSpace(prefix))
+                    if (!string.IsNullOrWhiteSpace(prefix))
                     {
                         interwikiPrefixs.Add(prefix);
                     }

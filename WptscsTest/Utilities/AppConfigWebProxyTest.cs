@@ -14,12 +14,12 @@ namespace Honememo.Wptscs.Utilities
     using System.IO;
     using Honememo.Wptscs.Properties;
     using Honememo.Wptscs.Utilities;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="AppConfigWebProxy"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class AppConfigWebProxyTest
     {
         #region 定数
@@ -27,7 +27,7 @@ namespace Honememo.Wptscs.Utilities
         /// <summary>
         /// テストデータが格納されているフォルダパス。
         /// </summary>
-        private static readonly string testFile = "Data\\config.xml";
+        private static readonly string TestFile = "Data\\config.xml";
 
         #endregion
 
@@ -37,11 +37,11 @@ namespace Honememo.Wptscs.Utilities
         /// <see cref="AppConfigWebProxy.UserAgent"/>プロパティテストケース。
         /// </summary>
         /// <remarks>アプリ設定部分はアクセス権の関係上試験できず。</remarks>
-        [Test]
+        [TestMethod]
         public void TestUserAgent()
         {
             IWebProxy proxy = new AppConfigWebProxy();
-            ////Settings.Default.UserAgent = String.Empty;
+            ////Settings.Default.UserAgent = string.Empty;
 
             // 初期状態ではアプリ名を元に生成した値
             Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -49,7 +49,7 @@ namespace Honememo.Wptscs.Utilities
             ////    String.Format(Settings.Default.DefaultUserAgent, ver.Major, ver.Minor),
             ////    proxy.UserAgent);
             Assert.AreEqual(
-                String.Format("Translation Support for Wikipedia/{0}.{1:D2}", ver.Major, ver.Minor),
+                string.Format("Translation Support for Wikipedia/{0}.{1:D2}", ver.Major, ver.Minor),
                 proxy.UserAgent);
 
             // プロパティ設定時はその値が返る
@@ -57,12 +57,12 @@ namespace Honememo.Wptscs.Utilities
             Assert.AreEqual("test property useragent", proxy.UserAgent);
 
             // 空でも有効
-            proxy.UserAgent = String.Empty;
-            Assert.IsEmpty(proxy.UserAgent);
+            proxy.UserAgent = string.Empty;
+            Assert.AreEqual(string.Empty, proxy.UserAgent);
 
             // nullなら無効
             proxy.UserAgent = null;
-            Assert.IsNotEmpty(proxy.UserAgent);
+            Assert.IsTrue(proxy.UserAgent.Length > 0);
 
             // アプリ設定時はアプリに格納された設定値が最優先
             ////Settings.Default.UserAgent = "test setting useragent";
@@ -73,14 +73,14 @@ namespace Honememo.Wptscs.Utilities
         /// <see cref="AppConfigWebProxy.Referer"/>プロパティテストケース。
         /// </summary>
         /// <remarks>アプリ設定部分はアクセス権の関係上試験できず。</remarks>
-        [Test]
+        [TestMethod]
         public void TestReferer()
         {
             IWebProxy proxy = new AppConfigWebProxy();
-            ////Settings.Default.Referer = String.Empty;
+            ////Settings.Default.Referer = string.Empty;
 
             // 初期状態では空
-            Assert.IsEmpty(proxy.Referer);
+            Assert.AreEqual(string.Empty, proxy.Referer);
 
             // プロパティ設定時はその値が返る
             proxy.Referer = "test property referer";
@@ -99,14 +99,14 @@ namespace Honememo.Wptscs.Utilities
         /// <see cref="AppConfigWebProxy.GetStream"/>メソッドテストケース。
         /// </summary>
         /// <remarks>内容的に難しいため、fileプロトコルのみ確認。</remarks>
-        [Test]
+        [TestMethod]
         public void TestGetStream()
         {
             IWebProxy proxy = new AppConfigWebProxy();
 
             // テストファイルを読んで例外が発生しなければOKとする
-            UriBuilder b = new UriBuilder("file", String.Empty);
-            b.Path = Path.GetFullPath(testFile);
+            UriBuilder b = new UriBuilder("file", string.Empty);
+            b.Path = Path.GetFullPath(TestFile);
             using (proxy.GetStream(b.Uri))
             {
             }

@@ -11,12 +11,12 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// TextElementのテストクラスです。
+    /// <see cref="TextElement"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class TextElementTest
     {
         #region コンストラクタテストケース
@@ -24,7 +24,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             TextElement element = new TextElement();
@@ -41,7 +41,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// Textプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestText()
         {
             TextElement element = new TextElement();
@@ -58,12 +58,12 @@ namespace Honememo.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             TextElement element = new TextElement();
 
-            Assert.IsEmpty(element.ToString());
+            Assert.AreEqual(string.Empty, element.ToString());
             element.Text = "test";
             Assert.AreEqual("test", element.ToString());
         }

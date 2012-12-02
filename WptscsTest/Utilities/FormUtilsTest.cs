@@ -13,24 +13,58 @@ namespace Honememo.Wptscs.Utilities
     using System;
     using System.Windows.Forms;
     using Honememo.Wptscs.Utilities;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// FormUtilsのテストクラスです。
+    /// <see cref="FormUtils"/>のテストクラスです。
     /// </summary>
     /// <remarks>
     /// その性質上、画面周りのメソッドならびに設定ファイル関連のメソッドについてはテストケースが作成できていない。
     /// これらのメソッドに手を入れる際は注意すること。
     /// </remarks>
-    [TestFixture]
+    [TestClass]
     public class FormUtilsTest
     {
+        #region private変数
+
+        /// <summary>
+        /// テスト実施中カルチャを変更し後で戻すため、そのバックアップ。
+        /// </summary>
+        private System.Globalization.CultureInfo backupCulture;
+
+        #endregion
+
+        #region 前処理・後処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestInitialize]
+        public void SetUp()
+        {
+            // 一部処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
+            this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("ja-JP");
+        }
+
+        /// <summary>
+        /// テストの後処理。
+        /// </summary>
+        [TestCleanup]
+        public void TearDown()
+        {
+            // カルチャーを元に戻す
+            System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
+        }
+
+        #endregion
+
         #region リソース関連テストケース
 
         /// <summary>
         /// ReplaceInvalidFileNameCharsメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestApplicationName()
         {
             // ※ バージョンが変わるごとにバージョン表記の部分を書き換えるのは面倒なので置換
@@ -42,7 +76,7 @@ namespace Honememo.Wptscs.Utilities
         /// <summary>
         /// ReplaceInvalidFileNameCharsメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceInvalidFileNameChars()
         {
             Assert.AreEqual("C__test_test.doc", FormUtils.ReplaceInvalidFileNameChars("C:\\test\\test.doc"));
@@ -61,7 +95,7 @@ namespace Honememo.Wptscs.Utilities
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             // 引数二つ
@@ -72,10 +106,10 @@ namespace Honememo.Wptscs.Utilities
             Assert.AreNotEqual("null", FormUtils.ToString(new DummyCell { Value = new object() }, "null"));
 
             // 引数一つ
-            Assert.AreEqual(String.Empty, FormUtils.ToString(null));
-            Assert.AreEqual(String.Empty, FormUtils.ToString(new DummyCell()));
+            Assert.AreEqual(string.Empty, FormUtils.ToString(null));
+            Assert.AreEqual(string.Empty, FormUtils.ToString(new DummyCell()));
             Assert.AreEqual("not null", FormUtils.ToString(new DummyCell { Value = "not null" }));
-            Assert.IsNotEmpty(FormUtils.ToString(new DummyCell { Value = new object() }));
+            Assert.IsTrue(FormUtils.ToString(new DummyCell { Value = new object() }).Length > 0);
         }
 
         #endregion

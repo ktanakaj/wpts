@@ -17,12 +17,12 @@ namespace Honememo.Wptscs.Models
     using System.Xml;
     using System.Xml.Serialization;
     using Honememo.Utilities;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// Languageのテストクラスです。
+    /// <see cref="Language"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class LanguageTest
     {
         #region プロパティテストケース
@@ -30,7 +30,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Codeプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCode()
         {
             Language lang = new Language("en");
@@ -40,7 +40,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Codeプロパティテストケース（コードがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestCodeNull()
         {
@@ -50,7 +50,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Codeプロパティテストケース（コードが空）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestCodeBlank()
         {
@@ -60,13 +60,13 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Namesプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNames()
         {
             Language lang = new Language("en");
 
             // 初期状態で空のディクショナリーを作成
-            Assert.NotNull(lang.Names);
+            Assert.IsNotNull(lang.Names);
             Assert.AreEqual(0, lang.Names.Count);
 
             Language.LanguageName name = new Language.LanguageName { Name = "テスト", ShortName = "テ" };
@@ -79,7 +79,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Namesプロパティテストケース（オブジェクトがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestNamesNull()
         {
@@ -89,7 +89,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// Bracketプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestBracket()
         {
             Language lang = new Language("en");
@@ -104,7 +104,7 @@ namespace Honememo.Wptscs.Models
             // 消すとデフォルトが有効になること
             lang.Bracket = null;
             Assert.AreEqual(" ($1) ", lang.Bracket);
-            lang.Bracket = String.Empty;
+            lang.Bracket = string.Empty;
             Assert.AreEqual(" ($1) ", lang.Bracket);
         }
 
@@ -115,7 +115,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// FormatLinkInterwikiメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestFormatLinkInterwiki()
         {
             Language lang = new Language("en");
@@ -139,7 +139,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLデシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReadXml()
         {
             Language lang;
@@ -158,7 +158,7 @@ namespace Honememo.Wptscs.Models
             Assert.AreEqual("Japanese language", lang.Names["en"].Name);
             Assert.AreEqual("Japanese", lang.Names["en"].ShortName);
             Assert.AreEqual("日语", lang.Names["zh"].Name);
-            Assert.IsEmpty(lang.Names["zh"].ShortName);
+            Assert.AreEqual(string.Empty, lang.Names["zh"].ShortName);
             Assert.IsFalse(lang.Names.ContainsKey("ja"));
             Assert.AreEqual("（{0}）", lang.Bracket);
         }
@@ -166,7 +166,7 @@ namespace Honememo.Wptscs.Models
         /// <summary>
         /// XMLシリアライズテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestWriteXml()
         {
             Language lang = new Language("ja");

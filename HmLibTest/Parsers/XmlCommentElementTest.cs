@@ -11,12 +11,12 @@
 namespace Honememo.Parsers
 {
     using System;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// XmlCommentElementのテストクラスです。
+    /// <see cref="XmlCommentElement"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class XmlCommentElementTest
     {
         #region コンストラクタテストケース
@@ -24,7 +24,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             XmlCommentElement comment = new XmlCommentElement();
@@ -41,7 +41,7 @@ namespace Honememo.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             XmlCommentElement comment = new XmlCommentElement();

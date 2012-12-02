@@ -166,7 +166,7 @@ namespace Honememo.Wptscs.Models
                 item.Word = itemElement.GetAttribute("To");
                 item.Alias = itemElement.GetAttribute("Redirect");
                 string timestamp = itemElement.GetAttribute("Timestamp");
-                if (!String.IsNullOrEmpty(timestamp))
+                if (!string.IsNullOrEmpty(timestamp))
                 {
                     item.Timestamp = DateTime.Parse(timestamp);
 
@@ -196,7 +196,7 @@ namespace Honememo.Wptscs.Models
                 writer.WriteStartElement("Item");
                 writer.WriteAttributeString("From", item.Key);
                 writer.WriteAttributeString("To", item.Value.Word);
-                if (!String.IsNullOrWhiteSpace(item.Value.Alias))
+                if (!string.IsNullOrWhiteSpace(item.Value.Alias))
                 {
                     writer.WriteAttributeString("Redirect", item.Value.Alias);
                 }

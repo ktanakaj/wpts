@@ -114,7 +114,7 @@ namespace Honememo.Wptscs.Websites
                 this.redirect = null;
 
                 // 本文格納のタイミングでリダイレクトページ（#REDIRECT等）かを判定
-                if (!String.IsNullOrEmpty(base.Text))
+                if (!string.IsNullOrEmpty(base.Text))
                 {
                     IElement element;
                     using (MediaWikiRedirectParser parser = new MediaWikiRedirectParser(this.Website))
@@ -389,13 +389,13 @@ namespace Honememo.Wptscs.Websites
 
             // インラインでなさそうな場合、解説記事名を確認
             string subtitle = ObjectUtils.ToString(template.PipeTexts.ElementAtOrDefault(0));
-            if (String.IsNullOrWhiteSpace(subtitle) || subtitle.Contains('='))
+            if (string.IsNullOrWhiteSpace(subtitle) || subtitle.Contains('='))
             {
                 // 指定されていない場合はデフォルトのページを探索
                 subtitle = this.Website.DocumentationTemplateDefaultPage;
             }
 
-            if (String.IsNullOrEmpty(subtitle))
+            if (string.IsNullOrEmpty(subtitle))
             {
                 return null;
             }
@@ -510,7 +510,7 @@ namespace Honememo.Wptscs.Websites
 
                 // 親記事名と子記事名（あれば）を結合して完了
                 title = parent;
-                if (!String.IsNullOrEmpty(subtitle))
+                if (!string.IsNullOrEmpty(subtitle))
                 {
                     title += "/" + subtitle;
                 }
@@ -538,7 +538,7 @@ namespace Honememo.Wptscs.Websites
 
             // 補完する必要がある場合、名前空間のプレフィックス（Template等）を取得
             string prefix = this.GetTemplatePrefix();
-            if (String.IsNullOrEmpty(prefix))
+            if (string.IsNullOrEmpty(prefix))
             {
                 // 名前空間の設定が存在しない場合、何も出来ないため終了
                 return template.Title;

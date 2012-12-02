@@ -15,12 +15,12 @@ namespace Honememo.Wptscs.Parsers
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="MediaWikiVariableParser"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class MediaWikiVariableParserTest
     {
         #region private変数
@@ -28,7 +28,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 前処理・後処理で生成／解放される言語別の<see cref="MediaWikiParser"/>。
         /// </summary>
-        private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
+        private static IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
 
         #endregion
 
@@ -37,27 +37,28 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テストの前処理。
         /// </summary>
+        /// <param name="context">テスト用情報。</param>
         /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の生成。</remarks>
-        [TestFixtureSetUp]
-        public void SetUpBeforeClass()
+        [ClassInitialize]
+        public static void SetUpBeforeClass(TestContext context)
         {
-            this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
-            this.mediaWikiParsers["ja"] = new MediaWikiParser(new MockFactory().GetMediaWiki("ja"));
+            mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
+            mediaWikiParsers["ja"] = new MediaWikiParser(new MockFactory().GetMediaWiki("ja"));
         }
 
         /// <summary>
         /// テストの後処理。
         /// </summary>
         /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の解放。</remarks>
-        [TestFixtureTearDown]
-        public void TearDownAfterClass()
+        [ClassCleanup]
+        public static void TearDownAfterClass()
         {
-            foreach (IDisposable parser in this.mediaWikiParsers.Values)
+            foreach (IDisposable parser in mediaWikiParsers.Values)
             {
                 parser.Dispose();
             }
 
-            this.mediaWikiParsers.Clear();
+            mediaWikiParsers.Clear();
         }
 
         #endregion
@@ -67,12 +68,12 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// <see cref="MediaWikiVariableParser.TryParse"/>メソッドテストケース（基本的な構文）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseBasic()
         {
             IElement element;
             MediaWikiVariable variable;
-            MediaWikiVariableParser parser = new MediaWikiVariableParser(this.mediaWikiParsers["en"]);
+            MediaWikiVariableParser parser = new MediaWikiVariableParser(mediaWikiParsers["en"]);
 
             // 変数のみ
             Assert.IsTrue(parser.TryParse("{{{変数名}}}", out element));
@@ -91,7 +92,7 @@ namespace Honememo.Wptscs.Parsers
             variable = (MediaWikiVariable)element;
             Assert.AreEqual("変数名", variable.Variable);
             Assert.IsNotNull(variable.Value);
-            Assert.IsEmpty(variable.Value.ToString());
+            Assert.AreEqual(string.Empty, variable.Value.ToString());
 
             // コメントについてはあっても特に問題ない
             Assert.IsTrue(parser.TryParse("{{{変数名<!--必要に応じて変更1-->|デフォルト値<!--必要に応じて変更2-->}}}", out element));
@@ -103,11 +104,11 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// <see cref="MediaWikiVariableParser.TryParse"/>メソッドテストケース（NGパターン）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseNg()
         {
             IElement element;
-            MediaWikiVariableParser parser = new MediaWikiVariableParser(this.mediaWikiParsers["en"]);
+            MediaWikiVariableParser parser = new MediaWikiVariableParser(mediaWikiParsers["en"]);
 
             // 開始タグが無い
             Assert.IsFalse(parser.TryParse("変数名}}}", out element));
@@ -128,31 +129,31 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsFalse(parser.TryParse("{{変数名}}", out element));
 
             // 空・null
-            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsFalse(parser.TryParse(string.Empty, out element));
             Assert.IsFalse(parser.TryParse(null, out element));
         }
 
         /// <summary>
         /// <see cref="MediaWikiVariableParser.TryParse"/>メソッドテストケース（入れ子）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseNested()
         {
             IElement element;
             MediaWikiVariable variable;
-            MediaWikiVariableParser parser = new MediaWikiVariableParser(this.mediaWikiParsers["ja"]);
+            MediaWikiVariableParser parser = new MediaWikiVariableParser(mediaWikiParsers["ja"]);
 
             // 入れ子もあり
             Assert.IsTrue(parser.TryParse("{{{変数名|[[内部リンク]]{{ref-en}}}}}", out element));
             variable = (MediaWikiVariable)element;
             Assert.AreEqual("変数名", variable.Variable);
             Assert.AreEqual("[[内部リンク]]{{ref-en}}", variable.Value.ToString());
-            Assert.IsInstanceOf(typeof(ListElement), variable.Value);
+            Assert.IsInstanceOfType(variable.Value, typeof(ListElement));
             ListElement list = (ListElement)variable.Value;
             Assert.AreEqual(2, list.Count);
-            Assert.IsInstanceOf(typeof(MediaWikiLink), list[0]);
+            Assert.IsInstanceOfType(list[0], typeof(MediaWikiLink));
             Assert.AreEqual("[[内部リンク]]", list[0].ToString());
-            Assert.IsInstanceOf(typeof(MediaWikiTemplate), list[1]);
+            Assert.IsInstanceOfType(list[1], typeof(MediaWikiTemplate));
             Assert.AreEqual("{{ref-en}}", list[1].ToString());
         }
         

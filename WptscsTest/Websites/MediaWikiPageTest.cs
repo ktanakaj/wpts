@@ -16,12 +16,12 @@ namespace Honememo.Wptscs.Websites
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Parsers;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="MediaWikiPage"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class MediaWikiPageTest
     {
         #region コンストラクタテストケース
@@ -29,7 +29,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorWebsiteTitleTextTimestamp()
         {
             DateTime t = DateTime.Now;
@@ -46,7 +46,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（タイムスタンプ無し）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorWebsiteTitleText()
         {
             MediaWiki s = new MediaWiki(new Language("en"));
@@ -61,7 +61,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（本文・タイムスタンプ無し）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorWebsiteTitle()
         {
             MediaWiki s = new MediaWiki(new Language("en"));
@@ -76,7 +76,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（ウェブサイトがnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorWebsiteNull()
         {
@@ -86,7 +86,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// コンストラクタテストケース（タイトルが空）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestConstructorTitleBlank()
         {
@@ -100,7 +100,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.Redirect"/>プロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestRedirect()
         {
             MediaWiki site;
@@ -122,7 +122,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.Redirect"/>プロパティテストケース（Text未設定）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestRedirectTextNull()
         {
@@ -136,7 +136,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（通常ページ）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetInterlanguage()
         {
             // 普通のページ
@@ -154,7 +154,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（通常ページ実データ使用）。
         /// </summary>
-        [Test, Timeout(20000)]
+        [TestMethod, Timeout(20000)]
         public void TestGetInterlanguageDiscoveryChannel()
         {
             MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Discovery Channel");
@@ -168,7 +168,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（テンプレートページ実データ使用）。
         /// </summary>
-        [Test, Timeout(20000)]
+        [TestMethod, Timeout(20000)]
         public void TestGetInterlanguagePlanetboxBegin()
         {
             MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Template:Planetbox begin");
@@ -180,7 +180,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（Template:Documentation使用ページ）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetInterlanguageDocumentation()
         {
             // Template:Documentation を使ってるページ
@@ -199,7 +199,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（Template:Documentationにnoincludeで囲まれた言語間リンクが存在）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetInterlanguagePartial()
         {
             MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Template:Partial");
@@ -210,7 +210,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.IsRedirect"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsRedirect()
         {
             MediaWiki site = new MediaWiki(new Language("en"));
@@ -238,7 +238,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.Normalize"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNormalize()
         {
             MediaWiki site = new MediaWiki(new Language("en"));
@@ -273,7 +273,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.ValidateIncomplete"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestValidateIncomplete()
         {
             // Textが空の場合例外発生、正常系は例外が発生しなければOK
@@ -285,7 +285,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// <see cref="MediaWikiPage.ValidateIncomplete"/>メソッドテストケース（異常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void TestValidateIncompleteNg()
         {

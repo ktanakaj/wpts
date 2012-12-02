@@ -27,7 +27,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// ログテキスト。
         /// </summary>
-        private string log = String.Empty;
+        private string log = string.Empty;
 
         #endregion
 
@@ -85,7 +85,7 @@ namespace Honememo.Wptscs.Logics
         public virtual void AddMessage(string format, params object[] args)
         {
             // 書式化してオーバーロードメソッドをコール
-            this.AddMessage(String.Format(format, args));
+            this.AddMessage(string.Format(format, args));
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Honememo.Wptscs.Logics
         public virtual void AddResponse(string format, params object[] args)
         {
             // 書式化してオーバーロードメソッドをコール
-            this.AddResponse(String.Format(format, args));
+            this.AddResponse(string.Format(format, args));
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Honememo.Wptscs.Logics
         public virtual void AddSeparator()
         {
             // この実装では、区切りは余分な空行で表す
-            this.AddMessage(String.Empty);
+            this.AddMessage(string.Empty);
         }
 
         #endregion
@@ -227,7 +227,7 @@ namespace Honememo.Wptscs.Logics
         protected void AddNewLineIfNotEndWithNewLine()
         {
             // ログが空以外で最後が改行ではない場合
-            if (!String.IsNullOrEmpty(this.Log) && !this.Log.EndsWith(Environment.NewLine))
+            if (!string.IsNullOrEmpty(this.Log) && !this.Log.EndsWith(Environment.NewLine))
             {
                 this.Log += Environment.NewLine;
             }

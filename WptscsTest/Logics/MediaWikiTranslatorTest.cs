@@ -19,12 +19,12 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Wptscs.Parsers;
     using Honememo.Wptscs.Utilities;
     using Honememo.Wptscs.Websites;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="MediaWikiTranslator"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class MediaWikiTranslatorTest
     {
         #region 定数
@@ -32,7 +32,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テスト結果が格納されているフォルダパス。
         /// </summary>
-        private static readonly string resultDir = Path.Combine(MockFactory.TestMediaWikiDir, "result");
+        private static readonly string ResultDir = Path.Combine(MockFactory.TestMediaWikiDir, "result");
 
         #endregion
 
@@ -50,8 +50,8 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テストの前処理。
         /// </summary>
-        [TestFixtureSetUp]
-        public void SetUpBeforeClass()
+        [TestInitialize]
+        public void SetUp()
         {
             // ロガーの処理結果はカルチャーにより変化するため、ja-JPを明示的に設定する
             this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
@@ -62,8 +62,8 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テストの後処理。
         /// </summary>
-        [TestFixtureTearDown]
-        public void TearDownAfterClass()
+        [TestCleanup]
+        public void TearDown()
         {
             // カルチャーを元に戻す
             System.Threading.Thread.CurrentThread.CurrentUICulture = this.backupCulture;
@@ -77,7 +77,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceLink()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -185,7 +185,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（サブページ）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceLinkSubpage()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -222,7 +222,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（カテゴリ）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceLinkCategory()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -271,7 +271,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（ファイル）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceLinkFile()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -309,7 +309,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceLink"/>メソッドテストケース（仮リンク）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceLinkLinkInterwiki()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -367,7 +367,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceTemplate"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceTemplate()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -413,7 +413,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceTemplate"/>メソッドテストケース（入れ子）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceTemplateNested()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -463,7 +463,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceHeading"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceHeading()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -505,7 +505,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.ReplaceHeading"/>メソッドテストケース（入れ子）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestReplaceHeadingNested()
         {
             TestMediaWikiTranslator translator = new TestMediaWikiTranslator();
@@ -546,7 +546,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// <see cref="MediaWikiTranslator.CreateOpening"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCreateOpening()
         {
             // From, Toの設定に応じて変換後記事の冒頭部を作り出す
@@ -619,7 +619,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// テストデータを用い、Runを通しで実行するテストケース。基本動作。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestExampleIgnoreHeading()
         {
             MockFactory mock = new MockFactory();
@@ -636,13 +636,13 @@ namespace Honememo.Wptscs.Logics
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example_定型句なし.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(ResultDir, "example_定型句なし.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example_定型句なし.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
+                File.ReadAllText(Path.Combine(ResultDir, "example_定型句なし.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translator.Log);
         }
 
@@ -650,7 +650,7 @@ namespace Honememo.Wptscs.Logics
         /// テストデータを用い、Runを通しで実行するテストケース。基本動作見出しの変換含む。
         /// </summary>
         /// <remarks>C++/CLI版の0.73までと同等の動作。</remarks>
-        [Test]
+        [TestMethod]
         public void TestExample()
         {
             MockFactory mock = new MockFactory();
@@ -674,20 +674,20 @@ namespace Honememo.Wptscs.Logics
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(ResultDir, "example.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
+                File.ReadAllText(Path.Combine(ResultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
                 translator.Log);
         }
 
         /// <summary>
         /// テストデータを用い、Runを通しで実行するテストケース。キャッシュ使用。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestExampleWithCache()
         {
             MockFactory mock = new MockFactory();
@@ -721,7 +721,7 @@ namespace Honememo.Wptscs.Logics
             Assert.IsNull(table["example.com"].Alias);
             Assert.IsNotNull(table["example.com"].Timestamp);
             Assert.IsTrue(table.ContainsKey("Exemplum"));
-            Assert.IsEmpty(table["Exemplum"].Word);
+            Assert.AreEqual(string.Empty, table["Exemplum"].Word);
             Assert.IsNull(table["Exemplum"].Alias);
             Assert.IsNotNull(table["Exemplum"].Timestamp);
             Assert.IsTrue(table.ContainsKey("example.net"));
@@ -732,20 +732,20 @@ namespace Honememo.Wptscs.Logics
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example_キャッシュ使用.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(ResultDir, "example_キャッシュ使用.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example_キャッシュ使用.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
+                File.ReadAllText(Path.Combine(ResultDir, "example_キャッシュ使用.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translator.Log);
         }
 
         /// <summary>
         /// テストデータを用い、Runを通しで実行するテストケース。基本動作見出しの変換、{{仮リンク}}への置き換え含む。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestExampleWithLinkInterwiki()
         {
             MockFactory mock = new MockFactory();
@@ -767,13 +767,13 @@ namespace Honememo.Wptscs.Logics
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example_仮リンク有効.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(ResultDir, "example_仮リンク有効.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
+                File.ReadAllText(Path.Combine(ResultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
                 translator.Log);
         }
 
@@ -781,7 +781,7 @@ namespace Honememo.Wptscs.Logics
         /// テストデータを用い、Runを通しで実行するテストケース（日本語版→英語版）。
         /// </summary>
         /// <remarks>C++/CLI版の0.73までと同等の動作。</remarks>
-        [Test]
+        [TestMethod]
         public void TestSpaceShipTwo()
         {
             MockFactory mock = new MockFactory();
@@ -814,20 +814,20 @@ namespace Honememo.Wptscs.Logics
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "スペースシップツー.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
+                File.ReadAllText(Path.Combine(ResultDir, "スペースシップツー.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
             Assert.AreEqual(
-                File.ReadAllText(Path.Combine(resultDir, "スペースシップツー.log")).Replace("http://ja.wikipedia.org", from.Location),
+                File.ReadAllText(Path.Combine(ResultDir, "スペースシップツー.log")).Replace("http://ja.wikipedia.org", from.Location),
                 translator.Log);
         }
 
         /// <summary>
         /// Runを通しで実行するテストケース（対象記事なし）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestPageNothing()
         {
             MockFactory mock = new MockFactory();
@@ -855,7 +855,7 @@ namespace Honememo.Wptscs.Logics
         /// <summary>
         /// Runを通しで実行するテストケース（対象記事がリダイレクトで無し）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestPageRedirectNothing()
         {
             MockFactory mock = new MockFactory();

@@ -33,7 +33,7 @@ namespace Honememo.Parsers
         {
             // 入力値確認
             result = null;
-            if (String.IsNullOrEmpty(s) || !s.StartsWith(XmlCommentElement.DelimiterStart))
+            if (string.IsNullOrEmpty(s) || !s.StartsWith(XmlCommentElement.DelimiterStart))
             {
                 return false;
             }

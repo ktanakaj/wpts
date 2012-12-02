@@ -58,7 +58,7 @@ namespace Honememo.Wptscs.Parsers
                 // 子パーサーが解放済みの場合Dispose済みで処理不可
                 throw new ObjectDisposedException(this.GetType().Name);
             }
-            else if (String.IsNullOrEmpty(s))
+            else if (string.IsNullOrEmpty(s))
             {
                 // 入力値が空の場合は即終了
                 return false;
@@ -76,7 +76,7 @@ namespace Honememo.Wptscs.Parsers
                     format = Settings.Default.MediaWikiRedirect;
                 }
 
-                if (!String.IsNullOrEmpty(format)
+                if (!string.IsNullOrEmpty(format)
                     && lower.StartsWith(format.ToLower()))
                 {
                     // "#REDIRECT "の部分をカットして後ろの[[～]]の部分のリンクを解析

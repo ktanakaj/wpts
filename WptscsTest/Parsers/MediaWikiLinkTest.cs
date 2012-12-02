@@ -13,12 +13,12 @@ namespace Honememo.Wptscs.Parsers
     using System;
     using System.Collections.Generic;
     using Honememo.Parsers;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// MediaWikiLinkのテストクラスです。
+    /// <see cref="MediaWikiLink"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class MediaWikiLinkTest
     {
         #region コンストラクタテストケース
@@ -26,7 +26,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             MediaWikiLink element;
@@ -49,7 +49,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Titleプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTitle()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -62,7 +62,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Sectionプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestSection()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -75,7 +75,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// PipeTextsプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestPipeTexts()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -90,7 +90,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// Interwikiプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestInterwiki()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -103,7 +103,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// IsColonプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsColon()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -122,7 +122,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// IsSubpageメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsSubpage()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -151,7 +151,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// GetLinkStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetLinkString()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -161,7 +161,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("testtitle", element.GetLinkString());
 
             // タイトルとセクション
-            element.Section = String.Empty;
+            element.Section = string.Empty;
             Assert.AreEqual("testtitle#", element.GetLinkString());
             element.Section = "testsection";
             Assert.AreEqual("testtitle#testsection", element.GetLinkString());
@@ -198,7 +198,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// ToStringメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestToString()
         {
             MediaWikiLink element = new MediaWikiLink();
@@ -208,7 +208,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual("[[testtitle]]", element.ToString());
 
             // タイトルとセクション
-            element.Section = String.Empty;
+            element.Section = string.Empty;
             Assert.AreEqual("[[testtitle#]]", element.ToString());
             element.Section = "testsection";
             Assert.AreEqual("[[testtitle#testsection]]", element.ToString());

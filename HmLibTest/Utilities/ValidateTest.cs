@@ -12,12 +12,12 @@ namespace Honememo.Utilities
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="Validate"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class ValidateTest
     {
         #region NotNullメソッドテストケース
@@ -25,23 +25,23 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="Validate.NotNull&lt;T&gt;(T, string)"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNotNull()
         {
             // パラメータ名指定無し
-            Assert.AreEqual(String.Empty, Validate.NotNull(String.Empty));
+            Assert.AreEqual(string.Empty, Validate.NotNull(string.Empty));
             Assert.AreEqual("not null", Validate.NotNull("not null"));
 
             // パラメータ名指定有り
-            Assert.AreEqual(String.Empty, Validate.NotNull(String.Empty, null));
-            Assert.AreEqual(String.Empty, Validate.NotNull(String.Empty, "test"));
+            Assert.AreEqual(string.Empty, Validate.NotNull(string.Empty, null));
+            Assert.AreEqual(string.Empty, Validate.NotNull(string.Empty, "test"));
             Assert.AreEqual("not null", Validate.NotNull("not null", "test"));
         }
 
         /// <summary>
         /// <see cref="Validate.NotNull&lt;T&gt;(T, string)"/>メソッドテストケース（異常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNotNullNg()
         {
             // obj = nullのチェック
@@ -87,7 +87,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="Validate.NotEmpty(string, string)"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNotEmpty()
         {
             // パラメータ名指定無し
@@ -100,7 +100,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="Validate.NotEmpty(string, string)"/>メソッドテストケース（異常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNotEmptyNg()
         {
             // str = nullのチェック
@@ -142,7 +142,7 @@ namespace Honememo.Utilities
             try
             {
                 // パラメータ名指定無し
-                Validate.NotEmpty(String.Empty);
+                Validate.NotEmpty(string.Empty);
                 Assert.Fail("expected ArgumentException");
             }
             catch (ArgumentException ex)
@@ -154,7 +154,7 @@ namespace Honememo.Utilities
             try
             {
                 // パラメータ名指定有り
-                Validate.NotEmpty(String.Empty, "test");
+                Validate.NotEmpty(string.Empty, "test");
                 Assert.Fail("expected ArgumentException");
             }
             catch (ArgumentException ex)
@@ -170,7 +170,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="Validate.NotBlank(string, string)"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNotBlank()
         {
             // パラメータ名指定無し
@@ -183,7 +183,7 @@ namespace Honememo.Utilities
         /// <summary>
         /// <see cref="Validate.NotBlank(string, string)"/>メソッドテストケース（異常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestNotBlankNg()
         {
             // str = nullのチェック
@@ -254,7 +254,7 @@ namespace Honememo.Utilities
         /// <see cref="Validate.InRange(string, int, string, string)"/>
         /// メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestInRangeStr()
         {
             // ※ 例外が起きなければOK
@@ -271,7 +271,7 @@ namespace Honememo.Utilities
         /// <see cref="Validate.InRange(string, int, string, string)"/>
         /// メソッドテストケース（異常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestInRangeStrNg()
         {
             // str = nullのチェック
@@ -314,7 +314,7 @@ namespace Honememo.Utilities
             try
             {
                 // パラメータ名指定無し
-                Validate.InRange(String.Empty, 0);
+                Validate.InRange(string.Empty, 0);
                 Assert.Fail("expected ArgumentOutOfRangeException");
             }
             catch (ArgumentOutOfRangeException ex)
@@ -348,7 +348,7 @@ namespace Honememo.Utilities
             try
             {
                 // パラメータ名指定有り
-                Validate.InRange(String.Empty, 0, "test", "testindex");
+                Validate.InRange(string.Empty, 0, "test", "testindex");
                 Assert.Fail("expected ArgumentOutOfRangeException");
             }
             catch (ArgumentOutOfRangeException ex)
@@ -359,7 +359,7 @@ namespace Honememo.Utilities
             try
             {
                 // パラメータ名指定有りnull
-                Validate.InRange(String.Empty, 0, null, null);
+                Validate.InRange(string.Empty, 0, null, null);
                 Assert.Fail("expected ArgumentOutOfRangeException");
             }
             catch (ArgumentOutOfRangeException ex)
@@ -372,7 +372,7 @@ namespace Honememo.Utilities
         /// <see cref="Validate.InRange&lt;T&gt;(IList&lt;T&gt;, int, string, string)"/>
         /// メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestInRangeIList()
         {
             // ※ 例外が起きなければOK
@@ -389,7 +389,7 @@ namespace Honememo.Utilities
         /// <see cref="Validate.InRange&lt;T&gt;(IList&lt;T&gt;, int, string, string)"/>
         /// メソッドテストケース（異常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestInRangeIListNg()
         {
             // list = nullのチェック

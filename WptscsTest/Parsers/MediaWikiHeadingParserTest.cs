@@ -15,12 +15,12 @@ namespace Honememo.Wptscs.Parsers
     using Honememo.Parsers;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Websites;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="MediaWikiHeadingParser"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class MediaWikiHeadingParserTest
     {
         #region private変数
@@ -28,7 +28,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// 前処理・後処理で生成／解放される言語別の<see cref="MediaWikiParser"/>。
         /// </summary>
-        private IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
+        private static IDictionary<string, MediaWikiParser> mediaWikiParsers = new Dictionary<string, MediaWikiParser>();
 
         #endregion
 
@@ -37,26 +37,27 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// テストの前処理。
         /// </summary>
+        /// <param name="context">テスト用情報。</param>
         /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の生成。</remarks>
-        [TestFixtureSetUp]
-        public void SetUpBeforeClass()
+        [ClassInitialize]
+        public static void SetUpBeforeClass(TestContext context)
         {
-            this.mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
+            mediaWikiParsers["en"] = new MediaWikiParser(new MockFactory().GetMediaWiki("en"));
         }
 
         /// <summary>
         /// テストの後処理。
         /// </summary>
         /// <remarks><see cref="MediaWikiParser.Dispose"/>が必要な<see cref="MediaWikiParser"/>の解放。</remarks>
-        [TestFixtureTearDown]
-        public void TearDownAfterClass()
+        [ClassCleanup]
+        public static void TearDownAfterClass()
         {
-            foreach (IDisposable parser in this.mediaWikiParsers.Values)
+            foreach (IDisposable parser in mediaWikiParsers.Values)
             {
                 parser.Dispose();
             }
 
-            this.mediaWikiParsers.Clear();
+            mediaWikiParsers.Clear();
         }
 
         #endregion
@@ -66,7 +67,7 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// コンストラクタテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             // TODO: ちゃんと設定されているかも確認する？
@@ -81,16 +82,16 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// <see cref="MediaWikiHeadingParser.TryParse"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParse()
         {
             IElement element;
             MediaWikiHeading heading;
-            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(this.mediaWikiParsers["en"]);
+            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(mediaWikiParsers["en"]);
 
             // 基本形
             Assert.IsTrue(parser.TryParse("==test==", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
             Assert.AreEqual("==test==", heading.ToString());
             Assert.AreEqual(2, heading.Level);
@@ -99,7 +100,7 @@ namespace Honememo.Wptscs.Parsers
 
             // 後ろが改行
             Assert.IsTrue(parser.TryParse("== test == \r\ntest", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
             Assert.AreEqual("== test == ", heading.ToString());
             Assert.AreEqual(2, heading.Level);
@@ -111,26 +112,26 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsNull(element);
 
             // 複数の要素を含む
-            Assert.IsTrue(parser.TryParse("===[[test]] and sample===", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsTrue(parser.TryParse("===[[TestMethod]] and sample===", out element));
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
-            Assert.AreEqual("===[[test]] and sample===", heading.ToString());
+            Assert.AreEqual("===[[TestMethod]] and sample===", heading.ToString());
             Assert.AreEqual(3, heading.Level);
             Assert.AreEqual(2, heading.Count);
-            Assert.AreEqual("[[test]]", heading[0].ToString());
-            Assert.IsInstanceOf(typeof(MediaWikiLink), heading[0]);
+            Assert.AreEqual("[[TestMethod]]", heading[0].ToString());
+            Assert.IsInstanceOfType(heading[0], typeof(MediaWikiLink));
             Assert.AreEqual(" and sample", heading[1].ToString());
 
             // 前後で数が違うのはOK、少ない側の階層と判定
             Assert.IsTrue(parser.TryParse("=test==", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
             Assert.AreEqual("=test==", heading.ToString());
             Assert.AreEqual(1, heading.Level);
 
             // 前後で数が違うの逆パターン
             Assert.IsTrue(parser.TryParse("====test==", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
             Assert.AreEqual("====test==", heading.ToString());
             Assert.AreEqual(2, heading.Level);
@@ -141,18 +142,18 @@ namespace Honememo.Wptscs.Parsers
 
             // 内部要素に改行を含むのはOK
             Assert.IsTrue(parser.TryParse("== {{lang\n|ja|見出し}} ==\n", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
             Assert.AreEqual("== {{lang\n|ja|見出し}} ==", heading.ToString());
             Assert.AreEqual(2, heading.Level);
             Assert.AreEqual(3, heading.Count);
             Assert.AreEqual(" ", heading[0].ToString());
             Assert.AreEqual("{{lang\n|ja|見出し}}", heading[1].ToString());
-            Assert.IsInstanceOf(typeof(MediaWikiTemplate), heading[1]);
+            Assert.IsInstanceOfType(heading[1], typeof(MediaWikiTemplate));
             Assert.AreEqual(" ", heading[2].ToString());
 
             // 空・null
-            Assert.IsFalse(parser.TryParse(String.Empty, out element));
+            Assert.IsFalse(parser.TryParse(string.Empty, out element));
             Assert.IsNull(element);
             Assert.IsFalse(parser.TryParse(null, out element));
             Assert.IsNull(element);
@@ -161,17 +162,17 @@ namespace Honememo.Wptscs.Parsers
         /// <summary>
         /// <see cref="MediaWikiHeadingParser.TryParse"/>メソッドテストケース（コメント）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryParseComment()
         {
             IElement element;
             MediaWikiHeading heading;
-            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(this.mediaWikiParsers["en"]);
+            MediaWikiHeadingParser parser = new MediaWikiHeadingParser(mediaWikiParsers["en"]);
 
             // ↓1.01以前のバージョンで対応していたコメント、中のコメントが認識されなかった
             // // こんな無茶なコメントも一応対応
             // Assert.IsTrue(parser.TryParse("<!--test-->=<!--test-->=関連項目<!--test-->==<!--test-->\n", out element));
-            // Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            // Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             // heading = (MediaWikiHeading)element;
             // Assert.AreEqual("<!--test-->=<!--test-->=関連項目<!--test-->==<!--test-->", heading.ToString());
             // Assert.AreEqual(2, heading.Level);
@@ -184,7 +185,7 @@ namespace Honememo.Wptscs.Parsers
             // ↓1.10改修後での動作
             Assert.IsFalse(parser.TryParse("<!--test-->=<!--test-->=関連項目<!--test-->==<!--test-->\n", out element));
             Assert.IsTrue(parser.TryParse("=<!--test-->=関連項目<!--test-->==\n", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
             Assert.AreEqual(1, heading.Level);
             Assert.AreEqual(4, heading.Count);
@@ -196,13 +197,13 @@ namespace Honememo.Wptscs.Parsers
 
             // ↓1.10改修後に対応しているコメント、変なところのコメントは駄目だが中のものを認識する
             Assert.IsTrue(parser.TryParse("==<!--test1-->関連項目<!--test2-->==\n", out element));
-            Assert.IsInstanceOf(typeof(MediaWikiHeading), element);
+            Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
             Assert.AreEqual("==<!--test1-->関連項目<!--test2-->==", heading.ToString());
             Assert.AreEqual(2, heading.Level);
             Assert.AreEqual(3, heading.Count);
             Assert.AreEqual("<!--test1-->", heading[0].ToString());
-            Assert.IsInstanceOf(typeof(XmlCommentElement), heading[0]);
+            Assert.IsInstanceOfType(heading[0], typeof(XmlCommentElement));
             Assert.AreEqual("関連項目", heading[1].ToString());
             Assert.AreEqual("<!--test2-->", heading[2].ToString());
         }

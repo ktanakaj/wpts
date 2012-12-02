@@ -14,12 +14,12 @@ namespace Honememo.Models
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// <see cref="MemoryCache&lt;TKey, TValue&gt;"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     internal class MemoryCacheTest
     {
         #region プロパティテストケース
@@ -27,7 +27,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Capacity"/>プロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCapacity()
         {
             MemoryCache<string, string> cache = new MemoryCache<string, string>();
@@ -42,7 +42,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Capacity"/>プロパティテストケース（0以下の値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestCapacityZero()
         {
@@ -56,7 +56,7 @@ namespace Honememo.Models
         /// <summary>
         /// インデクサーテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestThis()
         {
             // ※ 以下古いほうから削除の確認のために、登録時に毎回ウェイトを入れる
@@ -124,7 +124,7 @@ namespace Honememo.Models
         /// <summary>
         /// インデクサーテストケース（getでnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestThisGetNull()
         {
@@ -134,7 +134,7 @@ namespace Honememo.Models
         /// <summary>
         /// インデクサーテストケース（getで値無し）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(KeyNotFoundException))]
         public void TestThisGetEmpty()
         {
@@ -144,7 +144,7 @@ namespace Honememo.Models
         /// <summary>
         /// インデクサーテストケース（setでnull）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestThisSetNull()
         {
@@ -158,7 +158,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Add"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAdd()
         {
             // ※ 2012年2月現在、重複チェック以外はインデクサーと同じなので割愛
@@ -176,7 +176,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Add"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestAddNull()
         {
@@ -186,7 +186,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Add"/>メソッドテストケース（重複）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestAddAlready()
         {
@@ -199,7 +199,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.ContainsKey"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestContainsKey()
         {
             MemoryCache<string, string> cache = new MemoryCache<string, string>();
@@ -219,7 +219,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.ContainsKey"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestContainsKeyNull()
         {
@@ -229,7 +229,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Remove"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestRemove()
         {
             // 指定されたキャッシュが削除される
@@ -256,7 +256,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Remove"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestRemoveNull()
         {
@@ -266,7 +266,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.TryGetValue"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestTryGetValue()
         {
             // ※ 2012年2月現在、例外処理以外についてはインデクサーやGetと同じなので割愛
@@ -283,7 +283,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.TryGetValue"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestTryGetValueNull()
         {
@@ -294,7 +294,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Clear"/>メソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestClear()
         {
             // 全てのキャッシュが削除される
@@ -318,7 +318,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Get"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGet()
         {
             // ※ 2012年2月現在インデクサーを呼んでいるだけなのでテスト割愛
@@ -330,7 +330,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Get"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestGetNull()
         {
@@ -340,7 +340,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.Get"/>メソッドテストケース（値無し）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(KeyNotFoundException))]
         public void TestGetEmpty()
         {
@@ -350,7 +350,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.GetAndAddIfEmpty"/>メソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetAndAddIfEmpty()
         {
             MemoryCache<string, string> cache = new MemoryCache<string, string>();
@@ -373,7 +373,7 @@ namespace Honememo.Models
         /// <summary>
         /// <see cref="MemoryCache&lt;TKey, TValue&gt;.GetAndAddIfEmpty"/>メソッドテストケース（null）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestGetAndAddIfEmptyNull()
         {
@@ -387,7 +387,7 @@ namespace Honememo.Models
         /// <summary>
         /// 全体のテストケース（並列実行）。
         /// </summary>
-        [Test, Timeout(1500)]
+        [TestMethod, Timeout(1500)]
         public void TestMemoryCacheParallel()
         {
             // 並列実行でいくつかのメソッドを呼んで問題ないかを確認する

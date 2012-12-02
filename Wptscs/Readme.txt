@@ -3,7 +3,7 @@
 【ファイル】 wptscs121.msi, wptscs121.zip, wptscs121-src.zip
 【作成月日】 2012/x/xx
 【制 作 者】 Honeplus
-【動作環境】 Windows XP/Vista/7 での動作を確認。要.NET Framework 4.0 Client Profile
+【動作環境】 Windows 8 での動作を確認。要.NET Framework 4.0 Client Profile
 【配布形態】 修正BSDライセンス
 【HomePage】 http://sourceforge.jp/projects/wptscs/
 =====================================================================
@@ -33,7 +33,7 @@ Wiktionary.xml          : Wiktionary用の設定ファイル
 アプリケーション上で設定した内容は、上記設定ファイルには反映されません。
 ユーザーごとのフォルダに出力されます。
 設定ファイルを直接修正、または削除して初期値に戻したい場合は、
-下記のようなパスにあるファイルを更新してください（以下はVistaの例）。
+下記のようなパスにあるファイルを更新してください（以下はWindows 8の例）。
 
 C:\Users\[ユーザー名]\AppData\Roaming\Honememo\Wikipedia 翻訳支援ツール\[バージョン番号]\config.xml
 C:\Users\[ユーザー名]\AppData\Local\Honememo\wptscs.exe_[～]\[バージョン番号]\user.config
@@ -105,8 +105,8 @@ zip版の場合は展開したファイルを削除してください。
 
 
 ・ソースについて
-wptscs120-src.zip としてソースファイル一式を配布しています。
-開発環境はVisual C# 2010 Expressです。その他外部ツールとしてテスト自動化ツールのNUnitと、
+wptscs121-src.zip としてソースファイル一式を配布しています。
+開発環境はVisual C# 2012 Expressです。その他外部ツールとして
 コーディングスタイルチェック用のStyleCopを使用しています。
 また、インストーラの作成にはWiX並びにWindows SDKを使用しています。
 
@@ -119,7 +119,7 @@ wptscs120-src.zip としてソースファイル一式を配布しています�
 このプログラムの変更・再配布・流用はご自由にどうぞ。
 
 
-また、ソース中にNUnitのテストデータとしてWikipedia/Wiktionaryより取得したXMLを同梱しています。
+また、ソース中にテストデータとしてWikipedia/Wiktionaryより取得したXMLを同梱しています。
 これらファイル内の著作物の扱いについては、Wikipedia/Wiktionaryのライセンスに従ってください。
 
 
@@ -189,7 +189,7 @@ Ver1.21  2012/xx/xx 記事名が空の不正なテンプレート呼び出しで
 
 
 ・仕様上の制限
-プログラム上の問題により、記事名がピリオドで終わるページは処理できません。
+プログラム上の問題により、記事名がピリオドやハテナで終わるページは処理できません。
 （例、[[Vulcan Inc.]]）
 
 キャッシュの一覧で一度に大量の項目を削除すると、フリーズしたかのように時間がかかります。

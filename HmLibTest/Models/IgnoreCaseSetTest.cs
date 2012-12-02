@@ -12,12 +12,12 @@ namespace Honememo.Models
 {
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    /// IgnoreCaseSetのテストクラスです。
+    /// <see cref="IgnoreCaseSet"/>のテストクラスです。
     /// </summary>
-    [TestFixture]
+    [TestClass]
     public class IgnoreCaseSetTest
     {
         #region コンストラクタテストケース
@@ -25,7 +25,7 @@ namespace Honememo.Models
         /// <summary>
         /// コンストラクタテストケース（引数なし）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructor()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -35,7 +35,7 @@ namespace Honememo.Models
         /// <summary>
         /// コンストラクタテストケース（引数Set）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorSet()
         {
             ISet<string> inner = new HashSet<string>();
@@ -48,7 +48,7 @@ namespace Honememo.Models
         /// <summary>
         /// コンストラクタテストケース（引数Enumerable）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestConstructorEnumerable()
         {
             IList<string> other = new List<string>();
@@ -60,7 +60,7 @@ namespace Honememo.Models
         /// <summary>
         /// コンストラクタテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestConstructorSetNull()
         {
@@ -74,7 +74,7 @@ namespace Honememo.Models
         /// <summary>
         /// Setプロパティテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestSet()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -88,7 +88,7 @@ namespace Honememo.Models
         /// <summary>
         /// Setプロパティテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestSetNull()
         {
@@ -103,7 +103,7 @@ namespace Honememo.Models
         /// <summary>
         /// Countプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCount()
         {
             // ラップするISetと同じ値であること
@@ -116,7 +116,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsReadOnlyプロパティテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsReadOnly()
         {
             // ラップするISetと同じ値であること
@@ -133,7 +133,7 @@ namespace Honememo.Models
         /// <summary>
         /// Addメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestAdd()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -152,7 +152,7 @@ namespace Honememo.Models
         /// <summary>
         /// Addメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestAddNull()
         {
@@ -162,7 +162,7 @@ namespace Honememo.Models
         /// <summary>
         /// Containsメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestContains()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -176,7 +176,7 @@ namespace Honememo.Models
         /// <summary>
         /// Containsメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestContainsNull()
         {
@@ -186,7 +186,7 @@ namespace Honememo.Models
         /// <summary>
         /// Clearメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestClear()
         {
             // 全データが削除されること、またラップしているオブジェクトは維持されること
@@ -205,7 +205,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestCopyTo()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -223,7 +223,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestCopyToNull()
         {
@@ -233,7 +233,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（インデックスがマイナス値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestCopyToOutOfRange()
         {
@@ -243,7 +243,7 @@ namespace Honememo.Models
         /// <summary>
         /// CopyToメソッドテストケース（領域不足）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestCopyToOverflow()
         {
@@ -256,7 +256,7 @@ namespace Honememo.Models
         /// <summary>
         /// ExceptWithメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestExceptWith()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -271,7 +271,7 @@ namespace Honememo.Models
         /// <summary>
         /// ExceptWithメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestExceptWithNull()
         {
@@ -281,7 +281,7 @@ namespace Honememo.Models
         /// <summary>
         /// IntersectWithメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIntersectWith()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -297,7 +297,7 @@ namespace Honememo.Models
         /// <summary>
         /// IntersectWithメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestIntersectWithNull()
         {
@@ -307,7 +307,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsProperSubsetOfメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsProperSubsetOf()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -325,7 +325,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsProperSubsetOfメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestIsProperSubsetOfNull()
         {
@@ -335,7 +335,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsProperSupersetOfメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsProperSupersetOf()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -353,7 +353,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsProperSupersetOfメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestIsProperSupersetOfNull()
         {
@@ -363,7 +363,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsSubsetOfメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsSubsetOf()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -381,7 +381,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsSubsetOfメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestIsSubsetOfNull()
         {
@@ -391,7 +391,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsSupersetOfメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestIsSupersetOf()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -409,7 +409,7 @@ namespace Honememo.Models
         /// <summary>
         /// IsSupersetOfメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestIsSupersetOfNull()
         {
@@ -419,7 +419,7 @@ namespace Honememo.Models
         /// <summary>
         /// Overlapsメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestOverlaps()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -437,7 +437,7 @@ namespace Honememo.Models
         /// <summary>
         /// Overlapsメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestOverlapsNull()
         {
@@ -447,7 +447,7 @@ namespace Honememo.Models
         /// <summary>
         /// Removeメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestRemove()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -474,7 +474,7 @@ namespace Honememo.Models
         /// <summary>
         /// Removeメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestRemoveNull()
         {
@@ -484,7 +484,7 @@ namespace Honememo.Models
         /// <summary>
         /// SetEqualsメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestSetEquals()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -502,7 +502,7 @@ namespace Honememo.Models
         /// <summary>
         /// SetEqualsメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestSetEqualsNull()
         {
@@ -512,7 +512,7 @@ namespace Honememo.Models
         /// <summary>
         /// SymmetricExceptWithメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestSymmetricExceptWith()
         {
             IgnoreCaseSet set = new IgnoreCaseSet();
@@ -528,7 +528,7 @@ namespace Honememo.Models
         /// <summary>
         /// SymmetricExceptWithメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestSymmetricExceptWithNull()
         {
@@ -538,7 +538,7 @@ namespace Honememo.Models
         /// <summary>
         /// UnionWithメソッドテストケース（正常系）。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestUnionWith()
         {
             // 両方の値が格納される、重複するものは後の値で上書き
@@ -557,7 +557,7 @@ namespace Honememo.Models
         /// <summary>
         /// UnionWithメソッドテストケース（null値）。
         /// </summary>
-        [Test]
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestUnionWithNull()
         {
@@ -571,7 +571,7 @@ namespace Honememo.Models
         /// <summary>
         /// GetEnumeratorメソッドテストケース。
         /// </summary>
-        [Test]
+        [TestMethod]
         public void TestGetEnumerator()
         {
             // ラップするISetと同じ値であること

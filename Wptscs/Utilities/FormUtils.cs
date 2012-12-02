@@ -37,7 +37,7 @@ namespace Honememo.Wptscs.Utilities
             // ビルド番号・リビジョンは無視
             // ※例外なし。もし万が一発生する場合はそのまま投げる
             Version ver = Assembly.GetExecutingAssembly().GetName().Version;
-            return String.Format(Resources.ApplicationName, ver.Major, ver.Minor);
+            return string.Format(Resources.ApplicationName, ver.Major, ver.Minor);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Honememo.Wptscs.Utilities
             }
 
             // 可能であれば、旧バージョンの UserAppDataPath を探索
-            if (!String.IsNullOrEmpty(compatible))
+            if (!string.IsNullOrEmpty(compatible))
             {
                 // ファイルが見つかるまで探索
                 foreach (string dir in FormUtils.GetCompatibleUserAppDataPaths(compatible))
@@ -121,7 +121,7 @@ namespace Honememo.Wptscs.Utilities
             }
 
             // 可能であれば、旧バージョンの UserAppDataPath を探索
-            if (!String.IsNullOrEmpty(compatible))
+            if (!string.IsNullOrEmpty(compatible))
             {
                 // 各ディレクトリのファイル名を取得
                 foreach (string dir in FormUtils.GetCompatibleUserAppDataPaths(compatible))
@@ -198,7 +198,7 @@ namespace Honememo.Wptscs.Utilities
         /// <returns>渡されたセルの<see cref="DataGridViewCell.Value"/>を<see cref="Object.ToString"/>した結果。<c>null</c>の場合には空の文字列。</returns>
         public static string ToString(DataGridViewCell obj)
         {
-            return FormUtils.ToString(obj, String.Empty);
+            return FormUtils.ToString(obj, string.Empty);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace Honememo.Wptscs.Utilities
         public static void InformationDialog(string format, params object[] args)
         {
             // オーバーロードメソッドをコール
-            FormUtils.InformationDialog(String.Format(format, args));
+            FormUtils.InformationDialog(string.Format(format, args));
         }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace Honememo.Wptscs.Utilities
         public static void WarningDialog(string format, params object[] args)
         {
             // オーバーロードメソッドをコール
-            FormUtils.WarningDialog(String.Format(format, args));
+            FormUtils.WarningDialog(string.Format(format, args));
         }
 
         /// <summary>
@@ -297,7 +297,7 @@ namespace Honememo.Wptscs.Utilities
         public static void ErrorDialog(string format, params object[] args)
         {
             // オーバーロードメソッドをコール
-            FormUtils.ErrorDialog(String.Format(format, args));
+            FormUtils.ErrorDialog(string.Format(format, args));
         }
 
         #endregion
@@ -313,7 +313,7 @@ namespace Honememo.Wptscs.Utilities
         {
             foreach (DataGridViewCell cell in row.Cells)
             {
-                if (!String.IsNullOrEmpty(FormUtils.ToString(cell)))
+                if (!string.IsNullOrEmpty(FormUtils.ToString(cell)))
                 {
                     return false;
                 }
@@ -342,7 +342,7 @@ namespace Honememo.Wptscs.Utilities
             // という構成のはずなので、一つ上のフォルダから自分より前のフォルダを探索
             List<string> paths = new List<string>();
             string parent = Path.GetDirectoryName(Application.UserAppDataPath);
-            if (!String.IsNullOrEmpty(parent))
+            if (!string.IsNullOrEmpty(parent))
             {
                 // 現在のバージョンのフォルダ名
                 string now = Path.GetFileName(Application.UserAppDataPath);
