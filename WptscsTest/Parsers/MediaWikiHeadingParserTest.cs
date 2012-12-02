@@ -21,7 +21,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiHeadingParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiHeadingParserTest
+    public class MediaWikiHeadingParserTest
     {
         #region private変数
 
@@ -112,13 +112,13 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsNull(element);
 
             // 複数の要素を含む
-            Assert.IsTrue(parser.TryParse("===[[TestMethod]] and sample===", out element));
+            Assert.IsTrue(parser.TryParse("===[[test]] and sample===", out element));
             Assert.IsInstanceOfType(element, typeof(MediaWikiHeading));
             heading = (MediaWikiHeading)element;
-            Assert.AreEqual("===[[TestMethod]] and sample===", heading.ToString());
+            Assert.AreEqual("===[[test]] and sample===", heading.ToString());
             Assert.AreEqual(3, heading.Level);
             Assert.AreEqual(2, heading.Count);
-            Assert.AreEqual("[[TestMethod]]", heading[0].ToString());
+            Assert.AreEqual("[[test]]", heading[0].ToString());
             Assert.IsInstanceOfType(heading[0], typeof(MediaWikiLink));
             Assert.AreEqual(" and sample", heading[1].ToString());
 

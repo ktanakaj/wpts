@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiRedirectParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiRedirectParserTest
+    public class MediaWikiRedirectParserTest
     {
         #region ITextParserインタフェース実装メソッド
 
@@ -35,7 +35,7 @@ namespace Honememo.Wptscs.Parsers
             using (MediaWikiRedirectParser parser = new MediaWikiRedirectParser(new MockFactory().GetMediaWiki("en")))
             {
                 // 通常のリダイレクト
-                Assert.IsTrue(parser.TryParseToEndCondition("#redirect [[TestMethod]]", null, out element));
+                Assert.IsTrue(parser.TryParseToEndCondition("#redirect [[Test]]", null, out element));
                 Assert.IsInstanceOfType(element, typeof(MediaWikiLink));
                 link = (MediaWikiLink)element;
                 Assert.AreEqual("Test", link.Title);
@@ -60,7 +60,7 @@ namespace Honememo.Wptscs.Parsers
                 Assert.IsNull(element);
 
                 // enで日本語の転送書式
-                Assert.IsFalse(parser.TryParseToEndCondition("#転送 [[TestMethod]]", null, out element));
+                Assert.IsFalse(parser.TryParseToEndCondition("#転送 [[Test]]", null, out element));
                 Assert.IsNull(element);
 
                 // 空文字列・null
@@ -73,7 +73,7 @@ namespace Honememo.Wptscs.Parsers
             using (MediaWikiRedirectParser parser = new MediaWikiRedirectParser(new MockFactory().GetMediaWiki("ja")))
             {
                 // jaで日本語の転送書式
-                Assert.IsTrue(parser.TryParseToEndCondition("#転送 [[TestMethod]]", null, out element));
+                Assert.IsTrue(parser.TryParseToEndCondition("#転送 [[Test]]", null, out element));
                 Assert.IsInstanceOfType(element, typeof(MediaWikiLink));
                 link = (MediaWikiLink)element;
                 Assert.AreEqual("Test", link.Title);

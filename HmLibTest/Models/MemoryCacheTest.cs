@@ -20,7 +20,7 @@ namespace Honememo.Models
     /// <see cref="MemoryCache&lt;TKey, TValue&gt;"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MemoryCacheTest
+    public class MemoryCacheTest
     {
         #region プロパティテストケース
 
@@ -387,7 +387,7 @@ namespace Honememo.Models
         /// <summary>
         /// 全体のテストケース（並列実行）。
         /// </summary>
-        [TestMethod, Timeout(1500)]
+        [TestMethod, Timeout(3000)]
         public void TestMemoryCacheParallel()
         {
             // 並列実行でいくつかのメソッドを呼んで問題ないかを確認する

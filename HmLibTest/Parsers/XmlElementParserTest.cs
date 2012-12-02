@@ -17,7 +17,7 @@ namespace Honememo.Parsers
     /// <see cref="XmlElementParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class XmlElementParserTest
+    public class XmlElementParserTest
     {
         #region private変数
 

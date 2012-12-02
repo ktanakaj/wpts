@@ -18,7 +18,7 @@ namespace Honememo.Parsers
     /// </summary>
     /// <remarks>テストには最小実装の<see cref="TextElement"/>を使用。</remarks>
     [TestClass]
-    internal class AbstractElementTest
+    public class AbstractElementTest
     {
         #region インタフェース実装プロパティテストケース
 

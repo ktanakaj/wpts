@@ -17,7 +17,7 @@ namespace Honememo.Parsers
     /// <see cref="AbstractParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class AbstractParserTest
+    public class AbstractParserTest
     {
         #region インタフェース実装メソッドテストケース
 
@@ -96,15 +96,15 @@ namespace Honememo.Parsers
             Assert.IsTrue(parser.TryParseAt("a", 0, out element, parser));
             Assert.AreEqual("a", element.ToString());
 
-            Assert.IsFalse(parser.TryParseAt("test[[TestMethod]]", 4, out element));
+            Assert.IsFalse(parser.TryParseAt("test[[test]]", 4, out element));
             Assert.IsNull(element);
-            Assert.IsTrue(parser.TryParseAt("test[[TestMethod]]", 4, out element, parser));
-            Assert.AreEqual("[[TestMethod]]", element.ToString());
+            Assert.IsTrue(parser.TryParseAt("test[[test]]", 4, out element, parser));
+            Assert.AreEqual("[[test]]", element.ToString());
 
             parser.Success = false;
             Assert.IsFalse(parser.TryParseAt("a", 0, out element, parser));
             Assert.IsNull(element);
-            Assert.IsFalse(parser.TryParseAt("test[[TestMethod]]", 4, out element, parser));
+            Assert.IsFalse(parser.TryParseAt("test[[test]]", 4, out element, parser));
             Assert.IsNull(element);
         }
 

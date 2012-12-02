@@ -20,7 +20,7 @@ namespace Honememo.Wptscs.Parsers
     /// <see cref="MediaWikiNowikiParser"/>のテストクラスです。
     /// </summary>
     [TestClass]
-    internal class MediaWikiNowikiParserTest
+    public class MediaWikiNowikiParserTest
     {
         #region private変数
 
@@ -68,12 +68,12 @@ namespace Honememo.Wptscs.Parsers
             MediaWikiNowikiParser parser = new MediaWikiNowikiParser(this.xmlParser);
 
             // 基本動作、nowiki区間は再帰的に処理されない
-            Assert.IsTrue(parser.TryParse("<nowiki>[[TestMethod]]</nowiki>", out element));
-            Assert.AreEqual("<nowiki>[[TestMethod]]</nowiki>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki>[[test]]</nowiki>", out element));
+            Assert.AreEqual("<nowiki>[[test]]</nowiki>", element.ToString());
             Assert.IsInstanceOfType(element, typeof(XmlElement));
             xml = (XmlElement)element;
             Assert.IsInstanceOfType(xml[0], typeof(XmlTextElement));
-            Assert.AreEqual("[[TestMethod]]", xml[0].ToString());
+            Assert.AreEqual("[[test]]", xml[0].ToString());
             Assert.AreEqual(1, xml.Count);
 
             Assert.IsTrue(parser.TryParse("<noWiki>{{!}}<nowiki>nowikiサンプルのつもり</nowiki>{{!}}</nowiki>", out element));
@@ -96,32 +96,32 @@ namespace Honememo.Wptscs.Parsers
             // （その判断はMediaWikiNowikiParserではなくMediaWikiParserでの設定次第によるものだが）
             // 属性値などが指定されていても機能する
             // nowiki区間ではコメントも機能しない
-            Assert.IsTrue(parser.TryParse("<NOWIKI>[[TestMethod]]</NOWIKI>", out element));
-            Assert.AreEqual("<NOWIKI>[[TestMethod]]</NOWIKI>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<NOWIKI>[[test]]</NOWIKI>", out element));
+            Assert.AreEqual("<NOWIKI>[[test]]</NOWIKI>", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<Nowiki>[[TestMethod]]</noWiki>", out element));
-            Assert.AreEqual("<Nowiki>[[TestMethod]]</noWiki>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<Nowiki>[[test]]</noWiki>", out element));
+            Assert.AreEqual("<Nowiki>[[test]]</noWiki>", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<nowiki>[[TestMethod]]</nowiki></nowiki>", out element));
-            Assert.AreEqual("<nowiki>[[TestMethod]]</nowiki>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki>[[test]]</nowiki></nowiki>", out element));
+            Assert.AreEqual("<nowiki>[[test]]</nowiki>", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<nowiki>[[TestMethod]]nowiki", out element));
-            Assert.AreEqual("<nowiki>[[TestMethod]]nowiki", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki>[[test]]nowiki", out element));
+            Assert.AreEqual("<nowiki>[[test]]nowiki", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<nowiki>\n\n[[TestMethod]]\r\n</nowiki>", out element));
-            Assert.AreEqual("<nowiki>\n\n[[TestMethod]]\r\n</nowiki>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki>\n\n[[test]]\r\n</nowiki>", out element));
+            Assert.AreEqual("<nowiki>\n\n[[test]]\r\n</nowiki>", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<nowiki><!--[[TestMethod]]--></nowiki>", out element));
-            Assert.AreEqual("<nowiki><!--[[TestMethod]]--></nowiki>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki><!--[[test]]--></nowiki>", out element));
+            Assert.AreEqual("<nowiki><!--[[test]]--></nowiki>", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<nowiki><!--<nowiki>[[TestMethod]]</nowiki>--></nowiki>", out element));
-            Assert.AreEqual("<nowiki><!--<nowiki>[[TestMethod]]</nowiki>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki><!--<nowiki>[[test]]</nowiki>--></nowiki>", out element));
+            Assert.AreEqual("<nowiki><!--<nowiki>[[test]]</nowiki>", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<nowiki><!--[[TestMethod]]", out element));
-            Assert.AreEqual("<nowiki><!--[[TestMethod]]", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki><!--[[test]]", out element));
+            Assert.AreEqual("<nowiki><!--[[test]]", element.ToString());
 
-            Assert.IsTrue(parser.TryParse("<nowiki attr=\"Value\">[[TestMethod]]</nowiki>", out element));
-            Assert.AreEqual("<nowiki attr=\"Value\">[[TestMethod]]</nowiki>", element.ToString());
+            Assert.IsTrue(parser.TryParse("<nowiki attr=\"Value\">[[test]]</nowiki>", out element));
+            Assert.AreEqual("<nowiki attr=\"Value\">[[test]]</nowiki>", element.ToString());
         }
 
         /// <summary>
@@ -134,10 +134,10 @@ namespace Honememo.Wptscs.Parsers
             IElement element;
             MediaWikiNowikiParser parser = new MediaWikiNowikiParser(this.xmlParser);
 
-            Assert.IsFalse(parser.TryParse("<nowik>[[TestMethod]]</nowik>", out element));
+            Assert.IsFalse(parser.TryParse("<nowik>[[test]]</nowik>", out element));
             Assert.IsNull(element);
 
-            Assert.IsFalse(parser.TryParse("<nowiki[[TestMethod]]</nowiki>", out element));
+            Assert.IsFalse(parser.TryParse("<nowiki[[test]]</nowiki>", out element));
             Assert.IsNull(element);
 
             Assert.IsFalse(parser.TryParse(string.Empty, out element));
