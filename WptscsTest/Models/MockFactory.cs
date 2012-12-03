@@ -104,15 +104,24 @@ namespace Honememo.Wptscs.Models
                 wiki = new MediaWiki(new Language(lang));
             }
 
+            // テスト用にサーバー設定を書き換えて返す
+            this.SetMockConfig(wiki);
+            return wiki;
+        }
+
+        /// <summary>
+        /// 渡されたMediaWikiオブジェクトにモックの設定を上書きする。
+        /// </summary>
+        /// <param name="wiki">設定するMediaWikiオブジェクト。</param>
+        public void SetMockConfig(MediaWiki wiki)
+        {
             // テスト用にサーバー設定を書き換え
             // ※ フルパスじゃないとURIで取得できないので、ここで書き換える必要有り
             UriBuilder b = new UriBuilder("file", string.Empty);
             b.Path = Path.GetFullPath(MockFactory.TestMediaWikiDir) + "\\";
-            wiki.Location = new Uri(b.Uri, lang + "/").ToString();
+            wiki.Location = new Uri(b.Uri, wiki.Language.Code + "/").ToString();
             wiki.ExportPath = "$1.xml";
             wiki.MetaApi = "_api.xml";
-
-            return wiki;
         }
 
         #endregion

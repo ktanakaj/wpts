@@ -141,7 +141,7 @@ namespace Honememo.Wptscs.Websites
         {
             // 普通のページ
             MediaWikiPage page = new MediaWikiPage(
-                new MediaWiki(new Language("en")),
+                new MockFactory().GetMediaWiki("en"),
                 "TestTitle",
                 "TestText\n [[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
             Assert.AreEqual("[[ja:テストページ]]", page.GetInterlanguage("ja").ToString());
@@ -185,6 +185,7 @@ namespace Honememo.Wptscs.Websites
         {
             // Template:Documentation を使ってるページ
             MediaWiki site = new DummySite(new Language("en"));
+            new MockFactory().SetMockConfig(site);
             site.DocumentationTemplates.Add("Template:Documentation");
             site.DocumentationTemplateDefaultPage = "/doc";
             MediaWikiPage page = new MediaWikiPage(site, "Template:Test", "TestText{{Documentation}}");
@@ -241,7 +242,7 @@ namespace Honememo.Wptscs.Websites
         [TestMethod]
         public void TestNormalize()
         {
-            MediaWiki site = new MediaWiki(new Language("en"));
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
             MediaWikiPage page = new MediaWikiPage(site, "A/b/c");
 
             // サブページの正規化

@@ -20,6 +20,7 @@ namespace Honememo.Wptscs.Websites
     using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
+    using Honememo.Wptscs.Utilities;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -434,6 +435,36 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual(DateTime.Parse("2010/07/13T00:49:18Z"), page.Timestamp);
             Assert.IsTrue(page.Text.Length > 0);
             Assert.AreEqual(site, page.Website);
+        }
+
+        /// <summary>
+        /// <see cref="MediaWiki.GetPage"/>メソッドテストケース（末尾ピリオド）。
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(EndPeriodException))]
+        public void TestGetPageEndPeriodException()
+        {
+            // ピリオドで終わるページは2012年現在処理できないため、
+            // 暫定対応として例外を投げる
+            // ※ httpでページ名が末尾に来るパスになるよう設定
+            //    処理の都合上、このテストはサーバーに接続しています
+            MediaWiki site = new MediaWiki(new Language("en"));
+            site.GetPage("Vulcan Inc.");
+        }
+
+        /// <summary>
+        /// <see cref="MediaWiki.GetPage"/>メソッドテストケース（末尾クエッションマーク）。
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(EndPeriodException))]
+        public void TestGetPageEndPeriodExceptionAboutQuestion()
+        {
+            // ?で終わるページも2012年現在処理できないため、
+            // 暫定対応として例外を投げる
+            // ※ httpでページ名が末尾に来るパスになるよう設定
+            //    処理の都合上、このテストはサーバーに接続しています
+            MediaWiki site = new MediaWiki(new Language("en"));
+            site.GetPage("How does one patch KDE2 under FreeBSD?");
         }
 
         /// <summary>
