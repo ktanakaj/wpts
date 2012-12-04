@@ -32,11 +32,6 @@ namespace Honememo.Wptscs.Websites
         #region 定数
 
         /// <summary>
-        /// テストデータが格納されているフォルダパス。
-        /// </summary>
-        private static readonly string TestDir = "Data\\MediaWiki";
-
-        /// <summary>
         /// XMLインポート／エクスポートで用いるテストデータ。
         /// </summary>
         private static readonly string TestXml = "<MediaWiki><Location>http://ja.wikipedia.org</Location>"
@@ -50,28 +45,6 @@ namespace Honememo.Wptscs.Websites
             + "<LinkInterwikiFormat>{{仮リンク|$1|$2|$3|label=$4}}</LinkInterwikiFormat>"
             + "<LangFormat>{{Lang|$1|$2}}</LangFormat>"
             + "<HasLanguagePage>True</HasLanguagePage></MediaWiki>";
-
-        #endregion
-
-        #region テスト支援メソッド
-
-        /// <summary>
-        /// テスト用の値を設定した<see cref="MediaWiki"/>オブジェクトを返す。
-        /// </summary>
-        /// <param name="language">言語コード。</param>
-        /// <returns>テスト用の値を設定したオブジェクト。</returns>
-        public MediaWiki GetTestServer(string language)
-        {
-            // ※ 下記URL生成時は、きちんとパス区切り文字を入れてやら無いとフォルダが認識されない。
-            //    また、httpで取得した場合とfileで取得した場合では先頭の大文字小文字が異なることが
-            //    あるため、それについては随時期待値を調整して対処。
-            UriBuilder b = new UriBuilder("file", string.Empty);
-            b.Path = Path.GetFullPath(TestDir) + "\\";
-            MediaWiki server = new MediaWiki(new Language(language), new Uri(b.Uri, language + "/").ToString());
-            server.ExportPath = "$1.xml";
-            server.MetaApi = "_api.xml";
-            return server;
-        }
 
         #endregion
 
@@ -277,7 +250,7 @@ namespace Honememo.Wptscs.Websites
         [TestMethod]
         public void TestNamespaces()
         {
-            MediaWiki site = this.GetTestServer("en");
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
 
             // サーバーからダウンロードした値が返される
             ISet<string> names = site.Namespaces[6];
@@ -293,7 +266,7 @@ namespace Honememo.Wptscs.Websites
         [TestMethod]
         public void TestInterwikiPrefixs()
         {
-            MediaWiki site = this.GetTestServer("en");
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
 
             // デフォルトではサーバーからダウンロードした値+設定ファイルの値が返される
             Assert.IsNotNull(site.InterwikiPrefixs);
@@ -428,7 +401,7 @@ namespace Honememo.Wptscs.Websites
         [TestMethod]
         public void TestGetPage()
         {
-            MediaWiki site = this.GetTestServer("en");
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
             Page page = site.GetPage("example");
             Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
             Assert.AreEqual("Example", page.Title);
@@ -498,7 +471,7 @@ namespace Honememo.Wptscs.Websites
         [TestMethod]
         public void TestIsInterwiki()
         {
-            MediaWiki site = this.GetTestServer("en");
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
             site.InterwikiPrefixs = new IgnoreCaseSet();
 
             // 値が存在しなければ一致しない
@@ -528,7 +501,7 @@ namespace Honememo.Wptscs.Websites
         [TestMethod]
         public void TestIsNamespace()
         {
-            MediaWiki site = this.GetTestServer("en");
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
 
             // 値が設定されていれば、前方一致で一致する、大文字小文字は区別しない
             Assert.IsFalse(site.IsNamespace("page"));

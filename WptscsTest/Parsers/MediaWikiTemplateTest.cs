@@ -97,18 +97,20 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// NewLineプロパティテストケース。
+        /// <see cref="MediaWikiTemplate.Comment"/>プロパティテストケース。
         /// </summary>
         [TestMethod]
-        public void TestNewLine()
+        public void TestComment()
         {
             MediaWikiTemplate element = new MediaWikiTemplate("テンプレート名");
 
-            Assert.IsFalse(element.NewLine);
-            element.NewLine = true;
-            Assert.IsTrue(element.NewLine);
-            element.NewLine = false;
-            Assert.IsFalse(element.NewLine);
+            Assert.IsNull(element.Comment);
+            element.Comment = "  <!-- コメント -->  \n";
+            Assert.AreEqual("  <!-- コメント -->  \n", element.Comment);
+            element.Comment = null;
+            Assert.IsNull(element.Comment);
+            element.Comment = string.Empty;
+            Assert.AreEqual(string.Empty, element.Comment);
         }
 
         #endregion
@@ -143,7 +145,7 @@ namespace Honememo.Wptscs.Parsers
 
             // 改行の付加
             // ※ テンプレート名直後以外のものは、普通に文字列中に格納される
-            element.NewLine = true;
+            element.Comment = "\n";
             Assert.AreEqual("{{:テンプレート名\n|パラメータ1|パラメータ2}}", element.ToString());
             element.IsColon = false;
             Assert.AreEqual("{{テンプレート名\n|パラメータ1|パラメータ2}}", element.ToString());

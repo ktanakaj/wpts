@@ -83,7 +83,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsNull(template.Interwiki);
             Assert.IsFalse(template.IsColon);
             Assert.IsFalse(template.IsMsgnw);
-            Assert.IsFalse(template.NewLine);
+            Assert.AreEqual(string.Empty, template.Comment);
 
             // テンプレートではセクションは無いはず
             Assert.IsTrue(parser.TryParse("{{testtitle#testsection}}", out element));
@@ -128,17 +128,45 @@ namespace Honememo.Wptscs.Parsers
             Assert.AreEqual(2, template.PipeTexts.Count);
             Assert.AreEqual("testpipe1\n", template.PipeTexts[0].ToString());
             Assert.AreEqual("testpipe2\n", template.PipeTexts[1].ToString());
-            Assert.IsTrue(template.NewLine);
+            Assert.AreEqual("\n", template.Comment);
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiTemplateParser.TryParse"/>メソッドテストケース（コメントについて）。
+        /// </summary>
+        [TestMethod]
+        public void TestTryParseAboutComment()
+        {
+            IElement element;
+            MediaWikiTemplate template;
+            MediaWikiTemplateParser parser = new MediaWikiTemplateParser(mediaWikiParsers["en"]);
 
             // コメントはどこにあってもOK
             Assert.IsTrue(parser.TryParse("{{Cite web<!--newsの方がよいか？-->|url=http://www.example.com|title=test|publisher=[[company]]<!--|date=2011-08-05-->|accessdate=2011-11-10}}", out element));
             template = (MediaWikiTemplate)element;
-            Assert.AreEqual("Cite web<!--newsの方がよいか？-->", template.Title);
+            Assert.AreEqual("Cite web", template.Title);
+            Assert.AreEqual("<!--newsの方がよいか？-->", template.Comment);
             Assert.AreEqual(4, template.PipeTexts.Count);
             Assert.AreEqual("url=http://www.example.com", template.PipeTexts[0].ToString());
             Assert.AreEqual("title=test", template.PipeTexts[1].ToString());
             Assert.AreEqual("publisher=[[company]]<!--|date=2011-08-05-->", template.PipeTexts[2].ToString());
             Assert.AreEqual("accessdate=2011-11-10", template.PipeTexts[3].ToString());
+
+            // コメントの前後のスペースは保持する
+            Assert.IsTrue(parser.TryParse("{{Infobox  Dummy  <!--テスト用--> \n  \n | param1 = data \n}}\ninfoboxとは", out element));
+            template = (MediaWikiTemplate)element;
+            Assert.AreEqual("Infobox  Dummy", template.Title);
+            Assert.AreEqual("  <!--テスト用--> \n  \n ", template.Comment);
+            Assert.AreEqual(1, template.PipeTexts.Count);
+            Assert.AreEqual(" param1 = data \n", template.PipeTexts[0].ToString());
+
+            // 記事名中のコメントは処理できない
+            Assert.IsTrue(parser.TryParse("{{Infobox<!--インフォボックスに移行予定-->Dummy\n|param1 = data\n}}\ninfoboxとは", out element));
+            template = (MediaWikiTemplate)element;
+            Assert.AreEqual("Infobox<!--インフォボックスに移行予定-->Dummy", template.Title);
+            Assert.AreEqual("\n", template.Comment);
+            Assert.AreEqual(1, template.PipeTexts.Count);
+            Assert.AreEqual("param1 = data\n", template.PipeTexts[0].ToString());
         }
 
         /// <summary>
@@ -306,7 +334,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsNull(template.Interwiki);
             Assert.IsFalse(template.IsColon);
             Assert.IsFalse(template.IsMsgnw);
-            Assert.IsTrue(template.NewLine);
+            Assert.AreEqual("\n", template.Comment);
 
             // TODO: パイプ後の部分を入れ子も含めてちゃんと動いているかもうちょい検証する
         }
@@ -346,7 +374,7 @@ namespace Honememo.Wptscs.Parsers
             Assert.IsNull(template.Interwiki);
             Assert.IsFalse(template.IsColon);
             Assert.IsFalse(template.IsMsgnw);
-            Assert.IsFalse(template.NewLine);
+            Assert.AreEqual(string.Empty, template.Comment);
         }
 
         #endregion

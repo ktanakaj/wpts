@@ -92,9 +92,9 @@ namespace Honememo.Wptscs.Parsers
         }
 
         /// <summary>
-        /// 記事名の後で改行が入るか？
+        /// 記事名の後のコメントや改行。
         /// </summary>
-        public virtual bool NewLine
+        public virtual string Comment
         {
             get;
             set;
@@ -148,10 +148,10 @@ namespace Honememo.Wptscs.Parsers
                 b.Append(this.Section);
             }
 
-            // 改行の付加
-            if (this.NewLine)
+            // 記事名後のコメントや改行の付加
+            if (!string.IsNullOrEmpty(this.Comment))
             {
-                b.Append('\n');
+                b.Append(this.Comment);
             }
 
             // パイプ後の文字列の付加
