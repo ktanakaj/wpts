@@ -70,6 +70,7 @@ namespace Honememo.Wptscs.Parsers
             // 構文を解析して、{{}}内部の文字列を取得
             // ※構文はWikipediaのプレビューで色々試して確認、足りなかったり間違ってたりするかも・・・
             StringBuilder article = new StringBuilder();
+            StringBuilder comment = new StringBuilder();
             IList<IElement> pipeTexts = new List<IElement>();
             int lastIndex = -1;
             for (int i = MediaWikiTemplate.DelimiterStart.Length; i < s.Length; i++)
@@ -101,11 +102,37 @@ namespace Honememo.Wptscs.Parsers
                 }
                 else
                 {
-                    // | の前（記事名などの部分）のとき、変数・コメントの再帰チェック
+                    // | の前（記事名などの部分）のとき、まずコメントや改行などのチェック
+                    if (char.IsWhiteSpace(c))
+                    {
+                        // いずれかの空白文字（スペースや改行の場合）は
+                        // 記事名では無くその後のコメントとして判断
+                        comment.Append(c);
+                        continue;
+                    }
+
                     IElement element;
+                    if (this.TryParseAt(s, i, out element, this.parser.CommentParser))
+                    {
+                        // コメントなら、解析したブロック単位でコメントに追加
+                        i += element.ToString().Length - 1;
+                        comment.Append(element.ToString());
+                        continue;
+                    }
+
+                    // コメントは最後のみ有効、コメントの後に普通の文字が
+                    // 出現する場合は、それは記事名の一部として扱う
+                    // （記事名の途中の空白や記事名中のコメント等を想定、
+                    //   後者は無視してもよいけど復元できないので）
+                    if (comment.Length > 0)
+                    {
+                        article.Append(comment.ToString());
+                        comment.Clear();
+                    }
+
                     if (this.TryParseAt(s, i, out element, this.parser.CommentParser, this.parser.VariableParser))
                     {
-                        // 変数・コメントなら、解析したブロック単位でテンプレート名に追加
+                        // 変数なら、解析したブロック単位でテンプレート名に追加
                         i += element.ToString().Length - 1;
                         article.Append(element.ToString());
                         continue;
@@ -133,7 +160,7 @@ namespace Honememo.Wptscs.Parsers
             }
 
             // 解析に成功した場合、結果を出力値に設定
-            result = this.MakeElement(article.ToString(), pipeTexts, s.Substring(0, lastIndex + 1));
+            result = this.MakeElement(article.ToString(), comment.ToString(), pipeTexts, s.Substring(0, lastIndex + 1));
             return true;
         }
 
@@ -156,14 +183,20 @@ namespace Honememo.Wptscs.Parsers
         /// テンプレートタグを解析した結果から、MediaWikiテンプレート要素を生成する。
         /// </summary>
         /// <param name="article">テンプレートタグ上のテンプレート名部分の文字列。</param>
+        /// <param name="comment">テンプレート名の後のコメントや改行など。</param>
         /// <param name="pipeTexts">テンプレートタグ上のパイプ後の文字列。</param>
         /// <param name="parsedString">解析したテンプレートタグの文字列。</param>
         /// <returns>生成したテンプレート要素。</returns>
-        private MediaWikiTemplate MakeElement(string article, IList<IElement> pipeTexts, string parsedString)
+        private MediaWikiTemplate MakeElement(
+            string article,
+            string comment,
+            IList<IElement> pipeTexts,
+            string parsedString)
         {
             // 解析結果を各種属性に格納
-            // テンプレート名には、前後のスペース・改行を削除した値を設定
+            // テンプレート名には、前後のスペースを除去した値を設定
             MediaWikiTemplate template = new MediaWikiTemplate(article.Trim());
+            template.Comment = comment;
             template.ParsedString = parsedString;
             template.PipeTexts = pipeTexts;
 
@@ -180,12 +213,6 @@ namespace Honememo.Wptscs.Parsers
             if (template.IsMsgnw)
             {
                 template.Title = template.Title.Substring(MediaWikiTemplate.Msgnw.Length);
-            }
-
-            // 記事名直後の改行の有無を記録
-            if (article.TrimEnd(' ').EndsWith("\n"))
-            {
-                template.NewLine = true;
             }
 
             return template;
