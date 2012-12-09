@@ -106,9 +106,9 @@ zip版の場合は展開したファイルを削除してください。
 
 ・ソースについて
 wptscs121-src.zip としてソースファイル一式を配布しています。
-開発環境はVisual C# 2012 Expressです。その他外部ツールとして
-コーディングスタイルチェック用のStyleCopを使用しています。
-また、インストーラの作成にはWiX並びにWindows SDKを使用しています。
+開発環境はVisual Studio 2012 Express for Windows Desktopです。
+その他外部ツールとしてコーディングスタイルチェック用のStyleCopを使用しています。
+また、インストーラの作成にはWiXを使用しています。
 
 
 
