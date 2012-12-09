@@ -148,12 +148,12 @@ namespace Honememo.Wptscs.Parsers
             // テンプレートタグ
             Assert.IsFalse(parser.TryParse("{{testtitle}}", out element));
 
-            // 記事名名の部分に < > [ ] { } \n のいずれかの文字が存在する場合、NG
+            // 記事名の部分に < > [ ] { } \n のいずれかの文字が存在する場合、NG
             // ※ コメントや変数であれば可能、それ以外で存在するのがNG
             Assert.IsFalse(parser.TryParse("[[test<title]]", out element));
             Assert.IsFalse(parser.TryParse("[[test>title]]", out element));
             Assert.IsFalse(parser.TryParse("[[test[title]]", out element));
-            Assert.IsFalse(parser.TryParse("[[TestMethod]title]]", out element));
+            Assert.IsFalse(parser.TryParse("[[test]title]]", out element));
             Assert.IsFalse(parser.TryParse("[[test{title]]", out element));
             Assert.IsFalse(parser.TryParse("[[test}title]]", out element));
             Assert.IsFalse(parser.TryParse("[[testtitle\n]]", out element));
