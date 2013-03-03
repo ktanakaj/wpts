@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1678386" ns="0" title="民間宇宙飛行">
+        <langlinks>
+          <ll lang="de" xml:space="preserve">Private Raumfahrt</ll>
+          <ll lang="en" xml:space="preserve">Private spaceflight</ll>
+          <ll lang="es" xml:space="preserve">Vuelo espacial privado</ll>
+          <ll lang="fr" xml:space="preserve">Vol spatial privé</ll>
+          <ll lang="pnb" xml:space="preserve">پرائیویٹ خلائی پرواز</ll>
+          <ll lang="pt" xml:space="preserve">Voo espacial privado</ll>
+          <ll lang="sv" xml:space="preserve">Privat rymdfart</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="8956" ns="0" title="カリフォルニア州">
+        <langlinks>
+          <ll lang="af" xml:space="preserve">Kalifornië</ll>
+          <ll lang="als" xml:space="preserve">Kalifornien</ll>
+          <ll lang="am" xml:space="preserve">ካሊፎርኒያ</ll>
+          <ll lang="an" xml:space="preserve">California</ll>
+          <ll lang="ang" xml:space="preserve">California</ll>
+          <ll lang="ar" xml:space="preserve">كاليفورنيا</ll>
+          <ll lang="arz" xml:space="preserve">كاليفورنيا</ll>
+          <ll lang="ast" xml:space="preserve">California</ll>
+          <ll lang="ay" xml:space="preserve">California suyu</ll>
+          <ll lang="az" xml:space="preserve">Kaliforniya</ll>
+          <ll lang="ba" xml:space="preserve">Калифорния</ll>
+          <ll lang="bar" xml:space="preserve">Kalifornien</ll>
+          <ll lang="bat-smg" xml:space="preserve">Kalėfuornėjė</ll>
+          <ll lang="bcl" xml:space="preserve">California</ll>
+          <ll lang="be" xml:space="preserve">Штат Каліфорнія</ll>
+          <ll lang="be-x-old" xml:space="preserve">Каліфорнія</ll>
+          <ll lang="bg" xml:space="preserve">Калифорния</ll>
+          <ll lang="bi" xml:space="preserve">Kalifornia</ll>
+          <ll lang="bn" xml:space="preserve">ক্যালিফোর্নিয়া</ll>
+          <ll lang="bo" xml:space="preserve">ཁྰ་ལེ་ཧྥོར་ནི་ཡ།</ll>
+          <ll lang="bpy" xml:space="preserve">ক্যালিফোর্নিয়া</ll>
+          <ll lang="br" xml:space="preserve">Kalifornia</ll>
+          <ll lang="bs" xml:space="preserve">Kalifornija</ll>
+          <ll lang="ca" xml:space="preserve">Califòrnia</ll>
+          <ll lang="chy" xml:space="preserve">California</ll>
+          <ll lang="ckb" xml:space="preserve">کالیفۆرنیا</ll>
+          <ll lang="co" xml:space="preserve">California</ll>
+          <ll lang="cs" xml:space="preserve">Kalifornie</ll>
+          <ll lang="cv" xml:space="preserve">Калифорни</ll>
+          <ll lang="cy" xml:space="preserve">Califfornia</ll>
+          <ll lang="da" xml:space="preserve">Californien</ll>
+          <ll lang="de" xml:space="preserve">Kalifornien</ll>
+          <ll lang="diq" xml:space="preserve">Kaliforniya</ll>
+          <ll lang="el" xml:space="preserve">Καλιφόρνια</ll>
+          <ll lang="eml" xml:space="preserve">Califòrgna</ll>
+          <ll lang="en" xml:space="preserve">California</ll>
+          <ll lang="eo" xml:space="preserve">Kalifornio</ll>
+          <ll lang="es" xml:space="preserve">California</ll>
+          <ll lang="et" xml:space="preserve">California</ll>
+          <ll lang="eu" xml:space="preserve">Kalifornia</ll>
+          <ll lang="fa" xml:space="preserve">کالیفرنیا</ll>
+          <ll lang="fi" xml:space="preserve">Kalifornia</ll>
+          <ll lang="fo" xml:space="preserve">Kalifornia</ll>
+          <ll lang="fr" xml:space="preserve">Californie</ll>
+          <ll lang="frp" xml:space="preserve">California</ll>
+          <ll lang="frr" xml:space="preserve">California</ll>
+          <ll lang="fy" xml:space="preserve">Kalifornje</ll>
+          <ll lang="ga" xml:space="preserve">California</ll>
+          <ll lang="gag" xml:space="preserve">Kaliforniya</ll>
+          <ll lang="gd" xml:space="preserve">Calafòrnia</ll>
+          <ll lang="gl" xml:space="preserve">California</ll>
+          <ll lang="gn" xml:space="preserve">California</ll>
+          <ll lang="gv" xml:space="preserve">California</ll>
+          <ll lang="hak" xml:space="preserve">Kâ-li-fuk-nì-â</ll>
+          <ll lang="haw" xml:space="preserve">Kaleponi</ll>
+          <ll lang="he" xml:space="preserve">קליפורניה</ll>
+          <ll lang="hi" xml:space="preserve">कैलिफ़ोर्निया</ll>
+          <ll lang="hif" xml:space="preserve">California</ll>
+          <ll lang="hr" xml:space="preserve">Kalifornija</ll>
+          <ll lang="hsb" xml:space="preserve">Kaliforniska</ll>
+          <ll lang="ht" xml:space="preserve">Kalifòni</ll>
+          <ll lang="hu" xml:space="preserve">Kalifornia</ll>
+          <ll lang="hy" xml:space="preserve">Կալիֆորնիա</ll>
+          <ll lang="ia" xml:space="preserve">California</ll>
+          <ll lang="id" xml:space="preserve">California</ll>
+          <ll lang="ie" xml:space="preserve">California</ll>
+          <ll lang="ig" xml:space="preserve">California</ll>
+          <ll lang="ik" xml:space="preserve">California</ll>
+          <ll lang="ilo" xml:space="preserve">California</ll>
+          <ll lang="io" xml:space="preserve">Kalifornia</ll>
+          <ll lang="is" xml:space="preserve">Kalifornía</ll>
+          <ll lang="it" xml:space="preserve">California</ll>
+          <ll lang="iu" xml:space="preserve">ᑳᓖᐴᕐᓃᐊ</ll>
+          <ll lang="jbo" xml:space="preserve">kalifornias</ll>
+          <ll lang="jv" xml:space="preserve">California</ll>
+          <ll lang="ka" xml:space="preserve">კალიფორნია</ll>
+          <ll lang="kk" xml:space="preserve">Калифорния</ll>
+          <ll lang="kn" xml:space="preserve">ಕ್ಯಾಲಿಫೊರ್ನಿಯ</ll>
+          <ll lang="ko" xml:space="preserve">캘리포니아 주</ll>
+          <ll lang="krc" xml:space="preserve">Калифорния</ll>
+          <ll lang="ku" xml:space="preserve">California</ll>
+          <ll lang="kw" xml:space="preserve">Kaliforni</ll>
+          <ll lang="la" xml:space="preserve">California</ll>
+          <ll lang="lad" xml:space="preserve">California</ll>
+          <ll lang="lb" xml:space="preserve">Kalifornien</ll>
+          <ll lang="li" xml:space="preserve">Californië</ll>
+          <ll lang="lij" xml:space="preserve">California</ll>
+          <ll lang="lmo" xml:space="preserve">California</ll>
+          <ll lang="lt" xml:space="preserve">Kalifornija</ll>
+          <ll lang="lv" xml:space="preserve">Kalifornija</ll>
+          <ll lang="mg" xml:space="preserve">Kalifornia</ll>
+          <ll lang="mhr" xml:space="preserve">Калифорний</ll>
+          <ll lang="mi" xml:space="preserve">Karapōnia</ll>
+          <ll lang="mk" xml:space="preserve">Калифорнија</ll>
+          <ll lang="ml" xml:space="preserve">കാലിഫോർണിയ</ll>
+          <ll lang="mn" xml:space="preserve">Калифорни</ll>
+          <ll lang="mr" xml:space="preserve">कॅलिफोर्निया</ll>
+          <ll lang="mrj" xml:space="preserve">Калифорни</ll>
+          <ll lang="ms" xml:space="preserve">California</ll>
+          <ll lang="my" xml:space="preserve">ကယ်လီဖိုးနီးယားပြည်နယ်</ll>
+          <ll lang="mzn" xml:space="preserve">کالیفرنیای جزیره مونا</ll>
+          <ll lang="nah" xml:space="preserve">California</ll>
+          <ll lang="nds" xml:space="preserve">Kalifornien</ll>
+          <ll lang="nds-nl" xml:space="preserve">Kalifornië (stoat)</ll>
+          <ll lang="ne" xml:space="preserve">क्यालिफोर्निया</ll>
+          <ll lang="new" xml:space="preserve">क्यालिफोर्निया</ll>
+          <ll lang="nl" xml:space="preserve">Californië</ll>
+          <ll lang="nn" xml:space="preserve">California</ll>
+          <ll lang="no" xml:space="preserve">California</ll>
+          <ll lang="nv" xml:space="preserve">Akééháshį́į́h Hahoodzo</ll>
+          <ll lang="oc" xml:space="preserve">Califòrnia</ll>
+          <ll lang="os" xml:space="preserve">Калифорни</ll>
+          <ll lang="pag" xml:space="preserve">California</ll>
+          <ll lang="pam" xml:space="preserve">California</ll>
+          <ll lang="pap" xml:space="preserve">California</ll>
+          <ll lang="pl" xml:space="preserve">Kalifornia</ll>
+          <ll lang="pms" xml:space="preserve">Califòrnia</ll>
+          <ll lang="pnb" xml:space="preserve">کیلیفورنیا</ll>
+          <ll lang="ps" xml:space="preserve">کالېفورنیا</ll>
+          <ll lang="pt" xml:space="preserve">Califórnia</ll>
+          <ll lang="qu" xml:space="preserve">California suyu</ll>
+          <ll lang="rm" xml:space="preserve">California</ll>
+          <ll lang="ro" xml:space="preserve">California</ll>
+          <ll lang="roa-rup" xml:space="preserve">California</ll>
+          <ll lang="ru" xml:space="preserve">Калифорния</ll>
+          <ll lang="sa" xml:space="preserve">कालिफ़ोर्निया</ll>
+          <ll lang="sah" xml:space="preserve">Калифорния</ll>
+          <ll lang="scn" xml:space="preserve">California</ll>
+          <ll lang="sco" xml:space="preserve">Californie</ll>
+          <ll lang="se" xml:space="preserve">Kalifornia</ll>
+          <ll lang="sh" xml:space="preserve">Kalifornija</ll>
+          <ll lang="simple" xml:space="preserve">California</ll>
+          <ll lang="sk" xml:space="preserve">Kalifornia</ll>
+          <ll lang="sl" xml:space="preserve">Kalifornija</ll>
+          <ll lang="so" xml:space="preserve">Kalifornia</ll>
+          <ll lang="sq" xml:space="preserve">Kalifornia</ll>
+          <ll lang="sr" xml:space="preserve">Калифорнија</ll>
+          <ll lang="su" xml:space="preserve">Kalifornia</ll>
+          <ll lang="sv" xml:space="preserve">Kalifornien</ll>
+          <ll lang="sw" xml:space="preserve">California</ll>
+          <ll lang="szl" xml:space="preserve">Kaliforńijo</ll>
+          <ll lang="ta" xml:space="preserve">கலிபோர்னியா</ll>
+          <ll lang="te" xml:space="preserve">కాలిఫోర్నియా</ll>
+          <ll lang="tet" xml:space="preserve">California</ll>
+          <ll lang="th" xml:space="preserve">รัฐแคลิฟอร์เนีย</ll>
+          <ll lang="tl" xml:space="preserve">California</ll>
+          <ll lang="tr" xml:space="preserve">Kaliforniya</ll>
+          <ll lang="tt" xml:space="preserve">Калифорния (штат)</ll>
+          <ll lang="ug" xml:space="preserve">Kaliforniye Shitati</ll>
+          <ll lang="uk" xml:space="preserve">Каліфорнія</ll>
+          <ll lang="ur" xml:space="preserve">کیلی فورنیا</ll>
+          <ll lang="uz" xml:space="preserve">Kaliforniya</ll>
+          <ll lang="vec" xml:space="preserve">Całifornia</ll>
+          <ll lang="vi" xml:space="preserve">California</ll>
+          <ll lang="vo" xml:space="preserve">Kalifonän</ll>
+          <ll lang="wa" xml:space="preserve">Californeye</ll>
+          <ll lang="war" xml:space="preserve">California</ll>
+          <ll lang="wuu" xml:space="preserve">加利福尼亚</ll>
+          <ll lang="xal" xml:space="preserve">Калифорни</ll>
+          <ll lang="yi" xml:space="preserve">קאליפארניע</ll>
+          <ll lang="yo" xml:space="preserve">Kalifọ́rníà</ll>
+          <ll lang="zh" xml:space="preserve">加利福尼亚州</ll>
+          <ll lang="zh-min-nan" xml:space="preserve">California</ll>
+          <ll lang="zh-yue" xml:space="preserve">加利福尼亞州</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

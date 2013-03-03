@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="57837" ns="0" title="熱圏">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">ثيرموسفير</ll>
+          <ll lang="az" xml:space="preserve">Termosfer</ll>
+          <ll lang="be" xml:space="preserve">Тэрмасфера</ll>
+          <ll lang="bg" xml:space="preserve">Термосфера</ll>
+          <ll lang="bo" xml:space="preserve">ཚ་རིམ།</ll>
+          <ll lang="bs" xml:space="preserve">Termosfera</ll>
+          <ll lang="ca" xml:space="preserve">Termosfera</ll>
+          <ll lang="ckb" xml:space="preserve">تێرمۆسفێر</ll>
+          <ll lang="cs" xml:space="preserve">Termosféra</ll>
+          <ll lang="da" xml:space="preserve">Termosfære</ll>
+          <ll lang="de" xml:space="preserve">Thermosphäre</ll>
+          <ll lang="el" xml:space="preserve">Θερμόσφαιρα</ll>
+          <ll lang="en" xml:space="preserve">Thermosphere</ll>
+          <ll lang="es" xml:space="preserve">Termosfera</ll>
+          <ll lang="et" xml:space="preserve">Termosfäär</ll>
+          <ll lang="eu" xml:space="preserve">Termosfera</ll>
+          <ll lang="fr" xml:space="preserve">Thermosphère</ll>
+          <ll lang="gl" xml:space="preserve">Termosfera</ll>
+          <ll lang="he" xml:space="preserve">תרמוספירה</ll>
+          <ll lang="hr" xml:space="preserve">Termosfera</ll>
+          <ll lang="ht" xml:space="preserve">Tèmosfè</ll>
+          <ll lang="hu" xml:space="preserve">Termoszféra</ll>
+          <ll lang="it" xml:space="preserve">Termosfera</ll>
+          <ll lang="ka" xml:space="preserve">თერმოსფერო</ll>
+          <ll lang="ko" xml:space="preserve">열권</ll>
+          <ll lang="ky" xml:space="preserve">Термосфера</ll>
+          <ll lang="lt" xml:space="preserve">Termosfera</ll>
+          <ll lang="lv" xml:space="preserve">Termosfēra</ll>
+          <ll lang="mn" xml:space="preserve">Илчит мандал</ll>
+          <ll lang="ms" xml:space="preserve">Termosfera</ll>
+          <ll lang="nl" xml:space="preserve">Thermosfeer</ll>
+          <ll lang="nn" xml:space="preserve">Termosfæren</ll>
+          <ll lang="no" xml:space="preserve">Termosfæren</ll>
+          <ll lang="oc" xml:space="preserve">Termosfèra</ll>
+          <ll lang="pl" xml:space="preserve">Termosfera</ll>
+          <ll lang="pt" xml:space="preserve">Termosfera</ll>
+          <ll lang="ro" xml:space="preserve">Termosferă</ll>
+          <ll lang="ru" xml:space="preserve">Термосфера</ll>
+          <ll lang="simple" xml:space="preserve">Thermosphere</ll>
+          <ll lang="sk" xml:space="preserve">Termosféra</ll>
+          <ll lang="sr" xml:space="preserve">Термосфера</ll>
+          <ll lang="sv" xml:space="preserve">Termosfär</ll>
+          <ll lang="th" xml:space="preserve">เทอร์โมสเฟียร์</ll>
+          <ll lang="tk" xml:space="preserve">Termosfera</ll>
+          <ll lang="uk" xml:space="preserve">Термосфера</ll>
+          <ll lang="vi" xml:space="preserve">Tầng nhiệt</ll>
+          <ll lang="zh" xml:space="preserve">热层</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

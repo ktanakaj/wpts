@@ -3,7 +3,7 @@
 //      モックオブジェクト生成処理をまとめたファクトリークラスソース</summary>
 //
 // <copyright file="MockFactory.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -122,6 +122,7 @@ namespace Honememo.Wptscs.Models
             wiki.Location = new Uri(b.Uri, wiki.Language.Code + "/").ToString();
             wiki.ExportPath = "$1.xml";
             wiki.MetaApi = "_api.xml";
+            wiki.InterlanguageApi = "interlanguages/$1.xml";
         }
 
         #endregion

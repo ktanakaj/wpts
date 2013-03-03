@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="2499676" ns="10" title="Template:Partial">
+        <langlinks>
+          <ll lang="ca" xml:space="preserve">Plantilla:Cel·la parcial</ll>
+          <ll lang="de" xml:space="preserve">Vorlage:Teilweise-Feld</ll>
+          <ll lang="hu" xml:space="preserve">Sablon:Részlegesen</ll>
+          <ll lang="ja" xml:space="preserve">Template:Partial</ll>
+          <ll lang="pl" xml:space="preserve">Szablon:Tabela-częściowo</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Deloma</ll>
+          <ll lang="tr" xml:space="preserve">Şablon:Kısmen</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

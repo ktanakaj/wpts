@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1697136" ns="10" title="Template:Reusable launch systems">
+        <langlinks>
+          <ll lang="en" xml:space="preserve">Template:Reusable launch systems</ll>
+          <ll lang="ne" xml:space="preserve">ढाँचा:Reusable launch systems</ll>
+          <ll lang="zh" xml:space="preserve">Template:RLVs</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

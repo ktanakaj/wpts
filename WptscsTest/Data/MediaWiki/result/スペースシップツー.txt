@@ -8,24 +8,24 @@
   |製造者 = [[スケールド・コンポジッツ]]
   |運用状況 = 生産中（1号機は2009年12月7日ロールアウト）
 }} -->
-スケールド・コンポジッツ '''モデル339 スペースシップツー''' (Model 339 SpaceShipTwo, SS2) は、開発中の[[Space tourism|宇宙旅行者]]向けの[[Sub-orbital spaceflight|弾道飛行]][[Spaceplane|スペースプレーン]]である。[[Scaled Composites|スケールド・コンポジッツ]]と、[[Richard Branson|リチャード・ブランソン]]の[[Virgin Group|ヴァージン・グループ]]によるジョイントベンチャーである[[スペースシップ・カンパニー]] ([[:en:The Spaceship Company|The Spaceship Company]]) により、Tier 1bプログラムの一部として開発されている。2009年12月7日、[[California|カリフォルニア州]]の[[Mojave Air and Space Port|モハーヴェ宇宙港]]にて1号機'''[[VSSエンタープライズ]]'''が公開され、2010年3月22日には母機に吊るされて初飛行を行った<ref>[[:ja:Template:cite news]]<!-- {{cite news
+スケールド・コンポジッツ '''モデル339 スペースシップツー''' (Model 339 SpaceShipTwo, SS2) は、開発中の[[Space tourism|宇宙旅行者]]向けの[[Sub-orbital spaceflight|弾道飛行]][[Spaceplane|スペースプレーン]]である。[[Scaled Composites|スケールド・コンポジッツ]]と、[[Richard Branson|リチャード・ブランソン]]の[[Virgin Group|ヴァージン・グループ]]によるジョイントベンチャーである[[スペースシップ・カンパニー]] ([[:en:The Spaceship Company|The Spaceship Company]]) により、Tier 1bプログラムの一部として開発されている。2009年12月7日、[[California|カリフォルニア州]]の[[Mojave Air and Space Port|モハーヴェ宇宙港]]にて1号機'''[[VSSエンタープライズ]]'''が公開され、2010年3月22日には母機に吊るされて初飛行を行った<ref>{{Cite news
 | title= VSSエンタープライズ“処女飛行”
 | url= http://www.nationalgeographic.co.jp/news/news_article.php?file_id=2010032508&expand
-| publisher=ナショナルジオグラフィック ニュース | date=2010-03-25 | accessdate=2010-03-28 }} --></ref>。
+| publisher=ナショナルジオグラフィック ニュース | date=2010-03-25 | accessdate=2010-03-28 }}</ref>。
 
-宇宙航空会社の[[Virgin Galactic|ヴァージン・ギャラクティック]]は、2009年以前には行われたことのなかった乗客向けの[[Private spaceflight|民間宇宙飛行]]サービスを提供するために、この宇宙機を5機編成で運用する予定である<ref>[[:ja:Template:cite web]]<!-- {{cite web|url=http://www.nytimes.com/2008/01/23/science/space/23cnd-spaceship.html?hp|title=New Tourist Spacecraft Unveiled|accessdate=2008-01-23|author=John Schwartz|publisher=nytimes.com}} --></ref>。初めての宇宙飛行は2011年6月前後に行うとしている<ref>[[:ja:Template:cite web]]<!-- {{cite web|url=http://www.afpbb.com/article/environment-science-it/science-technology/2672434/5010250|title=格安宇宙旅行実現へ、ヴァージン・ギャラクティック 世界初の商用宇宙船を公開|date=2009-12-07|accessdate=2009-12-09|publisher=[[フランス通信社|AFPBB News]]}} --></ref>。
+宇宙航空会社の[[Virgin Galactic|ヴァージン・ギャラクティック]]は、2009年以前には行われたことのなかった乗客向けの[[Private spaceflight|民間宇宙飛行]]サービスを提供するために、この宇宙機を5機編成で運用する予定である<ref>{{Cite web|url=http://www.nytimes.com/2008/01/23/science/space/23cnd-spaceship.html?hp|title=New Tourist Spacecraft Unveiled|accessdate=2008-01-23|author=John Schwartz|publisher=nytimes.com}}</ref>。初めての宇宙飛行は2011年6月前後に行うとしている<ref>{{Cite web|url=http://www.afpbb.com/article/environment-science-it/science-technology/2672434/5010250|title=格安宇宙旅行実現へ、ヴァージン・ギャラクティック 世界初の商用宇宙船を公開|date=2009-12-07|accessdate=2009-12-09|publisher=[[フランス通信社|AFPBB News]]}}</ref>。
 
 == 設計と開発 ==
 [[File:Trajectoire-White-Knight.png|thumb|300px]]
 世界初の民間宇宙船[[SpaceShipOne|スペースシップワン]]は、[[Paul Allen|ポール・アレン]]が出資し、スケールド・コンポジッツが実施したTier Oneプログラムの一部として開発された。スペースシップツーはその技術の一部を基に作られている。スペースシップ・カンパニーはポール・アレンの[[モハーヴェ・エアロスペース・ベンチャーズ]]からライセンスを受けている。
 
-スペースシップツーは、8人の乗員（6人の乗客と2人のパイロット）を乗せることができる。飛行軌道の[[Apsis|遠地点]]はおよそ高度110&nbsp;km （68マイル）の[[Thermosphere|熱圏]]内である。これはスペースシップワンの目標高度である[[Kármán line|カーマン・ライン]]よりも10&nbsp;km （6マイル）高い（もっとも、スペースシップワンの最後のフライトは112&nbsp;kmに達している）。スペースシップツーは母機である[[Scaled Composites White Knight Two|ホワイトナイトツー]]から、高度15,200&nbsp;m （50,000フィート）で発射され、1基の[[Hybrid rocket|ハイブリッドロケット]]により4,200&nbsp;km/h (2,600 mph) の速度に達する。客室は長さ3.66&nbsp;m（12フィート）、直径2.28&nbsp;m（7.5フィート）である。<ref name="flightglobal-unveil">[[:ja:Template:cite web]]<!-- {{cite web |url=http://www.flightglobal.com/articles/2008/01/23/221031/pictures-virgin-galactic-unveils-dyna-soar-style-spaceshiptwo-design-and-twin-fuselage-white-knight.html|title=PICTURES: Virgin Galactic unveils Dyna-Soar style SpaceShipTwo design and twin-fuselage White Knight II configuration |accessdate=2008-01-23 |author=Rob Coppinger|publisher=flightglobal.com }} --></ref> 翼長は8.23&nbsp;m（27フィート）、全長は18.29&nbsp;m （60フィート）、尾翼の高さは4.57&nbsp;m（15フィート）である。
+スペースシップツーは、8人の乗員（6人の乗客と2人のパイロット）を乗せることができる。飛行軌道の[[Apsis|遠地点]]はおよそ高度110&nbsp;km （68マイル）の[[Thermosphere|熱圏]]内である。これはスペースシップワンの目標高度である[[Kármán line|カーマン・ライン]]よりも10&nbsp;km （6マイル）高い（もっとも、スペースシップワンの最後のフライトは112&nbsp;kmに達している）。スペースシップツーは母機である[[Scaled Composites White Knight Two|ホワイトナイトツー]]から、高度15,200&nbsp;m （50,000フィート）で発射され、1基の[[Hybrid rocket|ハイブリッドロケット]]により4,200&nbsp;km/h (2,600 mph) の速度に達する。客室は長さ3.66&nbsp;m（12フィート）、直径2.28&nbsp;m（7.5フィート）である。<ref name="flightglobal-unveil">{{Cite web |url=http://www.flightglobal.com/articles/2008/01/23/221031/pictures-virgin-galactic-unveils-dyna-soar-style-spaceshiptwo-design-and-twin-fuselage-white-knight.html|title=PICTURES: Virgin Galactic unveils Dyna-Soar style SpaceShipTwo design and twin-fuselage White Knight II configuration |accessdate=2008-01-23 |author=Rob Coppinger|publisher=flightglobal.com }}</ref> 翼長は8.23&nbsp;m（27フィート）、全長は18.29&nbsp;m （60フィート）、尾翼の高さは4.57&nbsp;m（15フィート）である。
 
 ==Notes==
 {{Reflist}}
 
 ==External links==
-[[:ja:Template:commonscat]]<!-- {{commonscat|SpaceShipTwo}} -->
+{{Commons category|SpaceShipTwo}}
 *[http://www.scaled.com Scaled Composites] {{En icon}}
 
 ==See Also==
@@ -35,7 +35,7 @@
 {{Reusable launch systems}}
 
 {{DEFAULTSORT:すへすしつふ2}}
-[[Category:Manned spacecraft]]
+[[Category:Spacecraft]]
 
 [[cs:SpaceShipTwo]]
 [[de:SpaceShipTwo]]

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="25941487" ns="10" title="Template:Table cell templates/doc">
+        <langlinks>
+          <ll lang="bn" xml:space="preserve">টেমপ্লেট:Table cell templates</ll>
+          <ll lang="ca" xml:space="preserve">Plantilla:Plantilles per les cel·les de les taules</ll>
+          <ll lang="eo" xml:space="preserve">Ŝablono:Jes ne</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Celda de tabla de plantillas</ll>
+          <ll lang="hsb" xml:space="preserve">Předłoha:Haj ně</ll>
+          <ll lang="ja" xml:space="preserve">Template:Table cell templates</ll>
+          <ll lang="ko" xml:space="preserve">틀:표 셀 틀</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Победа</ll>
+          <ll lang="sh" xml:space="preserve">Šablon:Da-ne</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Predloge za celico v tabeli</ll>
+          <ll lang="tr" xml:space="preserve">Şablon:Adaylık</ll>
+          <ll lang="zh" xml:space="preserve">Template:Table cell templates</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

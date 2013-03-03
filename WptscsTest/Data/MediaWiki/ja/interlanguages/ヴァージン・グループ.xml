@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="170568" ns="0" title="ヴァージン・グループ">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">مجموعة فيرجن</ll>
+          <ll lang="be" xml:space="preserve">Virgin Group</ll>
+          <ll lang="bg" xml:space="preserve">Върджин Груп</ll>
+          <ll lang="de" xml:space="preserve">Virgin Group</ll>
+          <ll lang="en" xml:space="preserve">Virgin Group</ll>
+          <ll lang="es" xml:space="preserve">Virgin Group</ll>
+          <ll lang="fa" xml:space="preserve">گروه ویرجین</ll>
+          <ll lang="fi" xml:space="preserve">Virgin Group</ll>
+          <ll lang="fr" xml:space="preserve">Virgin Group</ll>
+          <ll lang="he" xml:space="preserve">וירג'ין</ll>
+          <ll lang="it" xml:space="preserve">Virgin Group</ll>
+          <ll lang="ko" xml:space="preserve">버진 그룹</ll>
+          <ll lang="nl" xml:space="preserve">Virgin Group</ll>
+          <ll lang="pl" xml:space="preserve">Virgin Group</ll>
+          <ll lang="pt" xml:space="preserve">Virgin Group</ll>
+          <ll lang="ru" xml:space="preserve">Virgin Group</ll>
+          <ll lang="simple" xml:space="preserve">Virgin Group</ll>
+          <ll lang="sv" xml:space="preserve">Virgin Group</ll>
+          <ll lang="zh" xml:space="preserve">維珍集團</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

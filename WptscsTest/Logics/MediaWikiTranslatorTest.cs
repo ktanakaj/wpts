@@ -3,7 +3,7 @@
 //      MediaWikiTranslatorのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiTranslatorTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -236,16 +236,16 @@ namespace Honememo.Wptscs.Logics
             // ※ 以下オブジェクトを毎回作り直しているのは、更新されてしまうケースがあるため
             link = new MediaWikiLink();
             link.Title = "Category:宇宙船";
-            Assert.AreEqual("[[Category:Manned spacecraft]]", translator.ReplaceLink(link, parent).ToString());
+            Assert.AreEqual("[[Category:Spacecraft]]", translator.ReplaceLink(link, parent).ToString());
 
             // ソートキーあり
             link = new MediaWikiLink();
             link.Title = "Category:宇宙船";
             link.PipeTexts.Add(new TextElement("すへえすしつふつう"));
-            Assert.AreEqual("[[Category:Manned spacecraft|すへえすしつふつう]]", translator.ReplaceLink(link, parent).ToString());
+            Assert.AreEqual("[[Category:Spacecraft|すへえすしつふつう]]", translator.ReplaceLink(link, parent).ToString());
 
             // 記事名だけの内部リンクで言語間リンクなし、変換元言語へのリンクとなり元のカテゴリはコメントとなる
-            translator.To = mock.GetMediaWiki("it");
+            translator.To = mock.GetMediaWiki("zh-tw");
             link = new MediaWikiLink();
             link.Title = "Category:宇宙船";
             Assert.AreEqual("[[:ja:Category:宇宙船]]<!-- [[Category:宇宙船]] -->", translator.ReplaceLink(link, parent).ToString());
@@ -388,13 +388,13 @@ namespace Honememo.Wptscs.Logics
             Assert.AreEqual("{{要出典|date=January 2012}}", translator.ReplaceTemplate(template, parent).ToString());
 
             // テンプレート名だけで言語間リンクなし、変換元言語へのリンクとなり元のテンプレートはコメントとなる
-            template = new MediaWikiTemplate("Wiktionary");
-            Assert.AreEqual("[[:en:Template:Wiktionary]]<!-- {{Wiktionary}} -->", translator.ReplaceTemplate(template, parent).ToString());
+            template = new MediaWikiTemplate("context");
+            Assert.AreEqual("[[:en:Template:context]]<!-- {{context}} -->", translator.ReplaceTemplate(template, parent).ToString());
 
             // パラメータあり
-            template = new MediaWikiTemplate("Wiktionary");
+            template = new MediaWikiTemplate("context");
             template.PipeTexts.Add(new TextElement("Sample"));
-            Assert.AreEqual("[[:en:Template:Wiktionary]]<!-- {{Wiktionary|Sample}} -->", translator.ReplaceTemplate(template, parent).ToString());
+            Assert.AreEqual("[[:en:Template:context]]<!-- {{context|Sample}} -->", translator.ReplaceTemplate(template, parent).ToString());
 
             // テンプレート名だけで赤リンク、処理されない
             template = new MediaWikiTemplate("Invalid Template");
@@ -438,7 +438,7 @@ namespace Honememo.Wptscs.Logics
             Assert.AreEqual("{{要出典|date=January 2012|note=See also [[ふじ (宇宙船)|Fuji (Spacecraft)]]}}", translator.ReplaceTemplate(template, parent).ToString());
 
             // テンプレート名だけで言語間リンクなし、入れ子は処理されない
-            template = new MediaWikiTemplate("Wiktionary");
+            template = new MediaWikiTemplate("context");
             template.PipeTexts.Add(new TextElement("Sample"));
             list = new ListElement();
             list.Add(new TextElement("note=See also "));
@@ -446,7 +446,7 @@ namespace Honememo.Wptscs.Logics
             link.Title = "Fuji (Spacecraft)";
             list.Add(link);
             template.PipeTexts.Add(list);
-            Assert.AreEqual("[[:en:Template:Wiktionary]]<!-- {{Wiktionary|Sample|note=See also [[Fuji (Spacecraft)]]}} -->", translator.ReplaceTemplate(template, parent).ToString());
+            Assert.AreEqual("[[:en:Template:context]]<!-- {{context|Sample|note=See also [[Fuji (Spacecraft)]]}} -->", translator.ReplaceTemplate(template, parent).ToString());
 
             // テンプレート名だけで赤リンク、入れ子は処理されない
             template = new MediaWikiTemplate("Invalid Template");
@@ -708,7 +708,7 @@ namespace Honememo.Wptscs.Logics
 
             // 以下のキャッシュパターンを指定して実行
             TranslationDictionary table = new TranslationDictionary("en", "ja");
-            table.Add("Template:Wiktionary", new TranslationDictionary.Item { Word = "Template:Wiktionary" });
+            table.Add("Template:Wikiquote", new TranslationDictionary.Item());
             table.Add("example.org", new TranslationDictionary.Item());
             table.Add(".example", new TranslationDictionary.Item { Word = "。さんぷる", Alias = ".dummy" });
             table.Add("Template:Disambig", new TranslationDictionary.Item { Word = "Template:曖昧さ回避" });
@@ -852,34 +852,6 @@ namespace Honememo.Wptscs.Logics
             }
         }
 
-        /// <summary>
-        /// Runを通しで実行するテストケース（対象記事がリダイレクトで無し）。
-        /// </summary>
-        [TestMethod]
-        public void TestPageRedirectNothing()
-        {
-            MockFactory mock = new MockFactory();
-            MediaWiki from = mock.GetMediaWiki("en");
-            Translator translator = new MediaWikiTranslator();
-            translator.From = from;
-            translator.To = mock.GetMediaWiki("ja");
-
-            try
-            {
-                translator.Run("Redirect→Nothing Page");
-                Assert.Fail();
-            }
-            catch (ApplicationException)
-            {
-                // 実行ログを期待されるログと比較する
-                Assert.AreEqual(
-                    ("http://en.wikipedia.org より [[Redirect→Nothing Page]] を取得。\r\n"
-                    + "→ リダイレクト [[Nothing Page]]\r\n"
-                    + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。\r\n")
-                    .Replace("http://en.wikipedia.org", from.Location),
-                    translator.Log);
-            }
-        }
         #endregion
 
         #region テスト用クラス

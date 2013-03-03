@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <normalized>
+      <n from="Template:context" to="Template:Context" />
+    </normalized>
+    <pages>
+      <page pageid="1331312" ns="10" title="Template:Context">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">قالب:سياق</ll>
+          <ll lang="bg" xml:space="preserve">Шаблон:Контекст</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Contextualizar</ll>
+          <ll lang="mk" xml:space="preserve">Шаблон:Контекст</ll>
+          <ll lang="ms" xml:space="preserve">Templat:Konteks</ll>
+          <ll lang="pt" xml:space="preserve">Predefinição:Contextualizar</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Kontekst</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

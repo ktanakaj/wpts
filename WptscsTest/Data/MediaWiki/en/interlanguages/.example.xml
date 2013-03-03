@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1239768" ns="0" title=".example">
+        <langlinks>
+          <ll lang="ca" xml:space="preserve">.example</ll>
+          <ll lang="ce" xml:space="preserve">.example</ll>
+          <ll lang="cs" xml:space="preserve">.example</ll>
+          <ll lang="da" xml:space="preserve">.example</ll>
+          <ll lang="eu" xml:space="preserve">.example</ll>
+          <ll lang="fr" xml:space="preserve">.example</ll>
+          <ll lang="hu" xml:space="preserve">.example</ll>
+          <ll lang="it" xml:space="preserve">.example</ll>
+          <ll lang="ja" xml:space="preserve">トップレベルドメイン#特殊用途</ll>
+          <ll lang="no" xml:space="preserve">.example</ll>
+          <ll lang="pl" xml:space="preserve">.example</ll>
+          <ll lang="ro" xml:space="preserve">.example</ll>
+          <ll lang="ru" xml:space="preserve">.example</ll>
+          <ll lang="sv" xml:space="preserve">.example</ll>
+          <ll lang="zh" xml:space="preserve">.example</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

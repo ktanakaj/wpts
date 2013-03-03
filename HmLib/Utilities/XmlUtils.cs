@@ -3,7 +3,7 @@
 //      XMLの処理に関するユーティリティクラスソース。</summary>
 //
 // <copyright file="XmlUtils.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -13,6 +13,7 @@ namespace Honememo.Utilities
     using System;
     using System.Text;
     using System.Xml;
+    using System.Xml.Linq;
 
     /// <summary>
     /// XMLの処理に関するユーティリティクラスです。
@@ -97,6 +98,32 @@ namespace Honememo.Utilities
             }
 
             return StringUtils.DefaultString(node.OuterXml, nullStr);
+        }
+
+        /// <summary>
+        /// 属性が<c>null</c>の場合に空の文字列を返す<see cref="XAttribute.Value"/>。
+        /// </summary>
+        /// <param name="attribute"><see cref="XAttribute.Value"/>する属性。<c>null</c>も可。</param>
+        /// <returns>渡された属性を<see cref="XAttribute.Value"/>した結果。<c>null</c>の場合には空の文字列。</returns>
+        public static string Value(XAttribute attribute)
+        {
+            return XmlUtils.Value(attribute, string.Empty);
+        }
+
+        /// <summary>
+        /// 属性が<c>null</c>の場合に指定された文字列を返す<see cref="XAttribute.Value"/>。
+        /// </summary>
+        /// <param name="attribute"><see cref="XAttribute.Value"/>する属性。<c>null</c>も可。</param>
+        /// <param name="nullStr">渡された属性が<c>null</c>の場合に返される文字列。<c>null</c>も可。</param>
+        /// <returns>渡された属性を<see cref="XAttribute.Value"/>した結果。<c>null</c>の場合には指定された文字列。</returns>
+        public static string Value(XAttribute attribute, string nullStr)
+        {
+            if (attribute == null)
+            {
+                return nullStr;
+            }
+
+            return StringUtils.DefaultString(attribute.Value, nullStr);
         }
 
         #endregion

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="816541" ns="0" title="スケールド・コンポジッツ">
+        <langlinks>
+          <ll lang="de" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="en" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="es" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="fa" xml:space="preserve">سکیلد کامپوزیتس</ll>
+          <ll lang="fi" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="fr" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="it" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="nl" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="no" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="pl" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="pt" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="ru" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="sv" xml:space="preserve">Scaled Composites</ll>
+          <ll lang="uk" xml:space="preserve">Scaled Composites</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="2048472" ns="10" title="Template:Citation needed">
+        <langlinks>
+          <ll lang="af" xml:space="preserve">Sjabloon:Feit</ll>
+          <ll lang="als" xml:space="preserve">Vorlage:Beleg</ll>
+          <ll lang="an" xml:space="preserve">Plantilla:Cita requiesta</ll>
+          <ll lang="ar" xml:space="preserve">قالب:حقيقة</ll>
+          <ll lang="az" xml:space="preserve">Şablon:Mənbə göstərin</ll>
+          <ll lang="be" xml:space="preserve">Шаблон:Крыніца?</ll>
+          <ll lang="be-x-old" xml:space="preserve">Шаблён:Няма крыніцы</ll>
+          <ll lang="bg" xml:space="preserve">Шаблон:Източник</ll>
+          <ll lang="bn" xml:space="preserve">টেমপ্লেট:সত্যতা</ll>
+          <ll lang="ca" xml:space="preserve">Plantilla:Citació necessària</ll>
+          <ll lang="cs" xml:space="preserve">Šablona:Doplňte zdroj</ll>
+          <ll lang="cy" xml:space="preserve">Nodyn:Angen ffynhonnell</ll>
+          <ll lang="da" xml:space="preserve">Skabelon:Kilde mangler</ll>
+          <ll lang="dsb" xml:space="preserve">Pśedłoga:Fakt</ll>
+          <ll lang="el" xml:space="preserve">Πρότυπο:Εκκρεμεί παραπομπή</ll>
+          <ll lang="eo" xml:space="preserve">Ŝablono:Mankas fonto</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Cita requerida</ll>
+          <ll lang="et" xml:space="preserve">Mall:Lisa viide</ll>
+          <ll lang="fa" xml:space="preserve">الگو:مدرک</ll>
+          <ll lang="fi" xml:space="preserve">Malline:Lähde</ll>
+          <ll lang="fr" xml:space="preserve">Modèle:Citation nécessaire</ll>
+          <ll lang="gl" xml:space="preserve">Modelo:Sen referencias</ll>
+          <ll lang="he" xml:space="preserve">תבנית:מקור</ll>
+          <ll lang="hr" xml:space="preserve">Predložak:Nedostaje izvor</ll>
+          <ll lang="hsb" xml:space="preserve">Předłoha:Fakt</ll>
+          <ll lang="hu" xml:space="preserve">Sablon:Forráskérő</ll>
+          <ll lang="id" xml:space="preserve">Templat:Fact</ll>
+          <ll lang="is" xml:space="preserve">Snið:Heimild vantar</ll>
+          <ll lang="it" xml:space="preserve">Template:Citazione necessaria</ll>
+          <ll lang="ja" xml:space="preserve">Template:要出典</ll>
+          <ll lang="jv" xml:space="preserve">Cithakan:Fact</ll>
+          <ll lang="ka" xml:space="preserve">თარგი:ფაქტი</ll>
+          <ll lang="ko" xml:space="preserve">틀:출처</ll>
+          <ll lang="lt" xml:space="preserve">Šablonas:Faktas</ll>
+          <ll lang="lv" xml:space="preserve">Veidne:Nepieciešama atsauce</ll>
+          <ll lang="ml" xml:space="preserve">ഫലകം:തെളിവ്</ll>
+          <ll lang="nl" xml:space="preserve">Sjabloon:Bron?</ll>
+          <ll lang="nn" xml:space="preserve">Mal:Treng kjelde</ll>
+          <ll lang="no" xml:space="preserve">Mal:Trenger referanse</ll>
+          <ll lang="os" xml:space="preserve">Хуызæг:Ратæдзæн нæй</ll>
+          <ll lang="pl" xml:space="preserve">Szablon:Fakt</ll>
+          <ll lang="pt" xml:space="preserve">Predefinição:Carece de fontes</ll>
+          <ll lang="ro" xml:space="preserve">Format:Necesită citare</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Нет источника</ll>
+          <ll lang="sc" xml:space="preserve">Template:Esigit tzitassione</ll>
+          <ll lang="simple" xml:space="preserve">Template:Fact</ll>
+          <ll lang="sk" xml:space="preserve">Šablóna:Bez citácie</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Navedi vir</ll>
+          <ll lang="sq" xml:space="preserve">Stampa:Citim i duhur</ll>
+          <ll lang="sr" xml:space="preserve">Шаблон:Чињеница</ll>
+          <ll lang="sv" xml:space="preserve">Mall:Källa behövs</ll>
+          <ll lang="sw" xml:space="preserve">Kigezo:Ukweli</ll>
+          <ll lang="szl" xml:space="preserve">Muster:Fakt</ll>
+          <ll lang="te" xml:space="preserve">మూస:మూలాలు అవసరం</ll>
+          <ll lang="th" xml:space="preserve">แม่แบบ:ต้องการอ้างอิงเฉพาะส่วน</ll>
+          <ll lang="tl" xml:space="preserve">Padron:Fact</ll>
+          <ll lang="uk" xml:space="preserve">Шаблон:Fact</ll>
+          <ll lang="ur" xml:space="preserve">سانچہ:حوالہ درکار</ll>
+          <ll lang="vi" xml:space="preserve">Bản mẫu:Cần chú thích</ll>
+          <ll lang="zh" xml:space="preserve">Template:Fact</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

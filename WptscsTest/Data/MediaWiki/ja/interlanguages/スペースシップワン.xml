@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="103231" ns="0" title="スペースシップワン">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">سبيس شيب وان</ll>
+          <ll lang="bg" xml:space="preserve">СпейсШипУан</ll>
+          <ll lang="ca" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="cs" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="da" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="de" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="en" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="eo" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="es" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="fa" xml:space="preserve">فضاپیمای یک</ll>
+          <ll lang="fi" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="fr" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="he" xml:space="preserve">ספייס שיפ 1</ll>
+          <ll lang="hu" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="it" xml:space="preserve">Scaled Composites SpaceShipOne</ll>
+          <ll lang="ko" xml:space="preserve">스페이스십원</ll>
+          <ll lang="ms" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="nl" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="pl" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="pt" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="ru" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="sk" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="sl" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="sv" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="uk" xml:space="preserve">SpaceShipOne</ll>
+          <ll lang="zh" xml:space="preserve">太空船1號</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

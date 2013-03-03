@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <normalized>
+      <n from="Template:cite news" to="Template:Cite news" />
+    </normalized>
+    <pages>
+      <page pageid="593521" ns="10" title="Template:Cite news">
+        <langlinks>
+          <ll lang="af" xml:space="preserve">Sjabloon:Cite news</ll>
+          <ll lang="als" xml:space="preserve">Vorlage:Cite news</ll>
+          <ll lang="ar" xml:space="preserve">قالب:استشهاد بخبر</ll>
+          <ll lang="bar" xml:space="preserve">Vorlage:Cite news</ll>
+          <ll lang="bg" xml:space="preserve">Шаблон:Cite news</ll>
+          <ll lang="bn" xml:space="preserve">টেমপ্লেট:Cite news</ll>
+          <ll lang="cs" xml:space="preserve">Šablona:Citace novin</ll>
+          <ll lang="cy" xml:space="preserve">Nodyn:Dyf newyddion</ll>
+          <ll lang="da" xml:space="preserve">Skabelon:Kilde nyheder</ll>
+          <ll lang="de" xml:space="preserve">Vorlage:Cite news</ll>
+          <ll lang="dsb" xml:space="preserve">Pśedłoga:Cite news</ll>
+          <ll lang="el" xml:space="preserve">Πρότυπο:Cite news</ll>
+          <ll lang="en" xml:space="preserve">Template:Cite news</ll>
+          <ll lang="eo" xml:space="preserve">Ŝablono:Citnovaĵo</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Cita noticia</ll>
+          <ll lang="ext" xml:space="preserve">Prantilla:Almienta notícia</ll>
+          <ll lang="fa" xml:space="preserve">الگو:یادکرد خبر</ll>
+          <ll lang="fr" xml:space="preserve">Modèle:Cite news</ll>
+          <ll lang="gl" xml:space="preserve">Modelo:Cita novas</ll>
+          <ll lang="gu" xml:space="preserve">ઢાંચો:Cite news</ll>
+          <ll lang="he" xml:space="preserve">תבנית:Cite news</ll>
+          <ll lang="hr" xml:space="preserve">Predložak:Citiranje novina</ll>
+          <ll lang="hsb" xml:space="preserve">Předłoha:Cite news</ll>
+          <ll lang="ia" xml:space="preserve">Patrono:Cite news</ll>
+          <ll lang="is" xml:space="preserve">Snið:Cite news</ll>
+          <ll lang="it" xml:space="preserve">Template:Cite news</ll>
+          <ll lang="ko" xml:space="preserve">틀:뉴스 인용</ll>
+          <ll lang="ms" xml:space="preserve">Templat:Cite news</ll>
+          <ll lang="no" xml:space="preserve">Mal:Cite news</ll>
+          <ll lang="os" xml:space="preserve">Шаблон:Cite news</ll>
+          <ll lang="pl" xml:space="preserve">Szablon:Cytuj pismo</ll>
+          <ll lang="pt" xml:space="preserve">Predefinição:Citar notícia</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Cite news</ll>
+          <ll lang="sk" xml:space="preserve">Šablóna:Cite news</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Navedi novice</ll>
+          <ll lang="sv" xml:space="preserve">Mall:Tidningsref</ll>
+          <ll lang="th" xml:space="preserve">แม่แบบ:Cite news</ll>
+          <ll lang="uk" xml:space="preserve">Шаблон:Цитата:Новини</ll>
+          <ll lang="ur" xml:space="preserve">Template:Cite news</ll>
+          <ll lang="vi" xml:space="preserve">Tiêu bản:Chú thích báo</ll>
+          <ll lang="zh" xml:space="preserve">Template:Cite news</ll>
+          <ll lang="zh-yue" xml:space="preserve">Template:引新聞</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

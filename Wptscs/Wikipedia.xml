@@ -770,7 +770,6 @@
       <Item From="Template:Note label" To="Template:Note label" />
       <Item From="Template:Ref" To="Template:Ref" />
       <Item From="Template:Ref label" To="Template:Ref label" />
-      <Item From="Template:Refend" To="Template:Refend" />
       <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
     </ItemTable>
     <ItemTable From="en" To="ru">

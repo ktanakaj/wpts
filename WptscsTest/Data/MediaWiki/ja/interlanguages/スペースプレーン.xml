@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="514976" ns="0" title="スペースプレーン">
+        <langlinks>
+          <ll lang="ca" xml:space="preserve">Avió espacial</ll>
+          <ll lang="cs" xml:space="preserve">Kosmický raketoplán</ll>
+          <ll lang="de" xml:space="preserve">Raumflugzeug</ll>
+          <ll lang="en" xml:space="preserve">Spaceplane</ll>
+          <ll lang="fi" xml:space="preserve">Avaruuslentokone</ll>
+          <ll lang="fr" xml:space="preserve">Avion spatial</ll>
+          <ll lang="it" xml:space="preserve">Spazioplano</ll>
+          <ll lang="lv" xml:space="preserve">Kosmoplāns</ll>
+          <ll lang="nl" xml:space="preserve">Ruimteveer</ll>
+          <ll lang="pt" xml:space="preserve">Avião espacial</ll>
+          <ll lang="ru" xml:space="preserve">Орбитальный самолёт</ll>
+          <ll lang="sk" xml:space="preserve">Kozmický raketoplán</ll>
+          <ll lang="ta" xml:space="preserve">விண்ணூர்தி</ll>
+          <ll lang="zh" xml:space="preserve">太空飛機</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

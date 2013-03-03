@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="931557" ns="0" title="ヴァージン・ギャラクティック">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">فيرجن غالاكتيك</ll>
+          <ll lang="be" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="cs" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="da" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="de" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="en" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="es" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="fi" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="fr" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="he" xml:space="preserve">וירג'ין גלקטיק</ll>
+          <ll lang="it" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="ko" xml:space="preserve">버진 갤럭틱</ll>
+          <ll lang="lt" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="nl" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="pl" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="pt" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="ru" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="sk" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="sv" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="tr" xml:space="preserve">Virgin Galactic</ll>
+          <ll lang="wuu" xml:space="preserve">银河处女</ll>
+          <ll lang="zh" xml:space="preserve">維珍銀河</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

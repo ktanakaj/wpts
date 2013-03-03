@@ -3,7 +3,7 @@
 //      XmlUtilsのテストクラスソース。</summary>
 //
 // <copyright file="XmlUtilsTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2011 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -12,6 +12,7 @@ namespace Honememo.Utilities
 {
     using System;
     using System.Xml;
+    using System.Xml.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -23,7 +24,9 @@ namespace Honememo.Utilities
         #region null値許容メソッドテストケース
 
         /// <summary>
-        /// InnerTextメソッドテストケース。
+        /// <see cref="XmlUtils.InnerText(XmlNode)"/>,
+        /// <see cref="XmlUtils.InnerText(XmlNode, string)"/>
+        /// メソッドテストケース。
         /// </summary>
         [TestMethod]
         public void TestInnerText()
@@ -39,7 +42,9 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// InnerXmlメソッドテストケース。
+        /// <see cref="XmlUtils.InnerXml(XmlNode)"/>,
+        /// <see cref="XmlUtils.InnerXml(XmlNode, string)"/>
+        /// メソッドテストケース。
         /// </summary>
         [TestMethod]
         public void TestInnerXml()
@@ -49,13 +54,15 @@ namespace Honememo.Utilities
             Assert.AreEqual("<test />", XmlUtils.InnerXml(new XmlDocument { InnerXml = "<test />" }));
 
             // 引数二つ
-            Assert.IsNull(XmlUtils.InnerText(null, null));
+            Assert.IsNull(XmlUtils.InnerXml(null, null));
             Assert.AreEqual("<null />", XmlUtils.InnerXml(null, "<null />"));
             Assert.AreEqual("<test />", XmlUtils.InnerXml(new XmlDocument { InnerXml = "<test />" }, "<null />"));
         }
 
         /// <summary>
-        /// OuterXmlメソッドテストケース。
+        /// <see cref="XmlUtils.OuterXml(XmlNode)"/>,
+        /// <see cref="XmlUtils.OuterXml(XmlNode, string)"/>
+        /// メソッドテストケース。
         /// </summary>
         [TestMethod]
         public void TestOuterXml()
@@ -65,9 +72,27 @@ namespace Honememo.Utilities
             Assert.AreEqual("<test />", XmlUtils.OuterXml(new XmlDocument { InnerXml = "<test />" }));
 
             // 引数二つ
-            Assert.IsNull(XmlUtils.InnerText(null, null));
+            Assert.IsNull(XmlUtils.OuterXml(null, null));
             Assert.AreEqual("<null />", XmlUtils.OuterXml(null, "<null />"));
             Assert.AreEqual("<test />", XmlUtils.OuterXml(new XmlDocument { InnerXml = "<test />" }, "<null />"));
+        }
+
+        /// <summary>
+        /// <see cref="XmlUtils.Value(XAttribute)"/>,
+        /// <see cref="XmlUtils.Value(XAttribute, string)"/>
+        /// メソッドテストケース。
+        /// </summary>
+        [TestMethod]
+        public void TestValue()
+        {
+            // 引数一つ
+            Assert.AreEqual(string.Empty, XmlUtils.Value(null));
+            Assert.AreEqual("100", XmlUtils.Value(new XAttribute("id", "100")));
+
+            // 引数二つ
+            Assert.IsNull(XmlUtils.Value(null, null));
+            Assert.AreEqual("abc", XmlUtils.Value(null, "abc"));
+            Assert.AreEqual("100", XmlUtils.Value(new XAttribute("id", "100"), "abc"));
         }
 
         #endregion
@@ -75,7 +100,7 @@ namespace Honememo.Utilities
         #region エンコード／デコードテストケース
 
         /// <summary>
-        /// XmlEncodeメソッドテストケース。
+        /// <see cref="XmlUtils.XmlEncode"/>メソッドテストケース。
         /// </summary>
         [TestMethod]
         public void TestXmlEncode()
@@ -89,7 +114,7 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// XmlEncodeメソッドテストケース（null）。
+        /// <see cref="XmlUtils.XmlEncode"/>メソッドテストケース（null）。
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -99,7 +124,7 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// XmlDecodeメソッドテストケース。
+        /// <see cref="XmlUtils.XmlDecode"/>メソッドテストケース。
         /// </summary>
         [TestMethod]
         public void TestXmlDecode()
@@ -113,7 +138,7 @@ namespace Honememo.Utilities
         }
 
         /// <summary>
-        /// XmlDecodeメソッドテストケース（null）。
+        /// <see cref="XmlUtils.XmlDecode"/>メソッドテストケース（null）。
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]

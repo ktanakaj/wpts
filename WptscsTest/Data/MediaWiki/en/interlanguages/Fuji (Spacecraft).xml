@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="5207391" ns="0" title="Fuji (Spacecraft)">
+        <langlinks>
+          <ll lang="ja" xml:space="preserve">ふじ (宇宙船)</ll>
+          <ll lang="ru" xml:space="preserve">Фудзи (космический корабль)</ll>
+          <ll lang="zh" xml:space="preserve">富士號太空船</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

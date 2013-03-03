@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="914777" ns="0" title="モハーヴェ空港">
+        <langlinks>
+          <ll lang="de" xml:space="preserve">Mojave Air &amp; Space Port</ll>
+          <ll lang="en" xml:space="preserve">Mojave Air and Space Port</ll>
+          <ll lang="fa" xml:space="preserve">پایگاه هوایی و فضایی موهاوی</ll>
+          <ll lang="it" xml:space="preserve">Spazioporto di Mojave</ll>
+          <ll lang="nl" xml:space="preserve">Mojave Air and Space Port</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

@@ -13,11 +13,12 @@ http://ja.wikipedia.org より [[スペースシップツー]] を取得。
 [[カリフォルニア州]] → [[California]]
 [[モハーヴェ空港]] → [[Mojave Air and Space Port]]
 [[VSSエンタープライズ]] → 記事無し
-{{Template:cite news}} → 言語間リンク無し
+{{Template:cite news}} → [[Template:Cite news]]
 [[ヴァージン・ギャラクティック]] → [[Virgin Galactic]]
 [[民間宇宙飛行]] → [[Private spaceflight]]
-{{Template:cite web}} → 言語間リンク無し
-{{Template:cite web}} → 言語間リンク無し ※キャッシュ
+{{Template:cite web}} → [[Template:Cite web]]
+{{Template:cite web}} → [[Template:Cite web]] ※キャッシュ
+[[フランス通信社]] → 記事無し
 
 == 設計と開発 ==
 [[スペースシップワン]] → [[SpaceShipOne]]
@@ -28,17 +29,17 @@ http://ja.wikipedia.org より [[スペースシップツー]] を取得。
 [[カーマン・ライン]] → [[Kármán line]]
 [[ホワイトナイトツー]] → [[Scaled Composites White Knight Two]]
 [[ハイブリッドロケット]] → [[Hybrid rocket]]
-{{Template:cite web}} → 言語間リンク無し ※キャッシュ
+{{Template:cite web}} → [[Template:Cite web]] ※キャッシュ
 
 == 脚注 == → ==Notes==
 {{Template:Reflist}} → [[Template:Reflist]]
 
 == 外部リンク == → ==External links==
-{{Template:commonscat}} → 言語間リンク無し
+{{Template:commonscat}} → [[Template:Commons category]]
 {{Template:ref-en}} → リダイレクト [[Template:En icon]] → [[Template:En icon]]
 
 == 関連項目== → ==See Also==
 [[宇宙旅行]] → [[Space tourism]] ※キャッシュ
 [[スケールド・コンポジッツ]] → [[Scaled Composites]] ※キャッシュ
 {{Template:Reusable launch systems}} → [[Template:Reusable launch systems]]
-[[Category:宇宙船]] → [[Category:Manned spacecraft]]
+[[Category:宇宙船]] → [[Category:Spacecraft]]

@@ -3,7 +3,7 @@
 //      MediaWikiのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -422,7 +422,8 @@ namespace Honememo.Wptscs.Websites
             // ※ httpでページ名が末尾に来るパスになるよう設定
             //    処理の都合上、このテストはサーバーに接続しています
             MediaWiki site = new MediaWiki(new Language("en"));
-            site.GetPage("Vulcan Inc.");
+            Page page = site.GetPage("Vulcan Inc.");
+            string dummy = page.Text;
         }
 
         /// <summary>
@@ -437,7 +438,8 @@ namespace Honememo.Wptscs.Websites
             // ※ httpでページ名が末尾に来るパスになるよう設定
             //    処理の都合上、このテストはサーバーに接続しています
             MediaWiki site = new MediaWiki(new Language("en"));
-            site.GetPage("How does one patch KDE2 under FreeBSD?");
+            Page page = site.GetPage("How does one patch KDE2 under FreeBSD?");
+            string dummy = page.Text;
         }
 
         /// <summary>

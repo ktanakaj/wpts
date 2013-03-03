@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <normalized>
+      <n from="Template:wiktionary" to="Template:Wiktionary" />
+    </normalized>
+    <pages>
+      <page pageid="960068" ns="10" title="Template:Wiktionary">
+        <langlinks>
+          <ll lang="an" xml:space="preserve">Plantilla:Biquizionario</ll>
+          <ll lang="ar" xml:space="preserve">قالب:ويكاموس</ll>
+          <ll lang="as" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="be-x-old" xml:space="preserve">Шаблён:ВікіСлоўнік</ll>
+          <ll lang="bg" xml:space="preserve">Шаблон:Уикиречник</ll>
+          <ll lang="bn" xml:space="preserve">টেমপ্লেট:উইকশনারি</ll>
+          <ll lang="ca" xml:space="preserve">Template:Viccionari</ll>
+          <ll lang="cy" xml:space="preserve">Nodyn:Wiciadur</ll>
+          <ll lang="da" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="de" xml:space="preserve">Vorlage:Wiktionary</ll>
+          <ll lang="eo" xml:space="preserve">Ŝablono:Vikivortaro</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Wiktionary</ll>
+          <ll lang="fa" xml:space="preserve">الگو:ویکی‌واژه</ll>
+          <ll lang="fi" xml:space="preserve">Malline:Wikisanakirja</ll>
+          <ll lang="fr" xml:space="preserve">Modèle:Wiktionnaire</ll>
+          <ll lang="gl" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="id" xml:space="preserve">Templat:Wiktionary</ll>
+          <ll lang="is" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="ja" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="ko" xml:space="preserve">틀:위키낱말사전</ll>
+          <ll lang="la" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="lb" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="lt" xml:space="preserve">Šablonas:Vikižodynas</ll>
+          <ll lang="ms" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="nl" xml:space="preserve">Sjabloon:Wikt</ll>
+          <ll lang="no" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="pl" xml:space="preserve">Szablon:Wikisłownik</ll>
+          <ll lang="pt" xml:space="preserve">Predefinição:Wikcionário</ll>
+          <ll lang="ro" xml:space="preserve">Format:Wikţionar</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Wiktionary</ll>
+          <ll lang="simple" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="sk" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Wikislovar</ll>
+          <ll lang="sq" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="sr" xml:space="preserve">Шаблон:Wiktionary</ll>
+          <ll lang="su" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="sv" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="sw" xml:space="preserve">Template:Wiktionary</ll>
+          <ll lang="tr" xml:space="preserve">Şablon:Vikisözlük</ll>
+          <ll lang="uk" xml:space="preserve">Шаблон:Wiktionary</ll>
+          <ll lang="ur" xml:space="preserve">سانچہ:ویکی لغت</ll>
+          <ll lang="vi" xml:space="preserve">Tiêu bản:Wiktionary</ll>
+          <ll lang="zh" xml:space="preserve">Template:Wiktionary</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>
