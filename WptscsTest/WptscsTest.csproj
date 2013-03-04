@@ -84,9 +84,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Data\MediaWiki\en\Fuji %28Spacecraft%29.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data\MediaWiki\en\interlanguages\.example.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -157,9 +154,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\ja\interlanguages\Template_commonscat.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\MediaWiki\ja\interlanguages\Template_En icon.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\ja\interlanguages\Template_Infobox 航空機.xml">
@@ -235,9 +229,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\ja\interlanguages\熱圏.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\MediaWiki\ja\interlanguages\近点・遠点.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\MediaWiki\ja\interlanguages\遠地点.xml">

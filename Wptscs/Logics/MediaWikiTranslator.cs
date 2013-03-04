@@ -505,12 +505,15 @@ namespace Honememo.Wptscs.Logics
         protected virtual IElement ReplaceVariable(MediaWikiVariable variable, MediaWikiPage parent)
         {
             // 変数、これ自体は処理しないが、再帰的に探索
-            string old = variable.Value.ToString();
-            variable.Value = this.ReplaceElement(variable.Value, parent);
-            if (variable.Value.ToString() != old)
+            if (variable.Value != null)
             {
-                // 内部要素が変化した（置き換えが行われた）場合、変換前のテキストを破棄
-                variable.ParsedString = null;
+                string old = variable.Value.ToString();
+                variable.Value = this.ReplaceElement(variable.Value, parent);
+                if (variable.Value.ToString() != old)
+                {
+                    // 内部要素が変化した（置き換えが行われた）場合、変換前のテキストを破棄
+                    variable.ParsedString = null;
+                }
             }
 
             return variable;
@@ -977,11 +980,46 @@ namespace Honememo.Wptscs.Logics
                     + " " + new MediaWikiLink(page.Title).ToString());
             }
 
+            // ページ本文にアクセスして遅延読み込みを実行させる
+            if (!this.TryLoadPage(page))
+            {
+                // 読み込み失敗時はそのまま終了
+                return null;
+            }
+
             // 取得した記事のURIを以後のアクセスで用いるRefererとして登録
             this.From.WebProxy.Referer = page.Uri.AbsoluteUri;
             this.To.WebProxy.Referer = page.Uri.AbsoluteUri;
 
             return page;
+        }
+
+        /// <summary>
+        /// 翻訳支援対象のページの本文・タイムスタンプを読み込み。
+        /// </summary>
+        /// <param name="page">翻訳支援対象のページ。</param>
+        /// <returns>読み込み成功の場合<c>true</c>、失敗した（通信エラーなど）の場合<c>false</c>。</returns>
+        private bool TryLoadPage(MediaWikiPage page)
+        {
+            // ページ本文にアクセスして遅延読み込みを実行させる
+            try
+            {
+                string dummy = page.Text;
+            }
+            catch (EndPeriodException)
+            {
+                // 末尾がピリオドで終わるページが処理できない既知の不具合への対応、警告メッセージを出す
+                this.Logger.AddResponse(Resources.LogMessageErrorPageName, page.Title);
+                return false;
+            }
+            catch (Exception e)
+            {
+                // その他例外の場合、エラー情報を出力
+                this.Logger.AddError(e);
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -52,9 +52,14 @@
             this.groupBoxLanguage = new System.Windows.Forms.GroupBox();
             this.groupBoxLanguageName = new System.Windows.Forms.GroupBox();
             this.dataGridViewLanguageName = new System.Windows.Forms.DataGridView();
+            this.ColumnCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxBracket = new System.Windows.Forms.TextBox();
             this.labelBracket = new System.Windows.Forms.Label();
             this.groupBoxServer = new System.Windows.Forms.GroupBox();
+            this.textBoxInterlanguageApi = new System.Windows.Forms.TextBox();
+            this.labelInterlanguageApi = new System.Windows.Forms.Label();
             this.checkBoxHasLanguagePage = new System.Windows.Forms.CheckBox();
             this.textBoxLangFormat = new System.Windows.Forms.TextBox();
             this.labelLangFormat = new System.Windows.Forms.Label();
@@ -106,9 +111,6 @@
             this.labelUserAgent = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.ColumnCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewItems)).BeginInit();
@@ -242,14 +244,14 @@
             this.dataGridViewHeading.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewHeading.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewHeading.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewHeading.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewHeading.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewHeading.Name = "dataGridViewHeading";
             this.dataGridViewHeading.RowTemplate.Height = 21;
             // 
@@ -314,6 +316,24 @@
             this.dataGridViewLanguageName.Validating += new System.ComponentModel.CancelEventHandler(this.DataGridViewLanguageName_Validating);
             this.dataGridViewLanguageName.Validated += new System.EventHandler(this.ResetErrorText_Validated);
             // 
+            // ColumnCode
+            // 
+            resources.ApplyResources(this.ColumnCode, "ColumnCode");
+            this.ColumnCode.MaxInputLength = 10;
+            this.ColumnCode.Name = "ColumnCode";
+            // 
+            // ColumnName
+            // 
+            resources.ApplyResources(this.ColumnName, "ColumnName");
+            this.ColumnName.MaxInputLength = 255;
+            this.ColumnName.Name = "ColumnName";
+            // 
+            // ColumnShortName
+            // 
+            resources.ApplyResources(this.ColumnShortName, "ColumnShortName");
+            this.ColumnShortName.MaxInputLength = 20;
+            this.ColumnShortName.Name = "ColumnShortName";
+            // 
             // textBoxBracket
             // 
             resources.ApplyResources(this.textBoxBracket, "textBoxBracket");
@@ -331,6 +351,8 @@
             // groupBoxServer
             // 
             resources.ApplyResources(this.groupBoxServer, "groupBoxServer");
+            this.groupBoxServer.Controls.Add(this.textBoxInterlanguageApi);
+            this.groupBoxServer.Controls.Add(this.labelInterlanguageApi);
             this.groupBoxServer.Controls.Add(this.checkBoxHasLanguagePage);
             this.groupBoxServer.Controls.Add(this.textBoxLangFormat);
             this.groupBoxServer.Controls.Add(this.labelLangFormat);
@@ -356,6 +378,18 @@
             this.groupBoxServer.Controls.Add(this.labelFileNamespace);
             this.groupBoxServer.Name = "groupBoxServer";
             this.groupBoxServer.TabStop = false;
+            // 
+            // textBoxInterlanguageApi
+            // 
+            resources.ApplyResources(this.textBoxInterlanguageApi, "textBoxInterlanguageApi");
+            this.textBoxInterlanguageApi.Name = "textBoxInterlanguageApi";
+            this.toolTip.SetToolTip(this.textBoxInterlanguageApi, resources.GetString("textBoxInterlanguageApi.ToolTip"));
+            // 
+            // labelInterlanguageApi
+            // 
+            resources.ApplyResources(this.labelInterlanguageApi, "labelInterlanguageApi");
+            this.labelInterlanguageApi.Name = "labelInterlanguageApi";
+            this.toolTip.SetToolTip(this.labelInterlanguageApi, resources.GetString("labelInterlanguageApi.ToolTip"));
             // 
             // checkBoxHasLanguagePage
             // 
@@ -697,24 +731,6 @@
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // ColumnCode
-            // 
-            resources.ApplyResources(this.ColumnCode, "ColumnCode");
-            this.ColumnCode.MaxInputLength = 10;
-            this.ColumnCode.Name = "ColumnCode";
-            // 
-            // ColumnName
-            // 
-            resources.ApplyResources(this.ColumnName, "ColumnName");
-            this.ColumnName.MaxInputLength = 255;
-            this.ColumnName.Name = "ColumnName";
-            // 
-            // ColumnShortName
-            // 
-            resources.ApplyResources(this.ColumnShortName, "ColumnShortName");
-            this.ColumnShortName.MaxInputLength = 20;
-            this.ColumnShortName.Name = "ColumnShortName";
-            // 
             // ConfigForm
             // 
             this.AcceptButton = this.buttonOk;
@@ -833,5 +849,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnShortName;
+        private System.Windows.Forms.TextBox textBoxInterlanguageApi;
+        private System.Windows.Forms.Label labelInterlanguageApi;
     }
 }

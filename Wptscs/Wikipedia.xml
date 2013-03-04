@@ -760,17 +760,10 @@
       <Item From="Template:Template doc" To="Modèle:Documentation" Redirect="Template:Documentation" />
     </ItemTable>
     <ItemTable From="en" To="ja">
-      <Item From="Template:?" To="Template:?" />
-      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Documentation" To="Template:Documentation" />
       <Item From="Template:Lang-la" To="Template:Lang-la" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
       <Item From="Template:Note" To="Template:Note" />
-      <Item From="Template:Note label" To="Template:Note label" />
-      <Item From="Template:Ref" To="Template:Ref" />
-      <Item From="Template:Ref label" To="Template:Ref label" />
-      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
     </ItemTable>
     <ItemTable From="en" To="ru">
       <Item From="Template:Doc" To="Шаблон:Doc" Redirect="Template:Documentation" />

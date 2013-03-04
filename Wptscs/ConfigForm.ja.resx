@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 481</value>
+    <value>335, 524</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>624, 513</value>
+    <value>624, 556</value>
   </data>
   <data name="labelItemsNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 417</value>
@@ -210,10 +210,10 @@
     <value>51</value>
   </data>
   <data name="dataGridViewLanguageName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 319</value>
+    <value>260, 362</value>
   </data>
   <data name="groupBoxLanguageName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 343</value>
+    <value>272, 386</value>
   </data>
   <data name="groupBoxLanguageName.Text" xml:space="preserve">
     <value>各言語での言語名</value>
@@ -225,13 +225,39 @@
     <value>括弧のスタイル:</value>
   </data>
   <data name="groupBoxLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 392</value>
+    <value>286, 435</value>
   </data>
   <data name="groupBoxLanguage.Text" xml:space="preserve">
     <value>言語の設定</value>
   </data>
+  <data name="textBoxInterlanguageApi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 152</value>
+  </data>
+  <data name="textBoxInterlanguageApi.ToolTip" xml:space="preserve">
+    <value>サーバーから言語間リンク情報をXMLでダウンロードするためのパスを入力します。
+記事名を代入する部分を $1 としてください。
+
+どのようなパスかについては、下記URL等を参照してください。
+http://www.mediawiki.org/wiki/API:Properties/ja#langlinks_.2F_ll</value>
+  </data>
+  <data name="labelInterlanguageApi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 136</value>
+  </data>
+  <data name="labelInterlanguageApi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 12</value>
+  </data>
+  <data name="labelInterlanguageApi.Text" xml:space="preserve">
+    <value>言語間リンク取得用のAPIパス:</value>
+  </data>
+  <data name="labelInterlanguageApi.ToolTip" xml:space="preserve">
+    <value>サーバーから言語間リンク情報をXMLでダウンロードするためのパスを入力します。
+記事名を代入する部分を $1 としてください。
+
+どのようなパスかについては、下記URL等を参照してください。
+http://www.mediawiki.org/wiki/API:Properties/ja#langlinks_.2F_ll</value>
+  </data>
   <data name="checkBoxHasLanguagePage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 370</value>
+    <value>8, 414</value>
   </data>
   <data name="checkBoxHasLanguagePage.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 16</value>
@@ -240,13 +266,13 @@
     <value>言語名のページが存在</value>
   </data>
   <data name="textBoxLangFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 344</value>
+    <value>132, 388</value>
   </data>
   <data name="textBoxLangFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 19</value>
   </data>
   <data name="labelLangFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 347</value>
+    <value>6, 391</value>
   </data>
   <data name="labelLangFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 12</value>
@@ -255,13 +281,13 @@
     <value>言語指定用フォーマット:</value>
   </data>
   <data name="textBoxLinkInterwikiFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 316</value>
+    <value>115, 360</value>
   </data>
   <data name="textBoxLinkInterwikiFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 19</value>
   </data>
   <data name="labelLinkInterwikiFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 319</value>
+    <value>6, 363</value>
   </data>
   <data name="labelLinkInterwikiFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 12</value>
@@ -270,13 +296,13 @@
     <value>仮リンク用フォーマット:</value>
   </data>
   <data name="textBoxDocumentationTemplateDefaultPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 288</value>
+    <value>115, 332</value>
   </data>
   <data name="textBoxDocumentationTemplateDefaultPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 19</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 291</value>
+    <value>6, 335</value>
   </data>
   <data name="labelDocumentationTemplateDefaultPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 12</value>
@@ -285,13 +311,13 @@
     <value>デフォルトページ名:</value>
   </data>
   <data name="textBoxDocumentationTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 241</value>
+    <value>115, 285</value>
   </data>
   <data name="textBoxDocumentationTemplate.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 39</value>
   </data>
   <data name="labelDocumentationTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 244</value>
+    <value>6, 288</value>
   </data>
   <data name="labelDocumentationTemplate.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 12</value>
@@ -300,13 +326,13 @@
     <value>解説用テンプレート:</value>
   </data>
   <data name="textBoxFileNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 185</value>
+    <value>143, 229</value>
   </data>
   <data name="textBoxCategoryNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 160</value>
+    <value>143, 204</value>
   </data>
   <data name="labelCategoryNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 163</value>
+    <value>6, 207</value>
   </data>
   <data name="labelCategoryNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 12</value>
@@ -315,10 +341,10 @@
     <value>カテゴリ名前空間のID:</value>
   </data>
   <data name="textBoxTemplateNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 135</value>
+    <value>143, 179</value>
   </data>
   <data name="labelTemplateNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 138</value>
+    <value>6, 182</value>
   </data>
   <data name="labelTemplateNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 12</value>
@@ -327,10 +353,10 @@
     <value>テンプレート名前空間のID:</value>
   </data>
   <data name="textBoxRedirect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 214</value>
+    <value>115, 258</value>
   </data>
   <data name="labelRedirect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 217</value>
+    <value>6, 261</value>
   </data>
   <data name="labelRedirect.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 12</value>
@@ -353,6 +379,12 @@
   <data name="textBoxMetaApi.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 109</value>
   </data>
+  <data name="textBoxMetaApi.ToolTip" xml:space="preserve">
+    <value>サーバーから名前空間やウィキ間リンクといったメタ情報をXMLでダウンロードするためのパスを入力します。
+
+どのようなパスかについては、下記URL等を参照してください。
+http://www.mediawiki.org/wiki/API:Meta/ja#siteinfo_.2F_si</value>
+  </data>
   <data name="labelMetaApi.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 94</value>
   </data>
@@ -362,6 +394,12 @@
   <data name="labelMetaApi.Text" xml:space="preserve">
     <value>メタ情報取得用のAPIパス:</value>
   </data>
+  <data name="labelMetaApi.ToolTip" xml:space="preserve">
+    <value>サーバーから名前空間やウィキ間リンクといったメタ情報をXMLでダウンロードするためのパスを入力します。
+
+どのようなパスかについては、下記URL等を参照してください。
+http://www.mediawiki.org/wiki/API:Meta/ja#siteinfo_.2F_si</value>
+  </data>
   <data name="labelLocation.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 12</value>
   </data>
@@ -369,13 +407,13 @@
     <value>サーバーURL:</value>
   </data>
   <data name="labelFileNamespace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 188</value>
+    <value>6, 232</value>
   </data>
   <data name="labelFileNamespace.Text" xml:space="preserve">
     <value>ファイル名前空間のID:</value>
   </data>
   <data name="groupBoxServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 392</value>
+    <value>288, 435</value>
   </data>
   <data name="groupBoxServer.Text" xml:space="preserve">
     <value>MediaWikiの設定</value>
@@ -390,7 +428,7 @@
     <value>言語:</value>
   </data>
   <data name="tabPageServer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 437</value>
+    <value>592, 480</value>
   </data>
   <data name="tabPageServer.Text" xml:space="preserve">
     <value>サーバー／言語</value>
@@ -489,15 +527,15 @@
     <value>その他</value>
   </data>
   <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 463</value>
+    <value>600, 506</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>640, 550</value>
+    <value>640, 595</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>設定</value>
   </data>
   <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 481</value>
+    <value>215, 524</value>
   </data>
 </root>

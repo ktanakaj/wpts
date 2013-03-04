@@ -511,7 +511,7 @@ namespace Honememo.Wptscs.Websites
 
             // クエリーからページ情報を読み込み返す
             // ※ ページが無い場合などは、例外が投げられる
-            return MediaWikiPage.GetFromQuery(this, qe);
+            return MediaWikiPage.GetFromQuery(this, uri, qe);
         }
 
         /// <summary>

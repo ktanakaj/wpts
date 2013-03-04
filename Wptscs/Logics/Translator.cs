@@ -3,7 +3,7 @@
 //      翻訳支援処理を実装するための抽象クラスソース</summary>
 //
 // <copyright file="Translator.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -484,12 +484,6 @@ namespace Honememo.Wptscs.Logics
             {
                 // ページ無しによる例外も正常終了
                 return true;
-            }
-            catch (EndPeriodException)
-            {
-                // 末尾がピリオドで終わるページが処理できない既知の不具合への対応、警告メッセージを出す
-                this.Logger.AddResponse(Resources.LogMessageErrorPageName, title);
-                return false;
             }
             catch (Exception e)
             {

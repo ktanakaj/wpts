@@ -142,31 +142,6 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// ページのURI。
-        /// </summary>
-        /// <remarks>
-        /// get時に値が設定されていない場合、サーバーにアクセスしその際のURIを記録する。
-        /// ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。
-        /// </remarks>
-        public override Uri Uri
-        {
-            get
-            {
-                if (base.Uri == null)
-                {
-                    this.SetPageBodyAndTimestamp();
-                }
-
-                return base.Uri;
-            }
-
-            protected set
-            {
-                base.Uri = value;
-            }
-        }
-
-        /// <summary>
         /// リダイレクト元の記事名。
         /// </summary>
         public string Redirect
@@ -192,6 +167,7 @@ namespace Honememo.Wptscs.Websites
         /// APIから取得した言語間リンク情報から、ページを取得する。
         /// </summary>
         /// <param name="website">ページが所属するウェブサイト。</param>
+        /// <param name="uri">クエリーを取得したURI。</param>
         /// <param name="query">
         /// MediaWiki APIから取得した言語間リンク情報。
         /// <c>pages/page (ns="0"), redirects/r</c> を使用する。
@@ -200,7 +176,7 @@ namespace Honememo.Wptscs.Websites
         /// <exception cref="InvalidDataException">XMLのフォーマットが想定外。</exception>
         /// <exception cref="NullReferenceException">XMLのフォーマットが想定外。</exception>
         /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
-        public static MediaWikiPage GetFromQuery(MediaWiki website, XElement query)
+        public static MediaWikiPage GetFromQuery(MediaWiki website, Uri uri, XElement query)
         {
             // ページエレメントを取得
             // ※ この問い合わせでは、ページが無い場合も要素自体は毎回ある模様
@@ -224,9 +200,10 @@ namespace Honememo.Wptscs.Websites
                 throw new FileNotFoundException("page not found");
             }
 
-            // ページ名、リダイレクト、言語間リンク情報を詰めたオブジェクトを返す
+            // ページ名、URI、リダイレクト、言語間リンク情報を詰めたオブジェクトを返す
             // ※ ページ名以外はデータがあれば格納
             MediaWikiPage page = new MediaWikiPage(website, pe.Attribute("title").Value);
+            page.Uri = uri;
             var le = from links in pe.Elements("langlinks")
                      from n in links.Elements("ll")
                      select n;

@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツール設定画面クラスソース</summary>
 //
 // <copyright file="ConfigForm.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -764,6 +764,7 @@ namespace Honememo.Wptscs
             // MediaWikiクラス分の読み込み
             this.textBoxExportPath.Text = StringUtils.DefaultString(site.ExportPath);
             this.textBoxMetaApi.Text = StringUtils.DefaultString(site.MetaApi);
+            this.textBoxInterlanguageApi.Text = StringUtils.DefaultString(site.InterlanguageApi);
             this.textBoxTemplateNamespace.Text = site.TemplateNamespace.ToString();
             this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
             this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
@@ -852,6 +853,12 @@ namespace Honememo.Wptscs
             if (str != site.MetaApi)
             {
                 site.MetaApi = str;
+            }
+
+            str = StringUtils.DefaultString(this.textBoxInterlanguageApi.Text).Trim();
+            if (str != site.InterlanguageApi)
+            {
+                site.InterlanguageApi = str;
             }
 
             str = StringUtils.DefaultString(this.textBoxRedirect.Text).Trim();
