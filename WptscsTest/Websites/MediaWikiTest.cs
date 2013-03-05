@@ -404,42 +404,75 @@ namespace Honememo.Wptscs.Websites
             MediaWiki site = new MockFactory().GetMediaWiki("en");
             Page page = site.GetPage("example");
             Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
+            MediaWikiPage mp = (MediaWikiPage)page;
+            Assert.AreEqual("Example", page.Title);
+            Assert.AreSame(site, page.Website);
+            Assert.AreEqual(
+                new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.InterlanguageApi, "example")),
+                page.Uri);
+            Assert.IsNull(mp.Redirect);
+            Assert.AreEqual("Example (Begriffsklärung)", mp.GetInterlanguage("de"));
+
+            // 以下の二つは、遅延読み込みなので厳密にはGetPageで取得されていない
+            Assert.AreEqual(DateTime.Parse("2010/07/13T00:49:18Z"), page.Timestamp);
+            Assert.IsTrue(page.Text.Length > 0);
+
+            // リダイレクトの確認
+            page = site.GetPage("example.net");
+            Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
+            mp = (MediaWikiPage)page;
+            Assert.AreEqual("Example.com", page.Title);
+            Assert.AreSame(site, page.Website);
+            Assert.AreEqual(
+                new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.InterlanguageApi, "example.net")),
+                page.Uri);
+            Assert.AreEqual("Example.net", mp.Redirect);
+        }
+
+        /// <summary>
+        /// <see cref="MediaWiki.GetPageBodyAndTimestamp"/>メソッドテストケース。
+        /// </summary>
+        [TestMethod]
+        public void TestGetPageBodyAndTimestamp()
+        {
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
+            Page page = site.GetPageBodyAndTimestamp("example");
+            Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
             Assert.AreEqual("Example", page.Title);
             Assert.AreEqual(DateTime.Parse("2010/07/13T00:49:18Z"), page.Timestamp);
             Assert.IsTrue(page.Text.Length > 0);
             Assert.AreEqual(site, page.Website);
+
+            // このメソッドでは言語間リンク・リダイレクトは取れない
+            Assert.IsNull(((MediaWikiPage)page).GetInterlanguage("de"));
         }
 
         /// <summary>
-        /// <see cref="MediaWiki.GetPage"/>メソッドテストケース（末尾ピリオド）。
+        /// <see cref="MediaWiki.GetPageBodyAndTimestamp"/>メソッドテストケース（末尾ピリオド）。
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(EndPeriodException))]
-        public void TestGetPageEndPeriodException()
+        public void TestGetPageBodyAndTimestampAboutEndPeriodException()
         {
             // ピリオドで終わるページは2012年現在処理できないため、
             // 暫定対応として例外を投げる
             // ※ httpでページ名が末尾に来るパスになるよう設定
             //    処理の都合上、このテストはサーバーに接続しています
-            MediaWiki site = new MediaWiki(new Language("en"));
-            Page page = site.GetPage("Vulcan Inc.");
-            string dummy = page.Text;
+            new MediaWiki(new Language("en")).GetPageBodyAndTimestamp("Vulcan Inc.");
         }
 
         /// <summary>
-        /// <see cref="MediaWiki.GetPage"/>メソッドテストケース（末尾クエッションマーク）。
+        /// <see cref="MediaWiki.GetPageBodyAndTimestamp"/>メソッドテストケース（末尾クエッションマーク）。
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(EndPeriodException))]
-        public void TestGetPageEndPeriodExceptionAboutQuestion()
+        public void TestGetPageBodyAndTimestampAboutEndPeriodExceptionByQuestion()
         {
             // ?で終わるページも2012年現在処理できないため、
             // 暫定対応として例外を投げる
             // ※ httpでページ名が末尾に来るパスになるよう設定
             //    処理の都合上、このテストはサーバーに接続しています
-            MediaWiki site = new MediaWiki(new Language("en"));
-            Page page = site.GetPage("How does one patch KDE2 under FreeBSD?");
-            string dummy = page.Text;
+            new MediaWiki(new Language("en")).GetPageBodyAndTimestamp("How does one patch KDE2 under FreeBSD?");
         }
 
         /// <summary>

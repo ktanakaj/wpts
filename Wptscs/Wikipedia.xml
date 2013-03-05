@@ -749,31 +749,11 @@
     </MediaWiki>
   </Websites>
   <ItemTables>
-    <ItemTable From="en" To="de">
-      <Item From="Template:Doc" To="Vorlage:Dokumentation" Redirect="Template:Documentation" />
-      <Item From="Template:Documentation" To="Vorlage:Dokumentation" />
-      <Item From="Template:Template doc" To="Vorlage:Dokumentation" Redirect="Template:Documentation" />
-    </ItemTable>
-    <ItemTable From="en" To="fr">
-      <Item From="Template:Doc" To="Modèle:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Documentation" To="Modèle:Documentation" />
-      <Item From="Template:Template doc" To="Modèle:Documentation" Redirect="Template:Documentation" />
-    </ItemTable>
     <ItemTable From="en" To="ja">
       <Item From="Template:Lang-la" To="Template:Lang-la" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
       <Item From="Template:Note" To="Template:Note" />
-    </ItemTable>
-    <ItemTable From="en" To="ru">
-      <Item From="Template:Doc" To="Шаблон:Doc" Redirect="Template:Documentation" />
-      <Item From="Template:Documentation" To="Шаблон:Doc" />
-      <Item From="Template:Template doc" To="Шаблон:Doc" Redirect="Template:Documentation" />
-    </ItemTable>
-    <ItemTable From="en" To="zh">
-      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Documentation" To="Template:Documentation" />
-      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
     </ItemTable>
     <ItemTable From="ja" To="en">
       <Item From="Template:?" To="Template:?" />
@@ -786,12 +766,8 @@
       <Item From="Template:Col-end" To="Template:Col-end" />
       <Item From="Template:Column" To="Template:Column" />
       <Item From="Template:Columns-end" To="Template:Columns-end" />
-      <Item From="Template:Doc" To="Template:Documentation" Redirect="Template:Documentation" />
-      <Item From="Template:Documentation" To="Template:Documentation" />
       <Item From="Template:Multicol-break" To="Template:Multicol-break" />
       <Item From="Template:Multicol-end" To="Template:Multicol-end" />
-      <Item From="Template:Refend" To="Template:Refend" />
-      <Item From="Template:Template doc" To="Template:Documentation" Redirect="Template:Documentation" />
     </ItemTable>
   </ItemTables>
   <HeadingTable>
