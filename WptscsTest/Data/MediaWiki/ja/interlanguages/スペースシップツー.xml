@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1751498" ns="0" title="スペースシップツー">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">سبيس شيب تو</ll>
+          <ll lang="cs" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="de" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="en" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="eo" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="es" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="fa" xml:space="preserve">فضاپیمای دو</ll>
+          <ll lang="fi" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="fr" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="hu" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="it" xml:space="preserve">Scaled Composites SpaceShipTwo</ll>
+          <ll lang="nl" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="pl" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="ru" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="sk" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="sv" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="tr" xml:space="preserve">Spaceshiptwo</ll>
+          <ll lang="uk" xml:space="preserve">SpaceShipTwo</ll>
+          <ll lang="zh" xml:space="preserve">太空船2号</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

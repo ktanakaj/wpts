@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <normalized>
+      <n from="Template:cite web" to="Template:Cite web" />
+    </normalized>
+    <pages>
+      <page pageid="464640" ns="10" title="Template:Cite web">
+        <langlinks>
+          <ll lang="af" xml:space="preserve">Sjabloon:Webaanhaling</ll>
+          <ll lang="az" xml:space="preserve">Şablon:Cite web</ll>
+          <ll lang="be-x-old" xml:space="preserve">Шаблён:Спасылка</ll>
+          <ll lang="bg" xml:space="preserve">Шаблон:Цитат уеб</ll>
+          <ll lang="ca" xml:space="preserve">Plantilla:Citar web</ll>
+          <ll lang="cs" xml:space="preserve">Šablona:Citace elektronické monografie</ll>
+          <ll lang="da" xml:space="preserve">Skabelon:Kilde www</ll>
+          <ll lang="de" xml:space="preserve">Vorlage:Cite web</ll>
+          <ll lang="el" xml:space="preserve">Πρότυπο:Cite web</ll>
+          <ll lang="en" xml:space="preserve">Template:Cite web</ll>
+          <ll lang="eo" xml:space="preserve">Ŝablono:Citaĵo el la reto</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Cita web</ll>
+          <ll lang="et" xml:space="preserve">Mall:Netiviide</ll>
+          <ll lang="fi" xml:space="preserve">Malline:Verkkoviite</ll>
+          <ll lang="fr" xml:space="preserve">Modèle:Lien web</ll>
+          <ll lang="hr" xml:space="preserve">Predložak:Cite web</ll>
+          <ll lang="hu" xml:space="preserve">Sablon:Cite web</ll>
+          <ll lang="ia" xml:space="preserve">Patrono:Cite web</ll>
+          <ll lang="it" xml:space="preserve">Template:Cita web</ll>
+          <ll lang="ko" xml:space="preserve">틀:웹 인용</ll>
+          <ll lang="mk" xml:space="preserve">Шаблон:Cite web</ll>
+          <ll lang="ms" xml:space="preserve">Templat:Cite web</ll>
+          <ll lang="nl" xml:space="preserve">Sjabloon:Voetnoot web</ll>
+          <ll lang="no" xml:space="preserve">Mal:Kilde www</ll>
+          <ll lang="pl" xml:space="preserve">Szablon:Cytuj stronę</ll>
+          <ll lang="pt" xml:space="preserve">Predefinição:Citar web</ll>
+          <ll lang="ro" xml:space="preserve">Format:Citat web</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Cite web</ll>
+          <ll lang="sk" xml:space="preserve">Šablóna:Cite web</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Navedi splet</ll>
+          <ll lang="sr" xml:space="preserve">Шаблон:Cite web</ll>
+          <ll lang="sv" xml:space="preserve">Mall:Webbref</ll>
+          <ll lang="tr" xml:space="preserve">Şablon:Cite web</ll>
+          <ll lang="uk" xml:space="preserve">Шаблон:Cite web</ll>
+          <ll lang="vi" xml:space="preserve">Tiêu bản:Chú thích web</ll>
+          <ll lang="zh" xml:space="preserve">Template:Cite web</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

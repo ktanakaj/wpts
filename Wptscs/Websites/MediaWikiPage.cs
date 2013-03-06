@@ -3,7 +3,7 @@
 //      MediaWikiのページをあらわすモデルクラスソース</summary>
 //
 // <copyright file="MediaWikiPage.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -14,8 +14,8 @@ namespace Honememo.Wptscs.Websites
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Xml.Linq;
     using Honememo.Models;
-    using Honememo.Parsers;
     using Honememo.Utilities;
     using Honememo.Wptscs.Parsers;
 
@@ -24,15 +24,6 @@ namespace Honememo.Wptscs.Websites
     /// </summary>
     public class MediaWikiPage : Page
     {
-        #region private変数
-
-        /// <summary>
-        /// リダイレクト先のページ名。
-        /// </summary>
-        private MediaWikiLink redirect;
-
-        #endregion
-
         #region コンストラクタ
 
         /// <summary>
@@ -48,6 +39,7 @@ namespace Honememo.Wptscs.Websites
         public MediaWikiPage(MediaWiki website, string title, string text, DateTime? timestamp, Uri uri)
             : base(website, title, text, timestamp, uri)
         {
+            this.Interlanguages = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -62,6 +54,7 @@ namespace Honememo.Wptscs.Websites
         public MediaWikiPage(MediaWiki website, string title, string text)
             : base(website, title, text)
         {
+            this.Interlanguages = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -75,6 +68,7 @@ namespace Honememo.Wptscs.Websites
         public MediaWikiPage(MediaWiki website, string title)
             : base(website, title)
         {
+            this.Interlanguages = new Dictionary<string, string>();
         }
 
         #endregion
@@ -100,55 +94,137 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// ページの本文。
         /// </summary>
+        /// <remarks>
+        /// get時に値が設定されていない場合、サーバーから本文を取得する。
+        /// ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。
+        /// </remarks>
         public override string Text
         {
             get
             {
+                if (base.Text == null)
+                {
+                    this.SetPageBodyAndTimestamp();
+                }
+
                 return base.Text;
             }
 
             protected set
             {
-                // 本文は普通に格納
                 base.Text = value;
-                this.redirect = null;
-
-                // 本文格納のタイミングでリダイレクトページ（#REDIRECT等）かを判定
-                if (!string.IsNullOrEmpty(base.Text))
-                {
-                    IElement element;
-                    using (MediaWikiRedirectParser parser = new MediaWikiRedirectParser(this.Website))
-                    {
-                        if (parser.TryParse(base.Text, out element))
-                        {
-                            this.redirect = element as MediaWikiLink;
-                        }
-                    }
-                }
             }
         }
 
         /// <summary>
-        /// リダイレクト先へのリンク。
+        /// ページのタイムスタンプ。
         /// </summary>
-        /// <exception cref="InvalidOperationException"><see cref="Text"/>が<c>null</c>の場合。</exception>
-        public MediaWikiLink Redirect
+        /// <remarks>
+        /// get時に値が設定されていない場合、サーバーからタイムスタンプを取得する。
+        /// ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。
+        /// </remarks>
+        public override DateTime? Timestamp
         {
             get
             {
-                // Textが設定されている場合のみ有効
-                this.ValidateIncomplete();
-                return this.redirect;
+                if (base.Timestamp == null)
+                {
+                    this.SetPageBodyAndTimestamp();
+                }
+
+                return base.Timestamp;
             }
 
             protected set
             {
-                this.redirect = value;
+                base.Timestamp = value;
             }
         }
 
+        /// <summary>
+        /// リダイレクト元の記事名。
+        /// </summary>
+        public string Redirect
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 言語間リンクの対応表。
+        /// </summary>
+        protected IDictionary<string, string> Interlanguages
+        {
+            get;
+            private set;
+        }
+
         #endregion
-        
+
+        #region 静的メソッド
+
+        /// <summary>
+        /// APIから取得した言語間リンク情報から、ページを取得する。
+        /// </summary>
+        /// <param name="website">ページが所属するウェブサイト。</param>
+        /// <param name="uri">クエリーを取得したURI。</param>
+        /// <param name="query">
+        /// MediaWiki APIから取得した言語間リンク情報。
+        /// <c>pages/page (ns="0"), redirects/r</c> を使用する。
+        /// </param>
+        /// <returns>言語間リンク情報から取得したページ。</returns>
+        /// <exception cref="InvalidDataException">XMLのフォーマットが想定外。</exception>
+        /// <exception cref="NullReferenceException">XMLのフォーマットが想定外。</exception>
+        /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
+        public static MediaWikiPage GetFromQuery(MediaWiki website, Uri uri, XElement query)
+        {
+            // ページエレメントを取得
+            // ※ この問い合わせでは、ページが無い場合も要素自体は毎回ある模様
+            //    一件しか返らないはずなので先頭データを対象とする
+            XElement pe;
+            try
+            {
+                pe = (from pages in query.Elements("pages")
+                      from n in pages.Elements("page")
+                      select n).First();
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException("parse failed : pages/page element is not found");
+            }
+
+            // ページの解析
+            if (pe.Attribute("missing") != null)
+            {
+                // missing属性が存在する場合、ページ無し
+                throw new FileNotFoundException("page not found");
+            }
+
+            // ページ名、URI、リダイレクト、言語間リンク情報を詰めたオブジェクトを返す
+            // ※ ページ名以外はデータがあれば格納
+            MediaWikiPage page = new MediaWikiPage(website, pe.Attribute("title").Value);
+            page.Uri = uri;
+            var le = from links in pe.Elements("langlinks")
+                     from n in links.Elements("ll")
+                     select n;
+            foreach (var ll in le)
+            {
+                page.Interlanguages.Add(ll.Attribute("lang").Value, ll.Value);
+            }
+
+            var re = from redirects in query.Elements("redirects")
+                     from n in redirects.Elements("r")
+                     select n;
+            foreach (var r in re)
+            {
+                page.Redirect = r.Attribute("from").Value;
+            }
+
+            return page;
+        }
+
+        #endregion
+
         #region 公開メソッド
 
         /// <summary>
@@ -156,26 +232,24 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         /// <param name="code">言語コード。</param>
         /// <returns>言語間リンク。見つからない場合は<c>null</c>。</returns>
-        /// <exception cref="InvalidOperationException"><see cref="Text"/>が<c>null</c>の場合。</exception>
-        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        public virtual MediaWikiLink GetInterlanguage(string code)
+        public virtual string GetInterlanguage(string code)
         {
-            // Textが設定されている場合のみ有効
-            this.ValidateIncomplete();
+            // 対応表から返す
+            string interlanguage;
+            if (this.Interlanguages.TryGetValue(code, out interlanguage))
+            {
+                return interlanguage;
+            }
 
-            // ページ本文から言語間リンクを探索
-            // ※ 自ページの解析なのでnoincludeとして前処理を行う
-            return this.GetInterlanguage(code, MediaWikiPreparser.PreprocessByNoinclude(this.Text));
+            return null;
         }
 
         /// <summary>
         /// ページがリダイレクトかをチェック。
         /// </summary>
         /// <returns><c>true</c> リダイレクト。</returns>
-        /// <exception cref="InvalidOperationException"><see cref="Text"/>が<c>null</c>の場合。</exception>
         public bool IsRedirect()
         {
-            // Textが設定されている場合のみ有効
             return this.Redirect != null;
         }
 
@@ -246,6 +320,21 @@ namespace Honememo.Wptscs.Websites
         #region 内部処理用メソッド
 
         /// <summary>
+        /// ページの本文・タイムスタンプをサーバーから取得。
+        /// </summary>
+        /// <exception cref="Honememo.Wptscs.Utilities.EndPeriodException">
+        /// 末尾がピリオドのページの場合（既知の不具合への対応）。
+        /// </exception>
+        /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
+        protected void SetPageBodyAndTimestamp()
+        {
+            Page body = this.Website.GetPageBodyAndTimestamp(this.Title);
+            this.Text = body.Text;
+            this.Timestamp = body.Timestamp;
+            this.Uri = body.Uri;
+        }
+
+        /// <summary>
         /// ページが指定された番号の名前空間に所属するかをチェック。
         /// </summary>
         /// <param name="id">名前空間のID。</param>
@@ -263,210 +352,6 @@ namespace Honememo.Wptscs.Websites
             string title = this.Title.Remove(index);
             IgnoreCaseSet prefixes = this.Website.Namespaces[id];
             return prefixes != null && prefixes.Contains(title);
-        }
-
-        /// <summary>
-        /// オブジェクトがメソッドの実行に不完全な状態でないか検証する。
-        /// 不完全な場合、例外をスローする。
-        /// </summary>
-        /// <exception cref="InvalidOperationException"><see cref="Text"/>が<c>null</c>の場合。</exception>
-        protected virtual void ValidateIncomplete()
-        {
-            if (this.Text == null)
-            {
-                // ページ本文が設定されていない場合不完全と判定
-                throw new InvalidOperationException("Text is unset");
-            }
-        }
-
-        /// <summary>
-        /// 指定されたページテキストから言語間リンクを取得。
-        /// </summary>
-        /// <param name="code">言語コード。</param>
-        /// <param name="text">ページテキスト。</param>
-        /// <returns>言語間リンク。見つからない場合は<c>null</c>。</returns>
-        /// <remarks>
-        /// <para>
-        /// 言語間リンクが複数存在する場合は、先に発見したものを返す。
-        /// </para>
-        /// <para>
-        /// 稀に障害なのか<see cref="MediaWiki.MetaApi"/>から<c>interwikimap</c>
-        /// が0件で返ってくることがある
-        /// （API構文ミスなどでなく、それまで動いていたはずのものが）。
-        /// その場合、そのままでは言語すら判別できないので、念のためこの処理では
-        /// 実行前に強制的に翻訳元／先のコードを
-        /// <see cref="MediaWiki.InterwikiPrefixs"/>に追加している
-        /// （一時的な追加。例外にした方がよいのかもしれないが、それだとその間全く
-        /// 処理が行えないため。かつトランスレータ側なら余計なログが出るぐらいで
-        /// あまり影響がなくても、こちらは解析自体が失敗してしまうため）。
-        /// </para>
-        /// </remarks>
-        private MediaWikiLink GetInterlanguage(string code, string text)
-        {
-            // interwikimapに強制的に翻訳元／先のコードを一時的に追加
-            // ※ 2012年2月現在、キャッシュのセットが返ってくるので単純にそこに追加
-            this.Website.InterwikiPrefixs.Add(this.Website.Language.Code);
-            this.Website.InterwikiPrefixs.Add(code);
-
-            // 渡されたテキストを要素単位に解析し、その結果から言語間リンクを探索する
-            IElement element;
-            using (MediaWikiParser parser = new MediaWikiParser(this.Website))
-            {
-                element = parser.Parse(text);
-            }
-
-            return this.GetInterlanguage(code, element);
-        }
-
-        /// <summary>
-        /// 指定されたページ解析結果要素から言語間リンクを取得。
-        /// </summary>
-        /// <param name="code">言語コード。</param>
-        /// <param name="element">要素。</param>
-        /// <returns>言語間リンク。見つからない場合は<c>null</c>。</returns>
-        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        private MediaWikiLink GetInterlanguage(string code, IElement element)
-        {
-            if (element is MediaWikiTemplate)
-            {
-                // Documentationテンプレートがある場合は、その中を探索
-                MediaWikiLink interlanguage = this.GetDocumentationInterlanguage((MediaWikiTemplate)element, code);
-                if (interlanguage != null)
-                {
-                    return interlanguage;
-                }
-            }
-            else if (element is MediaWikiLink)
-            {
-                // 指定言語への言語間リンクの場合、内容を取得し、処理終了
-                MediaWikiLink link = (MediaWikiLink)element;
-                if (link.Interwiki == code && !link.IsColon)
-                {
-                    return link;
-                }
-            }
-            else if (element is IEnumerable<IElement>)
-            {
-                // 子要素を持つ場合、再帰的に探索
-                foreach (IElement e in (IEnumerable<IElement>)element)
-                {
-                    MediaWikiLink interlanguage = this.GetInterlanguage(code, e);
-                    if (interlanguage != null)
-                    {
-                        return interlanguage;
-                    }
-                }
-            }
-
-            // 未発見の場合null
-            return null;
-        }
-
-        /// <summary>
-        /// 渡されたTemplate:Documentationの呼び出しから、指定された言語コードへの言語間リンクを返す。
-        /// </summary>
-        /// <param name="template">テンプレート呼び出しのリンク。</param>
-        /// <param name="code">言語コード。</param>
-        /// <returns>言語間リンク。見つからない場合またはパラメータが対象外の場合は<c>null</c>。</returns>
-        /// <remarks>言語間リンクが複数存在する場合は、先に発見したものを返す。</remarks>
-        private MediaWikiLink GetDocumentationInterlanguage(MediaWikiTemplate template, string code)
-        {
-            // Documentationテンプレートのリンクかを確認
-            if (!this.IsDocumentationTemplate(template.Title))
-            {
-                return null;
-            }
-
-            // インライン・コンテンツの可能性があるため、先にパラメータを再帰的に探索
-            foreach (IElement e in template.PipeTexts)
-            {
-                MediaWikiLink interlanguage = this.GetInterlanguage(code, e);
-                if (interlanguage != null)
-                {
-                    return interlanguage;
-                }
-            }
-
-            // インラインでなさそうな場合、解説記事名を確認
-            string subtitle = ObjectUtils.ToString(template.PipeTexts.ElementAtOrDefault(0));
-            if (string.IsNullOrWhiteSpace(subtitle) || subtitle.Contains('='))
-            {
-                // 指定されていない場合はデフォルトのページを探索
-                subtitle = this.Website.DocumentationTemplateDefaultPage;
-            }
-
-            if (string.IsNullOrEmpty(subtitle))
-            {
-                return null;
-            }
-
-            // ページ名を正規化しつつ、解説ページから言語間リンクを取得
-            MediaWikiPage subpage = null;
-            try
-            {
-                // ※ ページ名を正規化するのはサブページへの対処
-                // ※ 本当はここでの取得状況も画面に見せたいが、今のつくりで
-                //    そうするとややこしくなるので隠蔽する。
-                subpage = this.Website.GetPage(this.Normalize(new MediaWikiLink(subtitle))) as MediaWikiPage;
-            }
-            catch (FileNotFoundException)
-            {
-                // 解説ページ無し
-            }
-            catch (Exception ex)
-            {
-                // 想定外の例外だが、ここではデバッグログを吐いて終了する
-                // ※ 他の処理と流れが違うため、うまい処理方法が思いつかないので
-                System.Diagnostics.Debug.WriteLine(ex.ToString());
-            }
-
-            if (subpage != null)
-            {
-                // サブページの言語間リンクを返す
-                // ※ テンプレート呼び出しなのでincludeとして前処理を行う
-                return subpage.GetInterlanguage(
-                    code,
-                    MediaWikiPreparser.PreprocessByInclude(subpage.Text));
-            }
-
-            // 未発見の場合null
-            return null;
-        }
-
-        /// <summary>
-        /// 渡されたテンプレート名がTemplate:Documentationのいずれかに該当するか？
-        /// </summary>
-        /// <param name="title">テンプレート名。</param>
-        /// <returns>該当する場合<c>true</c>。</returns>
-        private bool IsDocumentationTemplate(string title)
-        {
-            // Documentationテンプレートのリンクかを確認
-            string lowerTitle = title.ToLower();
-            foreach (string docTitle in this.Website.DocumentationTemplates)
-            {
-                string lowerDocTitle = docTitle.ToLower();
-
-                // 普通にテンプレート名を比較
-                if (lowerTitle == lowerDocTitle)
-                {
-                    return true;
-                }
-
-                // 名前空間で一致していない可能性があるので、名前空間を取ってもう一度判定
-                int index = lowerDocTitle.IndexOf(':');
-                if (new MediaWikiPage(this.Website, lowerDocTitle).IsTemplate()
-                    && index >= 0 && index + 1 < lowerDocTitle.Length)
-                {
-                    lowerDocTitle = lowerDocTitle.Substring(lowerDocTitle.IndexOf(':') + 1);
-                }
-
-                if (lowerTitle == lowerDocTitle)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>

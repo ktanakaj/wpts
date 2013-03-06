@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1757090" ns="0" title="ホワイトナイトツー">
+        <langlinks>
+          <ll lang="de" xml:space="preserve">White Knight Two</ll>
+          <ll lang="en" xml:space="preserve">Scaled Composites White Knight Two</ll>
+          <ll lang="fr" xml:space="preserve">White Knight Two</ll>
+          <ll lang="hu" xml:space="preserve">WhiteKnightTwo</ll>
+          <ll lang="pl" xml:space="preserve">WhiteKnightTwo</ll>
+          <ll lang="sv" xml:space="preserve">White Knight 2</ll>
+          <ll lang="zh" xml:space="preserve">白色骑士2号</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

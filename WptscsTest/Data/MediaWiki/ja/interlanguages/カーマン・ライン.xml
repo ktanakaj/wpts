@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1661853" ns="0" title="カーマン・ライン">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">خط كارمان</ll>
+          <ll lang="bn" xml:space="preserve">কার্মান রেখা</ll>
+          <ll lang="ca" xml:space="preserve">Línia de Kármán</ll>
+          <ll lang="cs" xml:space="preserve">Kármánova hranice</ll>
+          <ll lang="de" xml:space="preserve">Kármán-Linie</ll>
+          <ll lang="en" xml:space="preserve">Kármán line</ll>
+          <ll lang="es" xml:space="preserve">Línea de Kármán</ll>
+          <ll lang="et" xml:space="preserve">Kármáni joon</ll>
+          <ll lang="eu" xml:space="preserve">Kármánen lerroa</ll>
+          <ll lang="fi" xml:space="preserve">Kármánin raja</ll>
+          <ll lang="fr" xml:space="preserve">Ligne de Kármán</ll>
+          <ll lang="he" xml:space="preserve">קו קרמן</ll>
+          <ll lang="hu" xml:space="preserve">Kármán-vonal</ll>
+          <ll lang="it" xml:space="preserve">Linea di Kármán</ll>
+          <ll lang="lv" xml:space="preserve">Karmana līnija</ll>
+          <ll lang="ne" xml:space="preserve">कार्मन रेखा</ll>
+          <ll lang="nl" xml:space="preserve">Kármánlijn</ll>
+          <ll lang="no" xml:space="preserve">Kármánlinjen</ll>
+          <ll lang="oc" xml:space="preserve">Linha de Kármán</ll>
+          <ll lang="pl" xml:space="preserve">Linia Kármána</ll>
+          <ll lang="pt" xml:space="preserve">Linha de Kármán</ll>
+          <ll lang="ro" xml:space="preserve">Linia Kármán</ll>
+          <ll lang="ru" xml:space="preserve">Линия Кармана</ll>
+          <ll lang="sk" xml:space="preserve">Kármánova hranica</ll>
+          <ll lang="sr" xml:space="preserve">Карманова линија</ll>
+          <ll lang="sv" xml:space="preserve">Karmanlinjen</ll>
+          <ll lang="tr" xml:space="preserve">Atmosferin katmanları</ll>
+          <ll lang="uk" xml:space="preserve">Лінія Кармана</ll>
+          <ll lang="zh" xml:space="preserve">卡門線</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

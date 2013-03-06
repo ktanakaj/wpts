@@ -3,7 +3,7 @@
 //      MediaWikiPageのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiPageTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -12,6 +12,8 @@ namespace Honememo.Wptscs.Websites
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Linq;
     using Honememo.Parsers;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
@@ -24,109 +26,216 @@ namespace Honememo.Wptscs.Websites
     [TestClass]
     public class MediaWikiPageTest
     {
-        #region コンストラクタテストケース
+        #region 定数
 
         /// <summary>
-        /// コンストラクタテストケース。
+        /// example.xmlのページ本文。
         /// </summary>
-        [TestMethod]
-        public void TestConstructorWebsiteTitleTextTimestamp()
-        {
-            DateTime t = DateTime.Now;
-            Uri uri = new Uri("http://wikipedia.example");
-            MediaWiki s = new MediaWiki(new Language("en"));
-            MediaWikiPage page = new MediaWikiPage(s, "TestTitle", "TestText", t, uri);
-            Assert.AreSame(s, page.Website);
-            Assert.AreEqual("TestTitle", page.Title);
-            Assert.AreEqual("TestText", page.Text);
-            Assert.AreEqual(t, page.Timestamp);
-            Assert.AreSame(uri, page.Uri);
-        }
-
+        private static readonly string exampleText
+            = "[[File:Example.png|thumb|Wikipedia's example image. (Example.png)]]\n{{wiktionary}}\n{{wikiquote}}\n"
+                + "'''Example''' may refer to:\n\n*[[Example (rapper)]], a British rapper\n*[[example.com]], "
+                + "[[example.net]], [[example.org]]  and [[.example]], domain names reserved for use in documentation "
+                + "as examples \n\n==See also==\n*[[Exemplum]], medieval collections of short stories to be told in "
+                + "sermons\n*[[Exemplar]], a prototype or model which others can use to understand a topic better\n\n"
+                + "{{disambig}}\n\n[[fr:Example]]\n[[ksh:Example (Watt ėßß datt?)]]";
+        
         /// <summary>
-        /// コンストラクタテストケース（タイムスタンプ無し）。
+        /// example.xmlのページ本文。
         /// </summary>
-        [TestMethod]
-        public void TestConstructorWebsiteTitleText()
-        {
-            MediaWiki s = new MediaWiki(new Language("en"));
-            MediaWikiPage page = new MediaWikiPage(s, "TestTitle", "TestText");
-            Assert.AreEqual(s, page.Website);
-            Assert.AreEqual("TestTitle", page.Title);
-            Assert.AreEqual("TestText", page.Text);
-            Assert.IsNull(page.Timestamp);
-            Assert.IsNull(page.Uri);
-        }
-
-        /// <summary>
-        /// コンストラクタテストケース（本文・タイムスタンプ無し）。
-        /// </summary>
-        [TestMethod]
-        public void TestConstructorWebsiteTitle()
-        {
-            MediaWiki s = new MediaWiki(new Language("en"));
-            MediaWikiPage page = new MediaWikiPage(s, "TestTitle");
-            Assert.AreEqual(s, page.Website);
-            Assert.AreEqual("TestTitle", page.Title);
-            Assert.IsNull(page.Text);
-            Assert.IsNull(page.Timestamp);
-            Assert.IsNull(page.Uri);
-        }
-
-        /// <summary>
-        /// コンストラクタテストケース（ウェブサイトがnull）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestConstructorWebsiteNull()
-        {
-            new MediaWikiPage(null, "TestTitle");
-        }
-
-        /// <summary>
-        /// コンストラクタテストケース（タイトルが空）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestConstructorTitleBlank()
-        {
-            new MediaWikiPage(new MediaWiki(new Language("en")), "  ");
-        }
+        private static readonly DateTime exampleTimestamp = DateTime.Parse("2010-07-13T00:49:18Z");
 
         #endregion
 
         #region プロパティテストケース
 
         /// <summary>
-        /// <see cref="MediaWikiPage.Redirect"/>プロパティテストケース（正常系）。
+        /// <see cref="MediaWikiPage.Text"/>プロパティテストケース。
         /// </summary>
         [TestMethod]
-        public void TestRedirect()
+        public void TestText()
         {
-            MediaWiki site;
+            // 何も値が設定されていない場合、記事名からデータを読み込みその本文を返す
+            // 同時にタイムスタンプ, URIも設定される
+            // ※ 異常系については、MediaWiki側の実装なのでそちらでテストする
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
+            Uri uri = new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.ExportPath, "example"));
+            MediaWikiPageMock page = new MediaWikiPageMock(site, "example");
+            Assert.IsNull(page.Uri);
 
-            site = new MockFactory().GetMediaWiki("en");
-            Assert.IsNull(new MediaWikiPage(site, "TestTitle", "[[TestLink]]").Redirect);
-            Assert.IsNotNull(new MediaWikiPage(site, "TestTitle", "#redirect [[TestLink]]").Redirect);
-            Assert.AreEqual("[[TestLink]]", new MediaWikiPage(site, "TestTitle", "#redirect [[TestLink]]").Redirect.ToString());
-            Assert.IsNull(new MediaWikiPage(site, "TestTitle", "#転送 [[TestLink]]").Redirect);
+            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
+            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
+            Assert.AreEqual(uri, page.Uri);
 
-            site = new MockFactory().GetMediaWiki("ja");
-            Assert.IsNull(new MediaWikiPage(site, "TestTitle", "[[TestLink]]").Redirect);
-            Assert.IsNotNull(new MediaWikiPage(site, "TestTitle", "#redirect [[TestLink]]").Redirect);
-            Assert.AreEqual("[[TestLink]]", new MediaWikiPage(site, "TestTitle", "#redirect [[TestLink]]").Redirect.ToString());
-            Assert.IsNotNull(new MediaWikiPage(site, "TestTitle", "#転送 [[TestLink]]").Redirect);
-            Assert.AreEqual("[[TestLink]]", new MediaWikiPage(site, "TestTitle", "#転送 [[TestLink]]").Redirect.ToString());
+            // 一度読み込むと、次回以降はその値が設定されている
+            page.Title = "new name";
+            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
+            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
+
+            // 値が設定されている状態では、設定された値が返る
+            page = new MediaWikiPageMock(site, "example");
+            page.Text = "test body";
+            Assert.AreEqual("test body", page.Text);
+            Assert.IsNull(page.Uri);
         }
 
         /// <summary>
-        /// <see cref="MediaWikiPage.Redirect"/>プロパティテストケース（Text未設定）。
+        /// <see cref="MediaWikiPage.Timestamp"/>プロパティテストケース。
+        /// </summary>
+        [TestMethod]
+        public void TestTimestamp()
+        {
+            // 何も値が設定されていない場合、記事名からデータを読み込みそのタイムスタンプを返す
+            // 同時にページ本文, URIも設定される
+            // ※ 異常系については、MediaWiki側の実装なのでそちらでテストする
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
+            Uri uri = new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.ExportPath, "example"));
+            MediaWikiPageMock page = new MediaWikiPageMock(site, "example");
+            Assert.IsNull(page.Uri);
+
+            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
+            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
+            Assert.AreEqual(uri, page.Uri);
+
+            // 一度読み込むと、次回以降はその値が設定されている
+            page.Title = "new name";
+            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
+            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
+
+            // 値が設定されている状態では、設定された値が返る
+            page = new MediaWikiPageMock(site, "example");
+            DateTime now = DateTime.Now;
+            page.Timestamp = now;
+            Assert.AreEqual(now, page.Timestamp);
+            Assert.IsNull(page.Uri);
+        }
+
+        #endregion
+
+        #region 静的メソッドテストケース
+
+        /// <summary>
+        /// <see cref="MediaWikiPage.GetFromQuery"/>メソッドテストケース。
+        /// </summary>
+        [TestMethod]
+        public void TestGetFromQuery()
+        {
+            // XMLを変えつつ、クエリーから想定通りのパラメータが読み込まれていることを確認
+            // ※ ページ本文とタイムスタンプはnullだが遅延読み込みされるので、ここではチェックしない
+            // ※ XMLはいろんなパターンがありえるが、パターンが増えすぎるので使う項目しかテストしていない。
+            //    ここ以外の項目は、基本的に影響していない・・・はず。
+
+            // 必要最小限のパターン
+            MediaWiki website = new MockFactory().GetMediaWiki("en");
+            XElement pe = new XElement("page", new XAttribute("title", "Test page"));
+            XElement query = new XElement("query", new XElement("pages", pe));
+            MediaWikiPage page = MediaWikiPage.GetFromQuery(website, null, query);
+            Assert.AreSame(website, page.Website);
+            Assert.IsNull(page.Uri);
+            Assert.AreEqual("Test page", page.Title);
+            Assert.IsNull(page.GetInterlanguage("ja"));
+            Assert.IsNull(page.GetInterlanguage("de"));
+            Assert.IsNull(page.Redirect);
+
+            // URI
+            Uri uri = new Uri("http://example.com/");
+            page = MediaWikiPage.GetFromQuery(website, uri, query);
+            Assert.AreSame(website, page.Website);
+            Assert.AreSame(uri, page.Uri);
+            Assert.AreEqual("Test page", page.Title);
+            Assert.IsNull(page.GetInterlanguage("ja"));
+            Assert.IsNull(page.GetInterlanguage("de"));
+            Assert.IsNull(page.Redirect);
+
+            // 言語間リンク枠だけ、上と変わらず
+            XElement les = new XElement("langlinks");
+            pe.Add(les);
+            page = MediaWikiPage.GetFromQuery(website, uri, query);
+            Assert.AreSame(website, page.Website);
+            Assert.AreSame(uri, page.Uri);
+            Assert.AreEqual("Test page", page.Title);
+            Assert.IsNull(page.GetInterlanguage("ja"));
+            Assert.IsNull(page.GetInterlanguage("de"));
+            Assert.IsNull(page.Redirect);
+
+            // 言語間リンク
+            les.Add(new XElement("ll", new XAttribute("lang", "ja"), "テストページ"));
+            page = MediaWikiPage.GetFromQuery(website, uri, query);
+            Assert.AreSame(website, page.Website);
+            Assert.AreSame(uri, page.Uri);
+            Assert.AreEqual("Test page", page.Title);
+            Assert.AreEqual("テストページ", page.GetInterlanguage("ja"));
+            Assert.IsNull(page.GetInterlanguage("de"));
+            Assert.IsNull(page.Redirect);
+
+            // 言語間リンク複数も可
+            les.Add(new XElement("ll", new XAttribute("lang", "de"), "Test de page"));
+            page = MediaWikiPage.GetFromQuery(website, uri, query);
+            Assert.AreSame(website, page.Website);
+            Assert.AreSame(uri, page.Uri);
+            Assert.AreEqual("Test page", page.Title);
+            Assert.AreEqual("テストページ", page.GetInterlanguage("ja"));
+            Assert.AreEqual("Test de page", page.GetInterlanguage("de"));
+            Assert.IsNull(page.Redirect);
+
+            // リダイレクト
+            query.Add(new XElement("redirects", new XElement("r", new XAttribute("from", "from Redirect"))));
+            page = MediaWikiPage.GetFromQuery(website, uri, query);
+            Assert.AreSame(website, page.Website);
+            Assert.AreSame(uri, page.Uri);
+            Assert.AreEqual("Test page", page.Title);
+            Assert.AreEqual("テストページ", page.GetInterlanguage("ja"));
+            Assert.AreEqual("Test de page", page.GetInterlanguage("de"));
+            Assert.AreEqual("from Redirect", page.Redirect);
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiPage.GetFromQuery"/>メソッドテストケース（サイトが<c>null</c>）。
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestGetFromQueryAboutWebsiteIsNull()
+        {
+            MediaWikiPage.GetFromQuery(
+                null,
+                null,
+                new XElement(
+                    "query",
+                    new XElement(
+                        "pages",
+                        new XElement("page", new XAttribute("title", "Test page")))));
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiPage.GetFromQuery"/>メソッドテストケース（XML不正）。
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void TestRedirectTextNull()
+        public void TestGetFromQueryAboutPageElementIsNotFound()
         {
-            MediaWikiLink dummy = new MediaWikiPage(new MockFactory().GetMediaWiki("en"), "TestTitle").Redirect;
+            MediaWikiPage.GetFromQuery(
+                new MockFactory().GetMediaWiki("en"),
+                null,
+                new XElement("query", new XElement("pages")));
+        }
+
+        /// <summary>
+        /// <see cref="MediaWikiPage.GetFromQuery"/>メソッドテストケース（ページなし）。
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void TestGetFromQueryAboutMissingPage()
+        {
+            MediaWikiPage.GetFromQuery(
+                new MockFactory().GetMediaWiki("en"),
+                null,
+                new XElement(
+                    "query",
+                    new XElement(
+                        "pages",
+                        new XElement(
+                            "page",
+                            new XAttribute("title", "Test page"),
+                            new XAttribute("missing", string.Empty)))));
         }
 
         #endregion
@@ -134,78 +243,21 @@ namespace Honememo.Wptscs.Websites
         #region 公開メソッドテストケース
 
         /// <summary>
-        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（通常ページ）。
+        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース。
         /// </summary>
         [TestMethod]
         public void TestGetInterlanguage()
         {
-            // 普通のページ
-            MediaWikiPage page = new MediaWikiPage(
+            MediaWikiPageMock page = new MediaWikiPageMock(
                 new MockFactory().GetMediaWiki("en"),
-                "TestTitle",
-                "TestText\n [[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
-            Assert.AreEqual("[[ja:テストページ]]", page.GetInterlanguage("ja").ToString());
-            Assert.AreEqual("[[fr:Test_Fr]]", page.GetInterlanguage("fr").ToString());
+                "TestTitle");
+            page.Interlanguages.Add("ja", "テストページ");
+            page.Interlanguages.Add("fr", "Test_Fr");
+            Assert.AreEqual("テストページ", page.GetInterlanguage("ja"));
+            Assert.AreEqual("Test_Fr", page.GetInterlanguage("fr"));
             Assert.IsNull(page.GetInterlanguage("de"));
             Assert.IsNull(page.GetInterlanguage("ru"));
             Assert.IsNull(page.GetInterlanguage("zh"));
-        }
-
-        /// <summary>
-        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（通常ページ実データ使用）。
-        /// </summary>
-        [TestMethod, Timeout(20000)]
-        public void TestGetInterlanguageDiscoveryChannel()
-        {
-            MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Discovery Channel");
-            Assert.AreEqual("[[ja:ディスカバリーチャンネル]]", page.GetInterlanguage("ja").ToString());
-            Assert.AreEqual("[[it:Discovery Channel (Italia)]]", page.GetInterlanguage("it").ToString());
-            Assert.AreEqual("[[simple:Discovery Channel]]", page.GetInterlanguage("simple").ToString());
-            Assert.AreEqual("[[ru:Discovery (телеканал)]]", page.GetInterlanguage("ru").ToString());
-            Assert.IsNull(page.GetInterlanguage("io"));
-        }
-
-        /// <summary>
-        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（テンプレートページ実データ使用）。
-        /// </summary>
-        [TestMethod, Timeout(20000)]
-        public void TestGetInterlanguagePlanetboxBegin()
-        {
-            MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Template:Planetbox begin");
-            Assert.AreEqual("[[ja:Template:Planetbox begin]]", page.GetInterlanguage("ja").ToString());
-            Assert.AreEqual("[[ru:Шаблон:Planetbox begin]]", page.GetInterlanguage("ru").ToString());
-            Assert.IsNull(page.GetInterlanguage("zh"));
-        }
-
-        /// <summary>
-        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（Template:Documentation使用ページ）。
-        /// </summary>
-        [TestMethod]
-        public void TestGetInterlanguageDocumentation()
-        {
-            // Template:Documentation を使ってるページ
-            MediaWiki site = new DummySite(new Language("en"));
-            new MockFactory().SetMockConfig(site);
-            site.DocumentationTemplates.Add("Template:Documentation");
-            site.DocumentationTemplateDefaultPage = "/doc";
-            MediaWikiPage page = new MediaWikiPage(site, "Template:Test", "TestText{{Documentation}}");
-
-            Assert.AreEqual("[[ja:テストページ]]", page.GetInterlanguage("ja").ToString());
-            Assert.AreEqual("[[fr:Test_Fr]]", page.GetInterlanguage("fr").ToString());
-            Assert.IsNull(page.GetInterlanguage("de"));
-            Assert.IsNull(page.GetInterlanguage("ru"));
-            Assert.IsNull(page.GetInterlanguage("zh"));
-        }
-
-        /// <summary>
-        /// <see cref="MediaWikiPage.GetInterlanguage"/>メソッドテストケース（Template:Documentationにnoincludeで囲まれた言語間リンクが存在）。
-        /// </summary>
-        [TestMethod]
-        public void TestGetInterlanguagePartial()
-        {
-            MediaWikiPage page = (MediaWikiPage)new MockFactory().GetMediaWiki("en").GetPage("Template:Partial");
-            Assert.AreEqual("[[ja:Template:Partial]]", page.GetInterlanguage("ja").ToString());
-            Assert.IsNull(page.GetInterlanguage("ru"));
         }
 
         /// <summary>
@@ -215,25 +267,21 @@ namespace Honememo.Wptscs.Websites
         public void TestIsRedirect()
         {
             MediaWiki site = new MediaWiki(new Language("en"));
-            MediaWikiPage page = new MediaWikiPage(site, "TestTitle", "#REDIRECT [[Test Redirect]]");
-            Assert.IsTrue(page.IsRedirect());
-            Assert.AreEqual("Test Redirect", page.Redirect.Title);
-
-            page = new MediaWikiPage(site, "TestTitle", "#転送 [[Test Redirect2]]");
+            MediaWikiPage page = new MediaWikiPage(site, "TestTitle");
             Assert.IsFalse(page.IsRedirect());
+            Assert.IsNull(page.Redirect);
 
-            site.Redirect = "#転送";
-            page = new MediaWikiPage(site, "TestTitle", "#転送 [[Test Redirect2]]");
+            page.Redirect = "Test Redirect";
             Assert.IsTrue(page.IsRedirect());
-            Assert.AreEqual("Test Redirect2", page.Redirect.Title);
+            Assert.AreEqual("Test Redirect", page.Redirect);
 
-            page = new MediaWikiPage(site, "TestTitle", "#REDIRECT [[Test Redirect3]]");
+            page.Redirect = string.Empty;
             Assert.IsTrue(page.IsRedirect());
-            Assert.AreEqual("Test Redirect3", page.Redirect.Title);
+            Assert.AreEqual(string.Empty, page.Redirect);
 
-            page = new MediaWikiPage(site, "TestTitle", "#redirect [[Test Redirect4]]");
-            Assert.IsTrue(page.IsRedirect());
-            Assert.AreEqual("Test Redirect4", page.Redirect.Title);
+            page.Redirect = null;
+            Assert.IsFalse(page.IsRedirect());
+            Assert.IsNull(page.Redirect);
         }
 
         /// <summary>
@@ -267,78 +315,7 @@ namespace Honememo.Wptscs.Websites
 
         #endregion
 
-        #region 内部処理用メソッドテストケース
-
-        // 非公開メソッドについてはprotected以上、またはやりたい部分だけ実施
-
-        /// <summary>
-        /// <see cref="MediaWikiPage.ValidateIncomplete"/>メソッドテストケース（正常系）。
-        /// </summary>
-        [TestMethod]
-        public void TestValidateIncomplete()
-        {
-            // Textが空の場合例外発生、正常系は例外が発生しなければOK
-            MediaWikiPageMock page = new MediaWikiPageMock(new MediaWiki(new Language("en")), "TestTitle");
-            page.Text = "TestText";
-            page.ValidateIncomplete();
-        }
-
-        /// <summary>
-        /// <see cref="MediaWikiPage.ValidateIncomplete"/>メソッドテストケース（異常系）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void TestValidateIncompleteNg()
-        {
-            // Textが空の場合例外発生
-            new MediaWikiPageMock(new MediaWiki(new Language("en")), "TestTitle").ValidateIncomplete();
-        }
-
-        #endregion
-
         #region モッククラス
-
-        /// <summary>
-        /// <see cref="MediaWikiPage"/>テスト用のモッククラスです。
-        /// </summary>
-        private class DummySite : MediaWiki
-        {
-            #region コンストラクタ
-
-            /// <summary>
-            /// コンストラクタ。
-            /// </summary>
-            /// <param name="lang">ウェブサイトの言語。</param>
-            public DummySite(Language lang)
-                : base(lang)
-            {
-            }
-
-            #endregion
-
-            #region ダミーメソッド
-
-            /// <summary>
-            /// ページを取得。<paramref name="title"/>に応じてテスト用の結果を返す。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <returns>取得したページ。</returns>
-            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
-            public override Page GetPage(string title)
-            {
-                if (title == "Template:Test/doc")
-                {
-                    return new MediaWikiPage(
-                        this,
-                        title,
-                        "[[ja:テストページ]]<nowiki>[[zh:試験]]</nowiki><!--[[ru:test]]-->[[fr:Test_Fr]]");
-                }
-
-                return base.GetPage(title);
-            }
-
-            #endregion
-        }
 
         /// <summary>
         /// <see cref="MediaWikiPage"/>テスト用のモッククラスです。
@@ -362,6 +339,23 @@ namespace Honememo.Wptscs.Websites
 
             #region 非公開プロパティテスト用のオーラーライドプロパティ
 
+
+            /// <summary>
+            /// ページタイトル。
+            /// </summary>
+            public new string Title
+            {
+                get
+                {
+                    return base.Title;
+                }
+
+                set
+                {
+                    base.Title = value;
+                }
+            }
+
             /// <summary>
             /// ページの本文。
             /// </summary>
@@ -378,18 +372,31 @@ namespace Honememo.Wptscs.Websites
                 }
             }
 
-            #endregion
+            /// <summary>
+            /// ページのタイムスタンプ。
+            /// </summary>
+            public new DateTime? Timestamp
+            {
+                get
+                {
+                    return base.Timestamp;
+                }
 
-            #region 非公開メソッドテスト用のオーラーライドメソッド
+                set
+                {
+                    base.Timestamp = value;
+                }
+            }
 
             /// <summary>
-            /// オブジェクトがメソッドの実行に不完全な状態でないか検証する。
-            /// 不完全な場合、例外をスローする。
+            /// 言語間リンクの対応表。
             /// </summary>
-            /// <exception cref="InvalidOperationException">オブジェクトは不完全。</exception>
-            public new void ValidateIncomplete()
+            public new IDictionary<string, string> Interlanguages
             {
-                base.ValidateIncomplete();
+                get
+                {
+                    return base.Interlanguages;
+                }
             }
 
             #endregion

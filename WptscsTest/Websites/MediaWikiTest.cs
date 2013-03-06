@@ -3,7 +3,7 @@
 //      MediaWikiのテストクラスソース。</summary>
 //
 // <copyright file="MediaWikiTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -36,7 +36,7 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         private static readonly string TestXml = "<MediaWiki><Location>http://ja.wikipedia.org</Location>"
             + "<Language Code=\"ja\"><Names /><Bracket /></Language>"
-            + "<MetaApi>_api.xml</MetaApi><ExportPath>/export/$1</ExportPath><Redirect>#飛ばす</Redirect>"
+            + "<MetaApi>_api.xml</MetaApi><ExportPath>/export/$1</ExportPath><InterlanguageApi>/interlanguage/$1.xml</InterlanguageApi>"
             + "<TemplateNamespace>100</TemplateNamespace><CategoryNamespace>101</CategoryNamespace><FileNamespace>200</FileNamespace>"
             + "<MagicWords><Variable>特別</Variable><Variable>マジックワード</Variable></MagicWords>"
             + "<InterwikiPrefixs><Prefix>外部ウィキ</Prefix><Prefix>ニュース</Prefix></InterwikiPrefixs>"
@@ -151,25 +151,31 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// <see cref="MediaWiki.Redirect"/>プロパティテストケース。
+        /// <see cref="MediaWiki.InterlanguageApi"/>プロパティテストケース。
         /// </summary>
         [TestMethod]
-        public void TestRedirect()
+        public void TestInterlanguageApi()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
 
             // デフォルトでは設定ファイルの値が返される
-            Assert.AreEqual("#REDIRECT", site.Redirect);
+            Assert.AreEqual(
+                "/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml",
+                site.InterlanguageApi);
 
             // 値を設定するとその値が返る
-            site.Redirect = "test";
-            Assert.AreEqual("test", site.Redirect);
+            site.InterlanguageApi = "test";
+            Assert.AreEqual("test", site.InterlanguageApi);
 
             // 空またはnullの場合、再び設定ファイルの値が入る
-            site.Redirect = null;
-            Assert.AreEqual("#REDIRECT", site.Redirect);
-            site.Redirect = string.Empty;
-            Assert.AreEqual("#REDIRECT", site.Redirect);
+            site.InterlanguageApi = null;
+            Assert.AreEqual(
+                "/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml",
+                site.InterlanguageApi);
+            site.InterlanguageApi = string.Empty;
+            Assert.AreEqual(
+                "/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml",
+                site.InterlanguageApi);
         }
 
         /// <summary>
@@ -404,40 +410,75 @@ namespace Honememo.Wptscs.Websites
             MediaWiki site = new MockFactory().GetMediaWiki("en");
             Page page = site.GetPage("example");
             Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
+            MediaWikiPage mp = (MediaWikiPage)page;
+            Assert.AreEqual("Example", page.Title);
+            Assert.AreSame(site, page.Website);
+            Assert.AreEqual(
+                new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.InterlanguageApi, "example")),
+                page.Uri);
+            Assert.IsNull(mp.Redirect);
+            Assert.AreEqual("Example (Begriffsklärung)", mp.GetInterlanguage("de"));
+
+            // 以下の二つは、遅延読み込みなので厳密にはGetPageで取得されていない
+            Assert.AreEqual(DateTime.Parse("2010/07/13T00:49:18Z"), page.Timestamp);
+            Assert.IsTrue(page.Text.Length > 0);
+
+            // リダイレクトの確認
+            page = site.GetPage("example.net");
+            Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
+            mp = (MediaWikiPage)page;
+            Assert.AreEqual("Example.com", page.Title);
+            Assert.AreSame(site, page.Website);
+            Assert.AreEqual(
+                new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.InterlanguageApi, "example.net")),
+                page.Uri);
+            Assert.AreEqual("Example.net", mp.Redirect);
+        }
+
+        /// <summary>
+        /// <see cref="MediaWiki.GetPageBodyAndTimestamp"/>メソッドテストケース。
+        /// </summary>
+        [TestMethod]
+        public void TestGetPageBodyAndTimestamp()
+        {
+            MediaWiki site = new MockFactory().GetMediaWiki("en");
+            Page page = site.GetPageBodyAndTimestamp("example");
+            Assert.IsInstanceOfType(page, typeof(MediaWikiPage));
             Assert.AreEqual("Example", page.Title);
             Assert.AreEqual(DateTime.Parse("2010/07/13T00:49:18Z"), page.Timestamp);
             Assert.IsTrue(page.Text.Length > 0);
             Assert.AreEqual(site, page.Website);
+
+            // このメソッドでは言語間リンク・リダイレクトは取れない
+            Assert.IsNull(((MediaWikiPage)page).GetInterlanguage("de"));
         }
 
         /// <summary>
-        /// <see cref="MediaWiki.GetPage"/>メソッドテストケース（末尾ピリオド）。
+        /// <see cref="MediaWiki.GetPageBodyAndTimestamp"/>メソッドテストケース（末尾ピリオド）。
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(EndPeriodException))]
-        public void TestGetPageEndPeriodException()
+        public void TestGetPageBodyAndTimestampAboutEndPeriodException()
         {
             // ピリオドで終わるページは2012年現在処理できないため、
             // 暫定対応として例外を投げる
             // ※ httpでページ名が末尾に来るパスになるよう設定
             //    処理の都合上、このテストはサーバーに接続しています
-            MediaWiki site = new MediaWiki(new Language("en"));
-            site.GetPage("Vulcan Inc.");
+            new MediaWiki(new Language("en")).GetPageBodyAndTimestamp("Vulcan Inc.");
         }
 
         /// <summary>
-        /// <see cref="MediaWiki.GetPage"/>メソッドテストケース（末尾クエッションマーク）。
+        /// <see cref="MediaWiki.GetPageBodyAndTimestamp"/>メソッドテストケース（末尾クエッションマーク）。
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(EndPeriodException))]
-        public void TestGetPageEndPeriodExceptionAboutQuestion()
+        public void TestGetPageBodyAndTimestampAboutEndPeriodExceptionByQuestion()
         {
             // ?で終わるページも2012年現在処理できないため、
             // 暫定対応として例外を投げる
             // ※ httpでページ名が末尾に来るパスになるよう設定
             //    処理の都合上、このテストはサーバーに接続しています
-            MediaWiki site = new MediaWiki(new Language("en"));
-            site.GetPage("How does one patch KDE2 under FreeBSD?");
+            new MediaWiki(new Language("en")).GetPageBodyAndTimestamp("How does one patch KDE2 under FreeBSD?");
         }
 
         /// <summary>
@@ -597,7 +638,7 @@ namespace Honememo.Wptscs.Websites
             // ※ InterwikiPrefixsのgetは常にサーバーからも値を取得するため、ここではテストしない
             Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases|interwikimap", site.MetaApi);
             Assert.AreEqual("/wiki/Special:Export/$1", site.ExportPath);
-            Assert.AreEqual("#REDIRECT", site.Redirect);
+            Assert.AreEqual("/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml", site.InterlanguageApi);
             Assert.AreEqual(10, site.TemplateNamespace);
             Assert.AreEqual(14, site.CategoryNamespace);
             Assert.AreEqual(6, site.FileNamespace);
@@ -615,7 +656,7 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("ja", site.Language.Code);
             Assert.AreEqual("_api.xml", site.MetaApi);
             Assert.AreEqual("/export/$1", site.ExportPath);
-            Assert.AreEqual("#飛ばす", site.Redirect);
+            Assert.AreEqual("/interlanguage/$1.xml", site.InterlanguageApi);
             Assert.AreEqual(100, site.TemplateNamespace);
             Assert.AreEqual(101, site.CategoryNamespace);
             Assert.AreEqual(200, site.FileNamespace);
@@ -652,7 +693,7 @@ namespace Honememo.Wptscs.Websites
 
             Assert.AreEqual(
                 "<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language>"
-                + "<MetaApi /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace />"
+                + "<MetaApi /><ExportPath /><InterlanguageApi /><TemplateNamespace /><CategoryNamespace /><FileNamespace />"
                 + "<MagicWords /><InterwikiPrefixs /><DocumentationTemplates /><LinkInterwikiFormat /><LangFormat />"
                 + "<HasLanguagePage>False</HasLanguagePage></MediaWiki>",
                 b.ToString());
@@ -660,7 +701,7 @@ namespace Honememo.Wptscs.Websites
             // プロパティに値が設定された場合の出力
             site.MetaApi = "_api.xml";
             site.ExportPath = "/export/$1";
-            site.Redirect = "#飛ばす";
+            site.InterlanguageApi = "/interlanguage/$1.xml";
             site.TemplateNamespace = 100;
             site.CategoryNamespace = 101;
             site.FileNamespace = 200;

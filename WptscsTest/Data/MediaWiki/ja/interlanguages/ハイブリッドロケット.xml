@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1382968" ns="0" title="ハイブリッドロケット">
+        <langlinks>
+          <ll lang="de" xml:space="preserve">Hybridrakete</ll>
+          <ll lang="en" xml:space="preserve">Hybrid rocket</ll>
+          <ll lang="fi" xml:space="preserve">Hybridiraketti</ll>
+          <ll lang="fr" xml:space="preserve">Propulsion hybride (fusée)</ll>
+          <ll lang="it" xml:space="preserve">Razzo a propellenti ibridi</ll>
+          <ll lang="pl" xml:space="preserve">Rakietowy silnik hybrydowy</ll>
+          <ll lang="pt" xml:space="preserve">Foguete de combustível híbrido</ll>
+          <ll lang="ru" xml:space="preserve">Гибридный ракетный двигатель</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

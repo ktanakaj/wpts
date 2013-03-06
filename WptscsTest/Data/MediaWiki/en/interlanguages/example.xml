@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <normalized>
+      <n from="example" to="Example" />
+    </normalized>
+    <pages>
+      <page pageid="1646233" ns="0" title="Example">
+        <langlinks>
+          <ll lang="da" xml:space="preserve">Eksempel</ll>
+          <ll lang="de" xml:space="preserve">Example (Begriffsklärung)</ll>
+          <ll lang="es" xml:space="preserve">Example</ll>
+          <ll lang="fr" xml:space="preserve">Example</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

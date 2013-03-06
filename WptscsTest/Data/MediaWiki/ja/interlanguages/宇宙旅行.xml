@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="93913" ns="0" title="宇宙旅行">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">سياحة الفضاء</ll>
+          <ll lang="bg" xml:space="preserve">Космически туризъм</ll>
+          <ll lang="ca" xml:space="preserve">Turisme espacial</ll>
+          <ll lang="cs" xml:space="preserve">Vesmírný turista</ll>
+          <ll lang="da" xml:space="preserve">Rumturisme</ll>
+          <ll lang="de" xml:space="preserve">Weltraumtourismus</ll>
+          <ll lang="en" xml:space="preserve">Space tourism</ll>
+          <ll lang="eo" xml:space="preserve">Kosmoturismo</ll>
+          <ll lang="es" xml:space="preserve">Turismo espacial</ll>
+          <ll lang="eu" xml:space="preserve">Espazio-turismo</ll>
+          <ll lang="fa" xml:space="preserve">گردشگری فضایی</ll>
+          <ll lang="fi" xml:space="preserve">Avaruusturisti</ll>
+          <ll lang="fr" xml:space="preserve">Tourisme spatial</ll>
+          <ll lang="he" xml:space="preserve">תיירות בחלל</ll>
+          <ll lang="hi" xml:space="preserve">अंतरिक्ष पर्यटन</ll>
+          <ll lang="hu" xml:space="preserve">Űrturizmus</ll>
+          <ll lang="it" xml:space="preserve">Turismo spaziale</ll>
+          <ll lang="ko" xml:space="preserve">우주여행</ll>
+          <ll lang="li" xml:space="preserve">Ruimtetoerisme</ll>
+          <ll lang="lt" xml:space="preserve">Kosmoso turizmas</ll>
+          <ll lang="nl" xml:space="preserve">Ruimtetoerisme</ll>
+          <ll lang="pl" xml:space="preserve">Turysta kosmiczny</ll>
+          <ll lang="pt" xml:space="preserve">Turismo espacial</ll>
+          <ll lang="ru" xml:space="preserve">Космический туризм</ll>
+          <ll lang="sh" xml:space="preserve">Svemirski turizam</ll>
+          <ll lang="sl" xml:space="preserve">Vesoljski turizem</ll>
+          <ll lang="sv" xml:space="preserve">Rymdturism</ll>
+          <ll lang="ta" xml:space="preserve">விண்வெளிச் சுற்றுலா</ll>
+          <ll lang="tr" xml:space="preserve">Uzay turizmi</ll>
+          <ll lang="uk" xml:space="preserve">Космічний туризм</ll>
+          <ll lang="zh" xml:space="preserve">太空游客</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

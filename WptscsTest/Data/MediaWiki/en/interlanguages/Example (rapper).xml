@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <redirects>
+      <r from="Example (rapper)" to="Example (musician)" />
+    </redirects>
+    <pages>
+      <page pageid="9355587" ns="0" title="Example (musician)">
+        <langlinks>
+          <ll lang="cs" xml:space="preserve">Example</ll>
+          <ll lang="da" xml:space="preserve">Example</ll>
+          <ll lang="de" xml:space="preserve">Example</ll>
+          <ll lang="es" xml:space="preserve">Example (cantante)</ll>
+          <ll lang="fi" xml:space="preserve">Example</ll>
+          <ll lang="fr" xml:space="preserve">Example (rappeur)</ll>
+          <ll lang="is" xml:space="preserve">Example</ll>
+          <ll lang="it" xml:space="preserve">Example</ll>
+          <ll lang="lv" xml:space="preserve">Example</ll>
+          <ll lang="nl" xml:space="preserve">Example</ll>
+          <ll lang="pl" xml:space="preserve">Example</ll>
+          <ll lang="pt" xml:space="preserve">Example</ll>
+          <ll lang="ru" xml:space="preserve">Example</ll>
+          <ll lang="sk" xml:space="preserve">Example</ll>
+          <ll lang="th" xml:space="preserve">เอกแซมเพิล</ll>
+          <ll lang="tr" xml:space="preserve">Example</ll>
+          <ll lang="uk" xml:space="preserve">Example</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

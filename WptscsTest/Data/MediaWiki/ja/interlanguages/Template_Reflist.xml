@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="906690" ns="10" title="Template:Reflist">
+        <langlinks>
+          <ll lang="ar" xml:space="preserve">قالب:ثبت المراجع</ll>
+          <ll lang="be-x-old" xml:space="preserve">Шаблён:Зноскі</ll>
+          <ll lang="ca" xml:space="preserve">Plantilla:Referències</ll>
+          <ll lang="en" xml:space="preserve">Template:Reflist</ll>
+          <ll lang="eo" xml:space="preserve">Ŝablono:Referencoj</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Listaref</ll>
+          <ll lang="fi" xml:space="preserve">Malline:Viitteet</ll>
+          <ll lang="fr" xml:space="preserve">Modèle:Références</ll>
+          <ll lang="hi" xml:space="preserve">Template:टिप्पणीसूची</ll>
+          <ll lang="hr" xml:space="preserve">Predložak:Izvori</ll>
+          <ll lang="hsb" xml:space="preserve">Předłoha:Referency</ll>
+          <ll lang="ia" xml:space="preserve">Patrono:Reflist</ll>
+          <ll lang="it" xml:space="preserve">Template:References</ll>
+          <ll lang="ka" xml:space="preserve">თარგი:სქოლიოს სია</ll>
+          <ll lang="ko" xml:space="preserve">틀:주석</ll>
+          <ll lang="lv" xml:space="preserve">Veidne:Reflist</ll>
+          <ll lang="ml" xml:space="preserve">ഫലകം:Reflist</ll>
+          <ll lang="ms" xml:space="preserve">Templat:Reflist</ll>
+          <ll lang="no" xml:space="preserve">Mal:Reflist</ll>
+          <ll lang="pl" xml:space="preserve">Szablon:Przypisy</ll>
+          <ll lang="pt" xml:space="preserve">Predefinição:Reflist</ll>
+          <ll lang="ro" xml:space="preserve">Format:Listănote</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Примечания</ll>
+          <ll lang="sr" xml:space="preserve">Шаблон:Напомене</ll>
+          <ll lang="sv" xml:space="preserve">Mall:Reflist</ll>
+          <ll lang="th" xml:space="preserve">แม่แบบ:รายการอ้างอิง</ll>
+          <ll lang="uk" xml:space="preserve">Шаблон:Reflist</ll>
+          <ll lang="vi" xml:space="preserve">Bản mẫu:Tham khảo</ll>
+          <ll lang="zh" xml:space="preserve">Template:Reflist</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

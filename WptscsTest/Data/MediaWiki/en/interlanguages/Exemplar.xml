@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="1691470" ns="0" title="Exemplar">
+        <langlinks>
+          <ll lang="de" xml:space="preserve">Exemplar</ll>
+          <ll lang="et" xml:space="preserve">Eksemplar</ll>
+          <ll lang="lt" xml:space="preserve">Egzempliorius</ll>
+          <ll lang="pt" xml:space="preserve">Exemplo</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

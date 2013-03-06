@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="667140" ns="10" title="Template:Infobox 航空機">
+        <langlinks>
+          <ll lang="af" xml:space="preserve">Sjabloon:Inligtingskas Vliegtuig-en</ll>
+          <ll lang="ar" xml:space="preserve">قالب:معلومات طائرة</ll>
+          <ll lang="bg" xml:space="preserve">Шаблон:Самолет</ll>
+          <ll lang="bs" xml:space="preserve">Šablon:Infokutija avion</ll>
+          <ll lang="ca" xml:space="preserve">Plantilla:Fitxa d'aeronau</ll>
+          <ll lang="de" xml:space="preserve">Vorlage:Infobox Flugzeug</ll>
+          <!-- 既存テストと互換性を保つためコメントアウト
+          <ll lang="en" xml:space="preserve">Template:Infobox Aircraft</ll>
+          -->
+          <ll lang="es" xml:space="preserve">Plantilla:Ficha de aeronave</ll>
+          <ll lang="et" xml:space="preserve">Mall:Lennuk</ll>
+          <ll lang="fi" xml:space="preserve">Malline:Lentokone2</ll>
+          <ll lang="fr" xml:space="preserve">Modèle:Infobox Avion</ll>
+          <ll lang="hu" xml:space="preserve">Sablon:Repcsiadat</ll>
+          <ll lang="id" xml:space="preserve">Templat:Infobox Aircraft</ll>
+          <ll lang="lt" xml:space="preserve">Šablonas:Infolentelė orlaivis</ll>
+          <ll lang="lv" xml:space="preserve">Veidne:Lidmašīnas informācija</ll>
+          <ll lang="mk" xml:space="preserve">Шаблон:Инфокутија летало</ll>
+          <ll lang="ms" xml:space="preserve">Templat:Info Pesawat</ll>
+          <ll lang="nl" xml:space="preserve">Sjabloon:Infobox vliegtuig</ll>
+          <ll lang="no" xml:space="preserve">Mal:Infoboks fly</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Карточка ЛА</ll>
+          <ll lang="zh" xml:space="preserve">Template:Infobox Aircraft</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

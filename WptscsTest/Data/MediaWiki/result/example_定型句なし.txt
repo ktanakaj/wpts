@@ -1,18 +1,18 @@
 ﻿'''xxx'''（[[英語|英]]: '''{{Lang|en|Example}}'''）
 
 [[ファイル:Example.png|thumb|Wikipedia's example image. (Example.png)]]
-[[:en:Template:wiktionary]]<!-- {{wiktionary}} -->
-[[:en:Template:wikiquote]]<!-- {{wikiquote}} -->
+{{Wiktionary}}
+{{Wikiquote}}
 '''Example''' may refer to:
 
 *[[:en:Example (rapper)|Example (rapper)]], a British rapper
-*[[Example.com|example.com]], [[Example.com|example.net]], [[Example.com|example.org]]  and [[トップレベルドメイン|.example]], domain names reserved for use in documentation as examples 
+*[[Example.com|example.com]], [[Example.com|example.net]], [[Example.com|example.org]]  and [[トップレベルドメイン#特殊用途|.example]], domain names reserved for use in documentation as examples 
 
 ==See also==
 *[[:en:Exemplum|Exemplum]], medieval collections of short stories to be told in sermons
 *[[:en:Exemplar|Exemplar]], a prototype or model which others can use to understand a topic better
 
-[[:en:Template:disambig]]<!-- {{disambig}} -->
+{{Aimai}}
 
 [[fr:Example]]
 [[ksh:Example (Watt ėßß datt?)]]

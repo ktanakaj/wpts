@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="2474747" ns="0" title="Exemplum">
+        <langlinks>
+          <ll lang="ca" xml:space="preserve">Exemplum</ll>
+          <ll lang="cs" xml:space="preserve">Exemplum</ll>
+          <ll lang="es" xml:space="preserve">Exemplum</ll>
+          <ll lang="fr" xml:space="preserve">Exemplum</ll>
+          <ll lang="it" xml:space="preserve">Exemplum</ll>
+          <ll lang="no" xml:space="preserve">Exemplum</ll>
+          <ll lang="pl" xml:space="preserve">Exemplum</ll>
+          <ll lang="pt" xml:space="preserve">Exemplum</ll>
+          <ll lang="ru" xml:space="preserve">Exempla</ll>
+          <ll lang="simple" xml:space="preserve">Example</ll>
+          <ll lang="sk" xml:space="preserve">Exemplum</ll>
+          <ll lang="sv" xml:space="preserve">Exemplum</ll>
+          <ll lang="uk" xml:space="preserve">Екземплум</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

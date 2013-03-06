@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <normalized>
+      <n from="example.com" to="Example.com" />
+    </normalized>
+    <pages>
+      <page pageid="1191806" ns="0" title="Example.com">
+        <langlinks>
+          <ll lang="bcl" xml:space="preserve">Example.com</ll>
+          <ll lang="ca" xml:space="preserve">Example.com</ll>
+          <ll lang="cbk-zam" xml:space="preserve">Example.com</ll>
+          <ll lang="ceb" xml:space="preserve">Example.com</ll>
+          <ll lang="de" xml:space="preserve">Example.com</ll>
+          <ll lang="es" xml:space="preserve">Example.com</ll>
+          <ll lang="fi" xml:space="preserve">Example.com</ll>
+          <ll lang="fr" xml:space="preserve">Example.com</ll>
+          <ll lang="hu" xml:space="preserve">Example.com</ll>
+          <ll lang="ilo" xml:space="preserve">Example.com</ll>
+          <ll lang="is" xml:space="preserve">Example.net</ll>
+          <ll lang="it" xml:space="preserve">Example.com</ll>
+          <ll lang="ja" xml:space="preserve">Example.com</ll>
+          <ll lang="ru" xml:space="preserve">Домены для примеров</ll>
+          <ll lang="tl" xml:space="preserve">Example.com</ll>
+          <ll lang="zh" xml:space="preserve">Example.com</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

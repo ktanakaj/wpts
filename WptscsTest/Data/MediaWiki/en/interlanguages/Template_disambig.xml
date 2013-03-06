@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <normalized>
+      <n from="Template:disambig" to="Template:Disambig" />
+    </normalized>
+    <redirects>
+      <r from="Template:Disambig" to="Template:Disambiguation" />
+    </redirects>
+    <pages>
+      <page pageid="9950598" ns="10" title="Template:Disambiguation">
+        <langlinks>
+          <ll lang="af" xml:space="preserve">Sjabloon:Dubbelsinnig</ll>
+          <ll lang="als" xml:space="preserve">Vorlage:Begriffsklärung</ll>
+          <ll lang="am" xml:space="preserve">Template:መንታ</ll>
+          <ll lang="ang" xml:space="preserve">Template:Disambig</ll>
+          <ll lang="ar" xml:space="preserve">قالب:توضيح</ll>
+          <ll lang="arc" xml:space="preserve">ܩܠܒܐ:ܬ.ܐ.</ll>
+          <ll lang="arz" xml:space="preserve">قالب:توضيح</ll>
+          <ll lang="ast" xml:space="preserve">Plantilla:Dixebra</ll>
+          <ll lang="az" xml:space="preserve">Şablon:Dəqiqləşdirmə</ll>
+          <ll lang="ba" xml:space="preserve">Ҡалып:Күп мәғәнәлелек</ll>
+          <ll lang="bar" xml:space="preserve">Vorlage:Begriffsklärung</ll>
+          <ll lang="bat-smg" xml:space="preserve">Šablonas:Disambig</ll>
+          <ll lang="be-x-old" xml:space="preserve">Шаблён:Неадназначнасьць</ll>
+          <ll lang="bg" xml:space="preserve">Шаблон:Пояснение</ll>
+          <ll lang="bn" xml:space="preserve">Template:দ্ব্যর্থতা নিরসন</ll>
+          <ll lang="br" xml:space="preserve">Patrom:Disheñvelout</ll>
+          <ll lang="bs" xml:space="preserve">Šablon:Čvor</ll>
+          <ll lang="ca" xml:space="preserve">Plantilla:Desambiguació</ll>
+          <ll lang="cdo" xml:space="preserve">Template:Gì-ngiê</ll>
+          <ll lang="ceb" xml:space="preserve">Plantilya:Giklaro</ll>
+          <ll lang="co" xml:space="preserve">Template:Disambig</ll>
+          <ll lang="cs" xml:space="preserve">Šablona:Rozcestník</ll>
+          <ll lang="cv" xml:space="preserve">Шаблон:Disambig</ll>
+          <ll lang="cy" xml:space="preserve">Nodyn:Gwahaniaethu</ll>
+          <ll lang="da" xml:space="preserve">Skabelon:Flertydig</ll>
+          <ll lang="de" xml:space="preserve">Vorlage:Begriffsklärung</ll>
+          <ll lang="el" xml:space="preserve">Πρότυπο:Αποσαφήνιση</ll>
+          <ll lang="eo" xml:space="preserve">Ŝablono:Apartigilo</ll>
+          <ll lang="es" xml:space="preserve">Plantilla:Desambiguación</ll>
+          <ll lang="et" xml:space="preserve">Mall:Täpsustuslehekülg</ll>
+          <ll lang="eu" xml:space="preserve">Txantiloi:Argipen</ll>
+          <ll lang="fa" xml:space="preserve">الگو:ابهام‌زدایی</ll>
+          <ll lang="fi" xml:space="preserve">Malline:Täsmennyssivu</ll>
+          <ll lang="fo" xml:space="preserve">Fyrimynd:Fleiri týdningar</ll>
+          <ll lang="fr" xml:space="preserve">Modèle:Homonymie</ll>
+          <ll lang="frp" xml:space="preserve">Template:Homonimos</ll>
+          <ll lang="fur" xml:space="preserve">Model:Disambig</ll>
+          <ll lang="fy" xml:space="preserve">Berjocht:Neibetsjuttings</ll>
+          <ll lang="ga" xml:space="preserve">Teimpléad:Idirdhealú</ll>
+          <ll lang="gl" xml:space="preserve">Modelo:Homónimos</ll>
+          <ll lang="he" xml:space="preserve">תבנית:פירושונים</ll>
+          <ll lang="hi" xml:space="preserve">Template:बहुविकल्पी शब्द</ll>
+          <ll lang="hr" xml:space="preserve">Predložak:Razdvojba</ll>
+          <ll lang="ht" xml:space="preserve">Template:Menm non</ll>
+          <ll lang="hu" xml:space="preserve">Sablon:Egyért</ll>
+          <ll lang="ia" xml:space="preserve">Patrono:Disambiguation</ll>
+          <ll lang="id" xml:space="preserve">Templat:Disambig</ll>
+          <ll lang="io" xml:space="preserve">Template:Homonimo</ll>
+          <ll lang="is" xml:space="preserve">Snið:Aðgreining</ll>
+          <ll lang="it" xml:space="preserve">Template:Disambigua</ll>
+          <ll lang="ja" xml:space="preserve">Template:Aimai</ll>
+          <ll lang="jv" xml:space="preserve">Cithakan:Disambig</ll>
+          <ll lang="ka" xml:space="preserve">თარგი:მრავალმნიშვნელოვანი</ll>
+          <ll lang="kn" xml:space="preserve">ಟೆಂಪ್ಲೇಟು:ದ್ವಂದ್ವ ನಿವಾರಣೆ</ll>
+          <ll lang="ksh" xml:space="preserve">Schablon:Disambig</ll>
+          <ll lang="ku" xml:space="preserve">Şablon:Cudakirin</ll>
+          <ll lang="la" xml:space="preserve">Formula:Discretiva</ll>
+          <ll lang="lb" xml:space="preserve">Template:Homonymie</ll>
+          <ll lang="lez" xml:space="preserve">Шаблон:Са шумуд манавал</ll>
+          <ll lang="li" xml:space="preserve">Sjabloon:Verdudeliking</ll>
+          <ll lang="lmo" xml:space="preserve">Template:Desambiguassiú</ll>
+          <ll lang="ln" xml:space="preserve">Template:Bokokani</ll>
+          <ll lang="lt" xml:space="preserve">Šablonas:Disambig</ll>
+          <ll lang="map-bms" xml:space="preserve">Template:Disambig</ll>
+          <ll lang="mi" xml:space="preserve">Template:Disambig</ll>
+          <ll lang="mk" xml:space="preserve">Шаблон:Појаснување</ll>
+          <ll lang="mo" xml:space="preserve">Template:Дезамбигуйзаре</ll>
+          <ll lang="ms" xml:space="preserve">Templat:Nyahkekaburan</ll>
+          <ll lang="mt" xml:space="preserve">Template:Diżambigwazzjoni</ll>
+          <ll lang="nds" xml:space="preserve">Vörlaag:Mehrdüdig Begreep</ll>
+          <ll lang="nds-nl" xml:space="preserve">Sjabloon:Dv</ll>
+          <ll lang="nl" xml:space="preserve">Sjabloon:Dp</ll>
+          <ll lang="nn" xml:space="preserve">Mal:Fleirtyding</ll>
+          <ll lang="no" xml:space="preserve">Mal:Peker</ll>
+          <ll lang="nrm" xml:space="preserve">Template:Page dé frouque</ll>
+          <ll lang="oc" xml:space="preserve">Modèl:Omonimia</ll>
+          <ll lang="os" xml:space="preserve">Шаблон:Disambig</ll>
+          <ll lang="pl" xml:space="preserve">Szablon:Disambig</ll>
+          <ll lang="pt" xml:space="preserve">Predefinição:Desambiguação</ll>
+          <ll lang="rmy" xml:space="preserve">Sikavno:Dudalipen</ll>
+          <ll lang="ro" xml:space="preserve">Format:Dezambiguizare</ll>
+          <ll lang="ru" xml:space="preserve">Шаблон:Неоднозначность</ll>
+          <ll lang="scn" xml:space="preserve">Template:Disambigua</ll>
+          <ll lang="sh" xml:space="preserve">Template:Višeznačna odrednica</ll>
+          <ll lang="sk" xml:space="preserve">Šablóna:Rozlišovacia stránka</ll>
+          <ll lang="sl" xml:space="preserve">Predloga:Razločitev</ll>
+          <ll lang="sq" xml:space="preserve">Stampa:Kthjellim</ll>
+          <ll lang="sr" xml:space="preserve">Шаблон:Вишезначна одредница</ll>
+          <ll lang="su" xml:space="preserve">Citakan:Disambig</ll>
+          <ll lang="sv" xml:space="preserve">Mall:Förgrening</ll>
+          <ll lang="sw" xml:space="preserve">Template:Maana</ll>
+          <ll lang="ta" xml:space="preserve">வார்ப்புரு:பக்கவழி நெறிப்படுத்தல்</ll>
+          <ll lang="te" xml:space="preserve">మూస:అయోమయ నివృత్తి</ll>
+          <ll lang="tg" xml:space="preserve">Шаблон:Ибҳомзудоӣ</ll>
+          <ll lang="tl" xml:space="preserve">Template:Paglilinaw</ll>
+          <ll lang="tr" xml:space="preserve">Şablon:Anlam ayrımı</ll>
+          <ll lang="tt" xml:space="preserve">Калып:Күп мәгънәләр</ll>
+          <ll lang="uk" xml:space="preserve">Шаблон:Disambig</ll>
+          <ll lang="ur" xml:space="preserve">سانچہ:Disambig</ll>
+          <ll lang="uz" xml:space="preserve">Template:Disambig</ll>
+          <ll lang="vep" xml:space="preserve">Šablon:T</ll>
+          <ll lang="vi" xml:space="preserve">Tiêu bản:Trang định hướng</ll>
+          <ll lang="vls" xml:space="preserve">Patrôon:Db</ll>
+          <ll lang="vo" xml:space="preserve">Template:Telplänov</ll>
+          <ll lang="wa" xml:space="preserve">Modele:Omonimeye</ll>
+          <ll lang="war" xml:space="preserve">Batakan:Pansayod</ll>
+          <ll lang="yi" xml:space="preserve">מוסטער:באדייטן</ll>
+          <ll lang="zh" xml:space="preserve">Template:Disambig</ll>
+          <ll lang="zh-classical" xml:space="preserve">Template:釋義</ll>
+          <ll lang="zh-min-nan" xml:space="preserve">Template:Khu-pia̍t-ia̍h</ll>
+          <ll lang="zh-yue" xml:space="preserve">Template:分流</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

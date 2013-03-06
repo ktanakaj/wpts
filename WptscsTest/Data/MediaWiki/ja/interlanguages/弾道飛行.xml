@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<api>
+  <query>
+    <pages>
+      <page pageid="556978" ns="0" title="弾道飛行">
+        <langlinks>
+          <ll lang="bg" xml:space="preserve">Суборбитален космически полет</ll>
+          <ll lang="ca" xml:space="preserve">Vol espacial suborbital</ll>
+          <ll lang="cs" xml:space="preserve">Suborbitální kosmický let</ll>
+          <ll lang="de" xml:space="preserve">Suborbitaler Flug</ll>
+          <ll lang="en" xml:space="preserve">Sub-orbital spaceflight</ll>
+          <ll lang="es" xml:space="preserve">Vuelo suborbital</ll>
+          <ll lang="eu" xml:space="preserve">Hegaldi azpiorbital</ll>
+          <ll lang="fr" xml:space="preserve">Vol suborbital</ll>
+          <ll lang="he" xml:space="preserve">טיסה תת-מסלולית</ll>
+          <ll lang="hu" xml:space="preserve">Űrugrás</ll>
+          <ll lang="it" xml:space="preserve">Volo suborbitale</ll>
+          <ll lang="lb" xml:space="preserve">Suborbitale Raumfluch</ll>
+          <ll lang="nl" xml:space="preserve">Suborbitale ruimtevlucht</ll>
+          <ll lang="pl" xml:space="preserve">Lot suborbitalny</ll>
+          <ll lang="pt" xml:space="preserve">Voo sub-orbital</ll>
+          <ll lang="ru" xml:space="preserve">Суборбитальный космический полёт</ll>
+          <ll lang="sk" xml:space="preserve">Suborbitálny kozmický let</ll>
+          <ll lang="uk" xml:space="preserve">Суборбітальний космічний політ</ll>
+        </langlinks>
+      </page>
+    </pages>
+  </query>
+</api>

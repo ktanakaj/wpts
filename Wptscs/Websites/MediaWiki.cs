@@ -3,7 +3,7 @@
 //      MediaWikiのウェブサイト（システム）をあらわすモデルクラスソース</summary>
 //
 // <copyright file="MediaWiki.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -15,6 +15,7 @@ namespace Honememo.Wptscs.Websites
     using System.IO;
     using System.Linq;
     using System.Xml;
+    using System.Xml.Linq;
     using System.Xml.Serialization;
     using Honememo.Models;
     using Honememo.Utilities;
@@ -38,6 +39,11 @@ namespace Honememo.Wptscs.Websites
         /// 記事のXMLデータが存在するパス。
         /// </summary>
         private string exportPath;
+
+        /// <summary>
+        /// MediaWiki言語間リンク取得用にアクセスするAPI。
+        /// </summary>
+        private string interlanguageApi;
 
         /// <summary>
         /// リダイレクトの文字列。
@@ -173,24 +179,24 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// リダイレクトの文字列。
+        /// MediaWiki言語間リンク取得用にアクセスするAPI。
         /// </summary>
         /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
-        public string Redirect
+        public string InterlanguageApi
         {
             get
             {
-                if (string.IsNullOrEmpty(this.redirect))
+                if (string.IsNullOrEmpty(this.interlanguageApi))
                 {
-                    return Settings.Default.MediaWikiRedirect;
+                    return Settings.Default.MediaWikiInterlanguageApi;
                 }
 
-                return this.redirect;
+                return this.interlanguageApi;
             }
 
             set
             {
-                this.redirect = value;
+                this.interlanguageApi = value;
             }
         }
 
@@ -440,10 +446,61 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。</returns>
+        /// <exception cref="InvalidDataException">APIから取得したデータが想定外。</exception>
+        /// <exception cref="NullReferenceException">APIから取得したデータが想定外。</exception>
+        /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
+        /// <remarks>
+        /// ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。
+        /// このメソッドでは記事本文や日時といった情報は取得しない。
+        /// そうした情報は、実際にアクセスされたタイミングで動的に取得する。
+        /// </remarks>
+        public override Page GetPage(string title)
+        {
+            // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
+            // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
+            string escapeTitle = title;
+            if (new Uri(this.Location).IsFile)
+            {
+                escapeTitle = FormUtils.ReplaceInvalidFileNameChars(title);
+            }
+
+            // URIを生成
+            Uri uri = new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.InterlanguageApi, escapeTitle));
+
+            // ページの言語間リンク情報XMLデータをMediaWikiサーバーから取得
+            XElement doc;
+            using (Stream reader = this.WebProxy.GetStream(uri))
+            {
+                doc = XElement.Load(reader);
+            }
+
+            // クエリーエレメントを取得
+            // ※ エレメントは常に1件
+            XElement qe;
+            try
+            {
+                qe = (from n in doc.Elements("query")
+                      select n).First();
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException("parse failed : api/query element is not found");
+            }
+
+            // クエリーからページ情報を読み込み返す
+            // ※ ページが無い場合などは、例外が投げられる
+            return MediaWikiPage.GetFromQuery(this, uri, qe);
+        }
+
+        /// <summary>
+        /// ページを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <returns>取得したページ。</returns>
         /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
         /// <exception cref="EndPeriodException">末尾がピリオドのページの場合（既知の不具合への対応）。</exception>
         /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
-        public override Page GetPage(string title)
+        public Page GetPageBodyAndTimestamp(string title)
         {
             // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
             // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
@@ -667,7 +724,7 @@ namespace Honememo.Wptscs.Websites
 
             this.MetaApi = XmlUtils.InnerText(siteElement.SelectSingleNode("MetaApi"));
             this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
-            this.Redirect = XmlUtils.InnerText(siteElement.SelectSingleNode("Redirect"));
+            this.InterlanguageApi = XmlUtils.InnerText(siteElement.SelectSingleNode("InterlanguageApi"));
 
             int namespaceId;
             if (int.TryParse(XmlUtils.InnerText(siteElement.SelectSingleNode("TemplateNamespace")), out namespaceId))
@@ -748,7 +805,7 @@ namespace Honememo.Wptscs.Websites
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力
             writer.WriteElementString("MetaApi", this.metaApi);
             writer.WriteElementString("ExportPath", this.exportPath);
-            writer.WriteElementString("Redirect", this.redirect);
+            writer.WriteElementString("InterlanguageApi", this.interlanguageApi);
             writer.WriteElementString(
                 "TemplateNamespace",
                 this.templateNamespace.HasValue ? this.templateNamespace.ToString() : string.Empty);
