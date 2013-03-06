@@ -90,7 +90,6 @@
     <Compile Include="Parsers\MediaWikiNowikiParser.cs" />
     <Compile Include="Parsers\MediaWikiVariable.cs" />
     <Compile Include="Parsers\MediaWikiVariableParser.cs" />
-    <Compile Include="Utilities\EndPeriodException.cs" />
     <Compile Include="Websites\MediaWiki.cs" />
     <Compile Include="Parsers\MediaWikiLink.cs" />
     <Compile Include="Websites\MediaWikiPage.cs" />

@@ -143,8 +143,8 @@
   &lt;string&gt;#iferror&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
-    <Setting Name="MediaWikiExportPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">/wiki/Special:Export/$1</Value>
+    <Setting Name="MediaWikiContentApi" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/w/api.php?action=query&amp;prop=revisions&amp;titles=$1&amp;redirects&amp;rvprop=timestamp|content&amp;format=xml</Value>
     </Setting>
     <Setting Name="Bracket" Type="System.String" Scope="Application">
       <Value Profile="(Default)"> ($1) </Value>

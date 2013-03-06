@@ -28,7 +28,6 @@
       <ExportPath>/de/Spezial:Exportieren/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
     </MediaWiki>
     <MediaWiki>
@@ -65,7 +64,6 @@
       <ExportPath>/en/Special:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
     </MediaWiki>
     <MediaWiki>
@@ -98,7 +96,6 @@
       <ExportPath>/fr/Special:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
     </MediaWiki>
     <MediaWiki>
@@ -128,7 +125,6 @@
       <ExportPath>/ja/%E7%89%B9%E5%88%A5:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
     </MediaWiki>
     <MediaWiki>
@@ -157,7 +153,6 @@
       <ExportPath>/ru/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
     </MediaWiki>
     <MediaWiki>
@@ -186,7 +181,6 @@
       <ExportPath>/zh/Special:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
     </MediaWiki>
   </Websites>

@@ -762,22 +762,12 @@ namespace Honememo.Wptscs
             this.LoadCurrentValue((Website)site);
 
             // MediaWikiクラス分の読み込み
-            this.textBoxExportPath.Text = StringUtils.DefaultString(site.ExportPath);
+            this.textBoxContentApi.Text = StringUtils.DefaultString(site.ContentApi);
             this.textBoxMetaApi.Text = StringUtils.DefaultString(site.MetaApi);
             this.textBoxInterlanguageApi.Text = StringUtils.DefaultString(site.InterlanguageApi);
             this.textBoxTemplateNamespace.Text = site.TemplateNamespace.ToString();
             this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
             this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
-
-            // Template:Documentionは改行区切りのマルチテキストとして扱う
-            StringBuilder b = new StringBuilder();
-            foreach (string s in site.DocumentationTemplates)
-            {
-                b.Append(s).Append(Environment.NewLine);
-            }
-
-            this.textBoxDocumentationTemplate.Text = b.ToString();
-            this.textBoxDocumentationTemplateDefaultPage.Text = StringUtils.DefaultString(site.DocumentationTemplateDefaultPage);
             this.textBoxLinkInterwikiFormat.Text = StringUtils.DefaultString(site.LinkInterwikiFormat);
             this.textBoxLangFormat.Text = StringUtils.DefaultString(site.LangFormat);
             this.checkBoxHasLanguagePage.Checked = site.HasLanguagePage;
@@ -842,10 +832,10 @@ namespace Honememo.Wptscs
             // ※ もうちょっと綺麗に書きたかったが、うまい手が思いつかなかったので力技
             //    MediaWikiクラス側で行わないのは、場合によっては意図的に初期値と同じ値を設定すること
             //    もありえるから（初期値が変わる可能性がある場合など）。
-            string str = StringUtils.DefaultString(this.textBoxExportPath.Text).Trim();
-            if (str != site.ExportPath)
+            string str = StringUtils.DefaultString(this.textBoxContentApi.Text).Trim();
+            if (str != site.ContentApi)
             {
-                site.ExportPath = str;
+                site.ContentApi = str;
             }
             
             str = StringUtils.DefaultString(this.textBoxMetaApi.Text).Trim();
@@ -858,23 +848,6 @@ namespace Honememo.Wptscs
             if (str != site.InterlanguageApi)
             {
                 site.InterlanguageApi = str;
-            }
-
-            // Template:Documentionの設定は行ごとに格納
-            // ※ この値は初期値を持たないパラメータ
-            site.DocumentationTemplates.Clear();
-            foreach (string s in StringUtils.DefaultString(this.textBoxDocumentationTemplate.Text).Split('\n'))
-            {
-                if (!string.IsNullOrWhiteSpace(s))
-                {
-                    site.DocumentationTemplates.Add(s.Trim());
-                }
-            }
-
-            str = StringUtils.DefaultString(this.textBoxDocumentationTemplateDefaultPage.Text).Trim();
-            if (str != site.DocumentationTemplateDefaultPage)
-            {
-                site.DocumentationTemplateDefaultPage = str;
             }
 
             str = StringUtils.DefaultString(this.textBoxLinkInterwikiFormat.Text).Trim();
