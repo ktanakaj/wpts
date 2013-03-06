@@ -768,7 +768,6 @@ namespace Honememo.Wptscs
             this.textBoxTemplateNamespace.Text = site.TemplateNamespace.ToString();
             this.textBoxCategoryNamespace.Text = site.CategoryNamespace.ToString();
             this.textBoxFileNamespace.Text = site.FileNamespace.ToString();
-            this.textBoxRedirect.Text = StringUtils.DefaultString(site.Redirect);
 
             // Template:Documentionは改行区切りのマルチテキストとして扱う
             StringBuilder b = new StringBuilder();
@@ -859,12 +858,6 @@ namespace Honememo.Wptscs
             if (str != site.InterlanguageApi)
             {
                 site.InterlanguageApi = str;
-            }
-
-            str = StringUtils.DefaultString(this.textBoxRedirect.Text).Trim();
-            if (str != site.Redirect)
-            {
-                site.Redirect = str;
             }
 
             // Template:Documentionの設定は行ごとに格納

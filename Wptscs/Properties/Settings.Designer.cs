@@ -177,15 +177,6 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#REDIRECT")]
-        public string MediaWikiRedirect {
-            get {
-                return ((string)(this["MediaWikiRedirect"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int MediaWikiTemplateNamespace {
             get {

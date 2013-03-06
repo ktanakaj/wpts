@@ -36,7 +36,7 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         private static readonly string TestXml = "<MediaWiki><Location>http://ja.wikipedia.org</Location>"
             + "<Language Code=\"ja\"><Names /><Bracket /></Language>"
-            + "<MetaApi>_api.xml</MetaApi><ExportPath>/export/$1</ExportPath><Redirect>#飛ばす</Redirect>"
+            + "<MetaApi>_api.xml</MetaApi><ExportPath>/export/$1</ExportPath><InterlanguageApi>/interlanguage/$1.xml</InterlanguageApi>"
             + "<TemplateNamespace>100</TemplateNamespace><CategoryNamespace>101</CategoryNamespace><FileNamespace>200</FileNamespace>"
             + "<MagicWords><Variable>特別</Variable><Variable>マジックワード</Variable></MagicWords>"
             + "<InterwikiPrefixs><Prefix>外部ウィキ</Prefix><Prefix>ニュース</Prefix></InterwikiPrefixs>"
@@ -151,25 +151,31 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// <see cref="MediaWiki.Redirect"/>プロパティテストケース。
+        /// <see cref="MediaWiki.InterlanguageApi"/>プロパティテストケース。
         /// </summary>
         [TestMethod]
-        public void TestRedirect()
+        public void TestInterlanguageApi()
         {
             MediaWiki site = new MediaWiki(new Language("ja"));
 
             // デフォルトでは設定ファイルの値が返される
-            Assert.AreEqual("#REDIRECT", site.Redirect);
+            Assert.AreEqual(
+                "/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml",
+                site.InterlanguageApi);
 
             // 値を設定するとその値が返る
-            site.Redirect = "test";
-            Assert.AreEqual("test", site.Redirect);
+            site.InterlanguageApi = "test";
+            Assert.AreEqual("test", site.InterlanguageApi);
 
             // 空またはnullの場合、再び設定ファイルの値が入る
-            site.Redirect = null;
-            Assert.AreEqual("#REDIRECT", site.Redirect);
-            site.Redirect = string.Empty;
-            Assert.AreEqual("#REDIRECT", site.Redirect);
+            site.InterlanguageApi = null;
+            Assert.AreEqual(
+                "/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml",
+                site.InterlanguageApi);
+            site.InterlanguageApi = string.Empty;
+            Assert.AreEqual(
+                "/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml",
+                site.InterlanguageApi);
         }
 
         /// <summary>
@@ -632,7 +638,7 @@ namespace Honememo.Wptscs.Websites
             // ※ InterwikiPrefixsのgetは常にサーバーからも値を取得するため、ここではテストしない
             Assert.AreEqual("/w/api.php?format=xml&action=query&meta=siteinfo&siprop=namespaces|namespacealiases|interwikimap", site.MetaApi);
             Assert.AreEqual("/wiki/Special:Export/$1", site.ExportPath);
-            Assert.AreEqual("#REDIRECT", site.Redirect);
+            Assert.AreEqual("/w/api.php?action=query&prop=langlinks&titles=$1&redirects=&lllimit=500&format=xml", site.InterlanguageApi);
             Assert.AreEqual(10, site.TemplateNamespace);
             Assert.AreEqual(14, site.CategoryNamespace);
             Assert.AreEqual(6, site.FileNamespace);
@@ -650,7 +656,7 @@ namespace Honememo.Wptscs.Websites
             Assert.AreEqual("ja", site.Language.Code);
             Assert.AreEqual("_api.xml", site.MetaApi);
             Assert.AreEqual("/export/$1", site.ExportPath);
-            Assert.AreEqual("#飛ばす", site.Redirect);
+            Assert.AreEqual("/interlanguage/$1.xml", site.InterlanguageApi);
             Assert.AreEqual(100, site.TemplateNamespace);
             Assert.AreEqual(101, site.CategoryNamespace);
             Assert.AreEqual(200, site.FileNamespace);
@@ -687,7 +693,7 @@ namespace Honememo.Wptscs.Websites
 
             Assert.AreEqual(
                 "<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language>"
-                + "<MetaApi /><ExportPath /><Redirect /><TemplateNamespace /><CategoryNamespace /><FileNamespace />"
+                + "<MetaApi /><ExportPath /><InterlanguageApi /><TemplateNamespace /><CategoryNamespace /><FileNamespace />"
                 + "<MagicWords /><InterwikiPrefixs /><DocumentationTemplates /><LinkInterwikiFormat /><LangFormat />"
                 + "<HasLanguagePage>False</HasLanguagePage></MediaWiki>",
                 b.ToString());
@@ -695,7 +701,7 @@ namespace Honememo.Wptscs.Websites
             // プロパティに値が設定された場合の出力
             site.MetaApi = "_api.xml";
             site.ExportPath = "/export/$1";
-            site.Redirect = "#飛ばす";
+            site.InterlanguageApi = "/interlanguage/$1.xml";
             site.TemplateNamespace = 100;
             site.CategoryNamespace = 101;
             site.FileNamespace = 200;

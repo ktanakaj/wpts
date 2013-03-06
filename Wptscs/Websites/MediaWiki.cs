@@ -201,28 +201,6 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// リダイレクトの文字列。
-        /// </summary>
-        /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
-        public string Redirect
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(this.redirect))
-                {
-                    return Settings.Default.MediaWikiRedirect;
-                }
-
-                return this.redirect;
-            }
-
-            set
-            {
-                this.redirect = value;
-            }
-        }
-
-        /// <summary>
         /// テンプレートの名前空間を示す番号。
         /// </summary>
         /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
@@ -746,7 +724,7 @@ namespace Honememo.Wptscs.Websites
 
             this.MetaApi = XmlUtils.InnerText(siteElement.SelectSingleNode("MetaApi"));
             this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
-            this.Redirect = XmlUtils.InnerText(siteElement.SelectSingleNode("Redirect"));
+            this.InterlanguageApi = XmlUtils.InnerText(siteElement.SelectSingleNode("InterlanguageApi"));
 
             int namespaceId;
             if (int.TryParse(XmlUtils.InnerText(siteElement.SelectSingleNode("TemplateNamespace")), out namespaceId))
@@ -827,7 +805,7 @@ namespace Honememo.Wptscs.Websites
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力
             writer.WriteElementString("MetaApi", this.metaApi);
             writer.WriteElementString("ExportPath", this.exportPath);
-            writer.WriteElementString("Redirect", this.redirect);
+            writer.WriteElementString("InterlanguageApi", this.interlanguageApi);
             writer.WriteElementString(
                 "TemplateNamespace",
                 this.templateNamespace.HasValue ? this.templateNamespace.ToString() : string.Empty);
