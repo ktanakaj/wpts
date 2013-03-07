@@ -20,12 +20,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%D8%AE%D8%A7%D8%B5:%D8%AA%D8%B5%D8%AF%D9%8A%D8%B1/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/شرح">قالب:توثيق</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{وإو|عر=$1|لغ=$2|تر=$3|نص=$4}}</LinkInterwikiFormat>
       <LangFormat>{{رمزلغة|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -48,10 +44,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%E0%A6%AC%E0%A6%BF%E0%A6%B6%E0%A7%87%E0%A6%B7:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -80,12 +74,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Spezial:Exportieren/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -157,11 +147,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Template doc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{link-interwiki|en=$1|en_text=$4|lang=$2|lang_title=$3}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -192,12 +177,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Especial:Exportar/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -231,12 +212,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Sp%C3%A9cial:Exporter/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Modèle:Documentation</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{Lien|fr=$1|lang=$2|trad=$3|texte=$4}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -259,10 +236,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%E0%A4%B5%E0%A4%BF%E0%A4%B6%E0%A5%87%E0%A4%B7:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{भाषा|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -292,12 +267,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Speciale:Esporta/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -336,7 +307,6 @@
         </Names>
         <Bracket>（$1）</Bracket>
       </Language>
-      <ExportPath>/wiki/%E7%89%B9%E5%88%A5:%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%97/$1</ExportPath>
       <MagicWords>
         <Variable>CURRENTYEAR</Variable>
         <Variable>CURRENTMONTH</Variable>
@@ -485,11 +455,6 @@
         <Variable>親ページ名</Variable>
       </MagicWords>
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Template doc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{仮リンク|$1|$2|$3|label=$4}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -516,12 +481,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%ED%8A%B9%EC%88%98%EA%B8%B0%EB%8A%A5:%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/설명문서">틀:틀 설명문서</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -547,12 +508,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Speciaal:Exporteren/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Sjabloon:Sjabdoc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -574,12 +531,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Specjalna:Eksport/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/opis">Szablon:Dokumentacja</DocumentationTemplate>
-      </DocumentationTemplates>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -608,12 +561,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Especial:Exportar/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -643,12 +592,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Служебная:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -670,10 +615,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%E0%B7%80%E0%B7%92%E0%B7%81%E0%B7%9A%E0%B7%82:%E0%B6%B1%E0%B7%92%E0%B6%BB%E0%B7%8A%E0%B6%BA%E0%B7%8F%E0%B6%AD%E0%B6%9A%E0%B6%BB%E0%B6%B1%E0%B7%8A%E0%B6%B1/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -694,10 +637,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/%E0%AE%9A%E0%AE%BF%E0%AE%B1%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81:Export/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -726,14 +667,8 @@
           </LanguageName>
         </Names>
       </Language>
-      <ExportPath>/wiki/Special:%E5%AF%BC%E5%87%BA%E9%A1%B5%E9%9D%A2/$1</ExportPath>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Template doc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -746,7 +681,6 @@
       <Item From="Template:Note" To="Template:Note" />
     </ItemTable>
     <ItemTable From="ja" To="en">
-      <Item From="Template:?" To="Template:?" />
       <Item From="Template:Col-2" To="Template:Col-2" />
       <Item From="Template:Col-3" To="Template:Col-3" />
       <Item From="Template:Col-4" To="Template:Col-4" />
@@ -762,12 +696,20 @@
   </ItemTables>
   <HeadingTable>
     <Group>
+      <Word Lang="en">Administrative units</Word>
+      <Word Lang="ja">行政区画</Word>
+    </Group>
+    <Group>
       <Word Lang="en">Advantages</Word>
       <Word Lang="ja">利点</Word>
     </Group>
     <Group>
       <Word Lang="en">Background</Word>
       <Word Lang="ja">背景</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Climate</Word>
+      <Word Lang="ja">気候</Word>
     </Group>
     <Group>
       <Word Lang="en">Costs</Word>
@@ -784,6 +726,10 @@
       <Word Lang="zh">文化</Word>
     </Group>
     <Group>
+      <Word Lang="en">Demographics</Word>
+      <Word Lang="ja">人口動態</Word>
+    </Group>
+    <Group>
       <Word Lang="en">Disadvantages</Word>
       <Word Lang="ja">欠点</Word>
     </Group>
@@ -791,6 +737,14 @@
       <Word Lang="en">Economy</Word>
       <Word Lang="ja">経済</Word>
       <Word Lang="zh">經濟</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Education</Word>
+      <Word Lang="ja">教育</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Ethnicity</Word>
+      <Word Lang="ja">民族</Word>
     </Group>
     <Group>
       <Word Lang="en">Example</Word>
@@ -817,6 +771,14 @@
       <Word Lang="ja">関連資料</Word>
     </Group>
     <Group>
+      <Word Lang="en">Gallery</Word>
+      <Word Lang="ja">画像</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Geography</Word>
+      <Word Lang="ja">地理</Word>
+    </Group>
+    <Group>
       <Word Lang="en">History</Word>
       <Word Lang="es">Historia</Word>
       <Word Lang="fr">Histoire</Word>
@@ -824,6 +786,10 @@
       <Word Lang="nl">Geschiedenis</Word>
       <Word Lang="pl">Historia</Word>
       <Word Lang="zh">歷史</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Infrastructure</Word>
+      <Word Lang="ja">インフラ</Word>
     </Group>
     <Group>
       <Word Lang="de">Quellen</Word>
@@ -836,6 +802,14 @@
       <Word Lang="pl">Przypisy</Word>
       <Word Lang="ru">Примечания</Word>
       <Word Lang="zh">注釋</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Planetary system</Word>
+      <Word Lang="ja">惑星系</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Politics</Word>
+      <Word Lang="ja">政治</Word>
     </Group>
     <Group>
       <Word Lang="de">Literatur</Word>
@@ -853,6 +827,10 @@
       <Word Lang="zh">参考文献</Word>
     </Group>
     <Group>
+      <Word Lang="en">Religion</Word>
+      <Word Lang="ja">宗教</Word>
+    </Group>
+    <Group>
       <Word Lang="de">Siehe auch</Word>
       <Word Lang="en">See Also</Word>
       <Word Lang="es">Véase también</Word>
@@ -866,8 +844,20 @@
       <Word Lang="zh">參見</Word>
     </Group>
     <Group>
+      <Word Lang="en">Sports</Word>
+      <Word Lang="ja">スポーツ</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Sister cities</Word>
+      <Word Lang="ja">姉妹都市</Word>
+    </Group>
+    <Group>
       <Word Lang="en">Theory</Word>
       <Word Lang="ja">理論</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Transportation</Word>
+      <Word Lang="ja">交通</Word>
     </Group>
   </HeadingTable>
 </Config>

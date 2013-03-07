@@ -159,10 +159,11 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/wiki/Special:Export/$1")]
-        public string MediaWikiExportPath {
+        [global::System.Configuration.DefaultSettingValueAttribute("/w/api.php?action=query&prop=revisions&titles=$1&redirects&rvprop=timestamp|conte" +
+            "nt&format=xml")]
+        public string MediaWikiContentApi {
             get {
-                return ((string)(this["MediaWikiExportPath"]));
+                return ((string)(this["MediaWikiContentApi"]));
             }
         }
         

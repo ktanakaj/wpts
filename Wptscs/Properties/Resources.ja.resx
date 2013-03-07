@@ -178,10 +178,6 @@
 </value>
     <comment>翻訳支援処理処理を完了した際のメッセージ</comment>
   </data>
-  <data name="LogMessageErrorPageName" xml:space="preserve">
-    <value>{0} は、現在のツールでは処理できないページ名です。</value>
-    <comment>ページ名絡みの既知の不具合用の暫定メッセージ</comment>
-  </data>
   <data name="LogMessageErrorURL" xml:space="preserve">
     <value>要求したURLは {0} です。</value>
     <comment>通信エラー発生時のURLを示すメッセージ</comment>

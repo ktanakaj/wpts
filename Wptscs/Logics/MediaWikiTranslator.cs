@@ -1006,12 +1006,6 @@ namespace Honememo.Wptscs.Logics
             {
                 string dummy = page.Text;
             }
-            catch (EndPeriodException)
-            {
-                // 末尾がピリオドで終わるページが処理できない既知の不具合への対応、警告メッセージを出す
-                this.Logger.AddResponse(Resources.LogMessageErrorPageName, page.Title);
-                return false;
-            }
             catch (Exception e)
             {
                 // その他例外の場合、エラー情報を出力

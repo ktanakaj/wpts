@@ -31,7 +31,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// example.xmlのページ本文。
         /// </summary>
-        private static readonly string exampleText
+        private static readonly string ExampleText
             = "[[File:Example.png|thumb|Wikipedia's example image. (Example.png)]]\n{{wiktionary}}\n{{wikiquote}}\n"
                 + "'''Example''' may refer to:\n\n*[[Example (rapper)]], a British rapper\n*[[example.com]], "
                 + "[[example.net]], [[example.org]]  and [[.example]], domain names reserved for use in documentation "
@@ -42,7 +42,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// example.xmlのページ本文。
         /// </summary>
-        private static readonly DateTime exampleTimestamp = DateTime.Parse("2010-07-13T00:49:18Z");
+        private static readonly DateTime ExampleTimestamp = DateTime.Parse("2010-07-13T00:49:18Z");
 
         #endregion
 
@@ -58,18 +58,18 @@ namespace Honememo.Wptscs.Websites
             // 同時にタイムスタンプ, URIも設定される
             // ※ 異常系については、MediaWiki側の実装なのでそちらでテストする
             MediaWiki site = new MockFactory().GetMediaWiki("en");
-            Uri uri = new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.ExportPath, "example"));
+            Uri uri = new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.ContentApi, "example"));
             MediaWikiPageMock page = new MediaWikiPageMock(site, "example");
             Assert.IsNull(page.Uri);
 
-            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
-            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
+            Assert.AreEqual(MediaWikiPageTest.ExampleText, page.Text);
+            Assert.AreEqual(MediaWikiPageTest.ExampleTimestamp, page.Timestamp);
             Assert.AreEqual(uri, page.Uri);
 
             // 一度読み込むと、次回以降はその値が設定されている
             page.Title = "new name";
-            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
-            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
+            Assert.AreEqual(MediaWikiPageTest.ExampleText, page.Text);
+            Assert.AreEqual(MediaWikiPageTest.ExampleTimestamp, page.Timestamp);
 
             // 値が設定されている状態では、設定された値が返る
             page = new MediaWikiPageMock(site, "example");
@@ -88,18 +88,18 @@ namespace Honememo.Wptscs.Websites
             // 同時にページ本文, URIも設定される
             // ※ 異常系については、MediaWiki側の実装なのでそちらでテストする
             MediaWiki site = new MockFactory().GetMediaWiki("en");
-            Uri uri = new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.ExportPath, "example"));
+            Uri uri = new Uri(new Uri(site.Location), StringUtils.FormatDollarVariable(site.ContentApi, "example"));
             MediaWikiPageMock page = new MediaWikiPageMock(site, "example");
             Assert.IsNull(page.Uri);
 
-            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
-            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
+            Assert.AreEqual(MediaWikiPageTest.ExampleTimestamp, page.Timestamp);
+            Assert.AreEqual(MediaWikiPageTest.ExampleText, page.Text);
             Assert.AreEqual(uri, page.Uri);
 
             // 一度読み込むと、次回以降はその値が設定されている
             page.Title = "new name";
-            Assert.AreEqual(MediaWikiPageTest.exampleTimestamp, page.Timestamp);
-            Assert.AreEqual(MediaWikiPageTest.exampleText, page.Text);
+            Assert.AreEqual(MediaWikiPageTest.ExampleTimestamp, page.Timestamp);
+            Assert.AreEqual(MediaWikiPageTest.ExampleText, page.Text);
 
             // 値が設定されている状態では、設定された値が返る
             page = new MediaWikiPageMock(site, "example");
@@ -338,7 +338,6 @@ namespace Honememo.Wptscs.Websites
             #endregion
 
             #region 非公開プロパティテスト用のオーラーライドプロパティ
-
 
             /// <summary>
             /// ページタイトル。

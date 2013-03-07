@@ -340,10 +340,6 @@ Process stopped. Log: {0}
     <value>Max connect retries must be greater than or equal to 0.</value>
     <comment>リトライ回数に不正な値を入れられた場合のメッセージ</comment>
   </data>
-  <data name="LogMessageErrorPageName" xml:space="preserve">
-    <value>{0} is not supported page name.</value>
-    <comment>ページ名絡みの既知の不具合用の暫定メッセージ</comment>
-  </data>
   <data name="DropDownConfigLoadConfigFailed" xml:space="preserve">
     <value>(load failed)</value>
     <comment>設定ファイル読み込み失敗時の状態</comment>

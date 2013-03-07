@@ -36,19 +36,14 @@ namespace Honememo.Wptscs.Websites
         private string metaApi;
 
         /// <summary>
-        /// 記事のXMLデータが存在するパス。
+        /// MediaWiki記事データ取得用にアクセスするAPI。
         /// </summary>
-        private string exportPath;
+        private string contentApi;
 
         /// <summary>
         /// MediaWiki言語間リンク取得用にアクセスするAPI。
         /// </summary>
         private string interlanguageApi;
-
-        /// <summary>
-        /// リダイレクトの文字列。
-        /// </summary>
-        private string redirect;
 
         /// <summary>
         /// テンプレートの名前空間を示す番号。
@@ -89,11 +84,6 @@ namespace Honememo.Wptscs.Websites
         /// <see cref="InitializeByMetaApi"/>同期用ロックオブジェクト。
         /// </summary>
         private object lockLoadMetaApi = new object();
-
-        /// <summary>
-        /// Template:Documentation（言語間リンク等を別ページに記述するためのテンプレート）に相当するページ名。
-        /// </summary>
-        private IList<string> documentationTemplates = new List<string>();
 
         #endregion
 
@@ -157,24 +147,24 @@ namespace Honememo.Wptscs.Websites
         }
 
         /// <summary>
-        /// 記事のXMLデータが存在するパス。
+        /// MediaWiki記事データ取得用にアクセスするAPI。
         /// </summary>
         /// <remarks>値が指定されていない場合、デフォルト値を返す。</remarks>
-        public string ExportPath
+        public string ContentApi
         {
             get
             {
-                if (string.IsNullOrEmpty(this.exportPath))
+                if (string.IsNullOrEmpty(this.contentApi))
                 {
-                    return Settings.Default.MediaWikiExportPath;
+                    return Settings.Default.MediaWikiContentApi;
                 }
 
-                return this.exportPath;
+                return this.contentApi;
             }
 
             set
             {
-                this.exportPath = value;
+                this.contentApi = value;
             }
         }
 
@@ -366,44 +356,6 @@ namespace Honememo.Wptscs.Websites
         #region それ以外のプロパティ
 
         /// <summary>
-        /// Template:Documentation（言語間リンク等を別ページに記述するためのテンプレート）に相当するページ名。
-        /// </summary>
-        /// <remarks>空の場合、その言語版にはこれに相当する機能は無いものとして扱う。</remarks>
-        public IList<string> DocumentationTemplates
-        {
-            get
-            {
-                return this.documentationTemplates;
-            }
-
-            set
-            {
-                if (value == null)
-                {
-                    // nullの場合、空のリストを代入
-                    // ※ 例外にしてもよいが、このクラスにはnullで初期化としている
-                    //    プロパティが多数存在するので、動きをあわせる
-                    value = new List<string>();
-                }
-
-                this.documentationTemplates = value;
-            }
-        }
-
-        /// <summary>
-        /// Template:Documentationで指定が無い場合に参照するページ名。
-        /// </summary>
-        /// <remarks>
-        /// ほとんどの言語では[[/Doc]]の模様。
-        /// 空の場合、明示的な指定が無い場合は参照不能として扱う。
-        /// </remarks>
-        public string DocumentationTemplateDefaultPage
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Template:仮リンク（他言語へのリンク）で書式化するためのフォーマット。
         /// </summary>
         /// <remarks>空の場合、その言語版にはこれに相当する機能は無いor使用しないものとして扱う。</remarks>
@@ -511,68 +463,50 @@ namespace Honememo.Wptscs.Websites
             }
 
             // URIを生成
-            Uri uri = new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ExportPath, escapeTitle));
-            if (uri.OriginalString.EndsWith(".") || uri.OriginalString.EndsWith("?"))
-            {
-                // 末尾がピリオドのページが取得できない既知の不具合への暫定対応
-                // 対処方法が不明なため、せめて例外を投げて検知する
-                throw new EndPeriodException(title + " is not suppoted");
-            }
+            Uri uri = new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ContentApi, escapeTitle));
 
             // ページのXMLデータをMediaWikiサーバーから取得
-            XmlDocument xml = new XmlDocument();
+            XElement doc;
+            using (Stream reader = this.WebProxy.GetStream(uri))
+            {
+                doc = XElement.Load(reader);
+            }
+
+            // ページエレメントを取得
+            // ※ この問い合わせでは、ページが無い場合も要素自体は毎回ある模様
+            //    一件しか返らないはずなので先頭データを対象とする
+            XElement pe;
             try
             {
-                using (Stream reader = this.WebProxy.GetStream(uri))
-                {
-                    xml.Load(reader);
-                }
+                pe = (from query in doc.Elements("query")
+                      from pages in query.Elements("pages")
+                      from n in pages.Elements("page")
+                      select n).First();
             }
-            catch (System.Net.WebException e)
+            catch (InvalidOperationException)
             {
-                // 404エラーによるページ取得失敗は詰め替えて返す
-                if (this.IsNotFound(e))
-                {
-                    throw new FileNotFoundException("page not found", e);
-                }
-
-                throw e;
-            }
-
-            // ルートエレメントまで取得し、フォーマットをチェック
-            XmlElement rootElement = xml["mediawiki"];
-            if (rootElement == null)
-            {
-                // XMLは取得できたが空 or フォーマットが想定外
-                throw new InvalidDataException("parse failed : mediawiki element is not found");
+                throw new InvalidOperationException("parse failed : query/pages/page element is not found");
             }
 
             // ページの解析
-            XmlElement pageElement = rootElement["page"];
-            if (pageElement == null)
+            if (pe.Attribute("missing") != null)
             {
-                // ページ無し
+                // missing属性が存在する場合、ページ無し
                 throw new FileNotFoundException("page not found");
             }
 
             // ページ名、ページ本文、最終更新日時
-            // ※ 一応、各項目が無くても動作するようにする
-            string pageTitle = XmlUtils.InnerText(pageElement["title"], title);
-            string text = null;
-            DateTime? time = null;
-            XmlElement revisionElement = pageElement["revision"];
-            if (revisionElement != null)
-            {
-                text = XmlUtils.InnerText(revisionElement["text"], null);
-                XmlElement timeElement = revisionElement["timestamp"];
-                if (timeElement != null)
-                {
-                    time = new DateTime?(DateTime.Parse(timeElement.InnerText));
-                }
-            }
+            var re = (from revisions in pe.Elements("revisions")
+                      from n in revisions.Elements("rev")
+                      select n).First();
 
             // ページ情報を作成して返す
-            return new MediaWikiPage(this, pageTitle, text, time, uri);
+            return new MediaWikiPage(
+                this,
+                XmlUtils.Value(pe.Attribute("title"), title),
+                re.Value,
+                new DateTime?(DateTime.Parse(re.Attribute("timestamp").Value)),
+                uri);
         }
 
         /// <summary>
@@ -723,7 +657,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             this.MetaApi = XmlUtils.InnerText(siteElement.SelectSingleNode("MetaApi"));
-            this.ExportPath = XmlUtils.InnerText(siteElement.SelectSingleNode("ExportPath"));
+            this.ContentApi = XmlUtils.InnerText(siteElement.SelectSingleNode("ContentApi"));
             this.InterlanguageApi = XmlUtils.InnerText(siteElement.SelectSingleNode("InterlanguageApi"));
 
             int namespaceId;
@@ -768,21 +702,6 @@ namespace Honememo.Wptscs.Websites
                 this.InterwikiPrefixs = prefixs;
             }
 
-            // Template:Documentationの設定
-            this.DocumentationTemplates = new List<string>();
-            foreach (XmlNode docNode in siteElement.SelectNodes("DocumentationTemplates/DocumentationTemplate"))
-            {
-                this.DocumentationTemplates.Add(docNode.InnerText);
-                XmlElement docElement = docNode as XmlElement;
-                if (docElement != null)
-                {
-                    // ※ XML上DefaultPageはテンプレートごとに異なる値を持てるが、
-                    //    そうした例を見かけたことがないため、代表で一つの値のみ使用
-                    //    （複数値が持てるのも、リダイレクトが存在するためその対策として）
-                    this.DocumentationTemplateDefaultPage = docElement.GetAttribute("DefaultPage");
-                }
-            }
-
             this.LinkInterwikiFormat = XmlUtils.InnerText(siteElement.SelectSingleNode("LinkInterwikiFormat"));
             this.LangFormat = XmlUtils.InnerText(siteElement.SelectSingleNode("LangFormat"));
             bool hasLanguagePage;
@@ -804,7 +723,7 @@ namespace Honememo.Wptscs.Websites
             // MediaWiki固有の情報
             // ※ 設定ファイルに初期値を持つものは、プロパティではなく値から出力
             writer.WriteElementString("MetaApi", this.metaApi);
-            writer.WriteElementString("ExportPath", this.exportPath);
+            writer.WriteElementString("ContentApi", this.contentApi);
             writer.WriteElementString("InterlanguageApi", this.interlanguageApi);
             writer.WriteElementString(
                 "TemplateNamespace",
@@ -835,17 +754,6 @@ namespace Honememo.Wptscs.Websites
                 {
                     writer.WriteElementString("Prefix", prefix);
                 }
-            }
-
-            // Template:Documentationの設定
-            writer.WriteEndElement();
-            writer.WriteStartElement("DocumentationTemplates");
-            foreach (string doc in this.DocumentationTemplates)
-            {
-                writer.WriteStartElement("DocumentationTemplate");
-                writer.WriteAttributeString("DefaultPage", this.DocumentationTemplateDefaultPage);
-                writer.WriteValue(doc);
-                writer.WriteEndElement();
             }
 
             writer.WriteEndElement();
