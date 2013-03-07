@@ -22,9 +22,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/شرح">قالب:توثيق</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{وإو|عر=$1|لغ=$2|تر=$3|نص=$4}}</LinkInterwikiFormat>
       <LangFormat>{{رمزلغة|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -49,7 +46,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -80,9 +76,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/Doku">Vorlage:Dokumentation</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -154,10 +147,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{link-interwiki|en=$1|en_text=$4|lang=$2|lang_title=$3}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -190,9 +179,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Plantilla:Documentación</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -224,9 +210,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Modèle:Documentation</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{Lien|fr=$1|lang=$2|trad=$3|texte=$4}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -251,7 +234,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <LangFormat>{{भाषा|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -283,9 +265,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/man">Template:Man</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -472,10 +451,6 @@
         <Variable>親ページ名</Variable>
       </MagicWords>
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Template:Documentation</DocumentationTemplate>
-        <DocumentationTemplate DefaultPage="/doc">Template:Doc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LinkInterwikiFormat>{{仮リンク|$1|$2|$3|label=$4}}</LinkInterwikiFormat>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
@@ -504,9 +479,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/설명문서">틀:틀 설명문서</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -534,9 +506,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Sjabloon:Sjabdoc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -560,9 +529,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/opis">Szablon:Dokumentacja</DocumentationTemplate>
-      </DocumentationTemplates>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -593,9 +559,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Predefinição:Documentação</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -627,9 +590,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">Шаблон:Doc</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
@@ -653,7 +613,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -676,7 +635,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates />
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
@@ -703,9 +661,6 @@
       </Language>
       <MagicWords />
       <InterwikiPrefixs />
-      <DocumentationTemplates>
-        <DocumentationTemplate DefaultPage="/doc">模板:Documentation</DocumentationTemplate>
-      </DocumentationTemplates>
       <LangFormat>{{Lang|$1|$2}}</LangFormat>
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>

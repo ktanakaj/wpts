@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+<Config>
+  <Translator>MediaWikiTranslator</Translator>
+  <Websites>
+    <MediaWiki>
+      <Location>http://de.wikivoyage.org</Location>
+      <Language Code="de">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Deutsche Sprache</Name>
+            <ShortName>Deutsch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>German language</Name>
+            <ShortName>German</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ドイツ語</Name>
+            <ShortName>独</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>독일어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>德语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://en.wikivoyage.org</Location>
+      <Language Code="en">
+        <Names>
+          <LanguageName Code="ar">
+            <Name>لغة إنجليزية</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="bn">
+            <Name>ইংরেজি ভাষা</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="de">
+            <Name>Englische Sprache</Name>
+            <ShortName>Englisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>English language</Name>
+            <ShortName>English</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma inglés</Name>
+            <ShortName>Inglés</ShortName>
+          </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Anglais</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="hi">
+            <Name>अंग्रेज़ी भाषा</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="it">
+            <Name>Lingua inglese</Name>
+            <ShortName>inglese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>英語</Name>
+            <ShortName>英</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>영어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="nl">
+            <Name>Engels</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pl">
+            <Name>Język angielski</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua inglesa</Name>
+            <ShortName>Inglês</ShortName>
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Английский язык</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>英语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://es.wikivoyage.org</Location>
+      <Language Code="es">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Spanish language</Name>
+            <ShortName>Spanish</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma español</Name>
+            <ShortName>Español</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>スペイン語</Name>
+            <ShortName>西</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>에스파냐어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>西班牙语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://fr.wikivoyage.org</Location>
+      <Language Code="fr">
+        <Names>
+          <LanguageName Code="en">
+            <Name>French language</Name>
+            <ShortName>French</ShortName>
+          </LanguageName>
+          <LanguageName Code="de">
+            <Name>Französische Sprache</Name>
+            <ShortName>Französisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="fr">
+            <Name>Français</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>フランス語</Name>
+            <ShortName>仏</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>프랑스어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>法语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://it.wikivoyage.org</Location>
+      <Language Code="it">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Italian language</Name>
+            <ShortName>Italian</ShortName>
+          </LanguageName>
+          <LanguageName Code="it">
+            <Name>Lingua italiana</Name>
+            <ShortName>Italiano</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>イタリア語</Name>
+            <ShortName>伊</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>이탈리아어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>意大利语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://nl.wikivoyage.org</Location>
+      <Language Code="nl">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Niederländisch</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Dutch language</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>オランダ語</Name>
+            <ShortName>蘭</ShortName>
+          </LanguageName>
+          <LanguageName Code="nl">
+            <Name>Nederlands</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://pl.wikivoyage.org</Location>
+      <Language Code="pl">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Polish language</Name>
+            <ShortName>Polish</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ポーランド語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pl">
+            <Name>Język polski</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://pt.wikivoyage.org</Location>
+      <Language Code="pt">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Portuguese language</Name>
+            <ShortName>Portuguese</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ポルトガル語</Name>
+            <ShortName>葡</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>포르투갈어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua portuguesa</Name>
+            <ShortName>Português</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>葡萄牙語</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://sv.wikivoyage.org</Location>
+      <Language Code="sv">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Swedish language</Name>
+            <ShortName>Swedish</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>スウェーデン語</Name>
+            <ShortName>典</ShortName>
+          </LanguageName>
+          <LanguageName Code="sv">
+            <Name>Svenska</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://ro.wikivoyage.org</Location>
+      <Language Code="ro">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Romanian language</Name>
+            <ShortName>Romanian</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ルーマニア語</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ro">
+            <Name>Limba română</Name>
+            <ShortName>română</ShortName>
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>http://ru.wikivoyage.org</Location>
+      <Language Code="ru">
+        <Names>
+          <LanguageName Code="en">
+            <Name>Russian language</Name>
+            <ShortName>Russian</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>ロシア語</Name>
+            <ShortName>露</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>러시아어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="ru">
+            <Name>Русский язык</Name>
+            <ShortName>Русский</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>俄语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+  </Websites>
+  <ItemTables />
+  <HeadingTable />
+</Config>

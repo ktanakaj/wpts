@@ -696,12 +696,20 @@
   </ItemTables>
   <HeadingTable>
     <Group>
+      <Word Lang="en">Administrative units</Word>
+      <Word Lang="ja">行政区画</Word>
+    </Group>
+    <Group>
       <Word Lang="en">Advantages</Word>
       <Word Lang="ja">利点</Word>
     </Group>
     <Group>
       <Word Lang="en">Background</Word>
       <Word Lang="ja">背景</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Climate</Word>
+      <Word Lang="ja">気候</Word>
     </Group>
     <Group>
       <Word Lang="en">Costs</Word>
@@ -718,6 +726,10 @@
       <Word Lang="zh">文化</Word>
     </Group>
     <Group>
+      <Word Lang="en">Demographics</Word>
+      <Word Lang="ja">人口動態</Word>
+    </Group>
+    <Group>
       <Word Lang="en">Disadvantages</Word>
       <Word Lang="ja">欠点</Word>
     </Group>
@@ -725,6 +737,14 @@
       <Word Lang="en">Economy</Word>
       <Word Lang="ja">経済</Word>
       <Word Lang="zh">經濟</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Education</Word>
+      <Word Lang="ja">教育</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Ethnicity</Word>
+      <Word Lang="ja">民族</Word>
     </Group>
     <Group>
       <Word Lang="en">Example</Word>
@@ -751,6 +771,14 @@
       <Word Lang="ja">関連資料</Word>
     </Group>
     <Group>
+      <Word Lang="en">Gallery</Word>
+      <Word Lang="ja">画像</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Geography</Word>
+      <Word Lang="ja">地理</Word>
+    </Group>
+    <Group>
       <Word Lang="en">History</Word>
       <Word Lang="es">Historia</Word>
       <Word Lang="fr">Histoire</Word>
@@ -758,6 +786,10 @@
       <Word Lang="nl">Geschiedenis</Word>
       <Word Lang="pl">Historia</Word>
       <Word Lang="zh">歷史</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Infrastructure</Word>
+      <Word Lang="ja">インフラ</Word>
     </Group>
     <Group>
       <Word Lang="de">Quellen</Word>
@@ -770,6 +802,14 @@
       <Word Lang="pl">Przypisy</Word>
       <Word Lang="ru">Примечания</Word>
       <Word Lang="zh">注釋</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Planetary system</Word>
+      <Word Lang="ja">惑星系</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Politics</Word>
+      <Word Lang="ja">政治</Word>
     </Group>
     <Group>
       <Word Lang="de">Literatur</Word>
@@ -787,6 +827,10 @@
       <Word Lang="zh">参考文献</Word>
     </Group>
     <Group>
+      <Word Lang="en">Religion</Word>
+      <Word Lang="ja">宗教</Word>
+    </Group>
+    <Group>
       <Word Lang="de">Siehe auch</Word>
       <Word Lang="en">See Also</Word>
       <Word Lang="es">Véase también</Word>
@@ -800,8 +844,20 @@
       <Word Lang="zh">參見</Word>
     </Group>
     <Group>
+      <Word Lang="en">Sports</Word>
+      <Word Lang="ja">スポーツ</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Sister cities</Word>
+      <Word Lang="ja">姉妹都市</Word>
+    </Group>
+    <Group>
       <Word Lang="en">Theory</Word>
       <Word Lang="ja">理論</Word>
+    </Group>
+    <Group>
+      <Word Lang="en">Transportation</Word>
+      <Word Lang="ja">交通</Word>
     </Group>
   </HeadingTable>
 </Config>
