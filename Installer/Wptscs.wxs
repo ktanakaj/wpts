@@ -3,7 +3,7 @@
   <?define ProductVersion="1.3.0" ?>
   <?define ProductGUID="{3266949E-9E73-49B8-BC63-EB7B5ABE7586}" ?>
   <?define ProductUpgradeCode="{8A17447B-F484-4b42-98C4-317216CCEB78}" ?>
-  <?define MainExecutableGUID="{8771FF61-B4D9-4c35-A43D-946692E05E36}" ?>
+  <?define MainExecutableGUID="{3F07C4BD-A267-4E3D-B1A5-4F5F36ABC681}" ?>
   <?define ResourceJAGUID="{A3DB3F56-B8EF-42ca-8891-26378B9A5DBE}" ?>
   <?define DocumentGUID="{C703FEE3-D60F-476d-B5B0-3AAF157B506C}" ?>
 
@@ -37,8 +37,8 @@
                     Source="..\Wptscs\bin\Release\hmlib.dll" Checksum="yes" />
               <File Id="WikipediaXML" Name="Wikipedia.xml"
                     Source="..\Wptscs\Wikipedia.xml" />
-              <File Id="WikitravelXML" Name="Wikitravel.xml"
-                    Source="..\Wptscs\Wikitravel.xml" Vital="no" />
+              <File Id="WikivoyageXML" Name="Wikivoyage.xml"
+                    Source="..\Wptscs\Wikivoyage.xml" Vital="no" />
               <File Id="WiktionaryXML" Name="Wiktionary.xml"
                     Source="..\Wptscs\Wiktionary.xml" Vital="no" />
             </Component>
@@ -95,7 +95,7 @@
     </InstallUISequence>
     <InstallExecuteSequence>
       <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERFOUND</Custom>
-      <RemoveExistingProducts After="InstallFinalize" />
+      <RemoveExistingProducts After="InstallInitialize" />
     </InstallExecuteSequence>
 
     <PropertyRef Id="NETFRAMEWORK40CLIENT"/>

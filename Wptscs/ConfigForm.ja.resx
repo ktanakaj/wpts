@@ -163,6 +163,9 @@
   <data name="tabPageItems.Text" xml:space="preserve">
     <value>記事の置き換え</value>
   </data>
+  <data name="dataGridViewHeading.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 373</value>
+  </data>
   <data name="tabPageHeadings.Size" type="System.Drawing.Size, System.Drawing">
     <value>592, 385</value>
   </data>

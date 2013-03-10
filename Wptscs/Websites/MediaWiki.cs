@@ -449,8 +449,9 @@ namespace Honememo.Wptscs.Websites
         /// </summary>
         /// <param name="title">ページタイトル。</param>
         /// <returns>取得したページ。</returns>
+        /// <exception cref="InvalidDataException">APIから取得したデータが想定外。</exception>
+        /// <exception cref="NullReferenceException">APIから取得したデータが想定外。</exception>
         /// <exception cref="FileNotFoundException">ページが存在しない場合。</exception>
-        /// <exception cref="EndPeriodException">末尾がピリオドのページの場合（既知の不具合への対応）。</exception>
         /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         public Page GetPageBodyAndTimestamp(string title)
         {
