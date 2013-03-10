@@ -322,9 +322,6 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// ページの本文・タイムスタンプをサーバーから取得。
         /// </summary>
-        /// <exception cref="Honememo.Wptscs.Utilities.EndPeriodException">
-        /// 末尾がピリオドのページの場合（既知の不具合への対応）。
-        /// </exception>
         /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         protected void SetPageBodyAndTimestamp()
         {
