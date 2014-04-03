@@ -1,9 +1,9 @@
 ﻿=====================================================================
 【タイトル】 Wikipedia 翻訳支援ツール
-【ファイル】 wptscs130.msi, wptscs130.zip, wptscs130-src.zip
-【作成月日】 2013/3/10
+【ファイル】 wptscs131.msi, wptscs131.zip, wptscs131-src.zip
+【作成月日】 2014/4/xx
 【制 作 者】 Honeplus
-【動作環境】 Windows 8 での動作を確認。要.NET Framework 4.0 Client Profile または 4.5
+【動作環境】 Windows 7/8.1 での動作を確認。要.NET Framework 4.0 Client Profile または 4.5
 【配布形態】 修正BSDライセンス
 【HomePage】 http://sourceforge.jp/projects/wptscs/
 =====================================================================
@@ -33,7 +33,7 @@ Wiktionary.xml          : Wiktionary用の設定ファイル
 アプリケーション上で設定した内容は、上記設定ファイルには反映されません。
 ユーザーごとのフォルダに出力されます。
 設定ファイルを直接修正、または削除して初期値に戻したい場合は、
-下記のようなパスにあるファイルを更新してください（以下はWindows 8の例）。
+下記のようなパスにあるファイルを更新してください（以下はWindows 8.1の例）。
 
 C:\Users\[ユーザー名]\AppData\Roaming\Honememo\Wikipedia 翻訳支援ツール\[バージョン番号]\config.xml
 C:\Users\[ユーザー名]\AppData\Local\Honememo\wptscs.exe_[～]\[バージョン番号]\user.config
@@ -105,8 +105,8 @@ zip版の場合は展開したファイルを削除してください。
 
 
 ・ソースについて
-wptscs130-src.zip としてソースファイル一式を配布しています。
-開発環境はVisual Studio 2012 Express for Windows Desktopです。
+wptscs131-src.zip としてソースファイル一式を配布しています。
+開発環境はVisual Studio 2013 Express for Windows Desktopです。
 その他外部ツールとしてコーディングスタイルチェック用のStyleCopを使用しています。
 また、インストーラの作成にはWiXを使用しています。
 
@@ -199,6 +199,7 @@ Ver1.30  2013/03/10 言語間リンクの取得を自前の解析処理を使わ
                     その他設定ファイルを精査。
                     ※ 設定ファイルに互換性はありますが、一部設定項目の変更・追加・削除が発生しています。
                        独自の設定を追加している場合、変更が必要になる可能性があります。
+Ver1.31  2014/04/xx 記事名のエスケープを明示的に行うようにし、扱えない文字が残っていたのを修正。
 
 
 ・仕様上の制限

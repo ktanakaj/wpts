@@ -3,7 +3,7 @@
 //      MediaWikiのウェブサイト（システム）をあらわすモデルクラスソース</summary>
 //
 // <copyright file="MediaWiki.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2013 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2014 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -408,16 +408,8 @@ namespace Honememo.Wptscs.Websites
         /// </remarks>
         public override Page GetPage(string title)
         {
-            // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
-            // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
-            string escapeTitle = title;
-            if (new Uri(this.Location).IsFile)
-            {
-                escapeTitle = FormUtils.ReplaceInvalidFileNameChars(title);
-            }
-
-            // URIを生成
-            Uri uri = new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.InterlanguageApi, escapeTitle));
+            // 言語間リンク取得用のURIを生成
+            Uri uri = this.CreateUri(this.InterlanguageApi, title);
 
             // ページの言語間リンク情報XMLデータをMediaWikiサーバーから取得
             XElement doc;
@@ -455,16 +447,8 @@ namespace Honememo.Wptscs.Websites
         /// <remarks>ページの取得に失敗した場合（通信エラーなど）は、その状況に応じた例外を投げる。</remarks>
         public Page GetPageBodyAndTimestamp(string title)
         {
-            // fileスキームの場合、記事名からファイルに使えない文字をエスケープ
-            // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので
-            string escapeTitle = title;
-            if (new Uri(this.Location).IsFile)
-            {
-                escapeTitle = FormUtils.ReplaceInvalidFileNameChars(title);
-            }
-
-            // URIを生成
-            Uri uri = new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(this.ContentApi, escapeTitle));
+            // 記事データ取得用のURIを生成
+            Uri uri = this.CreateUri(this.ContentApi, title);
 
             // ページのXMLデータをMediaWikiサーバーから取得
             XElement doc;
@@ -922,6 +906,40 @@ namespace Honememo.Wptscs.Websites
             }
 
             return interwikiPrefixs;
+        }
+
+        /// <summary>
+        /// URI用のフォーマットと記事名からURIを生成する。
+        /// </summary>
+        /// <param name="format">URI用のフォーマット。</param>
+        /// <param name="title">フォーマットに埋め込む記事名。</param>
+        /// <returns>生成されたURI。</returns>
+        /// <remarks>記事名は必要に応じてエスケープされる。</remarks>
+        private Uri CreateUri(string format, string title)
+        {
+            // ※ 仕組み的な処理はWebsite側に置きたいが、向こうではタイトルだけを抽出できないので。
+            //    Uriだけでも自動的にエスケープされるが、その場合+など一部の文字が対象にならなかったため
+            //    明示的に記事名だけエスケープする。
+            return new Uri(new Uri(this.Location), StringUtils.FormatDollarVariable(format, this.EscapeString(title)));
+        }
+
+        /// <summary>
+        /// 接続に用いるスキームに応じて、文字列をエスケープする。
+        /// </summary>
+        /// <param name="str">エスケープする文字列。</param>
+        /// <returns>エスケープされた文字列。</returns>
+        private string EscapeString(string str)
+        {
+            if (new Uri(this.Location).IsFile)
+            {
+                // fileスキームの場合、ファイルで使えない文字をエスケープ
+                return FormUtils.ReplaceInvalidFileNameChars(str);
+            }
+            else
+            {
+                // それ以外はhttp等のURL用のエスケープ
+                return Uri.EscapeDataString(str);
+            }
         }
 
         #endregion
