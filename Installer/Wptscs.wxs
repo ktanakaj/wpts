@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <?define ProductVersion="1.3.0" ?>
-  <?define ProductGUID="{3266949E-9E73-49B8-BC63-EB7B5ABE7586}" ?>
+  <?define ProductVersion="1.3.1" ?>
+  <?define ProductGUID="{7446ECCE-2E69-449B-9EA9-F84724122026}" ?>
   <?define ProductUpgradeCode="{8A17447B-F484-4b42-98C4-317216CCEB78}" ?>
   <?define MainExecutableGUID="{3F07C4BD-A267-4E3D-B1A5-4F5F36ABC681}" ?>
   <?define ResourceJAGUID="{A3DB3F56-B8EF-42ca-8891-26378B9A5DBE}" ?>
