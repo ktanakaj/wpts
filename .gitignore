@@ -9,4 +9,14 @@ TestResult.xml
 *.shfbproj_*
 Help
 TestResults
+*/bin
+*/obj
+*/*.csproj.user
+*/*.Cache
+Installer/*.wixobj
+Installer/*.wixpdb
+Installer/*.msi
+Installer/*.mst
+Installer/*.exe
+Installer/*.zip
 !.gitkeep
