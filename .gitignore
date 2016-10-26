@@ -1,0 +1,12 @@
+*.suo
+*.bak
+.project
+.settings
+TestResult.xml
+*.sln.VisualState.xml
+*.chm
+*.chw
+*.shfbproj_*
+Help
+TestResults
+!.gitkeep
