@@ -635,13 +635,13 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example_定型句なし.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example_定型句なし.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translator.Log);
         }
@@ -673,13 +673,13 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
                 translator.Log);
         }
@@ -731,13 +731,13 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example_キャッシュ使用.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.xx", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example_キャッシュ使用.log")).Replace("file:///xxx/Data/MediaWiki/en/", from.Location),
                 translator.Log);
         }
@@ -766,13 +766,13 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example_仮リンク有効.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "example.log")).Replace("http://en.wikipedia.org", from.Location),
                 translator.Log);
         }
@@ -813,13 +813,13 @@ namespace Honememo.Wptscs.Logics
 
             // テストデータの変換結果を期待される結果と比較する
             // バージョン表記部分は毎回変化するため、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "スペースシップツー.txt")).Replace("<!-- Wikipedia 翻訳支援ツール Ver0.73", "<!-- " + FormUtils.ApplicationName()),
                 translator.Text);
 
             // テストデータの変換ログを期待されるログと比較する
             // 1行目のパスが一致しないので、期待される結果のうち該当部分を更新する
-            Assert.AreEqual(
+            AssertEqualTextPerLines(
                 File.ReadAllText(Path.Combine(ResultDir, "スペースシップツー.log")).Replace("http://ja.wikipedia.org", from.Location),
                 translator.Log);
         }
@@ -844,11 +844,36 @@ namespace Honememo.Wptscs.Logics
             catch (ApplicationException)
             {
                 // 実行ログを期待されるログと比較する
-                Assert.AreEqual(
+                AssertEqualTextPerLines(
                     ("http://en.wikipedia.org より [[Nothing Page]] を取得。\r\n"
                     + "→ 翻訳元として指定された記事は存在しません。記事名を確認してください。\r\n")
                     .Replace("http://en.wikipedia.org", from.Location),
                     translator.Log);
+            }
+        }
+
+        #endregion
+
+        #region テスト用メソッド
+
+        /// <summary>
+        /// テキストを1行ずつ<see cref="Assert.AreEqual{T}(T, T)"/>で比較する。
+        /// </summary>
+        /// <param name="expected">期待値。</param>
+        /// <param name="actual">実際の値。</param>
+        private static void AssertEqualTextPerLines(string expected, string actual)
+        {
+            using (StringReader esr = new StringReader(expected))
+            {
+                using (StringReader asr = new StringReader(actual))
+                {
+                    while (esr.Peek() > -1 || asr.Peek() > -1)
+                    {
+                        Assert.AreEqual(esr.ReadLine(), asr.ReadLine());
+                    }
+
+                    Assert.AreEqual(esr.Peek(), asr.Peek());
+                }
             }
         }
 

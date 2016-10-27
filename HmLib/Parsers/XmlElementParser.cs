@@ -233,7 +233,7 @@ namespace Honememo.Parsers
         /// <remarks>性能対策などで<see cref="TryParse"/>を呼ぶ前に目処を付けたい場合用。</remarks>
         public override bool IsPossibleParse(char c)
         {
-            return '<' == c;
+            return c == '<';
         }
 
         #endregion
