@@ -174,9 +174,6 @@
   <data name="&gt;&gt;groupBoxApplicationConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="labelWebsite.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -290,9 +287,6 @@
   </data>
   <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
     <value>errorProvider</value>
-  </data>
-  <data name="labelBracket.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 12</value>
   </data>
   <data name="textBoxInterlanguageApi.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -455,8 +449,8 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv</value>
   <data name="labelCategoryNamespace.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="textBoxMaxConnectRetries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Disable</value>
+  <data name="labelInterlanguageApi.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ColumnToCode.Width" type="System.Int32, mscorlib">
     <value>66</value>
@@ -553,7 +547,7 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv</value>
     <value>True</value>
   </data>
   <data name="linkLabelWebsite.Text" xml:space="preserve">
-    <value>http://sourceforge.jp/projects/wptscs/</value>
+    <value>https://osdn.net/projects/wptscs/</value>
   </data>
   <data name="labelUserAgent.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -774,8 +768,8 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv</value>
 どのようなパスかについては、下記URL等を参照してください。
 http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ColumnAlias.HeaderText" xml:space="preserve">
+    <value>Redirect</value>
   </data>
   <data name="groupBoxInformation.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -800,9 +794,6 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   </data>
   <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
     <value>toolTip</value>
-  </data>
-  <data name="&gt;&gt;labelReferer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonCancel.ToolTip" xml:space="preserve">
     <value>設定を更新せず、この画面を閉じます。</value>
@@ -837,6 +828,13 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="textBoxConnectRetryTime.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
+  <data name="labelInterlanguageApi.ToolTip" xml:space="preserve">
+    <value>サーバーから言語間リンク情報をXMLでダウンロードするためのパスを入力します。
+記事名を代入する部分を $1 としてください。
+
+どのようなパスかについては、下記URL等を参照してください。
+http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
+  </data>
   <data name="ColumnAlias.ToolTipText" xml:space="preserve">
     <value>翻訳元記事名がリダイレクトの場合の、リダイレクト先の記事名です。</value>
   </data>
@@ -852,8 +850,8 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="textBoxContentApi.MaxLength" type="System.Int32, mscorlib">
     <value>2083</value>
   </data>
-  <data name="&gt;&gt;ColumnFromCode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelWebsite.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;textBoxTemplateNamespace.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -867,8 +865,8 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="&gt;&gt;comboBoxLanguage.Parent" xml:space="preserve">
     <value>tabPageServer</value>
   </data>
-  <data name="ColumnAlias.HeaderText" xml:space="preserve">
-    <value>Redirect</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="&gt;&gt;ColumnFromTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1101,6 +1099,9 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="textBoxLinkInterwikiFormat.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
+  <data name="&gt;&gt;ColumnAlias.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;buttonLanguageRemove.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -1214,6 +1215,9 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   </data>
   <data name="&gt;&gt;ColumnArrow.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="labelCacheNote.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1338,8 +1342,8 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="&gt;&gt;labelBracket.Name" xml:space="preserve">
     <value>labelBracket</value>
   </data>
-  <data name="labelMaxConnectRetries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 102</value>
+  <data name="&gt;&gt;labelReferer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textBoxConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 19</value>
@@ -1350,8 +1354,8 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="textBoxLangFormat.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;ColumnFromTitle.Name" xml:space="preserve">
-    <value>ColumnFromTitle</value>
+  <data name="labelCacheExpire.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="labelMetaApi.Error" xml:space="preserve">
     <value />
@@ -1488,6 +1492,9 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="textBoxReferer.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="textBoxLocation.MaxLength" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
   <data name="groupBoxInformation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -1506,12 +1513,8 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="ColumnToTitle.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="labelInterlanguageApi.ToolTip" xml:space="preserve">
-    <value>サーバーから言語間リンク情報をXMLでダウンロードするためのパスを入力します。
-記事名を代入する部分を $1 としてください。
-
-どのようなパスかについては、下記URL等を参照してください。
-http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
+  <data name="labelBracket.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 12</value>
   </data>
   <data name="textBoxCategoryNamespace.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 19</value>
@@ -1597,9 +1600,6 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="&gt;&gt;tabPageHeadings.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUserAgentNote.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="tabPageItems.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -1632,9 +1632,6 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   </data>
   <data name="&gt;&gt;textBoxConnectRetryTime.Name" xml:space="preserve">
     <value>textBoxConnectRetryTime</value>
-  </data>
-  <data name="labelCacheExpire.IconPadding" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;buttonLunguageAdd.Name" xml:space="preserve">
     <value>buttonLunguageAdd</value>
@@ -1672,8 +1669,11 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="labelUserAgent.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;labelConnectRetryTime.Parent" xml:space="preserve">
+    <value>groupBoxApplicationConfig</value>
+  </data>
   <data name="linkLabelWebsite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 12</value>
+    <value>182, 12</value>
   </data>
   <data name="&gt;&gt;labelRefererNote.Name" xml:space="preserve">
     <value>labelRefererNote</value>
@@ -1815,6 +1815,9 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="checkBoxHasLanguagePage.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="labelMaxConnectRetries.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 102</value>
+  </data>
   <data name="&gt;&gt;labelReferer.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
@@ -1842,6 +1845,9 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   <data name="labelFileNamespace.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;ColumnFromCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ColumnName.HeaderText" xml:space="preserve">
     <value>Name (Article)</value>
   </data>
@@ -1862,9 +1868,6 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   </data>
   <data name="buttonOk.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
-    <value>tabControl</value>
   </data>
   <data name="&gt;&gt;labelApplicationConfigNote.Parent" xml:space="preserve">
     <value>groupBoxApplicationConfig</value>
@@ -1931,6 +1934,9 @@ http://www.mediawiki.org/wiki/API:Properties#langlinks_.2F_ll</value>
   </data>
   <data name="&gt;&gt;labelBracket.Parent" xml:space="preserve">
     <value>groupBoxLanguage</value>
+  </data>
+  <data name="&gt;&gt;ColumnFromTitle.Name" xml:space="preserve">
+    <value>ColumnFromTitle</value>
   </data>
   <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
     <value>buttonOk</value>
@@ -2034,6 +2040,9 @@ http://www.mediawiki.org/wiki/API:Meta#siteinfo_.2F_si</value>
   <data name="dataGridViewItems.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="tabPageItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 365</value>
+  </data>
   <data name="&gt;&gt;labelLanguage.Parent" xml:space="preserve">
     <value>tabPageServer</value>
   </data>
@@ -2091,9 +2100,6 @@ http://www.mediawiki.org/wiki/API:Meta#siteinfo_.2F_si</value>
   </data>
   <data name="dataGridViewHeading.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="labelCategoryNamespace.ToolTip" xml:space="preserve">
-    <value>上記APIで取得した名前空間のうち、カテゴリに該当する番号を入力します。</value>
   </data>
   <data name="groupBoxApplicationConfig.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -2184,9 +2190,6 @@ http://www.mediawiki.org/wiki/API:Meta#siteinfo_.2F_si</value>
   </data>
   <data name="&gt;&gt;comboBoxLanguage.Name" xml:space="preserve">
     <value>comboBoxLanguage</value>
-  </data>
-  <data name="&gt;&gt;labelFileNamespace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textBoxLocation.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2389,8 +2392,8 @@ http://www.mediawiki.org/wiki/API:Meta#siteinfo_.2F_si</value>
   <data name="&gt;&gt;groupBoxLanguageName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="textBoxLocation.MaxLength" type="System.Int32, mscorlib">
-    <value>300</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelFileNamespace.ZOrder" xml:space="preserve">
     <value>18</value>
@@ -2476,8 +2479,8 @@ http://www.mediawiki.org/wiki/API:Meta#siteinfo_.2F_si</value>
   <data name="tabPageHeadings.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
+    <value>tabControl</value>
   </data>
   <data name="labelWebsite.Error" xml:space="preserve">
     <value />
@@ -2557,9 +2560,6 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="labelInterlanguageApi.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="tabPageApplication.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -2611,8 +2611,8 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv
   <data name="&gt;&gt;textBoxLangFormat.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;labelConnectRetryTime.Parent" xml:space="preserve">
-    <value>groupBoxApplicationConfig</value>
+  <data name="&gt;&gt;labelUserAgentNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="labelContentApi.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2626,14 +2626,17 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv
   <data name="&gt;&gt;textBoxCacheExpire.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="textBoxMaxConnectRetries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
   <data name="groupBoxLanguageName.Error" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;labelItemsNote.Parent" xml:space="preserve">
     <value>tabPageItems</value>
   </data>
-  <data name="&gt;&gt;ColumnAlias.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;labelFileNamespace.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="comboBoxLanguage.Error" xml:space="preserve">
     <value />
@@ -2655,9 +2658,6 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv
   </data>
   <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Settings</value>
   </data>
   <data name="labelMaxConnectRetries.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 12</value>
@@ -2755,8 +2755,8 @@ http://www.mediawiki.org/wiki/API:Properties#revisions_.2F_rv
   <data name="&gt;&gt;labelMetaApi.Parent" xml:space="preserve">
     <value>groupBoxServer</value>
   </data>
-  <data name="tabPageItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 365</value>
+  <data name="labelCategoryNamespace.ToolTip" xml:space="preserve">
+    <value>上記APIで取得した名前空間のうち、カテゴリに該当する番号を入力します。</value>
   </data>
   <metadata name="ColumnToCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

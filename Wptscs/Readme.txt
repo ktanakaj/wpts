@@ -5,7 +5,7 @@
 【制 作 者】 Honeplus
 【動作環境】 Windows 7/8.1 での動作を確認。要.NET Framework 4.0 Client Profile または 4.5
 【配布形態】 修正BSDライセンス
-【HomePage】 http://sourceforge.jp/projects/wptscs/
+【HomePage】 https://ja.osdn.net/projects/wptscs/
 =====================================================================
 
 ・概要

@@ -8,7 +8,7 @@
   <String Id="PackageKeywords" Overridable="yes">インストーラ</String>
   <String Id="PackageDescription" Overridable="yes">Wikipedia 翻訳支援ツール Ver1.31 インストーラ</String>
   <String Id="ExeShortcutName" Overridable="yes">Wikipedia 翻訳支援ツール</String>
-  <String Id="AppUrlInfoAbout" Overridable="yes">http://sourceforge.jp/projects/wptscs/</String>
+  <String Id="AppUrlInfoAbout" Overridable="yes">https://ja.osdn.net/projects/wptscs/</String>
   <String Id="NoDowngradeMsg" Overridable="yes">[ProductName] の新しいバージョンが既にインストールされています。</String>
   <String Id="NetFrameworkMsg" Overridable="yes">このセットアップを実行するためには、.NET Framework 4.0 Client Profile がインストールされている必要があります。</String>
 </WixLocalization>
