@@ -2,6 +2,7 @@
 *.bak
 .project
 .settings
+.vs
 TestResult.xml
 *.sln.VisualState.xml
 *.chm
