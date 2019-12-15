@@ -10,10 +10,10 @@ rem
 setlocal
 
 rem WiXならびにWindows SDKインストールフォルダ
-set WIX=%ProgramFiles(x86)%\WiX Toolset v3.8
-set WINSDK=%ProgramFiles(x86)%\Microsoft SDKs\Windows\v7.1A
-set WINKIT=%ProgramFiles(x86)%\Windows Kits\8.1
-set PATH=%WIX%\bin;%WINSDK%\Bin;%WINKIT%\bin\x86;%PATH%
+rem ※ WiXやSDKのバージョンが変わった際は、パスを書き換えてください。
+set WIX_BIN=%ProgramFiles(x86)%\WiX Toolset v3.11\bin
+set WINKIT_BIN=%ProgramFiles(x86)%\Windows Kits\10\bin\10.0.17134.0\x86
+set PATH=%WIX_BIN%;%WINKIT_BIN%;%PATH%
 
 rem WiXビルドファイル（以下、ファイル名はこのバッチからの相対パス）
 set WXS_FILE=Wptscs.wxs
