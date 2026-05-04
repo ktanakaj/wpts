@@ -38,3 +38,6 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 [assembly: AssemblyVersion("1.32.*")]
+
+// テストコードからSettingsなどを参照するためにinternalへのアクセスを許可します
+[assembly: InternalsVisibleTo("WptscsTest")]

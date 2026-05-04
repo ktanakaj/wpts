@@ -20,6 +20,7 @@ namespace Honememo.Wptscs.Websites
     using Honememo.Models;
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
+    using Honememo.Wptscs.Properties;
     using Honememo.Wptscs.Utilities;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -34,7 +35,7 @@ namespace Honememo.Wptscs.Websites
         /// <summary>
         /// XMLインポート／エクスポートで用いるテストデータ。
         /// </summary>
-        private static readonly string TestXml = "<MediaWiki><Location>http://ja.wikipedia.org</Location>"
+        private static readonly string TestXml = "<MediaWiki><Location>https://ja.wikipedia.org</Location>"
             + "<Language Code=\"ja\"><Names /><Bracket /></Language>"
             + "<MetaApi>_api.xml</MetaApi><ContentApi>/export/$1</ContentApi><InterlanguageApi>/interlanguage/$1.xml</InterlanguageApi>"
             + "<TemplateNamespace>100</TemplateNamespace><CategoryNamespace>101</CategoryNamespace><FileNamespace>200</FileNamespace>"
@@ -43,6 +44,20 @@ namespace Honememo.Wptscs.Websites
             + "<LinkInterwikiFormat>{{仮リンク|$1|$2|$3|label=$4}}</LinkInterwikiFormat>"
             + "<LangFormat>{{Lang|$1|$2}}</LangFormat>"
             + "<HasLanguagePage>True</HasLanguagePage></MediaWiki>";
+
+        #endregion
+
+        #region 前処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestInitialize]
+        public void SetUp()
+        {
+            // ユニットテスト時は、API呼び出しのウェイトを外す
+            Settings.Default.RequestInterval = 0;
+        }
 
         #endregion
 
@@ -87,7 +102,7 @@ namespace Honememo.Wptscs.Websites
         {
             MediaWiki site = new MediaWiki(new Language("en"));
             Assert.AreEqual("en", site.Language.Code);
-            Assert.AreEqual("http://en.wikipedia.org", site.Location);
+            Assert.AreEqual("https://en.wikipedia.org", site.Location);
         }
 
         /// <summary>
@@ -551,14 +566,14 @@ namespace Honememo.Wptscs.Websites
             // ほぼ空の状態での読み込み
             MediaWiki site;
             using (XmlReader r = XmlReader.Create(
-                new StringReader("<MediaWiki><Location>http://ja.wikipedia.org</Location>"
+                new StringReader("<MediaWiki><Location>https://ja.wikipedia.org</Location>"
                     + "<Language Code=\"ja\"><Names /></Language></MediaWiki>")))
             {
                 site = new XmlSerializer(typeof(MediaWiki)).Deserialize(r) as MediaWiki;
             }
 
             Assert.IsNotNull(site);
-            Assert.AreEqual("http://ja.wikipedia.org", site.Location);
+            Assert.AreEqual("https://ja.wikipedia.org", site.Location);
             Assert.AreEqual("ja", site.Language.Code);
             Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LinkInterwikiFormat));
             Assert.AreEqual(string.Empty, StringUtils.DefaultString(site.LangFormat));
@@ -583,7 +598,7 @@ namespace Honememo.Wptscs.Websites
 
             // ※ InterwikiPrefixsのgetは常にサーバーからも値を取得するため、ここではテストしない
             Assert.IsNotNull(site);
-            Assert.AreEqual("http://ja.wikipedia.org", site.Location);
+            Assert.AreEqual("https://ja.wikipedia.org", site.Location);
             Assert.AreEqual("ja", site.Language.Code);
             Assert.AreEqual("_api.xml", site.MetaApi);
             Assert.AreEqual("/export/$1", site.ContentApi);
@@ -619,7 +634,7 @@ namespace Honememo.Wptscs.Websites
             }
 
             Assert.AreEqual(
-                "<MediaWiki><Location>http://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language>"
+                "<MediaWiki><Location>https://ja.wikipedia.org</Location><Language Code=\"ja\"><Names /><Bracket /></Language>"
                 + "<MetaApi /><ContentApi /><InterlanguageApi /><TemplateNamespace /><CategoryNamespace /><FileNamespace />"
                 + "<MagicWords /><InterwikiPrefixs /><LinkInterwikiFormat /><LangFormat />"
                 + "<HasLanguagePage>False</HasLanguagePage></MediaWiki>",

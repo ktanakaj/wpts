@@ -17,6 +17,7 @@ namespace Honememo.Wptscs.Logics
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Parsers;
+    using Honememo.Wptscs.Properties;
     using Honememo.Wptscs.Utilities;
     using Honememo.Wptscs.Websites;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -57,6 +58,9 @@ namespace Honememo.Wptscs.Logics
             this.backupCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("ja-JP");
             System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+
+            // ユニットテスト時は、API呼び出しのウェイトを外す
+            Settings.Default.RequestInterval = 0;
         }
 
         /// <summary>

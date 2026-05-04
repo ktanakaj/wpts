@@ -111,9 +111,15 @@ namespace Honememo.Wptscs.Utilities
         /// </remarks>
         public Stream GetStream(Uri uri)
         {
-            // 実際の処理はサブメソッドで行い、このメソッドでは通信エラー時のリトライを行う
-            int retry = Settings.Default.MaxConnectRetries;
-            int wait = Settings.Default.ConnectRetryTime;
+            // 実際の処理はサブメソッドで行い、このメソッドではウェイトや通信エラー時のリトライを行う
+            var requestInterval = Settings.Default.RequestInterval;
+            if (requestInterval > 0)
+            {
+                Thread.Sleep(requestInterval);
+            }
+
+            var max = Settings.Default.MaxConnectRetries;
+            var retry = max;
             while (true)
             {
                 try
@@ -129,12 +135,21 @@ namespace Honememo.Wptscs.Utilities
                         throw e;
                     }
 
-                    // 時間を置いてからリトライする（0はスレッド停止のため除外）
-                    System.Diagnostics.Debug.WriteLine("AppConfigWebProxy.GetStream > retry : " + e.Message);
-                    if (wait > 0)
+                    // Retry-Afterヘッダーがある場合はそれを使用
+                    if (! this.TryParseRetryAfter(e.Response, out var waitTime))
                     {
-                        Thread.Sleep(wait);
+                        // 無い場合は、指数バックオフでリトライ
+                        waitTime = TimeSpan.FromSeconds(Math.Pow(2, max - retry));
                     }
+
+                    // ただし、待機時間が長すぎる場合は、即座にエラーにする
+                    if (waitTime > TimeSpan.FromMinutes(3))
+                    {
+                        throw e;
+                    }
+
+                    System.Diagnostics.Debug.WriteLine($"AppConfigWebProxy.GetStream > retry {waitTime.TotalSeconds}s : {e.Message}");
+                    Thread.Sleep(waitTime);
                 }
             }
         }
@@ -200,7 +215,8 @@ namespace Honememo.Wptscs.Utilities
                 return sc == HttpStatusCode.InternalServerError
                     || sc == HttpStatusCode.BadGateway
                     || sc == HttpStatusCode.ServiceUnavailable
-                    || sc == HttpStatusCode.GatewayTimeout;
+                    || sc == HttpStatusCode.GatewayTimeout
+                    || sc == (HttpStatusCode)429;
             }
 
             // それ以外は、応答ステータスで判断する
@@ -209,6 +225,36 @@ namespace Honememo.Wptscs.Utilities
                 && e.Status != WebExceptionStatus.UnknownError
                 && e.Status != WebExceptionStatus.RequestProhibitedByCachePolicy
                 && e.Status != WebExceptionStatus.RequestProhibitedByProxy;
+        }
+
+        /// <summary>
+        /// HTTPのRetry-Afterヘッダーをパースする。
+        /// </summary>
+        /// <param name="response">Webレスポンス。</param>
+        /// <param name="retryAfter">パースしたRetry-Afterヘッダーの現在日時からの期間。</param>
+        /// <returns>パースに成功した場合true。</returns>
+        private bool TryParseRetryAfter(WebResponse response, out TimeSpan retryAfter)
+        {
+            retryAfter = TimeSpan.Zero;
+            var retryAfterStr = response.Headers["Retry-After"];
+            if (string.IsNullOrEmpty(retryAfterStr))
+            {
+                return false;
+            }
+
+            if (int.TryParse(retryAfterStr, out int seconds))
+            {
+                retryAfter = TimeSpan.FromSeconds(seconds);
+                return true;
+            }
+
+            if (DateTime.TryParse(retryAfterStr, out DateTime retryAfterDate))
+            {
+                retryAfter = retryAfterDate - DateTime.UtcNow;
+                return true;
+            }
+
+            return false;
         }
 
         #endregion

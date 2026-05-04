@@ -93,7 +93,7 @@ namespace Honememo.Wptscs
                 this.textBoxUserAgent.Text = Settings.Default.UserAgent;
                 this.textBoxReferer.Text = Settings.Default.Referer;
                 this.textBoxMaxConnectRetries.Text = Settings.Default.MaxConnectRetries.ToString();
-                this.textBoxConnectRetryTime.Text = Settings.Default.ConnectRetryTime.ToString();
+                this.textBoxRequestInterval.Text = Settings.Default.RequestInterval.ToString();
                 this.checkBoxIgnoreError.Checked = Settings.Default.IgnoreError;
                 this.labelApplicationName.Text = FormUtils.ApplicationName();
                 AssemblyCopyrightAttribute copyright = Attribute.GetCustomAttribute(
@@ -137,7 +137,7 @@ namespace Honememo.Wptscs
                 Settings.Default.UserAgent = this.textBoxUserAgent.Text;
                 Settings.Default.Referer = this.textBoxReferer.Text;
                 Settings.Default.MaxConnectRetries = int.Parse(this.textBoxMaxConnectRetries.Text);
-                Settings.Default.ConnectRetryTime = int.Parse(this.textBoxConnectRetryTime.Text);
+                Settings.Default.RequestInterval = int.Parse(this.textBoxRequestInterval.Text);
                 Settings.Default.IgnoreError = this.checkBoxIgnoreError.Checked;
 
                 // 設定をファイルに保存

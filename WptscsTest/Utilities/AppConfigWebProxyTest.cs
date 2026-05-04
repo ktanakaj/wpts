@@ -31,6 +31,20 @@ namespace Honememo.Wptscs.Utilities
 
         #endregion
 
+        #region 前処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestInitialize]
+        public void SetUp()
+        {
+            // ユニットテスト時は、API呼び出しのウェイトを外す
+            Settings.Default.RequestInterval = 0;
+        }
+
+        #endregion
+
         #region インタフェース実装プロパティテストケース
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Honememo.Wptscs.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -29,15 +29,6 @@ namespace Honememo.Wptscs.Properties {
         public string DefaultUserAgent {
             get {
                 return ((string)(this["DefaultUserAgent"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://{0}.wikipedia.org")]
-        public string WikipediaLocation {
-            get {
-                return ((string)(this["WikipediaLocation"]));
             }
         }
         
@@ -98,6 +89,61 @@ namespace Honememo.Wptscs.Properties {
             }
             set {
                 this["Referer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<ArrayOfString xmlns:xsi=\"http://www.w3.o" +
+            "rg/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n  <str" +
+            "ing>CURRENTYEAR</string>\n  <string>CURRENTMONTH</string>\n  <string>CURRENTMONTHN" +
+            "AME</string>\n  <string>CURRENTMONTHNAMEGEN</string>\n  <string>CURRENTMONTHABBREV" +
+            "</string>\n  <string>CURRENTDAY</string>\n  <string>CURRENTDAY2</string>\n  <string" +
+            ">CURRENTDOW</string>\n  <string>CURRENTDAYNAME</string>\n  <string>CURRENTTIME</st" +
+            "ring>\n  <string>CURRENTHOUR</string>\n  <string>CURRENTWEEK</string>\n  <string>CU" +
+            "RRENTTIMESTAMP</string>\n  <string>LOCALYEAR</string>\n  <string>LOCALMONTH</strin" +
+            "g>\n  <string>LOCALMONTHNAME</string>\n  <string>LOCALMONTHNAMEGEN</string>\n  <str" +
+            "ing>LOCALMONTHABBREV</string>\n  <string>LOCALDAY</string>\n  <string>LOCALDAY2</s" +
+            "tring>\n  <string>LOCALDOW</string>\n  <string>LOCALDAYNAME</string>\n  <string>LOC" +
+            "ALTIME</string>\n  <string>LOCALHOUR</string>\n  <string>LOCALWEEK</string>\n  <str" +
+            "ing>LOCALTIMESTAMP</string>\n  <string>SITENAME</string>\n  <string>SERVER</string" +
+            ">\n  <string>SERVERNAME</string>\n  <string>DIRMARK</string>\n  <string>DIRECTIONMA" +
+            "RK</string>\n  <string>SCRIPTPATH</string>\n  <string>STYLEPATH</string>\n  <string" +
+            ">CURRENTVERSION</string>\n  <string>CONTENTLANGUAGE</string>\n  <string>CONTENTLAN" +
+            "G</string>\n  <string>REVISIONID</string>\n  <string>REVISIONDAY</string>\n  <strin" +
+            "g>REVISIONDAY2</string>\n  <string>REVISIONMONTH</string>\n  <string>REVISIONYEAR<" +
+            "/string>\n  <string>REVISIONTIMESTAMP</string>\n  <string>REVISIONUSER</string>\n  " +
+            "<string>PAGESIZE</string>\n  <string>PROTECTIONLEVEL</string>\n  <string>DISPLAYTI" +
+            "TLE</string>\n  <string>DEFAULTSORT</string>\n  <string>DEFAULTSORTKEY</string>\n  " +
+            "<string>DEFAULTCATEGORYSORT</string>\n  <string>NUMBEROFPAGES</string>\n  <string>" +
+            "NUMBEROFARTICLES</string>\n  <string>NUMBEROFFILES</string>\n  <string>NUMBEROFEDI" +
+            "TS</string>\n  <string>NUMBEROFVIEWS</string>\n  <string>NUMBEROFUSERS</string>\n  " +
+            "<string>NUMBEROFADMINS</string>\n  <string>NUMBEROFACTIVEUSERS</string>\n  <string" +
+            ">PAGESINCATEGORY</string>\n  <string>PAGESINCAT</string>\n  <string>NUMBERINGROUP<" +
+            "/string>\n  <string>NUMINGROUP</string>\n  <string>PAGESINNS</string>\n  <string>PA" +
+            "GESINNAMESPACE</string>\n  <string>FULLPAGENAME</string>\n  <string>PAGENAME</stri" +
+            "ng>\n  <string>BASEPAGENAME</string>\n  <string>SUBPAGENAME</string>\n  <string>SUB" +
+            "JECTPAGENAME</string>\n  <string>TALKPAGENAME</string>\n  <string>FULLPAGENAMEE</s" +
+            "tring>\n  <string>PAGENAMEE</string>\n  <string>BASEPAGENAMEE</string>\n  <string>S" +
+            "UBPAGENAMEE</string>\n  <string>SUBJECTPAGENAMEE</string>\n  <string>TALKPAGENAMEE" +
+            "</string>\n  <string>NAMESPACE</string>\n  <string>SUBJECTSPACE</string>\n  <string" +
+            ">ARTICLESPACE</string>\n  <string>TALKSPACE</string>\n  <string>NAMESPACEE</string" +
+            ">\n  <string>SUBJECTSPACEE</string>\n  <string>TALKSPACEE</string>\n  <string>local" +
+            "url</string>\n  <string>fullurl</string>\n  <string>filepath</string>\n  <string>ur" +
+            "lencode</string>\n  <string>anchorencode</string>\n  <string>ns</string>\n  <string" +
+            ">lc</string>\n  <string>lcfirst</string>\n  <string>uc</string>\n  <string>ucfirst<" +
+            "/string>\n  <string>formatnum</string>\n  <string>#dateformat</string>\n  <string>#" +
+            "formatdate</string>\n  <string>padleft</string>\n  <string>padright</string>\n  <st" +
+            "ring>plural</string>\n  <string>grammar</string>\n  <string>int</string>\n  <string" +
+            ">#language</string>\n  <string>#special</string>\n  <string>#tag</string>\n  <strin" +
+            "g>gender</string>\n  <string>groupconvert</string>\n  <string>#expr</string>\n  <st" +
+            "ring>#if</string>\n  <string>#ifeq</string>\n  <string>#ifexist</string>\n  <string" +
+            ">#ifexpr</string>\n  <string>#switch</string>\n  <string>#time</string>\n  <string>" +
+            "#rel2abs</string>\n  <string>#titleparts</string>\n  <string>#iferror</string>\n</A" +
+            "rrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection MediaWikiMagicWords {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWords"]));
             }
         }
         
@@ -217,12 +263,56 @@ namespace Honememo.Wptscs.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2000")]
-        public int ConnectRetryTime {
+        public int RequestInterval {
             get {
-                return ((int)(this["ConnectRetryTime"]));
+                return ((int)(this["RequestInterval"]));
             }
             set {
-                this["ConnectRetryTime"] = value;
+                this["RequestInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<ArrayOfString xmlns:xsi=\"http://www.w3.o" +
+            "rg/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n  <str" +
+            "ing>acronym</string>\n  <string>advogato</string>\n  <string>annotationwiki</strin" +
+            "g>\n  <string>arxiv</string>\n  <string>c2find</string>\n  <string>cache</string>\n " +
+            " <string>commons</string>\n  <string>corpknowpedia</string>\n  <string>dictionary<" +
+            "/string>\n  <string>disinfopedia</string>\n  <string>docbook</string>\n  <string>do" +
+            "i</string>\n  <string>drumcorpswiki</string>\n  <string>dwjwiki</string>\n  <string" +
+            ">emacswiki</string>\n  <string>elibre</string>\n  <string>foldoc</string>\n  <strin" +
+            "g>foxwiki</string>\n  <string>freebsdman</string>\n  <string>gej</string>\n  <strin" +
+            "g>gentoo-wiki</string>\n  <string>google</string>\n  <string>googlegroups</string>" +
+            "\n  <string>hammondwiki</string>\n  <string>hewikisource</string>\n  <string>hrwiki" +
+            "</string>\n  <string>imdb</string>\n  <string>jargonfile</string>\n  <string>jspwik" +
+            "i</string>\n  <string>keiki</string>\n  <string>kmwiki</string>\n  <string>linuxwik" +
+            "i</string>\n  <string>lojban</string>\n  <string>lqwiki</string>\n  <string>lugkr</" +
+            "string>\n  <string>mathsongswiki</string>\n  <string>meatball</string>\n  <string>m" +
+            "ediazilla</string>\n  <string>mediawikiwiki</string>\n  <string>memoryalpha</strin" +
+            "g>\n  <string>metawiki</string>\n  <string>metawikipedia</string>\n  <string>moinmo" +
+            "in</string>\n  <string>mozillawiki</string>\n  <string>mw</string>\n  <string>oeis<" +
+            "/string>\n  <string>openfacts</string>\n  <string>openwiki</string>\n  <string>patw" +
+            "iki</string>\n  <string>pmeg</string>\n  <string>ppr</string>\n  <string>pythoninfo" +
+            "</string>\n  <string>rfc</string>\n  <string>s23wiki</string>\n  <string>seattlewik" +
+            "i</string>\n  <string>seattlewireless</string>\n  <string>senseislibrary</string>\n" +
+            "  <string>slashdot</string>\n  <string>sourceforge</string>\n  <string>squeak</str" +
+            "ing>\n  <string>susning</string>\n  <string>svgwiki</string>\n  <string>tavi</strin" +
+            "g>\n  <string>tejo</string>\n  <string>tmbw</string>\n  <string>tmnet</string>\n  <s" +
+            "tring>tmwiki</string>\n  <string>theopedia</string>\n  <string>twiki</string>\n  <s" +
+            "tring>uea</string>\n  <string>unreal</string>\n  <string>usemod</string>\n  <string" +
+            ">vinismo</string>\n  <string>webseitzwiki</string>\n  <string>why</string>\n  <stri" +
+            "ng>wiki</string>\n  <string>wikia</string>\n  <string>wikibooks</string>\n  <string" +
+            ">wikicities</string>\n  <string>wikif1</string>\n  <string>wikihow</string>\n  <str" +
+            "ing>wikinfo</string>\n  <string>wikimedia</string>\n  <string>wikinews</string>\n  " +
+            "<string>wikiquote</string>\n  <string>wikipedia</string>\n  <string>wikisource</st" +
+            "ring>\n  <string>wikispecies</string>\n  <string>wikitravel</string>\n  <string>wik" +
+            "iversity</string>\n  <string>wikt</string>\n  <string>wiktionary</string>\n  <strin" +
+            "g>wlug</string>\n  <string>zwiki</string>\n  <string>zzz wiki</string>\n</ArrayOfSt" +
+            "ring>")]
+        public global::System.Collections.Specialized.StringCollection MediaWikiInterwikiPrefixs {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiInterwikiPrefixs"]));
             }
         }
         
@@ -271,102 +361,10 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>CURRENTYEAR</string>\r\n  <string>CURRENTMONTH</string>\r\n  <string>CURRENTMO" +
-            "NTHNAME</string>\r\n  <string>CURRENTMONTHNAMEGEN</string>\r\n  <string>CURRENTMONTH" +
-            "ABBREV</string>\r\n  <string>CURRENTDAY</string>\r\n  <string>CURRENTDAY2</string>\r\n" +
-            "  <string>CURRENTDOW</string>\r\n  <string>CURRENTDAYNAME</string>\r\n  <string>CURR" +
-            "ENTTIME</string>\r\n  <string>CURRENTHOUR</string>\r\n  <string>CURRENTWEEK</string>" +
-            "\r\n  <string>CURRENTTIMESTAMP</string>\r\n  <string>LOCALYEAR</string>\r\n  <string>L" +
-            "OCALMONTH</string>\r\n  <string>LOCALMONTHNAME</string>\r\n  <string>LOCALMONTHNAMEG" +
-            "EN</string>\r\n  <string>LOCALMONTHABBREV</string>\r\n  <string>LOCALDAY</string>\r\n " +
-            " <string>LOCALDAY2</string>\r\n  <string>LOCALDOW</string>\r\n  <string>LOCALDAYNAME" +
-            "</string>\r\n  <string>LOCALTIME</string>\r\n  <string>LOCALHOUR</string>\r\n  <string" +
-            ">LOCALWEEK</string>\r\n  <string>LOCALTIMESTAMP</string>\r\n  <string>SITENAME</stri" +
-            "ng>\r\n  <string>SERVER</string>\r\n  <string>SERVERNAME</string>\r\n  <string>DIRMARK" +
-            "</string>\r\n  <string>DIRECTIONMARK</string>\r\n  <string>SCRIPTPATH</string>\r\n  <s" +
-            "tring>STYLEPATH</string>\r\n  <string>CURRENTVERSION</string>\r\n  <string>CONTENTLA" +
-            "NGUAGE</string>\r\n  <string>CONTENTLANG</string>\r\n  <string>REVISIONID</string>\r\n" +
-            "  <string>REVISIONDAY</string>\r\n  <string>REVISIONDAY2</string>\r\n  <string>REVIS" +
-            "IONMONTH</string>\r\n  <string>REVISIONYEAR</string>\r\n  <string>REVISIONTIMESTAMP<" +
-            "/string>\r\n  <string>REVISIONUSER</string>\r\n  <string>PAGESIZE</string>\r\n  <strin" +
-            "g>PROTECTIONLEVEL</string>\r\n  <string>DISPLAYTITLE</string>\r\n  <string>DEFAULTSO" +
-            "RT</string>\r\n  <string>DEFAULTSORTKEY</string>\r\n  <string>DEFAULTCATEGORYSORT</s" +
-            "tring>\r\n  <string>NUMBEROFPAGES</string>\r\n  <string>NUMBEROFARTICLES</string>\r\n " +
-            " <string>NUMBEROFFILES</string>\r\n  <string>NUMBEROFEDITS</string>\r\n  <string>NUM" +
-            "BEROFVIEWS</string>\r\n  <string>NUMBEROFUSERS</string>\r\n  <string>NUMBEROFADMINS<" +
-            "/string>\r\n  <string>NUMBEROFACTIVEUSERS</string>\r\n  <string>PAGESINCATEGORY</str" +
-            "ing>\r\n  <string>PAGESINCAT</string>\r\n  <string>NUMBERINGROUP</string>\r\n  <string" +
-            ">NUMINGROUP</string>\r\n  <string>PAGESINNS</string>\r\n  <string>PAGESINNAMESPACE</" +
-            "string>\r\n  <string>FULLPAGENAME</string>\r\n  <string>PAGENAME</string>\r\n  <string" +
-            ">BASEPAGENAME</string>\r\n  <string>SUBPAGENAME</string>\r\n  <string>SUBJECTPAGENAM" +
-            "E</string>\r\n  <string>TALKPAGENAME</string>\r\n  <string>FULLPAGENAMEE</string>\r\n " +
-            " <string>PAGENAMEE</string>\r\n  <string>BASEPAGENAMEE</string>\r\n  <string>SUBPAGE" +
-            "NAMEE</string>\r\n  <string>SUBJECTPAGENAMEE</string>\r\n  <string>TALKPAGENAMEE</st" +
-            "ring>\r\n  <string>NAMESPACE</string>\r\n  <string>SUBJECTSPACE</string>\r\n  <string>" +
-            "ARTICLESPACE</string>\r\n  <string>TALKSPACE</string>\r\n  <string>NAMESPACEE</strin" +
-            "g>\r\n  <string>SUBJECTSPACEE</string>\r\n  <string>TALKSPACEE</string>\r\n  <string>l" +
-            "ocalurl</string>\r\n  <string>fullurl</string>\r\n  <string>filepath</string>\r\n  <st" +
-            "ring>urlencode</string>\r\n  <string>anchorencode</string>\r\n  <string>ns</string>\r" +
-            "\n  <string>lc</string>\r\n  <string>lcfirst</string>\r\n  <string>uc</string>\r\n  <st" +
-            "ring>ucfirst</string>\r\n  <string>formatnum</string>\r\n  <string>#dateformat</stri" +
-            "ng>\r\n  <string>#formatdate</string>\r\n  <string>padleft</string>\r\n  <string>padri" +
-            "ght</string>\r\n  <string>plural</string>\r\n  <string>grammar</string>\r\n  <string>i" +
-            "nt</string>\r\n  <string>#language</string>\r\n  <string>#special</string>\r\n  <strin" +
-            "g>#tag</string>\r\n  <string>gender</string>\r\n  <string>groupconvert</string>\r\n  <" +
-            "string>#expr</string>\r\n  <string>#if</string>\r\n  <string>#ifeq</string>\r\n  <stri" +
-            "ng>#ifexist</string>\r\n  <string>#ifexpr</string>\r\n  <string>#switch</string>\r\n  " +
-            "<string>#time</string>\r\n  <string>#rel2abs</string>\r\n  <string>#titleparts</stri" +
-            "ng>\r\n  <string>#iferror</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection MediaWikiMagicWords {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://{0}.wikipedia.org")]
+        public string WikipediaLocation {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiMagicWords"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>acronym</string>\r\n  <string>advogato</string>\r\n  <string>annotationwiki</s" +
-            "tring>\r\n  <string>arxiv</string>\r\n  <string>c2find</string>\r\n  <string>cache</st" +
-            "ring>\r\n  <string>commons</string>\r\n  <string>corpknowpedia</string>\r\n  <string>d" +
-            "ictionary</string>\r\n  <string>disinfopedia</string>\r\n  <string>docbook</string>\r" +
-            "\n  <string>doi</string>\r\n  <string>drumcorpswiki</string>\r\n  <string>dwjwiki</st" +
-            "ring>\r\n  <string>emacswiki</string>\r\n  <string>elibre</string>\r\n  <string>foldoc" +
-            "</string>\r\n  <string>foxwiki</string>\r\n  <string>freebsdman</string>\r\n  <string>" +
-            "gej</string>\r\n  <string>gentoo-wiki</string>\r\n  <string>google</string>\r\n  <stri" +
-            "ng>googlegroups</string>\r\n  <string>hammondwiki</string>\r\n  <string>hewikisource" +
-            "</string>\r\n  <string>hrwiki</string>\r\n  <string>imdb</string>\r\n  <string>jargonf" +
-            "ile</string>\r\n  <string>jspwiki</string>\r\n  <string>keiki</string>\r\n  <string>km" +
-            "wiki</string>\r\n  <string>linuxwiki</string>\r\n  <string>lojban</string>\r\n  <strin" +
-            "g>lqwiki</string>\r\n  <string>lugkr</string>\r\n  <string>mathsongswiki</string>\r\n " +
-            " <string>meatball</string>\r\n  <string>mediazilla</string>\r\n  <string>mediawikiwi" +
-            "ki</string>\r\n  <string>memoryalpha</string>\r\n  <string>metawiki</string>\r\n  <str" +
-            "ing>metawikipedia</string>\r\n  <string>moinmoin</string>\r\n  <string>mozillawiki</" +
-            "string>\r\n  <string>mw</string>\r\n  <string>oeis</string>\r\n  <string>openfacts</st" +
-            "ring>\r\n  <string>openwiki</string>\r\n  <string>patwiki</string>\r\n  <string>pmeg</" +
-            "string>\r\n  <string>ppr</string>\r\n  <string>pythoninfo</string>\r\n  <string>rfc</s" +
-            "tring>\r\n  <string>s23wiki</string>\r\n  <string>seattlewiki</string>\r\n  <string>se" +
-            "attlewireless</string>\r\n  <string>senseislibrary</string>\r\n  <string>slashdot</s" +
-            "tring>\r\n  <string>sourceforge</string>\r\n  <string>squeak</string>\r\n  <string>sus" +
-            "ning</string>\r\n  <string>svgwiki</string>\r\n  <string>tavi</string>\r\n  <string>te" +
-            "jo</string>\r\n  <string>tmbw</string>\r\n  <string>tmnet</string>\r\n  <string>tmwiki" +
-            "</string>\r\n  <string>theopedia</string>\r\n  <string>twiki</string>\r\n  <string>uea" +
-            "</string>\r\n  <string>unreal</string>\r\n  <string>usemod</string>\r\n  <string>vinis" +
-            "mo</string>\r\n  <string>webseitzwiki</string>\r\n  <string>why</string>\r\n  <string>" +
-            "wiki</string>\r\n  <string>wikia</string>\r\n  <string>wikibooks</string>\r\n  <string" +
-            ">wikicities</string>\r\n  <string>wikif1</string>\r\n  <string>wikihow</string>\r\n  <" +
-            "string>wikinfo</string>\r\n  <string>wikimedia</string>\r\n  <string>wikinews</strin" +
-            "g>\r\n  <string>wikiquote</string>\r\n  <string>wikipedia</string>\r\n  <string>wikiso" +
-            "urce</string>\r\n  <string>wikispecies</string>\r\n  <string>wikitravel</string>\r\n  " +
-            "<string>wikiversity</string>\r\n  <string>wikt</string>\r\n  <string>wiktionary</str" +
-            "ing>\r\n  <string>wlug</string>\r\n  <string>zwiki</string>\r\n  <string>zzz wiki</str" +
-            "ing>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection MediaWikiInterwikiPrefixs {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["MediaWikiInterwikiPrefixs"]));
+                return ((string)(this["WikipediaLocation"]));
             }
         }
     }

@@ -18,6 +18,7 @@ namespace Honememo.Wptscs.Websites
     using Honememo.Utilities;
     using Honememo.Wptscs.Models;
     using Honememo.Wptscs.Parsers;
+    using Honememo.Wptscs.Properties;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -43,6 +44,20 @@ namespace Honememo.Wptscs.Websites
         /// example.xmlのページ本文。
         /// </summary>
         private static readonly DateTime ExampleTimestamp = DateTime.Parse("2010-07-13T00:49:18Z");
+
+        #endregion
+
+        #region 前処理
+
+        /// <summary>
+        /// テストの前処理。
+        /// </summary>
+        [TestInitialize]
+        public void SetUp()
+        {
+            // ユニットテスト時は、API呼び出しのウェイトを外す
+            Settings.Default.RequestInterval = 0;
+        }
 
         #endregion
 

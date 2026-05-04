@@ -426,26 +426,12 @@ http://www.mediawiki.org/wiki/API:Meta/ja#siteinfo_.2F_si</value>
   <data name="labelApplicationConfigNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 12</value>
   </data>
-  <data name="labelApplicationConfigNote.Text" xml:space="preserve">
-    <value>※ このタブの設定はアプリケーション全体に適用されます。</value>
+  <data name="labelRequestInterval.Text" xml:space="preserve">
+    <value>リクエスト間隔 (ms):</value>
   </data>
-  <data name="textBoxConnectRetryTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 125</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 128</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 12</value>
-  </data>
-  <data name="labelConnectRetryTimeNote.Text" xml:space="preserve">
-    <value>（0:ウェイトしない）</value>
-  </data>
-  <data name="labelConnectRetryTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 12</value>
-  </data>
-  <data name="labelConnectRetryTime.Text" xml:space="preserve">
-    <value>リトライ時のウェイト時間（ミリ秒）:</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelRequestInterval.ToolTip" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="labelMaxConnectRetriesNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 12</value>
@@ -518,5 +504,11 @@ http://www.mediawiki.org/wiki/API:Meta/ja#siteinfo_.2F_si</value>
   </data>
   <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
     <value>215, 429</value>
+  </data>
+  <data name="labelApplicationConfigNote.Text" xml:space="preserve">
+    <value>※ このタブの設定はアプリケーション全体に適用されます。</value>
+  </data>
+  <data name="textBoxConnectRetryTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 125</value>
   </data>
 </root>

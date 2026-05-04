@@ -5,9 +5,6 @@
     <Setting Name="DefaultUserAgent" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Translation Support for Wikipedia/{0}.{1:D2}</Value>
     </Setting>
-    <Setting Name="WikipediaLocation" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://{0}.wikipedia.org</Value>
-    </Setting>
     <Setting Name="SaveDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -176,7 +173,7 @@
     <Setting Name="MaxConnectRetries" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="ConnectRetryTime" Type="System.Int32" Scope="User">
+    <Setting Name="RequestInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2000</Value>
     </Setting>
     <Setting Name="MediaWikiInterwikiPrefixs" Type="System.Collections.Specialized.StringCollection" Scope="Application">
@@ -290,6 +287,9 @@
     </Setting>
     <Setting Name="MediaWikiInterlanguageApi" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/w/api.php?action=query&amp;prop=langlinks&amp;titles=$1&amp;redirects=&amp;lllimit=500&amp;format=xml</Value>
+    </Setting>
+    <Setting Name="WikipediaLocation" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://{0}.wikipedia.org</Value>
     </Setting>
   </Settings>
 </SettingsFile>
