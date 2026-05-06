@@ -3,72 +3,70 @@
 //      XmlCommentElementParserのテストクラスソース。</summary>
 //
 // <copyright file="XmlCommentElementParserTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2026 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-namespace Honememo.Parsers
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Honememo.Parsers;
+
+/// <summary>
+/// <see cref="XmlCommentElementParser"/>のテストクラスです。
+/// </summary>
+[TestClass]
+public class XmlCommentElementParserTest
 {
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    #region インタフェース実装メソッドテストケース
 
     /// <summary>
-    /// <see cref="XmlCommentElementParser"/>のテストクラスです。
+    /// <see cref="XmlCommentElementParser.TryParse"/>メソッドテストケース。
     /// </summary>
-    [TestClass]
-    public class XmlCommentElementParserTest
+    [TestMethod]
+    public void TestTryParse()
     {
-        #region インタフェース実装メソッドテストケース
-
-        /// <summary>
-        /// <see cref="XmlCommentElementParser.TryParse"/>メソッドテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestTryParse()
-        {
-            XmlCommentElementParser parser = new XmlCommentElementParser();
-            IElement comment;
-            Assert.IsTrue(parser.TryParse("<!--test-->", out comment));
-            Assert.AreEqual("<!--test-->", comment.ToString());
-            Assert.IsTrue(parser.TryParse("<!-- test -->", out comment));
-            Assert.AreEqual("<!-- test -->", comment.ToString());
-            Assert.IsTrue(parser.TryParse("<!--test-->-->", out comment));
-            Assert.AreEqual("<!--test-->", comment.ToString());
-            Assert.IsTrue(parser.TryParse("<!--test--", out comment));
-            Assert.AreEqual("<!--test--", comment.ToString());
-            Assert.IsTrue(parser.TryParse("<!--->", out comment));
-            Assert.AreEqual("<!--->", comment.ToString());
-            Assert.IsTrue(parser.TryParse("<!--->-->", out comment));
-            Assert.AreEqual("<!--->-->", comment.ToString());
-            Assert.IsTrue(parser.TryParse("<!--\n\ntest\r\n-->", out comment));
-            Assert.AreEqual("<!--\n\ntest\r\n-->", comment.ToString());
-            Assert.IsFalse(parser.TryParse("<--test-->", out comment));
-            Assert.IsNull(comment);
-            Assert.IsFalse(parser.TryParse("<%--test--%>", out comment));
-            Assert.IsNull(comment);
-            Assert.IsFalse(parser.TryParse("<! --test-->", out comment));
-            Assert.IsNull(comment);
-            Assert.IsFalse(parser.TryParse(string.Empty, out comment));
-            Assert.IsNull(comment);
-            Assert.IsFalse(parser.TryParse(null, out comment));
-            Assert.IsNull(comment);
-        }
-
-        /// <summary>
-        /// <see cref="XmlCommentElementParser.IsPossibleParse"/>メソッドテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestIsPossibleParse()
-        {
-            XmlCommentElementParser parser = new XmlCommentElementParser();
-            Assert.IsTrue(parser.IsPossibleParse('<'));
-            Assert.IsFalse(parser.IsPossibleParse('['));
-            Assert.IsFalse(parser.IsPossibleParse('-'));
-            Assert.IsFalse(parser.IsPossibleParse('/'));
-            Assert.IsFalse(parser.IsPossibleParse('#'));
-        }
-
-        #endregion
+        XmlCommentElementParser parser = new XmlCommentElementParser();
+        IElement comment;
+        Assert.IsTrue(parser.TryParse("<!--test-->", out comment));
+        Assert.AreEqual("<!--test-->", comment.ToString());
+        Assert.IsTrue(parser.TryParse("<!-- test -->", out comment));
+        Assert.AreEqual("<!-- test -->", comment.ToString());
+        Assert.IsTrue(parser.TryParse("<!--test-->-->", out comment));
+        Assert.AreEqual("<!--test-->", comment.ToString());
+        Assert.IsTrue(parser.TryParse("<!--test--", out comment));
+        Assert.AreEqual("<!--test--", comment.ToString());
+        Assert.IsTrue(parser.TryParse("<!--->", out comment));
+        Assert.AreEqual("<!--->", comment.ToString());
+        Assert.IsTrue(parser.TryParse("<!--->-->", out comment));
+        Assert.AreEqual("<!--->-->", comment.ToString());
+        Assert.IsTrue(parser.TryParse("<!--\n\ntest\r\n-->", out comment));
+        Assert.AreEqual("<!--\n\ntest\r\n-->", comment.ToString());
+        Assert.IsFalse(parser.TryParse("<--test-->", out comment));
+        Assert.IsNull(comment);
+        Assert.IsFalse(parser.TryParse("<%--test--%>", out comment));
+        Assert.IsNull(comment);
+        Assert.IsFalse(parser.TryParse("<! --test-->", out comment));
+        Assert.IsNull(comment);
+        Assert.IsFalse(parser.TryParse(string.Empty, out comment));
+        Assert.IsNull(comment);
+        Assert.IsFalse(parser.TryParse(null, out comment));
+        Assert.IsNull(comment);
     }
+
+    /// <summary>
+    /// <see cref="XmlCommentElementParser.IsPossibleParse"/>メソッドテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestIsPossibleParse()
+    {
+        XmlCommentElementParser parser = new XmlCommentElementParser();
+        Assert.IsTrue(parser.IsPossibleParse('<'));
+        Assert.IsFalse(parser.IsPossibleParse('['));
+        Assert.IsFalse(parser.IsPossibleParse('-'));
+        Assert.IsFalse(parser.IsPossibleParse('/'));
+        Assert.IsFalse(parser.IsPossibleParse('#'));
+    }
+
+    #endregion
 }

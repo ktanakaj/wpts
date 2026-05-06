@@ -3,7 +3,7 @@
 //      Wikipedia翻訳支援ツールのアセンブリソース</summary>
 //
 // <copyright file="AssemblyInfo.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2019 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2026 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// アセンブリに関する一般情報は以下の属性セットをとおして制御されます。 
+// アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("Wikipedia 翻訳支援ツール")]
@@ -20,12 +20,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Wikipedia 翻訳支援ツール")]
-[assembly: AssemblyCopyright("Copyright (C) Honeplus 2019")]
+[assembly: AssemblyCopyright("Copyright (C) Honeplus 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// ComVisible を false に設定すると、このアセンブリ内の型は COM コンポーネントには 
-// 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、 
+// ComVisible を false に設定すると、このアセンブリ内の型は COM コンポーネントには
+// 参照不可能になります。COM からこのアセンブリ内の型にアクセスする場合は、
 // その型の ComVisible 属性を true に設定してください。
 [assembly: ComVisible(false)]
 
@@ -34,10 +34,10 @@ using System.Runtime.InteropServices;
 
 // アセンブリのバージョン情報は、以下の 4 つの値で構成されています:
 //      Major Version
-//      Minor Version 
+//      Minor Version
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("1.32.*")]
+[assembly: AssemblyVersion("1.40.*")]
 
 // テストコードからSettingsなどを参照するためにinternalへのアクセスを許可します
 [assembly: InternalsVisibleTo("WptscsTest")]

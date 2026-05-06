@@ -19,7 +19,7 @@ namespace Honememo.Wptscs.Properties {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -218,7 +218,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Interlanguage is not found に類似しているローカライズされた文字列を検索します。
+        ///   Interlanguage link not found に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageInterWikiNotFound {
             get {
@@ -227,7 +227,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Page is not found に類似しているローカライズされた文字列を検索します。
+        ///   Page not found に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageLinkArticleNotFound {
             get {
@@ -265,7 +265,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Find interlanguage start. に類似しているローカライズされた文字列を検索します。
+        ///   Starting interlanguage search. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageStartParseAndReplace {
             get {
@@ -285,7 +285,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Warning: This page have interlanguage to [[{0}]]. に類似しているローカライズされた文字列を検索します。
+        ///   Warning: This page has an interlanguage link to  [[{0}]]. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageTargetArticleHadInterWiki {
             get {
@@ -303,7 +303,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Identify {{{{{0}}}}}&apos;s namespace failed. {1} is guessed. ({2}) に類似しているローカライズされた文字列を検索します。
+        ///   Failed to identify the namespace of {{{{{0}}}}}. {1} is guessed. ({2}) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string LogMessageTemplateNameUnidentified {
             get {
@@ -393,7 +393,16 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Output caches failed.
+        ///   Waiting before retry... に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StatusRetryWaiting {
+            get {
+                return ResourceManager.GetString("StatusRetryWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Failed to output caches.
         ///
         ///{0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -413,7 +422,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Name is already. に類似しているローカライズされた文字列を検索します。
+        ///   Name already exists. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageDuplicateConfigName {
             get {
@@ -422,7 +431,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Language code is already. に類似しているローカライズされた文字列を検索します。
+        ///   Language code already exists. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageDuplicateLanguageCode {
             get {
@@ -485,7 +494,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Source and Destination may not be same. に類似しているローカライズされた文字列を検索します。
+        ///   Source and destination may not be the same. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageEqualsSourceAndTarget {
             get {
@@ -521,7 +530,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Namespace&apos;s ID must be integer. に類似しているローカライズされた文字列を検索します。
+        ///   Namespace ID must be an integer. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string WarningMessageIgnoreNumericNamespace {
             get {

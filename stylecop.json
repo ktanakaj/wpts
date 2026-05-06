@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "companyName": "honeplusのメモ帳",
+      "copyrightText": "Copyright (C) 2026 Honeplus. All rights reserved.",
+      "xmlHeader": true
+    },
+    "layoutRules": {
+    },
+    "orderingRules": {
+      "usingDirectivesPlacement": "outsideNamespace"
+    },
+    "namingRules": {
+    }
+  }
+}

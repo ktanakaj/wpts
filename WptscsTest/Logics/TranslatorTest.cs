@@ -3,374 +3,372 @@
 //      Translatorのテストクラスソース。</summary>
 //
 // <copyright file="TranslatorTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2026 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-namespace Honememo.Wptscs.Logics
+using System;
+using Honememo.Wptscs.Models;
+using Honememo.Wptscs.Websites;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Honememo.Wptscs.Logics;
+
+/// <summary>
+/// <see cref="Translator"/>のテストクラスです。
+/// </summary>
+[TestClass]
+public class TranslatorTest
 {
-    using System;
-    using System.Collections.Generic;
-    using Honememo.Wptscs.Models;
-    using Honememo.Wptscs.Websites;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    #region プロパティテストケース
 
     /// <summary>
-    /// <see cref="Translator"/>のテストクラスです。
+    /// <see cref="Translator.ItemTable"/>プロパティテストケース。
     /// </summary>
-    [TestClass]
-    public class TranslatorTest
+    [TestMethod]
+    public void TestItemTable()
     {
-        #region プロパティテストケース
+        // 初期状態がnull、設定すればそのオブジェクトが返されること
+        TranslatorMock translator = new TranslatorMock();
+        Assert.IsNull(translator.ItemTable);
+        TranslationDictionary table = new TranslationDictionary("en", "ja");
+        translator.ItemTable = table;
+        Assert.AreSame(table, translator.ItemTable);
+    }
 
-        /// <summary>
-        /// <see cref="Translator.ItemTable"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestItemTable()
+    /// <summary>
+    /// <see cref="Translator.HeadingTable"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestHeadingTable()
+    {
+        // 初期状態がnull、設定すればそのオブジェクトが返されること
+        TranslatorMock translator = new TranslatorMock();
+        Assert.IsNull(translator.HeadingTable);
+        TranslationTable table = new TranslationTable();
+        translator.HeadingTable = table;
+        Assert.AreSame(table, translator.HeadingTable);
+    }
+
+    /// <summary>
+    /// <see cref="Translator.Log"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestLog()
+    {
+        // 初期状態は空
+        TranslatorMock translator = new TranslatorMock();
+        Assert.AreEqual(string.Empty, translator.Log);
+
+        // 更新時にLogUpdateイベントが実行されること
+        int count = 0;
+        translator.LogUpdated += new EventHandler((object sender, EventArgs e) => { ++count; });
+        Assert.AreEqual(0, count);
+        translator.Logger.AddMessage("ログ");
+        Assert.AreEqual(1, count);
+        Assert.AreEqual("ログ" + Environment.NewLine, translator.Log);
+        translator.Logger.AddMessage("add");
+        Assert.AreEqual(2, count);
+        Assert.AreEqual("ログ" + Environment.NewLine + "add" + Environment.NewLine, translator.Log);
+    }
+
+    /// <summary>
+    /// <see cref="Translator.Text"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestText()
+    {
+        // 初期状態は空
+        TranslatorMock translator = new TranslatorMock();
+        Assert.AreEqual(string.Empty, translator.Text);
+
+        // null設定時は空白が設定されること、それ以外はそのまま
+        translator.Text = null;
+        Assert.AreEqual(string.Empty, translator.Text);
+        translator.Text = "test";
+        Assert.AreEqual("test", translator.Text);
+    }
+
+    /// <summary>
+    /// <see cref="Translator.CancellationPending"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestCancellationPending()
+    {
+        // 初期状態はfalse、設定すればそのオブジェクトが返されること
+        TranslatorMock translator = new TranslatorMock();
+        Assert.IsFalse(translator.CancellationPending);
+        translator.CancellationPending = true;
+        Assert.IsTrue(translator.CancellationPending);
+        translator.CancellationPending = false;
+        Assert.IsFalse(translator.CancellationPending);
+    }
+
+    /// <summary>
+    /// <see cref="Translator.From"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestFrom()
+    {
+        // 初期状態がnull、設定すればそのオブジェクトが返されること
+        TranslatorMock translator = new TranslatorMock();
+        Assert.IsNull(translator.From);
+        WebsiteMock website = new WebsiteMock();
+        translator.From = website;
+        Assert.AreSame(website, translator.From);
+    }
+
+    /// <summary>
+    /// <see cref="Translator.To"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestTo()
+    {
+        // 初期状態がnull、設定すればそのオブジェクトが返されること
+        TranslatorMock translator = new TranslatorMock();
+        Assert.IsNull(translator.To);
+        WebsiteMock website = new WebsiteMock();
+        translator.To = website;
+        Assert.AreSame(website, translator.To);
+    }
+
+    #endregion
+
+    #region 静的メソッドテストケース
+
+    /// <summary>
+    /// <see cref="Translator.Create"/>メソッドテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestCreate()
+    {
+        // コンフィグの情報から対応するトランスレータが生成されること
+        Translator translator = Translator.Create(new MockFactory().GetConfig(), "en", "ja");
+        Assert.IsNotNull(translator);
+        Assert.IsInstanceOfType(translator, typeof(MediaWikiTranslator));
+        Assert.IsNotNull(translator.From);
+        Assert.AreEqual("en", translator.From.Language.Code);
+        Assert.IsNotNull(translator.To);
+        Assert.AreEqual("ja", translator.To.Language.Code);
+        Assert.IsNotNull(translator.ItemTable);
+        Assert.AreEqual("en", translator.ItemTable.From);
+        Assert.AreEqual("ja", translator.ItemTable.To);
+        Assert.IsNotNull(translator.HeadingTable);
+        Assert.AreEqual("en", translator.HeadingTable.From);
+        Assert.AreEqual("ja", translator.HeadingTable.To);
+    }
+
+    /// <summary>
+    /// <see cref="Translator.Create"/>メソッドテストケース（未対応のトランスレータクラス）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(NotImplementedException))]
+    public void TestCreateUnsupportedConstructor()
+    {
+        // コンフィグに引数無しのコンストラクタを持たないトランスレータクラス
+        // が指定されていない場合、例外となること
+        Config config = new MockFactory().GetConfig();
+        config.Translator = typeof(TranslatorIgnoreMock);
+        Translator.Create(config, "en", "ja");
+    }
+
+    /// <summary>
+    /// <see cref="Translator.Create"/>メソッドテストケース（トランスレータクラス以外の指定）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(InvalidCastException))]
+    public void TestCreateIgnoreConstructor()
+    {
+        // コンフィグに引数無しのコンストラクタを持たないトランスレータクラス
+        // が指定されていない場合、例外となること
+        Config config = new MockFactory().GetConfig();
+        config.Translator = this.GetType();
+        Translator.Create(config, "en", "ja");
+    }
+
+    #endregion
+
+    #region 公開メソッドテストケース
+
+    /// <summary>
+    /// <see cref="Translator.Run"/>メソッドテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestRun()
+    {
+        // ※ Runの処理ではpingも行っているが、そのテストについては2012年2月現在、
+        //    App.configのデフォルト値がpingを行わない設定なっているため行えない
+        TranslatorMock translator = new TranslatorMock();
+        translator.From = new WebsiteMock();
+        translator.From.Location = "file://";
+        translator.To = new WebsiteMock();
+
+        // 正常に実行が行えること
+        // また、実行ごとに結果が初期化されること
+        translator.Run("test");
+        Assert.AreEqual(string.Empty, translator.Log);
+        Assert.AreEqual(string.Empty, translator.Text);
+        translator.Logger.AddMessage("testlog");
+        translator.Text = "testtext";
+        translator.Run("test");
+        Assert.AreEqual(string.Empty, translator.Log);
+        Assert.AreEqual(string.Empty, translator.Text);
+
+        // 失敗はApplicationExceptionで表現、RunBodyから例外が投げられること
+        translator.Logger.AddMessage("testlog");
+        translator.Text = "testtext";
+        translator.Exception = true;
+        try
         {
-            // 初期状態がnull、設定すればそのオブジェクトが返されること
-            TranslatorMock translator = new TranslatorMock();
-            Assert.IsNull(translator.ItemTable);
-            TranslationDictionary table = new TranslationDictionary("en", "ja");
-            translator.ItemTable = table;
-            Assert.AreSame(table, translator.ItemTable);
-        }
-
-        /// <summary>
-        /// <see cref="Translator.HeadingTable"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestHeadingTable()
-        {
-            // 初期状態がnull、設定すればそのオブジェクトが返されること
-            TranslatorMock translator = new TranslatorMock();
-            Assert.IsNull(translator.HeadingTable);
-            TranslationTable table = new TranslationTable();
-            translator.HeadingTable = table;
-            Assert.AreSame(table, translator.HeadingTable);
-        }
-
-        /// <summary>
-        /// <see cref="Translator.Log"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestLog()
-        {
-            // 初期状態は空
-            TranslatorMock translator = new TranslatorMock();
-            Assert.AreEqual(string.Empty, translator.Log);
-
-            // 更新時にLogUpdateイベントが実行されること
-            int count = 0;
-            translator.LogUpdated += new EventHandler((object sender, EventArgs e) => { ++count; });
-            Assert.AreEqual(0, count);
-            translator.Logger.AddMessage("ログ");
-            Assert.AreEqual(1, count);
-            Assert.AreEqual("ログ" + Environment.NewLine, translator.Log);
-            translator.Logger.AddMessage("add");
-            Assert.AreEqual(2, count);
-            Assert.AreEqual("ログ" + Environment.NewLine + "add" + Environment.NewLine, translator.Log);
-        }
-
-        /// <summary>
-        /// <see cref="Translator.Text"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestText()
-        {
-            // 初期状態は空
-            TranslatorMock translator = new TranslatorMock();
-            Assert.AreEqual(string.Empty, translator.Text);
-
-            // null設定時は空白が設定されること、それ以外はそのまま
-            translator.Text = null;
-            Assert.AreEqual(string.Empty, translator.Text);
-            translator.Text = "test";
-            Assert.AreEqual("test", translator.Text);
-        }
-
-        /// <summary>
-        /// <see cref="Translator.CancellationPending"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestCancellationPending()
-        {
-            // 初期状態はfalse、設定すればそのオブジェクトが返されること
-            TranslatorMock translator = new TranslatorMock();
-            Assert.IsFalse(translator.CancellationPending);
-            translator.CancellationPending = true;
-            Assert.IsTrue(translator.CancellationPending);
-            translator.CancellationPending = false;
-            Assert.IsFalse(translator.CancellationPending);
-        }
-
-        /// <summary>
-        /// <see cref="Translator.From"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestFrom()
-        {
-            // 初期状態がnull、設定すればそのオブジェクトが返されること
-            TranslatorMock translator = new TranslatorMock();
-            Assert.IsNull(translator.From);
-            WebsiteMock website = new WebsiteMock();
-            translator.From = website;
-            Assert.AreSame(website, translator.From);
-        }
-
-        /// <summary>
-        /// <see cref="Translator.To"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestTo()
-        {
-            // 初期状態がnull、設定すればそのオブジェクトが返されること
-            TranslatorMock translator = new TranslatorMock();
-            Assert.IsNull(translator.To);
-            WebsiteMock website = new WebsiteMock();
-            translator.To = website;
-            Assert.AreSame(website, translator.To);
-        }
-
-        #endregion
-
-        #region 静的メソッドテストケース
-
-        /// <summary>
-        /// <see cref="Translator.Create"/>メソッドテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestCreate()
-        {
-            // コンフィグの情報から対応するトランスレータが生成されること
-            Translator translator = Translator.Create(new MockFactory().GetConfig(), "en", "ja");
-            Assert.IsNotNull(translator);
-            Assert.IsInstanceOfType(translator, typeof(MediaWikiTranslator));
-            Assert.IsNotNull(translator.From);
-            Assert.AreEqual("en", translator.From.Language.Code);
-            Assert.IsNotNull(translator.To);
-            Assert.AreEqual("ja", translator.To.Language.Code);
-            Assert.IsNotNull(translator.ItemTable);
-            Assert.AreEqual("en", translator.ItemTable.From);
-            Assert.AreEqual("ja", translator.ItemTable.To);
-            Assert.IsNotNull(translator.HeadingTable);
-            Assert.AreEqual("en", translator.HeadingTable.From);
-            Assert.AreEqual("ja", translator.HeadingTable.To);
-        }
-
-        /// <summary>
-        /// <see cref="Translator.Create"/>メソッドテストケース（未対応のトランスレータクラス）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
-        public void TestCreateUnsupportedConstructor()
-        {
-            // コンフィグに引数無しのコンストラクタを持たないトランスレータクラス
-            // が指定されていない場合、例外となること
-            Config config = new MockFactory().GetConfig();
-            config.Translator = typeof(TranslatorIgnoreMock);
-            Translator.Create(config, "en", "ja");
-        }
-
-        /// <summary>
-        /// <see cref="Translator.Create"/>メソッドテストケース（トランスレータクラス以外の指定）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(InvalidCastException))]
-        public void TestCreateIgnoreConstructor()
-        {
-            // コンフィグに引数無しのコンストラクタを持たないトランスレータクラス
-            // が指定されていない場合、例外となること
-            Config config = new MockFactory().GetConfig();
-            config.Translator = this.GetType();
-            Translator.Create(config, "en", "ja");
-        }
-
-        #endregion
-
-        #region 公開メソッドテストケース
-
-        /// <summary>
-        /// <see cref="Translator.Run"/>メソッドテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestRun()
-        {
-            // ※ Runの処理ではpingも行っているが、そのテストについては2012年2月現在、
-            //    App.configのデフォルト値がpingを行わない設定なっているため行えない
-            TranslatorMock translator = new TranslatorMock();
-            translator.From = new WebsiteMock();
-            translator.From.Location = "file://";
-            translator.To = new WebsiteMock();
-
-            // 正常に実行が行えること
-            // また、実行ごとに結果が初期化されること
             translator.Run("test");
-            Assert.AreEqual(string.Empty, translator.Log);
-            Assert.AreEqual(string.Empty, translator.Text);
-            translator.Logger.AddMessage("testlog");
-            translator.Text = "testtext";
-            translator.Run("test");
-            Assert.AreEqual(string.Empty, translator.Log);
-            Assert.AreEqual(string.Empty, translator.Text);
-
-            // 失敗はApplicationExceptionで表現、RunBodyから例外が投げられること
-            translator.Logger.AddMessage("testlog");
-            translator.Text = "testtext";
-            translator.Exception = true;
-            try
-            {
-                translator.Run("test");
-                Assert.Fail();
-            }
-            catch (ApplicationException e)
-            {
-                Assert.AreEqual("Dummy", e.Message);
-            }
-
-            Assert.AreEqual(string.Empty, translator.Log);
-            Assert.AreEqual(string.Empty, translator.Text);
+            Assert.Fail();
+        }
+        catch (ApplicationException e)
+        {
+            Assert.AreEqual("Dummy", e.Message);
         }
 
+        Assert.AreEqual(string.Empty, translator.Log);
+        Assert.AreEqual(string.Empty, translator.Text);
+    }
+
+    /// <summary>
+    /// <see cref="Translator.Run"/>メソッドテストケース（必須パラメータ未設定）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void TestRunLangEmpty()
+    {
+        // From, To が未設定の場合処理不能
+        new TranslatorMock().Run("test");
+    }
+
+    #endregion
+
+    #region モッククラス
+
+    /// <summary>
+    /// <see cref="Translator"/>テスト用のモッククラスです。
+    /// </summary>
+    private class TranslatorMock : Translator
+    {
+        #region テスト支援用プロパティ
+
         /// <summary>
-        /// <see cref="Translator.Run"/>メソッドテストケース（必須パラメータ未設定）。
+        /// <see cref="RunBody"/>で例外を投げるか？
         /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void TestRunLangEmpty()
+        public bool Exception
         {
-            // From, To が未設定の場合処理不能
-            new TranslatorMock().Run("test");
+            get;
+            set;
         }
 
         #endregion
 
-        #region モッククラス
+        #region 非公開プロパティテスト用のオーラーライドプロパティ
 
         /// <summary>
-        /// <see cref="Translator"/>テスト用のモッククラスです。
+        /// ログテキスト生成用ロガー。
         /// </summary>
-        private class TranslatorMock : Translator
+        public new Logger Logger
         {
-            #region テスト支援用プロパティ
-
-            /// <summary>
-            /// <see cref="RunBody"/>で例外を投げるか？
-            /// </summary>
-            public bool Exception
+            get
             {
-                get;
-                set;
+                return base.Logger;
             }
 
-            #endregion
-
-            #region 非公開プロパティテスト用のオーラーライドプロパティ
-
-            /// <summary>
-            /// ログテキスト生成用ロガー。
-            /// </summary>
-            public new Logger Logger
+            set
             {
-                get
-                {
-                    return base.Logger;
-                }
-
-                set
-                {
-                    base.Logger = value;
-                }
+                base.Logger = value;
             }
-
-            /// <summary>
-            /// 変換後テキスト。
-            /// </summary>
-            public new string Text
-            {
-                get
-                {
-                    return base.Text;
-                }
-
-                set
-                {
-                    base.Text = value;
-                }
-            }
-
-            #endregion
-
-            #region ダミーメソッド
-
-            /// <summary>
-            /// 翻訳支援処理実行部の本体。
-            /// </summary>
-            /// <param name="name">記事名。</param>
-            protected override void RunBody(string name)
-            {
-                if (this.Exception)
-                {
-                    throw new ApplicationException("Dummy");
-                }
-            }
-
-            #endregion
         }
 
         /// <summary>
-        /// <see cref="Translator"/>テスト用のモッククラスです。
+        /// 変換後テキスト。
         /// </summary>
-        private class TranslatorIgnoreMock : Translator
+        public new string Text
         {
-            #region コンストラクタ
-
-            /// <summary>
-            /// デフォルトコンストラクタを隠すためのダミーコンストラクタ。
-            /// </summary>
-            /// <param name="dummy">ダミー。</param>
-            public TranslatorIgnoreMock(string dummy)
+            get
             {
+                return base.Text;
             }
 
-            #endregion
-
-            #region ダミーメソッド
-
-            /// <summary>
-            /// 翻訳支援処理実行部の本体。
-            /// </summary>
-            /// <param name="name">記事名。</param>
-            protected override void RunBody(string name)
+            set
             {
+                base.Text = value;
             }
-
-            #endregion
         }
 
+        #endregion
+
+        #region ダミーメソッド
+
         /// <summary>
-        /// <see cref="Translator"/>テスト用のモッククラスです。
+        /// 翻訳支援処理実行部の本体。
         /// </summary>
-        private class WebsiteMock : Website
+        /// <param name="name">記事名。</param>
+        protected override void RunBody(string name)
         {
-            #region ダミーメソッド
-
-            /// <summary>
-            /// ページを取得。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <returns>取得したページ。</returns>
-            /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
-            public override Page GetPage(string title)
+            if (this.Exception)
             {
-                return null;
+                throw new ApplicationException("Dummy");
             }
-
-            #endregion
         }
 
         #endregion
     }
+
+    /// <summary>
+    /// <see cref="Translator"/>テスト用のモッククラスです。
+    /// </summary>
+    private class TranslatorIgnoreMock : Translator
+    {
+        #region コンストラクタ
+
+        /// <summary>
+        /// デフォルトコンストラクタを隠すためのダミーコンストラクタ。
+        /// </summary>
+        /// <param name="dummy">ダミー。</param>
+        public TranslatorIgnoreMock(string dummy)
+        {
+        }
+
+        #endregion
+
+        #region ダミーメソッド
+
+        /// <summary>
+        /// 翻訳支援処理実行部の本体。
+        /// </summary>
+        /// <param name="name">記事名。</param>
+        protected override void RunBody(string name)
+        {
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// <see cref="Translator"/>テスト用のモッククラスです。
+    /// </summary>
+    private class WebsiteMock : Website
+    {
+        #region ダミーメソッド
+
+        /// <summary>
+        /// ページを取得。
+        /// </summary>
+        /// <param name="title">ページタイトル。</param>
+        /// <returns>取得したページ。</returns>
+        /// <remarks>取得できない場合（通信エラーなど）は例外を投げる。</remarks>
+        public override Page GetPage(string title)
+        {
+            return null;
+        }
+
+        #endregion
+    }
+
+    #endregion
 }

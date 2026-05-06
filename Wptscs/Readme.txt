@@ -1,11 +1,11 @@
 ﻿=====================================================================
 【タイトル】 Wikipedia 翻訳支援ツール
-【ファイル】 wptscs132.msi, wptscs132.zip, wptscs132-src.zip
-【作成月日】 2019/12/11
+【ファイル】 wptscs140.msi, wptscs140.zip, wptscs140-src.zip
+【作成月日】 2026/05/07
 【制 作 者】 Honeplus
-【動作環境】 Windows 10 での動作を確認。要.NET Framework 4.7.2
+【動作環境】 Windows 11 での動作を確認。要.NET Framework 4.7.2
 【配布形態】 修正BSDライセンス
-【HomePage】 https://ja.osdn.net/projects/wptscs/
+【HomePage】 https://github.com/ktanakaj/wpts
 =====================================================================
 
 ・概要
@@ -33,7 +33,7 @@ Wiktionary.xml          : Wiktionary用の設定ファイル
 アプリケーション上で設定した内容は、上記設定ファイルには反映されません。
 ユーザーごとのフォルダに出力されます。
 設定ファイルを直接修正、または削除して初期値に戻したい場合は、
-下記のようなパスにあるファイルを更新してください（以下はWindows 10の例）。
+下記のようなパスにあるファイルを更新してください（以下はWindows 11の例）。
 
 C:\Users\[ユーザー名]\AppData\Roaming\Honememo\Wikipedia 翻訳支援ツール\[バージョン番号]\config.xml
 C:\Users\[ユーザー名]\AppData\Local\Honememo\wptscs.exe_[～]\[バージョン番号]\user.config
@@ -105,8 +105,8 @@ zip版の場合は展開したファイルを削除してください。
 
 
 ・ソースについて
-wptscs132-src.zip としてソースファイル一式を配布しています。
-開発環境はVisual Studio Community 2019です。
+wptscs140-src.zip としてソースファイル一式を配布しています。
+開発環境はVisual Studio Community 2026です。
 インストーラの作成にはWiXを使用しています。
 
 
@@ -201,6 +201,8 @@ Ver1.30  2013/03/10 言語間リンクの取得を自前の解析処理を使わ
 Ver1.31  2014/04/04 記事名のエスケープを明示的に行うようにし、扱えない文字が残っていたのを修正。
 Ver1.32  2019/12/11 TLS1.0/1.1のサポート終了でエラーとなる問題を修正。
                     ※ 本バージョンから、.NET Frameworkが4.0→4.7へと変わります。XPなど古いOSでは動作しません。
+Ver1.40  2026/05/07 MediaWikiのレート制限の強化を受けた、リトライ処理などの修正。
+                    生成AIを使ったローカライズの改善など。
 
 
 ・仕様上の制限

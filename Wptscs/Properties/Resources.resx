@@ -163,7 +163,7 @@
     <comment>お知らせダイアログのタイトル</comment>
   </data>
   <data name="LogMessageTargetArticleHadInterWiki" xml:space="preserve">
-    <value>Warning: This page have interlanguage to [[{0}]].</value>
+    <value>Warning: This page has an interlanguage link to  [[{0}]].</value>
     <comment>翻訳支援対象の記事が言語間リンクを持っている場合の警告メッセージ</comment>
   </data>
   <data name="LogMessageTargetArticleNotFound" xml:space="preserve">
@@ -171,7 +171,7 @@
     <comment>翻訳支援対象の記事が存在しない場合のエラーメッセージ</comment>
   </data>
   <data name="LogMessageStartParseAndReplace" xml:space="preserve">
-    <value>Find interlanguage start.</value>
+    <value>Starting interlanguage search.</value>
     <comment>翻訳支援処理本体を開始する際のメッセージ</comment>
   </data>
   <data name="LogMessageEnd" xml:space="preserve">
@@ -195,11 +195,11 @@ Output {0} failed. ({1})
     <comment>翻訳支援対象の記事を取得する際のメッセージ</comment>
   </data>
   <data name="LogMessageInterWikiNotFound" xml:space="preserve">
-    <value>Interlanguage is not found</value>
+    <value>Interlanguage link not found</value>
     <comment>記事に言語間リンクが存在しない場合のメッセージ</comment>
   </data>
   <data name="LogMessageLinkArticleNotFound" xml:space="preserve">
-    <value>Page is not found</value>
+    <value>Page not found</value>
     <comment>内部リンク先の記事が存在しない場合のメッセージ</comment>
   </data>
   <data name="LogMessageRedirect" xml:space="preserve">
@@ -219,7 +219,7 @@ Process stopped. Log: {0}
     <comment>翻訳支援処理処理を中止した際のメッセージ</comment>
   </data>
   <data name="LogMessageTemplateNameUnidentified" xml:space="preserve">
-    <value>Identify {{{{{0}}}}}'s namespace failed. {1} is guessed. ({2})</value>
+    <value>Failed to identify the namespace of {{{{{0}}}}}. {1} is guessed. ({2})</value>
     <comment>テンプレートの名前空間を補完する際に、想定外のエラーとなった場合のメッセージ</comment>
   </data>
   <data name="LogMessageNoteTranslation" xml:space="preserve">
@@ -251,7 +251,7 @@ Process stopped. Log: {0}
     <value>Language code is already.</value>
   </data>
   <data name="WarningMessageEqualsSourceAndTarget" xml:space="preserve">
-    <value>Source and Destination may not be same.</value>
+    <value>Source and destination may not be the same.</value>
   </data>
   <data name="WarningMessageShortNameColumnOnly" xml:space="preserve">
     <value>Name may not be empty.</value>
@@ -267,14 +267,14 @@ Process stopped. Log: {0}
     <comment>キャッシュ有効期限に不正な値を入れられた場合のメッセージ</comment>
   </data>
   <data name="WarningMessageIgnoreNumericNamespace" xml:space="preserve">
-    <value>Namespace's ID must be integer.</value>
+    <value>Namespace ID must be an integer.</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Warning</value>
     <comment>警告ダイアログのタイトル</comment>
   </data>
   <data name="WarningMessageCacheSaveFailed" xml:space="preserve">
-    <value>Output caches failed.
+    <value>Failed to output caches.
 
 {0}</value>
   </data>
@@ -325,7 +325,7 @@ Process stopped. Log: {0}
     <comment>ステータスバー処理時間のフォーマット</comment>
   </data>
   <data name="WarningMessageDuplicateLanguageCode" xml:space="preserve">
-    <value>Language code is already.</value>
+    <value>Language code already exists.</value>
     <comment>言語コード追加でのコード重複バリデートNGメッセージ</comment>
   </data>
   <data name="WarningMessageEmptyLanguageCode" xml:space="preserve">
@@ -345,7 +345,7 @@ Process stopped. Log: {0}
     <comment>設定ファイル読み込み失敗時の状態</comment>
   </data>
   <data name="WarningMessageDuplicateConfigName" xml:space="preserve">
-    <value>Name is already.</value>
+    <value>Name already exists.</value>
     <comment>設定の追加で設定名が重複している場合のバリデートNGメッセージ</comment>
   </data>
   <data name="WarningMessageEmptyConfigName" xml:space="preserve">
@@ -357,5 +357,9 @@ Process stopped. Log: {0}
 
 Invalid chars : {0}</value>
     <comment>設定の追加で設定名に使用できない文字が含まれる場合のバリデートNGメッセージ</comment>
+  </data>
+  <data name="StatusRetryWaiting" xml:space="preserve">
+    <value>Waiting before retry...</value>
+    <comment>処理状態がダウンロードのリトライの待機待ち</comment>
   </data>
 </root>

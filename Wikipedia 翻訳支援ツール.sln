@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11723.231
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wptscs", "wptscs\Wptscs.csproj", "{4E20E523-0230-474C-B8F1-1E991360F5F5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CC7F6106-0C00-427B-9BF2-1EE65448907B} = {CC7F6106-0C00-427B-9BF2-1EE65448907B}
@@ -11,6 +13,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmLib", "HmLib\HmLib.csproj", "{CC7F6106-0C00-427B-9BF2-1EE65448907B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HmLibTest", "HmLibTest\HmLibTest.csproj", "{77218F38-BD1C-469B-B975-68AE3E9EE14E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{5C6134F8-5E60-4777-8CC9-1126D802E05F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Installer\buildMsi.bat = Installer\buildMsi.bat
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		Installer\License.rtf = Installer\License.rtf
+		README.md = README.md
+		stylecop.json = stylecop.json
+		Installer\Wptscs.en-us.wxl = Installer\Wptscs.en-us.wxl
+		Installer\Wptscs.ja-jp.wxl = Installer\Wptscs.ja-jp.wxl
+		Installer\Wptscs.wxs = Installer\Wptscs.wxs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +63,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBCAD339-4C3D-4E61-8D23-AFC198FCAD27}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

@@ -3,253 +3,250 @@
 //      AbstractTextParserのテストクラスソース。</summary>
 //
 // <copyright file="AbstractTextParserTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2026 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-namespace Honememo.Parsers
+using System;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Honememo.Parsers;
+
+/// <summary>
+/// <see cref="AbstractTextParser"/>のテストクラスです。
+/// </summary>
+[TestClass]
+public class AbstractTextParserTest
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Honememo.Utilities;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    #region インタフェース実装メソッドテストケース
 
     /// <summary>
-    /// <see cref="AbstractTextParser"/>のテストクラスです。
+    /// <see cref="AbstractTextParser.TryParseToEndCondition"/>メソッドテストケース。
     /// </summary>
-    [TestClass]
-    public class AbstractTextParserTest
+    [TestMethod]
+    public void TestTryParseToEndCondition()
     {
-        #region インタフェース実装メソッドテストケース
+        IElement element;
+        TestTextParser parser = new TestTextParser();
 
-        /// <summary>
-        /// <see cref="AbstractTextParser.TryParseToEndCondition"/>メソッドテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestTryParseToEndCondition()
+        // conditionの指定がないときは、文字列を最後までTryParseElementAtで解析
+        parser.Success = true;
+        Assert.IsFalse(parser.TryParseToEndCondition(null, null, out element));
+        Assert.IsNull(element);
+
+        Assert.IsTrue(parser.TryParseToEndCondition(string.Empty, null, out element));
+        Assert.AreEqual(string.Empty, element.ToString());
+        Assert.IsInstanceOfType(element, typeof(TextElement));
+
+        Assert.IsTrue(parser.TryParseToEndCondition("0123456789", null, out element));
+        Assert.AreEqual("0123456789", element.ToString());
+        Assert.IsInstanceOfType(element, typeof(ListElement));
+        ListElement list = (ListElement)element;
+        Assert.AreEqual(10, list.Count);
+        foreach (IElement e in list)
         {
-            IElement element;
-            TestTextParser parser = new TestTextParser();
-
-            // conditionの指定がないときは、文字列を最後までTryParseElementAtで解析
-            parser.Success = true;
-            Assert.IsFalse(parser.TryParseToEndCondition(null, null, out element));
-            Assert.IsNull(element);
-
-            Assert.IsTrue(parser.TryParseToEndCondition(string.Empty, null, out element));
-            Assert.AreEqual(string.Empty, element.ToString());
-            Assert.IsInstanceOfType(element, typeof(TextElement));
-
-            Assert.IsTrue(parser.TryParseToEndCondition("0123456789", null, out element));
-            Assert.AreEqual("0123456789", element.ToString());
-            Assert.IsInstanceOfType(element, typeof(ListElement));
-            ListElement list = (ListElement)element;
-            Assert.AreEqual(10, list.Count);
-            foreach (IElement e in list)
-            {
-                Assert.IsInstanceOfType(e, typeof(TextElement));
-            }
-
-            // conditionが指定されている場合は、その条件を満たすまで
-            Assert.IsTrue(parser.TryParseToEndCondition(
-                "0123456789",
-                (string s, int index) => s[index] == '5',
-                out element));
-            Assert.AreEqual("01234", element.ToString());
-            Assert.IsInstanceOfType(element, typeof(ListElement));
+            Assert.IsInstanceOfType(e, typeof(TextElement));
         }
 
+        // conditionが指定されている場合は、その条件を満たすまで
+        Assert.IsTrue(parser.TryParseToEndCondition(
+            "0123456789",
+            (string s, int index) => s[index] == '5',
+            out element));
+        Assert.AreEqual("01234", element.ToString());
+        Assert.IsInstanceOfType(element, typeof(ListElement));
+    }
+
+    /// <summary>
+    /// <see cref="AbstractTextParser.TryParseToDelimiter"/>メソッドテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestTryParseToDelimiter()
+    {
+        IElement element;
+        TestTextParser parser = new TestTextParser();
+
+        // delimitersの指定がないときは、condition無しのTryParseToEndConditionと同じ
+        parser.Success = true;
+        Assert.IsFalse(parser.TryParseToDelimiter(null, out element));
+        Assert.IsNull(element);
+
+        Assert.IsTrue(parser.TryParseToDelimiter(string.Empty, out element));
+        Assert.AreEqual(string.Empty, element.ToString());
+        Assert.IsInstanceOfType(element, typeof(TextElement));
+
+        Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element));
+        Assert.AreEqual("[[test]] is good", element.ToString());
+        Assert.IsInstanceOfType(element, typeof(ListElement));
+
+        // delimitersが指定されている場合は、その文字列まで
+        // ※ 本当は "test]] is good" にした状態で用いる
+        Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]"));
+        Assert.AreEqual("[[test", element.ToString());
+        Assert.IsInstanceOfType(element, typeof(ListElement));
+
+        // delimitersは複数指定可能、先に見つけたもの優先
+        Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]", "s"));
+        Assert.AreEqual("[[te", element.ToString());
+        Assert.IsInstanceOfType(element, typeof(ListElement));
+
+        // delimitersの指定があっても見つからないときは最後まで処理する
+        Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "}}"));
+        Assert.AreEqual("[[test]] is good", element.ToString());
+        Assert.IsInstanceOfType(element, typeof(ListElement));
+    }
+
+    /// <summary>
+    /// <see cref="AbstractTextParser.TryParseToDelimiter"/>メソッドテストケース（null）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void TestTryParseToDelimiterNull()
+    {
+        IElement element;
+        string[] delimiters = null;
+        new TestTextParser().TryParseToDelimiter(null, out element, delimiters);
+    }
+
+    /// <summary>
+    /// <see cref="AbstractTextParser.TryParse"/>メソッドテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestTryParse()
+    {
+        IElement element;
+        TestTextParser parser = new TestTextParser();
+
+        // condition無しのTryParseToEndConditionと同じ
+        parser.Success = true;
+        Assert.IsFalse(parser.TryParse(null, out element));
+        Assert.IsNull(element);
+
+        Assert.IsTrue(parser.TryParse(string.Empty, out element));
+        Assert.AreEqual(string.Empty, element.ToString());
+        Assert.IsInstanceOfType(element, typeof(TextElement));
+
+        Assert.IsTrue(parser.TryParse("0123456789", out element));
+        Assert.AreEqual("0123456789", element.ToString());
+        Assert.IsInstanceOfType(element, typeof(ListElement));
+        ListElement list = (ListElement)element;
+    }
+
+    #endregion
+
+    #region 実装支援用メソッドテストケース
+
+    /// <summary>
+    /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（正常系）。
+    /// </summary>
+    [TestMethod]
+    public void TestFlashText()
+    {
+        // ビルダーに値が詰まっている場合、その内容をリストに追加してクリアする
+        ListElement list = new ListElement();
+        StringBuilder b = new StringBuilder();
+        TestTextParser parser = new TestTextParser();
+
+        parser.FlashText(ref list, ref b);
+        Assert.AreEqual(0, list.Count);
+        Assert.AreEqual(string.Empty, b.ToString());
+
+        b.Append("1st string");
+        parser.FlashText(ref list, ref b);
+        Assert.AreEqual(1, list.Count);
+        Assert.AreEqual("1st string", list[0].ToString());
+        Assert.IsInstanceOfType(list[0], typeof(TextElement));
+        Assert.AreEqual(string.Empty, b.ToString());
+
+        b.Append("2nd string");
+        parser.FlashText(ref list, ref b);
+        Assert.AreEqual(2, list.Count);
+        Assert.AreEqual("1st string", list[0].ToString());
+        Assert.AreEqual("2nd string", list[1].ToString());
+        Assert.IsInstanceOfType(list[1], typeof(TextElement));
+        Assert.AreEqual(string.Empty, b.ToString());
+    }
+
+    /// <summary>
+    /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（リストがnull）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void TestFlashTextListNull()
+    {
+        ListElement list = null;
+        StringBuilder b = new StringBuilder();
+        new TestTextParser().FlashText(ref list, ref b);
+    }
+
+    /// <summary>
+    /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（ビルダーがnull）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void TestFlashTextBNull()
+    {
+        ListElement list = new ListElement();
+        StringBuilder b = null;
+        new TestTextParser().FlashText(ref list, ref b);
+    }
+
+    #endregion
+
+    #region テスト用AbstractTextParser実装
+
+    /// <summary>
+    /// テスト用<see cref="AbstractTextParser"/>実装クラスです。
+    /// </summary>
+    private class TestTextParser : AbstractTextParser
+    {
+        #region テスト用プロパティ
+
         /// <summary>
-        /// <see cref="AbstractTextParser.TryParseToDelimiter"/>メソッドテストケース。
+        /// <see cref="TryParseElementAt"/>の戻り値。
         /// </summary>
-        [TestMethod]
-        public void TestTryParseToDelimiter()
+        public bool Success
         {
-            IElement element;
-            TestTextParser parser = new TestTextParser();
-
-            // delimitersの指定がないときは、condition無しのTryParseToEndConditionと同じ
-            parser.Success = true;
-            Assert.IsFalse(parser.TryParseToDelimiter(null, out element));
-            Assert.IsNull(element);
-
-            Assert.IsTrue(parser.TryParseToDelimiter(string.Empty, out element));
-            Assert.AreEqual(string.Empty, element.ToString());
-            Assert.IsInstanceOfType(element, typeof(TextElement));
-
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element));
-            Assert.AreEqual("[[test]] is good", element.ToString());
-            Assert.IsInstanceOfType(element, typeof(ListElement));
-
-            // delimitersが指定されている場合は、その文字列まで
-            // ※ 本当は "test]] is good" にした状態で用いる
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]"));
-            Assert.AreEqual("[[test", element.ToString());
-            Assert.IsInstanceOfType(element, typeof(ListElement));
-
-            // delimitersは複数指定可能、先に見つけたもの優先
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "]]", "s"));
-            Assert.AreEqual("[[te", element.ToString());
-            Assert.IsInstanceOfType(element, typeof(ListElement));
-
-            // delimitersの指定があっても見つからないときは最後まで処理する
-            Assert.IsTrue(parser.TryParseToDelimiter("[[test]] is good", out element, "}}"));
-            Assert.AreEqual("[[test]] is good", element.ToString());
-            Assert.IsInstanceOfType(element, typeof(ListElement));
-        }
-
-        /// <summary>
-        /// <see cref="AbstractTextParser.TryParseToDelimiter"/>メソッドテストケース（null）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestTryParseToDelimiterNull()
-        {
-            IElement element;
-            string[] delimiters = null;
-            new TestTextParser().TryParseToDelimiter(null, out element, delimiters);
-        }
-
-        /// <summary>
-        /// <see cref="AbstractTextParser.TryParse"/>メソッドテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestTryParse()
-        {
-            IElement element;
-            TestTextParser parser = new TestTextParser();
-
-            // condition無しのTryParseToEndConditionと同じ
-            parser.Success = true;
-            Assert.IsFalse(parser.TryParse(null, out element));
-            Assert.IsNull(element);
-
-            Assert.IsTrue(parser.TryParse(string.Empty, out element));
-            Assert.AreEqual(string.Empty, element.ToString());
-            Assert.IsInstanceOfType(element, typeof(TextElement));
-
-            Assert.IsTrue(parser.TryParse("0123456789", out element));
-            Assert.AreEqual("0123456789", element.ToString());
-            Assert.IsInstanceOfType(element, typeof(ListElement));
-            ListElement list = (ListElement)element;
+            get;
+            set;
         }
 
         #endregion
 
-        #region 実装支援用メソッドテストケース
+        #region 非公開メソッドテスト用のオーラーライドメソッド
 
         /// <summary>
-        /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（正常系）。
+        /// 文字列が空でない場合、リストにText要素を追加して、文字列をリセットする。
         /// </summary>
-        [TestMethod]
-        public void TestFlashText()
+        /// <param name="list">追加されるリスト。</param>
+        /// <param name="b">追加する文字列。</param>
+        /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
+        public new void FlashText(ref ListElement list, ref StringBuilder b)
         {
-            // ビルダーに値が詰まっている場合、その内容をリストに追加してクリアする
-            ListElement list = new ListElement();
-            StringBuilder b = new StringBuilder();
-            TestTextParser parser = new TestTextParser();
-
-            parser.FlashText(ref list, ref b);
-            Assert.AreEqual(0, list.Count);
-            Assert.AreEqual(string.Empty, b.ToString());
-
-            b.Append("1st string");
-            parser.FlashText(ref list, ref b);
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual("1st string", list[0].ToString());
-            Assert.IsInstanceOfType(list[0], typeof(TextElement));
-            Assert.AreEqual(string.Empty, b.ToString());
-
-            b.Append("2nd string");
-            parser.FlashText(ref list, ref b);
-            Assert.AreEqual(2, list.Count);
-            Assert.AreEqual("1st string", list[0].ToString());
-            Assert.AreEqual("2nd string", list[1].ToString());
-            Assert.IsInstanceOfType(list[1], typeof(TextElement));
-            Assert.AreEqual(string.Empty, b.ToString());
-        }
-
-        /// <summary>
-        /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（リストがnull）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestFlashTextListNull()
-        {
-            ListElement list = null;
-            StringBuilder b = new StringBuilder();
-            new TestTextParser().FlashText(ref list, ref b);
-        }
-
-        /// <summary>
-        /// <see cref="AbstractTextParser.FlashText"/>メソッドテストケース（ビルダーがnull）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestFlashTextBNull()
-        {
-            ListElement list = new ListElement();
-            StringBuilder b = null;
-            new TestTextParser().FlashText(ref list, ref b);
+            base.FlashText(ref list, ref b);
         }
 
         #endregion
 
-        #region テスト用AbstractTextParser実装
+        #region テスト用メソッド実装
 
         /// <summary>
-        /// テスト用<see cref="AbstractTextParser"/>実装クラスです。
+        /// 渡されたテキストの指定されたインデックス位置を各種解析処理で解析する。
         /// </summary>
-        private class TestTextParser : AbstractTextParser
+        /// <param name="s">解析するテキスト。</param>
+        /// <param name="index">処理インデックス。</param>
+        /// <param name="result">解析結果。渡された文字列のインデックス位置の値を要素にして返す。</param>
+        /// <returns><see cref="Success"/>の設定値。</returns>
+        protected override bool TryParseElementAt(string s, int index, out IElement result)
         {
-            #region テスト用プロパティ
-
-            /// <summary>
-            /// <see cref="TryParseElementAt"/>の戻り値。
-            /// </summary>
-            public bool Success
-            {
-                get;
-                set;
-            }
-
-            #endregion
-
-            #region 非公開メソッドテスト用のオーラーライドメソッド
-
-            /// <summary>
-            /// 文字列が空でない場合、リストにText要素を追加して、文字列をリセットする。
-            /// </summary>
-            /// <param name="list">追加されるリスト。</param>
-            /// <param name="b">追加する文字列。</param>
-            /// <exception cref="ArgumentNullException"><paramref name="list"/>または<paramref name="b"/>が<c>null</c>の場合。</exception>
-            public new void FlashText(ref ListElement list, ref StringBuilder b)
-            {
-                base.FlashText(ref list, ref b);
-            }
-
-            #endregion
-
-            #region テスト用メソッド実装
-
-            /// <summary>
-            /// 渡されたテキストの指定されたインデックス位置を各種解析処理で解析する。
-            /// </summary>
-            /// <param name="s">解析するテキスト。</param>
-            /// <param name="index">処理インデックス。</param>
-            /// <param name="result">解析結果。渡された文字列のインデックス位置の値を要素にして返す。</param>
-            /// <returns><see cref="Success"/>の設定値。</returns>
-            protected override bool TryParseElementAt(string s, int index, out IElement result)
-            {
-                result = new TextElement(s[index].ToString());
-                return this.Success;
-            }
-
-            #endregion
+            result = new TextElement(s[index].ToString());
+            return this.Success;
         }
 
         #endregion
     }
+
+    #endregion
 }

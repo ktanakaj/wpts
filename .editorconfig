@@ -1,0 +1,8 @@
+[*.cs]
+
+dotnet_sort_system_directives_first = true
+dotnet_diagnostic.SA1124.severity = silent
+dotnet_diagnostic.SA1623.severity = none
+dotnet_diagnostic.SA1629.severity = none
+dotnet_diagnostic.SA1642.severity = none
+dotnet_diagnostic.SA1643.severity = none

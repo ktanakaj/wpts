@@ -3,149 +3,148 @@
 //      Websiteのテストクラスソース。</summary>
 //
 // <copyright file="WebsiteTest.cs" company="honeplusのメモ帳">
-//      Copyright (C) 2012 Honeplus. All rights reserved.</copyright>
+//      Copyright (C) 2026 Honeplus. All rights reserved.</copyright>
 // <author>
 //      Honeplus</author>
 // ================================================================================================
 
-namespace Honememo.Wptscs.Websites
+using System;
+using Honememo.Wptscs.Models;
+using Honememo.Wptscs.Utilities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Honememo.Wptscs.Websites;
+
+/// <summary>
+/// <see cref="Website"/>のテストクラスです。
+/// </summary>
+[TestClass]
+public class WebsiteTest
 {
-    using System;
-    using Honememo.Wptscs.Models;
-    using Honememo.Wptscs.Utilities;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    #region プロパティテストケース
 
     /// <summary>
-    /// <see cref="Website"/>のテストクラスです。
+    /// <see cref="Website.Location"/>プロパティテストケース。
     /// </summary>
-    [TestClass]
-    public class WebsiteTest
+    [TestMethod]
+    public void TestLocation()
     {
-        #region プロパティテストケース
+        DummySite site = new DummySite();
+        site.Location = "test";
+        Assert.AreEqual("test", site.Location);
+    }
+
+    /// <summary>
+    /// <see cref="Website.Location"/>プロパティテストケース（null）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void TestLocationNull()
+    {
+        new DummySite().Location = null;
+    }
+
+    /// <summary>
+    /// <see cref="Website.Location"/>プロパティテストケース（空）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void TestLocationBlank()
+    {
+        new DummySite().Location = " ";
+    }
+
+    /// <summary>
+    /// <see cref="Website.Language"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestLanguage()
+    {
+        DummySite site = new DummySite();
+        site.Language = new Language("ja");
+        Assert.AreEqual("ja", site.Language.Code);
+    }
+
+    /// <summary>
+    /// <see cref="Website.Language"/>プロパティテストケース（null）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void TestLanguageNull()
+    {
+        new DummySite().Language = null;
+    }
+
+    /// <summary>
+    /// <see cref="Website.WebProxy"/>プロパティテストケース。
+    /// </summary>
+    [TestMethod]
+    public void TestWebProxy()
+    {
+        DummySite site = new DummySite();
+
+        // デフォルトでオブジェクトが格納されている
+        Assert.IsNotNull(site.WebProxy);
+
+        // 値を設定するとそのオブジェクトが返る
+        IWebProxy proxy = new AppConfigWebProxy();
+        site.WebProxy = proxy;
+        Assert.AreSame(proxy, site.WebProxy);
+    }
+
+    /// <summary>
+    /// <see cref="Website.WebProxy"/>プロパティテストケース（null）。
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void TestWebProxyNull()
+    {
+        new DummySite().WebProxy = null;
+    }
+
+    #endregion
+
+    #region モッククラス
+
+    /// <summary>
+    /// <see cref="Website"/>テスト用のモッククラスです。
+    /// </summary>
+    private class DummySite : Website
+    {
+        #region 非公開プロパティテスト用のオーラーライドプロパティ
 
         /// <summary>
-        /// <see cref="Website.Location"/>プロパティテストケース。
+        /// ウェブサイトの言語。
         /// </summary>
-        [TestMethod]
-        public void TestLocation()
+        public new Language Language
         {
-            DummySite site = new DummySite();
-            site.Location = "test";
-            Assert.AreEqual("test", site.Location);
-        }
+            get
+            {
+                return base.Language;
+            }
 
-        /// <summary>
-        /// <see cref="Website.Location"/>プロパティテストケース（null）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestLocationNull()
-        {
-            new DummySite().Location = null;
-        }
-
-        /// <summary>
-        /// <see cref="Website.Location"/>プロパティテストケース（空）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestLocationBlank()
-        {
-            new DummySite().Location = " ";
-        }
-
-        /// <summary>
-        /// <see cref="Website.Language"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestLanguage()
-        {
-            DummySite site = new DummySite();
-            site.Language = new Language("ja");
-            Assert.AreEqual("ja", site.Language.Code);
-        }
-
-        /// <summary>
-        /// <see cref="Website.Language"/>プロパティテストケース（null）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestLanguageNull()
-        {
-            new DummySite().Language = null;
-        }
-
-        /// <summary>
-        /// <see cref="Website.WebProxy"/>プロパティテストケース。
-        /// </summary>
-        [TestMethod]
-        public void TestWebProxy()
-        {
-            DummySite site = new DummySite();
-
-            // デフォルトでオブジェクトが格納されている
-            Assert.IsNotNull(site.WebProxy);
-
-            // 値を設定するとそのオブジェクトが返る
-            IWebProxy proxy = new AppConfigWebProxy();
-            site.WebProxy = proxy;
-            Assert.AreSame(proxy, site.WebProxy);
-        }
-
-        /// <summary>
-        /// <see cref="Website.WebProxy"/>プロパティテストケース（null）。
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TestWebProxyNull()
-        {
-            new DummySite().WebProxy = null;
+            set
+            {
+                base.Language = value;
+            }
         }
 
         #endregion
 
-        #region モッククラス
+        #region ダミーメソッド
 
         /// <summary>
-        /// <see cref="Website"/>テスト用のモッククラスです。
+        /// ページを取得。空実装。
         /// </summary>
-        private class DummySite : Website
+        /// <param name="title">ページタイトル。</param>
+        /// <returns><c>null</c>。</returns>
+        public override Page GetPage(string title)
         {
-            #region 非公開プロパティテスト用のオーラーライドプロパティ
-            
-            /// <summary>
-            /// ウェブサイトの言語。
-            /// </summary>
-            public new Language Language
-            {
-                get
-                {
-                    return base.Language;
-                }
-
-                set
-                {
-                    base.Language = value;
-                }
-            }
-
-            #endregion
-
-            #region ダミーメソッド
-
-            /// <summary>
-            /// ページを取得。空実装。
-            /// </summary>
-            /// <param name="title">ページタイトル。</param>
-            /// <returns><c>null</c>。</returns>
-            public override Page GetPage(string title)
-            {
-                return null;
-            }
-
-            #endregion
+            return null;
         }
 
         #endregion
     }
+
+    #endregion
 }
