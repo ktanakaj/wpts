@@ -3,7 +3,7 @@
   <Translator>MediaWikiTranslator</Translator>
   <Websites>
     <MediaWiki>
-      <Location>http://de.wiktionary.org</Location>
+      <Location>https://de.wiktionary.org</Location>
       <Language Code="de">
         <Names>
           <LanguageName Code="de">
@@ -29,7 +29,7 @@
       <LangFormat>{{lang|$1|$2}}</LangFormat>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://en.wiktionary.org</Location>
+      <Location>https://en.wiktionary.org</Location>
       <Language Code="en">
         <Names>
           <LanguageName Code="de">
@@ -62,7 +62,7 @@
       <InterwikiPrefixs />
     </MediaWiki>
     <MediaWiki>
-      <Location>http://fr.wiktionary.org</Location>
+      <Location>https://fr.wiktionary.org</Location>
       <Language Code="fr">
         <Names>
           <LanguageName Code="de">
@@ -91,7 +91,7 @@
       <InterwikiPrefixs />
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ja.wiktionary.org</Location>
+      <Location>https://ja.wiktionary.org</Location>
       <Language Code="ja">
         <Names>
           <LanguageName Code="de">
@@ -118,7 +118,7 @@
       <LangFormat>{{lang|$1|$2}}</LangFormat>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ru.wiktionary.org</Location>
+      <Location>https://ru.wiktionary.org</Location>
       <Language Code="ru">
         <Names>
           <LanguageName Code="en">
@@ -143,7 +143,7 @@
       <InterwikiPrefixs />
     </MediaWiki>
     <MediaWiki>
-      <Location>http://zh.wiktionary.org</Location>
+      <Location>https://zh.wiktionary.org</Location>
       <Language Code="zh">
         <Names>
           <LanguageName Code="de">

@@ -3,7 +3,7 @@
   <Translator>MediaWikiTranslator</Translator>
   <Websites>
     <MediaWiki>
-      <Location>http://ar.wikipedia.org</Location>
+      <Location>https://ar.wikipedia.org</Location>
       <Language Code="ar">
         <Names>
           <LanguageName Code="ar">
@@ -27,7 +27,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://bn.wikipedia.org</Location>
+      <Location>https://bn.wikipedia.org</Location>
       <Language Code="bn">
         <Names>
           <LanguageName Code="bn">
@@ -49,7 +49,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://de.wikipedia.org</Location>
+      <Location>https://de.wikipedia.org</Location>
       <Language Code="de">
         <Names>
           <LanguageName Code="de">
@@ -80,7 +80,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://en.wikipedia.org</Location>
+      <Location>https://en.wikipedia.org</Location>
       <Language Code="en">
         <Names>
           <LanguageName Code="ar">
@@ -152,7 +152,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://es.wikipedia.org</Location>
+      <Location>https://es.wikipedia.org</Location>
       <Language Code="es">
         <Names>
           <LanguageName Code="en">
@@ -183,7 +183,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://fr.wikipedia.org</Location>
+      <Location>https://fr.wikipedia.org</Location>
       <Language Code="fr">
         <Names>
           <LanguageName Code="en">
@@ -219,7 +219,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://hi.wikipedia.org</Location>
+      <Location>https://hi.wikipedia.org</Location>
       <Language Code="hi">
         <Names>
           <LanguageName Code="en">
@@ -242,7 +242,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://it.wikipedia.org</Location>
+      <Location>https://it.wikipedia.org</Location>
       <Language Code="it">
         <Names>
           <LanguageName Code="en">
@@ -273,7 +273,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ja.wikipedia.org</Location>
+      <Location>https://ja.wikipedia.org</Location>
       <Language Code="ja">
         <Names>
           <LanguageName Code="de">
@@ -460,7 +460,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ko.wikipedia.org</Location>
+      <Location>https://ko.wikipedia.org</Location>
       <Language Code="ko">
         <Names>
           <LanguageName Code="en">
@@ -487,7 +487,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://nl.wikipedia.org</Location>
+      <Location>https://nl.wikipedia.org</Location>
       <Language Code="nl">
         <Names>
           <LanguageName Code="de">
@@ -514,7 +514,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://pl.wikipedia.org</Location>
+      <Location>https://pl.wikipedia.org</Location>
       <Language Code="pl">
         <Names>
           <LanguageName Code="en">
@@ -536,7 +536,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://pt.wikipedia.org</Location>
+      <Location>https://pt.wikipedia.org</Location>
       <Language Code="pt">
         <Names>
           <LanguageName Code="en">
@@ -567,7 +567,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ru.wikipedia.org</Location>
+      <Location>https://ru.wikipedia.org</Location>
       <Language Code="ru">
         <Names>
           <LanguageName Code="en">
@@ -598,7 +598,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://si.wikipedia.org</Location>
+      <Location>https://si.wikipedia.org</Location>
       <Language Code="si">
         <Names>
           <LanguageName Code="en">
@@ -620,7 +620,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ta.wikipedia.org</Location>
+      <Location>https://ta.wikipedia.org</Location>
       <Language Code="ta">
         <Names>
           <LanguageName Code="en">
@@ -642,7 +642,7 @@
       <HasLanguagePage>True</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://zh.wikipedia.org</Location>
+      <Location>https://zh.wikipedia.org</Location>
       <Language Code="zh">
         <Names>
           <LanguageName Code="de">

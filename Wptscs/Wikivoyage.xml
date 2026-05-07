@@ -3,7 +3,7 @@
   <Translator>MediaWikiTranslator</Translator>
   <Websites>
     <MediaWiki>
-      <Location>http://de.wikivoyage.org</Location>
+      <Location>https://de.wikivoyage.org</Location>
       <Language Code="de">
         <Names>
           <LanguageName Code="de">
@@ -33,7 +33,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://en.wikivoyage.org</Location>
+      <Location>https://en.wikivoyage.org</Location>
       <Language Code="en">
         <Names>
           <LanguageName Code="ar">
@@ -103,7 +103,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://es.wikivoyage.org</Location>
+      <Location>https://es.wikivoyage.org</Location>
       <Language Code="es">
         <Names>
           <LanguageName Code="en">
@@ -133,7 +133,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://fr.wikivoyage.org</Location>
+      <Location>https://fr.wikivoyage.org</Location>
       <Language Code="fr">
         <Names>
           <LanguageName Code="en">
@@ -167,7 +167,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://it.wikivoyage.org</Location>
+      <Location>https://it.wikivoyage.org</Location>
       <Language Code="it">
         <Names>
           <LanguageName Code="en">
@@ -197,7 +197,46 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://nl.wikivoyage.org</Location>
+      <Location>https://ja.wikivoyage.org</Location>
+      <Language Code="ja">
+        <Names>
+          <LanguageName Code="de">
+            <Name>Japanische Sprache</Name>
+            <ShortName>Japanisch</ShortName>
+          </LanguageName>
+          <LanguageName Code="en">
+            <Name>Japanese language</Name>
+            <ShortName>Japanese</ShortName>
+          </LanguageName>
+          <LanguageName Code="es">
+            <Name>Idioma japonés</Name>
+            <ShortName>Japonés</ShortName>
+          </LanguageName>
+          <LanguageName Code="ja">
+            <Name>日本語</Name>
+            <ShortName>日</ShortName>
+          </LanguageName>
+          <LanguageName Code="ko">
+            <Name>일본어</Name>
+            <ShortName />
+          </LanguageName>
+          <LanguageName Code="pt">
+            <Name>Língua japonesa</Name>
+            <ShortName>Japonês</ShortName>
+          </LanguageName>
+          <LanguageName Code="zh">
+            <Name>日语</Name>
+            <ShortName />
+          </LanguageName>
+        </Names>
+        <Bracket>（$1）</Bracket>
+      </Language>
+      <MagicWords />
+      <InterwikiPrefixs />
+      <HasLanguagePage>False</HasLanguagePage>
+    </MediaWiki>
+    <MediaWiki>
+      <Location>https://nl.wikivoyage.org</Location>
       <Language Code="nl">
         <Names>
           <LanguageName Code="de">
@@ -223,7 +262,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://pl.wikivoyage.org</Location>
+      <Location>https://pl.wikivoyage.org</Location>
       <Language Code="pl">
         <Names>
           <LanguageName Code="en">
@@ -245,7 +284,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://pt.wikivoyage.org</Location>
+      <Location>https://pt.wikivoyage.org</Location>
       <Language Code="pt">
         <Names>
           <LanguageName Code="en">
@@ -275,7 +314,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://sv.wikivoyage.org</Location>
+      <Location>https://sv.wikivoyage.org</Location>
       <Language Code="sv">
         <Names>
           <LanguageName Code="en">
@@ -297,7 +336,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ro.wikivoyage.org</Location>
+      <Location>https://ro.wikivoyage.org</Location>
       <Language Code="ro">
         <Names>
           <LanguageName Code="en">
@@ -319,7 +358,7 @@
       <HasLanguagePage>False</HasLanguagePage>
     </MediaWiki>
     <MediaWiki>
-      <Location>http://ru.wikivoyage.org</Location>
+      <Location>https://ru.wikivoyage.org</Location>
       <Language Code="ru">
         <Names>
           <LanguageName Code="en">
