@@ -262,7 +262,7 @@ namespace Honememo.Wptscs.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int RequestInterval {
             get {
                 return ((int)(this["RequestInterval"]));

@@ -37,6 +37,15 @@ public class AppConfigWebProxy : IWebProxy
 
     #endregion
 
+    #region インタフェース実装イベント
+
+    /// <summary>
+    /// リトライ待ち発生を通知するイベント。
+    /// </summary>
+    public event EventHandler<RetryEventArgs> RetryWaiting;
+
+    #endregion
+
     #region インタフェース実装プロパティ
 
     /// <summary>
@@ -136,7 +145,7 @@ public class AppConfigWebProxy : IWebProxy
                 }
 
                 // Retry-Afterヘッダーがある場合はそれを使用
-                if (!this.TryParseRetryAfter(e.Response, out var waitTime))
+                if (!this.TryParseRetryAfter(e.Response, out var waitTime) || waitTime <= TimeSpan.Zero)
                 {
                     // 無い場合は、指数バックオフでリトライ
                     waitTime = TimeSpan.FromSeconds(Math.Pow(2, max - retry));
@@ -148,7 +157,9 @@ public class AppConfigWebProxy : IWebProxy
                     throw e;
                 }
 
+                // リトライ待ち発生イベントを通知してからウェイト実施
                 System.Diagnostics.Debug.WriteLine($"AppConfigWebProxy.GetStream > retry {waitTime.TotalSeconds}s : {e.Message}");
+                this.RetryWaiting?.Invoke(this, new RetryEventArgs(max - retry, waitTime, e.Message));
                 Thread.Sleep(waitTime);
             }
         }

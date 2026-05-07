@@ -252,6 +252,12 @@ public abstract class Translator
         translator.HeadingTable.From = from;
         translator.HeadingTable.To = to;
 
+        // Webサイトのリトライ処理イベントのステータス伝播用にイベントを設定
+        translator.From.WebProxy.RetryWaiting += (s, e) =>
+        {
+            translator.StatusManager.SetTemporaryStatus(string.Format(Resources.StatusRetryWaiting, e.WaitTime.TotalSeconds));
+        };
+
         return translator;
     }
 

@@ -152,7 +152,18 @@ public class StatusManager<T> : IDisposable
     /// </summary>
     public virtual void Clear()
     {
-        this.Status = default(T);
+        this.Status = default;
+    }
+
+    /// <summary>
+    /// ステータスを切り替え中の状態を残したまま変更する。
+    /// </summary>
+    /// <param name="status">新しいステータス。</param>
+    /// <remarks><see cref="Switch(T)"/>の途中で一時的に状態を変更したい、といった用途ではこちらを呼んでください。</remarks>
+    public virtual void SetTemporaryStatus(T status)
+    {
+        this.status = status;
+        this.CallChangedEvent();
     }
 
     #endregion
@@ -164,10 +175,7 @@ public class StatusManager<T> : IDisposable
     /// </summary>
     private void CallChangedEvent()
     {
-        if (this.Changed != null)
-        {
-            this.Changed(this, EventArgs.Empty);
-        }
+        this.Changed?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion

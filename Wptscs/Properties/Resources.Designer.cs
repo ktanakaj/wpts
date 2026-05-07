@@ -393,7 +393,7 @@ namespace Honememo.Wptscs.Properties {
         }
         
         /// <summary>
-        ///   Waiting before retry... に類似しているローカライズされた文字列を検索します。
+        ///   Waiting before retry... ({0} s) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StatusRetryWaiting {
             get {

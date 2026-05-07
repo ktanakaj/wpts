@@ -18,6 +18,15 @@ namespace Honememo.Wptscs.Utilities;
 /// </summary>
 public interface IWebProxy
 {
+    #region イベント
+
+    /// <summary>
+    /// リトライ待ち発生を通知するイベント。
+    /// </summary>
+    event EventHandler<RetryEventArgs> RetryWaiting;
+
+    #endregion
+
     #region プロパティ
 
     /// <summary>
