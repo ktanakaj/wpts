@@ -215,7 +215,7 @@ public class MediaWikiTranslator : Translator
     #region 冒頭／末尾ブロックの生成メソッド
 
     /// <summary>
-    /// 変換後記事冒頭用の「'''日本語記事名'''（[[英語|英]]: '''{{Lang|en|英語記事名}}'''）」みたいなのを作成する。
+    /// 変換後記事冒頭用の「'''日本語記事名'''（[[英語|英]]: {{Lang|en|英語記事名}}）」みたいなのを作成する。
     /// </summary>
     /// <param name="title">翻訳支援対象の記事名。</param>
     /// <returns>冒頭部のテキスト。</returns>
@@ -235,7 +235,7 @@ public class MediaWikiTranslator : Translator
         }
 
         StringBuilder b = new StringBuilder("'''xxx'''");
-        b.Append(this.To.Language.FormatBracket(langPart + "'''" + langBody + "'''"));
+        b.Append(this.To.Language.FormatBracket(langPart + langBody));
         b.Append("\n\n");
         return b.ToString();
     }

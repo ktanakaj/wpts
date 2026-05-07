@@ -560,13 +560,13 @@ public class MediaWikiTranslatorTest
 
         // 完全な形
         Assert.AreEqual(
-            "'''xxx'''（[[英語|英]]: '''{{Lang|en|English's title}}'''）\n\n",
+            "'''xxx'''（[[英語|英]]: {{Lang|en|English's title}}）\n\n",
             translator.CreateOpening("English's title"));
 
         // リンクなし・略称あり
         translator.To.HasLanguagePage = false;
         Assert.AreEqual(
-            "'''xxx'''（英: '''{{Lang|en|English's title}}'''）\n\n",
+            "'''xxx'''（英: {{Lang|en|English's title}}）\n\n",
             translator.CreateOpening("English's title"));
 
         // リンクなし・略称なし
@@ -574,38 +574,38 @@ public class MediaWikiTranslatorTest
         name.ShortName = null;
         translator.From.Language.Names["ja"] = name;
         Assert.AreEqual(
-            "'''xxx'''（英語: '''{{Lang|en|English's title}}'''）\n\n",
+            "'''xxx'''（英語: {{Lang|en|English's title}}）\n\n",
             translator.CreateOpening("English's title"));
 
         // リンクあり・略称なし
         translator.To.HasLanguagePage = true;
         Assert.AreEqual(
-            "'''xxx'''（[[英語]]: '''{{Lang|en|English's title}}'''）\n\n",
+            "'''xxx'''（[[英語]]: {{Lang|en|English's title}}）\n\n",
             translator.CreateOpening("English's title"));
 
         // 言語名なし・リンク有り
         translator.From.Language.Names.Remove("ja");
         Assert.AreEqual(
-            "'''xxx'''（'''{{Lang|en|English's title}}'''）\n\n",
+            "'''xxx'''（{{Lang|en|English's title}}）\n\n",
             translator.CreateOpening("English's title"));
 
         // 言語名なし・リンクなし
         translator.To.HasLanguagePage = false;
         Assert.AreEqual(
-            "'''xxx'''（'''{{Lang|en|English's title}}'''）\n\n",
+            "'''xxx'''（{{Lang|en|English's title}}）\n\n",
             translator.CreateOpening("English's title"));
 
         // 仮リンクフォーマットなし
         translator.To.LangFormat = null;
         Assert.AreEqual(
-            "'''xxx'''（'''English's title'''）\n\n",
+            "'''xxx'''（English's title）\n\n",
             translator.CreateOpening("English's title"));
 
         // 括弧のフォーマット変更
         // ※ パラメータ上なしには出来ない
         translator.To.Language.Bracket = "「$1」";
         Assert.AreEqual(
-            "'''xxx'''「'''English's title'''」\n\n",
+            "'''xxx'''「English's title」\n\n",
             translator.CreateOpening("English's title"));
 
         // 括弧のフォーマットの$1なし
