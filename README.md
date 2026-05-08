@@ -14,7 +14,7 @@ The *Translation Support for Wikipedia* is a Windows application designed to sup
 Windows 11 にて動作を確認。  
 .NET Framework 4.7.2 が必要です。
 
-[Releases](https://github.com/ktanakaj/wpts/releases)から最新バージョンのインストーラ (`wptscs132.msi`) をダウンロードして、画面の指示に従いインストールを進めてください。
+[Releases](https://github.com/ktanakaj/wpts/releases)から最新バージョンのインストーラ (`wptscs140.msi`) をダウンロードして、画面の指示に従いインストールを進めてください。
 
 ## Usage
 * 詳細は「[使い方](https://github.com/ktanakaj/wpts/wiki/%E4%BD%BF%E3%81%84%E6%96%B9)」を参照。
