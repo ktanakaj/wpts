@@ -27,18 +27,5 @@ jobs:
       - run: msbuild "./Wikipedia 翻訳支援ツール.sln"
 
       # ユニットテストの実行
-      - name: Run tests
-        shell: pwsh
-        run: |
-          $vsTestPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe"
-          if (!(Test-Path $vsTestPath)) {
-            Write-Error "VSTest not found at expected location: $vsTestPath"
-            exit 1
-          }
-
-          $dlls = Get-ChildItem -Recurse -Filter "*Test.dll" |
-                    Where-Object { $_.FullName -match "\\bin\\(Debug|Release)\\" }
-                    ForEach-Object { $_.FullName }
-
-          & "$vsTestPath" $dlls
+      - run: pwsh -File .github/scripts/test.ps1
         timeout-minutes: 3
