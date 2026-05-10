@@ -1,0 +1,57 @@
+# GitHub Actionsによるビルド設定。
+# 配布用のzipとインストーラーを生成する。
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      # リポジトリのチェックアウト
+      - uses: actions/checkout@v6
+
+      # msbuildをパスに登録
+      - uses: microsoft/setup-msbuild@v3
+
+      # NuGetの取得
+      - run: nuget restore "./Wikipedia 翻訳支援ツール.sln"
+
+      # リリースビルドの実行
+      - run: msbuild "./Wikipedia 翻訳支援ツール.sln" /p:Configuration=Release
+
+      # 配布用zipのアップロード
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          name: wptscs.zip
+          path: |
+            Wptscs/bin/Release/ja
+            Wptscs/bin/Release/hmlib.dll
+            Wptscs/bin/Release/wptscs.exe
+            Wptscs/bin/Release/wptscs.exe.config
+            Wptscs/bin/Release/License.txt
+            Wptscs/bin/Release/Readme.txt
+            Wptscs/bin/Release/Wikipedia.xml
+            Wptscs/bin/Release/Wikivoyage.xml
+            Wptscs/bin/Release/Wiktionary.xml
+          compression-level: 9
+
+      # WiXのインストール
+      - name: Install WiX 3.14
+        run: |
+          curl -L -o wix314.exe https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314.exe
+          .\wix314.exe /quiet /norestart
+
+      # インストーラーの作成
+      - name: Build MSI
+        run: pwsh -File Installer/buildMsi.ps1
+
+      # インストーラーのアップロード
+      - name: Upload MSI
+        uses: actions/upload-artifact@v7
+        with:
+          path: Installer/wptscs.msi
+          archive: false

@@ -17,7 +17,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{5C6134F8-5E60-4777-8CC9-1126D802E05F}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		Installer\buildMsi.bat = Installer\buildMsi.bat
+		Installer\buildMsi.ps1 = Installer\buildMsi.ps1
 		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
 		Installer\License.rtf = Installer\License.rtf
